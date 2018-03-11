@@ -1,0 +1,358 @@
+﻿Total # = 40
+
+1. Which country does Airline "JetBlue Airways" belong to?
+
+
+select Country
+from AIRLINES
+where Airline = "JetBlue Airways"
+
+
+2. What is the abbreviation of Airline "JetBlue Airways"?
+
+
+select Abbreviation
+from AIRLINES
+where Airline = "JetBlue Airways"
+
+
+3. List all airline names and their abbreviations in "USA".
+
+
+select Airline, Abbreviation
+from AIRLINES
+where Country = "USA"
+
+
+4. List all airport codes and their city locations in "United States".
+
+
+select AirportCode, City
+from AIRPORTS100
+where Country = "United States "
+
+
+5. How many airlines do we have?
+
+
+select count(*)
+from AIRLINES
+
+
+6. How many airports do we have?
+
+
+select count(*)
+from AIRPORTS100
+
+
+7. How many flights do we have?
+
+
+select count(*)
+from FLIGHTS
+
+
+8. Which airline has abbreviation 'UAL'?
+
+
+select Airline
+from AIRLINES
+where Abbreviation = "UAL"
+
+
+9. How many airlines are from USA?
+
+
+select count(*)
+from AIRLINES
+where Country = "USA"
+
+
+10. Which city and country is the airport 'APG' at?
+
+
+select City, Country
+from AIRPORTS100
+where AirportCode = "APG"
+
+
+11. What is the airport name for airport 'AKO'?
+
+
+select AirportName
+from AIRPORTS100
+where AirportCode = "AKO"
+
+
+12. What are airport names at City 'Aberdeen'?
+
+
+select AirportName
+from AIRPORTS100
+where City="Aberdeen "
+
+
+13. How many flights depart from 'APG'?
+
+
+select count(*)
+from FLIGHTS
+where SourceAirport = "APG"
+
+
+14. How many flights have destination 'ATO'?
+
+
+select count(*)
+from FLIGHTS
+where DestAirport = "ATO"
+
+
+15. How many flights depart from City 'Aberdeen '?
+
+
+select count(*)
+from FLIGHTS join AIRPORTS100 on FLIGHTS.SourceAirport = AIRPORTS100.AirportCode
+where AIRPORTS100.City = "Aberdeen "
+
+
+16. How many flights arriving at City 'Aberdeen '?
+
+
+select count(*)
+from FLIGHTS join AIRPORTS100 on FLIGHTS.DestAirport = AIRPORTS100.AirportCode
+where AIRPORTS100.City = "Aberdeen "
+
+
+17. How many flights depart from City 'Aberdeen ' and have destination City 'Ashley '?
+
+
+select count(*)
+from FLIGHTS, AIRPORTS100 as A1, AIRPORTS100 as A2
+where FLIGHTS.DestAirport = A1.AirportCode
+    and FLIGHTS.SourceAirport = A2.AirportCode
+    and A1.City = "Ashley "
+    and A2.City = "Aberdeen "
+
+
+18. How many flights does airline 'JetBlue Airways' have?
+
+
+select count(*)
+from FLIGHTS join AIRLINES on FLIGHTS.Airline = AIRLINES.uid
+where AIRLINES.Airline="JetBlue Airways"
+
+
+19. How many 'United Airlines' flights go to Airport 'ASY'?
+
+
+select count(*)
+from AIRLINES join FLIGHTS on FLIGHTS.Airline = AIRLINES.uid
+where AIRLINES.Airline = "United Airlines" and FLIGHTS.DestAirport = "ASY"
+
+
+20. How many 'United Airlines' flights depart from Airport 'AHD'?
+
+
+select count(*)
+from AIRLINES join FLIGHTS on FLIGHTS.Airline = AIRLINES.uid
+where AIRLINES.Airline = "United Airlines" and FLIGHTS.SourceAirport = "AHD"
+
+
+21. How many 'United Airlines' flights go to City 'Aberdeen '?
+
+
+select count(*)
+from AIRLINES, AIRPORTS100, FLIGHTS
+where FLIGHTS.DestAirport = AIRPORTS100.AirportCode 
+    and AIRPORTS100.City = "Aberdeen "
+    and FLIGHTS.Airline = AIRLINES.uid 
+    and AIRLINES.Airline = "United Airlines"
+
+
+22. Which city has most number of arriving flights?
+
+
+select AIRPORTS100.City
+from AIRPORTS100 join FLIGHTS on AIRPORTS100.AirportCode = FLIGHTS.DestAirport
+group by AIRPORTS100.City
+order by count(*) desc
+limit 1
+
+
+23. Which city has most number of departing flights?
+
+
+select AIRPORTS100.City
+from AIRPORTS100 join FLIGHTS on AIRPORTS100.AirportCode = FLIGHTS.SourceAirport
+group by AIRPORTS100.City
+order by count(*) desc
+limit 1
+
+
+24. What is the code of airport that has most number of flights?
+
+
+select AIRPORTS100.AirportCode
+from AIRPORTS100, FLIGHTS
+where AIRPORTS100.AirportCode = FLIGHTS.DestAirport or AIRPORTS100.AirportCode = FLIGHTS.SourceAirport
+group by AIRPORTS100.AirportCode
+order by count (*) desc
+limit 1
+
+
+25. What is the code of airport that has fewest number of flights?
+
+
+select AIRPORTS100.AirportCode
+from AIRPORTS100, FLIGHTS
+where AIRPORTS100.AirportCode = FLIGHTS.DestAirport or AIRPORTS100.AirportCode = FLIGHTS.SourceAirport
+group by AIRPORTS100.AirportCode
+order by count (*) asc
+limit 1
+
+
+26. Which airline has most number of flights?
+
+
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+group by AIRLINES.Airline
+order by count(*) desc
+limit 1
+
+
+27. Which airline has fewest number of flights?
+
+
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+group by AIRLINES.Airline
+order by count(*) asc
+limit 1
+
+
+28. What are airlines that have flights departing from airport 'AHD'?
+
+
+        select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+where FLIGHTS.SourceAirport == "'AHD"
+
+
+29. What are airlines that have flights arriving at airport 'AHD'?
+        
+        select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+where FLIGHTS.DestAirport == "'AHD"
+
+
+30. Find all airlines that have flights from both airport 'APG' and 'CVO'.
+
+
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+where FLIGHTS.SourceAirport == "'APG'"
+intersect
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+where FLIGHTS.SourceAirport == "'CVO'"
+
+
+31. Find all airlines that have flights from airport 'CVO' but not from 'APG'.
+
+
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+where FLIGHTS.SourceAirport == "'CVO'"
+except
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+where FLIGHTS.SourceAirport == "'APG'"
+
+
+32. Find all airlines that have at least 10 flights
+
+
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+group by AIRLINES.Airline
+having count(*) > 10
+
+
+33. Find all airlines that have fewer than 200 flights
+
+
+select AIRLINES.Airline
+from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
+group by AIRLINES.Airline
+having count(*) < 200
+
+
+34. Find all airlines which have departure flights in all airports.
+
+
+select distinct AIRLINES.Airline
+from AIRLINES
+where not exists (
+select distinct AIRPORTS100.AirportCode
+from AIRPORTS100
+except
+select distinct FLIGHTS.SourceAirport
+from FLIGHTS
+where AIRLINES.uid = FLIGHTS.Airline)
+
+
+35. Find all airlines which have arriving flights in all airports.
+
+
+select distinct AIRLINES.Airline
+from AIRLINES
+where not exists (
+select distinct AIRPORTS100.AirportCode
+from AIRPORTS100
+except
+select distinct FLIGHTS.DestAirport
+from FLIGHTS
+where AIRLINES.uid = FLIGHTS.Airline)
+
+
+36. What are flight numbers of Airline "United Airlines"?
+
+
+select FlightNo
+from FLIGHTS join AIRLINES on AIRLINES.uid = FLIGHTS.Airline
+where AIRLINES.Airline = "United Airlines"
+
+
+37. What are flight numbers of flights departing from Airport "APG"?
+
+
+select FlightNo
+from FLIGHTS
+where SourceAirport = "APG"
+
+
+38. What are flight numbers of flights arriving at Airport "APG"?
+
+
+select FlightNo
+from FLIGHTS
+where DestAirport = "APG"
+
+
+39. What are flight numbers of flights departing from City "Aberdeen "?
+
+
+select FLIGHTS.FlightNo
+from FLIGHTS join AIRPORTS100 on FLIGHTS.SourceAirport  = AIRPORTS100.AirportCode
+where AIRPORTS100.City = "Aberdeen "
+
+
+40. What are flight numbers of flights arriving at City "Aberdeen "?
+
+
+select FLIGHTS.FlightNo
+from FLIGHTS join AIRPORTS100 on FLIGHTS.DestAirport  = AIRPORTS100.AirportCode
+where AIRPORTS100.City = "Aberdeen "
