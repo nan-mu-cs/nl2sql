@@ -1,0 +1,392 @@
+Total # = 50
+
+1. What is the most expensive cake and its flavor?
+
+select id, flavor
+from goods
+where food = "Cake"
+order by price desc
+limit 1
+
+What is the cheapest cookie and its flavor?
+
+select id, flavor
+from goods
+where food = "Cookie"
+order by price
+limit 1
+
+2. Find the ids of goods that have apple flavor.
+
+Select id
+From goods
+Where flavor = "Apple"
+
+What are the ids of goods that cost less than 3 dollars?
+
+Select id
+From goods
+Where price < 3
+
+
+3. List the first and last names of all customers who shopped on 10-Oct-2007.
+
+Select DISTINCT T1.LastName, T1.FirstName
+From customers as T1 JOIN receipts as T2 ON T1.id = T2. CustomerId
+Where T2.date = "10-Oct-2007"
+
+How many customers shopped at the bakery on 23-Oct-2007?
+
+Select count(*)
+From customers as T1 JOIN receipts as T2 ON T1.id = T2. CustomerId
+Where T2. date = "23-Oct-2007"
+
+
+4. Find the id of customers who shopped at the bakery at least 15 times.
+
+Select CustomerId
+From receipts
+Group by CustomerId
+having count(*) >= 15
+
+What is the last name of the customers who shopped at the bakery more than 10 times?
+
+Select T2.LastName
+From receipts as T1 JOIN customers as T2 ON T1.CustomerId = T2.id
+Group by T2.id
+having count(*) > 10
+
+
+5. How many types of Tart does this bakery sell?
+
+Select count(*)
+From goods
+where food = "Tart"
+
+List all the flavors of Croissant available in this bakery.
+
+Select flavor
+From goods
+where food = "Croissant"
+
+
+6. Give me a list of all the distinct goods bought by the customer number 15.
+
+Select distinct T1.item
+from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber 
+Where T2.CustomerId = 15
+
+List distinct goods bought by customer number 5 or 6.
+
+Select distinct T1.item
+from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber 
+Where T2.CustomerId = 5 or T2.CustomerId = 6
+
+
+7. Find the receipts where both Cake and Eclair were bought.
+
+Select T1.receipt
+From items as T1 JOIN goods as T2 ON T1.item = T2.id
+Where T2.food = "Cake"
+INTERSECT
+Select T1.receipt
+From items as T1 JOIN goods as T2 ON T1.item = T2.id
+Where T2.food = "Eclair"
+
+
+Which receipts show the purchase of not only Tart but also Croissant?
+
+Select T1.receipt
+From items as T1 JOIN goods as T2 ON T1.item = T2.id
+Where T2.food = "Tart"
+INTERSECT
+Select T1.receipt
+From items as T1 JOIN goods as T2 ON T1.item = T2.id
+Where T2.food = "Croissant"
+
+
+8. List the distinct flavors of all goods bought on 17-Oct-2007.
+
+Select distinct T4.flavor
+From items as T1 JOIN receipts as T2 JOIN items as T3 JOIN goods as T4 ON T1.receipt = T2.ReceiptNumber and T1.receipt = T3.receipt and T3.item = T4.id
+where T2.date = "17-Oct-2007"
+
+
+What is the average price of all goods bought on 3-Oct-2017?
+
+Select avg(T4.price)
+From items as T1 JOIN receipts as T2 JOIN items as T3 JOIN goods as T4 ON T1.receipt = T2.ReceiptNumber and T1.receipt = T3.receipt and T3.item = T4.id
+where T2.date = "3-Oct-2007"
+
+
+9. How many goods are available for each food type?
+
+Select count(*), food
+From goods
+group by food
+
+What is the average price for each food type?
+
+Select avg(price), food
+From goods
+group by food
+
+
+10. What are the goods that have Apricot flavor and are cheaper than 5 dollars?
+
+Select id
+From goods
+where flavor = "Apricot" and price < 5
+
+Find flavor of cakes that cost more than 10 dollars.
+
+Select flavor
+From goods
+where food = "Cake" and price > 10
+
+
+
+11. Find distinct ids of goods that someone bought on 20-Oct-2007.
+
+Select distinct T1.item
+From items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber
+where T2.date = "20-Oct-2007"
+  
+
+What are the distinct ids of all goods that are cheaper than some goods of type Danish?
+
+Select distinct T1.id
+From goods as T1, goods as T2
+where T1.price < T2.price and T2.food = "Danish"
+
+
+12.  List distinct receipt numbers for which someone bought a good that costs more than 13 dollars.
+
+Select distinct T1.ReceiptNumber
+from receipts as T1 JOIN items as T2 JOIN goods as T3 ON T1.ReceiptNumber = T2.receipt and T2.item = T3.id
+Where T3.price > 13
+
+
+On which date (distinct) did some customer buy a good that costs more than 15 dollars.
+
+Select distinct T1.date
+from receipts as T1 JOIN items as T2 JOIN goods as T3 ON T1.ReceiptNumber = T2.receipt and T2.item = T3.id
+Where T3.price > 15
+
+
+13. Give me the list of all goods whose id has "APP".
+
+Select id
+from goods
+Where id LIKE "%APP%"
+
+Which good has "70" in its id? And what is its price?
+
+Select id, price
+from goods
+Where id LIKE "%70%"
+
+
+14. List the last names of all customers in an alphabetical oder
+
+Select distinct LastName
+From customers
+Order by LastName
+
+Return the ordered list of all good ids.
+
+Select distinct id
+From goods
+Order by id
+
+
+15. Find all receipts in which either good "50-ALM" was bought or customer 12 shopped.
+
+Select Receipt
+From items
+where item = "50-ALM"
+UNION
+Select ReceiptNumber
+From receipts
+where CustomerId = 12
+
+
+Find all receipts which either has date 7-Oct-2007 or has good "45-CO".
+
+Select Receipt
+From items
+where item = "45-CO"
+UNION
+Select ReceiptNumber
+From receipts
+where date = "7-Oct-2007"
+
+
+
+16. What are the ids of Eclair and Meringue that cost between 3 and 7 dollars?
+
+Select id
+From goods
+where (food = "Eclair" or food = "Meringue") and price between 3 and 7 
+
+
+Find the ids of Eclair and Meringue whose flavor is Vanilla
+
+Select id 
+From goods
+where (food = "Eclair" or food = "Meringue") and flavor = "Vanilla"
+
+
+
+17. What is average price of goods whose flavor is blackberry or blueberry?
+
+Select avg(price)
+From goods
+where flavor = "Blackberry" or flavor = "Blueberry"
+
+
+Return the cheapest price for goods with cheese flavor.
+
+Select min(price)
+From goods
+where flavor = "Cheese"
+
+
+18. What are highest, lowest, and average prices of goods, grouped and ordered by flavor?
+
+Select max(price), min(price), avg(price), flavor
+From goods
+group by flavor
+order by flavor
+
+
+Return the lowest and highest prices of goods grouped and ordered by food type.
+
+Select min(price), max(price), food
+From goods
+group by food
+order by food
+
+
+19. Find the top three dates when the most goods were sold.
+
+Select date
+From receipts
+Group by date
+Order by count(*)
+LIMIT 3
+
+Which customer shopped most often? How many times?
+
+Select CustomerId, count(*)
+From receipts
+Group by CustomerId
+Order by count(*)
+LIMIT 1
+
+
+20. List customers who have bought good "20-BC-L-10".
+
+Select distinct T2.CustomerId
+from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber
+where T1.item = "20-BC-L-10"
+
+
+Give me the first name and last name of customers who have bought good "46-11".
+
+Select distinct T3.FirstName, T3.LastName
+from items as T1 JOIN receipts as T2 JOIN customers as T3 ON T1.receipt = T2.ReceiptNumber and T2.CustomerId = T3.id
+where T1.item = "46-11"
+
+
+
+21. What are the ids of Cookies whose price is lower than any Meringue?
+
+Select id
+From goods
+where food = "Cookie" and price <  (select min(price)
+                             from goods
+                             where food = 'Meringue')
+
+
+Give me the ids of Cakes whose price is at least three times as much as the average price of Tart?
+
+Select id
+From goods
+where food = "Cake" and price >= 3 * (select avg(price)
+                             from goods
+                             where food = "Tart")
+
+
+What are the ids of goods whose price is above twice the average price of all goods?
+
+Select id
+From goods
+where price > 2 * (select avg(price)
+                             from goods)
+
+
+22. List the id, flavor and type of food of goods ordered by price.
+
+Select id, flavor, food
+From goods
+order by price
+
+
+Return a list of the id and flavor for Cakes ordered by price.
+
+Select id, flavor
+From goods
+where food = "Cake"
+order by price
+
+
+
+23. Find the ids of customers who shopped on 10-Oct-2007 but did not buy a cake.
+
+Select distinct CustomerId
+From receipts
+where date = "10-Oct-2007"
+EXCEPT
+Select distinct T4.CustomerId
+From customers as T1 JOIN goods as T2 JOIN items as T3 JOIN receipts as T4 ON T1.id = T4.CustomerId and T2.id = T3.item and T3.receipt = T4.ReceiptNumber
+where T2.food = "Cake" and T4.date = "19-Oct-2007"
+
+
+What are the flavors available for cakes but not for tarts?
+
+Select distinct flavor
+From goods
+where food = "Cake"
+EXCEPT 
+Select distinct flavor
+From goods
+where food = "Tart"
+
+
+24. What is the three most popular goods in this bakery?
+
+Select item
+From items
+Group by item
+Order by count (*) DESC
+LIMIT 3
+
+
+
+25. Find the ids of customers who have spent more than 150 dollars in total?
+
+Select T3.CustomerId
+From goods as T1 JOIN items as T2 JOIN receipts as T3 ON T1.id = T2.item and T2.receipt = T3.ReceiptNumber
+Group by T3.CustomerId
+having sum(T1.price) > 150
+
+
+On which day did the bakery sell more than 100 dollars in total?
+
+Select T3.date
+From goods as T1 JOIN items as T2 JOIN receipts as T3 ON T1.id = T2.item and T2.receipt = T3.ReceiptNumber
+Group by T3.date
+having sum(T1.price) > 100
+
+
