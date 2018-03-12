@@ -370,18 +370,16 @@ FROM country
 ORDER BY Population DESC
 LIMIT 3
 
-	24.	What are the nations with top 3 lowest population for each continent?
-	CHECK
-	SELECT Name, Continent
-FROM country
-GROUP BY Continent
-ORDER BY Population ASC
-LIMIT 3
-(correct? Sqlite-web query does not return right? Try:
-SELECT Name, Population
-FROM country
-GROUP BY Continent
-)
+24. What are the nations with top 3 lowest population for each continent?
+
+select name, continent
+from country T1 
+where name in (select name 
+	     from country 
+	     where Continent = T1.Continent 
+	     order by Population ASC
+	     limit 3)
+			     
 25. how many countries are in Asia?
 
 	SELECT count(*)
