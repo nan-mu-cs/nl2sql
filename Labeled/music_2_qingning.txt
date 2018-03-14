@@ -1,0 +1,405 @@
+Total = 50
+
+1. How many bands are there?
+
+Find the number of bands.
+
+SELECT count(*)
+FROM Band
+
+2. What are all the labels?
+
+SELECT distinct label
+FROM Albums
+
+3. Find all the albums in 2012.
+
+SELECT *
+FROM Albums
+WHERE year = 2012
+
+4. Find all the stage positions of the musicians with first name "Solveig"
+
+SELECT distinct T1.stageposition
+FROM Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+where Firstname = "Solveig"
+
+5. How many songs are there?
+
+SELECT count(*)
+FROM "Songs"
+
+6. Find all the songs performed by artist with last name "Heilo"
+
+SELECT Title
+FROM Performance join Band
+on Performance.bandmate = Band.id
+join Songs
+on Songs.SongId = Performance.SongId
+where Lastname = "Heilo"
+
+7. Hom many musicians performed in the song "Flash"?
+
+select count(*)
+from performance as T1 join band as T2
+on T1.bandmate = T2.id
+join songs as T3
+on T3.songid = T1.songid
+where T3.Title = "Flash"
+
+8. Find all the songs produced by artists with first name "Marianne".
+
+SELECT T3.Title
+FROM Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+where T2.firstname = "Marianne"
+
+9. Who performed the song named "Badlands"?
+
+SELECT T2.firstname, T2.lastname
+FROM Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+where T3.Title = "Badlands"
+
+10. Who is performing in the back for the song "Badlands"?
+
+SELECT T2.firstname, T2.lastname
+FROM Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+where T3.Title = "Badlands" and T1.StagePosition = "back"
+
+11. How many unique labels are there?
+
+select count(distinct label)
+from albums
+
+12. What is the label that has the most albums?
+
+select label
+from albums
+group by label
+order by count(*) desc
+limit 1
+
+13. What is the last name of the musician that have produced the most songs?
+
+select T2.lastname
+from Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+group by lastname
+order by count(*) desc
+limit 1
+
+14. What is the last name of the musician that has been at the back position the most?
+
+select T2.lastname
+from Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+where stageposition = "back"
+group by lastname
+order by count(*) desc
+limit 1
+
+15. Find all the songs whose name contains the word "the".
+
+select title
+from songs
+where title like '% the %'
+
+16. What are all the instruments used?
+
+SELECT distinct instrument
+FROM Instruments
+
+17. What instrument did the musician with last name "Heilo" use in the song "Le Pop"
+
+select T4.instrument
+from Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+join Instruments as T4
+on T4.songid = T3.songid and T4.bandmateid = T2.id
+where lastname = "Heilo" and title = "Le Pop"
+
+18. What is the most used instrument?
+
+select instrument
+from instruments
+group by instrument
+order by count(*) desc
+limit 1
+
+19. How many songs has used the instrument "drums"?
+
+select count(*)
+from instruments
+where instrument = "drums"
+
+20. What instruments does the the song "Le Pop" use?
+
+select instrument
+from instruments as T1 join songs as T2
+on T1.songid = T2.songid
+where title = "Le Pop"
+
+21. How many instruments does the song "Le Pop" use?
+
+select count(distinct instrument)
+from instruments as T1 join songs as T2
+on T1.songid = T2.songid
+where title = "Le Pop"
+
+22. How many instrument does the musician with last name "Heilo" use?
+
+select count(distinct instrument)
+from instruments as T1 join Band as T2
+on T1.bandmateid = T2.id
+where T2.lastname = "Heilo"
+
+23. Find all the instruments ever used by the musician with last name "Heilo"
+
+select instrument
+from instruments as T1 join Band as T2
+on T1.bandmateid = T2.id
+where T2.lastname = "Heilo"
+
+24. Which song has the most vocals?
+
+select title
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+group by T1.songid
+order by count(*) desc
+limit 1
+
+25. Which vocal type is the most frequently appearring type?
+
+select type
+from vocals
+group by type
+order by count(*) desc
+limit 1
+
+26. Which vocal type has the band mate with last name "Heilo" played the most?
+
+select type
+from vocals as T1 join band as T2
+on T1.bandmate = T2.id
+where lastname = "Heilo"
+group by type
+order by count(*) desc
+limit 1
+
+27. What are the vocal types used in song "Le Pop"?
+
+select type
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+where title = "Le Pop"
+
+28. Find the number of vocal types used in song "Demon Kitty Rag"
+
+select count(*)
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+where title = "Demon Kitty Rag"
+
+29. How many songs has a lead vocal?
+
+select count(distinct title)
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+where type = "lead"
+
+30. Which vocal type did the musician with first name "Solveig" played in the song with title "A Bar in Amsterdam"
+
+select type 
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+join band as T3
+on T1.bandmate = T3.id
+where firstname = "Solveig" and title = "A Bar In Amsterdam"
+
+31. Find all the songs that does not have a lead vocal.
+
+select distinct title
+from vocals as t1 join songs as t2
+on t1.songid = t2.songid
+except
+select t2.title
+from vocals as t1 join songs as t2
+on t1.songid = t2.songid
+where type = "lead"
+
+32. Find all the vocal types.
+
+select distinct type
+from vocals
+
+33. What are the albums produced in year 2010?
+
+SELECT *
+FROM Albums
+WHERE year = 2010
+
+34. Who performed the song named "Le Pop"?
+
+SELECT T2.firstname, T2.lastname
+FROM Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+where T3.Title = "Le Pop"
+
+35. What is the first name of the musician that have produced the most songs?
+
+select T2.lastname
+from Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+group by lastname
+order by count(*) desc
+limit 1
+
+36. What instrument did the musician with first name "Heilo" use in the song "Badlands"
+
+select T4.instrument
+from Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+join Instruments as T4
+on T4.songid = T3.songid and T4.bandmateid = T2.id
+where lastname = "Heilo" and title = "Badlands"
+
+37. How many instruments does the song "Badlands" use?
+
+select count(distinct instrument)
+from instruments as T1 join songs as T2
+on T1.songid = T2.songid
+where title = "Badlands"
+
+38. What are the vocal types used in song "Badlands"?
+
+select type
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+where title = "Badlands"
+
+39. Find the number of vocal types used in song "Le Pop"
+
+select count(*)
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+where title = "Le Pop"
+
+40. How many songs has a shared vocal?
+
+select count(distinct title)
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+where type = "shared"
+
+41. Find all the songs that does not have a back vocal.
+
+select distinct title
+from vocals as t1 join songs as t2
+on t1.songid = t2.songid
+except
+select t2.title
+from vocals as t1 join songs as t2
+on t1.songid = t2.songid
+where type = "back"
+
+42. Which vocal type has the band mate with first name "Solveig" played the most?
+
+select type
+from vocals as T1 join band as T2
+on T1.bandmate = T2.id
+where firstname = "Solveig"
+group by type
+order by count(*) desc
+limit 1
+
+43. Which vocal type did the musician with last name "Heilo" played in the song with title "Der Kapitan"
+
+select type 
+from vocals as T1 join songs as T2
+on T1.songid = T2.songid
+join band as T3
+on T1.bandmate = T3.id
+where lastname = "Heilo" and title = "Der Kapitan"
+
+44. Find the first name of the band mate that have performed in most songs.
+
+select t2.firstname
+from Performance as t1 join Band as t2
+on t1.bandmate = t2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+group by firstname
+order by count(*) desc
+limit 1
+
+45. Which vocal type has the band mate with first name "Marianne" played the most?
+
+select type
+from vocals as T1 join band as T2
+on T1.bandmate = T2.id
+where firstname = "Marianne"
+group by type
+order by count(*) desc
+limit 1
+
+46. Who is performing in the back for the song "Der Kapitan"?
+
+SELECT T2.firstname, T2.lastname
+FROM Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
+where T3.Title = "Der Kapitan" and T1.StagePosition = "back"
+
+47. Find the name of songs that does not have a back vocal.
+
+select distinct title
+from vocals as t1 join songs as t2
+on t1.songid = t2.songid
+except
+select t2.title
+from vocals as t1 join songs as t2
+on t1.songid = t2.songid
+where type = "back"
+
+48. What are the songs in album "A Kiss Before You Go: Live in Hamburg"
+
+select T3.title
+from albums as T1 join tracklists as T2 on T1.aid = T2.albumid
+join songs as T3 on T2.songid = T3.songid
+where t1.title = "A Kiss Before You Go: Live in Hamburg"
+
+49. What are all the songs under label "Universal Music Group"?
+
+select T3.title
+from albums as T1 join tracklists as T2 on T1.aid = T2.albumid
+join songs as T3 on T2.songid = T3.songid
+where t1.label = "Universal Music Group"
+
+50. Find the number of songs in all the studio albums.
+
+select count(distinct T3.title)
+from albums as T1 join tracklists as T2 on T1.aid = T2.albumid
+join songs as T3 on T2.songid = T3.songid
+where t1.type = "Studio"
+
