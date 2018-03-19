@@ -2,14 +2,14 @@ Total # = 58
 
 1. What is the title of the sculpture that is created in the most recent year?
 
-select title, year
+select title
 from sculptures
 order by year desc
 limit 1
 
 Where is the tile and location of the oldest painting?
 
-select title, location, year
+select title, location
 from paintings
 order by year
 limit 1
