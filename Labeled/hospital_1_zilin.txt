@@ -28,7 +28,7 @@ SELECT name, address
 FROM appointment as T1 join patient as T2 on T1.patient = T2.ssn
 
 
-8. 
+3. 
 Find the most recently started appointment?
 SELECT appointmentid 
 FROM appointment
@@ -42,7 +42,7 @@ ORDER BY end desc
 LIMIT 1
 
 
-6.
+4.
 What is the SSN of the patient who makes the most recent appointments?
 SELECT T1.ssn
 FROM patient as T1, appointment as T2
@@ -58,7 +58,7 @@ ORDER BY T2.start desc
 LIMIT 1
 
 
-7.
+5.
 How many patients stay in room 112?
 SELECT count(patient)
 FROM stay
@@ -70,7 +70,7 @@ FROM patient as T1, prescribes as T2, physician as T3
 WHERE T1.SSN=T2.patient and T2.physician=T3.employeeid and T3.name="John Dorian"
 
 
-3. 
+6. 
 Find the SSN of patients who stay in room 111?
 SELECT patient
 FROM stay
@@ -84,7 +84,7 @@ ORDER BY staystart desc
 LIMIT 1
 
 
-4.  
+7.  
 Which nurse has the most number of appointments?
 SELECT T1.name
 FROM nurse as T1, appointment as T2
@@ -102,7 +102,7 @@ ORDER BY count(T1.employeeid) desc
 LIMIT 1
 
 
-5. 
+8. 
 How many patients do each physician take care of? list their names and number of patients they take care of.
 SELECT T1.name, count(T1.employeeid)
 FROM physician as T1, patient as T2
