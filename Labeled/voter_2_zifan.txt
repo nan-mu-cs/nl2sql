@@ -1,0 +1,181 @@
+# Total number = 25
+
+1. Find the number of students in total.
+
+select count(*)
+from STUDENT
+
+Find the number of voting records in total.
+
+select count(*)
+from VOTING_RECORD
+
+
+2. Find the last names of students with major 50.
+
+select LName
+from STUDENT
+where Major = 50
+
+Find the first names of students with age bigger than 22.
+
+select Fname
+from STUDENT
+where Age > 22
+
+What are the student ID of male (sex is M) students?
+
+select StuID
+from STUDENT
+where Sex = "M"
+
+What are the distinct secretary vote in fall election cycle?
+
+select distinct Secretary_Vote
+from VOTING_RECORD
+where ELECTION_CYCLE = "Fall"
+
+
+3. Report the distinct registration date and the election cycle.
+
+select distinct Registration_Date, Election_Cycle
+from VOTING_RECORD
+
+Report the distinct president vote and the vice president vote.
+
+select distinct President_Vote, VICE_President_Vote
+from VOTING_RECORD
+
+
+4. Find the distinct last names of the students who have class president votes.
+
+select distinct T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.CLASS_President_VOTE
+
+Find the distinct first names of the students who have class senator votes.
+
+select distinct T1.Fname
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.CLASS_Senator_VOTE
+
+5. Find the distinct age of students who have secretary votes in fall election cycle.
+
+select distinct T1.Age
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.Secretary_Vote 
+where T2.Election_Cycle = "Fall"
+
+Find the distinct Advisor of students who have treasurer votes in spring election cycle.
+
+select distinct T1.Advisor
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.Treasurer_Vote
+where T2.Election_Cycle = "Spring"
+
+
+6. Find the first and last name of all female (sex is F) students who have president votes.
+
+select T1.Fname, T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.President_VOTE
+where T1.sex = "F"
+
+Find the first and last name of all students of age 18 and have vice president votes.
+
+select T1.Fname, T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.VICE_President_VOTE
+where T1.age = 18
+
+
+7. How many male (sex is M) students have class senator votes in fall election cycle?
+
+select count(*)
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = Class_Senator_Vote
+where T1.Sex = "M" and T2.Election_Cycle = "Fall"
+
+Find the number of students whose city code is NYC and have secretary votes in spring election cycle.
+
+select count(*)
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = SECRETARY_Vote
+where T1.city_code = "NYC" and T2.Election_Cycle = "Spring"
+
+
+8. Find the distinct first names of all students who have vice president votes and whose city code is not PIT. 
+
+select distinct T1.Fname
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.VICE_PRESIDENT_Vote
+except
+select distinct Fname 
+from STUDENT 
+where city_code = "PIT"
+
+Find the distinct last names of all students who have president votes and whose advisor is not 2192.
+
+select distinct T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = PRESIDENT_Vote
+except
+select distinct LName 
+from STUDENT 
+where Advisor = "2192"
+
+Find the distinct last names of all students who have president votes and whose advisor is 8741.
+
+select distinct T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = PRESIDENT_Vote
+INTERSECT
+select distinct LName 
+from STUDENT 
+where Advisor = "8741"
+
+
+9. For each advisor, report the total number of students advised by the advisor.
+
+select advisor, count(*)
+from STUDENT
+group by Advisor
+
+For each election cycle, report the number of voting records.
+
+select Election_Cycle, count(*)
+from VOTING_RECORD
+group by Election_Cycle
+
+
+10. Which major has the most students?
+
+select Major
+from STUDENT
+group by major
+order by count(*) desc
+limit 1
+
+What is the city_code that has the most students?
+
+select city_code
+from STUDENT
+group by city_code
+order by count(*) desc
+limit 1
+
+
+11. Find the average amount of student of one advisor.
+
+select avg(cnt) from
+(select count(*) as cnt
+from STUDENT
+group by Advisor)
+
+
+12. Report the distinct advisor who have between one and three students.
+
+select distinct Advisor from
+(select Advisor, COUNT(*) as cnt
+from STUDENT group by Advisor)
+where cnt >= 1 and cnt <= 3
