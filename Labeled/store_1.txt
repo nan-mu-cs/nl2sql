@@ -1,4 +1,4 @@
-Total # = 40
+Total # = 56
 
 1. A list of the top 5 countries by number of invoices. List country name and number of invoices.
 SELECT billing_country, COUNT(*) AS invoice_count
