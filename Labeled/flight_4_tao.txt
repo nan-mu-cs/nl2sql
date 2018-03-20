@@ -1,0 +1,117 @@
+
+
+Find the name, city, country, and altitude (or elevation) of the JFK airport.
+
+
+
+Find the routes operated by American Airlines that are codeshared. 
+
+
+Find the airports located in Cuba or Argentina.
+
+
+
+Find the airlines whose name starts with ‘Orbit’. 
+
+
+
+Find the airports within a bounding box.
+
+
+
+Find the routes with destination airport in Italy.
+
+
+
+return routes with destination airport in Italy operated by the airline with name ‘American Airlines’.
+
+
+
+Find the domestic routes.
+
+
+
+find the routes that are international.
+
+
+
+Find the routes from the United States to Canada operated by American Airlines.
+
+
+
+How many airports are there per country? Order the countries by decreasing number of airports.
+
+
+
+
+How many airports are there per city in the United States? Order the cities by decreasing number of airports and project only the cities. Use the HAVING clause to return only the cities with more than 3 airports.
+
+
+
+Find the number of routes for each source airport. Project only the number of routes and corresponding id of the airport (i.e., src_apid). Order the results by decreasing number of routes.
+
+
+
+Find the average, max, and min routes operated by American Airlines across cities in the United States. You need to account only for routes with source airport located in a city in the United States.
+
+
+
+
+Find the number of routes that have as destination the JFK airport.
+
+
+
+
+
+How many routes are domestic and how many routes are international?
+
+
+
+
+
+Find the source airports with amount of routes above the average number of routes for all source airports.
+
+
+
+
+Find the route with the most airlines. Assume there is only one route with the most airlines. Then, write another SQL query to find the names of the airlines in this route.
+
+
+
+calculate the in- and out-degree for each airport, respectively.
+
+
+
+
+calculate the in- and out-degree for each city.
+
+
+
+Calculate the in- and out-degree for each country.
+
+
+
+
+Which city is the most prestigious destination? Hint: we need to find the city with the highest in-degree.
+
+
+
+
+Which countries are the least prestigious destinations?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

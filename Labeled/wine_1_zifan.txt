@@ -1,0 +1,280 @@
+Total # = 40
+
+1. What is the name of the highest rated wine?
+
+select Name
+from WINE
+order by Score
+limit 1
+
+Which winery is the wine that has the highest score from?
+
+select Winery
+from WINE
+order by SCORE
+limit 1
+
+
+2. Find the names of all wines produced in 2008.
+
+Select Name
+from WINE
+Where Year = "2008"
+
+List the grapes and appelations of all wines.
+
+select Grape, Appelation
+from WINE
+
+List the names and scores of all wines.
+
+select Name, Score
+from WINE
+
+List the area and county of all appelations.
+
+select Area, County
+from APPELLATIONS
+
+What are the prices of wines produced before the year of 2010?
+
+select Price
+from WINE
+Where Year < 2010
+
+List the names of all distinct wines that have scores higher than 90.
+
+select Name 
+from WINE
+Where score > 90
+
+
+3. List the names of all distinct wines that are made of red color grape.
+
+Select DISTINCT T2.Name
+From GRAPES as T1 JOIN WINE as T2 ON T1.Grape = T2.Grape
+Where T1.Color = "Red"
+
+Find the names of all distinct wines that have appellations in North Coast area.
+
+Select DISTINCT T2.Name
+From APPELLATIONs as T1 JOIN WINE as T2 ON T1.Appelation = T2.Appelation
+Where T1.Area = "North Coast"
+
+
+4. How many wines are produced at Robert Biale winery?
+
+Select count(*)
+From WINE
+where Winery = "Robert Biale"
+
+How many appelations are in Napa Country?
+
+Select count(*)
+From APPELLATIONS
+where County = "Napa"
+
+
+5. Give me the average prices of wines that are produced by appelations in Sonoma County.
+
+Select AVG(T2.Price)
+From APPELLATIONS as T1 JOIN WINE as T2 ON T1.Appelation = T2.Appelation
+Where T1.County = "Sonoma"
+
+
+What are the names and scores of wines that are made of white color grapes?
+
+Select T2.Name,  T2.Score
+From GRAPES as T1 JOIN WINE as T2 ON T1.Grape = T2.Grape
+Where T1.Color = "White"
+
+6. Find the appelations in Central Coast area and produce wine before the year of 2007.
+
+Select Appelation from APPELLATIONS where Area = "Central Coast"
+INTERSECT
+Select Appelation from WINE where year < "2005"
+
+Find the white color grapes that are used to produce wines with scores higher than 90.
+
+Select Grape from GRAPES where Color = "White"
+INTERSECT
+Select Grape from WINE where score < 90
+
+
+7. What are the wines that have prices higher than 100 and made of Red color grapes?
+
+Select T2.Name
+From Grapes as T1 JOIN WINE as T2 ON T1.Grape = T2.Grape
+where T1.Color = "Red" and T2.price > "50"
+
+What are the wines that have prices lower than 50 and have appelations in Monterey county?
+
+Select T2.Name
+From APPELLATIONS as T1 JOIN WINE as T2 ON T1.Appelation = T2.Appelation
+where T1.County = "Monterey" and T2.price < "50"
+
+
+8. What are the numbers of wines for different grapes?
+
+Select count(*), Grape
+From WINE
+group by Grape
+
+What are the average prices of wines for different years?
+
+Select avg(Price), Year
+From WINE
+group by Year
+
+
+9.  Find the distinct names of all wines that have prices higher than some wines 
+from John Anthony winery.
+
+Select distinct T1.Name
+From WINE as T1, WINE as T2
+where T1.Price > T2.Price and T2.Winery = "John Anthony"
+
+Find the distinct names of all wines that have scores higher than some wines 
+from Napa Valley appelation.
+
+Select distinct T1.Name
+From WINE as T1, WINE as T2
+where T1.Score > T2.Score and T2.Appelation = "Napa Valley"
+
+
+10. List the names of all distinct wines in alphabetical order.
+
+Select distinct Name
+From WINE
+Order by Name
+
+List the names of all distinct wines ordered by price.
+
+Select distinct Name
+From WINE
+Order by price
+
+
+11. What is the area of the appelation that produces the highest number of wines before the year of 2010?
+
+Select T1.Area
+From APPELLATIONS as T1 JOIN WINE as T2 ON T1.Appelation = T2.Appelation
+group by T2.Appelation
+having T2.year < 2010
+order by count(*) DESC
+LIMIT 1
+
+What is the color of the grape whose wine products has the highest average price?
+
+Select T1.Color
+From GRAPES as T1 JOIN WINE as T2 ON T1.Grape = T2.Grape
+group by T2.Grape
+order by AVG(Price) DESC
+LIMIT 1
+
+
+12. Find the distinct names of wines produced before the year of 2000 or after the year of 2010.
+
+Select distinct Name
+From WINE
+where year < 2000 or year > 2010
+
+Find the distinct winery of wines having price between 50 and 100.
+
+Select distinct Winery
+From WINE
+where Price between 50 and 100
+
+
+13. What are the average prices and cases of wines produced in the year of 2009 and made of 
+Zinfandel grape?
+
+Select AVG(Price), AVG(Cases)
+From WINE
+where Year = 2009 and Grape = "Zinfandel"
+
+What are the maximum price and score of wines produced by St. Helena appelation?
+
+Select max(Price), max(Score)
+From WINE
+where Appelation = "St. Helena"
+
+
+14. What are the maximum price and score of wines grouped and ordered by year?
+
+Select max(Price), max(Score), Year
+From WINE
+group by year
+order by year
+
+What are the average price and score of wines grouped by appelation and ordered by name?
+
+Select avg(Price), avg(Score), Appelation
+From WINE
+group by Appelation
+order by Name
+
+
+15. Find the wineries that have at least four wines.
+
+Select Winery
+From WINE
+group by Winery
+having count(*) >= 4
+
+Find the country of all appelations who have at most three wines.
+
+Select T1.County
+From APPELLATIONS as T1 JOIN WINE as T2 on T1.Appelation = T2.Appelation
+group by T2.Appelation
+having count(*) <= 3
+
+
+16. What are the names of wines whose production year are before the year of all wines by Brander winery?
+
+Select Name
+From WINE
+where year < (select min(Year)
+                             from WINE
+                             where Winery = "Brander")
+
+What are the names of wines whose price are more expansive then all wines in the year of 2006?
+
+Select Name
+From WINE
+where Price > (select max(Price)
+                             from WINE
+                             where Year = 2006)
+
+
+17. Find the top 3 wineries having the biggest number of wines made of white color grapes.
+
+Select T2.Winery
+From GRAPES as T1 JOIN WINE as T2 ON T1.GRAPE = T2.GRAPE
+where T1.Color = "White"
+group by T2.Winery
+order by count(*) DESC
+LIMIT 3
+
+
+18. List the grape, winery and year of the wines whose price is bigger than 100 ordered by year.
+
+Select Grape, Winery, Year
+From WINE
+where Price >  100
+order by Year
+
+List the grape, appelation and name of wines whose score is higher than 93 ordered by Name.
+
+Select Grape, Appelation, Name
+From WINE
+where Score > 93
+order by Name
+
+
+19. Find the appelations that produce wines after the year of 2008 but not in Central Coast area.
+
+Select Appelation from WINE Where Year > 2008
+EXCEPT
+Select Appelation from APPELLATIONS Where Area = "Central Coast"
+
