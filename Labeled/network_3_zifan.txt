@@ -1,0 +1,141 @@
+Total * = 25
+
+1. How many likes are there in total?
+
+select count(*)
+from LIKES
+
+Show student ID and smoking behavior of all students' preferences.
+
+select StuID, Smoking
+from PREFERENCES
+
+Show all distinct sleep habits from students' preferences.
+
+select distinct SleepHabits
+from PREFERENCES
+
+
+2. What is the music preference of student Linda Smith?
+
+select T1.MusicType
+from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
+where T2.Fname = "Linda" and T2.LName = "Smith"
+
+What is the sleep habit of student Tracy Kim?
+
+select T1.SleepHabits
+from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
+where T2.StuID = 1001
+
+Show all student IDs of student that answers yes for smoking
+
+select StuID
+from PREFERENCES
+where Smoking = "Yes"
+
+Show the student ID of the student Eric Tai.
+
+select StuID
+from STUDENT
+where Fname = "Eric" and LName = "Tai"
+
+Who likes student Shiela Jones?
+
+select distinct T1.WhoLikes
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoIsLiked = T2.StuID
+where T2.Fname = "Shiela" and T2.LName = "Jones"
+
+How many distinct students like Dinesh Kumar?
+
+select COUNT(distinct T1.WhoLikes)
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoIsLiked = T2.StuID
+where T2.Fname = "Dinesh" and T2.LName = "Kumar"
+
+Who does student Paul Gompers love?
+
+select distinct T1.WhoIsLiked
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoLikes = T2.StuID
+where T2.Fname = "Paul" and T2.LName = "Gompers"
+
+How many different sleep habits?
+
+SELECT count(distinct SleepHabits)
+FROM PREFERENCES
+
+What is the first name of the oldest student?
+
+SELECT Fname
+FROM STUDENT
+WHERE Age = (select max(Age) from STUDENT)
+
+What is the first name of the oldest female (sex is F) student?
+
+SELECT Fname
+FROM STUDENT
+WHERE Age = (select max(Age) from STUDENT WHERE Sex = "F") and Sex = "F"
+
+
+3. Show the student first names and the number of distinct people each student likes.
+
+select T2.Fname, count(distinct T1.WhoIsLiked)
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoLikes = T2.StuID
+group by T1.WhoLikes
+
+Show the last name of the student being loved by most students.
+
+select T2.LName
+from LOVES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
+group by T1.WhoIsLoved ORDER BY count(distinct T1.WhoLoves) DESC LIMIT 1
+
+Show me the first names of all students being loved by at least 4 students.
+
+select T2.Fname
+from LOVES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
+group by T1.WhoIsLoved HAVING count(distinct T1.WhoLoves) >= 4
+
+Find the last names of all students being loved by exactly 1 students
+
+select T2.LName
+from LOVES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
+group by T1.WhoIsLoved HAVING count(distinct T1.WhoLoves) = 1
+
+Show me the sleeping habits preferences that is shared by most students
+
+select SleepHabits
+from PREFERENCES group by SleepHabits
+order by COUNT(*) DESC LIMIT 1
+
+
+4. What is the student ID of the student that does not like any other student?
+
+select StuID
+From STUDENT 
+Except
+Select WhoLikes
+From LIKES
+
+What is the student ID of the student that are not loved by any other student?
+
+select StuID
+From STUDENT
+Except
+Select WhoIsLoved
+From LOVES
+
+What are the student IDs of the male (sex is M) student that are non smoking?
+
+select StuID
+From STUDENT WHERE Sex = "M"
+INTERSECT
+Select StuID
+From PREFERENCES WHERE Smoking = "no"
+
+What are the student IDs of the female (sex is F) student whose sleeping habit is late-nighter?
+
+select StuID
+From STUDENT WHERE Sex = "F"
+INTERSECT
+Select StuID
+From PREFERENCES WHERE SleepHabits = "LateNighter"
+
