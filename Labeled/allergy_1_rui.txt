@@ -11,7 +11,7 @@ from Allergy_type
 2. How many allergy types?
 
 
-select count(allergytype)
+select count(distinct allergytype)
 from Allergy_type
 
 
