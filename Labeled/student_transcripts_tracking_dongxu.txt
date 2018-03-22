@@ -1,0 +1,360 @@
+# count = 40
+
+
+1. what are all the addresses including line 1 and line 2?
+
+
+select line_1, line_2
+from addresses;
+
+
+2. How many total courses are listed?
+
+
+select count(*)
+from Courses;
+
+
+3. How is the math course described?
+
+
+select course_description
+from Courses
+where course_name = 'math';
+
+
+4. What is the zip code of the address located in the city Port Chelsea?
+
+
+select zip_postcode
+from Addresses
+where city = 'Port Chelsea';
+
+
+
+5. Which department offers the most number of degrees? List department name and id.
+
+select T2.department_name
+from Degree_Programs as T1 JOIN Departments as T2 on T1.department_id = T2.department_id
+group by T1.department_id
+order by count(*) desc limit 1;
+
+
+6. How many departments offers at least one degree?
+
+
+select count(distinct department_id)
+from Degree_Programs;
+
+
+7. How many different degree names are offered?
+
+
+select count(distinct degree_summary_name)
+from Degree_Programs;
+
+
+8. How many degrees does the engineer department offers?
+
+
+select count(*)
+from Departments as T1 JOIN Degree_Programs as T2 on T1.department_id = T2.department_id
+where T1.department_name = 'engineer';
+
+
+9. What are all the section names and section descriptions?
+
+
+select section_name, section_description
+from Sections;
+
+
+10. What are the names and ids of courses having at most 2 sections? 
+
+
+select T1.course_name, T1.course_id
+from Courses as T1 JOIN Sections as T2 on T1.course_id = T2.course_id
+group by T1.course_id
+having count(*) <= 2;
+
+
+11. List the section_name in reversed lexicographical order.
+
+
+select section_name
+from Sections
+order by section_name desc;
+
+
+12. How many semesters are fall semesters?
+
+
+select count(*)
+from Semesters
+where semester_name LIKE "%fall%";
+
+
+13. What are all the semester names?
+
+
+select semester_name
+from Semesters;
+
+
+14. Who are enrolled in 2 degree programs in one semester? List the full name and the id.
+
+
+select T1.first_name, T1.middle_name, T1.last_name, T1.student_id
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id
+group by T1.student_id
+having count(*) = 2;
+
+
+
+15. Who enrolled in a PHD degree program? List the full name and the id.
+
+
+select distinct T1.first_name, T1.middle_name, T1.last_name
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id
+where T2.degree_program_id in
+(
+	select degree_program_id
+	from Degree_Programs
+	where degree_summary_name = 'PHD'
+);
+
+
+
+16. Which kind of program have been enrolled most times, Master, Bachelor or PHD?
+
+
+select T1.degree_summary_name
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+group by T1.degree_summary_name
+order by count(*) desc limit 1;
+
+
+
+17. Which program have been enrolled by most times? List both the id and the summary.
+
+
+select T1.degree_program_id, T1.degree_summary_name
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+group by T1.degree_program_id
+order by count(*) desc limit 1;
+
+
+18. Which student has enrolled for the most times in any program? List the id, first name, middel name, last name and the number of enrollments.
+
+
+select T1.student_id, T1.first_name, T1.middle_name, T1.last_name, count(*)
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id
+group by T1.student_id
+order by count(*) desc limit 1;
+
+
+19. How namy semesters are there?
+
+
+select count(*)
+from Semesters;
+
+
+20. How many courses have only one section?
+
+
+select count(*)
+from (
+	select course_id
+	from Sections
+	group by course_id
+	having count(*) = 1
+);
+
+
+21. What are all the course names of the courses which have ever been enrolled in?
+
+
+select distinct T1.course_name
+from Courses as T1 JOIN Student_Enrolment_Courses as T2
+on T1.course_id = T2.course_id;
+
+
+22. Which course has most number of enrollments?
+
+
+select  T1.course_name
+from Courses as T1 JOIN Student_Enrolment_Courses as T2
+on T1.course_id = T2.course_id
+group by T1.course_name
+order by count(*) desc limit 1;
+
+
+23. Which student has taken the most number of courses? List the full name.
+
+
+select first_name, middle_name, last_name
+from Students
+where student_id in
+(
+	select T2.student_id
+	from Student_Enrolment_Courses as T1 JOIN Student_Enrolment as T2 on T1.student_enrolment_id = T2.student_enrolment_id
+	group by T2.student_id
+	order by count(*) desc limit 1
+);
+
+
+
+24. Which students has taken exactly one course? List the full name.
+
+
+select first_name, middle_name, last_name
+from Students
+where student_id in
+(
+	select T2.student_id
+	from Student_Enrolment_Courses as T1 JOIN Student_Enrolment as T2 on T1.student_enrolment_id = T2.student_enrolment_id
+	group by T2.student_id
+	having count(*) = 1
+);
+
+
+
+25. What is the phone number of Timmothy Anna Ward?
+
+
+select cell_mobile_number
+from Students
+where first_name = 'Timmothy' and middle_name = 'Anna' and last_name = 'Ward';
+
+
+
+26. Who is the first student to register? List the full name.
+
+
+select first_name, middle_name, last_name
+from Students
+order by date_first_registered asc limit 1;
+
+
+27. Who is the earliest graduate of the school? List the full name.
+
+
+select first_name, middle_name, last_name
+from Students
+order by date_left asc limit 1;
+
+
+28. Whose permanent address is different from his or her current address? List the fullname.
+
+
+select first_name, middle_name, last_name
+from Students
+where current_address_id != permanent_address_id
+
+
+29. Which address holds the most number of students currently? List the address id and all lines.
+
+
+select T1.address_id, T1.line_1, T1.line_2
+from Addresses as T1 JOIN Students as T2 on T1.address_id = T2.current_address_id
+group by T1.address_id
+order by count(*) desc limit 1;
+
+
+30. What are all the fullnames of all the students?
+
+
+select first_name, middle_name, last_name
+from Students
+
+
+31. When is the first transcript released, list the date and details?
+
+
+select transcript_date, other_details
+from Transcripts
+order by transcript_date asc limit 1;
+
+
+32. How many transcripts are released?
+
+select count(*)
+from Transcripts;
+
+
+33. What is the last transcript release date?
+
+
+select transcript_date
+from Transcripts
+order by transcript_date desc limit 1;
+
+
+34. Which course enrollment result is shown in the most number of transcripts?
+
+
+select student_course_id
+from Transcript_Contents
+group by student_course_id
+order by count(*) desc limit 1;
+
+
+
+35. Which transcript shows the least number of results? List the id.
+
+
+select transcript_id
+from Transcript_Contents
+group by transcript_id
+order by count(*) asc limit 1;
+
+
+36. What is the email address of the student who had stayed for the longest period in the school?
+
+
+select email_address
+from Students
+order by (date_left - date_first_registered) desc limit 1;
+
+
+37. How many different addresses does the students currently live?
+
+
+select count(distinct current_address_id)
+from Students;
+
+
+38. List all the student details in reversed lexicographical order.
+
+select other_student_details
+from Students
+order by other_student_details desc;
+
+39. For how many years has the school been providing transcripts?
+
+
+select max(transcript_date) - min(transcript_date)
+from Transcripts;
+
+40. Describe the section h.
+
+select section_description
+from Sections
+where section_name = 'h';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
