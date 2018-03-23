@@ -1,0 +1,181 @@
+Total = #35
+
+1. What kind of document status code do we have?
+SELECT document_status_code FROM Ref_Document_Status;
+
+2. What is the description of document status code working?
+SELECT document_status_description 
+FROM Ref_Document_Status
+WHERE document_status_code="working";
+
+3. What kind of document types do we have?
+SELECT document_type_code FROM Ref_Document_Types;
+
+4. What is the description of document type Paper?
+SELECT document_type_description
+FROM Ref_Document_Types
+WHERE document_type_code="Paper";
+
+5. What are shipping agents do we have?
+SELECT shipping_agent_name FROM Ref_Shipping_Agents;
+
+6. What is the shipping agent code of shipping agent UPS?
+SELECT shipping_agent_code
+FROM Ref_Shipping_Agents
+WHERE shipping_agent_name="UPS";
+
+7. What are all role codes?
+SELECT role_code FROM Roles;
+
+8. What is the description of role code ED?
+SELECT role_description
+FROM Roles
+WHERE role_code="ED";
+
+9. How many employees do we have?
+
+SELECT count(*)
+FROM Employees;
+
+10. What is employee Koby's role?
+SELECT Roles.role_description
+FROM Roles JOIN Employees ON Employees.role_code=Roles.role_code
+WHERE Employees.employee_name="Koby";
+
+11. List all document id of documents we have.
+SELECT document_id FROM Documents;
+
+12. How many employee does each roles have? List role description and number of employees.
+SELECT Roles.role_description,count(*)
+FROM Roles JOIN Employees ON Employees.role_code=Roles.role_code
+GROUP BY Employees.role_code;
+
+13. List roles than have more than one employee. List role description and number of employees.
+SELECT Roles.role_description,count(Employees.employee_id)
+FROM Roles JOIN Employees ON Employees.role_code=Roles.role_code
+GROUP BY Employees.role_code
+HAVING count(Employees.employee_id) > 1;
+
+14. What is the document status of document with id 1? List document status description.
+SELECT Ref_Document_Status.document_status_description
+FROM Ref_Document_Status JOIN Documents ON Documents.document_status_code=Ref_Document_Status.document_status_code
+WHERE Documents.document_id=1;
+
+15. How many documents are in status done?
+SELECT count(*)
+FROM Documents
+WHERE document_status_code="done";
+
+17. What is the document type of document with id 2? List document type code.
+SELECT document_type_code
+FROM Documents
+WHERE document_id=2;
+
+18. Which document status code is done and document type is Paper? List document id.
+SELECT document_id
+FROM Documents
+WHERE document_status_code="done" and document_type_code="Paper";
+
+19. What is the shipping agent of document with id 2? List shipping agent name.
+
+SELECT Ref_Shipping_Agents.shipping_agent_name
+FROM Ref_Shipping_Agents JOIN Documents ON Documents.shipping_agent_code=Ref_Shipping_Agents.shipping_agent_code
+WHERE Documents.document_id=2;
+
+20. How many documents were shipped by USPS?
+SELECT count(*)
+FROM Ref_Shipping_Agents JOIN Documents ON Documents.shipping_agent_code=Ref_Shipping_Agents.shipping_agent_code
+WHERE Ref_Shipping_Agents.shipping_agent_name="USPS";
+
+21. Which shipping agent shipped most of documents? List shipping agent name and the number of documents.
+SELECT Ref_Shipping_Agents.shipping_agent_name,count(Documents.document_id)
+FROM Ref_Shipping_Agents JOIN Documents ON Documents.shipping_agent_code=Ref_Shipping_Agents.shipping_agent_code
+GROUP BY Ref_Shipping_Agents.shipping_agent_code
+ORDER BY count(Documents.document_id) DESC
+LIMIT 1;
+
+22. What is the receipt date of document with id 3?
+SELECT receipt_date
+FROM Documents
+WHERE document_id=3;
+
+23. What is the address does document with id 4 mailed to? List address details.
+SELECT Addresses.address_details
+FROM Addresses JOIN Documents_Mailed ON Documents_Mailed.mailed_to_address_id=Addresses.address_id
+WHERE document_id=4;
+
+24. What is the mail date of document with id 7?
+SELECT mailing_date
+FROM Documents_Mailed
+WHERE document_id=7;
+
+25. List document id of documents status is done and document type is Paper and the document is not shipped by shipping agent named USPS.
+SELECT document_id
+FROM Documents
+WHERE document_status_code = "done" and document_type_code="Paper"
+EXCEPT
+SELECT document_id
+FROM Documents JOIN Ref_Shipping_Agents ON Documents.shipping_agent_code=Ref_Shipping_Agents.shipping_agent_code
+WHERE Ref_Shipping_Agents.shipping_agent_name="USPS";
+
+26. List document id of documents status is done and document type is Paper and the document is shipped by shipping agent named USPS.
+SELECT document_id
+FROM Documents
+WHERE document_status_code = "done" and document_type_code="Paper"
+INTERSECT
+SELECT document_id
+FROM Documents JOIN Ref_Shipping_Agents ON Documents.shipping_agent_code=Ref_Shipping_Agents.shipping_agent_code
+WHERE Ref_Shipping_Agents.shipping_agent_name="USPS";
+
+27. What is draft detail of document with id 7?
+SELECT draft_details
+FROM Document_Drafts
+WHERE document_id=7;
+
+28. How many draft copied does document with id 2 has?
+SELECT count(*)
+FROM Draft_Copies
+WHERE document_id=2;
+
+29. Which document has most of draft copies? List document id and number of draft copies.
+SELECT document_id,count(copy_number)
+FROM Draft_Copies
+GROUP BY document_id
+ORDER BY count(copy_number) DESC
+LIMIT 1;
+
+30. Which documents have more than 1 draft copies? List document id and number of draft copies.
+SELECT document_id,count(copy_number)
+FROM Draft_Copies
+GROUP BY document_id
+HAVING count(copy_number) > 1;
+
+31. List all employees in the circulation history of document with id 1. List employee's name.
+SELECT Employees.employee_name
+FROM Employees JOIN Circulation_History ON Circulation_History.employee_id=Employees.employee_id
+WHERE Circulation_History.document_id=1;
+
+32. List employees who has not showed in any circulation history of documents. List employee's name.
+SELECT employee_name
+FROM Employees
+EXCEPT
+SELECT Employees.employee_name
+FROM Employees JOIN Circulation_History ON Circulation_History.employee_id=Employees.employee_id
+
+33. Which employee has showed in most of circulation history of documents. List employee's name and the number of draft and copies.
+SELECT Employees.employee_name,count(*)
+FROM Employees JOIN Circulation_History ON Circulation_History.employee_id=Employees.employee_id
+GROUP BY Circulation_History.document_id,Circulation_History.draft_number,Circulation_History.copy_number
+ORDER BY count(*) DESC
+LIMIT 1;
+
+34. For each document, list the number of employees has showed in circulation history of that document. List document id and number of employees.
+SELECT document_id, count(distinct employee_id)
+FROM Circulation_History
+GROUP BY document_id;
+
+35 List documents that no employee has showed in circulation history of that document. List document id.
+SELECT Documents.document_id
+FROM Documents LEFT OUTER JOIN Circulation_History ON Documents.document_id= Circulation_History.document_id
+GROUP BY Documents.document_id
+HAVING count(Circulation_History.employee_id) = 0;
