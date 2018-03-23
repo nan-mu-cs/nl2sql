@@ -1,0 +1,286 @@
+Total = 35
+
+1. How many clubs are there?
+
+select count(*)
+from club
+
+What are the name of all clubs?
+
+select clubname
+from club
+
+How many students are there?
+
+select count(*)
+from student
+
+What are the first names of all the students.
+
+select distinct fname
+from student
+
+2. Find the last names of the members of the club "Bootup Baltimore".
+
+select t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore"
+
+Who are the members of the club named "Hopkins Student Enterprises"?
+
+select t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises"
+
+
+3. How many members does the club "Tennis Club" has?
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Tennis Club"
+
+Find the number of members of club "Pen and Paper Gaming".
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Pen and Paper Gaming"
+
+4. How many clubs does "Linda Smith" belong to?
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Linda" and t3.lname = "Smith"
+
+Find the number of clubs where "Tracy Kim" is a member.
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Tracy" and t3.lname = "Kim"
+
+5. Find all the female members of club "Bootup Baltimore"
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.sex = "F"
+
+Find all the male members of club "Hopkins Student Enterprises"
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises" and t3.sex = "M"
+
+6. Find all members of "Bootup Baltimore" whose major is "600".
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.major = "600"
+
+7. Which club has the most members majoring in "600"?
+
+select t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.major = "600"
+group by t1.clubname
+order by count(*) desc
+limit 1
+
+Find the name of the club that has the most female students.
+
+select t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.sex = "F"
+group by t1.clubname
+order by count(*) desc
+limit 1
+
+8. What is the description of club named "Tennis Club"?
+
+select clubdesc
+from club
+where clubname = "Tennis Club"
+
+Find the description of club "Pen and Paper Gaming".
+
+select clubdesc
+from club
+where clubname = "Pen and Paper Gaming"
+
+9. What is the location of club named "Tennis Club"?
+
+select clublocation
+from club
+where clubname = "Tennis Club"
+
+Find the description of club "Pen and Paper Gaming".
+
+select clublocation
+from club
+where clubname = "Pen and Paper Gaming"
+
+Where is club "Hopkins Student Enterprises" located?
+
+select clublocation
+from club
+where clubname = "Hopkins Student Enterprises"
+
+10. Find the name of all clubs at "AKW".
+
+select clubname
+from club
+where clublocation = "AKW"
+
+11. How many clubs are located at "HHH"?
+
+select count(*)
+from club
+where clublocation = "HHH"
+
+12. What is the name of the president of club "Bootup Baltimore"?
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t2.position = "President"
+
+Who is the "CTO" of "Hopkins Student Enterprises"?
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises" and t2.position = "CTO"
+
+13. How many different roles are there in the club "Bootup Baltimore"?
+
+select distinct t2.position
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+where t1.clubname = "Bootup Baltimore"
+
+14. How many members of "Bootup Baltimore" are older than 18?
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.age > 18
+
+How many members of club "Bootup Baltimore" are younger than 18?
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.age < 18
+
+15. Find the name of all clubs that have at least a member from city with city code "BAL".
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.city_code = "BAL"
+
+Find the name of all clubs that have at least a member from city with city code "HOU".
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.city_code = "HOU"
+
+16. Which clubs does the student named "Eric Tai" belong to?
+
+select count(distinct t1.clubname)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Eric" and t3.lname = "Tai"
+
+List the clubs having "Davis Steven" as a member.
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Davis" and t3.lname = "Steven"
+
+17. List the clubs that have at least a member with advisor "1121".
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.advisor = 1121
+
+18. What is the average age of members of the club "Bootup Baltimore"?
+
+select avg(t3.age)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore"
+
+Find the average age of members of the club "Hopkins Student Enterprises".
+
+select avg(t3.age)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises"
+
+Retrieve the average age of members of the club "Tennis Club".
+
+select avg(t3.age)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Tennis Club"
+
+

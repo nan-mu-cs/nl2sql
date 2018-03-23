@@ -1,0 +1,177 @@
+
+Total # = 27
+
+Find the titles of movies that don’t have any rating.
+
+Select title
+From movies
+Where rating is NULL
+
+Find the names of movies whose rating is ‘G’.
+
+Select title
+From movies
+Where rating = 'G'
+
+Find the title of the movie that is played in the Odeon theater.
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon'
+
+Find the names of movies that are played in any theater and the name of the corresponding theater.
+
+Select T1.title, T2.name
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+
+Find the number of movies whose rating is ‘G’.
+
+Select count(*)
+From movies
+Where rating = 'G'
+
+How many movies are on in all theaters?
+
+Select count(*)
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+
+How many distinct movies are on in all theaters?
+
+Select count(distinct T1.code)
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+
+How many distinct movie theaters are there?
+
+Select count(distinct name)
+From movietheaters
+
+Find the rating of the movie whose name including the word ‘Citizen’.
+
+Select rating
+From movies
+Where title LIKE '%Citizen%'
+
+Find the name of the cinemas that are playing movies with either rating ‘G’ or rating ‘PG’.
+
+Select title
+From movies
+Where rating = 'G' or rating = 'PG'
+
+Find the name of the movies that are played in either cinema Odeon or Imperial.
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon' or T2.name = 'Imperial'
+
+
+Find the name of the movie that is on in theater Odeon and Imperial.
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon' 
+Intersect 
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Imperial'
+
+Find the name of all movies that are not played in Odeon theater.
+
+Select title
+From movies
+Except
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon'
+
+List in alphabetical order the titles of all movies.
+
+Select title
+From movies
+Order by title
+
+Find the titles of all movies sorted by their ratings.
+
+Select title
+From movies
+Order by rating
+
+Find the name of theater that is playing the most number of movies.
+
+Select name
+From movietheaters
+Group by name
+Order by count(*) desc
+Limit 1
+
+Find the name of movie that is played in the most number of theater.
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Group by T1.title
+Order by count(*) desc
+Limit 1
+
+Find the number of movies in each rating.
+
+Select count(*), rating
+From movies
+Group by rating
+
+Find the number of movies whose rating is not null in each rating.
+
+Select count(*), rating
+From movies
+Where rating is not NULL
+Group by rating
+
+Find the number of movies for each rating excepts NULL.
+
+Select count(*), rating
+From movies
+Group by rating
+Having rating is not NULL
+
+Find the name of theaters that has at least one movie playing.
+
+Select name
+From movietheaters
+Group by name
+Having count(*) >= 1
+
+Select the name of all movie theaters that are not currently showing a movie.
+
+select name
+from MovieTheaters
+where Movie is NULL
+
+Find the name of the movie theaters that are playing the movies whose rating is ‘G’.
+
+Select T2.name
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T1.rating = 'G'
+
+
+Select the title of all movies.
+
+select title
+from movie
+ 
+Show all the distinct ratings in the database.
+
+select distinct rating
+from movies
+ 
+Show all information of all unrated movies.
+
+select *
+from movies
+where rating is NULL
+ 
+Show the titles of movies not currently being shown in any theaters.
+
+SELECT Title
+FROM Movies
+WHERE Code NOT IN
+(SELECT Movie
+FROM MovieTheaters
+WHERE Movie IS NOT NULL)

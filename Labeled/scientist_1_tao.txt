@@ -1,0 +1,178 @@
+
+Total # = 24
+
+Find the total number of scientists.
+
+Select count(*)
+From scientists
+
+Find the total hours of all projects.
+
+Select sum(hours)
+From projects
+
+How many different scientists are assigned to any project?
+
+Select count(distinct scientist)
+From assignedto
+
+Find the number of distinct projects.
+
+Select count(distinct name)
+From projects
+
+Find the average hours of all projects.
+
+Select avg(hours)
+From projects
+
+Find the name of project that continues for the longest time.
+
+Select name
+From projects
+Order by hours desc
+Limit 1
+
+List the name of all projects that are operated longer than the average working hours of all projects.
+
+Select name
+From projects
+Where hours > (select avg(hours) from projects)
+
+Find the name and hours of project that has the most number of scientists.
+
+Select T1.name
+From projects as T1 join assignedto as T2 on T1.code = T2.project
+Group by T2.project
+Order by count(*) desc
+Limit 1
+
+Find the name of the project which scientist whose name contains word ‘Smith’ is assigned to.
+
+Select T2.name
+From assignedto as T1
+     Join projects as T2 on T1.project = T2.code
+     Join scientists as T3 on T1.scientist = T3.SSN
+Where T3.name LIKE '%Smith%'
+
+Find the total hours of the projects which scientists Michael Rogers or Carol Smith is working on.
+
+Select sum(T2.hours)
+From assignedto as T1
+     Join projects as T2 on T1.project = T2.code
+     Join scientists as T3 on T1.scientist = T3.SSN
+Where T3.name = 'Michael Rogers' or T3.name = 'Carol Smith'
+
+Find the name of projects that require a working load between 100 and 300 hours.
+
+Select name
+From projects
+Where hours between 100 and 300
+
+
+Find the name of scientist who worked on both project named 'Matter of Time' and the project with name 'A Puzzling Parallax'.
+
+Select T3.name
+From assignedto as T1
+     Join projects as T2 on T1.project = T2.code
+     Join scientists as T3 on T1.scientist = T3.SSN
+Where T2.name = 'Matter of Time'
+Intersect
+Select T3.name
+From assignedto as T1
+     Join projects as T2 on T1.project = T2.code
+     Join scientists as T3 on T1.scientist = T3.SSN
+Where T2.name = 'A Puzzling Parallax'
+
+
+List the names of all scientists sorted in in alphabetical order.
+
+Select name
+From scientists
+Order by name
+
+Find the number of scientists are involved for each project and project name.
+
+Select count(*), T1.name
+From projects as T1 join assignedto as T2 on T1.code = T2.project
+group by T1.name
+
+
+Find the number of scientists are involved for these projects that require more than 300 hours.
+
+Select count(*), T1.name
+From projects as T1 join assignedto as T2 on T1.code = T2.project
+Where T1.hours > 300
+group by T1.name
+
+Find the number of projects which each scientist is working on and scientist's name.
+
+Select count(*), T1.name
+From scientists as T1 join assignedto as T2 on T1.ssn = T2.scientist
+Group by T1.name
+
+Find the SSN and name of scientists who are assigned to the project with the longest hours.
+
+Select T3.ssn, T3.name
+From assignedto as T1
+     Join projects as T2 on T1.project = T2.code
+     Join scientists as T3 on T1.scientist = T3.SSN
+Where T2.hours = (select max(hours) from projects)
+
+Find the name of scientists who are assigned to some project. 
+
+Select T2.name
+From assignedto as T1 join scientists as T2 on T1.scientist = T2.ssn
+
+
+Select the project names which are not assigned yet.
+
+SELECT Name
+FROM Projects
+WHERE Code NOT IN
+(SELECT Project
+FROM AssignedTo)
+
+Find the name of scientists who are not assigned to any project.
+
+SELECT Name
+FROM scientists
+WHERE ssn NOT IN
+(SELECT scientist
+FROM AssignedTo)
+
+Find the number of scientists who are not assigned to any project.
+
+SELECT count(*)
+FROM scientists
+WHERE ssn NOT IN
+(SELECT scientist
+FROM AssignedTo)
+
+Find the name of scientists who are not working on the project with the highest hours.
+
+Select name
+From scientists
+Except 
+Select T3.name
+From assignedto as T1
+     Join projects as T2 on T1.project = T2.code
+     Join scientists as T3 on T1.scientist = T3.SSN
+Where T2.hours = (select max(hours) from projects)
+
+List all the scientists' names, their projects' names, and the hours worked by that scientist on each project, in alphabetical order of project name, then scientist name.
+
+SELECT T1.Name, T3.Name, T3.Hours
+FROM Scientists as T1
+     JOIN AssignedTo as T2 ON T1.SSN=T2.Scientist
+     JOIN Projects as T3 ON T2.Project=T3.Code
+ORDER BY T3.Name, T1.Name
+
+
+Find name of the project that needs the fastest time to finish and the name of scientists who worked on it.
+
+Select T2.name, T3.name
+From assignedto as T1
+     Join projects as T2 on T1.project = T2.code
+     Join scientists as T3 on T1.scientist = T3.SSN
+Where T2.hours = (select min(hours) from projects)
