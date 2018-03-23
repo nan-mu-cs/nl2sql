@@ -1,4 +1,4 @@
-# count = 40
+# count = 42
 
 
 1. what are all the addresses including line 1 and line 2?
@@ -196,33 +196,27 @@ group by T1.course_name
 order by count(*) desc limit 1;
 
 
-23. Which student has taken the most number of courses? List the first name, middle name and last name.
+
+23. Find the last name of the students who currently live in the NorthCarolina state but has not registered in any degree program.
 
 
-select first_name, middle_name, last_name
-from Students
-where student_id in
-(
-	select T2.student_id
-	from Student_Enrolment_Courses as T1 JOIN Student_Enrolment as T2 on T1.student_enrolment_id = T2.student_enrolment_id
-	group by T2.student_id
-	order by count(*) desc limit 1
-);
+select T1.last_name
+from Students as T1 JOIN Addresses as T2 on T1.current_address_id = T2.address_id
+where T2.state_province_county = 'NorthCarolina'
+EXCEPT
+select distinct T1.last_name
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id;
 
 
 
-24. Which students has taken exactly one course? List the first name, middle name and last name.
+24. Show the date of the transcript showing at least 2 course results, also list the id.
 
 
-select first_name, middle_name, last_name
-from Students
-where student_id in
-(
-	select T2.student_id
-	from Student_Enrolment_Courses as T1 JOIN Student_Enrolment as T2 on T1.student_enrolment_id = T2.student_enrolment_id
-	group by T2.student_id
-	having count(*) = 1
-);
+select T2.transcript_date, T1.transcript_id
+from Transcript_Contents as T1 JOIN Transcripts as T2 on T1.transcript_id = T2.transcript_id
+group by T1.transcript_id
+having count(*) >= 2;
+
 
 
 
@@ -374,26 +368,6 @@ where degree_summary_name = 'Bachelor'
 
 
 
-
-43. Find the last name of the students who currently live in the NorthCarolina state but has not registered in any degree program.
-
-
-select T1.last_name
-from Students as T1 JOIN Addresses as T2 on T1.current_address_id = T2.address_id
-where T2.state_province_county = 'NorthCarolina'
-EXCEPT
-select distinct T1.last_name
-from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id;
-
-
-
-44. Show the date of the transcript showing at least 2 course results, also list the id.
-
-
-select T2.transcript_date, T1.transcript_id
-from Transcript_Contents as T1 JOIN Transcripts as T2 on T1.transcript_id = T2.transcript_id
-group by T1.transcript_id
-having count(*) >= 2;
 
 
 
