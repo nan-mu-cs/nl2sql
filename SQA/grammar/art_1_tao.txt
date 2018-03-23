@@ -144,8 +144,9 @@ From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
 where T2.medium = "oil" and location = "Gallery 241"
 
 9. What are the numbers of works for different medium on type?
-# NOT SURE WHAT THIS IS ASKING!!
-How many works are there in each medium?
+A. How many works are there in each medium?
+#ISSUE: I don't think there is a way to make this sound natural -- "medium on" is not neither used
+nor gramatically correct
 
 Select count(*), mediumOn
 From paintings
@@ -164,43 +165,45 @@ From paintings
 group by location
 having year < 1900
 
-10. What are the titles of paintings that are created after 1910 and medium is oil?
+10. What are the titles of paintings that are created after 1910 and whose medium is oil?
 
 Select title
 From paintings
 where year > 1910 and medium = "oil"
 
-Find the unique id of the painters who had medium oil painting exhibited at gallery 240?
+Find the unique id of the painters who had medium oil paintings exhibited at gallery 240?
 
 Select DISTINCT painterID
 From paintings
 where medium = "oil" and location = "Gallery 240"
 
-11.  Find the distinct titles of all paintings that have a longer height than some paintings on canvas?
+11.  Find the distinct titles of all paintings that have a longer height than some painting on canvas?
 
 Select distinct T1.title
 From paintings as T1, paintings as T2
 where T1.height_mm > T2.height_mm and T2.mediumOn = "canvas"
 
-Find the distinct ids of all paintings that have a longer year than some paintings at location gallery 240?
+Find the distinct ids of all paintings that have a bigger year than some paintings at location gallery 240.
+A. Find the distinct distinct ids of all paintings that are older than some painting at location gallery 240.
 
 Select distinct T1.paintingID
 From paintings as T1, paintings as T2
 where T1.year > T2.year and T2. location = "Gallery 240"
 
 Find the distinct ids of the oldest paintings?
+#Note: I don't think this is the correct SQL translation
 
 Select distinct T1.paintingID
 From paintings as T1, paintings as T2
 where T1.year > T2.year and T2. location = "Gallery 240"
 
-12. What is the first and last name of the artist who had a sculpture work whose title has “female”?
+12. What are the first and last name of the artist who had a sculpture work whose title has the word “female” in it?
 
 Select T1.lname, T1.fname
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 Where T2.title LIKE "%female%"
 
-13. List the names of all distinct paintings in alphabetical oder
+13. List the names of all distinct paintings in alphabetical order
 
 Select distinct title
 From paintings
@@ -212,7 +215,7 @@ Select distinct title
 From paintings
 Order by height_mm
 
-14. what are the names of both paintings and sculptures created between 1900 and 1950?
+14. What are the names of both paintings and sculptures created between 1900 and 1950?
 
 Select title
 From paintings
@@ -249,13 +252,13 @@ group by T2. sculptorID
 order by count(*) DESC
 LIMIT 1
 
-16. What are the names of paintings whose width are less than 600 or height is larger than 800?
+16. What are the names of paintings whose width is less than 600 or height is larger than 800?
 
 Select title
 From paintings
 where width_mm < 600 or height_mm > 800
 
-Find the locations where has paintings created before 1885 or after 1930?
+Which locations have paintings created before 1885 or after 1930?
 
 Select distinct location
 From paintings
@@ -277,7 +280,7 @@ Select location
 From paintings
 where mediumOn = "canvas"
 
-Find the locations where has paintings created before 1885 and after 1930?
+Find the locations that have paintings created before 1885 and after 1930?
 
 Select location
 From paintings
@@ -313,14 +316,14 @@ From paintings
 group by painterID
 order by title
 
-20. Find the first names and number of works of all artists who has at least two paintings?
+20. Find the first names and number of works of all artists who have at least two paintings?
 
 Select T1.fname, count(*)
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
 group by T2. painterID
 having count(*) > 1
 
-Find the death year of all artists who has at most 3 paintings?
+Find the death year of all artists who have at most 3 paintings?
 
 Select T1.deathYear
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
@@ -335,7 +338,7 @@ Group by T2.sculptorID
 Order by count(*)
 LIMIT 1
 
-What is ids and height of the painting with the longest width in gallery 240?
+What are the ids and height of the painting with the longest width in gallery 240?
 
 Select paintingID, height_mm
 From paintings
@@ -343,7 +346,7 @@ where location = 'Gallery 240'
 Order by width_mm DESC
 LIMIT 1
 
-22. What is ids of the paintings whose created year is before the year of all paintings in gallery 240?
+22. What are the ids of the paintings whose created year is before the year of all paintings in gallery 240?
 
 Select paintingID
 From paintings
@@ -351,7 +354,7 @@ where year <  (select min(year)
                              from paintings
                              where location = 'Gallery 240')
 
-What is ids of the paintings whose height is longer than the height of all paintings created after 1900?
+What are the ids of the paintings whose height is longer than the height of all paintings created after 1900?
 
 Select paintingID, height_mm
 From paintings
@@ -359,7 +362,7 @@ where height_mm >  (select max(height_mm)
                                       from paintings
                                        where year > 1900)
 
-23. Find the top 3 artists has the biggest number of painting works whose medium is oil?
+23. Find the top 3 artists who have the biggest number of painting works whose medium is oil?
 
 Select T1. lname, T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
@@ -368,14 +371,14 @@ group by T2. painterID
 order by count(*) DESC
 LIMIT 3
 
-24. List the painting id, location and title of the medium oil paintings ordered by year?
+24. List the painting id, location and title of the medium oil paintings ordered by year.
 
 Select paintingID, title, location
 From paintings
 where medium =  "oil"
 order by year
 
-List the year, location and title of paintings whose height is longer than 1000 ordered by title?
+List the year, location and title of paintings whose height is longer than 1000 ordered by title.
 
 Select title, location, year
 From paintings
@@ -383,7 +386,7 @@ where height_mm > 1000
 order by title
 
 
-25. Find the first and last name of artists who has painting but no sculpture work?
+25. Find the first and last name of artists who have painting but no sculpture work.
 
 Select T1. lname, T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
@@ -391,7 +394,7 @@ EXCEPT
 Select T1. lname, T1.fname
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 
-Find the locations where has painting before 1885 and no work with medium on canvas?
+Find the locations that have paintings before 1885 and no work with medium on canvas?
 
 Select location
 From paintings
