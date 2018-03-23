@@ -1,117 +1,297 @@
 
+Total # = 42
 
-Find the name, city, country, and altitude (or elevation) of the JFK airport.
+Find the name of the airport in the city of Goroka. 
+
+select name
+from airports
+where city = 'Goroka'
+
+Find the name, city, country, and altitude (or elevation) of the airports in the city of New York.
+
+select name, city, country, elevation
+from airports
+where city = 'New York'
+
+How many airlines are there?
+
+select count(*)
+from airlines
+
+How many airlines does Russia has?
+
+select count(*)
+from airlines
+where country = 'Russia'
+
+What is the maximum elevation of all airports in the country of Iceland?
+
+select max(elevation)
+from airports
+where country = 'Iceland'
+
+Find the name of the airports located in Cuba or Argentina.
+
+select name
+from airports
+where country = 'Cuba' or country = 'Argentina
+
+Find the country of the airlines whose name starts with ‘Orbit’. 
+
+select country
+from airlines
+where name LIKE '%Orbit%'
+
+Find the name of airports whose latitude is between -50 and 50.
+
+select name
+from airports
+where elevation between -50 and 50
+
+Which country is the airport that has the highest latitude located in?
+
+select country
+from airports
+order by elevation desc
+limit 1
+
+Find the number of airports whose name contain the word 'International'.
+
+select count(*)
+from airports
+where name LIKE '%International%'
+
+How many different cities do have some airport in the country of Greenland?
+
+select count(distinct city)
+from airports
+where country = 'Greenland'
+
+Find the routes operated by American Airlines.
+
+select count(*)
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+where T1.name = 'American Airlines'
+
+find the number of routes whose destination airports are in Canada.
+
+select count(*)
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+where country = 'Canada'
+
+Find the name, city, and country of the airport that has the lowest altitude.
+
+select name, city, country
+from airports
+order by elevation
+limit 1
+
+Find the name, city, and country of the airport that has the highest latitude.
+
+select name, city, country
+from airports
+order by elevation desc
+limit 1
+
+Find the name and city of the airport where is the destination of the most number of routes.
+
+select T1.name, T1.city, T2.dst_apid
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+group by T2.dst_apid 
+order by count(*) desc
+limit 1
+
+Find the names of the top 10 airlines that operate the most number of routes.
+
+select T1.name, T2.alid
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+group by T2.alid
+order by count(*) desc
+limit 10
+
+Find the name, city and country of the airport where is the source for the most number of flight routes.
+
+select T1.name, T1.city, T2.src_apid
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+group by T2.src_apid 
+order by count(*) desc
+limit 1
+
+Find the number of different airports where are the destinations of the American Airlines.
+
+select count(distinct dst_apid)
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+where T1.name = 'American Airlines'
 
 
+Which counties has the most number of airlines?
 
-Find the routes operated by American Airlines that are codeshared. 
+select country
+from airlines
+group by country
+order by count(*) desc
+limit 1
 
+Which counties has the most number of airlines whose active status is 'Y'?
 
-Find the airports located in Cuba or Argentina.
+select country
+from airlines
+where active = 'Y'
+group by country
+order by count(*) desc
+limit 1
 
+List all countries and their number of airlines in the descending order of number of airlines.
 
-
-Find the airlines whose name starts with ‘Orbit’. 
-
-
-
-Find the airports within a bounding box.
-
-
-
-Find the routes with destination airport in Italy.
-
-
-
-return routes with destination airport in Italy operated by the airline with name ‘American Airlines’.
-
-
-
-Find the domestic routes.
-
-
-
-find the routes that are international.
-
-
-
-Find the routes from the United States to Canada operated by American Airlines.
-
-
+select country, count(*)
+from airlines
+group by country
+order by count(*) desc
 
 How many airports are there per country? Order the countries by decreasing number of airports.
 
+select count(*), country
+from airports
+group by country
+order by count(*) desc
+
+How many airports are there per city in the United States? Order the cities by decreasing number of airports.
+
+select count(*), city
+from airports
+where country = 'United States'
+group by city
+order by count(*) desc
+
+Return the cities with more than 3 airports in the United States.
+
+select city
+from airports
+where country = 'United States'
+group by city
+having count(*) > 3
+
+How many cities are there have more than 3 airports?
+
+select count(*)
+from 
+(select city
+from airports
+group by city
+having count(*) > 3)
+
+List the cities where have more than one airports and number of airports.
+
+select city, count(*)
+from airports
+group by city
+having count(*) > 1
+
+List the cities where have more than 2 airports sorted by the number of airports.
+
+select city
+from airports
+group by city
+having count(*) > 2
+order by count(*)
+
+Find the number of routes for each source airport and the airport name.
+
+select count(*), T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+group by T1.name
 
 
+Find the number of routes and airport name for each source airport, order the results by decreasing number of routes.
 
-How many airports are there per city in the United States? Order the cities by decreasing number of airports and project only the cities. Use the HAVING clause to return only the cities with more than 3 airports.
+select count(*), T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+group by T1.name
+order by count(*) desc
 
+Find the average elevation of all airports for each country.
 
+select avg(elevation), country
+from airports
+group by country
 
-Find the number of routes for each source airport. Project only the number of routes and corresponding id of the airport (i.e., src_apid). Order the results by decreasing number of routes.
+Find the cities where have exactly two airports.
 
+select city
+from airports
+group by city
+having count(*) = 2
 
+Find the most popular airline (airline that has the most number of routes) in each country.
 
-Find the average, max, and min routes operated by American Airlines across cities in the United States. You need to account only for routes with source airport located in a city in the United States.
+###wrong check
+select T1.country, T1.name, count(*)
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+group by T1.country, T1.name
 
+Find the number of routes with destination airports in Italy.
 
+select count(*)
+from routes as T1 join airports as T2 on T1.dst_apid = T2.apid
+where T2.country = 'Italy'
 
+return routes with destination airport in Italy operated by the airline with name ‘American Airlines’.
 
-Find the number of routes that have as destination the JFK airport.
+select count(*)
+from routes as T1 
+     join airports as T2 on T1.dst_apid = T2.apid
+     join airlines as T3 on T1.alid = T3.alid
+where T2.country = 'Italy' and T3.name = 'American Airlines'
 
+Find the number of routes that have as destination the John F Kennedy International Airport.
 
+select count(*)
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+where T1.name = 'John F Kennedy International Airport'
 
+Find the number of routes from the United States to Canada operated by American Airlines.
 
+select count(*)
+from routes 
+where dst_apid IN (select apid from airports where country = 'Canada') 
+      and src_apid IN (select apid from airports where country = 'United States')
 
-How many routes are domestic and how many routes are international?
+Find the id of routes which source and destination airports are in the United States.
 
+select rid
+from routes 
+where dst_apid IN (select apid from airports where country = 'United States') 
+      and src_apid IN (select apid from airports where country = 'United States')
 
+Find the number of routes which source and destination airports are in different countries.
 
-
-
-Find the source airports with amount of routes above the average number of routes for all source airports.
-
-
-
-
-Find the route with the most airlines. Assume there is only one route with the most airlines. Then, write another SQL query to find the names of the airlines in this route.
-
-
-
-calculate the in- and out-degree for each airport, respectively.
-
-
-
-
-calculate the in- and out-degree for each city.
-
-
-
-Calculate the in- and out-degree for each country.
-
-
-
-
-Which city is the most prestigious destination? Hint: we need to find the city with the highest in-degree.
-
-
-
-
-Which countries are the least prestigious destinations?
-
-
-
-
-
-
-
-
-
-
-
-
-
+select count(*)
+from routes
+where (select country from airports where apid = dst_apid) != (select country from airports where apid = src_apid)
 
 
+Find the name of airline which runs the most number of routes.
 
+select T1.name
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+group by T1.name
+order by count(*) desc
+limit 1
 
+Find the busiest source airport that runs most number of routes in China.
+
+select T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+where T1.country = 'China'
+group by city
+order by count(*) desc
+limit 1
+
+Find the busiest destination airport that runs most number of routes in China.
+
+select T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+where T1.country = 'China'
+group by city
+order by count(*) desc
+limit 1
