@@ -1,0 +1,337 @@
+1. Which countries are mentioned in the addresses?
+
+select distinct country
+from Addresses;
+
+
+2. Which states are the real estates located in?
+
+
+select distinct county_state_province
+from Addresses;
+
+
+
+3. How is the feature rooftop described?
+
+
+select feature_description
+from Features 
+where feature_name = 'rooftop';
+
+
+4. How many features are there?
+
+
+select count(*)
+from Features;
+
+
+
+5. How many rooms can a house have at most?
+
+
+select room_count
+from Properties
+order by room_count desc limit 1;
+
+
+6. How many properties have one parking lot or one garage?
+
+
+select count(*)
+from Properties
+where parking_lots = 1 or garage_yn = 1;
+
+
+7. What are all the descriptions of property features of the property with the most features?
+
+
+select property_feature_description
+from Property_Features
+where property_id = 
+(select property_id
+	from Property_Features
+	group by property_id
+	order by count(*) desc limit 1 
+);
+
+
+
+8. What is the user category code of the user who owns the most number of properties?
+
+select T1.user_category_code
+from Users as T1 JOIN Properties as T2 on T2.owner_user_id = T1.User_id
+
+
+9. Which properties have the garden feature? List the property id.
+
+ 
+ select distinct T1.property_id
+ from Property_Features as T1 JOIN Features as T2 on T1.feature_id = T2.feature_id
+ where T2.feature_name = 'garden';
+
+
+
+ 10. In which cities are there any properties equipped with a swimming pool?
+
+select T2.town_city
+from Properties as T1 JOIN Addresses as T2 on T1.property_address_id = T2.address_id
+where T1.property_id 
+in
+(select T1.property_id
+	from Property_Features as T1 JOIN Features as T2 on T1.feature_id = T2.feature_id
+	where T2.feature_name = 'swimming pool'
+);
+
+
+
+
+11. How many features does the property which was the first to get into the market have? List also the id.
+
+select count(*), T1.property_id
+from Properties as T1 JOIN Property_Features as T2 on T1.property_id = T2.property_id
+group by T1.property_id
+order by T1.date_on_market asc limit 1;
+
+
+12. Which property was requested the lowest price by the vendor? List the id and the price.
+
+select property_id, vendor_requested_price
+from Properties
+order by vendor_requested_price asc limit 1;
+
+
+13. On average, how many rooms does a property has?
+
+select avg(room_count)
+from Properties;
+
+
+
+14. How many kinds of room sizes are listed?
+
+select count(distinct room_size)
+from Rooms;
+
+
+15. What are the search sequence numbers of the user searched most frequently? Also list the user id.
+
+
+select search_seq, user_id
+from User_Searches
+where user_id in
+(select user_id
+from User_Searches
+group by user_id
+order by count(*) desc limit 1);
+
+
+
+
+16. When was the latest search by a user?
+
+select search_datetime
+from User_Searches
+order by search_datetime desc limit 1;
+
+
+17. What are all the user searches time and content? Sort the result descending by content.
+
+
+select search_datetime, search_string
+from User_Searches
+order by search_string desc;
+
+
+18. Where are the properties owned by the user who owns the most number of properties located? List the building, the street and owner id.
+
+
+select T1.line_1_number_building, T1.line_2_number_street, T2.owner_user_id
+from Addresses as T1 JOIN Properties as T2 on T1.address_id = T2.property_address_id
+group by T2.owner_user_id
+order by count(*) desc limit 1;
+
+
+19. What are all the user categories of the users making only one search? List both category and user id.
+
+select T1.user_category_code, T1.user_id
+from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
+group by T1.user_id
+having count(*) = 1;
+
+
+20. What is the age range of the user who made the first search?
+
+
+select T1.age_category_code
+from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
+order by T2.search_datetime asc limit 1;
+
+
+21. Which users are buyers? List their log in name.
+
+
+select login_name
+from Users
+where is_buyer = 1;
+
+
+
+22. How many searches does buyers make in total?
+
+select count(*)
+from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
+where T1.is_buyer = 1;
+
+
+
+
+23. When did the user with log in name ratione registered?
+
+select date_registered
+from Users
+where login_name = 'ratione';
+
+
+24. List the full real name and log in name of all the seller users.
+
+select first_name, middle_name, last_name, login_name
+from Users
+where is_seller = 1;
+
+ 
+25. Where do the Senior Citizens live? List building, street, locality and the city.
+
+
+select T1.line_1_number_building, T1.line_2_number_street, T1.line_3_area_locality, T1.town_city
+from Addresses as T1 JOIN Users as T2 on T1.address_id = T2.user_address_id
+where T2.user_category_code = 'Senior Citizen';
+
+paraphrase: what are the addresses of all the senior citizens?
+
+
+26. Which users do not live together with other users? List their full names and address id.
+
+
+select first_name, middle_name, last_name, user_address_id
+from Users
+group by user_address_id
+having count(*) = 1;
+
+
+
+
+27.  In which cities are there any properties with at least 2 features?
+
+select T2.town_city
+from Properties as T1 JOIN Addresses as T2 on T1.property_address_id = T2.address_id
+where T1.property_id 
+in
+(select property_id
+	from Property_Features
+ group by property_id
+ having count(*) >=2
+);
+
+
+28. On which date did the last property go into the market?
+
+select date_on_market
+from Properties
+order by date_on_market desc limit 1;
+
+
+
+
+29. What is the maximum rise in the price of a property?
+
+select price_max - price_min
+from Properties
+order by price_max - price_min desc limit 1;
+
+
+
+30. What is the maximum price per room requested by the vendor?
+
+select vendor_requested_price / room_count
+from Properties
+order by vendor_requested_price / room_count desc limit 1;
+
+
+31. For the properties with at least one photo, how many photos does a single property has on average?
+
+select 1.0 * count(*) / count(distinct property_id)
+from Property_Photos;
+
+
+
+32. For all the owners, how many photos does a owner has of his or her properties on average?
+
+select 1.0 * count(*) / count(distinct T1.owner_user_id)
+from Properties as T1 JOIN Property_Photos as T2 on T1.property_id = T2.property_id;
+
+
+33. What is the percentage of the single mother in the users?
+
+select 100.0 * count(*) / (select count(*) from Users)
+from Users
+where user_category_code = 'Single Mother'
+
+
+34. When did all the user property history happened? Sort them ascending.
+
+select datestamp
+from User_Property_History
+order by datestamp asc;
+
+
+35. What is the description of the most common property type? List the description and the id.
+
+select T1.property_type_description, T1.property_type_code
+from Ref_Property_Types as T1 JOIN Properties as T2 on T1.property_type_code = T2.property_type_code
+group by T1.property_type_code
+order by count(*) desc limit 1;
+
+
+36. What is the detailed description of the age category code 'Over 60'?
+
+select age_category_description
+from Ref_Age_Categories
+where age_category_code = 'Over 60';
+
+
+37. What is the most common room size? How many?
+
+select room_size, count(*)
+from Rooms
+group by room_size
+order by count(*) desc limit 1;
+
+
+38. In which country does Robbie Angelo Keeling lives? 
+
+select T1.country
+from Addresses as T1 JOIN Users as T2 on T1.address_id = T2.user_address_id
+where T2.first_name = 'Robbie' and middle_name = 'Angelo' and last_name = 'Keeling';
+
+
+39. Who lives in the property he or she owns? List the full name.
+
+select first_name, middle_name, last_name
+from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
+Where T1.property_address_id = T2.user_address_id
+
+
+40. Which poor users do not own a single property? List the full name.
+
+first_name, middle_name, last_name
+from Users
+where user_id not in
+(select owner_user_id from Properties);
+
+
+
+
+
+
