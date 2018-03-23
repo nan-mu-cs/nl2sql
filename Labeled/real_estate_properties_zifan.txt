@@ -1,0 +1,154 @@
+Total * = 25
+
+1. How many available features are there in total?
+
+select count(*)
+from Other_Available_Features
+
+Show the names and descriptions of all available features.
+
+select feature_name, feature_description
+from Other_Available_Features
+
+Show all distinct property feature descriptions.
+
+select distinct property_feature_description
+from Other_Property_Features
+
+Show all information on feature types.
+
+SELECT * 
+from REF_FEATURE_TYPES
+
+What are all the property names?
+
+Select property_name
+from Properties
+
+
+2. What is the feature type name of feature AirCon?
+
+select feature_type_name
+from Other_Available_Features as T1 JOIN Ref_Feature_Types as T2 
+on T1.feature_type_code = T2.feature_type_code
+where T1.feature_name = "AirCon"
+
+What is the feature type name of feature air conditioning?
+
+select feature_type_name
+from Other_Available_Features as T1 JOIN Ref_Feature_Types as T2 
+on T1.feature_type_code = T2.feature_type_code
+where T1.feature_description = "Air Conditioning."
+
+Show all feature IDs of features with codes Amenity.
+
+select feature_id
+from Other_Available_Features 
+where feature_type_code = "Amenity"
+
+Show all IDs and descriptions of properties with feature ID 3.
+
+select property_id, property_feature_description
+from Other_Property_Features 
+where feature_id = "3"
+
+Show all distinct property type descriptions that contain the word "house"
+
+SELECT 	distinct property_type_description
+from REF_PROPERTY_TYPES 
+WHERE property_type_description LIKE "%house%"
+
+Show all IDs and descriptions of properties with swimming pool features.
+
+select property_id, property_feature_description
+from Other_Available_Features as T1 JOIN Other_Property_Features  as T2 
+on T1.feature_id = T2.feature_id
+where T1.feature_description = "Swimming Pool."
+
+How many distinct property type code are there?
+
+select COUNT(distinct property_type_code)
+from Properties
+
+What is the maximum vendor requested price of the properties?
+
+select max(vendor_requested_price)
+from Properties
+
+What is the average buyer offered price of the properties?
+
+select avg(buyer_offered_price)
+from Properties
+
+Show all dates that properties with 7 rooms are on market.
+
+SELECT date_on_market
+from Properties
+Where room_count = 7
+
+Show the property name and address of properties with agreed selling price of at least 100.
+
+SELECT property_name, property_address
+from Properties
+Where agreed_selling_price >= 100
+
+When is the property with 7 rooms and 1.68 buyer offered price sold?
+SELECT date_sold
+from Properties
+Where room_count = 7 AND buyer_offered_price = 1.68
+
+
+3. Show the property type code and the number of properties belong to that code.
+
+select property_type_code, COUNT(*)
+from Properties
+group by property_type_code
+
+Show the property type descriptions and the corresponding maximum agreed selling price.
+
+select T2.property_type_description, max(T1.agreed_selling_price)
+from Properties as T1 JOIN Ref_Property_Types as T2 
+on T1.property_type_code = T2.property_type_code
+group by T1.property_type_code
+
+Show the property type descriptions with the smallest amount of average room numbers.
+
+select T2.property_type_description 
+from Properties as T1 JOIN Ref_Property_Types as T2 
+on T1.property_type_code = T2.property_type_code
+group by T1.property_type_code
+ORDER BY avg(T1.room_count) ASC 
+LIMIT 1
+
+Show the property type descriptions with average agreed selling price at least 100.
+
+select T2.property_type_description 
+from Properties as T1 JOIN Ref_Property_Types as T2 
+on T1.property_type_code = T2.property_type_code
+group by T1.property_type_code
+HAVING avg(T1.agreed_selling_price) >= 100
+
+Show the feature name that is shared by most properties
+
+select T1.feature_name
+from Other_Available_Features as T1 join Other_Property_Features as T2
+on T1.feature_id = T2. feature_id
+group by T1.feature_id
+order by COUNT(*) DESC LIMIT 1
+
+Show all feature id and the number of properties associated sorted by 
+the counts in increasing order
+
+select feature_id, COUNT(*)
+from Other_Property_Features
+group by feature_id
+ORDER BY COUNT(*) ASC
+
+
+4. What are the feature IDs that are not used in any property?
+
+select feature_id
+From Other_Available_Features
+Except
+Select feature_id
+From Other_Property_Features

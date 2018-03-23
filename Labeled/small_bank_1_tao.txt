@@ -1,0 +1,192 @@
+
+Total # = 26
+
+Find the total saving balance of all accounts except the account with name ‘Brown’.
+
+SELECT sum(T2.balance)
+FROM accounts as T1 join savings as T2 on T1.custid = T2.custid
+Where T1.name != 'Brown'
+
+How many accounts in total?
+
+Select count(*)
+From accounts
+
+What is the total checking balance in all accounts?
+
+Select sum(balance)
+From checking
+
+Find the average checking balance.
+
+Select avg(balance)
+From checking
+
+How many accounts whose saving balance is above the average saving balance?
+
+Select count(*)
+From savings
+Where balance > (select avg(balance) from savings)
+
+Find the name and id of accounts whose checking balance is below the maximum checking balance?
+
+Select T1.custid, T1.name
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+Where T2.balance < (select max(balance) from checking)
+
+What is the checking balance of the account whose owner’s name containing the substring ‘ee’?
+
+Select T2.balance
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+Where T1.name LIKE '%ee%'
+
+
+Find the checking balance and saving balance in the Brown’s account.
+
+Select T2.balance, T3.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 ON T1.custid = T3.custid
+Where T1.name = 'Brown'
+
+
+Find the name of accounts whose checking balance is above the average checking balance, but saving balance is below the average saving balance.
+
+Select T1.name
+From accounts as T1 Join checking as T2 on T1.custid = T2.custid
+Where T2.balance > (select avg(balance) from checking)
+INTERSECT
+Select T1.name
+From accounts as T1 Join savings as T2 ON T1.custid = T2.custid
+Where T2.balance < (select avg(balance) from savings)
+
+Find the checking balance of the accounts whose saving balance is higher than the average saving balance.
+
+Select T2.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid  
+Where T1.name IN (Select T1.name 
+                  From accounts as T1 Join savings as T2 ON T1.custid = T2.custid
+                  Where T2.balance > (select avg(balance) from savings))
+
+
+List all customers’ names in the alphabetical order.
+
+Select name
+From accounts
+Order by name
+
+Find the name of account that has the lowest total checking and saving balance.
+
+#should use left join
+Select T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 ON T1.custid = T3.custid
+order by T2.balance + T3.balance
+Limit 1
+
+Find the names and total checking and saving balances of accounts whose saving balance is higher than the average saving balance.
+
+Select T1.name, T2.balance + T3.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 ON T1.custid = T3.custid
+Where T3.balance > (select avg(balance) from savings)
+
+What is the sum of total saving and checking balances in the bank?
+
+Select sum(T1.balance) + sum(T2.balance)
+From checking as T1, savings as T2
+
+Find the name and checking balance of the account with lowest saving balance.
+
+Select T1.name, T2.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Order by T3.balance
+Limit 1
+
+
+Find the number of checking accounts for each account and account name.
+
+select count(*), T1.name
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+group by T1.name
+
+Find the total saving balance in each account and account name.
+
+Select sum(T2.balance), T1.name
+From accounts as T1 join savings as T2 on T1.custid = T2.custid
+Group by T1.name
+
+
+Find the name of accounts whose checking balance is below the average checking balance.
+
+Select T1.name
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+Where T2.balance < (select avg(balance) from checking)
+
+Find the saving balance of the account with the highest checking balance.
+
+Select T3.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+order by T2.balance desc
+Limit 1
+
+Find the total checking and saving balance of all accounts sorted by the total balance in ascending order.
+
+Select T1.balance + T2.balance
+From checking as T1 join savings as T2 on T1.custid = T2.custid
+Order by T1.balance + T2.balance
+
+Find the name and checking balance of the account with the lowest saving balance.
+
+Select T2.balance, T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+order by T3.balance
+Limit 1
+
+
+Find the name, checking balance and saving balance of all accounts in the bank.
+
+Select T2.balance, T3.balance, T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+
+Find the name, checking balance and saving balance of all accounts in the bank sorted by their total checking and saving balance in the descending order.
+
+Select T2.balance, T3.balance, T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Order by T2.balance + T3.balance desc
+
+Find the name of accounts whose checking balance is higher than corresponding saving balance.
+
+Select T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Where T2.balance > T3.balance
+
+Find the name and total checking and saving balance of the accounts whose saving balance is lower than corresponding checking balance.
+
+Select T1.name, T3.balance + T2.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Where T2.balance > T3.balance
+
+Find the name and saving balance of the top 3 accounts with the highest saving balance sorted by the balance in the descending order.
+
+Select T1.name, T2.balance
+From accounts as T1 join savings as T2 on T1.custid = T2.custid
+Order by T2.balance desc
+Limit 3

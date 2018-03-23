@@ -1,0 +1,411 @@
+
+Total # = 40
+
+1. How many continents are there?
+
+
+select count(*)
+from CONTINENTS;
+
+
+2. Which of the continents has the most number of contries? List the continent id, continent name and the number of countries.
+
+
+select T1.ContId, T1.Continent, count(*)
+from CONTINENTS as T1 JOIN COUNTRIES as T2 on T1.ContId = T2.Continent
+group by T1.ContId
+order by count(*) DESC LIMIT 1;
+
+
+
+3. How many countries are listed?
+
+
+select count(*)
+from COUNTRIES;
+
+
+4. Which maker makes the most number of models? List both maker full name and id.
+
+
+select T1.FullName, T1.Id
+from [CAR-MAKERS] as T1 JOIN [MODEL-LIST] as T2 on T1.Id = T2.Maker
+group by T1.Id
+order by count(*) DESC LIMIT 1;
+
+
+5. Which model of the cars has the minimum horsepower?
+
+
+select T1.Model
+from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+order by T2.horsepower ASC LIMIT 1;
+
+
+6. Which of the latest makes is the heaviest?
+
+
+select T1.Make
+from [CAR-NAMES] as T1, [CARS-DATA] as T2 on T1.MakeId = T2.Id
+where T2.Year = 
+(select Year 
+from [CARS-DATA]
+order by Year DESC LIMIT 1
+)
+order by T2.weight DESC LIMIT 1;
+
+
+7. Which of the makers produced the earliest car model?
+
+
+select T1.Maker
+from [CAR-MAKERS] as T1, [MODEL-LIST] as T2
+where T1.Id = T2.Maker and T2.model in (
+ select  model
+ from [CARS-DATA] as T3 join [CAR-NAMES] as T4
+ on T3.Id = T4.MakeId
+ where year = (
+ select Year
+ from [CARS-DATA] as T3 join [CAR-NAMES] as T4
+ on T3.Id = T4.MakeId
+ order by Year ASC LIMIT 1
+ )
+);
+
+
+8. Which year is the earliest year the makers started to produce cars?
+
+
+select year
+from [CARS-DATA] as T3 join [CAR-NAMES] as T4
+on T3.Id = T4.MakeId
+order by Year ASC LIMIT 1;
+
+
+9. Which car models are the earliest car models?
+
+
+select  model
+from [CARS-DATA] as T3 join [CAR-NAMES] as T4
+on T3.Id = T4.MakeId
+where year = (
+select year
+from [CARS-DATA] as T3 join [CAR-NAMES] as T4
+on T3.Id = T4.MakeId
+order by Year ASC LIMIT 1
+);
+
+
+10. Which of the continents has the most number of car makers?
+
+
+select T1.Continent
+from [CONTINENTS] as T1, [COUNTRIES] as T2
+where T1.ContId = T2.continent  and T2.CountryId in (
+ select Country
+ from [CAR-MAKERS] as T1
+ group by Country
+ order by Count(*) DESC LIMIT 1
+);
+
+
+11. Which of the countries has the most car makers? List the country name and id.
+
+
+select T2.CountryName, T1.Country
+from [CAR-MAKERS] as T1, [COUNTRIES] as T2
+where T1.Country = T2.CountryId
+group by T1.Country
+order by Count(*) DESC LIMIT 1;
+
+
+
+12. On average, how many car models are produced by each maker?
+
+
+select AVG(ATT1)
+from (
+ select Count(Maker) as ATT1, Maker
+ from [MODEL-LIST] 
+ group by Maker
+);
+
+
+13. What is the accelerate of the car make amc hornet sportabout (sw)?
+
+
+select T1.Accelerate
+from [CARS-DATA] as T1 JOIN [CAR-NAMES] as T2 on T1.Id = T2.MakeId
+where T2.Make = 'amc hornet sportabout (sw)';
+
+
+14. How many car makers are there in france?
+
+
+select count(*)
+from [CAR-MAKERS] as T1 JOIN [COUNTRIES] as T2 on T1.Country = T2.CountryId
+where T2.CountryName = 'france';
+
+
+15. How many car models are produced in the usa?
+
+select count(*)
+from [MODEL-LIST]
+where Maker in
+(select T1.Id
+from [CAR-MAKERS] as T1 JOIN [COUNTRIES] as T2 on T1.Country = T2.CountryId
+where T2.CountryName = 'usa');
+
+
+16. What is the average miles per gallon(mpg) of the cars with 4 cylinders?
+
+
+select avg(mpg)
+from [CARS-DATA]
+where Cylinders = 4;
+
+
+17. What is the smallest weight of the car produced with 8 cylinders on 1974?
+
+
+select Weight
+from [CARS-DATA]
+where Cylinders = 4 and Year = 1974
+order by Weight asc Limit 1;
+
+
+18. What are all the model names?
+
+
+select Model
+from [MODEL-LIST];
+
+
+19. What are the countries having at least one car maker? List name and id.
+
+
+select T1.CountryName, T1.CountryId
+from [COUNTRIES] as T1 JOIN [CAR-MAKERS] as T2 on T1.CountryId = T2.Country
+group by T1.CountryId
+having count(*) >= 1;
+
+
+20. What is the number of the cars with horsepower more than 150?
+
+
+select count(*)
+from [CARS-DATA]
+where horsepower > 150;
+
+
+21. What is the average weight of cars each year?
+
+
+select avg(Weight), Year
+from [CARS-DATA]
+group by Year;
+
+
+
+22. Which country in europe has most manufacturers?
+
+
+select T3.ATT2
+from
+(select T1.CountryId as ATT1, T1.CountryName as ATT2
+from [COUNTRIES] as T1 JOIN [CONTINENTS] as T2 on T1.Continent = T2.ContId
+where T2.Continent = 'europe') as T3 JOIN [CAR-MAKERS] as T4 on T3.Att1 = T4.Country
+group by T4.Country
+order by count(*) desc limit 1;
+
+
+23. what is the maximum horsepower and the make name of the car models with 3 cylinders ?
+
+
+select T2.horsepower, T1.Make 
+from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+where T2.cylinders = 3
+order by T2.horsepower DESC LIMIT 1;
+
+
+24. Which model saves the most gasoline?
+
+
+select T1.Model
+from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+order by T2.mpg DESC LIMIT 1;
+
+
+paraphrase: Which model has the maximum miles per galonn?
+
+
+25. What is the average horsepower of the cars before 1980?
+
+
+select avg(horsepower)
+from [CARS-DATA]
+where Year < 1980;
+
+
+26. What is the average edispl of the cars of model volvo?
+
+
+select avg(T2.edispl)
+from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+where T1.Model = 'volvo';
+
+
+
+27. What is the maximum accelerate for different number of cylinders?
+
+
+select max(Accelerate), Cylinders
+from [CARS-DATA]
+group by Cylinders;
+
+
+28. Which model has the most version(make) of cars?
+
+
+select Model
+from [CAR-NAMES]
+group by Model
+order by count(*) DESC LIMIT 1;
+
+
+29. How many cars have more than 4 cylinders?
+
+
+select count(*)
+from [CARS-DATA]
+where Cylinders > 4;
+
+
+30. how many cars were produced on 1980?
+
+select count(*)
+from [CARS-DATA]
+where Year = 1980;
+
+
+31. How many car models were produced by the maker American Motor Company?
+
+
+select count(*)
+from [CAR-MAKERS] as T1 JOIN [MODEL-LIST] as T2 on T1.Id = T2.Maker
+where T1.FullName = 'American Motor Company';
+
+
+32. Which makers designed more than 3 car models? List full name and the id.
+
+
+select T1.FullName, T1.Id
+from [CAR-MAKERS] as T1 JOIN [MODEL-LIST] as T2 on T1.Id = T2.Maker
+group by T1.Id
+having count(*) > 3;
+
+
+33. Between 1970 and 1980, how many car models are manufactured by each car makers?
+
+
+select T3.Maker, count(*)
+from (
+        select DISTINCT T2.Model as Model
+        from [CARS-DATA] as T1, [CAR-NAMES] as T2
+        where T1.Year between 1970 and 1980 and T1.Id = T2.MakeId
+) as T4 JOIN [MODEL-LIST] as T2 on T4.Model = T2.Model JOIN [CAR-MAKERS] as T3 on T2.Maker = T3.Id
+group by T3.Maker;
+
+
+34. In which year most cars were produced weighing between 3000 and 4000?
+
+
+select T1.Year
+from [CARS-DATA] as T1
+where T1.Weight between 3000 and 4000
+group by T1.Year
+order by COUNT(*) DESC LIMIT 1;
+
+
+35. What is the horsepower of the car makes with the largest accelerate?
+
+
+select T1.horsepower
+from [CARS-DATA] as T1
+order by T1.accelerate DESC LIMIT 1;
+
+
+36. How many cylinders does the car with the least accelerate each year have?
+
+
+select T1.Year, T1.cylinders
+from [CARS-DATA] as T1,
+        (select ATT1.year as year, min(ATT1.Accelerate) as accelerate
+        from [CARS-DATA] as ATT1
+        group by ATT1.year) as T2
+where T1.year = T2.year and T1.accelerate = T2.accelerate
+group by T1.year;
+
+
+37. How many cars have a larger accelerate than the car with the largest horsepower?
+
+
+select COUNT(*)
+from [CARS-DATA] as T1
+where T1.Accelerate > (
+        select ATT1.Accelerate
+        from [CARS-DATA] as ATT1
+        order by ATT1.Horsepower DESC LIMIT 1
+);
+
+
+38. How many countries has more than 2 car makers?
+
+
+select COUNT(*)
+from (
+ select T1.CountryId, COUNT(T1.CountryID) as ATT1
+ from [COUNTRIES] as T1, [CAR-MAKERS] as T2
+ where T1.CountryId = T2.Country
+ group by T1.CountryId
+)
+where ATT1 >= 2;
+
+
+39. How many cars has over 6 cylinders?
+
+
+select COUNT(*)
+from [CARS-DATA] as T1
+where T1.Cylinders >= 6;
+
+40. For the cars with 4 cylinders, which model has the largest horsepower?
+
+
+select T1.Model
+from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+where T2.Cylinders = 4
+order by T2.horsepower DESC LIMIT 1;
+
+
+
+-- 40. For the cars with 4 cylinders, which country produced the car with the largest horsepower?
+
+-- select T1.CountryName
+-- from [COUNTRIES] as T1, [CARS-DATA] as T2, [CAR-NAMES] as T3, [MODEL-LIST] as T4, [Car-MAKERS] as T5
+-- where T2.Cylinders = '4' and T3.MakeId = T2.Id and T3.Model = T4.Model and T4.Model = T5.Maker and T5.Country = T1.CountryId
+-- order by T2.Horsepower DESC LIMIT 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
