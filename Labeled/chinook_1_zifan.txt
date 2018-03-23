@@ -164,13 +164,14 @@ FROM CUSTOMER as T1 join INVOICE as T2
 on T1.CustomerId = T2.CustomerId
 where T1.FirstName = "Astrid" and LastName = "Gruber"
 
-26. Find all the customer IDs that do not have invoice.
+26. Find all the customer first names that do not have invoice.
 
-SELECT CustomerId
+SELECT 	FirstName
 from CUSTOMER
 except
-select CustomerId
-from Invoice
+select T1.FirstName
+from CUSTOMER as T1 JOIN Invoice as T2
+on T1.CustomerId = T2.CustomerId
 
 27. Find the first names of all customers that live in Brazil and have invoice.
 
@@ -219,13 +220,21 @@ on T1.SupportRepId = T2.EmployeeId
 GROUP BY T1.SupportRepId
 HAVING COUNT(*) >= 10
 
-33. Please list all album titles in alphabetical order
+33. Please show the employee last names that serves no more than 5 customers.
+
+SELECT T1.LastName
+FROM CUSTOMER as T1 join EMPLOYEE as T2 
+on T1.SupportRepId = T2.EmployeeId
+GROUP BY T1.SupportRepId
+HAVING COUNT(*) <=5
+
+34. Please list all album titles in alphabetical order
 
 SELECT Title 
 FROM ALBUM
 ORDER BY Title
 
-34. Please list the name of all artists that have at least 3 albums in alphabetical order.
+35. Please list the name of all artists that have at least 3 albums in alphabetical order.
 
 SELECT T2.Name
 FROM ALBUM as T1 join ARTIST as T2 
@@ -234,7 +243,7 @@ GROUP BY T1.ArtistId
 HAVING COUNT(*) >= 3
 ORDER BY T2.Name
 
-35. Find the names of artists that do not have albums
+36. Find the names of artists that do not have albums
 
 SELECT Name
 from ARTIST
@@ -242,3 +251,28 @@ except
 SELECT T2.Name
 FROM ALBUM as T1 join ARTIST as T2 
 on T1.ArtistId = T2.ArtistId
+
+37. What is the average unit price of rock tracks
+
+SELECT AVG(T2.UnitPrice)
+FROM GENRE as T1 JOIN TRACK as T2
+on T1.GenreId = T2.GenreId
+WHERE T1.Name = "Rock"
+
+38. What are the duration of the longest and shortest pop tracks in milliseconds?
+
+SELECT max(Milliseconds), min(Milliseconds)
+FROM GENRE as T1 JOIN TRACK as T2
+on T1.GenreId = T2.GenreId
+WHERE T1.Name = "Pop"
+
+39. What is the birth date of the employees who live in Edmonton
+
+SELECT BirthDate
+FROM EMPLOYEE 
+WHERE City = "Edmonton"
+
+40. What are the distinct unit prices of all tracks?
+
+SELECT distinct(UnitPrice) 
+FROM TRACK

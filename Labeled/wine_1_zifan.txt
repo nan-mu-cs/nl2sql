@@ -92,7 +92,7 @@ Where T1.Color = "White"
 
 Select Appelation from APPELLATIONS where Area = "Central Coast"
 INTERSECT
-Select Appelation from WINE where year < "2005"
+Select Appelation from WINE where year < 2005
 
 Find the white color grapes that are used to produce wines with scores higher than 90.
 
@@ -105,13 +105,13 @@ Select Grape from WINE where score < 90
 
 Select T2.Name
 From Grapes as T1 JOIN WINE as T2 ON T1.Grape = T2.Grape
-where T1.Color = "Red" and T2.price > "50"
+where T1.Color = "Red" and T2.price > 50
 
 What are the wines that have prices lower than 50 and have appelations in Monterey county?
 
 Select T2.Name
 From APPELLATIONS as T1 JOIN WINE as T2 ON T1.Appelation = T2.Appelation
-where T1.County = "Monterey" and T2.price < "50"
+where T1.County = "Monterey" and T2.price < 50
 
 
 8. What are the numbers of wines for different grapes?
