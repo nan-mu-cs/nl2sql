@@ -1,0 +1,377 @@
+Total = # 40
+
+
+1. List all country names and league names.
+
+
+select T1.name, T2.name
+from Country as T1 JOIN League as T2 on T1.id = T2.country_id
+
+
+How many leagues are there in England?
+
+
+select count(*)
+from Country as T1 JOIN League as T2 on T1.id = T2.country_id
+where T1.name = "England"
+
+
+2. What is the average weight of all players?
+
+
+select avg(weight)
+from Player
+
+
+What is the maximum and minimum height of all players?
+
+
+select max(weight), min(weight)
+from Player
+
+
+3. How many match records do we have in England Premier League ?
+
+
+select count(*)
+from Match as T1 JOIN League as T2 on T1.league_id = T2.id
+where T2.name = "England Premier League"
+
+
+List in order all seasons for England Premier League.
+
+
+select distinct season
+from Match as T1 JOIN League as T2 on T1.league_id = T2.id
+where T2.name = "England Premier League"
+order by season
+
+
+4. List the name of home team, the name of away team, the score, and the date of all matches in season 2008/2009.
+
+
+select T2.team_long_name, T3.team_long_name, T1.home_team_goal, T1.away_team_goal, T1.date
+from Match as T1, Team as T2, Team as T3
+where T1.home_team_api_id = T2.team_api_id and T1.away_team_api_id = T3.team_api_id and T1.season = "2008/2009"
+
+
+List the name of home team, the name of away team, and the score of all matches in England Premier League.
+
+
+select T2.team_long_name, T3.team_long_name, T1.home_team_goal, T1.away_team_goal
+from Match as T1, Team as T2, Team as T3, League T4
+where T1.home_team_api_id = T2.team_api_id and T1.away_team_api_id = T3.team_api_id and T4.id = T1.league_id and T4.name = "England Premier League"
+
+
+5. What is the average number of goals of Arsenal as home team in season 2008/2009?
+
+
+select avg(T1.home_team_goal)
+from Match as T1 JOIN Team as T2 on T1.home_team_api_id = T2.team_api_id
+where T2.team_long_name = "Arsenal" and T1.season = "2008/2009"
+
+
+What is the maximum number of goals of Arsenal as away team in season 2009/2010?
+
+
+select max(T1.away_team_goal)
+from Match as T1 JOIN Team as T2 on T1.away_team_api_id = T2.team_api_id
+where T2.team_long_name = "Arsenal" and T1.season = "2009/2010"
+
+
+6. What is the maximum score difference in England Premier League?
+
+
+select max(abs(T1.home_team_goal - T1.away_team_goal))
+from Match as T1 JOIN League as T2 on T1.league_id = T2.id
+where T2.name = "England Premier League"
+
+
+List the average goals of home team and away team in England Premier League.
+
+
+select avg(T1.home_team_goal), avg(T1.away_team_goal)
+from Match as T1 JOIN League as T2 on T1.league_id = T2.id
+where T2.name = "England Premier League"
+
+
+7. List all player names who has overall rating higher than the average.
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.overall_rating > ( select avg(overall_rating)
+                                 from Player_Attributes )
+
+
+What are names of players who have the best dribbling?
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.dribbling = ( select max(overall_rating)
+                         from Player_Attributes)
+
+
+8. List names of all player who have crossing higher than 90 and prefer right foot.
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.crossing > 90 and T2.preferred_foot = "right"
+
+
+List names of all left-foot players who have overall rating between 85 and 90.
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.preferred_foot = "left" and T2.overall_rating >= 85 and T2.overall_rating <= 90
+
+
+9. List all matches between Arsenal and Chelsea including date and scores.
+
+
+select T1.date, T1.home_team_goal, T1.away_team_goal
+from Match as T1, Team as T2, Team as T3
+where T1.home_team_api_id = T2.team_api_id and T1.away_team_api_id = T3.team_api_id and T2.team_long_name = "Arsenal" and T3.team_long_name = "Chelsea"
+UNION
+select T1.date, T1.away_team_goal, T1.home_team_goal
+from Match as T1, Team as T2, Team as T3
+where T1.home_team_api_id = T2.team_api_id and T1.away_team_api_id = T3.team_api_id and T2.team_long_name = "Chelsea" and T3.team_long_name = "Arsenal"
+
+
+Find all matches between Arsenal at home against Chelsea including date and scores.
+
+
+select T1.date, T1.home_team_goal, T1.away_team_goal
+from Match as T1, Team as T2, Team as T3
+where T1.home_team_api_id = T2.team_api_id and T1.away_team_api_id = T3.team_api_id and T2.team_long_name = "Arsenal" and T3.team_long_name = "Chelsea"
+
+
+10. What is total number of goals in each league in season 2008/2009?
+
+
+select T2.name, sum(T1.home_team_goal) + (T1.away_team_goal)
+from Match as T1 join League as T2 on T1.league_id = T2.id
+where T1.season = "2008/2009"
+group by T1.league_id
+
+
+Which league has most number of goals?
+
+
+select T2.name
+from Match as T1 join League as T2 on T1.league_id = T2.id
+group by T1.league_id
+order by sum(T1.home_team_goal) + (T1.away_team_goal) desc
+limit 1
+
+
+11. List all team teams and total number of goals as home team.
+
+
+select T2.team_long_name, sum(home_team_goal)
+from Match as T1 JOIN Team as T2 on T1.home_team_api_id = T2.team_api_id
+group by T2.team_api_id
+
+
+List all team teams and average number of goals as away team.
+
+
+select T2.team_long_name, avg(away_team_goal)
+from Match as T1 JOIN Team as T2 on T1.away_team_api_id = T2.team_api_id
+group by T2.team_api_id
+
+
+12. List all team names in England Premier League in alphabetical order.
+
+
+select distinct T1.team_long_name
+from Team as T1, Match as T2, League as T3
+where (T1.team_api_id = T2.home_team_api_id or T1.team_api_id = T2.away_team_api_id)
+and T2.league_id = T3.id and T3.name = "England Premier League"
+order by T1.team_long_name
+
+
+What are teams participating in 2008/2009 England Premier League?
+
+
+select distinct T1.team_long_name
+from Team as T1, Match as T2, League as T3
+where (T1.team_api_id = T2.home_team_api_id or T1.team_api_id = T2.away_team_api_id)
+and T2.league_id = T3.id and T3.name = "England Premier League" and T2.season = "2008/2009"
+
+
+13. List all league names with number of matches in Season 2008/2009.
+
+
+select T2.name, count(*)
+from Match as T1 JOIN League as T2 on T1.league_id = T2.id
+where T1.season = "2008/2009"
+group by T1.league_id
+
+
+What is the league name that has least number of matches?
+
+
+select T2.name
+from Match as T1 JOIN League as T2 on T1.league_id = T2.id
+group by T1.league_id
+order by count(*) asc
+limit 1
+
+
+14. List all seasons with number of matches.
+
+
+select season, count(*)
+from Match
+group by season
+
+
+Which season has most number of matches?
+ 
+select season
+from Match
+group by season
+order by count(*) desc
+limit 1
+
+
+15. What is the average rating for right-foot players and left-foot players?
+
+
+select preferred_foot, avg(overall_rating)
+from Player_Attributes
+group by preferred_foot
+
+
+Of all players with overall rating greater than 80, how many right-foot players and left-foot players?
+
+
+select preferred_foot, count(*)
+from Player_Attributes
+where overall_rating > 80
+group by preferred_foot
+
+
+16. List all player ids with height at least 180cm and overall ratings higher than 85.
+
+
+select player_api_id 
+from Player
+where height >= 180
+INTERSECT
+select player_api_id
+from Player_Attributes
+where overall_rating > 85
+
+
+List all left-root player ids with height between 180cm and 190cm.
+
+
+select player_api_id 
+from Player
+where height >= 180 and height <= 190
+INTERSECT
+select player_api_id
+from Player_Attributes
+where preferred_foot = "left"
+
+
+17. Find all league ids that have matches on season 2008/2009 and 2009/2010.
+
+
+select league_id
+from Match
+where season = "2008/2009"
+INTERSECT
+select league_id
+from Match
+where season = "2009/2010"
+
+
+Find all country ids that have matches on season 2008/2009 and 2009/2010.
+
+
+select country_id
+from Match
+where season = "2008/2009"
+INTERSECT
+select league_id
+from Match
+where season = "2009/2010"
+
+
+18. Find all team names who have scored more than 100 goals at home.
+
+
+select T2.team_long_name
+from Match as T1 JOIN Team as T2 on T1.home_team_api_id = T2.team_api_id
+group by T1.home_team_api_id
+having sum(T1.home_team_goal) > 100
+
+
+Find all team names who have scored more than 30 goals as away team in season 2008/2009.
+
+
+select T2.team_long_name
+from Match as T1 JOIN Team as T2 on T1.away_team_api_id = T2.team_api_id
+where season = "2008/2009"
+group by T1.away_team_api_id
+having sum(T1.away_team_goal) > 30
+
+
+19. How many home matches has Lionel Messi played?
+
+
+select count(*)
+from Match as T1, Player as T2
+where T2.player_name = "Lionel Messi" and ( T2.player_api_id = T1.home_player_1
+or T2.player_api_id = T1.home_player_2
+or T2.player_api_id = T1.home_player_3
+or T2.player_api_id = T1.home_player_4
+or T2.player_api_id = T1.home_player_5
+or T2.player_api_id = T1.home_player_6
+or T2.player_api_id = T1.home_player_7
+or T2.player_api_id = T1.home_player_8
+or T2.player_api_id = T1.home_player_9
+or T2.player_api_id = T1.home_player_10
+or T2.player_api_id = T1.home_player_11)
+
+
+List date and away team goal in matches where Lionel Messi played in the away team.
+
+
+select T1.date, T1.away_team_goal
+from Match as T1, Player as T2
+where T2.player_name = "Lionel Messi" and ( T2.player_api_id = T1.away_player_1
+or T2.player_api_id = T1.away_player_2
+or T2.player_api_id = T1.away_player_3
+or T2.player_api_id = T1.away_player_4
+or T2.player_api_id = T1.away_player_5
+or T2.player_api_id = T1.away_player_6
+or T2.player_api_id = T1.away_player_7
+or T2.player_api_id = T1.away_player_8
+or T2.player_api_id = T1.away_player_9
+or T2.player_api_id = T1.away_player_10
+or T2.player_api_id = T1.away_player_11)
+
+
+20. Who are top 3 players in terms of overall rating?
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id = T2.player_api_id
+order by overall_rating desc
+limit 3
+
+
+List names and birthdays of top five players in terms of potential.
+
+
+select distinct T1.player_name, T1.birthday
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id = T2.player_api_id
+order by potential desc
+limit 5

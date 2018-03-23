@@ -1,0 +1,174 @@
+Total # = 
+
+1.
+What is the id of the problem log that is created most recently?
+SELECT problem_log_id
+FROM problem_log
+ORDER BY log_entry_date DESC
+LIMIT 1
+
+What is the oldest log id and its correponding problem id?
+SELECT problem_log_id, problem_id
+FROM problem_log
+ORDER BY log_entry_date
+LIMIT 1
+
+
+2.
+Find all the id and dates of the logs for the problem whose id is 10?
+SELECT problem_log_id, log_entry_date
+FROM problem_log
+WHERE problem_id=10
+
+List all of the log id and their description?
+SELECT problem_log_id, log_entry_description
+FROM problem_log
+
+
+3.
+List the first and last names of all distinct staffs who who log the problem whose id is 1?
+SELECT DISTINCT staff_first_name, staff_last_name
+FROM staff as T1 JOIN problem_log as T2 ON T1.staff_id=T2.assigned_to_staff_id
+WHERE T2.problem_id=1
+
+List the problem id and log id which is assigned to Rylan Homenick?
+SELECT DISTINCT T2.problem_id, T2.problem_log_id
+FROM staff as T1 JOIN problem_log as T2 ON T1.staff_id=T2.assigned_to_staff_id
+WHERE T1.staff_first_name="Rylan" and T1.staff_last_name="Homenick"
+
+
+4.
+How many problems are there for product voluptatem?
+SELECT count(*)
+FROM product as T1 JOIN problems as T2 ON T1.product_id=T2.product_id
+WHERE T1.product_name="voluptatem"
+
+How many problems do the product with the most problem have? List the number of the problems and product name.
+SELECT count(*), T1.product_name
+FROM product as T1 JOIN problems as T2 ON T1.product_id=T2.product_id
+GROUP BY T1.product_name
+ORDER BY count(*) DESC
+LIMIT 1
+
+
+5.
+Give me a list of description of problems that are reported by the staff whose first name is Christop?
+SELECT T1.problem_description
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Christop"
+
+Find the id of problems that are reported by the staff whose last name is Bosco?
+SELECT T1.problem_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_last_name="Bosco"
+
+
+6.
+What are the id of the problems which are reported after 1978-06-26?
+SELECT problem_id
+FROM problems
+WHERE date_problem_reported>datetime("1978-06-26")
+
+What are the id of the problems which are reported before 1978-06-26?
+SELECT problem_id
+FROM problems
+WHERE date_problem_reported<datetime("1978-06-26")
+
+
+7.
+For those products who have probelms, what are the numbers of problems for different products on id?
+SELECT count(*), T2.product_id
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+GROUP BY T2.product_id
+
+For those products who have problems, what are the numbers of problems reported after 1986-11-13 for different products on id?
+SELECT count(*), T2.product_id
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+WHERE T1.date_problem_reported>datetime("1986-11-13")
+GROUP BY T2.product_id
+
+
+8.
+List the names of all distinct product names in alphabetical order?
+SELECT distinct product_name
+FROM product
+ORDER BY product_name
+
+List the names of all distinct product names ordered by id?
+SELECT distinct product_name
+FROM product
+ORDER BY product_id
+
+
+9.
+What are the id of problems reported by Dameon Frami or Jolie Weber?
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Dameon" and T2.staff_last_name="Frami"
+UNION
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Jolie" and T2.staff_last_name="Weber"
+
+What are the id of problems reported by Christop Berge and closure authorised by Ashley Medhurst?
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Christop" and T2.staff_last_name="Berge"
+INTERSECT
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.closure_authorised_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Ashley" and T2.staff_last_name="Medhurst"
+
+
+10.
+What is the id of the problems reported before the date of that reported by Lysanne Turcotte?
+SELECT T1.problem_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE date_problem_reported < (
+	SELECT min(date_problem_reported)
+	FROM problems as T3 JOIN staff as T4 ON T3.reported_by_staff_id=T4.staff_id
+	WHERE T4.staff_first_name="Lysanne" and T4.staff_last_name="Turcotte"
+)
+
+What is the id of the problems reported after the date of that reported by Rylan Homenick?
+SELECT T1.problem_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE date_problem_reported > (
+	SELECT max(date_problem_reported)
+	FROM problems as T3 JOIN staff as T4 ON T3.reported_by_staff_id=T4.staff_id
+	WHERE T4.staff_first_name="Rylan" and T4.staff_last_name="Homenick"
+)
+
+
+11.
+Find the top 3 products which has the biggest number of problems?
+SELECT T2.product_name
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+GROUP BY T2.product_name
+ORDER BY count(*) desc
+LIMIT 3
+
+List the id of the problems from product voluptatem and reported after 1995?
+SELECT T1.problem_id
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+WHERE T2.product_name="voluptatem" and T1.date_problem_reported>datetime("1995")
+
+
+12.
+Find the first and last name of staffs who reported problems from rem but not aut?
+SELECT T3.staff_first_name, T3.staff_last_name
+FROM problems as T1, product as T2, staff as T3
+WHERE T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id and T2.product_name="rem"
+EXCEPT
+SELECT T3.staff_first_name, T3.staff_last_name
+FROM problems as T1, product as T2, staff as T3
+WHERE T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id and T2.product_name="aut"
+
+Find the products which are reported problem by both Lacey Bosco and Kenton Champlin?
+SELECT T2.product_name
+FROM problems as T1, product as T2, staff as T3
+WHERE T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id and T3.staff_first_name="Lacey" and T3.staff_last_name="Bosco"
+INTERSECT
+SELECT T2.product_name
+FROM problems as T1, product as T2, staff as T3
+WHERE T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id and T3.staff_first_name="Kenton" and T3.staff_last_name="Champlin"

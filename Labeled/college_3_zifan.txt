@@ -1,0 +1,259 @@
+
+Total # = 40
+
+1. How many courses are there in total?
+
+SELECT count(*)
+FROM COURSE
+
+How many courses have more than 2 credits?
+
+SELECT count(*)
+FROM COURSE
+WHERE Credits > 2
+
+How many courses are taught by instructor 6112?
+
+SELECT count(*)
+FROM COURSE
+WHERE Instructor = 6112
+
+What is the number of departments in Division AS?
+
+SELECT count(*)
+FROM DEPARTMENT 
+WHERE Division = "AS"
+
+What are the phones of departments in Room 268?
+
+SELECT DPhone
+FROM DEPARTMENT 
+WHERE Room = 268
+
+Find the student ID and course ID of all students with grade "A".
+
+SELECT StuID, CID
+FROM ENROLLED_IN
+WHERE Grade = "A"
+
+Find the number of students that have at least one grade "B".
+
+SELECT count(distinct StuID)
+FROM ENROLLED_IN
+WHERE Grade = "B"
+
+Find the max and min grade point for all letter grade.
+
+SELECT max(gradepoint), min(gradepoint)
+FROM GRADECONVERSION
+
+Find the first names of students whose first names contain letter "a".
+
+SELECT DISTINCT Fname
+FROM STUDENT
+WHERE Fname LIKE '%a%'
+
+Find the first names and last names of male (sex is M) faculties who live in building NEB.
+
+SELECT Fname, Lname
+FROM FACULTY
+WHERE sex = "M" AND Building="NEB"
+
+Find the student ID of students minored in departments with DNO department number 520
+
+SELECT StuID 
+FROM MINOR_IN
+WHERE DNO = 520
+
+Find the faculty ID of faculties of department with department number 550
+
+SELECT FacID
+FROM MEMBER_OF
+WHERE DNO = 550
+
+
+2. List all information about courses sorted by credits in the ascending order.
+
+SELECT * 
+FROM COURSE
+ORDER BY Credits
+
+List the course name of courses whose department number is 600 sorted by credits.
+
+SELECT CName
+FROM COURSE
+WHERE DNO = 600
+ORDER BY Credits
+
+Find the first name of students in the descending order of age.
+
+SELECT Fname
+FROM STUDENT
+ORDER BY Age desc
+
+Find the last name of female (sex is F) students in the descending order of age.
+
+SELECT LName
+FROM STUDENT
+WHERE Sex = "F"
+ORDER BY Age desc
+
+Find the last names of faculties in building Barton in alphabetic order.
+
+SELECT Lname
+FROM FACULTY
+WHERE Building = "Barton"
+ORDER BY Lname
+
+Find the first names of faculties of rank Professor in alphabetic order.
+
+SELECT Fname
+FROM FACULTY
+WHERE Rank = "Professor"
+ORDER BY Fname
+
+
+3. Find the department number that has the biggest number of students minored in?
+
+SELECT DNO
+FROM MINOR_IN
+GROUP BY DNO
+ORDER BY count(*) desc
+LIMIT 1
+
+Find the department number that has the smallest number of students minored in?
+
+SELECT DNO
+FROM MINOR_IN
+GROUP BY DNO
+ORDER BY count(*) asc
+LIMIT 1
+
+Find the number of students enrolled and the course ID of courses ordered by descending count.
+
+SELECT count(*), CID
+FROM ENROLLED_IN
+GROUP BY CID
+ORDER BY count(*) desc
+
+Find the department number of the department that has the fewest members.
+
+SELECT DNO
+FROM MEMBER_OF
+GROUP BY DNO
+ORDER BY count(*) asc
+
+Find the rank of the faculty that the fewest faculties belong to.
+
+SELECT Rank
+FROM FACULTY
+GROUP BY Rank
+ORDER BY count(*) asc
+
+What are the instructor IDs of instructors that teach the top 3 number of courses?
+
+SELECT Instructor
+FROM COURSE
+GROUP BY Instructor
+ORDER BY count(*) desc
+LIMIT 3
+
+
+4. Find the first name and last name of the instructor of course that has course name 
+COMPUTER LITERACY.
+
+SELECT T2.Fname, T2.Lname
+FROM COURSE as T1 JOIN FACULTY as T2 ON T1.Instructor = T2.FacID
+WHERE T1.CName = "COMPUTER LITERACY"
+
+Find the department name and room of the course that has course ID "600.103".
+
+SELECT T2.Dname, T2.Room
+FROM COURSE as T1 JOIN DEPARTMENT as T2 ON T1.DNO = T2.DNO
+WHERE T1.CID = "600.103"
+
+Find the student IDs, course IDs, and grade points of all enrollments.
+
+SELECT T1.StuID, T1.CID,T2.gradepoint
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 ON T1.Grade = T2.lettergrade
+
+Find the distinct student IDs of all students that have grade point at least 3.8 in one course.
+
+SELECT distinct T1.StuID
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 ON T1.Grade = T2.lettergrade
+WHERE T2.gradepoint >= 3.8
+
+Find the first names of faculties that are members of department with department number 520.
+
+SELECT T1.Fname
+FROM FACULTY as T1 JOIN MEMBER_OF as T2 ON T1.FacID = T2.FacID
+WHERE T2.DNO = 520
+
+What are the first names and last names of the students that minor in the department with DNO 140.
+
+SELECT T2.Fname
+FROM MINOR_IN as T1 JOIN STUDENT as T2 ON T1.StuID = T2.StuID
+WHERE T1.DNO = 140
+
+Find the last names of faculties that are members of computer science department
+
+SELECT T2.Lname
+FROM DEPARTMENT as T1 
+     JOIN FACULTY as T2 ON T1.DNO = T3.DNO
+     JOIN MEMBER_OF as T3 ON T2.FacID = T3.FacID
+WHERE T1.DName = "Computer Science"
+
+Find the average grade point of student with student ID 1001.
+
+SELECT avg(T2.gradepoint)
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 ON T1.Grade = T2.lettergrade
+WHERE T1.StuID = "1001"
+
+What is the maximum and minimum grade point for course with course ID 600.211?
+
+SELECT max(T2.gradepoint), min(T2.gradepoint)
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 ON T1.Grade = T2.lettergrade
+WHERE T1.CID = "600.211"
+
+
+5. Find the student ID of students either enrolled in course 550.681 with grade "B" or 
+enrolled in course 600.303 with grade "B+".
+
+SELECT StuID FROM ENROLLED_IN WHERE CID = "550.681" AND Grade = "B"
+UNION
+SELECT StuID FROM ENROLLED_IN WHERE CID = "600.303" AND Grade = "B+"
+
+Find the student ID of students enrolled in course 600.211 with grade "C" and 
+enrolled in course 600.303 with grade "C+".
+
+SELECT StuID FROM ENROLLED_IN WHERE CID = "600.211" AND Grade = "C"
+INTERSECT
+SELECT StuID FROM ENROLLED_IN WHERE CID = "600.303" AND Grade = "C+"
+
+Find the student ID of male (sex is M) students enrolled in course 600.337.
+
+SELECT StuID FROM ENROLLED_IN WHERE CID = 600.337
+INTERSECT
+SELECT StuID FROM STUDENT WHERE Sex = "M"
+
+
+Find the faculty ID of faculties from department with department number 600 that are not in building 
+NEB.
+
+SELECT FacID
+FROM  MEMBER_OF
+WHERE DNO = 600
+Except
+SELECT FacID
+FROM  FACULTY
+WHERE Building = "NEB"
+
+Find the student ID of students minored in department with department number 520 that is not from a city with city code "CHI"
+
+SELECT StuID
+FROM  MINOR_IN
+WHERE DNO = 520
+Except
+SELECT StuID
+FROM  STUDENT
+WHERE city_code = "CHI"

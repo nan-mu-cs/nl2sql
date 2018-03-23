@@ -2,14 +2,14 @@ Total # = 58
 
 1. What is the title of the sculpture that is created in the most recent year?
 
-select title, year
+select title
 from sculptures
 order by year desc
 limit 1
 
 Where is the tile and location of the oldest painting?
 
-select title, location, year
+select title, location
 from paintings
 order by year
 limit 1
@@ -186,11 +186,11 @@ Select distinct T1.paintingID
 From paintings as T1, paintings as T2
 where T1.year > T2.year and T2. location = "Gallery 240"
 
-Find the distinct ids of the oldest paintings?
+Find the id of the oldest painting?
 
-Select distinct T1.paintingID
-From paintings as T1, paintings as T2
-where T1.year > T2.year and T2. location = "Gallery 240"
+Select paintingID
+From paintings
+where year = (select max(year) from paintings)
 
 12. What is the first and last name of the artist who had a sculpture work whose title has “female”?
 

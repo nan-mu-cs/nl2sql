@@ -1,0 +1,150 @@
+Total # = 25
+
+1.Find all modern rooms with a base price below $160 and two beds. Report room names and codes
+SELECT roomName,RoomId
+FROM Rooms
+WHERE basePrice<160 AND beds=2;
+
+2.Find all rooms occupied on February 6, 2010. Report full name of the room, the check-in and checkout dates of the reservation.
+SELECT T2.roomName, T1.CheckIn, T1.CheckOut
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+WHERE date(T1.CheckIn) <= date("2010-02-06") and date(T1.CheckOut) > date("2010-02-06");
+
+3. For each reservation that starts on December 31, 2010 report the room name, nightly rate, number of nights spent and the total amount of money paid.
+SELECT T2.roomName,T1.Rate, julianday (date(T1.CheckOut))-julianday (date(T1.CheckIn)),T1.Rate*(julianday (date(T1.CheckOut))-julianday (date(T1.CheckIn)))
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+WHERE date(T1.CheckIn) >= date("2010-12-31");
+
+4. Find the names of all people staying at the inn at the same time as HERBERT FRYDAY.
+SELECT FirstName, LastName
+FROM Reservations as T1,(
+SELECT CheckIn,CheckOut
+FROM Reservations
+WHERE FirstName="HERBERT" AND LastName="FRYDAY"
+) AS T2
+WHERE not(T1.FirstName="HERBERT" AND T1.LastName="FRYDAY") AND ((Date(T1.CheckIn)<Date(T2.CheckIn) AND Date(T1.CheckOut)>Date(T2.CheckIn)) OR (Date(T1.CheckIn)<Date(T2.CheckOut) AND Date(T1.CheckOut)>Date(T2.CheckIn)))
+
+
+5.Find the number of August reservations (both checkin and checkout dates are in August) where two adults are staying with two children.
+SELECT count(*)
+FROM Reservations
+WHERE strftime('%m',CheckIn) = "08" and strftime('%m',CheckOut) = "08" and Adults=2 and Kids=2;
+
+6. Find the most popular room in the hotel. The most popular room is the room that had seen the largest number of reservations
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY count(T1.Room) desc
+LIMIT 1;
+
+7. Find the room that has been occupied the largest number of days based on the reservations. Report the room name
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY sum(Date(T1.CheckOut)-Date(T1.CheckIn)) desc
+LIMIT 1;
+
+8. For each room, report the most expensive reservation. Report the full room name, dates of stay
+SELECT T2.roomName, sum(julianday(Date(T1.CheckOut))-julianday(Date(T1.CheckIn)))
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY sum((julianday(Date(T1.CheckOut))-julianday(Date(T1.CheckIn)))*T1.Rate) desc
+LIMIT 1;
+
+9. How many kids lives in the room reserved by  ROY SWEAZY
+
+SELECT kids
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+10. How many times does ROY SWEAZY has reserved a room
+SELECT count(*)
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+11.Which room has highest rate? List the room's full name, rate, check in and check out day.
+
+SELECT T2.roomName, T1.Rate, T1.CheckIn, T1.CheckOut
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY T1.Rate desc
+Limit 1;
+
+12.List the first name and last name of top 3 customers that have longest overall reservation days and the total days they stayed.
+SELECT FirstName, LastName, sum(julianday(Date(CheckOut))-julianday(Date(CheckIn)))
+FROM Reservations
+GROUP BY FirstName,LastName
+ORDER BY sum(julianday(Date(CheckOut))-julianday(Date(CheckIn))) desc
+LIMIT 3;
+
+13. What is average rating for reservation check in date between Feb 1, 2010 and Feb 28, 2010?
+SELECT avg(Rate)
+FROM Reservations
+WHERE Date(CheckIn) >= Date("2010-02-01") and Date(CheckIn) <= Date("2010-02-28");
+
+14. How many adults in CONRAD SELBIG Oct 23,2010's reservation?
+SELECT Adults
+FROM Reservations
+WHERE CheckIn="2010-10-23" and FirstName="CONRAD" AND LastName="SELBIG";
+
+15. How many kids in DAMIEN TRACHSEL Sep 21,2010's reservation?
+SELECT Kids
+FROM Reservations
+WHERE CheckIn="2010-09-21" and FirstName="DAMIEN" AND LastName="TRACHSEL";
+
+16. How many beds does room Abscond or bolster has?
+SELECT beds
+FROM Rooms
+WHERE roomName="Abscond or bolster";
+
+17. What is room Recluse and defiance's bed type?
+SELECT bedType
+FROM Rooms
+WHERE roomName="Recluse and defiance";
+
+18. Which room has cheapest base price? List the room's full name and the base price.
+SELECT roomName, basePrice
+FROM Rooms
+ORDER BY basePrice ASC
+LIMIT 1;
+
+19. What is the decor of room Recluse and defiance?
+SELECT decor
+FROM Rooms
+WHERE roomName="Recluse and defiance";
+
+20. What is the average base price of different bed type? List bed type and average base price.
+SELECT bedType,avg(basePrice)
+FROM Rooms
+GROUP BY bedType;
+
+21. What is the maximum number of people could stay in room Harbinger but bequest?
+SELECT maxOccupancy
+FROM Rooms
+WHERE roomName="Harbinger but bequest";
+
+22. What kind or decor has least number of reservations? List decor and reservations times.
+SELECT T2.decor, count(*)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T2.decor
+ORDER BY count(T2.decor) asc
+Limit 1;
+
+23. List how many times the number of people in the room reached the maximum occupancy of the room. The number of people include adults and kids.
+SELECT count(*)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+WHERE  T2. maxOccupancy = T1.Adults+T1. Kids;
+
+24. Which room people out payed most than its base price? List the room's full name.
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T2.roomName
+ORDER BY sum(T1.Rate-T2.basePrice) desc
+LIMIT 1;
+
+25. How many times does the room Convoke and sanguine was checked in between March 15,2010 and March 30,2010?
+SELECT count(*)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+WHERE T2.roomName="Convoke and sanguine" and Date(T1.CheckIn) between Date("2010-03-15") and Date("2010-03-30");
+
+

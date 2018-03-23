@@ -1,0 +1,329 @@
+Total = # 43
+
+1. How many authors are there?
+
+select count(*)
+from authors
+
+How many institutions are there?
+
+select count(*)
+from inst
+
+How many papers are published in total?
+
+select count(*)
+from papers
+
+2. What are the titles of papers published by "Jeremy Gibbons"?
+
+select t3.title
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where  t1.fname = "Jeremy" and t1.lname = "Gibbons"
+
+Find all the papers published by "Aaron Turon".
+
+select t3.title
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where  t1.fname = "Aaron" and t1.lname = "Turon"
+
+How many papers have "Atsushi Ohori" published?
+
+select count(*)
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where  t1.fname = "Atsushi" and t1.lname = "Ohori"
+
+3. What is the name of the institution that "Matthias Blume" belongs to?
+
+select distinct t3.name
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join inst as t3
+on t2.instid = t3.instid
+where t1.fname = "Matthias" and t1.lname = "Blume"
+
+Which institution does "Katsuhiro Ueno" belong to?
+
+select distinct t3.name
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join inst as t3
+on t2.instid = t3.instid
+where t1.fname = "Katsuhiro" and t1.lname = "Ueno"
+
+4. Who belongs to the institution "University of Oxford"?
+
+select distinct t1.fname, t1.lname
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join inst as t3
+on t2.instid = t3.instid
+where t3.name = "University of Oxford"
+
+How many authors belong to the institution "Google"?
+
+select distinct t1.fname, t1.lname
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join inst as t3
+on t2.instid = t3.instid
+where t3.name = "Google"
+
+5. What are the last names of the author of the paper titled "Binders Unbound"?
+
+select t1.lname
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where t3.title = "Binders Unbound"
+
+Find the name of the author(s) who wrote the paper "Nameless, Painless".
+
+select t1.fname, t1.lname
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where t3.title = "Nameless, Painless"
+
+6. What are the papers published under the institution "Indiana University"?
+
+select distinct t1.title
+from papers as t1 join authorship as t2
+on t1.paperid = t2.paperid
+join inst as t3
+on t2.instid = t3.instid
+where t3.name = "Indiana University"
+
+Find all the papers published by the institution "Google".
+
+select distinct t1.title
+from papers as t1 join authorship as t2
+on t1.paperid = t2.paperid
+join inst as t3
+on t2.instid = t3.instid
+where t3.name = "Google"
+
+7. How many papers are published by the institution "Tokohu University"?
+
+select count(distinct t1.title)
+from papers as t1 join authorship as t2
+on t1.paperid = t2.paperid
+join inst as t3
+on t2.instid = t3.instid
+where t3.name = "Tokohu University"
+
+Find the number of papers published by the institution "University of Pennsylvania".
+
+select count(distinct t1.title)
+from papers as t1 join authorship as t2
+on t1.paperid = t2.paperid
+join inst as t3
+on t2.instid = t3.instid
+where t3.name = "University of Pennsylvania"
+
+8. Find the title of papers that only have one author.
+
+select title
+from (select T1.title, count(distinct T2.authid) as author_count
+from papers as T1 join authorship as T2
+on t1.paperid = t2.paperid
+group by t1.title)
+where author_count = 1
+
+Find the title of papers that have two authors.
+
+select title
+from (select T1.title, count(distinct T2.authid) as author_count
+from papers as T1 join authorship as T2
+on t1.paperid = t2.paperid
+group by t1.title)
+where author_count = 2
+
+Which paper(s) have more than one authors?
+
+select title
+from (select T1.title, count(distinct T2.authid) as author_count
+from papers as T1 join authorship as T2
+on t1.paperid = t2.paperid
+group by t1.title)
+where author_count > 1
+
+9. Find the papers which have "Olin Shivers" as the first author.
+
+select t3.title
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where t1.fname = "Olin" and t1.lname = "Shivers"
+
+Which papers have "Stephanie Weirich" as the second author?
+
+select t3.title
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where t1.fname = "Stephanie" and t1.lname = "Weirich"
+
+10. Which paper is published in a institution in "USA" and have "Turon" as its second author?
+
+select t3.title
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+join inst as t4
+on t2.instid = t4.instid
+where t4.country = "USA" and t2.authorder = 2 and t1.lname = "Turon"
+
+Find the title of papers that are published in a "Japan" and it's first author's last name is "Ohori"?
+
+select t3.title
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+join inst as t4
+on t2.instid = t4.instid
+where t4.country = "Japan" and t2.authorder = 1 and t1.lname = "Ohori"
+
+11. What is the last name of the author that has published the most papers?
+
+select t1.lname
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+group by t1.fname, t1.lname
+order by count(*) desc
+limit 1
+
+12. Retrieve the country that have published the most papers.
+
+select t1.country
+from inst as t1 join authorship as t2
+on t1.instid = t2.instid
+join papers as t3
+on t2.paperid = t3.paperid
+group by t1.country
+order by count(*) desc
+limit 1
+
+13. Find the name of the organization that has published the largest number of papers.
+
+select t1.name
+from inst as t1 join authorship as t2
+on t1.instid = t2.instid
+join papers as t3
+on t2.paperid = t3.paperid
+group by t1.name
+order by count(*) desc
+limit 1
+
+14. Find the title of papers that contains the word "ML".
+
+select title
+from papers
+where title like "%ML%"
+
+Which paper's title contains the word "Database"?
+
+select title
+from papers
+where title like "%Database%"
+
+15. Find all the first names of authors that have wrote a paper with title containing the word "Functional".
+
+select t1.fname
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where t3.title like "%Functional%"
+
+Find all the last names of authors that have wrote a paper with title containing the word "Monadic".
+
+select t1.lname
+from authors as t1 join authorship as t2
+on t1.authid = t2.authid
+join papers as t3
+on t2.paperid = t3.paperid
+where t3.title like "%Monadic%"
+
+16. Retrieve the title of the paper that has the largest number of authors.
+
+select t2.title
+from authorship as t1 join papers as t2
+on t1.paperid = t2.paperid
+where t1.authorder = (select max(authorder)
+from authorship)
+
+Or, even better (more generic):
+
+select title
+from (select title, count(*) as author_count
+from papers as t1 join authorship as t2
+on t1.paperid = t2.paperid
+group by title)
+order by author_count desc
+limit 1
+
+17. Find the titles of papers with authors from more than one institution.
+
+select title
+from (select title, count(*) as institution_count
+from papers as t1 join authorship as t2
+on t1.paperid = t2.paperid
+group by t2.instid)
+where institution_count = 2
+
+Find the titles of papers with authors from one single institution.
+
+select title
+from (select title, count(*) as institution_count
+from papers as t1 join authorship as t2
+on t1.paperid = t2.paperid
+group by t2.instid)
+where institution_count = 1
+
+18. What is the last name of the author with last name "Ueno"?
+
+select fname
+from authors
+where lname = "Ueno"
+
+Find the first name of the author with first name "Amal".
+
+select lname
+from authors
+where fname = "Amal"
+
+19. Find all the first names of authors ordered in alphabetical order.
+
+select fname
+from authors
+order by fname
+
+Retrieve all the last names of authors in alphabetical order.
+
+select lname
+from authors
+order by lname
+
+Retrieve all the first and last names of authors in the alphabetical order of last names.
+
+select fname, lname
+from authors
+order by lname

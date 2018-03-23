@@ -1,0 +1,275 @@
+Total = # 40
+
+
+1. which college has most number of baseball player?
+SELECT T1.name_full
+FROM college as T1 join player_college as T2 on T1.college_id = T2.college_id
+GROUP BY T1.college_id
+ORDER BY count(T1.college_id) desc
+LIMIT 1;
+
+2. What is average salary of players in Boston Red Stockings ?
+
+SELECT avg(T1.salary)
+FROM salary as T1 join team as T2 on T1.team_id = T2.team_id_br
+WHERE T2.name ='Boston Red Stockings'
+
+
+
+3. What are first and last names of players participating in 1998 all star game?
+
+SELECT name_first, name_last
+FROM player as T1 join all_star as T2 on T1.player_id = T2.player_id
+WHERE year = 1998
+
+3. Who is the  first name and last name  player has most all star game experiences? List the count
+
+SELECT name_first,name_last,count(T2.year)
+FROM player as T1 join all_star as T2 on T1.player_id = T2.player_id
+GROUP BY T1.player_id
+ORDER BY count(T2.year) desc
+LIMIT 1;
+
+4.  Which team has most of all star player?
+
+SELECT t.name
+FROM all_star as T1, team as T2, appearances as T3
+WHERE T1.player_id = T3.player_id and T3.team_id = T2.team_id
+GROUP BY T2..team_id
+ORDER BY count(T2.team_id) desc
+LIMIT 1;
+
+5. Every year, how many players enter hall of fame?
+
+SELECT yearid,count(player_id)
+FROM hall_of_fame
+GROUP BY yearid;
+
+6. What is the average number of attendance for every year?
+
+	SELECT year, avg(attendance)
+	FROM home_game
+	GROUP BY year;
+
+7. In 2014, what is the name of the team that has most average number of attendance?
+
+	SELECT h.name
+FROM home_game as T1 join team as T2 on h.team_id=t.team_id
+WHERE T1.year = 2014
+GROUP BY T1.team_id
+ORDER BY avg(T1.attendance) desc
+LIMIT 1;
+
+8. Which manager’s first name and last name who won most of the manager award?
+	SELECT T1.name_first,T1.name_last
+	FROM player as T1 join manager_award as T2 on T1.player_id = T2.player_id
+	GROUP BY T2.player_id
+	ORDER BY count(T2.award_id) desc
+	LIMIT 1;
+
+9. How many parks are there in NY?
+	SELECT count( *)
+	FROM park
+	WHERE state = ‘NY’;
+
+10. Which top 3 players won most of player award?
+	SELECT T1.name_first,T2.name_last
+	FROM player as T1 join player_award as T2 on T1.player_id = T2.player_id
+	GROUP BY T2.award_id
+	ORDER BY count(T2.award_id) desc
+	LIMIT 3;
+11. List three countries where have least of player birth from?
+
+	SELECT birth_country
+	FROM player
+	GROUP BY birth_country
+	ORDER BY count(birth_country) asc
+	LIMIT 3;
+12. Find all players’ first name and last name who live in 2018
+	SELECT name_first,name_last
+	FROM player
+	WHERE death_year=’’;
+13. How many player’s birth in USA are right hand batter?
+	SELECT count(*)
+	FROM player
+	WHERE birth_country=’USA’ and bats = ‘R’;
+
+13. What is the average height of player from Yale University?
+	SELECT avg(T1.height)
+	FROM player as T1 JOIN player_college T2 on T1.player_id = T2.player_id
+		JOIN college T3 on T3.college_id = T2.college_id
+	WHERE T3.name_full = ‘Yale University’;
+
+14. What is the highest salary of each team? 
+	SELECT T1.name,max(T2.salary)
+	FROM team as T1 JOIN salary as T2 on T1.team_id=T2.team_id 
+	GROUP BY T1.team_id;
+
+15. List 3 teams have lowest average salary
+	SELECT T1.name
+	FROM team as T1 JOIN salary as T2 on T1.team_id=T2.team_id 
+	GROUP BY T1.team_id
+	ORDER BY avg(T2.salary) asc
+	LIMIT 3;
+
+16. Find out players’ first name and last name who won award both in 1960 and 1961
+	SELECT DISTINCT T1.name_first,T1.name_last
+	FROM player as T1 JOIN player_award as T2
+	WHERE T2.year = 1960
+	INTERSECT
+	SELECT DISTINCT T1.name_first,T1.name_last
+	FROM player as T1 JOIN player_award as T2
+	WHERE T2.year = 1961
+
+17 List players’ first name and last who have weight greater than 220 or height smaller than 75
+SELECT name_first,name_last
+FROM player
+WHERE weight > 220 or height < 75
+18 List max win scores of team Boston Red Stockings in postseason?
+	SELECT max(T1.wins - T1.losses)
+	FROM postseason as T1 JOIN team as T2 ON T1.team_id_winner = T2.team_id_br
+	WHERE T2.name = 'Boston Red Stockings';
+
+
+19. How many times Boston Red Stockings lost in 2009 postseason?
+	SELECT count(*)
+	FROM postseason as T1 JOIN team as T2 on T1.team_id_loser=T2.team_id_br
+	WHERE T2.name = 'Boston Red Stockings' and T1.year=2009;
+20. Which team has most wins in 2008 postseason?
+	SELECT T2.name
+	FROM postseason as T1 JOIN team as T2 on T1.team_id_winner = T2.team_id_br
+	WHERE T1.year = 2008
+	GROUP BY T1.team_id_winner
+	ORDER BY count(T1.team_id_winner)
+	LIMIT 1;
+21. What is average number of wins of team Boston Red Stockings got in every year’s postseason ?
+	SELECT avg(wins)
+	FROM (
+		SELECT count(*) wins
+		FROM postseason as T1 JOIN team as T2 on T1.team_id_winner = T2.team_id_br
+		WHERE T2.name = 'Boston Red Stockings'
+		GROUP BY T1.year
+	)
+
+22. What is the total number of postseason games that team Boston Red Stockings participate?
+	SELECT count(*)
+	FROM (
+		SELECT *
+		FROM postseason as T1 JOIN team as T2 on T1.team_id_winner = T2.team_id_br
+		WHERE T2.name = 'Boston Red Stockings'
+		UNION
+		SELECT *
+		FROM postseason as T1 JOIN team as T2 on T1.team_id_loser = T2.team_id_br
+		WHERE T2.name = 'Boston Red Stockings'
+);
+
+23. How many games result in ties in 2010 postseason?
+	SELECT count(*)
+	FROM postseason
+	WHERE year = 2010 and ties = 1;
+24 What is the total salary paid by team Boston Red Stockings in 2010?
+  What is the total salary expenses of team Boston Red Stockings in 2010?
+SELECT sum(T1.salary)
+FROM salary as T1 join team as T2 on T1.team_id = T2.team_id_br
+WHERE T2.name ='Boston Red Stockings' and T1.year = 2010
+
+25 How many players in Boston Red Stockings in 2000?
+How many players does Boston Red Stockings have in 2000?
+SELECT count(T1.player_id)
+FROM salary as T1 join team as T2 on T1.team_id = T2.team_id_br
+WHERE T2.name ='Boston Red Stockings' and T1.year = 2000
+
+26 List total 3 players’ highest salary in 2001?
+SELECT salary
+FROM salary
+WHERE year = 2001
+ORDER BY salary desc
+LIMIT 3;
+
+27 What is the salary difference in 2010 and 2001?
+
+SELECT T1.avg_salary - T2.avg_salary
+FROM (
+	SELECT avg(salary) as avg_salary
+	FROM salary
+	WHERE year = 2010
+) as T1, (
+	SELECT avg(salary) as avg_salary
+	FROM salary
+	WHERE year = 2001
+) AS T2;
+
+28 In which year has least people enter hall of fame?
+	SELECT yearid
+	FROM hall_of_fame
+	GROUP BY yearid
+	ORDER BY count(player_id) asc
+	LIMIT 1;
+
+29 How many parks are there in Atlanta?
+	SELECT count(*)
+	FROM park
+	WHERE city='Atlanta';
+30. How many games played in park Columbia Park in 1907?
+	SELECT count(*)
+	FROM home_game as T1 JOIN park as T2 on T1.park_id=T2.park_id
+	WHERE T1.year=1907 and T2.park_name='Columbia Park';
+31. How many games played in city Atlanta in 2000?
+	SELECT count(*)
+	FROM home_game as T1 JOIN park as T2 on T1.park_id=T2.park_id
+	WHERE T1.year=2000 and T2.city='Atlanta’;
+32. What is the total home game attendance of team Boston Red Stockings from 2000 to 2010?
+	SELECT sum(T1.attendance)
+	FROM home_game as T1 JOIN team as T2 on T1.team_id=T2.team_id_br
+	WHERE T2.name='Boston Red Stockings' and T1.year between 2000 and 2010;
+
+33. How much did Len Barker earned between 1985 to 1990?
+	SELECT sum(T1.salary)
+	FROM salary as T1 JOIN player as T2 on T1.player_id=T2.player_id
+	WHERE T2.name_first = 'Len' and T2.name_last='Barker' and T1.year between 1985 and 1990;
+
+34. List players’ first name and last name that in team Boston Red Stockings in both 1995 and 1996.
+	SELECT T2.name_first,T2.name_last
+	FROM salary as T1 JOIN player as T2 ON T1.player_id=T2.player_id JOIN
+		team as T3 on T3.team_id_br=T1.team_id
+	WHERE T1.year=1995 and T3.name='Boston Red Stockings' 
+	INTERSECT
+	SELECT T2.name_first,T2.name_last
+	FROM salary as T1 JOIN player as T2 ON T1.player_id=T2.player_id JOIN
+		team as T3 on T3.team_id_br=T1.team_id
+	WHERE T1.year=1996 and T3.name='Boston Red Stockings' 
+
+35 How many home game does team Boston Red Stockings played from 1990 to 2000?
+	SELECT sum(T1.games)
+	FROM home_game as T1 JOIN team as T2 on T1.team_id=T2.team_id_br
+	WHERE T2.name='Boston Red Stockings' and T1.year between 1990 and 2000;
+
+36. Which team has least number of attendances in 1980?
+	SELECT T2.name
+	FROM home_game as T1 JOIN team as T2 on T1.team_id=T2.team_id_br
+	WHERE T1.year=1980
+	ORDER BY T1.attendance asc
+	LIMIT 1;
+37. List name of states that have more than 2 parks.
+Which states have more than 2 parks.
+	SELECT state
+	FROM park
+	GROUP BY state
+	HAVING count(park_id) > 2;
+38. How many team franchises are active?
+	SELECT count(*)
+	FROM team_franchise
+	WHERE active='Y';
+
+39. Which city have between 2 to 4’s parks?
+	SELECT city
+	FROM park
+	GROUP BY city
+	HAVING count(city) between 2 and 4;
+40. Which park have most of attendances in 2008?
+	SELECT T2.park_name
+	FROM home_game as T1 JOIN park as T2 on T1.park_id=T2.park_id
+	WHERE T1.year=2008
+	ORDER BY T1.attendance desc
+	LIMIT 1;
+
