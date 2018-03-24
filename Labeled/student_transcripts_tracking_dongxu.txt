@@ -94,7 +94,7 @@ from Semesters as T1 JOIN Student_Enrolment as T2 on T1.semester_id = T2.semeste
 group by T1.semester_id
 order by count(*) desc limit 1;
 
-13. What is the description of the department which is probably related to the computer?
+13. What is the description of the department whose name has the substring the computer?
 
 
 select department_description
