@@ -267,14 +267,14 @@ where parking_lots = 1);
 
 
 
-30. List the user first names who have searched at least twice but do not live in state Wyoming.
+30. List the users who have searched at least twice but do not live in state Wyoming. List first names and ids.
 
-select T1.first_name
+select T1.first_name, T1.user_id
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
 group by T1.first_name
 having count(*) >= 2
 EXCEPT
-select T1.first_name
+select T1.first_name, T1.user_id
 from Users as T1 JOIN Addresses as T2 on T1.user_address_id = T2.address_id
 where county_state_province = 'Wyoming';
 
@@ -356,14 +356,14 @@ select distinct T1.search_string
 from User_Searches as T1 JOIN Properties as T2 on T1.user_id = T2.owner_user_id;
 
 
-41. List the user last names who have at least 2 properties and searched at most twice.
+41. List the user who have at least 2 properties and searched at most twice. List both last names and id.
 
-select T1.last_name
+select T1.last_name, T1.user_id
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
 group by T1.user_id
 having count(*) <= 2
 INTERSECT
-select T1.last_name
+select T1.last_name, T1.user_id
 from Users as T1 JOIN Properties as T2 on T1.user_id = T2.owner_user_id
 group by T1.user_id
 having count(*) >= 2;
