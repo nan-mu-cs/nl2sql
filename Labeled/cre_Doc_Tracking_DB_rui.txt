@@ -1,0 +1,378 @@
+Total = #  44
+
+
+1. How many calendar items do we have?
+
+
+select count(*)
+from Ref_calendar
+
+
+2. Show all calendar dates and day bumbers.
+
+
+select calendar_date, day_bumber
+from Ref_calendar
+________________
+
+
+3. Show the number of document types.
+
+
+select count(*)
+from Ref_document_types
+
+
+4. List all document type codes and document type names.
+
+
+select document_type_code, document_type_name
+from Ref_document_types
+
+
+5. What is the name and description for document type code RV?
+
+
+select document_type_name, document_type_description
+from Ref_document_types
+where document_type_code = "RV"
+
+
+6. What is the document type code for document type "Paper"
+
+
+select document_type_code
+from Ref_document_types
+where document_type_name = "Paper"
+________________
+
+
+7. Show the number of documents with document type code CV or BK.
+
+
+select count(*)
+from All_documents
+where document_type_code = "CV" or document_type_code = "BK"
+
+
+8. What is the date stored for the document "Marry CV"?
+
+
+select date_stored
+from All_documents
+where Document_name = "Marry CV"
+________________
+
+
+9. What is the day Bumber for the document with id 7?
+
+
+select T2.day_bumber
+from All_documents as T1 join Ref_calendar as T2 on T1.date_stored = T2.calendar_date
+where T1.document_id = 7
+
+
+10. What is the document type name for the document "How to read a book"?
+
+
+select T2.document_type_name
+from All_documents as T1 join Ref_document_types as T2 on T1.document_type_code = T2.document_type_code
+where T1.document_name = "How to read a book"
+________________
+
+
+11. Show the number of locations.
+
+
+select count(*)
+from Ref_locations
+
+
+12. List all location codes and location names.
+
+
+select location_code, location_name
+from Ref_locations
+
+
+13. What is the name and description for location code x?
+
+
+select location_name, location_description
+from Ref_locations
+where location_code = "x"
+
+
+14. What is the location code for "Canada".
+
+
+select location_code
+from Ref_locations
+where location_name = "Canada"
+________________
+
+
+15. How many roles?
+
+
+select count(*)
+from Roles
+
+
+16. List all role codes, role names, and role descriptions.
+
+
+select role_code, role_name, role_description
+from Roles
+
+
+17. What is the name and description for role code "MG".
+
+
+select role_name, role_description
+from Roles
+where role_code = "MG"
+
+
+18. Show the description for role name "Proof Reader".
+
+
+select role_description
+from Roles
+where role_name = "Proof Reader"
+
+
+________________
+
+
+19. How many employees do we have?
+
+
+select count(*)
+from Employees
+
+
+20. Show the name, role code, and date of birth for the employee with ID 25.
+
+
+select employee_name, role_code, date_of_birth
+from Employees
+where employee_ID = 25
+
+
+21. What is the employee id for Ebba?
+
+
+select employee_ID
+from Employees
+where employee_name = "Ebba"
+
+
+22. Show all employee names with role "HR".
+
+
+select employee_name
+from Employees
+where role_code = "HR"
+
+
+________________
+
+
+23. Show all role codes and the number of employees in each role.
+
+
+select role_code, count(*)
+from Employees
+group by role_code
+
+
+24. What is the role code with most number of employees?
+
+
+select role_code
+from Employees
+group by role_code
+order by count(*) desc
+limit 1
+
+
+25. Show all role codes with at least 3 employees.
+
+
+select role_code
+from Employees
+group by role_code
+having count(*) >= 3
+
+
+26. Show the role code with least number of employees.
+
+
+select role_code
+from Employees
+group by role_code
+order by count(*) asc
+limit 1
+________________
+
+
+27. What is the role name and role description for employee Ebba?
+
+
+select T2.role_name, T2.role_description
+from Employees as T1 join Roles as T2 on T1.role_code = T2.role_code
+where T1.employee_name = "Ebba"
+
+
+28. Show all employee names with role name Editor.
+
+
+select T1.employee_name
+from Employees as T1 join Roles as T2 on T1.role_code = T2.role_code
+where T2.role_name = "Editor"
+
+
+29. Show the employee ids for all employees with role name "Human Resource" or "Manager".
+
+
+select T1.employee_id
+from Employees as T1 join Roles as T2 on T1.role_code = T2.role_code
+where T2.role_name = "Human Resource" or T2.role_name = "Manager"
+________________
+
+
+30. What is the location code for document with id 7?
+
+
+select location_code
+from Document_locations
+where document_id = 7
+
+
+31. Show the location name for document "Robin CV".
+
+
+select T3.location_name
+from All_documents as T1 join Document_locations as T2 on T1.document_id = T2.document_id join Ref_locations as T3 on T2.location_code = T3.location_code
+where T1.document_name = "Robin CV"
+
+
+32. Show the location code, the date in location from,  the date in location to for the document with ID 11.
+
+
+select location_code, date_in_location_from, date_in_locaton_to
+from Document_locations
+where document_id = 11
+
+
+33. What is the date in location from and the date in location to for document "Robin CV"?
+
+
+select T1.date_in_location_from, T1.date_in_locaton_to
+from Document_locations as T1 join All_documents as T2 on T1.document_id = T2.document_id
+where T2.document_name = "Robin CV"
+
+
+________________
+
+
+34. Show the location codes and the number of documents in each location.
+
+
+select location_code, count(*)
+from Document_locations
+group by location_code
+
+
+35. What is the location code with most number of documents?
+
+
+select location_code
+from Document_locations
+group by location_code
+order by count(*) desc
+limit 1
+
+
+36. Show the location codes with at least 3 documents.
+
+
+select location_code
+from Document_locations
+group by location_code
+having count(*) >= 3
+
+
+37. Show the location name with least number of documents.
+
+
+select T2.location_name
+from Document_locations as T1 join Ref_locations as T2 on T1.location_code = T2.location_code
+group by T1.location_code
+order by count(*) asc
+limit 1
+
+
+________________
+
+
+38. What are the names for employees who authorise the destruction and destroy the document with id 7?
+
+
+select T2.employee_name, T3.employee_name
+from Documents_to_be_destroyed as T1 join Employees as T2 on T1.Destruction_Authorised_by_Employee_ID=T2.employee_id join Employees as T3 on T1.Destroyed_by_Employee_ID=T3.employee_id
+where T1.document_id = 7
+
+
+39. Show employee ids and number of documents authorised by each employee.
+
+
+select Destruction_Authorised_by_Employee_ID, count(*)
+from Documents_to_be_destroyed
+group by Destruction_Authorised_by_Employee_ID
+
+
+40. Show employee ids and number of documents destroyed by each employee.
+
+
+select Destroyed_by_Employee_ID, count(*)
+from Documents_to_be_destroyed
+group by Destroyed_by_Employee_ID
+
+
+________________
+
+
+41. Show all employee ids who don't authorize destruction for any document.
+
+
+select employee_id
+from Employees
+EXCEPT
+select Destruction_Authorised_by_Employee_ID
+from Documents_to_be_destroyed
+
+
+42. Show all employee ids who have authorized destruction.
+
+
+select distinct Destruction_Authorised_by_Employee_ID
+from Documents_to_be_destroyed
+
+
+43. Show all employee ids who have destroy a document.
+
+
+select distinct Destroyed_by_Employee_ID
+from Documents_to_be_destroyed
+
+
+44. Show all employee ids who don't destroy any document.
+
+
+select employee_id
+from Employees
+EXCEPT
+select Destroyed_by_Employee_ID
+from Documents_to_be_destroyed
