@@ -1,0 +1,278 @@
+Total * = 40
+
+1. How many available hotels are there in total?
+
+select count(*)
+from HOTELS
+
+What are the price ranges of hotels?
+
+select price_range
+from HOTELS
+
+Show all distinct location name.
+
+select distinct Location_Name
+from LOCATIONS
+
+Show all names of staffs.
+
+select Name
+from Staff
+
+Show details of all visitors
+
+select Tourist_Details
+from VISITORS
+
+
+2. Show the price ranges of hotels with 5 star ratings.
+
+select price_range
+from HOTELS
+WHERE star_rating_code = "5"
+
+Show the average price ranges of hotels with 5 star ratings and allow pets.
+
+select avg(price_range)
+from HOTELS
+WHERE star_rating_code = "5" AND pets_allowed_yn = 1
+
+What is the address of the location UK Gallery?
+
+select Address
+from LOCATIONS
+WHERE Location_Name = "UK Gallery"
+
+What is the description of the location UK Gallery?
+
+select Description
+from LOCATIONS
+WHERE Location_Name = "UK Gallery"
+
+Which location names contain the word "film"?
+
+select Location_Name
+from LOCATIONS
+WHERE Location_Name LIKE "%film%"
+
+How many distinct names are associated with all the photos?
+
+select count(distinct Name)
+from PHOTOS
+
+What are the distinct visit dates?
+
+select distinct Visit_Date
+from VISITS
+
+What are the names of tourist attractions that can be approached by bus?
+
+select Name
+from TOURIST_ATTRACTIONS
+WHERE How_to_Get_There = "bus"
+
+What are the names and opening hours for tourist attractions that can be approached by bus or walk?
+
+select Name, Opening_Hours
+from TOURIST_ATTRACTIONS
+WHERE How_to_Get_There = "bus" OR How_to_Get_There = "walk"
+
+What are the star rating descriptions of the hotels with price bigger than 10000?
+
+select T2.star_rating_description
+FROM HOTELS as T1 JOIN Ref_Hotel_Star_Ratings as T2
+on T1.star_rating_code = T2.star_rating_code
+WHERE T1.price_range > 10000
+
+What are the details and opening hours of the museums?
+
+select T1.Museum_Details, T2.Opening_Hours
+FROM MUSEUMS as T1 JOIN TOURIST_ATTRACTIONS as T2
+on T1.Museum_ID = T2.Tourist_Attraction_ID
+
+What is the name of the tourist attraction that is associated with the photo "game1"?
+
+select T2.Name
+FROM PHOTOS as T1 JOIN TOURIST_ATTRACTIONS as T2
+on T1.Tourist_Attraction_ID = T2.Tourist_Attraction_ID
+WHERE T1.Name = "game1"
+
+What are the names and descriptions photos taken at the tourist attraction "film festival"?
+
+select T1.Name, T1.Description
+FROM PHOTOS as T1 JOIN TOURIST_ATTRACTIONS as T2
+on T1.Tourist_Attraction_ID = T2.Tourist_Attraction_ID
+WHERE T2.Name = "film festival"
+
+What are the details of and ways to get to tourist attractions related to royal family?
+
+select T1.Royal_Family_Details, T2.Opening_Hours
+FROM ROYAL_FAMILY as T1 JOIN TOURIST_ATTRACTIONS as T2
+on T1.Royal_Family_ID = T2.Tourist_Attraction_ID
+
+What are the details of shops that can be approached by walk?
+
+select T1.Shop_Details
+FROM SHOPS as T1 JOIN TOURIST_ATTRACTIONS as T2
+on T1.Shop_ID = T2.Tourist_Attraction_ID
+WHERE T2.How_to_Get_There = "walk"
+
+What is the name of the staff that is in charge of the attraction "US museum"?
+
+select T1.Name
+FROM STAFF as T1 JOIN TOURIST_ATTRACTIONS as T2
+on T1.Tourist_Attraction_ID = T2.Tourist_Attraction_ID
+WHERE T2.Name = "US museum"
+
+What are the details of markets that can be approached by walk or bus?
+
+select T1.Market_Details
+FROM Street_Markets as T1 JOIN TOURIST_ATTRACTIONS as T2
+on T1.Market_ID = T2.Tourist_Attraction_ID
+WHERE T2.How_to_Get_There = "walk" OR  T2.How_to_Get_There = "bus"
+
+What are the visit dates and details of visitor Vincent?
+
+select T2.Visit_Date, T2.Visit_Details
+FROM VISITORS as T1 JOIN VISITS as T2
+on T1.Tourist_ID = T2.Tourist_ID
+WHERE T1.Tourist_Details = "Vincent"
+
+Which tourist attraction does Vincent visit?
+
+select T1.Name
+FROM Tourist_Attractions as T1 JOIN VISITORS as T2 JOIN VISITS as T3 
+on T1.Tourist_Attraction_ID = T3.Tourist_Attraction_ID AND T2.Tourist_ID = T3.Tourist_ID
+WHERE T2.Tourist_Details = "Vincent"
+
+What are the names of tourist attraction and dates that Vincent or Vivian visit?
+
+select T1.Name, T3.Visit_Date
+FROM Tourist_Attractions as T1 JOIN VISITORS as T2 JOIN VISITS as T3 
+on T1.Tourist_Attraction_ID = T3.Tourist_Attraction_ID AND T2.Tourist_ID = T3.Tourist_ID
+WHERE T2.Tourist_Details = "Vincent" or T2.Tourist_Details = "Vivian"
+
+
+3. Show the average price of hotels for each star rating code.
+
+select star_rating_code, avg(price_range)
+from HOTELS
+group by star_rating_code
+
+Show the average price of hotels for different pet policy.
+
+select pets_allowed_yn, avg(price_range)
+from HOTELS
+group by pets_allowed_yn
+
+Show the id and star rating of hotels ordered by price from low to high.
+
+select hotel_id, star_rating_code
+from HOTELS
+ORDER BY price_range ASC
+
+Show the details of the top 3 most expensive hotels.
+
+select other_hotel_details
+from HOTELS
+ORDER BY price_range DESC LIMIT 3
+
+Show the details of the 3 least expensive hotels.
+
+select other_hotel_details
+from HOTELS
+ORDER BY price_range ASC LIMIT 3
+
+Show the most popular ways to get to tourist attractions.
+
+select How_to_Get_There
+from Tourist_Attractions
+group by How_to_Get_There
+ORDER BY COUNT(*) DESC LIMIT 1
+
+Show the description of the most popular attraction type 
+
+select T1.Attraction_Type_Description
+from Ref_Attraction_Types as T1 JOIN Tourist_Attractions as T2
+on T1.Attraction_Type_Code = T2.Attraction_Type_Code
+group by T2.Attraction_Type_Code
+ORDER BY COUNT(*) DESC LIMIT 1
+
+Show different ways to get to attractions and the number of attractions that can be approached in the corresponding way.
+
+select How_to_Get_There, COUNT(*)
+from Tourist_Attractions
+group by How_to_Get_There
+
+Show different tourist attractions and the corresponding number of visits.
+
+select T1.Name, COUNT(*)
+from Tourist_Attractions as T1 JOIN VISITS as T2
+on T1.Tourist_Attraction_ID = T2.Tourist_Attraction_ID
+group by T2.Tourist_Attraction_ID
+
+Show names of tourist attractions that are visited at least two times.
+
+select T1.Name
+from Tourist_Attractions as T1 JOIN VISITS as T2
+on T1.Tourist_Attraction_ID = T2.Tourist_Attraction_ID
+group by T2.Tourist_Attraction_ID
+having count(*) >= 2
+
+Show names and opening hours of tourist attractions that are visited at most once.
+
+select T1.Name, T1.Opening_Hours
+from Tourist_Attractions as T1 JOIN VISITS as T2
+on T1.Tourist_Attraction_ID = T2.Tourist_Attraction_ID
+group by T2.Tourist_Attraction_ID
+having count(*) <= 1
+
+
+
+4. What are the names of tourist attractions that can either be reached by walk or is at address
+660 Shea Crescent?
+
+select Name
+From Tourist_Attractions
+WHERE How_to_Get_There = "walk"
+UNION
+select T2.Name
+From Locations as T1 JOIN Tourist_Attractions as T2
+on T1.Location_ID = T2.Location_ID
+WHERE T1.Address = "660 Shea Crescent"
+
+What are the names of tourist attractions that can either be reached by bus or is at address 254 Ottilie Junction?
+
+select Name
+From Tourist_Attractions
+WHERE How_to_Get_There = "bus"
+UNION
+select T2.Name
+From Locations as T1 JOIN Tourist_Attractions as T2
+on T1.Location_ID = T2.Location_ID
+WHERE T1.Address = "254 Ottilie Junction"
+
+What are the names of tourist attraction Vincent and Laurence visit?
+
+select T1.Name
+FROM Tourist_Attractions as T1 JOIN VISITORS as T2 JOIN VISITS as T3 
+on T1.Tourist_Attraction_ID = T3.Tourist_Attraction_ID AND T2.Tourist_ID = T3.Tourist_ID
+WHERE T2.Tourist_Details = "Vincent"
+INTERSECT 
+select T1.Name
+FROM Tourist_Attractions as T1 JOIN VISITORS as T2 JOIN VISITS as T3 
+on T1.Tourist_Attraction_ID = T3.Tourist_Attraction_ID AND T2.Tourist_ID = T3.Tourist_ID
+WHERE T2.Tourist_Details = "Laurence"
+
+What are the names of tourist attraction Alison and Rosalind visit?
+
+select T1.Name
+FROM Tourist_Attractions as T1 JOIN VISITORS as T2 JOIN VISITS as T3 
+on T1.Tourist_Attraction_ID = T3.Tourist_Attraction_ID AND T2.Tourist_ID = T3.Tourist_ID
+WHERE T2.Tourist_Details = "Alison"
+INTERSECT 
+select T1.Name
+FROM Tourist_Attractions as T1 JOIN VISITORS as T2 JOIN VISITS as T3 
+on T1.Tourist_Attraction_ID = T3.Tourist_Attraction_ID AND T2.Tourist_ID = T3.Tourist_ID
+WHERE T2.Tourist_Details = "Rosalind"
