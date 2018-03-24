@@ -271,7 +271,7 @@ where parking_lots = 1);
 
 select T1.first_name
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
-group by T1.user_id
+group by T1.first_name
 having count(*) >= 2
 EXCEPT
 select T1.first_name
