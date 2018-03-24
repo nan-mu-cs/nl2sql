@@ -1,4 +1,4 @@
-# count = 42
+# count = 41
 
 
 1. what are all the addresses including line 1 and line 2?
@@ -14,7 +14,7 @@ from addresses;
 select count(*)
 from Courses;
 
-sh
+
 3. How is the math course described?
 
 
@@ -69,7 +69,7 @@ select section_name, section_description
 from Sections;
 
 
-10. What are the names and ids of courses having at most 2 sections? 
+10. What are the names and id of courses having at most 2 sections? 
 
 
 select T1.course_name, T1.course_id
@@ -114,17 +114,12 @@ having count(*) = 2;
 
 
 
-15. Who enrolled in a PHD degree program? List the first name, middle name, last name.
+15. Who enrolled in a Bachelor degree program? List the first name, middle name, last name.
 
 
 select distinct T1.first_name, T1.middle_name, T1.last_name
-from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id
-where T2.degree_program_id in
-(
-	select degree_program_id
-	from Degree_Programs
-	where degree_summary_name = 'PHD'
-);
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id JOIN Degree_Programs as T3 on T2.degree_program_id = T3.degree_program_id
+where degree_summary_name = 'Bachelor';
 
 
 
@@ -197,7 +192,7 @@ order by count(*) desc limit 1;
 
 
 
-23. Find the last name of the students who currently live in the NorthCarolina state but has not registered in any degree program.
+23. Find the last name of the students who currently live in the NorthCarolina state but have not registered in any degree program.
 
 
 select T1.last_name
@@ -250,7 +245,7 @@ order by date_left asc limit 1;
 
 select first_name
 from Students
-where current_address_id != permanent_address_id
+where current_address_id != permanent_address_id;
 
 
 29. Which address holds the most number of students currently? List the address id and all lines.
@@ -308,13 +303,16 @@ from Transcript_Contents as T1 JOIN Transcripts as T2 on T1.transcript_id = T2.t
 group by T1.transcript_id
 order by count(*) asc limit 1;
 
+36. Find the semester when both Master students and Bachelor students got enrolled in.
 
-36. What is the email address of the student who had stayed for the longest period in the school?
 
-
-select email_address
-from Students
-order by (date_left - date_first_registered) desc limit 1;
+select distinct T2.semester_id
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+where degree_summary_name = 'Master'
+INTERSECT 
+select distinct T2.semester_id
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+where degree_summary_name = 'Bachelor';
 
 
 37. How many different addresses does the students currently live?
@@ -355,16 +353,7 @@ from Students
 where cell_mobile_number = '09700166582';
 
 
-42. Find the semester when both Master students and Bachelor students got enrolled in.
 
-
-select distinct T2.semester_id
-from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
-where degree_summary_name = 'Master'
-INTERSECT 
-select distinct T2.semester_id
-from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
-where degree_summary_name = 'Bachelor'
 
 
 
