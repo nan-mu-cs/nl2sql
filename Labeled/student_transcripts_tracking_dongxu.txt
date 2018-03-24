@@ -181,7 +181,7 @@ from Courses as T1 JOIN Student_Enrolment_Courses as T2
 on T1.course_id = T2.course_id;
 
 
-22. Which course has most number of enrollments?
+22. What's the name of the course with most number of enrollments?
 
 
 select  T1.course_name
