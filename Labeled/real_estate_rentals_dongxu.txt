@@ -1,3 +1,5 @@
+# count 43
+
 1. Which countries and cities are listed in the addresses?
 
 select country, town_city
@@ -294,11 +296,11 @@ from Properties as T1 JOIN Property_Photos as T2 on T1.property_id = T2.property
 group by T1.owner_user_id;
 
 
-33. What is the total max price of the properties owned by single mothers?
+33. What is the total max price of the properties owned by single mothers or students?
 
 select sum(T1.price_max)
 from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
-where T2.user_category_code = 'Single Mother';
+where T2.user_category_code = 'Single Mother' or T2.user_category_code = 'Student';
 
 
 34. When did all the user property history happened? Sort them ascending by timestamp, list the timestamp and list the property name.
@@ -365,6 +367,16 @@ select T1.last_name
 from Users as T1 JOIN Properties as T2 on T1.user_id = T2.owner_user_id
 group by T1.user_id
 having count(*) >= 2;
+
+
+42. For users whose description contain the suffix 'Mother', Which age categories are they in?
+
+select T2.age_category_code
+from Ref_User_Categories as T1 JOIN Users as T2 on T1.user_category_code = T2.user_category_code
+where T1.User_category_description LIKE "%Mother";
+
+
+
 
 
 
