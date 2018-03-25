@@ -1,0 +1,250 @@
+1. (Aggregators) What is the average amount of a student loan?
+
+select avg(amount_of_loan)
+from Student_Loans;
+
+
+
+2. (UNION) List the biographical data and student id of the students who take 2 or more classes and the students who have less than 2 detentions.
+
+
+select T1.bio_data, T1.student_id
+from Students as T1 JOIN Classes as T2
+on T1.student_id = T2.student_id
+group by T1.student_id
+having count(*) >= 2
+UNION
+select T1.bio_data, T1.student_id
+from Students as T1 JOIN Detention as T2
+on T1.student_id = T2.student_id
+group by T1.student_id
+having count(*) < 2;
+
+
+3. (EXCEPT) List the details of the teachers who teach some class whose detail has the substring 'data' 
+but does not teach a class whose detail contains the prefix 'net'
+
+select T1.teacher_details
+from Teachers as T1 JOIN Classes as T2
+on T1.teacher_id = T2.teacher_id
+where T2.calss_details LIKE '%data%'
+EXCEPT
+select T1.teacher_details
+from Teachers as T1 JOIN Classes as T2
+on T1.teacher_id = T2.teacher_id
+where T2.calss_details LIKE 'net%';
+
+
+4. (EXCEPT) List the biographical data of the students who never had a detention or student loan. 
+
+select bio_data
+from Students
+EXCEPT 
+select T1.bio_data
+from Students as T1 JOIN Detention as T2
+on T1.student_id = T2.student_id 
+EXCEPT 
+select T1.bio_data
+from Students as T1 JOIN Student_Loans as T2
+on T1.student_id = T2.student_id;
+
+
+
+5. (GROUP BY, having, >=) What are the loan amounts and dates of the students who have at least 2 achievements.
+
+select amount_of_loan, date_of_loan
+from Student_Loans
+where student_id in (
+	select student_id
+	from Achievements
+	group by student_id
+	having count(*) >= 2
+);
+
+
+6. (GROUP BY, order by)List the detail and id of the teacher who teaches the most number of courses.
+
+select T1.teacher_details, T1.teacher_id
+from Teachers as T1 JOIN Classes as T2
+on T1.teacher_id = T2.teacher_id
+group by T1.teacher_id
+order by count(*) desc limit 1;
+
+
+7. (distinct) What are all the distint descriptions of all the detentions which have ever happened.
+
+select distinct(T1.detention_type_description)
+from Ref_Detention_Type as T1 JOIN Detention as T2
+on T1.detention_type_code = T2.detention_type_code;
+
+
+8. List the personal details and the address type descriptions of the students.
+
+
+select distinct T1.student_details, T3.address_type_description
+from Students as T1 JOIN Students_Addresses as T2
+on T1.student_id = T2.student_id
+JOIN Ref_Address_Types as T3
+on T2.address_type_code = T2.address_type_code;
+
+
+9. List the details of the addres and the biographical information of the students.
+
+select T1.address_details, T3.bio_data
+from Addresses as T1 JOIN Students_Addresses as T2
+on T1.address_id = T2.address_id
+JOIN Students as T3
+ont T2.student_id = T3.student_id;
+
+
+10. List the biographical data and the date of the transcript of all the students.
+
+select T1.bio_data, T2.date_of_transcript
+from Students as T1 JOIN Transcripts as T2
+on T1.student_id = T2.student_id;
+
+
+11. How many students got the most common result details in the behavioral monitoring details? Also list details.
+
+select count(distinct student_id), behaviour_monitoring_details
+from Behaviour_Monitoring
+group by behaviour_monitoring_details
+order by count(*) desc limit 1;
+
+
+12. Which students not only got the most common result but also got a result which was got by 3 students in behaviour monitoring details? List the student's biographical data and details.
+
+
+select T1.bio_data, T1.student_details
+from Students as T1 JOIN Behaviour_Monitoring as T2
+on T1.student_id = T2.student_id
+where T2.behaviour_monitoring_details in (
+select behaviour_monitoring_details
+from Behaviour_Monitoring
+group by behaviour_monitoring_details
+order by count(*) desc limit 1
+)
+INTERSECT 
+select T1.bio_data, T1.student_details
+from Students as T1 JOIN Behaviour_Monitoring as T2
+on T1.student_id = T2.student_id
+where T2.behaviour_monitoring_details in (
+select behaviour_monitoring_details
+from Behaviour_Monitoring
+group by behaviour_monitoring_details
+having count(*) = 3
+);
+
+
+13. Which students got only the most common result for his or her all behaviour monitoring details? List the student's biographical information.
+
+
+select T1.bio_data
+from Students as T1 JOIN Behaviour_Monitoring as T2
+on T1.student_id = T2.student_id
+where T2.behaviour_monitoring_details in (
+select behaviour_monitoring_details
+from Behaviour_Monitoring
+group by behaviour_monitoring_details
+order by count(*) desc limit 1
+)
+EXCEPT
+select T1.bio_data
+from Students as T1 JOIN Behaviour_Monitoring as T2
+on T1.student_id = T2.student_id
+where T2.behaviour_monitoring_details not in (
+select behaviour_monitoring_details
+from Behaviour_Monitoring
+group by behaviour_monitoring_details
+order by count(*) desc limit 1
+);
+
+
+14. Which students have gone through any event? List the student biographical data and the event date.
+
+select T1.bio_data, T2.event_date
+from Students as T1 JOIN Student_Events as T2
+on T1.student_id = T2.student_id;
+
+
+15. How many students have joined in the most common type of  event? List the number, the event type and description.
+
+select count(*), T2.event_type_code, T3.event_type_description
+from Students as T1 JOIN Student_Events as T2
+on T1.student_id = T2.student_id
+JOIN Ref_Event_Types as T3
+on T2.event_type_code = T3.event_type_code
+group by T2.event_type_code
+order by count(*) desc limit 1;
+
+
+
+16. How are all the achievements described? List the achievement detail and the type description.
+
+select T1.achievement_details, T2.achievement_type_description
+from Achievements as T1 JOIN Ref_Achievement_Type as T2
+on T1.achievement_type_code = T2.achievement_type_code;
+
+
+
+17. How many teachers have taught any student who has not won an achievements?
+
+
+select count(distinct T1.teacher_id)
+from Teachers as T1 JOIN Classes as T2 
+on T1.teacher_id = T2.teacher_id
+where T2.student_id
+not in (
+select student_id
+from Achievements
+);
+
+
+18. List the date of the transcripts and the transcript details.
+
+select date_of_transcript, transcript_details
+from Transcripts;
+
+
+19. List the achievement type code, the details and the year of the achievements.
+
+select achievement_type_code, achievement_details, date_achievement
+from Achievements;
+
+20. Show the detention start time and end time of the detentions.
+
+select datetime_detention_start, datetime_detention_end
+from Detention;
+
+21. Show the biographical information of the students whose details includes the substring 'Suite'.
+
+select bio_data
+from Students
+where student_details LIKE '%Suite%'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
