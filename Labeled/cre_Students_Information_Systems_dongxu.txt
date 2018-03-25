@@ -1,11 +1,13 @@
-1. (Aggregators) What is the average amount of a student loan?
+# count 38
+
+1. What is the average amount of a student loan?
 
 select avg(amount_of_loan)
 from Student_Loans;
 
 
 
-2. (UNION) List the biographical data and student id of the students who take 2 or more classes and the students who have less than 2 detentions.
+2. List the biographical data and student id of the students who take 2 or more classes and the students who have less than 2 detentions.
 
 
 select T1.bio_data, T1.student_id
@@ -21,8 +23,7 @@ group by T1.student_id
 having count(*) < 2;
 
 
-3. (EXCEPT) List the details of the teachers who teach some class whose detail has the substring 'data' 
-but does not teach a class whose detail contains the prefix 'net'
+3. List the details of the teachers who teach some class whose detail has the substring 'data' but does not teach a class whose detail contains the prefix 'net'
 
 select T1.teacher_details
 from Teachers as T1 JOIN Classes as T2
@@ -35,7 +36,7 @@ on T1.teacher_id = T2.teacher_id
 where T2.calss_details LIKE 'net%';
 
 
-4. (EXCEPT) List the biographical data of the students who never had a detention or student loan. 
+4. List the biographical data of the students who never had a detention or student loan. 
 
 select bio_data
 from Students
@@ -50,7 +51,7 @@ on T1.student_id = T2.student_id;
 
 
 
-5. (GROUP BY, having, >=) What are the loan amounts and dates of the students who have at least 2 achievements.
+5. What are the loan amounts and dates of the students who have at least 2 achievements.
 
 select amount_of_loan, date_of_loan
 from Student_Loans
@@ -62,7 +63,7 @@ where student_id in (
 );
 
 
-6. (GROUP BY, order by)List the detail and id of the teacher who teaches the most number of courses.
+6. List the detail and id of the teacher who teaches the most number of courses.
 
 select T1.teacher_details, T1.teacher_id
 from Teachers as T1 JOIN Classes as T2
@@ -71,7 +72,7 @@ group by T1.teacher_id
 order by count(*) desc limit 1;
 
 
-7. (distinct) What are all the distint descriptions of all the detentions which have ever happened.
+7. What are all the distint descriptions of all the detentions which have ever happened.
 
 select distinct(T1.detention_type_description)
 from Ref_Detention_Type as T1 JOIN Detention as T2
@@ -223,6 +224,159 @@ from Students
 where student_details LIKE '%Suite%'
 
 
+22. List the pairs of details of teachers and students who are in the same class.
+
+select T1.teacher_details, T3.student_details
+from Teachers as T1 JOIN Classes as T2
+on T1.teacher_id = T2.teacher_id
+JOIN Students as T3
+on T2.student_id = T3.student_id;
+
+
+23. How many courses can a teacher teach at most? Also list the teacher id.
+
+select count(*), teacher_id
+from Classes
+group by teacher_id
+order by count(*) desc limit 1;
+
+
+24. How many courses can a student at most? Also list the student id.
+
+select count(*), student_id
+from Classes
+group by student_id
+order by count(*) desc limit 1;
+
+
+25. Which students take 2 courses? List student id and details.
+
+select T1.student_id, T1.student_details
+from Students as T1 JOIN Classes as T2
+on T1.student_id = T2.student_id
+group by T1.student_id
+having count(*) = 2;
+
+
+26. What is the least common detention type? Show the type code and the description.
+
+
+select T1.detention_type_code, T2.detention_type_description
+from Detention as T1 JOIN Ref_Detention_Type as T2
+on T1.detention_type_code = T2.detention_type_code
+group by T1.detention_type_code
+order by count(*) asc limit 1;
+
+
+27. Which students have a student loan more than the average amount? List the students' biographical data and the details.
+
+select T1.bio_data, T1.student_details
+from Students as T1 JOIN Student_Loans as T2
+on T1.student_id = T2.student_id
+where T2.amount_of_loan > (
+select avg(amount_of_loan)
+from Student_Loans
+);
+
+
+
+28. When was the earliest date of loan?
+
+
+select date_of_loan
+from Student_Loans
+order by date_of_loan asc limit 1;
+
+
+29. Which student has the loan with the minimum value? List the student's biographical information.
+
+
+select T1.bio_data
+from Students as T1 JOIN Student_Loans as T2
+on T1.student_id = T2.student_id
+order by T2.amount_of_loan asc limit 1;
+
+
+30. When was the transcript released by the student with loan of maximum value?
+
+
+select T1.date_of_transcript
+from Transcripts as T1 JOIN Student_Loans as T2
+on T1.student_id = T2.student_id
+order by T2.amount_of_loan desc limit 1;
+
+31. Who is the teacher who have taught a student with earliest transcript? List the teacher details.
+
+select T1.teacher_details
+from Teachers as T1 JOIN Classes as T2
+on T1.teacher_id = T2.teacher_id
+JOIN Transcripts as T3
+on T2.student_id = T3.student_id
+order by T3.date_of_transcript asc limit 1;
+
+
+32. How much student loan does each student have? List the student ids and the amount.
+
+select student_id, sum(amount_of_loan)
+from Student_Loans
+group by student_id;
+
+
+
+
+33. How many courses does each student take? List the student id, the student biographical data and the course count.
+
+select T1.student_id, T1.bio_data, count(*)
+from Students as T1 JOIN Classes as T2
+on T1.student_id = T2.student_id
+group by T1.student_id;
+
+
+34. How many students have went through a detention?
+
+
+select count(distinct student_id)
+from Detention;
+
+35. How is the address type and description of the more common student address type?
+
+
+select T1.address_type_code, T2.address_type_description
+from Students_Addresses as T1 JOIN Ref_Address_Types as T2
+where T1.address_type_code = T2.address_type_code 
+group by T1.address_type_code
+order by count(*) desc limit 1;
+
+
+36. For those students who have went through an event, who do not have an student loan? List the students' biographical data
+
+
+select T1.bio_data
+from Students as T1 JOIN Student_Events as T2
+where T1.student_id = T2.student_id
+EXCEPT
+select T1.bio_data
+from Students as T1 JOIN Student_Loans as T2
+where T1.student_id = T2.student_id;
+
+
+
+37. List the start time and the end time of the students' addresses of the students who have 2 transcripts.
+
+select date_from, date_to
+from Students_Addresses
+where student_id in (
+select student_id
+from Transcripts
+group by student_id
+having count(*) = 2
+);
+
+
+38. When did all the detentions start?
+
+select datetime_detention_start
+from Detention;
 
 
 
