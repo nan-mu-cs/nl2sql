@@ -1,0 +1,309 @@
+Total = 42
+
+1. How many products are there?
+
+select count(*)
+from products
+
+How many colors are there?
+
+select count(*)
+from ref_colors
+
+How many characteristics are there?
+
+select count(*)
+from characteristics
+
+2. What are the names of all the products?
+
+select product_name
+from products
+
+List the description of all the colors.
+
+select color_description
+from ref_colors
+
+Find the names of all the product characteristics.
+
+select distinct characteristic_name
+from characteristics
+
+3. What are the names of products with category "Spices"?
+
+select product_name
+from products
+where product_category_code = "Spices"
+
+List the names of products with category "Herbs".
+
+select product_name
+from products
+where product_category_code = "Herbs"
+
+4. How many products are there under the category "Seeds"?
+
+select count(*)
+from products
+where product_category_code = "Seeds"
+
+Find the number of products with category "Spices".
+
+select count(*)
+from products
+where product_category_code = "Spices"
+
+5. What is the category of the product with name "cumin"?
+
+select product_category_code
+from products
+where product_name = "cumin"
+
+Which category does the product named "flax" belong to?
+
+select product_category_code
+from products
+where product_name = "flax"
+
+6. What is the name of the product with id "1"?
+
+select product_name
+from products
+where product_id = "1"
+
+Find the category of the product that have id "11".
+
+select product_name
+from products
+where product_id = "11"
+
+7. What is the color of the product "catnip"?
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t1.product_name = "catnip"
+
+What is the color of the product "chervil"?
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t1.product_name = "chervil"
+
+Find the color of the product "cumin".
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t1.product_name = "cumin"
+
+8. List all the products with color "white".
+
+select t1.product_name
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t2.color_description = "white"
+
+What are the name of the products that are "yellow" colored?
+
+select t1.product_name
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t2.color_description = "yellow"
+
+9. How many characteristics does the product "sesame" have?
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+where t1.product_name = "sesame"
+
+How many characteristics does the product "cumin" have?
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+where t1.product_name = "cumin"
+
+10. What are all the characteristics of product "sesame"?
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "sesame"
+
+List all the characteristics of product "cumin".
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "cumin"
+
+11. List all the "Grade" type characteristics of product "sesame".
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "sesame" and t3.characteristic_type_code = "Grade"
+
+List all the "Purity" type characteristics of product "cumin".
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "cumin" and t3.characteristic_type_code = "Purity"
+
+12. How many characteristics does the product "laurel" have?
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "laurel"
+
+Find the number of characteristics that the product "flax" have.
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "flax"
+
+13. Find the name of the products that have the color "red" and have the characteristic "slow".
+
+select product_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+join ref_colors as t4
+on t1.color_code = t4.color_code
+where t4.color_description = "red" and t3.characteristic_name = "slow"
+
+List products that have the color "white" and have the characteristic "hot".
+
+select product_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+join ref_colors as t4
+on t1.color_code = t4.color_code
+where t4.color_description = "white" and t3.characteristic_name = "hot"
+
+14. How many products have the characteristic "hot"?
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t3.characteristic_name = "hot"
+
+Find the number of products that are "fast".
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t3.characteristic_name = "fast"
+
+15. List all the "warm" products.
+
+select distinct t1.product_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t3.characteristic_name = "warm"
+
+Which products have the characteristic "cool"?
+
+select distinct t1.product_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t3.characteristic_name = "cool"
+
+16. Find the number of the products that have the color "red" and have the characteristic "slow".
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+join ref_colors as t4
+on t1.color_code = t4.color_code
+where t4.color_description = "red" and t3.characteristic_name = "slow"
+
+Count the products that have the color "white" and have the characteristic "hot".
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+join ref_colors as t4
+on t1.color_code = t4.color_code
+where t4.color_description = "white" and t3.characteristic_name = "hot"
+
+17. What is the unit of measuerment of the product category "Herbs"?
+
+select unit_of_measure
+from ref_product_categories
+where product_category_code = "Herbs"
+
+What is the unit of measuerment of the product category "Seeds"?
+
+select unit_of_measure
+from ref_product_categories
+where product_category_code = "Seeds"
+
+18. Find the product category description of the product category with code "Spices".
+
+select product_category_description
+from ref_product_categories
+where product_category_code = "Spices"
+
+What is the product category description of category "Herbs"?
+
+select product_category_description
+from ref_product_categories
+where product_category_code = "Herbs"
+
+19. What is the unit of measurement of product "cumin"?
+
+select t2.unit_of_measure
+from products as t1 join ref_product_categories as t2
+on t1.product_category_code = t2.product_category_code
+where t1.product_name = "cumin"
+
+Find the unit of measurement of product "chervil".
+
+select t2.unit_of_measure
+from products as t1 join ref_product_categories as t2
+on t1.product_category_code = t2.product_category_code
+where t1.product_name = "chervil"
+
+20. Find the products that are white and have unit of measurement "Handful"
+
+select t1.product_name
+from products as t1 join ref_product_categories as t2
+on t1.product_category_code = t2.product_category_code
+join ref_colors as t3
+on t1.color_code = t3.color_code
+where t3.color_description = "white" and t2.unit_of_measure = "Handful"
