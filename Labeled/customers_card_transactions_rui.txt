@@ -339,6 +339,6 @@ limit 1
 40. Show the account id and the number of transactions for each account
 
 
-select T1.account_id, count(*)
-from Financial_transactions as T1 join Accounts as T2 on T1.account_id = T2.account_id
-group by T1.account_id
+select account_id, count(*)
+from Financial_transactions
+group by account_id

@@ -1,4 +1,5 @@
-TOTAL = # 40
+Total = # 40
+
 
 1. How many addresses do we have?
 
@@ -319,7 +320,7 @@ select product_id
 from Order_items
 
 
-37. How many  product Monitors have been ordered? 
+37. How many product Monitors have been ordered? 
 
 
 select sum(order_quantity)
