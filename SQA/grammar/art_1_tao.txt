@@ -183,19 +183,17 @@ Select distinct T1.title
 From paintings as T1, paintings as T2
 where T1.height_mm > T2.height_mm and T2.mediumOn = "canvas"
 
-Find the distinct ids of all paintings that have a bigger year than some paintings at location gallery 240.
-A. Find the distinct distinct ids of all paintings that are older than some painting at location gallery 240.
+Find the distinct ids of all paintings that are older than some painting at location gallery 240.
 
 Select distinct T1.paintingID
 From paintings as T1, paintings as T2
 where T1.year > T2.year and T2. location = "Gallery 240"
 
-Find the distinct ids of the oldest paintings?
-#Note: I don't think this is the correct SQL translation
+Find the id of the oldest painting.
 
-Select distinct T1.paintingID
-From paintings as T1, paintings as T2
-where T1.year > T2.year and T2. location = "Gallery 240"
+Select paintingID
+From paintings
+where year = (select max(year) from paintings)
 
 12. What are the first and last name of the artist who had a sculpture work whose title has the word “female” in it?
 
@@ -280,7 +278,7 @@ Select location
 From paintings
 where mediumOn = "canvas"
 
-Find the locations that have paintings created before 1885 and after 1930?
+Find the locations that have paintings created before 1885 and after 1930.
 
 Select location
 From paintings
