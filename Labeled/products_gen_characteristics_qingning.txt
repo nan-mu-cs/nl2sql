@@ -1,4 +1,4 @@
-Total = 42
+Total = 46
 
 1. How many products are there?
 
@@ -307,3 +307,43 @@ on t1.product_category_code = t2.product_category_code
 join ref_colors as t3
 on t1.color_code = t3.color_code
 where t3.color_description = "white" and t2.unit_of_measure = "Handful"
+
+21. What is the most popular color?
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+group by t2.color_description
+order by count(*) desc
+limit 1
+
+22. What is the least popular color?
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+group by t2.color_description
+order by count(*) asc
+limit 1
+
+23. What is the most popular characteristic?
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+group by t3.characteristic_name
+order by count(*) desc
+limit 1
+
+24. What is the least popular characteristic?
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+group by t3.characteristic_name
+order by count(*) asc
+limit 1
