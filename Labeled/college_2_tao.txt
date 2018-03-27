@@ -1,5 +1,5 @@
 
-Total # = 72
+Total # = 86
 
 Find the buildings where have rooms with capacity more than 50.
 
@@ -532,3 +532,92 @@ Find the building, room number, semester and year of all courses offered by Psyc
 select T2.building, T2.room_number, T2.semester, T2.year
 from course as T1 join section as T2 on T1.course_id = T2.course_id
 where T1.dept_name = 'Psychology'
+
+Find the names of all instructors in computer science department
+
+select name
+from instructor
+where dept_name = 'Comp. Sci.'
+
+Find the names of all instructors in Comp. Sci. department with salary > 80000.
+
+select name
+from instructor
+where dept_name = 'Comp. Sci.'  and salary > 80000
+
+Find the names of all instructors who have taught some course and the course_id.
+
+select name, course_id
+from instructor , teaches
+where instructor.ID = teaches.ID 
+
+Find the names of all instructors in the Art department who have taught some course and the course_id.
+
+select name, course_id
+from instructor , teaches
+where instructor.ID = teaches.ID  and  instructor.dept_name = 'Art'
+
+Find the names of all instructors whose name includes the substring “dar”.
+
+select name
+from instructor
+where name like '%dar%' 
+
+List in alphabetic order the names of all distinct instructors.
+
+select distinct name
+from  instructor
+order by name
+
+Find courses that ran in Fall 2009 or in Spring 2010.
+
+select course_id from section where semester = 'Fall' and year = 2009
+ union
+select course_id from section where semester = 'Spring' and year = 2010
+
+Find courses that ran in Fall 2009 and in Spring 2010.
+
+select course_id from section where semester = 'Fall' and year = 2009
+intersect
+select course_id from section where semester = 'Spring' and year = 2010
+
+Find courses that ran in Fall 2009 but not in Spring 2010.
+
+select course_id from section where semester = 'Fall' and year = 2009
+except
+select course_id from section where semester = 'Spring' and year = 2010
+
+Find the salaries of all distinct instructors that are less than the largest salary.
+
+select distinct salary
+from instructor
+where salary < (select max(salary) from instructor)
+
+Find the total number of instructors who teach a course in the Spring 2010 semester.
+
+select count (distinct ID)
+from teaches
+where semester = 'Spring' and year = 2010
+
+Find the names and average salaries of all departments whose average salary is greater than 42000.
+
+select dept_name, avg (salary)
+from instructor
+group by dept_name
+having avg (salary) > 42000
+
+Find names of instructors with salary greater than that of some (at least one) instructor in the Biology department.
+
+select name
+from instructor
+where salary > (select min(salary)
+                from instructor
+                where dept_name = 'Biology')
+                
+Find the names of all instructors whose salary is greater than the salary of all instructors in the Biology department.
+
+select name
+from instructor
+where salary > (select max(salary)
+                from instructor
+                where dept_name = 'Biology')

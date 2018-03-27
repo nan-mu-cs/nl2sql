@@ -1,4 +1,4 @@
-Total * = 25
+Total * = 40
 
 1. How many available features are there in total?
 
@@ -17,53 +17,71 @@ from Other_Property_Features
 
 Show all information on feature types.
 
-SELECT * 
+select * 
 from REF_FEATURE_TYPES
 
 What are all the property names?
 
-Select property_name
+select property_name
 from Properties
+
+What are all the property type descriptions?
+select property_type_description
+from REF_PROPERTY_TYPES
 
 
 2. What is the feature type name of feature AirCon?
 
-select feature_type_name
+select T2.feature_type_name
 from Other_Available_Features as T1 JOIN Ref_Feature_Types as T2 
 on T1.feature_type_code = T2.feature_type_code
 where T1.feature_name = "AirCon"
 
-What is the feature type name of feature air conditioning?
+Show the feature type name of features with codes Amenity.
 
 select feature_type_name
-from Other_Available_Features as T1 JOIN Ref_Feature_Types as T2 
-on T1.feature_type_code = T2.feature_type_code
-where T1.feature_description = "Air Conditioning."
+from REF_FEATURE_TYPES
+WHERE feature_type_code = "Amenity"
 
-Show all feature IDs of features with codes Amenity.
+Show all property feature descriptions of properties that are houses.
 
-select feature_id
-from Other_Available_Features 
-where feature_type_code = "Amenity"
+select T1.property_feature_description
+from OTHER_PROPERTY_FEATURES as T1 JOIN PROPERTIES as T2 
+on T1.property_id = T2.property_id
+where T2.property_type_code = "House"
 
-Show all IDs and descriptions of properties with feature ID 3.
+Show all property feature descriptions of properties with 2 rooms
 
-select property_id, property_feature_description
-from Other_Property_Features 
-where feature_id = "3"
+select T1.property_feature_description
+from OTHER_PROPERTY_FEATURES as T1 JOIN PROPERTIES as T2 
+on T1.property_id = T2.property_id
+where T2.room_count = 2
 
-Show all distinct property type descriptions that contain the word "house"
+Show all property feature descriptions of properties with buyer offered price more than 200
 
-SELECT 	distinct property_type_description
-from REF_PROPERTY_TYPES 
-WHERE property_type_description LIKE "%house%"
+select T1.property_feature_description
+from OTHER_PROPERTY_FEATURES as T1 JOIN PROPERTIES as T2 
+on T1.property_id = T2.property_id
+where T2.buyer_offered_price > 200
 
-Show all IDs and descriptions of properties with swimming pool features.
+Show all property feature descriptions of properties with agreed selling price less than 100
 
-select property_id, property_feature_description
-from Other_Available_Features as T1 JOIN Other_Property_Features  as T2 
-on T1.feature_id = T2.feature_id
-where T1.feature_description = "Swimming Pool."
+select T1.property_feature_description
+from OTHER_PROPERTY_FEATURES as T1 JOIN PROPERTIES as T2 
+on T1.property_id = T2.property_id
+where T2.agreed_selling_price < 100
+
+Show all property name and address of properties that are apartments.
+
+select property_name, property_address
+from Properties
+where property_type_code = "Apartment"
+
+Show all sold date of properties that are apartments.
+
+select date_sold
+from Properties
+where property_type_code = "Apartment"
 
 How many distinct property type code are there?
 
@@ -75,10 +93,28 @@ What is the maximum vendor requested price of the properties?
 select max(vendor_requested_price)
 from Properties
 
+What is the maximum vendor requested price of the properties with more than 3 rooms?
+
+select max(vendor_requested_price)
+from Properties
+WHERE room_count > 3
+
+What is the minimum agreed selling price of the properties with more than 4 rooms?
+
+select min(agreed_selling_price	)
+from Properties
+WHERE room_count > 4
+
 What is the average buyer offered price of the properties?
 
 select avg(buyer_offered_price)
 from Properties
+
+What is the average buyer offered price of the properties that are houses?
+
+select avg(buyer_offered_price)
+from Properties
+WHERE property_type_code = "House"
 
 Show all dates that properties with 7 rooms are on market.
 
@@ -86,23 +122,62 @@ SELECT date_on_market
 from Properties
 Where room_count = 7
 
+Show the maximum agreed selling price of properties with buyer offered price more than 1000.
+
+SELECT max(agreed_selling_price)
+from Properties
+Where buyer_offered_price > 1000
+
 Show the property name and address of properties with agreed selling price of at least 100.
 
 SELECT property_name, property_address
 from Properties
 Where agreed_selling_price >= 100
 
+When are the property with more than 8 rooms sold?
+
+SELECT date_sold
+from Properties
+Where room_count > 8
+
 When is the property with 7 rooms and 1.68 buyer offered price sold?
+
 SELECT date_sold
 from Properties
 Where room_count = 7 AND buyer_offered_price = 1.68
 
+What are the address of properties that are apartments?
 
-3. Show the property type code and the number of properties belong to that code.
-
-select property_type_code, COUNT(*)
+SELECT property_address
 from Properties
-group by property_type_code
+Where property_type_code = "Apartment"
+
+What are the address of properties that are apartments and agreed selling price more than 1000?
+
+SELECT property_address
+from Properties
+Where property_type_code = "Apartment" AND agreed_selling_price	> 1000
+
+Which property names contain the word "park"
+
+Select property_name
+from Properties
+WHERE property_name LIKE "%park%"
+
+3. Show the property type descriptions of properties belong to that code.
+
+select T2.property_type_description
+from Properties as T1 JOIN Ref_Property_Types as T2 
+on T1.property_type_code = T2.property_type_code
+group by T1.property_type_code
+
+Show the property type descriptions and the number of properties belong to that code if the number is bigger than 5.
+
+select T2.property_type_description, COUNT(*)
+from Properties as T1 JOIN Ref_Property_Types as T2 
+on T1.property_type_code = T2.property_type_code
+group by T1.property_type_code
+HAVING COUNT(*) > 5
 
 Show the property type descriptions and the corresponding maximum agreed selling price.
 
@@ -120,6 +195,14 @@ group by T1.property_type_code
 ORDER BY avg(T1.room_count) ASC 
 LIMIT 1
 
+Show the property type descriptions with average buyer offered price at least 300.
+
+select T2.property_type_description 
+from Properties as T1 JOIN Ref_Property_Types as T2 
+on T1.property_type_code = T2.property_type_code
+group by T1.property_type_code
+HAVING avg(T1.buyer_offered_price) >= 300
+
 Show the property type descriptions with average agreed selling price at least 100.
 
 select T2.property_type_description 
@@ -136,19 +219,48 @@ on T1.feature_id = T2. feature_id
 group by T1.feature_id
 order by COUNT(*) DESC LIMIT 1
 
-Show all feature id and the number of properties associated sorted by 
+Show the feature descriptions of the feature that is shared by fewest properties
+
+select T1.feature_description
+from Other_Available_Features as T1 join Other_Property_Features as T2
+on T1.feature_id = T2. feature_id
+group by T1.feature_id
+order by COUNT(*) ASC LIMIT 1
+
+Show all feature names and the number of properties associated sorted by 
 the counts in increasing order
 
-select feature_id, COUNT(*)
-from Other_Property_Features
-group by feature_id
+select T1.feature_name, COUNT(*)
+from Other_Available_Features as T1 join Other_Property_Features as T2
+ON T1.feature_id = T2.feature_id
+group by T2.feature_id
 ORDER BY COUNT(*) ASC
 
+Show all feature descriptions and the number of properties associated sorted by 
+the counts in decreasing order
 
-4. What are the feature IDs that are not used in any property?
+select T1.feature_name, COUNT(*)
+from Other_Available_Features as T1 join Other_Property_Features as T2
+ON T1.feature_id = T2.feature_id
+group by T2.feature_id
+ORDER BY COUNT(*) desc
 
-select feature_id
-From Other_Available_Features
-Except
-Select feature_id
-From Other_Property_Features
+
+4. What are the names of properties that are either House or Apartment with more than 1 room?
+
+select property_name
+From Properties
+WHERE property_type_code = "House"
+UNION
+select property_name
+From Properties
+WHERE property_type_code = "Apartment" and room_count > 1
+
+What are the sold date of properties that are either House or Apartment with selling price more than 100?
+select property_name
+From Properties
+WHERE property_type_code = "House"
+UNION
+select property_name
+From Properties
+WHERE property_type_code = "Apartment" and agreed_selling_price > 100
