@@ -3,6 +3,17 @@ Total # = 58
 1. What is the title of the sculpture that was created in the most recent year?
 		What is the name and year created of each sculphture?
 		Which one was created most recently?
+COMMENTS: or you can ask: 
+                Find all info of the sculphture was created most recently.
+		 select *
+		 from sculptures
+	         order by year desc
+		 limit 1
+                What is its name and year?
+		  select title, year
+		  from sculptures
+		  order by year desc
+		  limit 1
 
 select title, year
 from sculptures
@@ -12,6 +23,8 @@ limit 1
 What is the title and location of the oldest painting?
 	Which is the oldest painting?
 	What is its title, location and year created?
+COMMENTS: As we discussed, you can use synonyms: What is its name, place and year created? etc.
+COMMENTS IMPORTANT: BE CAREFUL to avoid falling into a pattern when you're rephrasing repetitive stuff. The purpose of paraphrases is to add some diversity to the data. So be consistant, correct and DIVERSE!
 
 select title, location, year
 from paintings
@@ -85,7 +98,15 @@ Where T2.year > 1920
 4. What are the first and last names of the artist who lived the longest?
 	Who are all the artists?
 	What was the first and last name of the one who lived the longest?
-
+COMMENTS: you can ask (SQA of length 3 is better):
+        Who are all the artists?
+	  Select *
+          From artists
+	Order the result by their lifetime.
+	  select *
+       	  From artists
+          Order by deathYear - birthYear DESC
+	What was the first and last name of the one who lived the longest?
 
 Select lname, fname
 From artists
@@ -160,7 +181,11 @@ Where T1.fname = "Pablo"
 7. Find the first and last names of the artists who have both works of paintings and sculptures?
 	Which artists have both works of paintings and sculptures?
 	What are their first and last names?
-
+COMMENTS: how about (you can see): 
+        Which artists have works of paintings?
+	Which artists created some sculptures?
+	What are the first and last names of the artists who have all of them?
+	
 Select T1.lname, T1.fname
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 INTERSECT
@@ -171,6 +196,7 @@ What are the first and last names of the artists who have not only medium oil pa
 	Which artists have medium oil paintings?
 	Of those, who also have paintings with the lithographic medium?
 	What are their first and last names?
+COMMENTS: these ones are better than mine above.
 
 Select T1.lname, T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
@@ -203,8 +229,9 @@ A. How many works are there in each medium?
 #ISSUE: I don't think there is a way to make this sound natural -- "medium on" is not neither used
 nor gramatically correct
 
-	What are the different mediums?
+	What are the different mediums? 
 	How many works are there for each of them?
+COMMENTS: What are the different mediums (of all paintings): (of all paintings) can be ingored sometimes but not always.
 
 Select count(*), mediumOn
 From paintings
@@ -221,7 +248,7 @@ group by medium
 What are the numbers of paintings created before 1900 in different places?
 	How many paintings were created before 1900?
 	Of these, how many were created in different places?
-
+COMMENTS: As we discussed, you both (Shanelle and James) should use the sqlite_web tool to visualize the database so that you have a big picture of the whole database. Thus, Of these, how many were created in different places? -> Of these, how many were shown/coolected in different places?
 
 Select count(*), location
 From paintings
@@ -250,8 +277,8 @@ where medium = "oil" and location = "Gallery 240"
 
 11.  Find the distinct titles of all paintings that have a longer height than some painting on canvas?
 		What are the heights of all the paintings?
-		Which of these have a longer height than some painting on canvas?
-		What are their distinct titles? 
+		Which of these have a longer height than some paintings on canvas?
+		What are their distinct titles?
 
 Select distinct T1.title
 From paintings as T1, paintings as T2
@@ -418,17 +445,21 @@ Select max(height_mm), paintingID
 From paintings
 where year < 1900
 
-19. What are the maximum height and width of paintings grouped and ordered by year?
+19. What are the maximum height and width of paintings for each year?
 		Group and order the paintings by year.
 		Of these paintings, what is the maximum height and width?
+
+COMMENTS: My question is not very good here. So I changed it. James(primary)/Shanelle should check if the sql/question matches. If not or have question, Put a special token in front of the question such as ISSUE.
 
 Select max(height_mm), max(width_mm), year
 From paintings
 group by year
-order by year
 
 What are the average height and width of paintings grouped by painters and ordered by name?
 	Group the paintings again by 
+
+COMMENTS: where the word 'again' come from? 
+          Shanelle to finish the rest of examples.
 
 Select avg(height_mm), avg(width_mm), painterID
 From paintings
@@ -436,6 +467,8 @@ group by painterID
 order by title
 
 20. Find the first names and number of works of all artists who have at least two paintings?
+
+COMMENTS: To to be finished.
 
 Select T1.fname, count(*)
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
