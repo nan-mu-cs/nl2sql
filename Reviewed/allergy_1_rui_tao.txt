@@ -1,0 +1,332 @@
+Total = #  40
+
+
+1. How many allergies?
+
+COMMENT: ok, but a little bit ambiguous. 
+
+select count(distinct allergy)
+from Allergy_type
+
+
+2. How many allergy types?
+
+
+select count(distinct allergytype)
+from Allergy_type
+
+
+3. Show all allergy types.
+
+
+select distinct allergytype
+from Allergy_type
+
+
+4. Show all allergies and their types.
+
+
+select allergy, allergytype
+from Allergy_type
+
+
+5. Show all allergies with type food.
+
+
+select allergy
+from Allergy_type
+where allergytype = "food"
+
+
+6. What is the type of allergy Cat?
+
+
+select allergytype
+from Allergy_type
+where allergy = "Cat"
+
+
+7. How many allergies have type animal?
+
+
+select count(*)
+from Allergy_type
+where allergytype = "animal"
+
+
+8. Show all allergy types and the number of allergies in each type.
+
+
+select allergytype, count(*)
+from Allergy_type
+group by allergytype
+
+
+9. Which allergy type has most number of allergies?
+
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) desc
+limit 1
+
+
+10. Which allergy type has least number of allergies?
+
+COMMENT: asc is defaulted.
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*)
+limit 1
+
+
+11. How many students?
+
+
+select count(*)
+from Student
+
+
+12. Show first name and last name for all students.
+
+
+select Fname, Lname
+from Student
+
+
+13. How many different advisors?
+
+
+select count(distinct advisor)
+from Student
+
+
+14. Show all majors.
+
+
+select distinct Major
+from Student
+
+
+15. Show all cities where students live in.
+
+
+select distinct city_code
+from Student
+
+
+16. Show first name, last name, age for all female (sex is F) students.
+
+COMMENT: if can't access the content, how to decide F means female?
+
+select Fname, Lname, Age
+from Student
+where Sex = 'F'
+
+
+17. Show student ids for all male students.
+
+
+select StuID
+from Student
+where Sex = 'M'
+
+
+18. How many students are at age 18?
+
+
+select count(*)
+from Student
+where age = 18
+
+
+19. Show all student ids who are older than 20.
+
+
+select StuID
+from Student
+where age > 20
+
+
+20. Which city does the student whose last name is Kim live in?
+
+COMMENT: how to decide which last and first name from question.
+
+select city_code
+from Student
+where LName = "Kim"
+
+
+21. Who is the advisor of student with ID 1004?
+
+
+select Advisor
+from Student
+where StuID = 1004
+
+
+22. How many students live in city of HKG or CHI?
+
+
+select count(*)
+from Student
+where city_code = "HKG" or city_code = "CHI"
+
+
+23. Show the minimum, average, and maximum age of all students.
+
+
+select min(age), avg(age), max(age)
+from Student
+
+
+24. What is the last name of the youngest student?
+
+
+select LName
+from Student
+where age = (select min(age) from Student)
+
+
+25. Show the student id of the oldest student.
+
+
+select StuID
+from Student
+where age = (select max(age) from Student)
+
+
+26. Show all majors and corresponding number of students.
+
+
+select major, count(*)
+from Student
+group by major
+
+
+27. Which major has most number of students?
+
+
+select major
+from Student
+group by major
+order by count(*) desc
+limit 1
+
+
+28. Show all ages and corresponding number of students.
+
+
+select age, count(*)
+from Student
+group by age
+
+
+29. Show the average age for male and female students.
+
+
+select avg(age), sex
+from Student
+group by sex
+
+
+30. Show all cities and corresponding number of students.
+
+
+select city_code, count(*)
+from Student
+group by city_code
+
+
+31. Show all advisors and corresponding number of students.
+
+COMMENT: too many questions with this sql patterns!
+
+select advisor, count(*)
+from Student
+group by advisor
+
+
+32. Which advisor has most number of students?
+
+
+select advisor
+from Student
+group by advisor
+order by count(*) desc
+limit 1
+
+
+33. How many students have allergy Cat?
+
+
+select count(*)
+from Has_allergy
+where Allergy = "Cat"
+
+
+34. Show all student IDs who have at least two allergies.
+
+
+select StuID
+from Has_allergy
+group by StuID
+having count(*) >= 2
+
+
+35. How many students don't have any allergy?
+
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Has_allergy
+
+
+36. How many female students have allergy Milk or Eggs?
+
+
+select count(*)
+from has_allergy as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.sex = "F" and (T1.allergy = "Milk" or T1.allergy = "Eggs")
+
+
+37. How many students have food allergy?
+
+
+select count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+where T2.allergytype = "food"
+
+
+________________
+
+
+38. Which allergy has most number of students affected?
+
+
+select Allergy
+from Has_allergy
+group by Allergy
+order by count(*) desc
+limit 1
+
+
+39. Show all allergy with number of students affected.
+
+
+select Allergy, count(*)
+from Has_allergy
+group by Allergy
+
+
+40. Show all allergy type with number of students affected.
+
+
+select T2.allergytype, count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+group by T2.allergytype
