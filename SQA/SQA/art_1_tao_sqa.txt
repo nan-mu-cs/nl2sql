@@ -1,0 +1,553 @@
+Total # = 58
+
+1. What is the title of the sculpture that was created in the most recent year?
+		What is the name and year created of each sculphture?
+		Which one was created most recently?
+COMMENTS: or you can ask: 
+                Find all info of the sculphture was created most recently.
+		 select *
+		 from sculptures
+	         order by year desc
+		 limit 1
+                What is its name and year?
+		  select title, year
+		  from sculptures
+		  order by year desc
+		  limit 1
+
+select title, year
+from sculptures
+order by year desc
+limit 1
+
+What is the title and location of the oldest painting?
+	Which is the oldest painting?
+	What is its title, location and year created?
+COMMENTS: As we discussed, you can use synonyms: What is its name, place and year created? etc.
+COMMENTS IMPORTANT: BE CAREFUL to avoid falling into a pattern when you're rephrasing repetitive stuff. The purpose of paraphrases is to add some diversity to the data. So be consistant, correct and DIVERSE!
+
+select title, location, year
+from paintings
+order by year
+limit 1
+
+2. Find the names of all sculptures located in gallery 226.
+		What are the titles of all the sculptures?
+		Which ones are located in gallery 226
+
+Select title
+From sculptures
+Where location = "Gallery 226"
+
+List the title and location of all paintings.
+	What are the titles of all the paintings?
+	Also list their locations.
+
+select title, location
+from paintings
+
+List the title and location of all sculptures.
+	What are the titles of all the sculptures?
+	Also list their locations.
+
+select title, location
+from sculptures
+
+What are the medium types of the painting with id = 80
+	Which painting has an id equal to 80?
+	What is its medium type?
+
+select medium
+from paintings
+Where paintingID = 80
+
+Find the first and last names of all artists who were born after 1850.
+	What are the first and last names of all the artists?
+	Which of those were born after 1850.
+
+select lname, fname
+from artists
+Where birthYear > 1850
+
+Find the names and years of all sculptures that are not located in gallery 226.
+	Which sculptures are not located in gallery 226?
+	Of those, what are their names and years?
+
+Select title, year
+From sculptures
+Where location != "Gallery 226"
+
+3. What are the first and last names of all distinct artists who made sculptures before 1900?
+	Who were all the distinct artists who made sculptures?
+	Of those, which made them before 1900?
+	What were their first and last names?
+
+Select DISTINCT T1.lname, T1.fname
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
+Where T2.year < 1900
+
+Find the birth years of all distinct artists who made sculptures after 1920?
+	Who are all the distinct artists?
+	Which of them made sculptures after 1920?
+	What are their birth years?
+
+Select DISTINCT T1.birthYear
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
+Where T2.year > 1920
+
+4. What are the first and last names of the artist who lived the longest?
+	Who are all the artists?
+	What was the first and last name of the one who lived the longest?
+COMMENTS: you can ask (SQA of length 3 is better):
+        Who are all the artists?
+	  Select *
+          From artists
+	Order the result by their lifetime.
+	  select *
+       	  From artists
+          Order by deathYear - birthYear DESC
+	What was the first and last name of the one who lived the longest?
+
+Select lname, fname
+From artists
+Order by deathYear - birthYear DESC
+LIMIT 1
+
+What is the age of the artist who had the shortest life?
+	Who are all the artists?
+	Which one lived the shortest?
+	What was his/her age?
+
+Select deathYear - birthYear
+From artists
+Order by deathYear - birthYear
+LIMIT 1
+
+What are the first name and age of the artist who had the longest life?
+	Who are all the artists?
+	Which one lived the longests?
+	What was his/her first name and age?
+
+Select fname , deathYear - birthYear
+From artists
+Order by deathYear - birthYear DESC
+LIMIT 1
+
+5. How many paintings are exhibited at gallery 240?
+	How many paintings are there?
+	How many of those are exhibited at gallery 240?
+
+Select count(*)
+From paintings
+where location = "Gallery 240"
+
+How many paintings did the artist with the longest life make?
+	Who is the artist with the longest life?
+	How many paintings did he/she make?
+
+Select count(*), T2.painterID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+Group by T2.painterID
+Order by T1.deathYear - T1.birthYear DESC
+LIMIT 1
+
+6. Give me a list of names and years of paintings that were created by the artist whose first name is Mary.
+	Which artist has a first name of Mary?
+	Select all paintings created by this artist. 
+	What are the names and years of all those paintings?
+
+Select T2.title,  T2.year
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+Where T1.fname = "Mary"
+
+What are the sizes of the paintings that were created by the artist who was born before 1850?
+	Which artist was born before 1850?
+	What paintings did he/she create?
+	What are the sizes of those paintings?
+
+Select T2.width_mm,  T2.height_mm
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+Where T1.birthYear < 1850
+
+What are the location and medium type of paintings that are created by the artist whose first name is Pablo?
+	Which artist has a first name of Pablo?
+	What paintings are created by him?
+	What are the location and medium types of those paintings?
+
+Select T2.location,  T2.medium
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+Where T1.fname = "Pablo"
+
+7. Find the first and last names of the artists who have both works of paintings and sculptures?
+	Which artists have both works of paintings and sculptures?
+	What are their first and last names?
+COMMENTS: how about (you can see): 
+        Which artists have works of paintings?
+	Which artists created some sculptures?
+	What are the first and last names of the artists who have all of them?
+	
+Select T1.lname, T1.fname
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
+INTERSECT
+Select T1.lname, T1.fname
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+
+What are the first and last names of the artists who have not only medium oil paintings but also paintings with the lithographic medium?
+	Which artists have medium oil paintings?
+	Of those, who also have paintings with the lithographic medium?
+	What are their first and last names?
+COMMENTS: these ones are better than mine above.
+
+Select T1.lname, T1.fname
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+where T2.medium = "oil"
+INTERSECT
+Select T1.lname, T1.fname
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+where T2.medium = "lithograph"
+
+8. What is the birth year of the artist who created a  painting in 1884 that is on canvas?
+		Who created a painting in 1884?
+		Of those artists, who painted the work on canvas?
+		What is his birthyear?
+
+Select T1.birthYear
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+where T2.year = 1884 and mediumOn = "canvas"
+
+What are the unique first names of the artists who had medium oil paintings located in gallery 241?
+	Which artists have medium oil paintings?
+	Of those artists, who has the paintings located in gallery 241?
+	What are the different first names of these artists?
+
+Select DISTINCT T1.fname
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+where T2.medium = "oil" and location = "Gallery 241"
+
+9. What are the numbers of works for different medium on type?
+A. How many works are there in each medium?
+#ISSUE: I don't think there is a way to make this sound natural -- "medium on" is not neither used
+nor gramatically correct
+
+	What are the different mediums? 
+	How many works are there for each of them?
+COMMENTS: What are the different mediums (of all paintings): (of all paintings) can be ingored sometimes but not always.
+
+Select count(*), mediumOn
+From paintings
+group by mediumOn
+
+What are the average height of works for different medium types?
+	What are the different medium types?
+	For each of them, what is the average height of the works in mm?
+
+Select avg(height_mm), medium
+From paintings
+group by medium
+
+What are the numbers of paintings created before 1900 in different places?
+	How many paintings were created before 1900?
+	Of these, how many were created in different places?
+COMMENTS: As we discussed, you both (Shanelle and James) should use the sqlite_web tool to visualize the database so that you have a big picture of the whole database. Thus, Of these, how many were created in different places? -> Of these, how many were shown/coolected in different places?
+
+Select count(*), location
+From paintings
+group by location
+having year < 1900
+
+10. What are the titles of paintings that are created after 1910 and whose medium is oil?
+		Which paintings created after 1910?
+		Of those, which have a medium of oil?
+		What are their titles?
+
+
+
+Select title
+From paintings
+where year > 1910 and medium = "oil"
+
+Find the unique id of the painters who had medium oil paintings exhibited at gallery 240?
+	Which painters created works in oil? 
+	Of these people, who has paintings exhibited at gallery 240?
+	What are the unique ids of these people?
+
+Select DISTINCT painterID
+From paintings
+where medium = "oil" and location = "Gallery 240"
+
+11.  Find the distinct titles of all paintings that have a longer height than some painting on canvas?
+		What are the heights of all the paintings?
+		Which of these have a longer height than some paintings on canvas?
+		What are their distinct titles?
+
+Select distinct T1.title
+From paintings as T1, paintings as T2
+where T1.height_mm > T2.height_mm and T2.mediumOn = "canvas"
+
+Find the distinct ids of all paintings that are older than some painting at location gallery 240.
+		Which paintings are older than some other paintings?
+		Of these, which are older than one in gallery 240?
+		Find the distinct ids of all these paintings.
+
+
+Select distinct T1.paintingID
+From paintings as T1, paintings as T2
+where T1.year > T2.year and T2. location = "Gallery 240"
+
+Find the id of the oldest painting.
+                Find the year of the oldest painting.
+		what is the id of that painting?
+
+Select paintingID
+From paintings
+where year = (select max(year) from paintings)
+
+12. What are the first and last name of the artist who had a sculpture work whose title has the word “female” in it?
+		Which artists created sculptures?
+		Of these artists, who created ones with a title that has the word "female" in it?
+		What is his/her first and last name?
+
+Select T1.lname, T1.fname
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
+Where T2.title LIKE "%female%"
+
+13. List the names of all distinct paintings in alphabetical order
+		What are the names of all the paintings?
+		List them in alphabetical order. 
+
+Select distinct title
+From paintings
+Order by title
+
+List the names of all distinct paintings ordered by length.
+	What are the names of all distinct paintings?
+	Order them by length.
+
+Select distinct title
+From paintings
+Order by height_mm
+
+14. What are the names of both paintings and sculptures created between 1900 and 1950?
+		Which are the names of all the paintings and sculptures?
+		Which of those were created between 1900 and 1950?
+
+Select title
+From paintings
+where year between 1900 and 1950
+UNION
+Select title
+From sculptures
+where year between 1900 and 1950
+
+Find the titles of painting and sculpture works made by the artist whose id is 222?
+	Which artist has an id of 222?
+	What are the titles of all paintings and sculpture works created by him?
+
+Select T2.title
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+where T1.artistID = 222
+UNION
+Select T2.title
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2. sculptorID
+where T1.artistID = 222
+
+15. What is the id of the artist who has the highest number of painting works before 1900?
+		How many paintings did each artist create before 1900?
+		Who painted the most?
+		What is his/her id?
+
+
+Select T1.artistID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+group by T2.painterID
+having T2.year < 1900
+order by count(*) DESC
+LIMIT 1
+
+What is the first name of the artist who has the highest number of sculptures?
+	How many sculptures did each artist create?
+	Who created the most?
+	What is their first name?
+
+Select T1.fname
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2. sculptorID
+group by T2. sculptorID
+order by count(*) DESC
+LIMIT 1
+
+16. What are the names of paintings whose width is less than 600 or height is larger than 800?
+		What are the names of all the paintings?
+		Which of these have a width less than 600 or a height larger than 800?
+
+Select title
+From paintings
+where width_mm < 600 or height_mm > 800
+
+Which locations have paintings created before 1885 or after 1930?
+	Which paintings were created before 1885 or after 1930?
+	Where are they all located?
+
+Select distinct location
+From paintings
+where year <1885 or year > 1930
+
+Find the ids of paintings whose height is bigger than 500 and less than 2000?
+	Which paintings have a height larger than 500?
+	Of these, which also are shorter than 2000?
+	What are their ids?
+
+Select paintingID
+From paintings
+where height_mm between 500 and 2000
+
+17. Which locations have paintings in the mediums of on panel and on canvas?
+		Which paintings are on panels and on canvas?
+		Find their locations.
+
+Select location
+From paintings
+where mediumOn = "panel"
+INTERSECT
+Select location
+From paintings
+where mediumOn = "canvas"
+
+Find the locations that have paintings created before 1885 and after 1930?
+	Which paintings were created before 1885?
+	Of these, which were also painted after 1930?
+	What are their locations?
+
+
+Select location
+From paintings
+where year < 1885
+INTERSECT
+Select location
+From paintings
+where year > 1930
+
+18. What are the average height and width of paintings that are oil medium in the place of gallery 241?
+		Which paintings are on oil medium?
+		Of these, which are located in gallery 241?
+		What is their average height and width?
+
+
+Select avg(height_mm), avg(width_mm)
+From paintings
+where medium = "oil" and location = "Gallery 241"
+
+What are the maximum height and id of paintings painted before 1900?
+	Which paintings were created before 1900?
+	What is the id of the painting with the maximum height?
+	Also what is that height?
+
+Select max(height_mm), paintingID
+From paintings
+where year < 1900
+
+19. What are the maximum height and width of paintings for each year?
+		Group and order the paintings by year.
+		Of these paintings, what is the maximum height and width?
+
+COMMENTS: My question is not very good here. So I changed it. James(primary)/Shanelle should check if the sql/question matches. If not or have question, Put a special token in front of the question such as ISSUE.
+
+Select max(height_mm), max(width_mm), year
+From paintings
+group by year
+
+What are the average height and width of paintings grouped by painters and ordered by name?
+	Group the paintings again by 
+
+COMMENTS: where the word 'again' come from? 
+          Shanelle to finish the rest of examples.
+
+Select avg(height_mm), avg(width_mm), painterID
+From paintings
+group by painterID
+order by title
+
+20. Find the first names and number of works of all artists who have at least two paintings?
+
+COMMENTS: To to be finished.
+
+Select T1.fname, count(*)
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+group by T2. painterID
+having count(*) > 1
+
+Find the death year of all artists who have at most 3 paintings?
+
+Select T1.deathYear
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+group by T2. painterID
+having count(*) <= 3
+
+21. Find the death year of the artist who made the least number of sculptures?
+
+Select T1.deathYear
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
+Group by T2.sculptorID
+Order by count(*)
+LIMIT 1
+
+What are the ids and height of the painting with the longest width in gallery 240?
+
+Select paintingID, height_mm
+From paintings
+where location = 'Gallery 240'
+Order by width_mm DESC
+LIMIT 1
+
+22. What are the ids of the paintings whose created year is before the year of all paintings in gallery 240?
+
+Select paintingID
+From paintings
+where year <  (select min(year)
+                             from paintings
+                             where location = 'Gallery 240')
+
+What are the ids of the paintings whose height is longer than the height of all paintings created after 1900?
+
+Select paintingID, height_mm
+From paintings
+where height_mm >  (select max(height_mm)
+                                      from paintings
+                                       where year > 1900)
+
+23. Find the top 3 artists who have the biggest number of painting works whose medium is oil?
+
+Select T1. lname, T1.fname
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+where T2.medium = "oil"
+group by T2. painterID
+order by count(*) DESC
+LIMIT 3
+
+24. List the painting id, location and title of the medium oil paintings ordered by year.
+
+Select paintingID, title, location
+From paintings
+where medium =  "oil"
+order by year
+
+List the year, location and title of paintings whose height is longer than 1000 ordered by title.
+
+Select title, location, year
+From paintings
+where height_mm > 1000
+order by title
+
+
+25. Find the first and last name of artists who have painting but no sculpture work.
+
+Select T1. lname, T1.fname
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+EXCEPT
+Select T1. lname, T1.fname
+From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
+
+Find the locations that have paintings before 1885 and no work with medium on canvas?
+
+Select location
+From paintings
+where year < 1885 and mediumOn != "canvas"
