@@ -303,9 +303,6 @@ from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
 where T2.allergytype = "food"
 
 
-________________
-
-
 38. Which allergy has most number of students affected?
 
 
@@ -318,6 +315,7 @@ limit 1
 
 39. Show all allergy with number of students affected.
 
+COMMENT: too many questions with this sql patterns!
 
 select Allergy, count(*)
 from Has_allergy
@@ -330,3 +328,33 @@ group by Allergy
 select T2.allergytype, count(*)
 from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
 group by T2.allergytype
+
+
+OVERALL COMMENTS: 
+1. questions are clear and good.
+2. a few questions do not have enough info to answer sql.
+3. too many questions with the same sql patterns! e.g. group by + count
+4. can add more other small components to be diverse. 
+   for example, a. !=, OR, LIKE
+                b. select different columns istead of just count
+                c. more INTERSECT, UNION, EXCEPT
+                d. more JOIN !
+                e. NOT IN/IN
+                
+41. find the last name and age of the students who have allergy to both milk and cat.
+
+42. List all allergies and their types which the student with last name Lisa has, and order the result by name of allergies.
+
+43. find the first name and gender of the students who have allergy to milk but not cat.
+
+44. Find the average age of the students who has allergies with food and animal types.
+
+45. List the first and last name of the students who do not have any food type allergy.
+
+46. Find the number of male (sex is 'M') students who have some food type allery.
+
+47. find the first name and city of the students who have allergy to milk or cat.
+
+48. Find the number of students with age older than 18 who are not allergy to either food or animal.
+
+49. Find the first name and major of the students who are not allegry to soy.
