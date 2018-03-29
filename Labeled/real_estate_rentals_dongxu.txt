@@ -50,6 +50,7 @@ where parking_lots = 1 or garage_yn = 1;
 
 7. What are all the descriptions of property features of the property with the most features?
 
+COMMENT: in -> = ?
 
 select property_feature_description
 from Property_Features
@@ -119,6 +120,7 @@ from Rooms;
 
 15. What are the search contents of the user who searched most frequently? Also list the user id.
 
+COMMENT: in -> = ? (too many this kind pattern IN + NESTED limit 1)
 
 select search_seq, user_id
 from User_Searches
@@ -148,6 +150,7 @@ order by search_string desc;
 
 18. Where are the properties which do not belong to the user who owns the most number of properties? List the building, and the street.
 
+COMMENT: do not use limit 1 too much, sepecially in NOT IN/IN, in this case = is enough.
 
 select line_1_number_building, line_2_number_street
 from Addresses as T1 JOIN Properties as T2 on T1.address_id = T2.property_address_id
@@ -178,6 +181,7 @@ order by T2.search_datetime asc limit 1;
 
 21. Which users are buyers? List their log in names.
 
+COMMENT: INTERESTING, can discuss
 
 select login_name
 from Users
@@ -190,8 +194,6 @@ where is_buyer = 1;
 select count(*)
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
 where T1.is_buyer = 1;
-
-
 
 
 23. When did the user with log in name ratione registered?
@@ -209,14 +211,11 @@ where is_seller = 1;
 
  
 25. Where do the Senior Citizens live? List building, street, and the city.
-
+P: what are the addresses of all the senior citizens?
 
 select T1.line_1_number_building, T1.line_2_number_street, T1.town_city
 from Addresses as T1 JOIN Users as T2 on T1.address_id = T2.user_address_id
 where T2.user_category_code = 'Senior Citizen';
-
-paraphrase: what are the addresses of all the senior citizens?
-
 
 26. Which users who live together with any other users? That is, the users sharing the same address with other users. List their first names and address id.
 
@@ -230,6 +229,8 @@ having count(*) > 1;
 
 
 27.  In which cities are there properties with at least 2 features?
+
+COMMENT: USE 2 JOIN INSTEAD OF NESTED SQL.
 
 select T2.town_city
 from Properties as T1 JOIN Addresses as T2 on T1.property_address_id = T2.address_id
@@ -252,6 +253,7 @@ order by date_on_market desc limit 1;
 
 29. List the names of the properties which have the a room described as living room and the properties which have 1 parking lot. 
 
+COMMENT: property_name UNION property_id?
 
 select property_name
 from Properties
@@ -269,6 +271,8 @@ where parking_lots = 1);
 
 30. List the users who have searched at least twice but do not live in state Wyoming. List first names and ids.
 
+COMMENT: can discuss more
+
 select T1.first_name, T1.user_id
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
 group by T1.first_name
@@ -277,8 +281,6 @@ EXCEPT
 select T1.first_name, T1.user_id
 from Users as T1 JOIN Addresses as T2 on T1.user_address_id = T2.address_id
 where county_state_province = 'Wyoming';
-
-
 
 
 31. For the properties with at least one photo, how many photos does each property have? Also list the property id.
@@ -304,6 +306,8 @@ where T2.user_category_code = 'Single Mother' or T2.user_category_code = 'Studen
 
 
 34. When did all the user property history happened? Sort them ascending by timestamp, list the timestamp and list the property name.
+
+COMMENT: asc is defaulted, so do not add asc.
 
 select T1.datestamp, T2.property_name
 from User_Property_History as T1 JOIN Properties as T2 on T1.property_id = T2.property_id
@@ -341,6 +345,8 @@ where T2.first_name = 'Robbie';
 
 
 39. Who lives in the property he or she owns? List the first name, middle name and last name.
+
+COMMENT: be more sepecific: T1.property_address_id = T2.user_address_id
 
 select first_name, middle_name, last_name
 from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
