@@ -29,6 +29,7 @@ order by year desc
 limit 1
 
 What is the title and location of the oldest painting?
+P: What is the name of the oldest painting and where is it located?
 	Which is the oldest painting?
 	What is its title, location and year created?
 COMMENTS: As we discussed, you can use synonyms: What is its name, place and year created? etc.
@@ -65,6 +66,7 @@ From sculptures
 Where location = "Gallery 226"
 
 List the title and location of all paintings.
+P: What are the paintings called and where are they located?
 	What are the titles of all the paintings?
 	Also list their locations.
 
@@ -78,6 +80,7 @@ select location
 from paintings
 
 List the title and location of all sculptures.
+P: What are the sculptures called and where are they located?
 	What are the titles of all the sculptures?
 	Also list their locations.
 
@@ -91,6 +94,7 @@ select location
 from sculptures
 
 What are the medium types of the painting with id = 80
+P: What mediums were used for the paining with id = 80?
 	Which painting has an id equal to 80?
 	What is its medium type?
 
@@ -107,6 +111,7 @@ from paintings
 Where paintingID = 80
 
 Find the first and last names of all artists who were born after 1850.
+P: What are the full names of artists born after 1850?
 	What are the first and last names of all the artists?
 	Which of those were born after 1850.
 
@@ -178,6 +183,7 @@ From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 Where T2.year > 1920
 
 4. What are the first and last names of the artist who lived the longest?
+P: Give the full name of the artist who lived the longest.
 	Who are all the artists?
 	What was the first and last name of the one who lived the longest?
 COMMENTS: you can ask (SQA of length 3 is better):
@@ -349,6 +355,7 @@ From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 Where T1.fname = "Pablo"
 
 7. Find the first and last names of the artists who have both works of paintings and sculptures?
+P: Give the full names of artists who have created paintings and sculptures.
 	Which artists have works of paintings?
 	Which artists created some sculptures?
 	What are the first and last names of the artists who have all of them?
@@ -372,6 +379,7 @@ Select T1.lname, T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
 
 What are the first and last names of the artists who have not only medium oil paintings but also paintings with the lithographic medium?
+P: What are the first and last names of artists who have painted using both oil and lithographic mediums?
 	Which artists have medium oil paintings?
 	Of those, who also have paintings with the lithographic medium?
 	What are their first and last names?
@@ -405,7 +413,7 @@ Select T1.lname, T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
 where T2.medium = "lithograph"
 
-8. What is the birth year of the artist who created a  painting in 1884 that is on canvas?
+8. What is the birth year of the artist who created a painting in 1884 that is on canvas?
 		Who created a painting in 1884?
 		Of those artists, who painted the work on canvas?
 		What is his birthyear?
@@ -503,6 +511,7 @@ group by location
 having year < 1900
 
 10. What are the titles of paintings that are created after 1910 and whose medium is oil?
+P: Give the names of all oil paintings created after 1910. 
 		Which paintings created after 1910?
 		Of those, which have a medium of oil?
 		What are their titles?
@@ -630,6 +639,7 @@ From paintings
 Order by title
 
 List the names of all distinct paintings ordered by length.
+P: List the names of all distinct paintings from shortest to longest in height.
 	What are the names of all distinct paintings?
 	Order them by length.
 
@@ -719,6 +729,7 @@ order by count(*) DESC
 LIMIT 1
 
 What is the first name of the artist who has the highest number of sculptures?
+P: What is the first name of the sculptor with the greatest number of works?
 	How many sculptures did each artist create?
 	Who created the most?
 	What is their first name?
@@ -871,6 +882,7 @@ From paintings
 where medium = "oil" and location = "Gallery 241"
 
 What are the maximum height and id of paintings painted before 1900?
+P: What is the height and id of the tallest painting created before 1900?
 	Which paintings were created before 1900?
 	What is the id of the painting with the maximum height?
 	Also what is that height?
