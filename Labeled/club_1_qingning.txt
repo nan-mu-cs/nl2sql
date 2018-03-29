@@ -31,6 +31,9 @@ where t1.clubname = "Bootup Baltimore"
 
 Who are the members of the club named "Hopkins Student Enterprises"?
 
+COMMENT: should be more sepecific about t3.lname.
+         do NOT write sql with where =  one sepecific value
+
 select t3.lname
 from club as t1 join member_of_club as t2
 on t1.clubid = t2.clubid
@@ -59,6 +62,9 @@ where t1.clubname = "Pen and Paper Gaming"
 
 4. How many clubs does "Linda Smith" belong to?
 
+COMMENT: should be more sepecific for t3.fname = "Linda" and t3.lname = "Smith"
+         select count(*) can be more diverse. you asked TOO MANY times! for example, select club name and location etc.
+
 select count(*)
 from club as t1 join member_of_club as t2
 on t1.clubid = t2.clubid
@@ -68,6 +74,8 @@ where t3.fname = "Linda" and t3.lname = "Smith"
 
 Find the number of clubs where "Tracy Kim" is a member.
 
+COMMENT: again
+
 select count(*)
 from club as t1 join member_of_club as t2
 on t1.clubid = t2.clubid
@@ -76,6 +84,8 @@ on t2.stuid = t3.stuid
 where t3.fname = "Tracy" and t3.lname = "Kim"
 
 5. Find all the female members of club "Bootup Baltimore"
+
+COMMENT: should be more sepecific female members (sex is 'F')
 
 select t3.fname, t3.lname
 from club as t1 join member_of_club as t2
@@ -104,6 +114,8 @@ where t1.clubname = "Bootup Baltimore" and t3.major = "600"
 
 7. Which club has the most members majoring in "600"?
 
+COMMENT: as you know, 600 is just a major code and has no other meaningful sense. do not ask where major = ..., it is fine to select major. Here you can ask Which club has the most number of members who are younger than 30?
+
 select t1.clubname
 from club as t1 join member_of_club as t2
 on t1.clubid = t2.clubid
@@ -116,6 +128,8 @@ limit 1
 
 Find the name of the club that has the most female students.
 
+COMMENT: should be more sepecific female members (sex is 'F')
+
 select t1.clubname
 from club as t1 join member_of_club as t2
 on t1.clubid = t2.clubid
@@ -127,6 +141,8 @@ order by count(*) desc
 limit 1
 
 8. What is the description of club named "Tennis Club"?
+
+COMMENT: TOO many sql with the same patterns with where = one value
 
 select clubdesc
 from club
@@ -231,6 +247,8 @@ where t3.city_code = "HOU"
 
 16. Which clubs does the student named "Eric Tai" belong to?
 
+COMMENT: should be more sepecific. DO NOT ASK TOO MANY QUESTIONS ANSWERED BY WHERE COL = ONE VALUE!
+
 select count(distinct t1.clubname)
 from club as t1 join member_of_club as t2
 on t1.clubid = t2.clubid
@@ -239,6 +257,8 @@ on t2.stuid = t3.stuid
 where t3.fname = "Eric" and t3.lname = "Tai"
 
 List the clubs having "Davis Steven" as a member.
+
+COMMENT: should be more sepecific 
 
 select distinct t1.clubname
 from club as t1 join member_of_club as t2
@@ -284,3 +304,12 @@ on t2.stuid = t3.stuid
 where t1.clubname = "Tennis Club"
 
 
+OVERALL COMMENTS:
+1. should be more sepecific on WHICH columns you are asking.
+2. DO NOT ASK TOO TOO MANY QUESTIONS ANSWERED BY WHERE COL = ONE VALUE (e.g. "Tennis Club")!
+3. SQL patterns could be more diverse. for example, use select count(*) too often.
+   ADD more group by: this data has many ways to GROUP BY for example: how many clubs does each location have?/how many students does each club have? etc. then you can add more condition to these questions. e.g. how many female students does each club have?
+   ADD more sum/avg/max etc. simple and complex
+   ADD OR, != , LIKE
+   ADD INTERSECT, EXCEPT, UNION, IN, NOT IN e.g. find the students who are in club 1 and club 2/who are in club1 but not club2
+   
