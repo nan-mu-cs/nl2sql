@@ -8,7 +8,7 @@ select count(*)
 from CONTINENTS;
 
 
-2. Which of the continents has the most number of contries? List the continent id, continent name and the number of countries.
+2. Which of the continents has the most number of countries? List the continent id, continent name and the number of countries.
 
 
 select T1.ContId, T1.Continent, count(*)
@@ -29,7 +29,7 @@ from COUNTRIES;
 
 
 select T1.FullName, T1.Id
-from [CAR-MAKERS] as T1 JOIN [MODEL-LIST] as T2 on T1.Id = T2.Maker
+from CAR_MAKERS as T1 JOIN MODEL_LIST as T2 on T1.Id = T2.Maker
 group by T1.Id
 order by count(*) DESC LIMIT 1;
 
@@ -38,34 +38,34 @@ order by count(*) DESC LIMIT 1;
 
 
 select T1.Model
-from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 order by T2.horsepower ASC LIMIT 1;
 
 
 6. Which of the latest makes is the heaviest?
 
+COMMENT: question is ambiguous
 
 select T1.Make
-from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
-where T2.Year in
-(select Year 
-from [CARS-DATA]
-order by Year DESC LIMIT 1
+from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
+where T2.Year =
+(select min(Year)
+from CARS_DATA
 )
 order by T2.weight DESC LIMIT 1;
 
 
-
 7. Which of the makers produced the earliest car model?
 
+COMMENT: SQL wrong/strange
 
 select distinct T1.Maker
-from [CAR-MAKERS] as T1 JOIN [MODEL-LIST] as T2
-on T1.Id = T2.Maker JOIN [CAR-NAMES] as T3
-on T2.model = T3.model JOIN [CARS-DATA] as T4
+from CAR_MAKERS as T1 JOIN MODEL_LIST as T2
+on T1.Id = T2.Maker JOIN CAR_NAMES as T3
+on T2.model = T3.model JOIN CARS_DATA as T4
 on T3.MakeId = T4.id
-where T4.year in (select Year 
-from [CARS-DATA]
+where T4.year in (select Year
+from CARS_DATA
 order by Year ASC LIMIT 1
 );
 
@@ -73,24 +73,34 @@ order by Year ASC LIMIT 1
 
 8. Which cars were not produced in the earliest year? What are the car names (make) and the production time?
 
+COMMENT: question are wrong&strange: Find the name and production time of the cars that were not produced in the earliest year?
+         SQL wrong/strange should be:
+
+         select T2.Make, T1.Year
+         from CARS_DATA as T1 join CAR_NAMES as T2
+         on T1.Id = T2.MakeId
+         where T1.Year != (select min(Year)
+         from CARS_DATA);
 
 select T2.Make, T1.Year
-from [CARS-DATA] as T1 join [CAR-NAMES] as T2
+from CARS_DATA as T1 join CAR_NAMES as T2
 on T1.Id = T2.MakeId
-where T1.Year not in (select Year 
-from [CARS-DATA]
+where T1.Year not in (select Year
+from CARS_DATA
 order by Year ASC LIMIT 1
 );
 
 
 9. Which distinct car models are the earliest car models?
 
+COMMENT: ask too many earliest question. change this question.
+
 select distinct T1.model
-from [MODEL-LIST] as T1 JOIN [CAR-NAMES] as T2
-on T1.model = T2.model JOIN [CARS-DATA] as T3
+from MODEL_LIST as T1 JOIN CAR_NAMES as T2
+on T1.model = T2.model JOIN CARS_DATA as T3
 on T2.MakeId = T3.id
-where T3.year in (select Year 
-from [CARS-DATA]
+where T3.year in (select Year
+from CARS_DATA
 order by Year ASC LIMIT 1
 );
 
@@ -99,7 +109,7 @@ order by Year ASC LIMIT 1
 
 
 select T1.Continent
-from [CONTINENTS] as T1 JOIN [COUNTRIES] as T2
+from CONTINENTS as T1 JOIN COUNTRIES as T2
 on T1.ContId = T2.continent JOIN COUNTRIES as T3
 on T2.CountryId = T3.CountryId
 group by T1.Continent
@@ -110,7 +120,7 @@ order by Count(*) DESC LIMIT 1;
 
 
 select T2.CountryName, T1.Country
-from [CAR-MAKERS] as T1 JOIN [COUNTRIES] as T2 on T1.Country = T2.CountryId
+from CAR_MAKERS as T1 JOIN COUNTRIES as T2 on T1.Country = T2.CountryId
 group by T1.Country
 order by Count(*) DESC LIMIT 1;
 
@@ -120,7 +130,7 @@ order by Count(*) DESC LIMIT 1;
 
 
  select Count(*), T2.FullName
- from [MODEL-LIST] as T1 JOIN [Car-MAKERS] as T2 on T1.Maker = T2.Id 
+ from MODEL_LIST as T1 JOIN CAR_MAKERS as T2 on T1.Maker = T2.Id
  group by T2.FullName;
 
 
@@ -128,7 +138,7 @@ order by Count(*) DESC LIMIT 1;
 
 
 select T1.Accelerate
-from [CARS-DATA] as T1 JOIN [CAR-NAMES] as T2 on T1.Id = T2.MakeId
+from CARS_DATA as T1 JOIN CAR_NAMES as T2 on T1.Id = T2.MakeId
 where T2.Make = 'amc hornet sportabout (sw)';
 
 
@@ -136,22 +146,22 @@ where T2.Make = 'amc hornet sportabout (sw)';
 
 
 select count(*)
-from [CAR-MAKERS] as T1 JOIN [COUNTRIES] as T2 on T1.Country = T2.CountryId
+from CAR_MAKERS as T1 JOIN COUNTRIES as T2 on T1.Country = T2.CountryId
 where T2.CountryName = 'france';
 
 
 15. How many car models are produced in the usa?
 
 select count(*)
-from [MODEL-LIST] as T1 JOIN [CAR-MAKERS] as T2 on T1.Maker = T2.Id
-JOIN [COUNTRIES] as T3 on T2.Country = T3.CountryId
+from MODEL_LIST as T1 JOIN CAR_MAKERS as T2 on T1.Maker = T2.Id
+JOIN COUNTRIES as T3 on T2.Country = T3.CountryId
 where T3.CountryName = 'usa';
 
 16. What is the average miles per gallon(mpg) of the cars with 4 cylinders?
 
 
 select avg(mpg)
-from [CARS-DATA]
+from CARS_DATA
 where Cylinders = 4;
 
 
@@ -159,23 +169,24 @@ where Cylinders = 4;
 
 
 select Weight
-from [CARS-DATA]
+from CARS_DATA
 where Cylinders = 4 and Year = 1974
 order by Weight asc Limit 1;
 
 
 18. What are all the model names?
 
+COMMENT: names?
 
 select Model
-from [MODEL-LIST];
+from MODEL_LIST;
 
 
 19. What are the countries having at least one car maker? List name and id.
 
 
 select T1.CountryName, T1.CountryId
-from [COUNTRIES] as T1 JOIN [CAR-MAKERS] as T2 on T1.CountryId = T2.Country
+from COUNTRIES as T1 JOIN CAR_MAKERS as T2 on T1.CountryId = T2.Country
 group by T1.CountryId
 having count(*) >= 1;
 
@@ -184,26 +195,28 @@ having count(*) >= 1;
 
 
 select count(*)
-from [CARS-DATA]
+from CARS_DATA
 where horsepower > 150;
 
 
 21. What is the average weight of cars each year?
 
+COMMENT: question is fine. but too wired, image if someone would ask this kinda question
 
 select avg(Weight), Year
-from [CARS-DATA]
+from CARS_DATA
 group by Year;
 
 
 
 22. Which country in europe has most manufacturers?
 
+COMMENT: most manufacturers? What does this mean? where manufacturers comes from?
 
 select T1.CountryName
-from [COUNTRIES] as T1 JOIN [CONTINENTS] as T2 
-on T1.Continent = T2.ContId 
-JOIN [CAR-MAKERS] as T3
+from COUNTRIES as T1 JOIN CONTINENTS as T2
+on T1.Continent = T2.ContId
+JOIN CAR_MAKERS as T3
 on T1.CountryId = T3.Country
 where T2.Continent = 'europe'
 group by T1.CountryName
@@ -212,18 +225,17 @@ order by count(*) desc limit 1;
 
 23. what is the maximum horsepower and the make name of the car models with 3 cylinders ?
 
-
-select T2.horsepower, T1.Make 
-from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+select T2.horsepower, T1.Make
+from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 where T2.cylinders = 3
 order by T2.horsepower DESC LIMIT 1;
 
 
-24. Which model saves the most gasoline? That is to say, have the maximum miles per galon.
+24. Which model saves the most gasoline? That is to say, have the maximum miles per gallon.
 
 
 select T1.Model
-from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 order by T2.mpg DESC LIMIT 1;
 
 
@@ -232,7 +244,7 @@ order by T2.mpg DESC LIMIT 1;
 
 
 select avg(horsepower)
-from [CARS-DATA]
+from CARS_DATA
 where Year < 1980;
 
 
@@ -240,7 +252,7 @@ where Year < 1980;
 
 
 select avg(T2.edispl)
-from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 where T1.Model = 'volvo';
 
 
@@ -249,7 +261,7 @@ where T1.Model = 'volvo';
 
 
 select max(Accelerate), Cylinders
-from [CARS-DATA]
+from CARS_DATA
 group by Cylinders;
 
 
@@ -257,7 +269,7 @@ group by Cylinders;
 
 
 select Model
-from [CAR-NAMES]
+from CAR_NAMES
 group by Model
 order by count(*) DESC LIMIT 1;
 
@@ -266,14 +278,14 @@ order by count(*) DESC LIMIT 1;
 
 
 select count(*)
-from [CARS-DATA]
+from CARS_DATA
 where Cylinders > 4;
 
 
 30. how many cars were produced on 1980?
 
 select count(*)
-from [CARS-DATA]
+from CARS_DATA
 where Year = 1980;
 
 
@@ -281,7 +293,7 @@ where Year = 1980;
 
 
 select count(*)
-from [CAR-MAKERS] as T1 JOIN [MODEL-LIST] as T2 on T1.Id = T2.Maker
+from CAR_MAKERS as T1 JOIN MODEL_LIST as T2 on T1.Id = T2.Maker
 where T1.FullName = 'American Motor Company';
 
 
@@ -289,23 +301,25 @@ where T1.FullName = 'American Motor Company';
 
 
 select T1.FullName, T1.Id
-from [CAR-MAKERS] as T1 JOIN [MODEL-LIST] as T2 on T1.Id = T2.Maker
+from CAR_MAKERS as T1 JOIN MODEL_LIST as T2 on T1.Id = T2.Maker
 group by T1.Id
 having count(*) > 3;
 
 
 33. Which models are produced by maker with the full name General Motors or weighing more than 3500?
 
+COMMENT: use OR. it is much simpler.
+
 select T2.Model
-from [CAR-NAMES] as T1 JOIN [MODEL-LIST] as T2
-on T1.Model = T2.Model 
-JOIN [Car-MAKERS] as T3 on T2.Maker = T3.Id
+from CAR_NAMES as T1 JOIN MODEL_LIST as T2
+on T1.Model = T2.Model
+JOIN CAR_MAKERS as T3 on T2.Maker = T3.Id
 where T3.FullName = 'General Motors'
 union
 select T1.model
-from [MODEL-LIST] as T1 JOIN [CAR-NAMES] as T2
+from MODEL_LIST as T1 JOIN CAR_NAMES as T2
 on T1.Model = T2.Model
-JOIN [CARS-DATA] as T3 on T2.MakeId = T3.Id
+JOIN CARS_DATA as T3 on T2.MakeId = T3.Id
 where T3.weight > 3500;
 
 
@@ -314,7 +328,7 @@ where T3.weight > 3500;
 
 
 select T1.Year
-from [CARS-DATA] as T1
+from CARS_DATA as T1
 where T1.Weight between 3000 and 4000
 group by T1.Year
 order by COUNT(*) DESC LIMIT 1;
@@ -322,9 +336,10 @@ order by COUNT(*) DESC LIMIT 1;
 
 35. What is the horsepower of the car makes with the largest accelerate?
 
+COMMENT:car makes? how about the car with the largest accelerate
 
 select T1.horsepower
-from [CARS-DATA] as T1
+from CARS_DATA as T1
 order by T1.accelerate DESC LIMIT 1;
 
 
@@ -332,7 +347,7 @@ order by T1.accelerate DESC LIMIT 1;
 
 
 select T1.cylinders
-from [CARS-DATA] as T1 JOIN [CAR-NAMES] as T2
+from CARS_DATA as T1 JOIN CAR_NAMES as T2
 on T1.Id = T2.MakeId
 where T2.Model = 'volvo'
 order by T1.accelerate asc limit 1;
@@ -340,12 +355,11 @@ order by T1.accelerate asc limit 1;
 
 37. How many cars have a larger accelerate than the car with the largest horsepower?
 
-
 select COUNT(*)
-from [CARS-DATA]
+from CARS_DATA
 where Accelerate > (
         select Accelerate
-        from [CARS-DATA]
+        from CARS_DATA
         order by Horsepower DESC LIMIT 1
 );
 
@@ -355,7 +369,7 @@ where Accelerate > (
 select COUNT(*)
 from (
  select T1.CountryId, COUNT(*)
- from [COUNTRIES] as T1, [CAR-MAKERS] as T2
+ from COUNTRIES as T1, CAR_MAKERS as T2
  where T1.CountryId = T2.Country
  group by T1.CountryId
  having count(*) > 2
@@ -365,63 +379,56 @@ from (
 
 
 select COUNT(*)
-from [CARS-DATA]
+from CARS_DATA
 where Cylinders > 6;
 
 40. For the cars with 4 cylinders, which model has the largest horsepower?
 
 
 select T1.Model
-from [CAR-NAMES] as T1 JOIN [CARS-DATA] as T2 on T1.MakeId = T2.Id
+from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 where T2.Cylinders = 4
 order by T2.horsepower DESC LIMIT 1;
 
 
 41. Among the cars with more than lowest horsepower, Which ones do not have more than 3 cylinders? List the car makeid and make name.
 
-
+COMMENT: use EXCEPT when only except works
 
 select T2.MakeId, T2.Make
-from [CARS-DATA] as T1 JOIN [CAR-NAMES] as T2 on T1.Id = T2.MakeId
-where T1.Horsepower > (select min(Horsepower) from [CARS-DATA])
+from CARS_DATA as T1 JOIN CAR_NAMES as T2 on T1.Id = T2.MakeId
+where T1.Horsepower > (select min(Horsepower) from CARS_DATA)
 EXCEPT
 select T2.MakeId, T2.Make
-from [CARS-DATA] as T1 JOIN [CAR-NAMES] as T2 on T1.Id = T2.MakeId
+from CARS_DATA as T1 JOIN CAR_NAMES as T2 on T1.Id = T2.MakeId
 where T1.Cylinders > 3;
 
 
-42. What is the maximum miles per galon of the car with 8 cylinders or produced before 1980?
+42. What is the maximum miles per gallon of the car with 8 cylinders or produced before 1980?
 
+COMMENT: too many *est/maximum question. if you search limit, there are 21/42, half of the question.
 
 select mpg
-from [CARS-DATA]
+from CARS_DATA
 where Cylinders = 8 or Year < 1980
 order by mpg desc Limit 1;
 
 
 43. Which models are lighter than 3500 but not built by the 'Ford Motor Company'?
 
+COMMENT: use EXCEPT when only except works
+
 select T1.model
-from [MODEL-LIST] as T1 JOIN [CAR-NAMES] as T2
+from MODEL_LIST as T1 JOIN CAR_NAMES as T2
 on T1.Model = T2.Model
-JOIN [CARS-DATA] as T3 on T2.MakeId = T3.Id
+JOIN CARS_DATA as T3 on T2.MakeId = T3.Id
 where T3.weight < 3500
 EXCEPT
 select T2.Model
-from [CAR-NAMES] as T1 JOIN [MODEL-LIST] as T2
-on T1.Model = T2.Model 
-JOIN [Car-MAKERS] as T3 on T2.Maker = T3.Id
+from CAR_NAMES as T1 JOIN MODEL_LIST as T2
+on T1.Model = T2.Model
+JOIN CAR_MAKERS as T3 on T2.Maker = T3.Id
 where T3.FullName = 'Ford Motor Company';
 
 
-
-
-
-
-
-
-
-
-
-
-
+COMMENT: can add more simple SQL: select multi/all columns, simple avg/max/min, split one complex into simpler one, add OR, INTERSECT(maybe)
