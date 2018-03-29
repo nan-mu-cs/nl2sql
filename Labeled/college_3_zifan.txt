@@ -14,6 +14,8 @@ WHERE Credits > 2
 
 How many courses are taught by instructor 6112?
 
+COMMENT: 6112 is not meaningful, avoid this kinda quesiton. you can select.
+
 SELECT count(*)
 FROM COURSE
 WHERE Instructor = 6112
@@ -26,6 +28,8 @@ WhERE Days = "MTW"
 
 What is the number of departments in Division AS?
 
+COMMENT: AS is not meaningful, avoid this kinda quesiton. you can select.
+
 SELECT count(*)
 FROM DEPARTMENT 
 WHERE Division = "AS"
@@ -37,6 +41,8 @@ FROM DEPARTMENT
 WHERE Room = 268
 
 Find the number of students that have at least one grade "B".
+
+COMMENT: SQL is right, but does not reflect the meaning of the question.
 
 SELECT count(distinct StuID)
 FROM ENROLLED_IN
@@ -67,11 +73,11 @@ WHERE Rank = "Professor" AND Building = "NEB"
 
 Find the department name that is in Building Mergenthaler
 
+COMMENT: DO NOT ask too many questions that are answered by WHERE col = ONE VALUE especially when the value does not make many sense.
+
 SELECT DName
 FROM DEPARTMENT 
 WHERE Building = "Mergenthaler"
-
-
 
 2. List all information about courses sorted by credits in the ascending order.
 
@@ -80,6 +86,8 @@ FROM COURSE
 ORDER BY Credits
 
 List the course name of courses whose department number is 600 sorted by credits.
+
+COMMENT: again
 
 SELECT CName
 FROM COURSE
@@ -116,6 +124,8 @@ ORDER BY Fname
 
 3. Find the name of the department that has the biggest number of students minored in?
 
+COMMENT: GROUP BY T2.DNO -> also select T2.DNO? 
+
 SELECT T1.DName
 FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
 on T1.DNO = T2.DNO
@@ -124,6 +134,8 @@ ORDER BY count(*) desc
 LIMIT 1
 
 Find the name of the department that has the smallest number of students minored in?
+
+COMMENT: wired problem, you can ask: Find the name of the department that has no student minored in.
 
 SELECT T1.DName
 FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
@@ -215,6 +227,8 @@ WHERE T1.DName = "Computer Science"
 
 Find the average grade point of student Linda Smith.
 
+COMMENT: be more sepecific or ask whose last name is Smith.
+
 SELECT avg(T2.gradepoint)
 FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
 ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
@@ -240,6 +254,8 @@ WHERE Credits = 1 AND Hours = 4
 
 Find the names of departments that are either in division AS or in division EN and in Building NEB
 
+COMMENT: wired question
+
 SELECT DName
 from DEPARTMENT
 WHERE Division = "AS"
@@ -248,9 +264,10 @@ SELECT DName
 from DEPARTMENT
 WHERE Division = "EN" AND Building = "NEB"
  
-
 Find the first names of faculties in Computer Science department that are not in building 
 NEB.
+
+COMMENT: can be answer simply by using WHERE cond1 and !cond2?
 
 SELECT T2.Fname
 FROM  DEPARTMENT as T1 JOIN FACULTY as T2 JOIN MEMBER_OF as T3
@@ -264,6 +281,8 @@ WHERE T2.Building = "NEB"
 
 Find the first names of faculties in computer science department that are not professors.
 
+COMMENT: can be answer simply by using WHERE cond1 and !cond2?
+
 SELECT T2.Fname
 FROM  DEPARTMENT as T1 JOIN FACULTY as T2 JOIN MEMBER_OF as T3
 ON T1.DNO = T3.DNO AND T2.FacID = T3.FacID
@@ -273,3 +292,14 @@ SELECT T2.Fname
 FROM  DEPARTMENT as T1 JOIN FACULTY as T2 JOIN MEMBER_OF as T3
 ON T1.DNO = T3.DNO AND T2.FacID = T3.FacID
 WHERE T2.Rank = "Professor"
+
+
+OVER COMMENTS:
+1. some questions should be more sepecific
+2. ask too many quesiton answered by where = one not meaningful value e.g. 6112 is not meaningful, avoid this kinda quesiton. you can select. some wired quesiton.
+3. except can be replaced by where condition.
+4. could add more a. select multi columns combing with simple/complex sql. 
+                  b. some sum/max/min
+                  c. OR, INTERSECT, right EXCEPT, >/< select MAX/MIN(student whose pga higher than the avg gpa)
+                  d. group by having/where
+                  e. NOT IN/IN
