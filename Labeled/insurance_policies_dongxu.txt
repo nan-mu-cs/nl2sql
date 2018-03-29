@@ -1,0 +1,243 @@
+# count = 25 (only 5 tables, 4 foreign keys)
+
+
+1. Which settlement has the settment amount not equal to average and caused more than 1 payment? List the settlement id, claim and settle date.
+
+
+select T1.Settlement_id, T1.Date_claim_made, T1.Date_Claim_Settled
+from Settlements as T1 JOIN Payments as T2
+on T1.Settlement_id = T2.Settlement_id
+where Amount_Settled <> (
+select avg(Amount_Settled)
+from Settlements
+)
+group by T1.Settlement_id
+having count(*) > 1;
+
+
+2. Which claims caused more than 2 settlements or have the maximum claim value? List the date the claim was made and the id.
+
+
+select T1.Date_Claim_Made, T1.Claim_id
+from Claims as T1 JOIN Settlements as T2
+on T1.Claim_id = T2.Claim_id
+group by T1.Claim_id
+having count(*) > 2
+UNION
+select T1.Date_Claim_Made, T1.Claim_id
+from Claims as T1 JOIN Settlements as T2
+on T1.Claim_id = T2.Claim_id
+where T1.Amount_Claimed = (
+select max(Amount_Claimed)
+from Claims
+);
+
+
+3. Which customer had at least 2 policies but did not file any claims? List the customer details and id.
+
+
+select T1.customer_details, T1.customer_id
+from Customers as T1 JOIN Customer_Policies as T2
+on T1.Customer_id = T2.customer_id 
+group by T1.customer_id
+having count(*) >= 2
+EXCEPT
+select T1.customer_details, T1.customer_id
+from Customers as T1 JOIN Customer_Policies as T2
+on T1.Customer_id = T2.customer_id 
+JOIN Claims as T3
+on T2.policy_id = T3.policy_id;
+
+
+
+4. List all the method, date and amount of all the payments, order by date ascendingly.
+
+
+select Payment_Method_Code, Date_Payment_Made, Amount_Payment
+from Payments
+order by Date_Payment_Made asc;
+
+
+5. Among all the claims, What is the settlement amount of the claim with the largest claim amount? List both settlement amount and claim amount.
+
+
+select Amount_Settled, Amount_Claimed
+from Claims
+order by Amount_Claimed desc limit 1;
+
+
+Paraphrase: Among all the claims, what is the amount claimed of the claim with the least amount settled? List both settlement amount and claim amount.
+
+
+select Amount_Settled, Amount_Claimed
+from Claims
+order by Amount_Settled asc limit 1;
+
+
+6. Among all the claims, which claims have the amount claimed larger than the average? List the date the claim was made and the date it was settled.
+
+
+select Date_Claim_Made, Date_Claim_Settled
+from Claims
+where Amount_Claimed >
+(
+	select avg(Amount_Claimed)
+	from Claims
+);
+
+
+Parapharase: Among all the claims, which settlements have the amount claimed no more than the average? List the claim start date.
+
+
+select Date_Claim_Made
+from Claims
+where Amount_Settled <=
+(
+	select avg(Amount_Settled)
+	from Claims
+);
+
+
+7. How many settlements does each claim correspond to? List the claim id and the number of settlements.
+
+
+select T1.Claim_id, count(*)
+from Claims as T1 JOIN Settlements as T2
+on T1.claim_id = T2.claim_id
+group by T1.claim_id;
+
+
+Parapharase: Which claim incurred the most number of settlements? List the claim id, the date the claim was made, and the number.
+
+
+select T1.claim_id, T1.date_claim_made, count(*)
+from Claims as T1 JOIN Settlements as T2
+on T1.claim_id = T2.claim_id
+group by T1.claim_id
+order by count(*) desc limit 1;
+
+
+8. How many settlement was applied to the most recent claim settlement date of the claim? List the number and the claim id.
+
+
+select count(*), T1.claim_id
+from Claims as T1 JOIN Settlements as T2
+on T1.claim_id = T2.claim_id
+group by T1.claim_id
+order by T1.Date_Claim_Settled desc limit 1;
+
+
+9. Of all the claims, when was the earliest date that any claim was made?
+
+
+select Date_Claim_Made
+from Claims
+order by Date_Claim_Made asc limit 1;
+
+
+10. What is the total amount of settlement in all the settlements?
+
+
+select sum(Amount_Settled)
+from Settlements;
+
+
+11. Who are the customer who had more than 1 policies? List the customer details and id.
+
+
+select T1.customer_details, T1.customer_id
+from Customers as T1 JOIN Customer_Policies as T2
+on T1.Customer_id = T2.Customer_id
+group by T1.customer_id
+having count(*) > 1;
+
+
+12. What are all the claim dates and settlement dates of the settlements?
+
+
+select Date_Claim_Made, Date_Claim_Settled
+from Settlement;
+
+
+13. What is the most popular payment method?
+
+
+select Payment_Method_Code
+from Payments
+group by Payment_Method_Code
+order by count(*) desc limit 1;
+
+
+Paraphrase: With which kind of payment method were the least number of payments processed?
+
+
+select Payment_Method_Code
+from Payments
+group by Payment_Method_Code
+order by count(*) asc limit 1;
+
+
+14. What is the total amount of payment?
+
+
+select sum(Amount_Payment)
+from Payments;
+
+
+15. What are all the distinct details of the customers?
+
+
+select distinct customer_details
+from Customers;
+
+
+16. Which kind of policy type were chosen by the most number of customers?
+
+
+select Policy_Type_Code
+from Customer_Policies
+group by Policy_Type_Code
+order by count(*) desc limit 1;
+
+
+17. How many settlements are there in total?
+
+
+select count(settlement_id)
+from Settlements;
+
+
+18. Which Payments were processed with Visa? List the payment Id, the date and the amount.
+
+
+select Payment_ID, Date_Payment_Made, Amount_Payment
+from Payments
+where Payment_Method_Code = 'Visa';
+
+
+19. List the details of the customers who do not have any policies.
+
+
+select customer_details
+from Customers
+EXCEPT
+select T1.customer_details
+from Customers as T1 JOIN Customer_Policies as T2
+on T1.customer_id = T2.customer_id;
+
+
+20. List the date the claim was made, the date the claim was settled and the amount settled of all the claims which had exactly one settlement.
+
+
+select T1.claim_id, T1.date_claim_made, T1.Date_Claim_Settled
+from Claims as T1 JOIN Settlements as T2
+on T1.Claim_id = T2.Claim_id
+group by T1.claim_id
+having count(*) =1;
+
+
+21. List the total amount of the claimed amount of all the claims.
+
+
+select sum(Amount_Claimed)
+from Claims;
