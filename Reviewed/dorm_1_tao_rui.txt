@@ -1,17 +1,13 @@
 
 Total # = 50
 
-Find the name of dorms only for F gender.
-
-comment: language not quite natural, how about "for female"
+Find the name of dorms only for female (F gender).
 
 Select dorm_name
 From dorm
 Where gender = 'F'
 
-Find the name of dorms for gender X that can accommodate more than 300 students.
-
-comment: for gender X? 
+Find the name of dorms that can accommodate more than 300 students.
 
 Select dorm_name
 From dorm
@@ -63,7 +59,7 @@ Select avg(age), city_code
 From student
 Group by city_code
 
-Find the average and total capacity of dorms for gender X.
+Find the average and total capacity of dorms for the students with gender X.
 
 Select avg(student_capacity), sum(student_capacity)
 From dorm
@@ -277,14 +273,11 @@ Where T3.dorm_name = 'Smith Hall'
 
 Find the average age of students who are living in the dorm with the largest capacity.
 
-comment: is this correct?
-
 Select avg(T1.age)
 From student as T1
      Join lives_in as T2 on T1.stuid = T2.stuid
      Join dorm as T3 on T3.dormid = T2.dormid
-Order by T3.student_capacity desc
-Limit 1
+where T3.student_capacity = (select max(student_capacity) from dorm)
 
 Find the total number of students living in the male dorm (with gender M).
 
@@ -382,19 +375,6 @@ Where T2.amenity_name = 'TV Lounge')
 
 
 Find the name of amenities of the dorm where the student with last name Smith is living in.
-
-comment: results are different
-
-Select T3.amenity_name
-From dorm as T1
-     Join has_amenity as T2 on T1.dormid = T2.dormid
-     Join dorm_amenity as T3 on T2.amenid = T3.amenid
-where T1.dormid =
-(select T1.dormid 
-from lives_in as T1 Join student as T2 on T1.stuid = T2.stuid
-Where T2.lname = 'Smith')
-
-------or-----------
 
 Select T3.amenity_name
 From dorm as T1
