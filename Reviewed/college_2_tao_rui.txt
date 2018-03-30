@@ -1,7 +1,6 @@
-
 Total # = 86
 
-Find the buildings where have rooms with capacity more than 50.
+Find the buildings which have rooms with capacity more than 50.
 
 Select distinct building
 From classroom
@@ -20,7 +19,7 @@ From department
 Where budget > (select avg(budget) from department)
 
 
-Find the room number of the rooms where can sit 50 to 100 students and their buildings.
+Find the room number of the rooms which can sit 50 to 100 students and their buildings.
 
 Select building, room_number
 From classroom
@@ -227,6 +226,7 @@ From course as T1
      Join teaches as T2 on T1.course_id = T2.course_id
      Join instructor as T3 on T2.id = T3.id
 Where year = 2008
+Order by T1.title
 
 
 Find the name of instructors who are advising more than one student.
@@ -256,7 +256,7 @@ select max(capacity), avg(capacity), building
 from classroom
 group by building
 
-Find the title of the course that is offered by more one department.
+Find the title of the course that is offered by more than one department.
 
 select title
 from course
@@ -278,11 +278,13 @@ having avg(salary) > (select avg(salary) from instructor)
 
 Find the number of courses provided in each semester and year.
 
+comment: select from section or course?
+
 select count(*), semester, year
 from section
 group by semester, year
 
-Find the year when offers the largest number of courses.
+Find the year which offers the largest number of courses.
 
 select year
 from section
@@ -312,7 +314,7 @@ select count(*), dept_name
 from student
 group by dept_name
 
-Find the semester and year when has the least number of student took any class.
+Find the semester and year which has the least number of student taking any class.
 
 select semester, year
 from takes
@@ -327,7 +329,7 @@ select i_id
 from advisor as T1 join student T2 on T1.s_id = T2.id
 where T2.dept_name = 'History'
 
-Find the name and salary of the instructors who are the advisors of all students from History department?
+Find the name and salary of the instructors who are advisors of any student from History department?
 
 select T2.name, T2.salary
 from advisor as T1
@@ -373,7 +375,7 @@ Find the names of students who have taken any course in the fall semester of yea
 
 select name
 from student
-where id NOT IN
+where id IN
 (select id
 from takes
 where semester = 'Fall' and year = 2003)
@@ -450,7 +452,7 @@ from instructor
 where id NOT IN
 (select id from teaches where semester = 'Spring')
 
-Find the name of the department where has the highest average salary of professors.
+Find the name of the department which has the highest average salary of professors.
 
 select dept_name
 from instructor
@@ -485,7 +487,8 @@ where T2.dept_name = 'Biology')
 
 Find the name of students who didn't take any course taught by instructor McKinnon.
 
-#####wrong#####check
+comment: #####wrong#####check
+
 select name
 from student as T1 join takes as T2 on T1.id = T2.id
 where T2.course_id, T2.sec_id, T2.semester, T2.year NOT IN
@@ -505,7 +508,7 @@ Find the name of students who have taken the prerequisite course of the course w
 
 select T1.name
 from student as T1 join takes as T2 on T1.id = T2.id
-where T2.course_id = 
+where T2.course_id IN 
 (select T2.prereq_id
 from course as T1 join prereq as T2 on T1.course_id = T2.course_id
 where T1.title = 'International Finance')
@@ -532,6 +535,7 @@ Find the building, room number, semester and year of all courses offered by Psyc
 select T2.building, T2.room_number, T2.semester, T2.year
 from course as T1 join section as T2 on T1.course_id = T2.course_id
 where T1.dept_name = 'Psychology'
+order by T1.title
 
 Find the names of all instructors in computer science department
 
@@ -548,14 +552,13 @@ where dept_name = 'Comp. Sci.'  and salary > 80000
 Find the names of all instructors who have taught some course and the course_id.
 
 select name, course_id
-from instructor , teaches
-where instructor.ID = teaches.ID 
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
 
 Find the names of all instructors in the Art department who have taught some course and the course_id.
 
 select name, course_id
-from instructor , teaches
-where instructor.ID = teaches.ID  and  instructor.dept_name = 'Art'
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
+where T1.dept_name = 'Art'
 
 Find the names of all instructors whose name includes the substring “dar”.
 
@@ -564,6 +567,8 @@ from instructor
 where name like '%dar%' 
 
 List in alphabetic order the names of all distinct instructors.
+
+comment: "distinct instrutors"?
 
 select distinct name
 from  instructor
@@ -588,6 +593,8 @@ except
 select course_id from section where semester = 'Spring' and year = 2010
 
 Find the salaries of all distinct instructors that are less than the largest salary.
+
+comment: "distinct instrutors"?
 
 select distinct salary
 from instructor
