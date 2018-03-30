@@ -1,4 +1,4 @@
-Total # = 50
+Total # = 52
 
 1. Give me the dates when the max temperature was higher than 85.
 
@@ -14,18 +14,19 @@ WHERE lat < 37.5
 
 
 
-2. What is the latitude and longitude of Japantown station?
+2. For each city, return the highest latitude among its stations.
 
-SELECT lat, long
+SELECT city, max(lat)
 FROM station
-WHERE name = "Japantown"
+Group by city
 
 
-Give me the start station and end station for trip id 900553.
+Give me the start station and end station for the trips with the three oldest id.
 
 SELECT start_station_name, end_station_name
 FROM trip
-WHERE id = 900553
+Order by id
+LIMIT 3
 
 
 3. What is the average latitude and longitude of stations located in San Jose city?
@@ -50,12 +51,12 @@ FROM trip
 WHERE bike_id = 636
 
 
-What is the average mean temperature of August in zip code 94041?
+For each zip code, return the average mean temperature of August there.
 
-SELECT avg(mean_temperature_f)
+SELECT zip_code , avg(mean_temperature_f)
 FROM weather
-WHERE zip_code = 94041 and date LIKE "8/%"
-
+where date LIKE "8/%"
+Group by zip_code
 
 
 5. From the trip record, find the number of unique bikes.
@@ -75,11 +76,11 @@ SELECT COUNT(id)
 FROM station
 WHERE city = "Mountain View"
 
-How many times did Santa Clara at Almaden station have 7 bikes available?
+Return the unique name for stations that have ever had 7 bikes available.
 
-SELECT COUNT(*)
+SELECT distinct T1.name
 FROM station as T1 JOIN status as T2 ON T1.id = T2.station_id
-WHERE T1.name = "Santa Clara at Almaden" and T2.bikes_available = 7
+WHERE T2.bikes_available = 7
 
 
 7. Which station had the most trips starting from August? Give me the name and id of the station.
@@ -107,11 +108,13 @@ SELECT COUNT(*)
 FROM weather 
 Where mean_humidity > 50 and mean_visibility_miles > 8
 
-How many trips started from Spear at Folsom station or ended at 2nd at Townsend Station.
 
-SELECT COUNT(*)
-From trip  
-Where start_station_name = "Spear at Folsom" or end_station_name = "2nd at Townsend" 
+What is the latitude, longitude, city of the station from which the shortest trip started?
+
+Select T1.lat, T1.long, T1.city
+From station as T1 JOIN trip as T2 ON T1.id = T2.start_station_id
+Order by T2.duration 
+LIMIT 1
 
 
 9. What are the ids of stations that are located in San Francisco and have average bike availability above 10.
@@ -177,40 +180,57 @@ GROUP by station_id
 Having max(bikes_available) > 10)
 
 
-12. When and in what zip code did max temperature reach 90?
+12. When and in what zip code did max temperature reach 80?
 
 Select date, zip_code
 From weather
 Where max_temperature_f >= 80
 
 
-How often did max wind speed reach 25 in zip code 95113?
+Give me ids for all the trip that took place in a zip code area with average mean temperature above 60.
+
+Select T1.id
+From trip as T1 JOIN weather as T2 ON T1.zip_code = T2.zip_code
+Group by T2.zip_code
+having avg(T2.mean_temperature_f) > 60
+
+
+
+For each zip code, return how many times max wind speed reached 25?
 
 Select count(*)
 From weather 
-Where max_wind_Speed_mph >= 25 and zip_code = 95113
+Where max_wind_Speed_mph >= 25
+Group by zip_code
 
 
 
-13. On which day and in which zip code was the min dew point lower than any day in zip code  94107?
+13. On which day and in which zip code was the min dew point lower than any day in zip code 94107?
 
 SELECT date, zip_code
 FROM weather
 WHERE min_dew_point_f < (SELECT min(min_dew_point_f) FROM weather WHERE zip_code = 94107)
 
 
-Which station has latitude higher than any stations in Redwood City? Return the id and name of the station.
+For each trip, return its ending station's installation date.
 
-SELECT id, name
-FROM station
-WHERE lat > (SELECT max(lat) FROM station WHERE city = "Redwood City")
+Select T1.id, T2.installation_date
+From trip as T1 JOIN station as T2 ON T1.end_station_id = T2.id
 
 
-14. Count the number of trips that did not end at Market at 10th station.
+Which trip started from the station with the largest dock count? Give me the trip id.
+
+Select T1.id
+From trip as T1 JOIN station as T2 ON T1.start_station_id = T2.id
+Order by T2.dock_count Desc
+LIMIT 1
+
+
+14. Count the number of trips that did not end in San Francisco city.
 
 Select count(*)
-From trip
-Where end_station_name != "Market at 10th"
+From trip as T1 JOIN station as T2 ON T1.end_station_id = T2.id
+Where T2.city != "San Francisco"
 
 
 In zip code 94107, on which day neither Fog nor Rain was not observed?
@@ -288,7 +308,7 @@ List all the cities in a decreasing order of each city's stations' highest latit
 SELECT city
 FROM station
 GROUP BY city
-Order by lat DESC
+Order by max(lat) DESC
 
 
 19. What are the dates that had the top 5 cloud cover rates? Also tell me the cloud cover rate.
@@ -378,18 +398,20 @@ Where T2.bikes_available > 12
 
 
 
-24. Which stations have longitude larger than -123 and have been the starting point of a trip ending at 2nd at Townsend?
+24. Give me the zip code where the average mean humidity is below 70 and at least 100 trips took place.
 
-Select name
-From station
-Where long > -123
+Select zip_code
+From weather
+Group by zip_code
+having avg(mean_humidity) < 70
 INTERSECT
-Select start_station_name
+Select zip_code
 From trip
-Where end_station_name = "2nd at Townsend"
+Group by zip_code
+having count(*) >= 100
 
 
-What are the names of stations that are located in Palo Alto city but have never been the ending point of trips in zip code 94103?
+What are the names of stations that are located in Palo Alto city but have never been the ending point of trips more than 100 times?
 
 Select name
 From station
@@ -397,7 +419,8 @@ Where city = "Palo Alto"
 EXCEPT
 Select end_station_name
 From trip
-Where zip_code = 94103
+Group by end_station_name
+Having count(*) > 100
 
 
 
@@ -412,7 +435,5 @@ What is the average latitude and longitude of the starting points of all trips?
 
 Select avg(T1.lat), avg(T1.long)
 From station as T1 JOIN trip as T2 ON T1.id = T2.start_station_id
-
-
 
 
