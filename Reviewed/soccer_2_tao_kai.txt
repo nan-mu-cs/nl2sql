@@ -55,9 +55,7 @@ SELECT count(*)
 FROM tryout
 WHERE decision = 'yes'
 
-How many students whose role is goalie?
-
-COMMENT: role is pPos
+How many students whose are playing role goalie?
 
 SELECT count(*)
 FROM tryout
@@ -147,12 +145,10 @@ LIMIT 3
 
 What is the name of school that has the smallest enrollment in each state?
 
-COMMENT: min()
-
 SELECT cName, state
 from college
 group by state
-having enr = max(enr)
+having enr = min(enr)
 
 4.Find the states where have some college students in tryout.
 
