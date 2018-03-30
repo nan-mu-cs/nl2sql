@@ -57,6 +57,8 @@ WHERE decision = 'yes'
 
 How many students whose role is goalie?
 
+COMMENT: role is pPos
+
 SELECT count(*)
 FROM tryout
 WHERE pPos = 'goalie'
@@ -144,6 +146,8 @@ ORDER BY enr desc
 LIMIT 3
 
 What is the name of school that has the smallest enrollment in each state?
+
+COMMENT: min()
 
 SELECT cName, state
 from college
