@@ -1,7 +1,7 @@
 Total # = 60
 
-1.	What are all countries that are independent after 1950?
-	Which nations are founded after 1950?
+1. What are all countries that are independent after 1950?
+Which nations are founded after 1950?
 
 SELECT Name
 FROM country
@@ -19,8 +19,8 @@ select sum(SurfaceArea)
 from country
 where Region = "Caribbean"
 
-	2.	Which continent is Anguilla located at?
-           What is the continent name which Anguilla belongs to?
+2. Which continent is Anguilla located at?
+What is the continent name which Anguilla belongs to?
 
 SELECT Continent
 FROM country
@@ -40,7 +40,7 @@ WHERE T1.Name = "Aruba"
 ORDER BY Percentage DESC
 LIMIT 1
 
-	3.	What are the population and life expectancy of Brazil?
+3. What are the population and life expectancy of Brazil?
 Give me Brazil’s population and life expectancy.
 
 SELECT Population, LifeExpectancy
@@ -53,7 +53,7 @@ SELECT Population, Region
 FROM country
 WHERE Name = "Angola"
 
-	4.	What is the average expected life of countries in Central Africa region?
+4. What is the average expected life of countries in Central Africa region?
 How long is the people’s average life expectancy in Central Africa?
 
 SELECT avg(LifeExpectancy)
@@ -69,7 +69,7 @@ order by LifeExpectancy
 LIMIT 1
 
 
-	5.	What is the total population and maximum GNP in Asia?
+5. What is the total population and maximum GNP in Asia?
 How many people lives in Asia, and what is the largest GNP among them?
 
 SELECT sum(Population), max(GNP)
@@ -88,10 +88,10 @@ SELECT sum(SurfaceArea)
 FROM country
 WHERE Continent = "Asia" or Continent = "Europe"
 
-	6.	How many people live in Gelderland district?
-	What is the total population of Gelderland district?
+6. How many people live in Gelderland district?
+What is the total population of Gelderland district?
 
-	SELECT sum(Population)
+SELECT sum(Population)
 FROM city
 WHERE District = "Gelderland"
 
@@ -101,7 +101,7 @@ SELECT avg(GNP), sum(population)
 FROM country
 WHERE GovernmentForm = "US Territory"
 
-	7.	How many unique languages are spoken in the world?
+7. How many unique languages are spoken in the world?
 What is the number of distinct languages used around the world?
 
 SELECT count(DISTINCT Language)
@@ -113,7 +113,7 @@ SELECT count(distinct GovernmentForm)
 FROM country
 where Continent = "Africa"
 
-	8.	How many languages does Aruba speak?
+8. How many languages does Aruba speak?
 What is the total number of languages used in Aruba?
 
 SELECT COUNT(T2.Language)
@@ -126,7 +126,7 @@ SELECT COUNT(*)
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T1.Name = "Afghanistan" and IsOfficial = "T"
 
-	9.	What is name of the country which speaks the largest number of languages?
+9. What is name of the country which speaks the largest number of languages?
 Which nation uses the largest amount of languages?
 
 SELECT T1.Name
@@ -143,8 +143,8 @@ GROUP BY T1.Continent
 ORDER BY COUNT(*) DESC
 LIMIT 1
 
-	10.	How many countries speak both English and Dutch?
-	   What is the number of nations using English and Dutch?
+10. How many countries speak both English and Dutch?
+What is the number of nations using English and Dutch?
 
 SELECT COUNT(*)
 FROM
@@ -182,8 +182,8 @@ SELECT COUNT( DISTINCT Continent)
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T2.Language = "Chinese"
 
-	11.	What are the regions that use English or Dutch?
-   Which regions speak Dutch or English?
+11. What are the regions that use English or Dutch?
+Which regions speak Dutch or English?
 
 SELECT DISTINCT T1.Region
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
@@ -199,9 +199,8 @@ SELECT T1.Name
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T2.Language = "Dutch" and IsOfficial = "T"
 
-	12.	Which language is most popular in Asia continent?
-	   What is the language that is used by the largest number of Asian nations?
-(most popular -> count?)
+12. Which language is most popular in Asia continent?
+What is the language that is used by the largest number of Asian nations?
 
 SELECT T2.Language
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
@@ -298,13 +297,13 @@ FROM countrylanguage
 WHERE Language != "English"
 
 
-18.	what are the codes of the countries that do not speak English and whose government forms are not Republic?
+18. what are the codes of the countries that do not speak English and whose government forms are not Republic?
 
 SELECT Code FROM country WHERE GovernmentForm != "Republic"
 EXCEPT
 SELECT CountryCode FROM countrylanguage WHERE Language = "English"
 
-19.	Which cities are in the European countries where English is not the official language?
+19. Which cities are in the European countries where English is not the official language?
 
 SELECT DISTINCT T2.Name
 FROM country as T1 JOIN city as T2 on T2.CountryCode = T1.Code
@@ -440,9 +439,3 @@ SELECT CountryCode
 from countrylanguage
 group by CountryCode
 having Percentage = max(Percentage) and Language = "Spanish"
-
-comments:
-1) great coverage and variation
-2) some interesting and hard queries
-3) some some mistakes in SQL
-4) ambiguous ANY
