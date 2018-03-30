@@ -3,11 +3,15 @@ Total # = 50
 
 Find the name of dorms only for F gender.
 
+comment: language not quite natural, how about "for female"
+
 Select dorm_name
 From dorm
 Where gender = 'F'
 
 Find the name of dorms for gender X that can accommodate more than 300 students.
+
+comment: for gender X? 
 
 Select dorm_name
 From dorm
@@ -19,7 +23,7 @@ Select count(*)
 From student 
 Where sex = 'F' and age < 25
 
-Find the first name of students whose is older than 20.
+Find the first name of students who is older than 20.
 
 Select fname
 From student
@@ -101,7 +105,7 @@ Select count(distinct major), count(distinct city_code)
 From student
 
 
-Find the name of dorms where has both TV Lounge and Study Room as amenities.
+Find the name of dorms which have both TV Lounge and Study Room as amenities.
 
 Select T1.dorm_name
 From dorm as T1
@@ -116,7 +120,7 @@ From dorm as T1
 Where T3.amenity_name = 'Study Room'
 
 
-Find the name of dorms where has TV Lounge but no Study Room as amenity.
+Find the name of dorms which have TV Lounge but no Study Room as amenity.
 
 Select T1.dorm_name
 From dorm as T1
@@ -273,6 +277,8 @@ Where T3.dorm_name = 'Smith Hall'
 
 Find the average age of students who are living in the dorm with the largest capacity.
 
+comment: is this correct?
+
 Select avg(T1.age)
 From student as T1
      Join lives_in as T2 on T1.stuid = T2.stuid
@@ -296,7 +302,7 @@ From student as T1
      Join dorm as T3 on T3.dormid = T2.dormid
 Where T3.dorm_name = 'Smith Hall' and T1.sex = 'F'
 
-Find the name of amenities does Smith Hall dorm have?
+Find the name of amenities Smith Hall dorm have.
 
 Select T3.amenity_name
 From dorm as T1
@@ -304,7 +310,7 @@ From dorm as T1
      Join dorm_amenity as T3 on T2.amenid = T3.amenid
 Where T1.dorm_name = 'Smith Hall'
 
-Find the name of amenities does Smith Hall dorm have? ordered the results b amenity names.
+Find the name of amenities Smith Hall dorm have. ordered the results by amenity names.
 
 Select T3.amenity_name
 From dorm as T1
@@ -376,6 +382,8 @@ Where T2.amenity_name = 'TV Lounge')
 
 
 Find the name of amenities of the dorm where the student with last name Smith is living in.
+
+comment: results are different
 
 Select T3.amenity_name
 From dorm as T1
