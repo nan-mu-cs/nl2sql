@@ -1,0 +1,434 @@
+Total # = 60
+
+1.	What are all countries that are independent after 1950?
+	Which nations are founded after 1950?
+
+SELECT Name
+FROM country
+WHERE IndepYear > 1950
+
+How many countries whose government is republic?
+
+select count(*)
+from country
+where GovernmentForm = "Republic"
+
+What is the total area of the countries in the Caribbean region?
+
+select sum(SurfaceArea)
+from country
+where Region = "Caribbean"
+
+	2.	Which continent is Anguilla located at?
+           What is the continent name which Anguilla belongs to?
+
+SELECT Continent
+FROM country
+WHERE Name = "Anguilla"
+
+Which region is Kabul city located in?
+
+SELECT Region
+FROM country as T1 JOIN city as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Name = "Kabul"
+
+Which language is the most popular in Aruba?
+
+SELECT T2.Language
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T1.Name = "Aruba"
+ORDER BY Percentage DESC
+LIMIT 1
+
+	3.	What are the population and life expectancy of Brazil?
+Give me Brazil’s population and life expectancy.
+
+SELECT Population, LifeExpectancy
+FROM country
+WHERE Name = "Brazil"
+
+What are the region and population of Angola?
+
+SELECT Population, Region
+FROM country
+WHERE Name = "Aruba"
+
+	4.	What is the average expected life of countries in Central Africa region?
+How long is the people’s average life expectancy in Central Africa?
+
+SELECT avg(LifeExpectancy)
+FROM country
+WHERE Region = "Central Africa"
+
+What is the name of country where has the shortest life expectancy in Asia?
+
+SELECT Name
+FROM country
+WHERE Continent = "Asia"
+order by LifeExpectancy
+LIMIT 1
+
+
+	5.	What is the total population and maximum GNP in Asia?
+How many people lives in Asia, and what is the largest GNP among them?
+
+SELECT sum(Population), max(GNP)
+FROM country
+WHERE Continent = "Asia"
+
+What is the average life expectancy in the republic African countries?
+
+SELECT avg(LifeExpectancy)
+FROM country
+WHERE Continent = "Africa" and GovernmentForm = "Republic"
+
+What is the total area of Asia and Europe continents?
+
+SELECT sum(SurfaceArea)
+FROM country
+WHERE Continent = "Asia" or Continent = "Europe"
+
+	6.	How many people lives in Gelderland district?
+	What is the total population of Gelderland district?
+
+	SELECT sum(Population)
+FROM city
+WHERE District = "Gelderland"
+
+What is the average GNP and total population in the nations whose government is US territory?
+
+SELECT avg(GNP), sum(population)
+FROM country
+WHERE GovernmentForm = "US Territory"
+
+	7.	How many unique languages spoken in the world?
+What is the number of distinct languages used around the world?
+
+SELECT count(DISTINCT Language)
+FROM countrylanguage
+
+How many type of governments in Africa?
+
+SELECT count(distinct GovernmentForm)
+FROM country
+where Continent = "Africa"
+
+	8.	How many languages does Aruba speaks?
+What is the total number of languages used in Aruba?
+
+SELECT COUNT(T2.Language)
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T1.Name = "Aruba"
+
+How many official language does Afghanistan has?
+
+SELECT COUNT(*)
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T1.Name = "Afghanistan" and IsOfficial = "T"
+
+	9.	What is name of the country where speak the largest number of languages?
+Which nation uses the largest amount of languages?
+
+SELECT T1.Name
+FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+GROUP BY T1.Name
+ORDER BY COUNT(*) DESC
+LIMIT 1
+
+Which continent has the most diverse languages?
+
+SELECT T1.Continent
+FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+GROUP BY T1.Continent
+ORDER BY COUNT(*) DESC
+LIMIT 1
+
+	10.	How many countries speak both English and Dutch?
+	   What is the number of nations use English and Dutch?
+
+SELECT COUNT(*)
+FROM
+(SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "English"
+INTERSECT
+SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "Dutch")
+
+What are the names of nations speak both English and French
+
+SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "English"
+INTERSECT
+SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "French"
+
+What are the names of nations where both English and French are official languages
+
+SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "English" and T2.IsOfficial = "T"
+INTERSECT
+SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "French" and T2.IsOfficial = "T"
+
+What is the number of distinct continents where speaks Chinese?
+
+SELECT COUNT( DISTINCT Continent)
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "Chinese"
+
+	11.	What are the regions that use English or Dutch?
+   Which regions speak Dutch or English?
+
+SELECT DISTINCT T1.Region
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "English" or T2.Language = "Dutch"
+
+What are the countries which either English or Dutch is the official language?
+
+SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "English" and IsOfficial = "T"
+UNION
+SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "Dutch" and IsOfficial = "T"
+
+	12.	Which language is most popular in Asia continent?
+	   What is the language that is used by the largest number of Asian nations?
+(most popular -> count?)
+
+SELECT T2.Language
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T1.Continent = "Asia"
+GROUP BY T2.Language
+ORDER BY COUNT (*) DESC
+LIMIT 1
+
+Which languages are spoken by only one country in republic governments?
+
+SELECT T2.Language
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T1.GovernmentForm = "Republic"
+GROUP BY T2.Language
+HAVING COUNT(*) = 1
+
+	13.	Find the city with the largest population where uses English and its population. 
+	   SELECT T1.Name, T1.Population
+FROM city as T1 JOIN countrylanguage as T2 ON T1.CountryCode = T2.CountryCode
+WHERE T2.Language = "English"
+ORDER BY T1.Population DESC
+LIMIT 1
+
+Find the name, population and expected life length of asian country with the largest area?
+
+SELECT Name, Population, LifeExpectancy
+FROM country
+WHERE Continent = "Asia"
+ORDER BY SurfaceArea DESC
+LIMIT 1
+
+	14.	What is average life expectancy in the countries where English is not the official language? 
+SELECT avg(LifeExpectancy)
+FROM country
+WHERE Name NOT IN
+(SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "English" and T2.IsOfficial = "T")
+
+What is the total number of people living in the nations where do not use English?
+
+SELECT sum(Population)
+FROM country
+WHERE Name NOT IN
+(SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.Language = "English")
+
+	15.	What is the official language spoken in the country whose president is Beatrix?
+
+SELECT T2.Language
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T1.HeadOfState = "Beatrix" and T2.IsOfficial = "T"
+
+What is the total unique official languages spoken in the countries whose are founded before 1930?
+
+SELECT count(distinct T2.Language)
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE  IndepYear < 1930 and T2.IsOfficial = "T"
+
+	16.	What are the countries where their area is greater than any country in Europe?
+
+SELECT Name
+FROM country
+WHERE SurfaceArea > (SELECT min(SurfaceArea) FROM country WHERE Continent = "Europe")
+
+	what are the African countries which their population is less than any country in Asia?
+
+SELECT Name
+FROM country
+WHERE Continent = "Africa"  and SurfaceArea < (SELECT min(SurfaceArea) FROM country WHERE Continent = "Asia")
+
+	what are the Asian countries which their population is larger than any country in African?
+
+SELECT Name
+FROM country
+WHERE Continent = "Asia"  and SurfaceArea > (SELECT max(SurfaceArea) FROM country WHERE Continent = "Africa")
+
+	17.	What are the countries that do not speak English 
+	   SELECT CountryCode
+FROM countrylanguage
+EXCEPT
+SELECT CountryCode
+FROM countrylanguage
+WHERE Language = "English"
+
+	What are the countries where also use languages other than English?
+
+SELECT distinct CountryCode
+FROM countrylanguage
+WHERE Language != "English"
+
+
+	18.	what are the codes of the countries that do not speak English and whose government forms are not Republic?
+
+SELECT Code FROM country WHERE GovernmentForm != "Republic"
+EXCEPT
+SELECT CountryCode FROM countrylanguage WHERE Language = "English"
+
+	19.	Which cities are in the European countries where English is not the official language?
+
+SELECT DISTINCT T2.Name
+FROM country as T1 JOIN city as T2 on T2.CountryCode = T1.Code
+WHERE T1.Continent = 'Europe' and T1.Name NOT IN
+(SELECT T1.Name
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+WHERE T2.IsOfficial = 'T' and T2.Language = 'English')
+
+Which unique cities are in the Asian countries where Chinese is the official language?
+
+SELECT distinct T3.Name
+FROM country T1
+JOIN countrylanguage T2 ON T1.Code = T2.CountryCode
+JOIN city T3 on T1.Code = T3.CountryCode
+WHERE T2.IsOfficial = 'T' and T2.Language = 'Chinese' and T1.Continent = "Asia"
+
+	20.	What are the name, independent year, and area of the country with the smallest population? 
+	SELECT Name, SurfaceArea, IndepYear
+FROM country
+ORDER BY Population
+LIMIT 1
+
+What are the population, name and leader of the country with the largest area?
+
+SELECT Name, population, HeadOfState
+FROM country
+ORDER BY SurfaceArea desc
+LIMIT 1
+
+	21.	return the country name and the numbers of languages spoken for each country that speaks at least 3 languages. 
+SELECT COUNT(T2.Language), C.Name
+FROM country as T1 JOIN countrylanguage as T2 on T1.Code = T2.CountryCode
+GROUP BY T1.Name
+HAVING COUNT(*) > 2
+
+           Find the number of cities whose population is greater than the average population of cities for each district?
+
+ SELECT count(distinct Name), District
+FROM city
+GROUP BY District
+HAVING Population > (select avg(Population) from city)
+
+	22.	Find the government form name and its total populations for each government form whose average life expectancy is longer than 72?
+
+SELECT sum(Population), GovernmentForm
+FROM country
+GROUP BY GovernmentForm
+HAVING avg(LifeExpectancy) > 72
+
+Find the average LifeExpectancy and total population for each continent which the average life expectancy is shorter than 72?
+
+SELECT sum(Population), avg(LifeExpectancy), Continent
+FROM country
+GROUP BY Continent
+HAVING avg(LifeExpectancy) < 70
+
+	23.	What are names and areas of countries with the top 5 largest area? 
+	SELECT Name, SurfaceArea
+FROM country
+ORDER BY SurfaceArea DESC
+LIMIT 5
+
+What are names of countries with the top 3 largest population? 
+SELECT Name
+FROM country
+ORDER BY Population DESC
+LIMIT 3
+
+24. What are the nations with top 3 lowest population for each continent?
+
+select name, continent
+from country T1 
+where name in (select name 
+	     from country 
+	     where Continent = T1.Continent 
+	     order by Population ASC
+	     limit 3)
+			     
+25. how many countries are in Asia?
+
+	SELECT count(*)
+          FROM country
+         where continent = "Asia"
+
+26. What are the names of the countries that are in Europe continent and its population is greater than 80000?
+
+	SELECT Name
+          FROM country
+         where where continent = "Europe" and Population = "80000"
+
+27. what is the total population and average area of countries in North America continent whose area is bigger than 3000？ 
+SELECT sum(Population), avg(SurfaceArea)
+from country
+where Continent = "North America" and SurfaceArea > 3000
+
+28. what are the cities whose population is between 160000 and 900000?
+
+SELECT name
+from city
+where Population between 160000 and 90000
+
+29. Which language is spoken by the largest number of countries?
+
+SELECT Language
+from countrylanguage
+group by Language
+order by count(*) desc
+limit 1
+
+30. What is the language spoken by the largest percentage people in each country?
+
+SELECT Language, CountryCode
+from countrylanguage
+group by CountryCode
+having Percentage = max(Percentage)
+
+31. What is the total number of countries where Spanish is spoken by the largest percentage people?
+
+select count(*)
+from (SELECT CountryCode
+from countrylanguage
+group by CountryCode
+having Percentage = max(Percentage) and Language = "Spanish")
+
+32.  What are the codes of countries where Spanish is spoken by the largest percentage people?
+
+SELECT CountryCode
+from countrylanguage
+group by CountryCode
+having Percentage = max(Percentage) and Language = "Spanish"
