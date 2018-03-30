@@ -138,8 +138,6 @@ Limit 1
 
 Find the number of professors with a Ph.D. degree in each department.
 
-COMMENTS: Find the number of professors with a Ph.D. as high degree in each department.
-
 Select count(*), dept_code
 From professor
 Where prof_high_degree = 'Ph.D.'
