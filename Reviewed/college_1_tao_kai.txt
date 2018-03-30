@@ -1,0 +1,592 @@
+Total # = 76
+
+1. Find the number of professors in accounting department.
+
+SELECT count(*)
+FROM professor as T1 JOIN department as T2 ON T1.dept_code = T2.dept_code
+WHERE DEPT_NAME = "Accounting"
+
+how many professors are teaching class with code ACCT-211?
+
+SELECT count(distinct PROF_NUM)
+FROM class as T2
+WHERE CRS_CODE = "ACCT-211"
+
+2. What is the first and last name of the professor in biology department?
+
+SELECT T3.EMP_FNAME, T3.EMP_LNAME
+FROM professor as T1
+JOIN department as T2 ON T1.dept_code = T2.dept_code
+JOIN employee as T3 ON T1.EMP_NUM = T3.EMP_NUM
+WHERE DEPT_NAME = "Biology"
+
+what are the first name and date of birth of professors teaching course ACCT-211?
+
+SELECT distinct T1.EMP_FNAME, T1.EMP_DOB
+FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
+WHERE CRS_CODE = "ACCT-211"
+
+How many classes are professor whose last name is Graztevski has?
+
+SELECT count(*)
+FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
+WHERE T1.EMP_LNAME = 'Graztevski'
+
+3. What is the code of school where the accounting department belongs to? 
+
+select school_code
+from department
+where dept_name = "Accounting"
+
+how many credits does course CIS-220 has, and what its description?
+
+select crs_credit, crs_description
+from course
+where crs_code = 'CIS-220'
+
+4. what the address of history department?
+
+select dept_address
+from department
+where dept_name = 'History'
+
+How many different locations does the school with code BUS has?
+
+select count(distinct dept_address)
+from department
+where school_code = 'BUS'
+
+How many different locations does each school has?
+
+select count(distinct dept_address), school_code
+from department
+Group by school_code
+
+Find the description and credit for the course QM-261?
+
+select crs_credit, crs_description
+from course
+where crs_code = 'QM-261'
+
+5. Find the number of departments in each school.
+
+select count(distinct dept_name), school_code
+from department
+Group by school_code
+
+Find the number of different departments in each school whose number of different departments is less than 5.
+
+select count(distinct dept_name), school_code
+from department
+Group by school_code
+Having count(distinct dept_name) < 5
+
+How many sections does each course has?
+
+Select count(*), crs_code
+from class
+Group by crs_code
+
+What is the total credit does each department offer?
+
+Select sum(crs_credit), dept_code
+From course
+Group by dept_code
+
+Find the number of classes offered for all class rooms that held at least 2 classes.
+
+Select count(*), class_room
+From class
+Group by class_room
+Having count(*) >= 2
+
+Find the number of classes in each department.
+
+Select count(*), dept_code
+From class as T1 join course as T2 on T1.crs_code = T2.crs_code
+Group by dept_code
+
+Find the number of classes in each school.
+
+Select count(*), T3.school_code
+From class as T1 
+     join course as T2 on T1.crs_code = T2.crs_code
+     Join department as T3 on T2.dept_code = T3.dept_code
+Group by T3.school_code
+
+What is the number of professors for different school?
+
+Select count(*), T1.school_code
+From department as T1 join professor as T2 on T1.dept_code = T2.dept_code
+Group by T1.school_code
+
+Find the count and code of the job has most employees.
+
+Select emp_jobcode, count(*)
+From employee
+Group by emp_jobcode
+Order by count(*) desc
+Limit 1
+
+Which school has the smallest amount of professors?
+
+Select T1.school_code
+From department as T1 join professor as T2 on T1.dept_code = T2.dept_code
+Group by T1.school_code
+Order by count(*)
+Limit 1
+
+Find the number of professors with a Ph.D. degree in each department.
+
+COMMENTS: Find the number of professors with a Ph.D. as high degree in each department.
+
+Select count(*), dept_code
+From professor
+Where prof_high_degree = 'Ph.D.'
+Group by dept_code
+
+Find the number of students for each department.
+
+Select count(*), dept_code
+From student
+group by dept_code
+
+Find the total number of hours have done for all students in each department.
+
+Select sum(stu_hrs), dept_code
+From student
+group by dept_code
+
+Find the max, average, and minimum pga of all students in each department.
+
+Select max(stu_gpa), avg(stu_gpa), min(stu_gpa), dept_code
+From student
+group by dept_code
+
+What is the name and the average gpa of department whose students have the highest average gpa?
+
+Select T2.dept_name, avg(T1.stu_gpa)
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+order by avg(T1.stu_gpa) desc
+limit 1
+
+6. how many schools in total?
+
+select count(distinct school_code)
+From department
+
+How many different classes are there?
+
+Select count(distinct class_code)
+From class
+
+how many courses are offered?
+
+Select count(distinct crs_code)
+From class
+
+how many departments does the college has?
+
+Select count(distinct dept_name)
+From department
+
+how many courses are offered by the Computer Info. Systems department? 
+
+Select count(*)
+From department as T1 join course as T2 on T1.dept_code = T2.dept_code
+where dept_name = "Computer Info. Systems"
+
+how many sections does course ACCT-211 has?
+
+select count(distinct class_section)
+From class
+Where crs_code = 'ACCT-211'
+
+Find the total credits of all classes offered by each department.
+
+Select sum(T1.crs_credit), T1.dept_code
+From course as T1 join class as T2 on T1.crs_code = T2.crs_code
+group by T1.dept_code
+
+Find the name of the department that offers the largest number of credits of all classes.
+
+Select T3.dept_name
+From course as T1 
+     join class as T2 on T1.crs_code = T2.crs_code
+     Join department as T3 on T1.dept_code = T3.dept_code
+group by T1.dept_code
+Order by sum(T1.crs_credit) desc
+Limit 1
+
+How many students enrolled in class ACCT-211?
+
+select count(*)
+From class as T1 join enroll as T2 on T1.class_code = T2.class_code
+Where T1.crs_code = 'ACCT-211'
+
+What is the first name of students enrolled in class ACCT-211?
+
+select T3.stu_fname
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T2.stu_num = T3.stu_num
+Where T1.crs_code = 'ACCT-211'
+
+What is the first name of students enrolled in class ACCT-211 and got grade C?
+
+Select T3.stu_fname
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T2.stu_num = T3.stu_num
+Where T1.crs_code = 'ACCT-211' and T2.enroll_grade = 'C'
+
+Find the total number of employees.
+
+Select count(*)
+From employee
+
+How many professors do have a Ph.D. degree?
+
+Select count(*)
+From professor
+Where prof_high_degree = 'Ph.D.'
+
+How many students are enrolled in the class taught by professor from the accounting department?
+
+Select count(*)
+From class as T1
+     Join enroll as T2 on T1.class_code = T2.class_code
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join department as T4 on T3.dept_code = T4.dept_code
+Where T4.dept_name = 'Accounting'
+
+What is the name of the department that has the largest number of students enrolled?
+
+Select T4.dept_name
+From class as T1
+     Join enroll as T2 on T1.class_code = T2.class_code
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join department as T4 on T3.dept_code = T4.dept_code
+Group by T4.dept_name
+Order by count(*) desc
+Limit 1
+
+7. list names of all departments ordered by their names.
+
+Select dept_name
+From department
+order by dept_name
+
+list all course codes happen in room KLR209.
+
+select class_code
+From class
+Where class_room = 'KLR209'
+
+List the first name of all employees with job code PROF ordered by their date of birth.
+
+Select emp_fname
+From employee
+Where emp_jobcode = 'PROF'
+Order by emp_dob
+
+Find the first names and offices of all professors sorted by alphabetic order of their first name.
+
+Select T2.emp_fname, T1.prof_office
+From professor as T1 join employee as T2 on T1.emp_num = T2.emp_num
+Order by T2.emp_fname
+
+8. What is the first and last name of the oldest employee?
+
+Select emp_fname, emp_lname
+From employee
+Order by emp_dob
+Limit 1
+
+What is the first, last name, gpa of the youngest one among students whose gga is above 3?
+
+Select stu_fname, stu_lname, stu_gpa
+From student
+Where stu_gpa > 3
+Order by stu_dob desc
+Limit 1
+
+What is the first name of students who got grade C in any class?
+
+Select distinct stu_fname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where enroll_grade = 'C' 
+
+What is the name of department where has the smallest number of professors?
+
+Select T2.dept_name, T1.dept_code
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+Order by count(*)
+Limit 1
+
+What is the name of department where has the largest number of professors with a Ph.D. degree?
+
+Select T2.dept_name, T1.dept_code
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T1.prof_high_degree = 'Ph.D.'
+group by T1.dept_code
+Order by count(*) desc
+Limit 1
+
+What is the first names of the professors who do not teach a class.
+
+Select emp_fname
+From employee
+Where emp_jobcode = 'PROF'
+except
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+
+What is the first names of the professors from the history department who do not teach a class.
+
+Select T1.emp_fname
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T3.dept_name = 'History'
+except
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+
+What is the last name and office of the professor from the history department?
+
+Select T1.emp_lname, T2.prof_office
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T3.dept_name = 'History'
+
+What is department name and office for the professor whose last name is Heffington?
+
+Select T3.dept_name , T2.prof_office
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T1.emp_lname = 'Heffington'
+
+Find the last name and hire date of the professor who is in office DRE 102.
+
+Select T1.emp_lname, T1.emp_hiredate
+From employee as T1 join professor as T2 on T1.emp_num = T2.emp_num
+Where T2.prof_office = 'DRE 102'
+
+What is the code of the course which the student whose last name is Smithson took?
+
+Select T1.crs_code
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T3.stu_num = T2.stu_num
+Where T3.stu_lname = 'Smithson'
+
+What is the description and credit of the course which the student whose last name is Smithson took?
+
+Select T4.crs_description, T4.crs_credit
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T3.stu_num = T2.stu_num
+     Join course as T4 on T4.crs_code = T1.crs_code
+Where T3.stu_lname = 'Smithson'
+
+9. How many professors who has a either Ph.D. or MA degree?
+
+Select count(*)
+From professor
+Where prof_high_degree = 'Ph.D.' or prof_high_degree = 'MA'
+
+How many professors who are from either Accounting or Biology department?
+
+Select count(*)
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T2.dept_name = 'Accounting' or T2.dept_name = 'Biology'
+
+Find the first name of the professor who is teaching two courses with code CIS-220 and QM-261.
+
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Where crs_code = 'CIS-220'
+Intersect
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Where crs_code = 'QM-261'
+
+Find the first name of student who is taking classes from accounting and Computer Info. Systems departments
+
+Select T1.stu_fname
+From student as T1 
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+     Join course as T4 on T3.crs_code = T4.crs_code
+     Join department as T5 on T5.dept_code = T4.dept_code
+Where T5.dept_name = 'Accounting'
+INTERSECT
+Select T1.stu_fname
+From student as T1 
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+     Join course as T4 on T3.crs_code = T4.crs_code
+     Join department as T5 on T5.dept_code = T4.dept_code
+Where T5.dept_name = 'Computer Info. Systems'
+
+10. What is the average gpa of the students enrolled in the course with code ACCT-211?
+
+Select avg(T2.stu_gpa)
+From enroll as T1 
+     join student as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T1.class_code = T3.class_code
+Where T3.crs_code = 'ACCT-211'
+
+What is the first name, gpa and phone number of the top 5 students with highest gpa?
+
+Select stu_gpa, stu_phone, stu_fname
+From student
+order by stu_gpa desc
+Limit 5
+
+What is the department name of the students with lowest gpa belongs to?
+
+Select T2.dept_name
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+order by stu_gpa
+Limit 1
+
+Find the first name and gpa of the students whose gpa is lower than the average gpa of all students.
+
+select stu_fname, stu_gpa
+From student
+Where stu_gpa < (select avg(stu_gpa) from student)
+
+Find the name and address of the department that has the highest number of students.
+
+Select T2.dept_name, T2.dept_address
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+Order by count(*) desc
+Limit 1
+
+Find the name, address, number of students of the departments that have the top 3 highest number of students.
+
+Select T2.dept_name, T2.dept_address, count(*)
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+Order by count(*) desc
+Limit 3
+
+Find the first name and office of the professor who is in the history department and has a Ph.D. degree.
+
+Select T1.emp_fname, T2.prof_office
+From employee as T1
+     Join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T3.dept_code = T2.dept_code
+Where T3.dept_name = 'History' and T2.prof_high_degree = 'Ph.D.'
+
+Find the first names of all instructors who have taught some course and the course code.
+
+Select T2.emp_fname, T1.crs_code
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+
+Find the first names of all instructors who have taught some course and the course description.
+
+Select T2.emp_fname, T3.crs_description
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
+
+Find the first names and offices of all instructors who have taught some course and the course description.
+
+Select T2.emp_fname, T4.prof_office, T3.crs_description
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join professor as T4 on T2.emp_num = T4.emp_num
+
+Find the first names and offices of all instructors who have taught some course and the course description and the department name.
+
+Select T2.emp_fname, T4.prof_office, T3.crs_description, T5.dept_name
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join professor as T4 on T2.emp_num = T4.emp_num
+     Join department as T5 on T4.dept_code = T5.dept_code
+
+Find names of all students who took some course and the course description.
+
+Select T1.stu_fname, T1.stu_lname, T4.crs_description
+From student as T1 
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+     Join course as T4 on T3.crs_code = T4.crs_code
+
+Find names of all students who took some course and got A or C and the class room.
+
+Select T1.stu_fname, T1.stu_lname, T3.class_room
+From student as T1 
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+Where T2.enroll_grade = 'C' or T2.enroll_grade = 'A'
+
+Find the first names of all professors in the Accounting department who is teaching some course and the class room.
+
+Select T2.emp_fname, T1.class_room
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+     Join department as T4 on T4.dept_code = T3.dept_code
+Where T4.dept_name = 'Accounting'
+
+Find the first names and degree of all professors who are teaching some class in Computer Info. Systems department.
+
+Select distinct T2.emp_fname, T3.prof_high_degree
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+     Join department as T4 on T4.dept_code = T3.dept_code
+Where T4.dept_name = 'Computer Info. Systems'
+
+What is the last name of the student who got a grade A in the class with code 10018.
+
+Select T1.stu_lname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where T2.enroll_grade = 'A' and T2.class_code = 10018
+
+Find the first name and office of history professor who did not get a Ph.D. degree.
+
+Select T2.emp_fname, T1.prof_office
+From professor as T1
+     Join employee as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T1.dept_code = T3.dept_code
+Where T3.dept_name = 'History' and T1.prof_high_degree != 'Ph.D.'
+
+Find the first names of professors who are teaching more than one class.
+
+Select T2.emp_fname
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+group by T1.prof_num
+Having count(*) > 1
+
+Find the first names of students who took exactly one class.
+
+Select T1.stu_fname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+group by T2.stu_num
+Having count(*) = 1
+
+11. Find the name of department that offers the class whose description has the word "Statistics".
+
+Select T2.dept_name
+From course as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T1.crs_description LIKE '%Statistics%'
+
+What is the first name of the student whose last name starting with the letter S and is taking ACCT-211 class?
+
+Select T1.stu_fname
+From student as T1
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+Where T3.crs_code = 'ACCT-211' and T1.stu_lname LIKE 'S%'
