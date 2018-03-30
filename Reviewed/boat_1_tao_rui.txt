@@ -51,12 +51,12 @@ WHERE T1.age > T2.age and T2.rating > 7
 6. find the name and id of the sailors who reserved at least one boat?
 
 SELECT DISTINCT T1.name, T1.sid
-FROM Sailors AS T1, Reserves AS T2 ON T1.sid = T2.sid
+FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
 
 find the name of the sailors who reserved more than one boat?
 
 SELECT DISTINCT T1.name 
-FROM Sailors AS T1, Reserves AS T2 ON T1.sid = T2.sid
+FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
 GROUP BY T2.sid
 HAVING COUNT(*) > 1
 
@@ -103,8 +103,8 @@ WHERE T1.color = "blue"
 SELECT sid 
 FROM Sailors
 EXCEPT
-SELECT T1.sid
-FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+SELECT sid
+FROM Reserves
 
 what is the name and id of sailors who do not have a reservation of a boat?
 
@@ -144,9 +144,9 @@ WHERE rating > (SELECT max(rating)
 FROM Sailors
 WHERE name = 'Luis')
 
-12. what is the name and id of sailors who’s rating is greater than 2 and reversed a boat.
+12. what is the name and id of sailors who have rating greater than 2 and reversed a boat.
 
-SELECT DISTINCT T1.name
+SELECT DISTINCT T1.name, T1.sid
 FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
 WHERE  T1.rating > 2
 
@@ -154,7 +154,7 @@ WHERE  T1.rating > 2
 
 SELECT name, age
 FROM Sailors
-WHERE age >=
+WHERE age =
 ( SELECT max(age)
 FROM Sailors )
 
@@ -178,7 +178,7 @@ WHERE name LIKE 'D%'
 What are the average rating and max age of all sailors?
 
 SELECT AVG(rating), MAX(age)
-FROM Sailors S
+FROM Sailors
 
 15. Find the number of reservations for each boat.
 
@@ -200,7 +200,7 @@ FROM Reserves
 GROUP BY bid
 HAVING count(*) > 1
 
-Find the number of reservations for each boat that is reserved by sailors with id greater than 1.
+Find the number of reservations by sailors with id greater than 1 for each boat.
 
 SELECT bid, count(*) 
 FROM Reserves
@@ -255,7 +255,7 @@ WHERE rating > (SELECT max(T1.rating)
 
 What is highest rating between sailors?
 
-Select min(rating)
+Select max(rating)
 From Sailors
 
 Find the names of sailors who reserved boat with name Melon.
