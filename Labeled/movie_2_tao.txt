@@ -91,6 +91,8 @@ Order by title
 
 Find the titles of all movies sorted by their ratings.
 
+COMMENTS: ratings order is meaningless, G PG 
+
 Select title
 From movies
 Order by rating
