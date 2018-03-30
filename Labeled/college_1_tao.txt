@@ -139,6 +139,8 @@ Limit 1
 
 Find the number of professors with a Ph.D. degree in each department.
 
+COMMENTS: Find the number of professors with a Ph.D. as high degree in each department.
+
 Select count(*), dept_code
 From professor
 Where prof_high_degree = 'Ph.D.'
@@ -303,7 +305,7 @@ From employee
 Order by emp_dob
 Limit 1
 
-What is the first, last name, gpa of the youngest one among students whose pga is above 3?
+What is the first, last name, gpa of the youngest one among students whose gga is above 3?
 
 Select stu_fname, stu_lname, stu_gpa
 From student
@@ -441,21 +443,21 @@ From enroll as T1
      Join class as T3 on T1.class_code = T3.class_code
 Where T3.crs_code = 'ACCT-211'
 
-What is the first name, gpa and phone number of the top 5 students with highest pga?
+What is the first name, gpa and phone number of the top 5 students with highest gpa?
 
 Select stu_gpa, stu_phone, stu_fname
 From student
 order by stu_gpa desc
 Limit 5
 
-What is the department name of the students with lowest pga belongs to?
+What is the department name of the students with lowest gpa belongs to?
 
 Select T2.dept_name
 From student as T1 join department as T2 on T1.dept_code = T2.dept_code
 order by stu_gpa
 Limit 1
 
-Find the first name and gpa of the students whose pga is lower than the average pga of all students.
+Find the first name and gpa of the students whose gpa is lower than the average gpa of all students.
 
 select stu_fname, stu_gpa
 From student
@@ -477,7 +479,7 @@ group by T1.dept_code
 Order by count(*) desc
 Limit 3
 
-Find the first and office of the professor who is in the history department and has a Ph.D. degree.
+Find the first name and office of the professor who is in the history department and has a Ph.D. degree.
 
 Select T1.emp_fname, T2.prof_office
 From employee as T1
