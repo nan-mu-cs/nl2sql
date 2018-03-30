@@ -16,7 +16,7 @@ order by pet_age
 Limit 1
 
 
-Find the maximum weight for each type of pet.
+Find the maximum weight for each type of pet. List the maximum weight and pet type.
 
 Select max(weight), petType
 From pets
@@ -66,6 +66,7 @@ from student as T1
 Where T3.pettype = 'dog'
 
 Find the major and age of students who do not have a cat pet.
+
 
 Select major, age
 From student
