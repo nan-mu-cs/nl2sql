@@ -266,27 +266,21 @@ WHERE  IndepYear < 1930 and T2.IsOfficial = "T"
 
 16.	What are the countries whose area is greater than any country in Europe?
 
-comment: ambigous and inconsistent "any"
-
 SELECT Name
 FROM country
 WHERE SurfaceArea > (SELECT min(SurfaceArea) FROM country WHERE Continent = "Europe")
 
 what are the African countries whose population is less than any country in Asia?
 
-comment: ambigous and inconsistent "any"
-
 SELECT Name
 FROM country
-WHERE Continent = "Africa"  and SurfaceArea < (SELECT min(SurfaceArea) FROM country WHERE Continent = "Asia")
+WHERE Continent = "Africa"  and SurfaceArea < (SELECT max(SurfaceArea) FROM country WHERE Continent = "Asia")
 
 what are the Asian countries whose population is larger than any country in African?
 
-comment: ambigous and inconsistent "any"
-
 SELECT Name
 FROM country
-WHERE Continent = "Asia"  and SurfaceArea > (SELECT max(SurfaceArea) FROM country WHERE Continent = "Africa")
+WHERE Continent = "Asia"  and SurfaceArea > (SELECT min(SurfaceArea) FROM country WHERE Continent = "Africa")
 
 17.	What are the countries that do not speak English?
 	
