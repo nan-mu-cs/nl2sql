@@ -119,7 +119,7 @@ Select T1.lname, T1.fname
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 INTERSECT
 Select T1.lname, T1.fname
-From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 
 What are the first and last names of the artists who have not only medium oil paintings but also paintings with lithograph medium
 
@@ -128,20 +128,20 @@ From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 where T2.medium = "oil"
 INTERSECT
 Select T1.lname, T1.fname
-From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 where T2.medium = "lithograph"
 
 8. When is the birth year of the artist who had painting in 1884 which medium on is canvas?
 
 Select T1.birthYear
-From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
-where T2.year = 1884 and mediumOn = "canvas"
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+where T2.year = 1884 and T2.mediumOn = "canvas"
 
 What is the unique first name of the artists who had medium oil painting located at gallery 241?
 
 Select DISTINCT T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
-where T2.medium = "oil" and location = "Gallery 241"
+where T2.medium = "oil" and T2.location = "Gallery 241"
 
 9. What are the numbers of works for different medium on type?
 
@@ -205,8 +205,6 @@ From paintings
 Order by title
 
 List the names of all distinct paintings ordered by length
-
-comment: length is ambiguous
 
 Select distinct title
 From paintings
@@ -382,7 +380,6 @@ From paintings
 where height_mm > 1000
 order by title
 
-
 25. Find the first and last name of artists who has painting but no sculpture work?
 
 Select T1.lname, T1.fname
@@ -393,15 +390,7 @@ From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 
 Find the locations which have painting before 1885 and no work with medium on canvas?
 
-comment: is this correct?
-
 Select location
 From paintings
 where year < 1885 and mediumOn != "canvas"
 
-
-comment:
-0) great coverage and variation of SQL
-1) some SQL use "having" but should use "where"
-2) order of select?
-3) name in the sentence match the column name, especially, "name" -> "title"?
