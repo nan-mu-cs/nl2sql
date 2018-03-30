@@ -278,8 +278,6 @@ having avg(salary) > (select avg(salary) from instructor)
 
 Find the number of courses provided in each semester and year.
 
-comment: select from section or course?
-
 select count(*), semester, year
 from section
 group by semester, year
@@ -484,17 +482,6 @@ where id NOT IN
 from takes as T1 join course as T2 on T1.course_id = T2.course_id
 where T2.dept_name = 'Biology')
 
-
-Find the name of students who didn't take any course taught by instructor McKinnon.
-
-comment: #####wrong#####check
-
-select name
-from student as T1 join takes as T2 on T1.id = T2.id
-where T2.course_id, T2.sec_id, T2.semester, T2.year NOT IN
-(Select T1.course_id, T1.sec_id, T1.semester, T1.year
-from teaches as T1 join instructor as T2 on T1.id = T2.id
-where T2.name = 'McKinnon')
      
 Find the total number of students and total number of instructors for each department.
 
@@ -568,8 +555,6 @@ where name like '%dar%'
 
 List in alphabetic order the names of all distinct instructors.
 
-comment: "distinct instrutors"?
-
 select distinct name
 from  instructor
 order by name
@@ -593,8 +578,6 @@ except
 select course_id from section where semester = 'Spring' and year = 2010
 
 Find the salaries of all distinct instructors that are less than the largest salary.
-
-comment: "distinct instrutors"?
 
 select distinct salary
 from instructor
