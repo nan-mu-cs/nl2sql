@@ -1,0 +1,399 @@
+
+Total # = 50
+
+Find the name of dorms only for F gender.
+
+Select dorm_name
+From dorm
+Where gender = 'F'
+
+Find the name of dorms for gender X that can accommodate more than 300 students.
+
+Select dorm_name
+From dorm
+Where student_capacity > 300
+
+How many female students (sex is F) whose age is below 25?
+
+Select count(*)
+From student 
+Where sex = 'F' and age < 25
+
+Find the first name of students whose is older than 20.
+
+Select fname
+From student
+Where age > 20
+
+
+Find the first name of students living in city PHL whose age is between 20 and 25.
+
+Select fname
+From student
+Where city_code = 'PHL' and age between 20 and 25
+
+
+How many dorms are there?
+
+Select count(*)
+From dorm
+
+Find the number of distinct amenities.
+
+Select count(*)
+From dorm_amenity
+
+Find the total capacity of all dorms.
+
+Select sum(student_capacity)
+From dorm
+
+How many students are there?
+
+Select count(*)
+From student
+
+Find the average age of all students living in the each city.
+
+Select avg(age), city_code
+From student
+Group by city_code
+
+Find the average and total capacity of dorms for gender X.
+
+Select avg(student_capacity), sum(student_capacity)
+From dorm
+Where gender = 'X'
+
+Find the number of dorms that have some amenity.
+
+Select count(distinct dormid)
+From has_amenity
+
+Find the name of dorms that do not have any amenity
+
+Select dorm_name
+From dorm
+Where dormid NOT IN 
+(Select dormid from has_amenity)
+
+
+Find the number of distinct gender for dorms.
+
+Select count(distinct gender)
+From dorm
+
+Find the capacity and gender type of the dorm whose name has substring ‘Donor’.
+
+Select student_capacity, gender
+From dorm
+Where dorm_name LIKE '%Donor%'
+
+Find the name and gender type of the dorms whose capacity is greater than 300 or less than 100.
+
+Select dorm_name, gender
+From dorm
+Where student_capacity > 300 or student_capacity < 100
+
+Find the numbers of different majors and cities.
+
+Select count(distinct major), count(distinct city_code)
+From student
+
+
+Find the name of dorms where has both TV Lounge and Study Room as amenities.
+
+Select T1.dorm_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Where T3.amenity_name = 'TV Lounge'
+Intersect
+Select T1.dorm_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Where T3.amenity_name = 'Study Room'
+
+
+Find the name of dorms where has TV Lounge but no Study Room as amenity.
+
+Select T1.dorm_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Where T3.amenity_name = 'TV Lounge'
+Except 
+Select T1.dorm_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Where T3.amenity_name = 'Study Room'
+
+Find the last name of students who is either female (sex is F) and living in the city of code BAL or male (sex is M) and in age of below 20.
+
+Select lname
+From student
+Where sex = 'F' and city_code = 'BAL'
+union
+Select lname
+From student
+Where sex = 'M' and age < 20
+
+Find the name of the dorm with the largest capacity.
+
+Select dorm_name
+From dorm
+order by student_capacity desc
+Limit 1
+
+List in alphabetic order all different amenities.
+
+Select amenity_name
+From dorm_amenity
+Order by amenity_name
+
+Find the code of city where most of students are living in.
+
+Select city_code
+From student
+Group by city_code
+Order by count(*) desc
+Limit 1
+
+Find the first and last name of students whose age is younger than the average age.
+
+Select fname, lname
+From student
+Where age < (select avg(age) from student)
+
+List the first and last name of students who are not living in the city with code HKG, and sorted the results by their ages.
+
+Select fname, lname
+From student
+Where city_code != 'HKG'
+Order by age
+
+List name of all amenities which Anonymous Donor Hall has, and sort the results in alphabetic order.
+
+Select T1.amenity_name
+From dorm_amenity as T1
+     Join has_amenity as T2 on T2.amenid = T1.amenid
+     Join dorm as T3 on T2.dormid = T3.dormid
+Where T3.dorm_name = 'Anonymous Donor Hall'
+Order by T1.amenity_name
+
+
+Find the number of dorms and total capacity for each gender.
+
+Select count(*), sum(student_capacity), gender
+From dorm
+group by gender
+
+Find the average and oldest age for students with different sex.
+
+Select avg(age), max(age), sex
+From student
+Group by sex
+
+Find the number of students in each major.
+
+Select count(*), major
+From student
+Group by major
+
+Find the number and average age of students living in each city.
+
+Select count(*), avg(age), city_code
+From student
+Group by city_code
+
+Find the average age and number of male students (with sex M) from each city.
+
+Select count(*), avg(age), city_code
+From student
+Where sex = 'M'
+Group by city_code
+
+find the number of students for the cities where have more than one student.
+
+Select count(*), city_code
+From student
+Group by city_code
+Having count(*) > 1
+
+Find the first and last name of students who are not in the largest major.
+
+Select fname, lname
+From student
+Where major != (select major 
+                from student
+                group by major
+                order by count(*) desc
+                limit 1)
+
+Find the number of students whose age is older than the average age for each gender.
+
+Select count(*), sex
+From student
+Where age > (select avg(age) from student)
+group by sex
+
+Find the average age of students living in each dorm and the name of dorm.
+
+Select avg(T1.age), T3.dorm_name
+From student as T1
+     Join lives_in as T2 on T1.stuid = T2.stuid
+     Join dorm as T3 on T3.dormid = T2.dormid
+Group by T3.dorm_name
+
+Find the number of amenities for each of the dorms that can accommodate more than 100 students.
+
+Select count(*), T1.dormid
+From dorm as T1 join has_amenity as T2 on T1.dormid = T2.dormid
+Where T1.student_capacity > 100
+Group by T1.dormid
+
+Find the number of students who is older than 20 in each dorm.
+
+Select count(*), T3.dorm_name
+From student as T1
+     Join lives_in as T2 on T1.stuid = T2.stuid
+     Join dorm as T3 on T3.dormid = T2.dormid
+Where T1.age > 20
+Group by T3.dorm_name 
+
+Find the first name of students who are living in the Smith Hall.
+
+Select T1.fname
+From student as T1
+     Join lives_in as T2 on T1.stuid = T2.stuid
+     Join dorm as T3 on T3.dormid = T2.dormid
+Where T3.dorm_name = 'Smith Hall'
+
+Find the average age of students who are living in the dorm with the largest capacity.
+
+Select avg(T1.age)
+From student as T1
+     Join lives_in as T2 on T1.stuid = T2.stuid
+     Join dorm as T3 on T3.dormid = T2.dormid
+Order by T3.student_capacity desc
+Limit 1
+
+Find the total number of students living in the male dorm (with gender M).
+
+Select count(*)
+From student as T1
+     Join lives_in as T2 on T1.stuid = T2.stuid
+     Join dorm as T3 on T3.dormid = T2.dormid
+Where T3.gender = 'M'
+
+Find the number of female students (with F sex) living in Smith Hall
+
+Select count(*)
+From student as T1
+     Join lives_in as T2 on T1.stuid = T2.stuid
+     Join dorm as T3 on T3.dormid = T2.dormid
+Where T3.dorm_name = 'Smith Hall' and T1.sex = 'F'
+
+Find the name of amenities does Smith Hall dorm have?
+
+Select T3.amenity_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Where T1.dorm_name = 'Smith Hall'
+
+Find the name of amenities does Smith Hall dorm have? ordered the results b amenity names.
+
+Select T3.amenity_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Where T1.dorm_name = 'Smith Hall'
+Order by T3.amenity_name
+
+Find the name of amenity that is most common in all dorms.
+
+Select T1.amenity_name
+From dorm_amenity as T1 join has_amenity as T2 on T1.amenid = T2.amenid
+group by T2.amenid
+Order by count(*) desc
+Limit 1
+
+Find the first name of students who are living in the dorm that has most number of amenities.
+
+Select T1.fname
+From student as T1
+     Join lives_in as T2 on T1.stuid = T2.stuid
+Where T2.dormid IN
+(Select T2.dormid
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Group by T2.dormid
+Order by count(*) desc
+Limit 1)
+
+Find the name and capacity of the dorm with least number of amenities.
+
+Select T1.dorm_name, T1.student_capacity
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Group by T2.dormid
+Order by count(*)
+Limit 1
+
+Find the name of dorms that do not have amenity TV Lounge.
+
+Select dorm_name
+From dorm
+Except
+Select T1.dorm_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+Where T3.amenity_name = 'TV Lounge'
+
+Find the first and last name of students who are living in the dorms that have amenity TV Lounge.
+
+Select T1.fname, T1.lname
+From student as T1 join lives_in as T2 on T1.stuid = T2.stuid
+Where T2.dormid IN
+(Select T1.dormid
+From has_amenity as T1 join dorm_amenity as T2 on T1.amenid = T2.amenid
+Where T2.amenity_name = 'TV Lounge')
+
+Find the first name and age of students who are living in the dorms that do not have amenity TV Lounge.
+
+Select T1.fname, T1.age
+From student as T1 join lives_in as T2 on T1.stuid = T2.stuid
+Where T2.dormid NOT IN
+(Select T1.dormid
+From has_amenity as T1 join dorm_amenity as T2 on T1.amenid = T2.amenid
+Where T2.amenity_name = 'TV Lounge')
+
+
+Find the name of amenities of the dorm where the student with last name Smith is living in.
+
+Select T3.amenity_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+where T1.dormid =
+(select T1.dormid 
+from lives_in as T1 Join student as T2 on T1.stuid = T2.stuid
+Where T2.lname = 'Smith')
+
+------or-----------
+
+Select T3.amenity_name
+From dorm as T1
+     Join has_amenity as T2 on T1.dormid = T2.dormid
+     Join dorm_amenity as T3 on T2.amenid = T3.amenid
+     Join lives_in as T4 on T4.dormid = T1.dormid
+     Join student as T5 on T5.stuid = T4.stuid
+Where T5.lname = 'Smith'
+
+
