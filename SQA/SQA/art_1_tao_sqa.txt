@@ -533,8 +533,8 @@ P:
 
 Select count(*), location
 From paintings
-group by location
-having year < 1900
+where year < 1900
+group by location 
 
 S: How many paintings were created before 1900?
 S: How many were created in different places?
@@ -543,12 +543,12 @@ Shanelle: TODO: how many were created in different places? -> how many were show
 
 Select count(*)
 From paintings
-having year < 1900
+where year < 1900
 
 Select count(*), location
 From paintings
+where year < 1900
 group by location
-having year < 1900
 
 25. What are the titles of paintings that are created after 1910 and whose medium is oil?
 P: Give the names of all oil paintings created after 1910. 
@@ -763,8 +763,8 @@ P:
 
 Select T1.artistID
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+where T2.year < 1900
 group by T2.painterID
-having T2.year < 1900
 order by count(*) DESC
 LIMIT 1
 
