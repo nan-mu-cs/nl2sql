@@ -1,0 +1,301 @@
+Total # = 27
+
+1. Find the titles of movies that don’t have any rating.
+P: What are the names of movies that do not have any ratings?
+
+Select title
+From movies
+Where rating is NULL
+
+S: Which movies do not have any ratings?
+S: What are their names?
+
+2. Find the names of movies whose rating is ‘G’.
+P: What are names of movies that have a 'G' ratings?
+
+Select title
+From movies
+Where rating = 'G'
+
+S: What is the name of each movie?
+S: Of these, which have a 'G' rating?
+
+3. Find the title of the movie that is played in the Odeon theater.
+P: What are the movie titles for ones that are played in the Odeon theater?
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon'
+
+S: What are the ids for movies played in the Odeon theater?
+S: For those ids, what are the titles?
+
+4. Find the names of movies that are played in any theater and the name of the corresponding theater.
+P: What are the names of the movies that are played in any theater and the name of the corresponding theater?
+
+Select T1.title, T2.name
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+
+S: What are the ids of movies played in any theater?
+S: What are names for these movie ids?
+S: Also, what are the names of the theaters in which these movies played?
+
+5. Find the number of movies whose rating is ‘G’.
+P: How many movies had a 'G' rating?
+
+Select count(*)
+From movies
+Where rating = 'G'
+
+S: What are the movies with a 'G' rating?
+S: How many are there?
+
+6. How many movies are on in all theaters?
+P: How many movies played in every theater?
+
+Select count(*)
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+
+S: Which movies played in every theater?
+S: How many are there?
+
+7. How many distinct movies are on in all theaters?
+P: How many different movies played in every theater?
+
+Select count(distinct T1.code)
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+
+S: What are the codes of all the movies that played in every theater?
+S: How many different codes are there?
+
+8. How many distinct movie theaters are there?
+P: How many different movie theaters exist?
+
+Select count(distinct name)
+From movietheaters
+
+S: What are the different movie theater names?
+S: How many are there?
+
+9. Find the rating of the movie whose name including the word ‘Citizen’.
+P: What is the rating of the movie what has a name including a word like 'Citizen'?
+
+Select rating
+From movies
+Where title LIKE '%Citizen%'
+
+S: Which movies have a title includign the word 'Citizen'?
+S: What are their ratings?
+
+10. Find the name of the cinemas that are playing movies with either rating ‘G’ or rating ‘PG’.
+P: What are the names of the movie theaters that are playing 'G' or 'PG' rated movies?
+
+Select title
+From movies
+Where rating = 'G' or rating = 'PG'
+
+S: Which movies have a 'G' rating?
+S: Combine that with all the movies that are rated 'PG'
+S: What are their names?
+
+11. Find the name of the movies that are played in either cinema Odeon or Imperial.
+P: What are the titles of all the movies that played at the Odeon or Imperial theater?
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon' or T2.name = 'Imperial'
+
+S: What are the codes of all movies that played at the Odeon theater?
+S: Also, what are the codes for the movies that played at the Imperial theater?
+S: What are the titles that correspond to those codes?
+
+
+12. Find the name of the movie that is on in theater Odeon and Imperial.
+P: What movie is playing at both the Odeon and Imperial theater?
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon' 
+Intersect 
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Imperial'
+
+S: What are the codes for all movie playing at the 'Odeon' theater?
+S: Which of those represent a movie also playing at the 'Imperial' theater?
+S: What are their titles?
+
+13. Find the name of all movies that are not played in Odeon theater.
+P: What are the names of every movie that is not playing at the Odeon theater?
+
+Select title
+From movies
+Except
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T2.name = 'Odeon'
+
+S: What are the codes of all the movies playing at the Odeon theater?
+S: What are the codes of all the other movies?
+S: What are the corresponding names?
+
+14. List in alphabetical order the titles of all movies.
+P: 	What are the movie names in alphabetical order? 
+
+Select title
+From movies
+Order by title
+
+S: What are the movie names?
+S: List them in alphabetical order
+
+
+15. Find the titles of all movies sorted by their ratings.
+P: What are the movie names sorted by rating?
+
+Select title
+From movies
+Order by rating
+
+S: Filter the movies by ratings
+S: List their names
+
+16. Find the name of the theater that is playing the most number of movies.
+P: What is the name of the theater playing the most movies?
+
+Select name
+From movietheaters
+Group by name
+Order by count(*) desc
+Limit 1
+
+S: What are the names of the movie theaters?
+S: Order them by number of movies playing?
+S: Which one is playing the most?
+
+17. Find the name of the movie that is played in the most number of theaters.
+P: What is the name of the film playing at the most number of theaters?
+
+Select T1.title
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Group by T1.title
+Order by count(*) desc
+Limit 1
+
+S: How many theaters is each movie playing at?
+S: Which movie is playing at the most?
+S: What is its name?
+
+18. Find the number of movies in each rating.
+P: How many movies exist for each rating?
+
+Select count(*), rating
+From movies
+Group by rating
+
+S: Group all the movies by rating
+S: How many movies are there for each rating?
+
+19. Find the number of movies whose rating is not null in each rating.
+ISSUE: this does not sound natural - I don't know how to make the group by sound natural
+P: How many movies have each rating type except null?
+
+Select count(*), rating
+From movies
+Where rating is not NULL
+Group by rating
+
+S: Group the movies by rating
+S: How many movies are there for each rating type?
+S: How many are there for each type except null?
+
+
+20. Find the number of movies for each rating excepts NULL.
+ISSUE: How is this different than the above?
+P: How many movies are there for each non-NULL rating?
+
+Select count(*), rating
+From movies
+Group by rating
+Having rating is not NULL
+
+S: Group the movies by rating
+S: How many movies are there for each rating type?
+S: How about for every non-null type?
+
+21. Find the name of theaters that has at least one movie playing.
+P: What is the name of every theater with at least one movie playing?
+
+Select name
+From movietheaters
+Group by name
+Having count(*) >= 1
+
+S: Group the movie theaters by name
+S: Which theaters have more than one film playing?
+S: What is that theater's name?
+
+22. Select the name of all movie theaters that are not currently showing a movie.
+P: What are the names of all cinemas not showing any movies?
+ISSUE: Shouldn't it be DISTINCT?
+
+select name
+from MovieTheaters
+where Movie is NULL
+
+S: What are the names of every movie theater?
+S: Of those, which are names of theaters that do not have any films showing?
+
+23. Find the name of the movie theaters that are playing the movies whose rating is ‘G’.
+P: What are the names of theaters playing 'G' rated movies? 
+
+Select T2.name
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
+Where T1.rating = 'G'
+
+S: What theaters are playing 'G'-rated movies?
+S: What are the names of the theaters?
+
+
+24. Select the title of all movies.
+P: What are all of the movie names?
+
+select title
+from movie
+
+S: What are all the movies?
+S: What are the titles?
+ 
+25. Show all the distinct ratings in the database.
+P: What are the different movie ratings?
+
+select distinct rating
+from movies
+
+S: What is all the information about the movies?
+S: What are their ratings?
+S: What are the different ratings?
+ 
+26. Show all information of all unrated movies.
+P: What is all the information about the unrated movies?
+
+select *
+from movies
+where rating is NULL
+
+S: Show all information about the movies
+S: Of that, which pertain to only unrated movies?
+
+ 
+27. Show the titles of movies not currently being shown in any theaters.
+P: What are the names of the movies not being shown in any theaters?
+
+SELECT Title
+FROM Movies
+WHERE Code NOT IN
+(SELECT Movie
+FROM MovieTheaters
+WHERE Movie IS NOT NULL)
+
+S: Which movies are not being shown in any theaters?
+S: What are their names
