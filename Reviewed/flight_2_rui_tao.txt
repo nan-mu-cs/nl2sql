@@ -320,12 +320,19 @@ select T1.FlightNo
 from FLIGHTS as T1 join AIRPORTS as T2 on T1.DestAirport  = T2.AirportCode
 where T2.City = "Aberdeen"
 
-OVERALL COMMENTS:
-1. CHANGE TO OUR JOIN RULE
-2. do not only change cond value to add one more example. combine with other small sql patterns together. e.g. select different columns or where
-3. 
-
 41. Find the number of flights landing in the city of Aberdeen or Abilene.
-(use OR)
 
-42. Find the name of airports where do not any flight in and out.
+select count(*)
+from Flights as T1 join Airports as T2 on T1.DestAirport = T2.AirportCode
+where T2.city = "Aberdeen" or T2.city = "Abilene"
+
+
+42. Find the name of airports which do not have any flight in and out.
+
+select AirportName
+from Airports
+where AirportCode NOT IN (select SourceAirport
+                          from Flights
+                          UNION
+                          select DestAirport
+                          from Flights)
