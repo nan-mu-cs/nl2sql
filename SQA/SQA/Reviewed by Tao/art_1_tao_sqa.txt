@@ -164,12 +164,10 @@ S: Who were all the distinct artists who made sculptures?
 S: Of those, which made them before 1900?
 S: What were their first and last names?
 
-James: do not select the columns that are not mentioned in the question.
-
-Select DISTINCT *
+Select *
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 
-Select DISTINCT *
+Select *
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 Where T2.year < 1900
 
@@ -188,10 +186,10 @@ S: Who are all the distinct artists?
 S: Which of them made sculptures after 1920?
 S: What are their birth years?
 
-Select DISTINCT *
+Select *
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 
-Select DISTINCT *
+Select *
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 Where T2.year > 1920
 
@@ -299,15 +297,12 @@ Group by T2.painterID
 Order by T1.deathYear - T1.birthYear DESC
 LIMIT 1
 
-James: if have group by + order by together in SQL, be careful to check. TODO: rewrite SQL for new questions.
-
 S: How many paintings did each artist make?
 S: How many paintings did the oldest of them make?
 
-Select lname, fname
-From artists 
-Order by deathYear - birthYear DESC
-LIMIT 1
+Select count(*), T2.painterID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+Group by T2.painterID
 
 Select count(*), T2.painterID
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
@@ -339,7 +334,7 @@ From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 Where T1.fname = "Mary"
 
 16. What are the widths of the paintings that were created by the artist who was born before 1850?
-P: 
+P: How wide were the paintings by the artist who was born prior to 1850?
 
 Select T2.width_mm
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
@@ -362,7 +357,7 @@ From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 Where T1.birthYear < 1850
 
 17. What are the location and medium type of paintings that are created by the artist whose first name is Pablo?
-P: 
+P: In what locations and on what mediums are the paintings created by the artist with the first name Pablo?
 
 Select T2.location,  T2.medium
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
@@ -445,7 +440,7 @@ From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 where T2.medium = "lithograph"
 
 20. What is the birth year of the artist who created a painting in 1884 that is on canvas?
-P:
+P: In what year was the artist who created a painting in 1884 born?
 
 Select T1.birthYear
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
@@ -454,8 +449,6 @@ where T2.year = 1884 and mediumOn = "canvas"
 S: Find the ids of the artists who created a painting in 1884.
 S: Of those, which are ids of artists that painted the work on canvas?
 S: What is his birthyear?
-
-James: You should be aware of this as well. If Shanelle did not be specify the select column in the first question for too many times, you should also change her first question so that you can write SQL that select some columns.
 
 Select T1.artistID
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
@@ -470,7 +463,7 @@ From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
 where T2.year = 1884 and mediumOn = "canvas"
 
 21. What are the unique first names of the artists who had medium oil paintings located in gallery 241?
-P:
+P: What are first names of the artists with oil paintings in gallery 241?
 
 Select DISTINCT T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
@@ -536,7 +529,6 @@ group by location
 
 S: How many paintings were created before 1900?
 S: How many were shown/collected in different places?
-
 
 Select count(*)
 From paintings
@@ -617,10 +609,16 @@ Select paintingID
 From paintings
 where year < (select max(year) from paintings where location = "Gallery 240")
 
-S: Which paintings are older than some other paintings?
+S: In what year was the oldest painting in Gallery 240 created?
 S: Of these, which are older than one in gallery 240?
 
-James: TODO: rewrite SQL answers.
+select max(year) 
+from paintings 
+where location = "Gallery 240"
+
+Select paintingID
+From paintings
+where year < (select max(year) from paintings where location = "Gallery 240")
 
 29. Find the id of the oldest painting.
 P: What is the id of the oldest painting?
@@ -644,7 +642,7 @@ order by year
 limit 1
 
 30. What are the first and last name of the artist who had a sculpture work whose title has the word “female” in it?
-P: 
+P: What is the full name of the artist with a sculpture whose title includes the word "female"?
 
 Select T1.lname, T1.fname
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
@@ -759,7 +757,7 @@ P: What is the id of the artist with the most paintings before 1900?
 Select T1.artistID
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 where T2.year < 1900
-group by T2.painterID
+group by T1.artistID
 order by count(*) DESC
 LIMIT 1
 
@@ -767,8 +765,21 @@ S: How many paintings did each artist create?
 S: How many did each create before 1900?
 S: Who painted the most?
 
-James: rewrite SQL. remember you can modify SQA questions if the original SQL is complex.
+Select count(*), T1.artistID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+group by T1.artistID
 
+Select count(*), T1.artistID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+where T2.year < 1900
+group by T1.artistID
+
+Select T1.artistID
+From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+where T2.year < 1900
+group by T1.artistID
+order by count(*) DESC
+LIMIT 1
 
 36. What is the first name of the artist who has the highest number of sculptures?
 P: What is the first name of the sculptor with the greatest number of works?
@@ -782,8 +793,6 @@ LIMIT 1
 S: How many sculptures did each artist create?
 S: Who created the most?
 S: What is their first name?
-
-James: group by what then select what (corrected)
 
 Select T2.sculptorID, count(*)
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
@@ -841,12 +850,10 @@ P: What are the ids of paintings that are taller than 500 and shorter than 2000?
 
 Select paintingID
 From paintings
-where height_mm between 500 and 2000
+where height_mm > 500 and height_mm < 2000
 
 S: What are the painting ids that have a height larger than 500?
 S: Of these, which also are shorter than 2000?
-
-James: keep the vast majority of final SQL the same as the SQL of the original complex question. But, in a few times, write the SQL more direct refects the SQA questions: between 500 and 2000 -> height_mm > 500 and height_mm < 2000
 
 Select paintingID
 From paintings
@@ -868,10 +875,24 @@ From paintings
 where mediumOn = "canvas"
 
 S: Which paintings are on panels?
-S: Of these, which are also on canvas?
-S: Find their locations.
+S: Which paintings are on canvas?
+S: Which locations contain both?
 
-James: TODO: rewrite SQL
+Select *
+From paintings
+where mediumOn = "panel"
+
+Select *
+From paintings
+where mediumOn = "canvas"
+
+Select DISTINCT location
+From paintings
+where mediumOn = "panel"
+INTERSECT
+Select DISTINCT location
+From paintings
+where mediumOn = "canvas"
 
 41. Find the locations that have paintings created before 1885 and after 1930?
 P: What are the locations that have works painted before 1885 and after 1930?
@@ -938,8 +959,6 @@ S: Which paintings were created before 1900?
 S: What is the id of the painting with the maximum height?
 S: Also what is that height?
 
-James: TODO: correct the final SQL.
-
 Select *
 From paintings
 where year < 1900
@@ -950,12 +969,14 @@ where year < 1900
 order by height_mm desc
 limit 1
 
-Select max(height_mm)
+Select height_mm
 From paintings
 where year < 1900
+order by height_mm desc
+limit 1
 
 44. What are the maximum height and width of paintings for each year?
-P: 
+P: What are largest height and width dimensions for paintings in each year?
 
 Select max(height_mm), max(width_mm), year
 From paintings
@@ -1060,7 +1081,6 @@ S: Find the id of all artists who made some scupltures.
 S: Of these, who created the fewest?
 S: When did he die?
 
-
 Select T1.artistID
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 
@@ -1118,8 +1138,6 @@ S: When was each painting in gallery 240 created?
 S: Which one is the oldest?
 S: Select the ids of all paintings older than that one.
 
-James: The first question does not ask id, do not put id. the 2nd question does not ask anything, put *.
-
 Select year
 From paintings
 where location = 'Gallery 240'
@@ -1144,14 +1162,15 @@ From paintings
 where height_mm >  (select max(height_mm)
                     from paintings
                     where year > 1900)
-		    
-
-James: You should double check if Shanelle's splittings are right (keep the same meaning of the original complex question). If not, correct them. TODO: correct SQL for right spilttings.
 				       
 S: Show all paintings created after 1900
 S: What is their maximum height?
-S: What are the ids of the paintings whose height is higher than the maximum height?
-			       
+S: What are the ids of the paintings whose height is higher than that maximum height?
+
+select *
+from paintings
+where year > 1900
+
 select max(height_mm)
 from paintings
 where year > 1900
