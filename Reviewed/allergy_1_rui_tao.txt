@@ -3,8 +3,6 @@ Total = #  40
 
 1. How many allergies?
 
-COMMENT: ok, but a little bit ambiguous. 
-
 select count(distinct allergy)
 from Allergy_type
 
@@ -74,8 +72,6 @@ limit 1
 
 10. Which allergy type has least number of allergies?
 
-COMMENT: asc is defaulted.
-
 select allergytype
 from Allergy_type
 group by allergytype
@@ -120,8 +116,6 @@ from Student
 
 16. Show first name, last name, age for all female (sex is F) students.
 
-COMMENT: if can't access the content, how to decide F means female?
-
 select Fname, Lname, Age
 from Student
 where Sex = 'F'
@@ -151,9 +145,7 @@ from Student
 where age > 20
 
 
-20. Which city does the student whose last name is Kim live in?
-
-COMMENT: how to decide which last and first name from question.
+20. Which city does the student whose last name is "Kim" live in?
 
 select city_code
 from Student
@@ -243,8 +235,6 @@ group by city_code
 
 31. Show all advisors and corresponding number of students.
 
-COMMENT: too many questions with this sql patterns!
-
 select advisor, count(*)
 from Student
 group by advisor
@@ -314,8 +304,6 @@ limit 1
 
 
 39. Show all allergy with number of students affected.
-
-COMMENT: too many questions with this sql patterns!
 
 select Allergy, count(*)
 from Has_allergy
