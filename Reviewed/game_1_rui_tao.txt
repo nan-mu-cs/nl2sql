@@ -338,8 +338,28 @@ where T3.Lname = "Smith" and T3.Fname = "Linda"
 
 
 41. Find the last and first name of students who are playing Football or Lacrosse.
-use OR
+
+select T2.lname, T2.fname
+from SportsInfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.SportName = "Football" or T1.SportName = "Lacrosse"
+
 
 42. Find the first name and age of the students who are playing both Football and Lacrosse.
 
+select fname, age
+from Student
+where StuID in (select StuID from Sportsinfo where SportName = "Football"
+                INTERSECT
+                select StuID from Sportsinfo where SportName = "Lacrosse")
+
 43. Find the last name and gender of the students who are playing both Call of Destiny and Works of Widenius games.
+
+select lname, sex
+from Student
+where StuID in (select T1.StuID
+                from Plays_games as T1 join Video_games as T2 on T1.GameID = T2.GameID
+                where T2.Gname = "Call of Destiny"
+                INTERSECT
+                select T1.StuID
+                from Plays_games as T1 join Video_games as T2 on T1.GameID = T2.GameID
+                where T2.Gname = "Works of Widenius")
