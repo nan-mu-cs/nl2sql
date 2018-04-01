@@ -1,7 +1,7 @@
 Total = #  40
 
 
-1. How many allergies?
+1. How many allergies are there?
 P: How many allergy entries are there?
 
 
