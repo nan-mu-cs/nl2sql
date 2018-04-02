@@ -281,12 +281,6 @@ having count(*) >= 2;
 
 
 
-select  *
-from Users as T1 JOIN User_Searches as T2 
-on T1.user_id = T2.user_id
-JOIN Addresses as T3
-on T1.user_address_id = T3.address_id
-
 31. For the properties with at least one photo, how many photos does each property have? Also list the property id.
 
 select count(*), property_id
