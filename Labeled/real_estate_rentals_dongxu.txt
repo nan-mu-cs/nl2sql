@@ -32,12 +32,11 @@ order by count(*) desc limit 1;
 
 
 
-5. How many rooms can a house have at most?
+5. How many rooms can a house have at least?
 
 
-select room_count
-from Properties
-order by room_count desc limit 1;
+select min(room_count)
+from Properties;
 
 
 6. How many properties have one parking lot or one garage?
@@ -50,11 +49,11 @@ where parking_lots = 1 or garage_yn = 1;
 
 7. What are all the descriptions of property features of the property with the most features?
 
-COMMENT: in -> = ?
+ COMMENT: in -> = ? Fixed
 
 select property_feature_description
 from Property_Features
-where property_id in 
+where property_id = 
 (select property_id
 	from Property_Features
 	group by property_id
@@ -95,14 +94,14 @@ where T4.feature_name = 'swimming pool';
 select count(*), T1.property_id
 from Properties as T1 JOIN Property_Features as T2 on T1.property_id = T2.property_id
 group by T1.property_id
-order by T1.date_on_market asc limit 1;
+order by T1.date_on_market limit 1;
 
 
 12. Which property was requested the lowest price by the vendor? List the id and the price.
 
 select property_id, vendor_requested_price
 from Properties
-order by vendor_requested_price asc limit 1;
+order by vendor_requested_price limit 1;
 
 
 13. On average, how many rooms does a property has?
@@ -118,26 +117,25 @@ select count(distinct room_size)
 from Rooms;
 
 
-15. What are the search contents of the user who searched most frequently? Also list the user id.
+15. What are the search contents of the user who searched for at least 2 times? Also list the user id.
 
-COMMENT: in -> = ? (too many this kind pattern IN + NESTED limit 1)
+COMMENT: in -> = ? (too many this kind pattern IN + NESTED limit 1) Fixed
 
 select search_seq, user_id
 from User_Searches
-where user_id in
+where user_id =
 (select user_id
 from User_Searches
 group by user_id
-order by count(*) desc limit 1);
+having count(*)>=2);
 
 
 
 
 16. When was the latest search by a user?
 
-select search_datetime
-from User_Searches
-order by search_datetime desc limit 1;
+select max(search_datetime)
+from User_Searches;
 
 
 17. What are all the user searches time and content? Sort the result descending by content.
@@ -148,17 +146,17 @@ from User_Searches
 order by search_string desc;
 
 
-18. Where are the properties which do not belong to the user who owns the most number of properties? List the building, and the street.
+18. Where are the properties which do not belong to the user who owns at most 2 properties? List the building, and the street.
 
 COMMENT: do not use limit 1 too much, sepecially in NOT IN/IN, in this case = is enough.
 
-select line_1_number_building, line_2_number_street
+select T1.line_1_number_building, T1.line_2_number_street
 from Addresses as T1 JOIN Properties as T2 on T1.address_id = T2.property_address_id
-where T2.owner_user_id not in(
+where T2.owner_user_id != (
 select owner_user_id
 from Properties
 group by owner_user_id
-order by count(*) desc limit 1
+having count(*) <= 2
 );
 
 
@@ -176,12 +174,12 @@ having count(*) = 1;
 
 select T1.age_category_code
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
-order by T2.search_datetime asc limit 1;
+order by T2.search_datetime limit 1;
 
 
-21. Which users are buyers? List their log in names.
+21. Which users are buyers with the buyer value equal to 1? List their log in names.
 
-COMMENT: INTERESTING, can discuss
+COMMENT: INTERESTING, can discuss Fixed
 
 select login_name
 from Users
@@ -211,7 +209,7 @@ where is_seller = 1;
 
  
 25. Where do the Senior Citizens live? List building, street, and the city.
-P: what are the addresses of all the senior citizens?
+Paraphrase: what are the addresses of all the senior citizens?
 
 select T1.line_1_number_building, T1.line_2_number_street, T1.town_city
 from Addresses as T1 JOIN Users as T2 on T1.address_id = T2.user_address_id
@@ -228,26 +226,23 @@ having count(*) > 1;
 
 
 
-27.  In which cities are there properties with at least 2 features?
+27.  In which cities are there properties with at least 2 features? List the city and the property id.
 
-COMMENT: USE 2 JOIN INSTEAD OF NESTED SQL.
+COMMENT: USE 2 JOIN INSTEAD OF NESTED SQL. Fixed
 
-select T2.town_city
-from Properties as T1 JOIN Addresses as T2 on T1.property_address_id = T2.address_id
-where T1.property_id 
-in
-(select property_id
-	from Property_Features
- group by property_id
- having count(*) >=2
-);
+
+select T1.town_city
+from Addresses as T1 JOIN Properties as T2 on T1.address_id = T2.property_address_id
+JOIN Property_Features as T3
+on T2.property_id = T3.property_id
+group by T2.property_id
+having count(*) >=2;
 
 
 28. On which date did the last property go into the market?
 
-select date_on_market
-from Properties
-order by date_on_market desc limit 1;
+select max(date_on_market)
+from Properties;
 
 
 
@@ -271,16 +266,19 @@ where parking_lots = 1);
 
 30. List the users who have searched at least twice but do not live in state Wyoming. List first names and ids.
 
-COMMENT: can discuss more
+COMMENT: can discuss more Fixed
 
-select T1.first_name, T1.user_id
-from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
-group by T1.first_name
-having count(*) >= 2
-EXCEPT
-select T1.first_name, T1.user_id
-from Users as T1 JOIN Addresses as T2 on T1.user_address_id = T2.address_id
-where county_state_province = 'Wyoming';
+
+select distinct T1.first_name, T1.user_id
+from Users as T1 JOIN User_Searches as T2 
+on T1.user_id = T2.user_id
+JOIN Addresses as T3
+on T1.user_address_id = T3.address_id
+where T3.county_state_province != 'Wyoming'
+group by T1.user_id
+having count(*) >= 2;
+
+
 
 
 31. For the properties with at least one photo, how many photos does each property have? Also list the property id.
@@ -307,11 +305,11 @@ where T2.user_category_code = 'Single Mother' or T2.user_category_code = 'Studen
 
 34. When did all the user property history happened? Sort them ascending by timestamp, list the timestamp and list the property name.
 
-COMMENT: asc is defaulted, so do not add asc.
+COMMENT: asc is defaulted, so do not add asc Fixed
 
 select T1.datestamp, T2.property_name
 from User_Property_History as T1 JOIN Properties as T2 on T1.property_id = T2.property_id
-order by datestamp asc;
+order by datestamp;
 
 
 35. What is the description of the most common property type? List the description and the id.
@@ -346,14 +344,27 @@ where T2.first_name = 'Robbie';
 
 39. Who lives in the property he or she owns? List the first name, middle name and last name.
 
-COMMENT: be more sepecific: T1.property_address_id = T2.user_address_id
+COMMENT: be more sepecific: T1.property_address_id = T2.user_address_id Fixed
+
+select first_name, middle_name, last_name
+from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
+Where T1.property_address_id = T2.user_address_id;
+
+40. Paraphrase: Which owner's address is the same as one of the propertie he or she owns? List the first name, middle name and last name.
+
+
+
+COMMENT: be more sepecific: T1.property_address_id = T2.user_address_id Fixed
 
 select first_name, middle_name, last_name
 from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
 Where T1.property_address_id = T2.user_address_id;
 
 
-40. List the search content of the poor users who do not own a single property.
+
+
+
+41. List the search content of the poor users who do not own a single property.
 
 select search_string
 from User_Searches
@@ -362,7 +373,7 @@ select distinct T1.search_string
 from User_Searches as T1 JOIN Properties as T2 on T1.user_id = T2.owner_user_id;
 
 
-41. List the user who have at least 2 properties and searched at most twice. List both last names and id.
+42. List the user who have at least 2 properties and searched at most twice. List both last names and id.
 
 select T1.last_name, T1.user_id
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
@@ -375,7 +386,7 @@ group by T1.user_id
 having count(*) >= 2;
 
 
-42. For users whose description contain the suffix 'Mother', Which age categories are they in?
+43. For users whose description contain the suffix 'Mother', Which age categories are they in?
 
 select T2.age_category_code
 from Ref_User_Categories as T1 JOIN Users as T2 on T1.user_category_code = T2.user_category_code
