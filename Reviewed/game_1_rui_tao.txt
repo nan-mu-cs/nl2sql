@@ -47,8 +47,6 @@ where gname = "Call of Destiny"
 
 7. How many video games have type Massively multiplayer online game?
 
-COMMENT: DO NOT ask more than two such where = TOO SPECIFIC VALUE, this time is ok
-
 select count(*)
 from Video_games
 where gtype = "Massively multiplayer online game"
@@ -91,9 +89,6 @@ where city_code = "CHI"
 
 
 12.  Show ids for all students who have advisor 1121.
-
-
-COMMENT: DO NOT ask non-meaningful where = TOO SPECIFIC VALUE
 
 select StuID
 from Student
@@ -138,8 +133,6 @@ from Sportsinfo
 
 
 18. List ids for all student who are on scholarship.
-
-COMMENT:what do you think?onscholarship = 'Y', should the model learn it?
 
 select StuID
 from Sportsinfo
@@ -226,8 +219,6 @@ from Sportsinfo
 
 28. Show student ids who are on scholarship and have major 600.
 
-COMMENT: CAN BE ANSWERED BY where and
-add one more question (intersect): Find the first name and age of the students who are playing both Football and Lacrosse.
 
 select StuID
 from Student
@@ -240,9 +231,6 @@ where onscholarship = 'Y'
 
 29. Show student ids who are female and play football.
 
-COMMENT: CAN BE ANSWERED BY where and. INTERSECT is for when you want to know the class that was taught in 2009 and 2010 (same column has two condition values!!!!)
-add one more question (intersect): Find the last name and gender of the students who are playing both Call of Destiny and Works of Widenius games.
-
 select StuID
 from Student
 where sex = 'F'
@@ -253,8 +241,6 @@ where sportname = "Football"
 
 
 30. Show all male student ids who don't play football.
-
-COMMENT: RIGHT because one student can play mulitple sports.
 
 select StuID
 from Student
@@ -350,8 +336,30 @@ select Gname
 from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid join Student as T3 on T3.Stuid = T1.Stuid
 where T3.Lname = "Smith" and T3.Fname = "Linda"
 
-OVERALL COMMENTS: 
-1. good overall
 
 41. Find the last and first name of students who are playing Football or Lacrosse.
-use OR
+
+select T2.lname, T2.fname
+from SportsInfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.SportName = "Football" or T1.SportName = "Lacrosse"
+
+
+42. Find the first name and age of the students who are playing both Football and Lacrosse.
+
+select fname, age
+from Student
+where StuID in (select StuID from Sportsinfo where SportName = "Football"
+                INTERSECT
+                select StuID from Sportsinfo where SportName = "Lacrosse")
+
+43. Find the last name and gender of the students who are playing both Call of Destiny and Works of Widenius games.
+
+select lname, sex
+from Student
+where StuID in (select T1.StuID
+                from Plays_games as T1 join Video_games as T2 on T1.GameID = T2.GameID
+                where T2.Gname = "Call of Destiny"
+                INTERSECT
+                select T1.StuID
+                from Plays_games as T1 join Video_games as T2 on T1.GameID = T2.GameID
+                where T2.Gname = "Works of Widenius")

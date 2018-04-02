@@ -1,0 +1,205 @@
+Total # = 30
+
+1.
+What is the id of the most recent order?
+SELECT order_id
+FROM orders
+ORDER BY date_order_placed DESC
+LIMIT 1
+
+what is the order id and customer id of the oldest order?
+SELECT order_id, customer_id
+FROM orders
+ORDER BY date_order_placed 
+LIMIT 1
+
+
+2.
+Find the id of the order whose shipment tracking number is "3452"?
+SELECT order_id
+FROM shipments
+WHERE shipment_tracking_number="3452"
+
+
+Find all the id of order items whose product id is 11?
+SELECT order_item_id
+FROM order_items
+WHERE product_id=11
+
+
+3.
+List the name of all distinct customers who have orders whose status is "Packing"?
+SELECT distinct T1.customer_name
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T2.order_status="Packing"
+
+
+Find the details of all distinct customers who have orders whose status is "On Road"?
+SELECT distinct T1.customer_details
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T2.order_status="On Road"
+
+
+4.
+What is the name of the customer who has the most orders?
+SELECT T1.customer_name
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id = T2.customer_id
+GROUP BY T1.customer_id
+ORDER BY count(*) DESC
+LIMIT 1
+
+What is the customer_id of the customer who has the most orders?
+SELECT T1.customer_id
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id = T2.customer_id
+GROUP BY T1.customer_id
+ORDER BY count(*) DESC
+LIMIT 1
+
+
+5.
+Give me a list of id and status of orders which belong to the customer whose name is "Jeramie"?
+SELECT T2.order_id, T2.order_status
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T1.customer_name="Jeramie"
+
+Find the dates of orders which belong to the customer whose name is "Jeramie"?
+SELECT T2.date_order_placed
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T1.customer_name="Jeramie"
+
+
+6.
+Give me a list of names of customers who have placed orders between 2009-01-01 and 2010-01-01?
+SELECT T1.customer_name
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T2.date_order_placed>=date("2009-01-01") and T2.date_order_placed<=date("2010-01-01")
+
+Give me a list of distince product id of orders which are placed between 1975-01-01 and 1976-01-01?
+SELECT distinct T2.product_id
+FROM orders as T1 JOIN order_items as T2 ON T1.order_id=T2.order_id
+WHERE T1.date_order_placed>=date("1975-01-01") and T1.date_order_placed<=date("1976-01-01")
+
+
+7. 
+Find the name of the customers who have orders status both "On Road" and "Shipped"?
+SELECT T1.customer_name
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T2.order_status="On Road"
+INTERSECT 
+SELECT T1.customer_name
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T2.order_status="Shipped"
+
+Find the id of the customers who have orders status both "On Road" and "Shipped"?
+SELECT T1.customer_id
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T2.order_status="On Road"
+INTERSECT 
+SELECT T1.customer_id
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+WHERE T2.order_status="Shipped"
+
+
+8.
+What is the placed date of the orders whose shipment tracking number is 3452?
+SELECT T1.date_order_placed
+FROM orders as T1 JOIN shipments as T2 ON T1.order_id=T2.order_id
+WHERE T2.shipment_tracking_number=3452
+
+What is the placed date of the orders whose invoice number is 10?
+SELECT T1.date_order_placed
+FROM orders as T1 JOIN shipments as T2 ON T1.order_id=T2.order_id
+WHERE T2.invoice_number=10
+
+
+9.
+List the number and id of the products of all orders?
+SELECT count(*), T3.product_id
+FROM orders as T1 JOIN order_items as T2 JOIN products as T3 ON T1.order_id=T2.order_id and T2.product_id=T3.product_id
+GROUP BY T3.product_id
+
+List the name and number of the products of all orders?
+SELECT T3.product_name, count(*)
+FROM orders as T1 JOIN order_items as T2 JOIN products as T3 ON T1.order_id=T2.order_id and T2.product_id=T3.product_id
+GROUP BY T3.product_id
+
+
+10.
+Find the id of orders which are shipped after 2000-01-01?
+SELECT order_id
+FROM shipments
+WHERE shipment_date>=date("2000-01-01")
+
+Find the id of the order which is most recently shipped?
+SELECT order_id
+FROM shipments
+WHERE shipment_date = (SELECT max(shipment_date) from shipments)
+
+
+11.
+List the names of all distinct products in alphabetical order?
+SELECT distinct product_name
+FROM products
+ORDER BY product_name
+
+List the id of all distinct orders ordered by placed date?
+SELECT distinct order_id
+FROM orders
+ORDER BY date_order_placed
+
+
+12.
+What is the id of the order which has the most number of items?
+SELECT T1.order_id
+FROM orders as T1 JOIN order_items as T2 ON T1.order_id=T2.order_id
+GROUP BY T1.order_id
+ORDER BY count(*) DESC
+LIMIT 1
+
+What is the name of the customer who has the most number of orders?
+SELECT T1.customer_name
+FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
+GROUP BY T1.customer_id
+ORDER BY count(*) DESC
+LIMIT 1
+
+
+13.
+Find the number of invoices which are created before 1989-09-03 or after 2007-12-25?
+SELECT invoice_number
+FROM invoices
+WHERE invoice_date<date("1989-09-03") or invoice_date>date("2007-12-25")
+
+Find the distinct details of invoices which are created before 1989-09-03 or after 2007-12-25?
+SELECT distinct invoice_details
+FROM invoices
+WHERE invoice_date<date("1989-09-03") or invoice_date>date("2007-12-25")
+
+
+14.
+Find the name and number of orders of all customers who has at least two orders?
+SELECT T2.customer_name, count(*)
+FROM orders as T1 JOIN customers as T2 ON T1.customer_id=T2.customer_id
+GROUP BY T2.customer_id
+having count(*) > 1
+
+Find the name of customers who has at most two orders?
+SELECT T2.customer_name
+FROM orders as T1 JOIN customers as T2 ON T1.customer_id=T2.customer_id
+GROUP BY T2.customer_id
+having count(*) < 3
+
+
+15.
+List the name of customers who have once bought product food?
+SELECT T1.customer_name
+FROM customers as T1 JOIN orders as T2 JOIN order_items as T3 JOIN products as T4 ON T1.customer_id=T2.customer_id and T2.order_id=T3.order_id and T3.product_id=T4.product_id
+GROUP BY T1.customer_id
+HAVING count(T4.product_name="food")
+
+List the name of customers who have once canceled to buy product food and the food item status is "Cancel"?
+SELECT T1.customer_name
+FROM customers as T1 JOIN orders as T2 JOIN order_items as T3 JOIN products as T4 ON T1.customer_id=T2.customer_id and T2.order_id=T3.order_id and T3.product_id=T4.product_id
+WHERE T3.order_item_status="Cancel"
+GROUP BY T1.customer_id
+HAVING count(T4.product_name="food")

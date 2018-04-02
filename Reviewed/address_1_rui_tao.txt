@@ -109,8 +109,6 @@ limit 1
 
 14. Show the first name and the last name for students living in state MD.
 
-COMMENT: also Fname -> T2.Fname, Lname -> T2.Lname
-
 select T2.Fname, T2.Lname
 from City as T1 join Student as T2 on T1.city_code = T2.city_code
 where T1.state = "MD"
@@ -126,8 +124,6 @@ where T1.country = "CHINA"
 
 16. Return the first name and major of students are living in Baltimore?
 
-COMMENT: Do not alway select count! you can select other columns!
-
 select T2.Fname, T2.Major
 from City as T1 join Student as T2 on T1.city_code = T2.city_code
 where T1.city_name = "Baltimore"
@@ -135,16 +131,12 @@ where T1.city_name = "Baltimore"
 
 17. Show the number of students living in each country.
 
-COMMENT: changed question. no need to say select country because our rule says you need to select country if you group by it.
-
 select T1.country, count(*)
 from City as T1 join Student as T2 on T1.city_code = T2.city_code
 group by T1.country
 
 
 18. Find the number of students living in each city.
-
-COMMENT: ADD T1/T2 before the column name
 
 select T1.city_name, count(*)
 from City as T1 join Student as T2 on T1.city_code = T2.city_code
@@ -170,9 +162,7 @@ group by T1.country
 order by count(*)
 limit 1
 
-21. Show all cities where at least three students live.
-
-COMMENT: be specific which column you want to select: code or name
+21. Show names for all cities where at least three students live.
 
 select T1.city_name
 from City as T1 join Student as T2 on T1.city_code = T2.city_code
@@ -191,8 +181,6 @@ having count(*) > 5
 
 23. Show ids for all students who don't live in USA.
 
-COMMENT: can be answered by WHERE != USA
-
 select StuID
 from Student
 EXCEPT
@@ -202,8 +190,6 @@ where country = "USA"
 
 
 24. Show ids for all female (sex is F) students living in state PA.
-
-COMMENT: be more specific
 
 select StuID
 from City as T1 join Student as T2 on T1.city_code = T2.city_code

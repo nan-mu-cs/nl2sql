@@ -125,116 +125,83 @@ where T2.City = "Aberdeen"
 
 17. How many flights depart from City 'Aberdeen' and have destination City 'Ashley'?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
 select count(*)
-from FLIGHTS, AIRPORTS as A1, AIRPORTS as A2
-where FLIGHTS.DestAirport = A1.AirportCode
-    and FLIGHTS.SourceAirport = A2.AirportCode
-    and A1.City = "Ashley"
-    and A2.City = "Aberdeen"
+from FLIGHTS as T1 join AIRPORTS as T2 on T1.DestAirport = T2.AirportCode join AIRPORTS as T3 on T1.SourceAirport = T3.AirportCode
+where T2.City = "Ashley" and T3.City = "Aberdeen"
 
 
 18. How many flights does airline 'JetBlue Airways' have?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
 select count(*)
-from FLIGHTS join AIRLINES on FLIGHTS.Airline = AIRLINES.uid
-where AIRLINES.Airline="JetBlue Airways"
+from FLIGHTS as T1 join AIRLINES as T2 on T1.Airline = T2.uid
+where T2.Airline="JetBlue Airways"
 
 
 19. How many 'United Airlines' flights go to Airport 'ASY'?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
 select count(*)
-from AIRLINES join FLIGHTS on FLIGHTS.Airline = AIRLINES.uid
-where AIRLINES.Airline = "United Airlines" and FLIGHTS.DestAirport = "ASY"
+from AIRLINES as T1 join FLIGHTS as T2 on T2.Airline = T1.uid
+where T1.Airline = "United Airlines" and T2.DestAirport = "ASY"
 
 
 20. How many 'United Airlines' flights depart from Airport 'AHD'?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
 select count(*)
-from AIRLINES join FLIGHTS on FLIGHTS.Airline = AIRLINES.uid
-where AIRLINES.Airline = "United Airlines" and FLIGHTS.SourceAirport = "AHD"
+from AIRLINES as T1 join FLIGHTS as T2 on T2.Airline = T1.uid
+where T1.Airline = "United Airlines" and T2.SourceAirport = "AHD"
 
 
 21. How many United Airlines flights go to City 'Aberdeen'?
-
-COMMENT: CHANGE TO OUR JOIN RULE
-
+    
 select count(*)
-from AIRLINES, AIRPORTS, FLIGHTS
-where FLIGHTS.DestAirport = AIRPORTS.AirportCode 
-    and AIRPORTS.City = "Aberdeen"
-    and FLIGHTS.Airline = AIRLINES.uid 
-    and AIRLINES.Airline = "United Airlines"
+from FLIGHTS as T1 join AIRPORTS as T2 on T1.DestAirport = T2.AirportCode join AIRLINES as T3 on T3.uid = T1.Airline
+where T2.City = "Aberdeen" and T3.Airline = "United Airlines"
 
 
 22. Which city has most number of arriving flights?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRPORTS.City
-from AIRPORTS join FLIGHTS on AIRPORTS.AirportCode = FLIGHTS.DestAirport
-group by AIRPORTS.City
+select T1.City
+from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.DestAirport
+group by T1.City
 order by count(*) desc
 limit 1
 
 
 23. Which city has most number of departing flights?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRPORTS.City
-from AIRPORTS join FLIGHTS on AIRPORTS.AirportCode = FLIGHTS.SourceAirport
-group by AIRPORTS.City
+select T1.City
+from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.SourceAirport
+group by T1.City
 order by count(*) desc
 limit 1
-
 
 24. What is the code of airport that has most number of flights?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRPORTS.AirportCode
-from AIRPORTS, FLIGHTS
-where AIRPORTS.AirportCode = FLIGHTS.DestAirport or AIRPORTS.AirportCode = FLIGHTS.SourceAirport
-group by AIRPORTS.AirportCode
+select T1.AirportCode
+from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.DestAirport or T1.AirportCode = T2.SourceAirport
+group by T1.AirportCode
 order by count(*) desc
 limit 1
 
-
 25. What is the code of airport that has fewest number of flights?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRPORTS.AirportCode
-from AIRPORTS, FLIGHTS
-where AIRPORTS.AirportCode = FLIGHTS.DestAirport or AIRPORTS.AirportCode = FLIGHTS.SourceAirport
-group by AIRPORTS.AirportCode
+select T1.AirportCode
+from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.DestAirport or T1.AirportCode = T2.SourceAirport
+group by T1.AirportCode
 order by count(*)
 limit 1
 
 
 26. Which airline has most number of flights?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-group by AIRLINES.Airline
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+group by T1.Airline
 order by count(*) desc
 limit 1
 
 
 27. Find the abbreviation and country of the airline that has fewest number of flights?
-
-COMMENT: TOO many this pattern, you can combine with other small pattern to be more diverse!
-         For example: I have changed the question to find the abbreviation and country of the airline.
          
 select T1.Abbreviation, T1.Country
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
@@ -245,71 +212,54 @@ limit 1
 
 28. What are airlines that have some flight departing from airport 'AHD'?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-        
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-where FLIGHTS.SourceAirport = "AHD"
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+where T2.SourceAirport = "AHD"
 
 
 29. What are airlines that have flights arriving at airport 'AHD'?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-where FLIGHTS.DestAirport == "AHD"
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+where T2.DestAirport = "AHD"
 
 
 30. Find all airlines that have flights from both airports 'APG' and 'CVO'.
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-where FLIGHTS.SourceAirport == "APG"
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+where T2.SourceAirport == "APG"
 intersect
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-where FLIGHTS.SourceAirport == "CVO"
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+where T2.SourceAirport == "CVO"
 
 
 31. Find all airlines that have flights from airport 'CVO' but not from 'APG'.
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-where FLIGHTS.SourceAirport == "CVO"
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+where T2.SourceAirport == "CVO"
 except
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-where FLIGHTS.SourceAirport == "APG"
-
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+where T2.SourceAirport == "APG"
 
 32. Find all airlines that have at least 10 flights
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-group by AIRLINES.Airline
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+group by T1.Airline
 having count(*) > 10
-
 
 33. Find all airlines that have fewer than 200 flights
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select AIRLINES.Airline
-from AIRLINES join FLIGHTS on AIRLINES.uid = FLIGHTS.Airline
-group by AIRLINES.Airline
+select T1.Airline
+from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
+group by T1.Airline
 having count(*) < 200
 
-
 34. Find all airlines which have departure flights in all airports.
-
-COMMENT: CHANGE TO OUR JOIN RULE
 
 select distinct AIRLINES.Airline
 from AIRLINES
@@ -324,9 +274,6 @@ where AIRLINES.uid = FLIGHTS.Airline)
 
 35. Find all airlines which have arriving flights in all airports.
 
-COMMENT: CHANGE TO OUR JOIN RULE
-         we do not use EXIST, but we can keep this two.
-
 select distinct AIRLINES.Airline
 from AIRLINES
 where not exists (
@@ -340,11 +287,9 @@ where AIRLINES.uid = FLIGHTS.Airline)
 
 36. What are flight numbers of Airline "United Airlines"?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select FlightNo
-from FLIGHTS join AIRLINES on AIRLINES.uid = FLIGHTS.Airline
-where AIRLINES.Airline = "United Airlines"
+select T1.FlightNo
+from FLIGHTS as T1 join AIRLINES as T2 on T2.uid = T1.Airline
+where T2.Airline = "United Airlines"
 
 
 37. What are flight numbers of flights departing from Airport "APG"?
@@ -364,27 +309,30 @@ where DestAirport = "APG"
 
 39. What are flight numbers of flights departing from City "Aberdeen "?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select FLIGHTS.FlightNo
-from FLIGHTS join AIRPORTS on FLIGHTS.SourceAirport  = AIRPORTS.AirportCode
-where AIRPORTS.City = "Aberdeen"
+select T1.FlightNo
+from FLIGHTS as T1 join AIRPORTS as T2 on T1.SourceAirport  = T2.AirportCode
+where T2.City = "Aberdeen"
 
 
 40. What are flight numbers of flights arriving at City "Aberdeen"?
 
-COMMENT: CHANGE TO OUR JOIN RULE
-
-select FLIGHTS.FlightNo
-from FLIGHTS join AIRPORTS on FLIGHTS.DestAirport  = AIRPORTS.AirportCode
-where AIRPORTS.City = "Aberdeen"
-
-OVERALL COMMENTS:
-1. CHANGE TO OUR JOIN RULE
-2. do not only change cond value to add one more example. combine with other small sql patterns together. e.g. select different columns or where
-3. 
+select T1.FlightNo
+from FLIGHTS as T1 join AIRPORTS as T2 on T1.DestAirport  = T2.AirportCode
+where T2.City = "Aberdeen"
 
 41. Find the number of flights landing in the city of Aberdeen or Abilene.
-(use OR)
 
-42. Find the name of airports where do not any flight in and out.
+select count(*)
+from Flights as T1 join Airports as T2 on T1.DestAirport = T2.AirportCode
+where T2.city = "Aberdeen" or T2.city = "Abilene"
+
+
+42. Find the name of airports which do not have any flight in and out.
+
+select AirportName
+from Airports
+where AirportCode NOT IN (select SourceAirport
+                          from Flights
+                          UNION
+                          select DestAirport
+                          from Flights)
