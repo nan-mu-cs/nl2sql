@@ -1,4 +1,3 @@
-
 Total # = 76
 
 1. Find the number of professors in accounting department.
@@ -138,8 +137,6 @@ Order by count(*)
 Limit 1
 
 Find the number of professors with a Ph.D. degree in each department.
-
-COMMENTS: Find the number of professors with a Ph.D. as high degree in each department.
 
 Select count(*), dept_code
 From professor

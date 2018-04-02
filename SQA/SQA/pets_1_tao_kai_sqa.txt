@@ -1,0 +1,277 @@
+
+Total # = 21
+
+1. Find the number of pets whose weight is heavier than 10.
+P: How many pets have a greater weight than 10?
+
+Select count(*)
+From pets
+Where weight > 10
+
+S: What information is there on pets?
+S: Which pets weigh more than 10?
+S: How many are there?
+
+
+2. Find the weight of the youngest dog.
+P: How much does the youngest dog weigh?
+
+Select weight
+From pets
+order by pet_age
+Limit 1
+
+S: Order the pets by age
+S: How much does each one weigh?
+S: What about the first one?
+
+
+3. Find the maximum weight for each type of pet. List the maximum weight and pet type.
+P: List the maximum weight and type for each type of pet. 
+
+Select max(weight), petType
+From pets
+Group by petType
+
+S: What are the different types of pets?
+S: For each of those types, what is the maximum weight?
+
+4. Find number of pets owned by students who are older than 20.
+P: How many pets are owned by students that have an age greater than 20?
+
+Select count(*)
+From student as T1 join has_pet as T2 on T1.stuid = T2.stuid
+Where T1.age > 20
+
+S: Which students are older than 20?
+S: How many are there?
+
+5. Find the number of dog pets that are raised by female students (with sex F). 
+P: How many dog pets are raised by female students?
+
+Select count(*)
+From student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T2.petid = T3.petid
+Where T1.sex = 'F' AND T3.pettype = 'dog'
+
+S: Who are the female students?
+S: Of those, who has a pet?
+S: How many of those have dogs?
+
+
+6. Find the number of distinct type of pets.
+P: How many different types of pet are there?
+
+select count(distinct pettype)
+From pets
+
+S: What are the different pet types?
+S: How many exist?
+
+7. Find the first name of students who have cat or dog pet.
+P: What are the first names of every student who has a cat or dog as a pet? 
+
+Select distinct T1.Fname
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'cat' or T3.pettype = 'dog'
+
+S: what is the first name of every student?
+S: Of those names, which ones correspond to somebody who has a cat?
+S: Also, combine those names with those who have a dog.
+
+8.Find the name of students who have both cat and dog pets.
+P: What are the students' first names who have both cats and dogs as pets?
+
+Select T1.Fname
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'cat'
+Intersect
+Select T1.Fname
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'dog'
+
+S: Which students have a dog as their type of pet?
+S: Who also has a cat?
+S: What are their first names?
+
+9. Find the major and age of students who do not have a cat pet.
+P: What major is every student who does not own a cat as a pet, and also how old are they?
+
+
+Select major, age
+From student
+Where stuid NOT IN
+(Select T1.stuid
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'cat')
+
+S: Which students do not own a cat as a pet?
+S: What are they majoring in?
+S: Also, how old are they?
+
+
+
+10. Find the id of students who do not have a cat pet.
+P: What are the ids of the students who do not own cats as pets?
+
+Select stuid
+From student
+Except 
+Select T1.stuid
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'cat'
+
+S: What is every student's id?
+S: Of those ids, which correspond to those who own cats as pets?
+S: List all the other ids. 
+
+
+11. Find the first name and age of students who have a dog but do not have a cat as a pet.
+P: What is the first name of every student who has a dog but does not have a cat? 
+
+Select T1.fname, T1.age
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'dog' and T1.stuid NOT IN
+(Select T1.stuid
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'cat')
+
+S: Which students do not own cats as pets?
+S: Of those, who has a dog?
+S: What are their first names?
+
+12. Find the type and weight of the youngest pet.
+P: What type of pet is the youngest animal, and how much does it weigh?
+
+Select pettype, weight
+From pets
+order by pet_age
+Limit 1
+
+S: Who is the youngest pet?
+S: What type are they?
+S: Also, how much do they weigh?
+
+13. Find the id and weight of all pets whose age is older than 1.
+P: What is the id and weight of every pet who is older than 1?
+
+Select petid, weight
+From pets
+Where pet_age > 1
+
+S: What are ids of every pet?
+S: For those, which refer to pets older than 1?
+S: Also, how much do they weigh?
+
+
+14. Find the average and maximum age for each type of pet.
+P: What is the average and maximum age for each pet type?
+
+Select avg(pet_age), max(pet_age), pettype
+From pets
+Group by pettype
+
+S: What are the different pet types?
+S: For each of those, what is the maximum age?
+S: What about the average age?
+
+15. Find the average weight for each pet type.
+P: What is the average weight for each type of pet?
+
+Select avg(weight), pettype
+From pets
+Group by pettype
+
+S: What information is there on pets?
+S: For each pet type, what is the average weight?
+
+
+16. Find the first name and age of students who have a pet.
+P: What are the  different first names and ages of the students who do not have pets? 
+
+Select distinct T1.fname, T1.age
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+
+S: Which students do not have pets?
+S: What are the different first names?
+S: Also, what are the distinct ages? 
+
+17. Find the id of the pet owned by student whose last name is ‘Smith’.
+P: What is the id of the pet owned by the student whose last name is 'Smith'?
+
+Select T2.petid
+from student as T1 join has_pet as T2 on T1.stuid = T2.stuid
+Where T1.Lname = 'Smith'
+
+S: Which students have pets?
+S: Of those, whose last name is smith?
+S: What is their pet's id?
+
+18. Find the number of pets for each student who has any pet and student id.
+P: For students who have pets, how many pets does each student have?
+
+Select count(*), T1.stuid
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Group by T1.stuid
+
+S: Which of the students have pets?
+S: How many pets does each of them have?
+
+19. Find the first name and gender of student who have more than one pet.
+P: What is the first name and gender of the all the students who have more than one pet?
+
+Select T1.fname, T1.sex, T1.stuid
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+group by T1.stuid
+Having count(*) > 1
+
+S: What is the first name and sex of each student?
+S: Which of those belong to somebody who has more than one pet?
+
+
+20. Find the last name of the student who has a cat that is age 3.
+P: What is the last name of the student who has a cat that is 3 years old?
+
+Select T1.lname
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pet_age = 3 and T3.pettype = 'cat'
+
+S: What is the id of the three-year old cat?
+S: Who is the owner of that cat?
+S: What is their last name?
+
+
+21. Find the average age of students who do not have any pet.
+P: What is the average age for all students who do not own any pets?
+
+Select avg(age)
+From student
+Where stuid NOT IN
+(Select T1.stuid
+from student as T1 join has_pet as T2 on T1.stuid = T2.stuid)
+
+S: Which students do not own any pets?
+S: What is their average age?

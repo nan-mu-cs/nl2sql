@@ -1,4 +1,3 @@
-
 Total # = 27
 
 Find the titles of movies that don’t have any rating.
@@ -90,8 +89,6 @@ From movies
 Order by title
 
 Find the titles of all movies sorted by their ratings.
-
-COMMENTS: ratings order is meaningless, G PG 
 
 Select title
 From movies

@@ -42,7 +42,6 @@ Find the number of distinct type of pets.
 select count(distinct pettype)
 From pets
 
-
 Find the first name of students who have cat or dog pet.
 
 Select distinct T1.Fname
@@ -176,10 +175,3 @@ From student
 Where stuid NOT IN
 (Select T1.stuid
 from student as T1 join has_pet as T2 on T1.stuid = T2.stuid)
-
-
-
-
-
-
-

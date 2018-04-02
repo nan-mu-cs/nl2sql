@@ -15,7 +15,7 @@ order by duration desc
 limit 1
 
 
-2. Find the names of all English songs?
+2. Find the names of all English songs.
 
 Select song_name
 From song
@@ -44,7 +44,7 @@ Where T2.resolution < 800
 
 
 
-4. What are the name of the artist who produced the shortest song?
+4. What is the name of the artist who produced the shortest song?
 
 Select T1.artist_name
 From song as T1 JOIN files as T2 ON T1.f_id = T2.f_id
@@ -144,18 +144,19 @@ group by languages
 
 
 
-10. What are the unique ids of songs that are in tagore genre and are in Bangla language?
+***10. Return the gender and name of artist who produced the song with the lowest resolution.
 
-Select DISTINCT song_name
-From song
-where genre_is = "tagore" and languages = "bangla"
+Select T1.gender, T1.artist_name
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+Order by T2.resolution Desc
+LIMIT 1
 
 
-Find the unique id of the songs that are in English language and have resolution lower than 1080.
+For each file format, return the number of artists who released songs in that format.
 
-Select DISTINCT song_name
-From song
-where languages = "english" and resolution < 1080
+Select count(*), formats
+From files
+Group by formats
 
 
 11.  Find the distinct names of all songs that have a higher resolution than some songs  in English.
@@ -243,7 +244,7 @@ Order by count(*) DESC
 LIMIT 1
 
 
-16. What are the names of artists who Male and are from UK?
+16. What are the names of artists who are Male and are from UK?
 
 Select artist_name
 From artist
@@ -388,7 +389,7 @@ order by count(*) DESC
 LIMIT 3
 
 
-24. List the f_id, genre and artist name of English songs ordered by rating?
+24. List the f_id, genre and artist name of English songs ordered by rating.
 
 Select f_id, genre_is, artist_name
 From song
@@ -424,9 +425,4 @@ EXCEPT
 Select distinct artist_name
 From song
 where rating > 7
-
-
-
-
-
 

@@ -12,11 +12,11 @@ SELECT count(*)
 FROM COURSE
 WHERE Credits > 2
 
-How many courses are taught by instructor 6112?
+List all names of courses with 1 credit?
 
-SELECT count(*)
+SELECT CName
 FROM COURSE
-WHERE Instructor = 6112
+WHERE Credits = 1
 
 Which courses are taught on days MTW?
 
@@ -24,7 +24,7 @@ SELECT CName
 FROM COURSE 
 WhERE Days = "MTW"
 
-What is the number of departments in Division AS?
+What is the number of departments in Division "AS"?
 
 SELECT count(*)
 FROM DEPARTMENT 
@@ -38,9 +38,11 @@ WHERE Room = 268
 
 Find the number of students that have at least one grade "B".
 
-SELECT count(distinct StuID)
+SELECT COUNT(*)
 FROM ENROLLED_IN
 WHERE Grade = "B"
+group by StuID 
+HAVING COUNT(*) >= 1
 
 Find the max and min grade point for all letter grade.
 
@@ -65,13 +67,10 @@ SELECT Room
 FROM FACULTY
 WHERE Rank = "Professor" AND Building = "NEB"
 
-Find the department name that is in Building Mergenthaler
+Find the department name that is in Building "Mergenthaler".
 
-SELECT DName
 FROM DEPARTMENT 
 WHERE Building = "Mergenthaler"
-
-
 
 2. List all information about courses sorted by credits in the ascending order.
 
@@ -79,11 +78,10 @@ SELECT *
 FROM COURSE
 ORDER BY Credits
 
-List the course name of courses whose department number is 600 sorted by credits.
+List the course name of courses sorted by credits.
 
 SELECT CName
 FROM COURSE
-WHERE DNO = 600
 ORDER BY Credits
 
 Find the first name of students in the descending order of age.
@@ -123,14 +121,13 @@ GROUP BY T2.DNO
 ORDER BY count(*) desc
 LIMIT 1
 
-Find the name of the department that has the smallest number of students minored in?
+Find the name of the department that has no students minored in?
 
+SELECT DName FROM DEPARTMENT 
+EXCEPT
 SELECT T1.DName
 FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
 on T1.DNO = T2.DNO
-GROUP BY T2.DNO
-ORDER BY count(*) asc
-LIMIT 1
 
 Find the name of the department that has the fewest members.
 
@@ -165,6 +162,14 @@ on T1.Instructor = T2.FacID
 GROUP BY T1.Instructor
 ORDER BY count(*) desc
 LIMIT 1
+
+What are the name of courses that have at least five enrollments?
+
+SELECT T1.CName
+FROM COURSE as T1 JOIN ENROLLED_IN as T2
+on T1.CID = T2.CID
+GROUP BY T2.CID
+HAVING COUNT(*) >= 5
 
 
 4. Find the first name and last name of the instructor of course that has course name 
@@ -213,7 +218,7 @@ FROM DEPARTMENT as T1
      JOIN MEMBER_OF as T3 ON T2.FacID = T3.FacID
 WHERE T1.DName = "Computer Science"
 
-Find the average grade point of student Linda Smith.
+Find the average grade point of student whose last name is Smith.
 
 SELECT avg(T2.gradepoint)
 FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
@@ -247,29 +252,9 @@ UNION
 SELECT DName
 from DEPARTMENT
 WHERE Division = "EN" AND Building = "NEB"
- 
 
-Find the first names of faculties in Computer Science department that are not in building 
-NEB.
+Find the first name of students not enrolled in any course.
 
-SELECT T2.Fname
-FROM  DEPARTMENT as T1 JOIN FACULTY as T2 JOIN MEMBER_OF as T3
-ON T1.DNO = T3.DNO AND T2.FacID = T3.FacID
-WHERE T1.DName = "Computer Science"
-Except
-SELECT T2.Fname
-FROM  DEPARTMENT as T1 JOIN FACULTY as T2 JOIN MEMBER_OF as T3
-ON T1.DNO = T3.DNO AND T2.FacID = T3.FacID
-WHERE T2.Building = "NEB"
-
-Find the first names of faculties in computer science department that are not professors.
-
-SELECT T2.Fname
-FROM  DEPARTMENT as T1 JOIN FACULTY as T2 JOIN MEMBER_OF as T3
-ON T1.DNO = T3.DNO AND T2.FacID = T3.FacID
-WHERE T1.DName = "Computer Science"
-Except
-SELECT T2.Fname
-FROM  DEPARTMENT as T1 JOIN FACULTY as T2 JOIN MEMBER_OF as T3
-ON T1.DNO = T3.DNO AND T2.FacID = T3.FacID
-WHERE T2.Rank = "Professor"
+SELECT Fname from STUDENT
+Where StuID not in 
+(select StuID from ENROLLED_IN)
