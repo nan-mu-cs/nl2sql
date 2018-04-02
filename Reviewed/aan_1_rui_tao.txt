@@ -339,26 +339,71 @@ group by T2.author_id
 order by count(*) desc
 limit 1
 
+Find the id of the papers whose title has the key word 'translation'.
 
-OVERALL COMMENTS:
-1. correct JOIN rules
-2. too many questions that have to be answered by where col = ONE SPECIFIC VALUE. it is ok to have some values that make sense. But do not do it too much.
-3. add more others:
-
-Find the id and author of the papers whose title has the key word 'translation'.
+select paper_id
+from Paper
+where title like "%translation%"
 
 Find the id and title of the papers that are never cited by others.
 
+select paper_id, title
+from Paper
+where paper_id NOT IN (select cited_paper_id from Citation)
+
 find the name of the affiliation whose address contains 'China' and publishs the most number of paper.
+
+select T1.name
+from Affiliation as T1 join Author_list as T2 on T1.affiliation_id = T2.affiliation_id
+where T1.address like "%China%"
+group by T1.affiliation_id
+order by count(*) desc
+limit 1
 
 Find the number of papers published in different conferences each year.
 
+select count(*), venue, year
+from Paper
+group by venue, year
+
 Find the total number of papers for each affiliation.
+
+select count(distinct T2.paper_id), T1.name
+from Affiliation as T1 join Author_list as T2 on T1.affiliation_id = T2.affiliation_id
+group by T1.affiliation_id
 
 Find the title of the papers that have more than 50 citations.
 
+select T2.title
+from Citation as T1 join Paper as T2 on T1.cited_paper_id = T2.paper_id
+group by T1.cited_paper_id
+having count(*) > 50
+
 Find the number of authors who did not publish any paper that is cited more than 50 times.
+
+select count(*)
+from Author
+where Author_id NOT IN ( select T2.author_id
+                        from Citation as T1 join Author_list as T2 on T1.cited_paper_id = T2.paper_id
+                        group by T1.cited_paper_id
+                        having count(distinct T1.paper_id) > 50)
 
 Find the name of authors who published some paper on NAACL and ACL in the year 2009.
 
+select name
+from Author
+where author_id IN (select T1.author_id
+                    from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
+                    where T2.venue = "ACL" and T2.year = 2009
+                    INTERSECT
+                    select T1.author_id
+                    from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
+                    where T2.venue = "NAACL" and T2.year = 2009)
+
 Find the name of authors who never published any paper on ACL.
+
+select name
+from Author
+where author_id NOT IN (select T1.author_id
+                        from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
+                        where T2.venue = "ACL")
