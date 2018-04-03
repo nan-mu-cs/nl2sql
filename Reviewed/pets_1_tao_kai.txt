@@ -1,7 +1,7 @@
 
 Total # = 21
 
-Find the number of pets whose weight is heavier than 10.
+1. Find the number of pets whose weight is heavier than 10.
 
 Select count(*)
 From pets
@@ -90,16 +90,19 @@ Where T3.pettype = 'cat'
 
 Find the first name and age of students who have any dog but do not have a cat pet.
 
+# comment: fixed: use except > not in
+
 Select T1.fname, T1.age
 from student as T1
      join has_pet as T2 on T1.stuid = T2.stuid
      Join pets as T3 on T3.petid = T2.petid
-Where T3.pettype = 'dog' and T1.stuid NOT IN
-(Select T1.stuid
+Where T3.pettype = 'dog'
+EXCEPT
+Select T1.fname, T1.age
 from student as T1
      join has_pet as T2 on T1.stuid = T2.stuid
      Join pets as T3 on T3.petid = T2.petid
-Where T3.pettype = 'cat')
+Where T3.pettype = 'cat'
 
 
 Find the type and weight of the youngest pet.

@@ -58,9 +58,10 @@ Group by petType
 S: What are the different types of pets?
 S: For each of those types, what is the maximum weight?
 
-Select petType
+# comment: should not use Group by so quick.
+
+Select distinct petType
 From pets
-Group by petType
 
 Select max(weight), petType
 From pets
@@ -216,9 +217,10 @@ from student as T1
      Join pets as T3 on T3.petid = T2.petid
 Where T3.pettype = 'cat')
 
-S: Which students do not own a cat as a pet?
+S: Which students have a cat as their pets?
 S: What are they majoring in?
 S: Also, how old are they?
+
 
 Select *
 From student
@@ -299,33 +301,37 @@ S: Which students have dogs?
 S: Of those, who does not own a cat?
 S: What are their first names and ages?
 
-Select *
-from student as T1
-     join has_pet as T2 on T1.stuid = T2.stuid
-     Join pets as T3 on T3.petid = T2.petid
-Where T3.pettype = 'dog' 
+# comment fixed the original
 
 Select *
 from student as T1
      join has_pet as T2 on T1.stuid = T2.stuid
      Join pets as T3 on T3.petid = T2.petid
-Where T3.pettype = 'dog' and T1.stuid NOT IN
-(Select T1.stuid
+Where T3.pettype = 'dog'
+
+Select *
 from student as T1
      join has_pet as T2 on T1.stuid = T2.stuid
      Join pets as T3 on T3.petid = T2.petid
-Where T3.pettype = 'cat')
+Where T3.pettype = 'dog'
+EXCEPT
+Select *
+from student as T1
+     join has_pet as T2 on T1.stuid = T2.stuid
+     Join pets as T3 on T3.petid = T2.petid
+Where T3.pettype = 'cat'
 
 Select T1.fname, T1.age
 from student as T1
      join has_pet as T2 on T1.stuid = T2.stuid
      Join pets as T3 on T3.petid = T2.petid
-Where T3.pettype = 'dog' and T1.stuid NOT IN
-(Select T1.stuid
+Where T3.pettype = 'dog'
+EXCEPT
+Select T1.fname, T1.age
 from student as T1
      join has_pet as T2 on T1.stuid = T2.stuid
      Join pets as T3 on T3.petid = T2.petid
-Where T3.pettype = 'cat')
+Where T3.pettype = 'cat'
 
 12. Find the type and weight of the youngest pet.
 P: What type of pet is the youngest animal, and how much does it weigh?
@@ -387,9 +393,10 @@ S: What are the different pet types?
 S: For each of those, what is the maximum age?
 S: What about the average age?
 
-Select pettype
+# comment: should not use group by at first
+
+Select distinct pettype
 From pets
-Group by pettype
 
 Select max(pet_age), pettype
 From pets
@@ -417,7 +424,9 @@ From pets
 Group by pettype
 
 16. Find the first name and age of students who have a pet.
-P: What are the  different first names and ages of the students who do not have pets? 
+P: What are the different first names and ages of the students who do have pets? 
+
+# comment: should not add 'not' in paraphrase
 
 Select distinct T1.fname, T1.age
 from student as T1
