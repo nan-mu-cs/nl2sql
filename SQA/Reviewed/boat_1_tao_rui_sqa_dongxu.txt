@@ -1,0 +1,729 @@
+
+Total # = 40
+
+1. Return all details of sailors who are older than 30.
+P: What can you tell me about sailors who are older than age 30?
+
+SELECT *
+FROM Sailors
+WHERE age > 30
+
+S: Return all details about the sailors
+S: Which of those pertain to those above age 30?
+
+SELECT * FROM Sailors
+
+SELECT * FROM Sailors WHERE age > 30
+
+2. Return name and age for sailors who are younger than 30.
+P: What is the name and age of every sailor who is younger than age 30?
+
+SELECT name, age
+FROM Sailors
+WHERE age < 30
+
+S: What is the name of every sailor?
+S: Of those, which are for sailors younger than 30?
+S: Also, tell me their ages.
+
+SELECT name FROM Sailors
+
+SELECT name FROM Sailors WHERE age < 30
+
+SELECT name, age FROM Sailors WHERE age < 30
+
+3. Find boats reserved by Sailor with id 1.
+P: What are the different boat ids reserved by the sailor whose id is 1?
+
+SELECT DISTINCT bid
+FROM Reserves
+WHERE sid=1
+
+S: Tell me all the information about the reservations. 
+S: Which of those reservations were created by a sailor with an id of 1?
+S: What are the different ids of the boats reserved by him?
+
+SELECT * FROM Reserves
+
+SELECT * FROM Reserves WHERE sid=1
+
+SELECT DISTINCT bid FROM Reserves WHERE sid=1
+
+4. Who reserved boat 102?
+P: What is the name of the sailor who reserved boat 102?
+
+SELECT T1.name
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+WHERE T2.bid = 102
+
+S: What are the names of all the sailors?
+S: Which of those reserved boat 102?
+
+SELECT name FROM Sailors
+
+SELECT T1.name
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+WHERE T2.bid = 102
+
+5. Return the unique boat ids (bid) of all reserved boats.
+
+SELECT DISTINCT bid 
+FROM Reserves
+
+S: Return all information about the reserved boats.
+S: What are their different ids? 
+
+SELECT * from Reserves
+
+SELECT DISTINCT bid from Reserves
+
+6. What is the name of sailors whose names contain letter e?
+P: What is the name of every sailor whose name contains the letter e?
+
+SELECT name
+FROM Sailors
+WHERE name LIKE '%e%'
+
+S: What is the name of every sailor?
+S: Which of those contain the letter e?
+
+SELECT name FROM Sailors
+
+SELECT name FROM Sailors WHERE name LIKE '%e%'
+
+7. return the unique ids of sailors who are older than any sailors.
+P: What is the different id of every sailor who is not the youngest?
+
+SELECT DISTINCT T1.sid
+FROM Sailors AS T1, Sailors AS T2
+WHERE T1.age > T2.age
+
+S: What are the different ids of every sailor?
+S: Which of those refer to sailors who are not the youngest?
+
+SELECT DISTINCT sid from Sailors
+
+SELECT DISTINCT T1.sid
+FROM Sailors AS T1, Sailors AS T2
+WHERE T1.age > T2.age
+
+8. Return the unique names of sailors who are older than any sailors whose rating is larger than 7.
+P: What are the different names of sailors who are older than some other sailor with a rating larger than 7?
+
+SELECT DISTINCT T1.name
+FROM Sailors AS T1, Sailors AS T2
+WHERE T1.age > T2.age and T2.rating > 7 
+
+S: Which sailors have a rating greater than 7?
+S: How old are they?
+S: What are the names of sailors who are older than at least one of them?
+
+SELECT * from Sailors WHERE rating > 7
+
+SELECT age from Sailors WHERE rating > 7
+
+SELECT DISTINCT T1.name
+FROM Sailors AS T1, Sailors AS T2
+WHERE T1.age > T2.age and T2.rating > 7 
+
+9.Find the name and id of the sailors who reserved at least one boat?
+P: What is the name and id of every sailor who reserved one or more boats?
+
+SELECT DISTINCT T1.name, T1.sid
+FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
+
+S: What are the different sailor names?
+S: Also, what are their different ids?
+S: Which of those are for people who reserved at least one boat?
+
+SELECT DISTINCT name FROM Sailors
+
+SELECT DISTINCT name, sid FROM Sailors
+
+SELECT DISTINCT T1.name, T1.sid
+FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
+
+10. Find the name of the sailors who reserved more than one boat. 
+P: What are the different names of sailors who reserved two or more boats?
+
+SELECT DISTINCT T1.name 
+FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
+GROUP BY T2.sid
+HAVING COUNT(*) > 1
+
+S: What are the different sailors' names?
+S: Which of those reserved a boat?
+S: Who reserved more than one?
+
+SELECT DISTINCT T1.name 
+FROM Sailors 
+
+SELECT DISTINCT t1.name FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
+GROUP BY T2.sid
+
+SELECT DISTINCT T1.name 
+FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
+GROUP BY T2.sid
+HAVING COUNT(*) > 1
+
+11. Find the id of Sailors (sid) that reserved red or blue boat.
+P: What are the sids for sailors who reserved red or blue boats?
+
+SELECT DISTINCT T2.sid 
+FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
+WHERE T1.color = 'red' OR T1.color = "blue"
+
+S: What are the ids of boats that are blue?
+S: What about for the ones that are red?
+S: What are the different ids of the sailors who reserved them?
+
+SELECT bid FROM boats WHERE color = 'red'
+
+SELECT bid FROM boats WHERE color ='red' or color = 'blue'
+
+SELECT DISTINCT T2.sid 
+FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
+WHERE T1.color = 'red' OR T1.color = "blue"
+
+12. Find the name and id of Sailors (sid) that reserved red or blue boat.
+P: What are the names and ids of sailors who reserved red or blue boats?
+
+SELECT DISTINCT T2.sid, T3.name
+FROM Boats AS T1 
+            JOIN Reserves AS T2 ON  T1.bid = T2.bid
+            JOIN Sailors AS T3 ON T2.sid = T3.sid
+WHERE T1.color = 'red' OR T1.color = "blue"
+
+S: What are the ids of boats that are blue?
+S: What about for the ones that are red?
+S: What are the different ids and names of the sailors who reserved them?
+
+SELECT bid FROM boats WHERE color = 'red'
+
+SELECT bid FROM boats WHERE color ='red' or color = 'blue'
+
+SELECT DISTINCT T2.sid, T3.name
+FROM Boats AS T1 
+            JOIN Reserves AS T2 ON  T1.bid = T2.bid
+            JOIN Sailors AS T3 ON T2.sid = T3.sid
+WHERE T1.color = 'red' OR T1.color = "blue"
+
+13. Find the id of Sailors (sid) that reserved red and blue boat.
+P: What are the ids of sailors who reserved red and blue boats?
+
+
+SELECT DISTINCT T2.sid 
+FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
+WHERE T1.color = 'red'
+INTERSECT
+SELECT DISTINCT T2.sid 
+FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
+WHERE T1.color = "blue"
+
+S: What are the ids of all the different blue boats?
+S: What are the ids of the sailors who reserved them?
+S: What are the ids of the sailors who also reserved red boats?
+
+SELECT DISTINCT bid from RESERVES where color = 'blue'
+
+SELECT T2.sid 
+FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
+WHERE T1.color = 'red' 
+
+SELECT DISTINCT T2.sid 
+FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
+WHERE T1.color = 'red'
+INTERSECT
+SELECT DISTINCT T2.sid 
+FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
+WHERE T1.color = "blue"
+
+14. Find the name and id of Sailors (sid) that reserved red and blue boat.
+P: What are the names and ids of sailors who reserved red and blue boats?
+
+
+SELECT DISTINCT T2.sid, T3.name
+FROM Boats AS T1 
+            JOIN Reserves AS T2 ON  T1.bid = T2.bid
+            JOIN Sailors AS T3 ON T2.sid = T3.sid
+WHERE T1.color = 'red'
+INTERSECT
+SELECT DISTINCT T2.sid, T3.name
+FROM Boats AS T1 
+            JOIN Reserves AS T2 ON  T1.bid = T2.bid
+            JOIN Sailors AS T3 ON T2.sid = T3.sid
+WHERE T1.color = "blue"
+
+S: What are the ids of boats that are blue?
+S: What about for the ones that are red?
+S: What are the different ids and names of the sailors who reserved one of each?
+
+15. What is the ids of sailors that haven’t reserved a boat?
+P: What are the ids of sailors who have not reserved a boat?
+
+SELECT sid 
+FROM Sailors
+EXCEPT
+SELECT sid
+FROM Reserves
+
+S: What are all the sailor ids?
+S: Which of those are listed as reserving a boat?
+S: What are the rest of them?
+
+SELECT sid FROM Sailors
+
+SELECT sid FROM Reserves
+
+SELECT sid 
+FROM Sailors
+EXCEPT
+SELECT sid
+FROM Reserves
+
+16. what is the name and id of sailors who do not have a reservation of a boat?
+P: What are the names and ids of all sailors who do not have boat reservations?
+
+SELECT sid, name
+FROM Sailors
+EXCEPT
+SELECT T1.sid, T1.name
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+S: What are the all the sailor ids and names?
+S: Which of those are listed as having boat reservations?
+S: Tell me all the other ones. 
+
+SELECT sid, name from Sailors
+
+SELECT T1.sid, T1.name
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+SELECT sid, name
+FROM Sailors
+EXCEPT
+SELECT T1.sid, T1.name
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+17. Find all information for the sailors who do not have a reservation of a boat?
+P: What is all the information about sailors who do not have boat reservations?
+
+SELECT *
+FROM Sailors
+EXCEPT
+SELECT T1.*
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+S: Which sailors have boat reservations?
+S: What are the ids of all sailors who do not?
+S: Find all information about them. 
+
+SELECT T1.* FROM Sailors as T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+SELECT sid FROM SAILORS EXCEPT SELECT T1.* FROM Sailors as T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+SELECT * FROM SAILORS EXCEPT SELECT T1.* FROM Sailors as T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+18. What is the name of the sailors who reserved boat with id 103?
+P: Find the name of the sailors who reserved boat with id 103.
+
+SELECT DISTINCT T1.name
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+WHERE  T2.bid = 103
+
+S: What can you tell me about the reservation for the boat with id 103?
+S: What is the id of the sailors who reserved it?
+S: What are the different names of those sailors?
+
+SELECT * from Reserves WHERE bid = 103
+
+SELECT sid from Reserves WHERE bid = 103
+
+SELECT DISTINCT T1.name
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+WHERE  T2.bid = 103
+
+19. What is the name of all sailors whose rating is higher than any sailor named Luis?
+P: What are the sailors' names, the ones whose rating is higher than any sailor named Luis?
+
+SELECT name
+FROM Sailors
+WHERE rating > (SELECT min(rating)
+                FROM Sailors
+                WHERE name = 'Luis')
+
+S: What are the ratings of all sailors named Luis?
+S: What is the smallest of those?
+S: What is name of all sailors who have a higher rating than that?
+
+SELECT rating from Sailors where name = 'Luis'
+
+SELECT min(rating) from Sailors where name = 'Luis'
+
+SELECT name
+FROM Sailors
+WHERE rating > (SELECT min(rating)
+                FROM Sailors
+                WHERE name = 'Luis')
+
+20. What is the name of all sailors whose rating is higher than all sailors named Luis?
+P: What are the names of all sailors with a higher rating than every sailor named Luis?
+
+SELECT name
+FROM Sailors
+WHERE rating > (SELECT max(rating)
+FROM Sailors
+WHERE name = 'Luis')
+
+S: What are the ratings of every sailor named Luis?
+S: What is the maximum of those?
+S: What are the names of those with a higher rating than that?
+
+SELECT rating FROM Sailors WHERE name = 'Luis'
+
+SELECT max(rating) FROM sailors WHERE name = 'Luis'
+
+SELECT name
+FROM Sailors
+WHERE rating > (SELECT max(rating)
+FROM Sailors
+WHERE name = 'Luis')
+
+21. what is the name and id of every sailor who has a rating greater than 2 and reserved a boat.
+P: What are the names and ids of all sailors who have a rating of at least 3 and reserved a boat?
+
+SELECT DISTINCT T1.name, T1.sid
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+WHERE  T1.rating > 2
+
+S: What are the different names and sailor ids?
+S: Which of those refer to those who reserved a boat?
+S: Of those, which refer to  a sailor with a rating of at least 3?
+
+SELECT DISTINCT name, sid FROM Sailors
+
+SELECT DISTINCT T1.name, T1.sid
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+
+SELECT DISTINCT T1.name, T1.sid
+FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
+WHERE  T1.rating > 2
+
+22. Find the name and age of the oldest sailor.
+P: What is the name and age of the sailor with maximum age?
+
+SELECT name, age
+FROM Sailors
+WHERE age =
+( SELECT max(age)
+FROM Sailors )
+
+S: What is the age of every sailor?
+S: WHat is the age of the oldest one?
+S: What is their name?
+
+SELECT age FROM Sailors
+
+SELECT max(age) FROM Sailors
+
+SELECT name, max(age) FROM Sailors
+
+23. how many sailors in total?
+P: How many sailors exist?
+
+SELECT COUNT(*)
+FROM Sailors
+
+S: Tell me what information you have on sailors
+S: How many sailors are there?
+
+SELECT * FROM Sailors
+
+SELECT COUNT(*) FROM Sailors
+
+24. What is the average age of sailors whose rating is 7?
+P: What is average age of all sailors who have a rating of 7?
+
+SELECT AVG(age)
+FROM Sailors
+WHERE rating = 7
+
+S: What is age of every sailor?
+S: What is the age of all the sailors with a rating of 7?
+S: What is their average age?
+
+SELECT age FROM Sailors
+
+SELECT age FROM Sailors WHERE rating = 7
+
+SELECT AVG(age) FROM Sailors WHERE rating = 7
+
+25. How many unique sailors whose name starts with letter D exist?
+P: What is the count of the sailors whose name starts with letter D exist?
+
+SELECT COUNT(DISTINCT name)
+FROM Sailors
+WHERE name LIKE 'D%'
+
+S: What can you tell me about sailors whose name starts with D?
+S: What are their names?
+S: How many different ones are there?
+
+SELECT * FROM Sailors WHERE name LIKE 'D%'
+
+SELECT name FROM Sailors WHERE name LIKE 'D%'
+
+SELECT COUNT(DISTINCT name)
+FROM Sailors
+WHERE name LIKE 'D%'
+
+26. What are the average rating and max age of all sailors?
+P: Find the average rating and largest age for the sailors
+
+SELECT AVG(rating), MAX(age)
+FROM Sailors
+
+S: What is the average rating for sailors?
+S: Also, what is their maximum age?
+
+SEELCT AVG(rating) FROM Sailors
+
+SELECT AVG(rating), MAX(age) FROM Sailors
+
+27. Find the number of reservations for each boat.
+P: How many reservations exist for each boat?
+
+SELECT bid, count(*)
+FROM Reserves
+GROUP BY bid
+
+S: What are the boat ids for reservations?
+S: How many reservations exist for each one of them?
+
+SELECT bid FROM Reserves
+
+SELECT bid, count(*)
+FROM Reserves GROUP BY bid
+
+28. Find the number of reservations for each boat with id greater than 50.
+P: How many reservations exist for each boat with an id greater than 50?
+
+SELECT bid, count(*)
+FROM Reserves
+GROUP BY bid
+HAVING bid > 50
+
+S: What are all the boat ids listed for reservations?
+S: Which of those have an id greater than 50?
+S: How many reservations exist for each of those?
+
+SELECT bid FROM Reserves
+
+SELECT bid FROM Reserves WHERE bid > 50
+
+SELECT bid, count(*)
+FROM Reserves
+GROUP BY bid
+HAVING bid > 50
+
+29. Find the number of reservations for each boat with more than 1 reservation.
+P: How many reservations exist for each boat that has more than 1 reservation already?
+
+SELECT bid, count(*)
+FROM Reserves
+GROUP BY bid
+HAVING count(*) > 1
+
+S: How many reservations exist for each boat?
+S: Which of these refer to boats that have more than 1 reservation?
+
+SELECT bid, count(*) FROM Reserves GROUP BY bid
+
+SELECT bid, count(*)
+FROM Reserves
+GROUP BY bid
+HAVING count(*) > 1
+
+
+30. Find the number of reservations by sailors with id greater than 1 for each boat.
+P: How many reservations for each boat did the sailors with an id greater than 1 make? 
+
+SELECT bid, count(*) 
+FROM Reserves
+WHERE sid > 1
+GROUP BY bid
+
+S: What are the boat ids for all boats reserved by a sailor with an id greater than 1?
+S: How many reservations for each of those exist?
+
+
+SELECT bid
+FROM Reserves
+WHERE sid > 1
+
+SELECT bid, count(*) FROM Reserves WHERE sid > 1 GROUP BY bid
+
+31. What is the rating and average age for sailors who have reserved red boat grouped by rating?
+P: What are the rating and average age for sailors who reserved red boats for each rating?
+
+SELECT T1.rating, avg(T1.age)
+FROM Sailors as T1 
+            JOIN Reserves as T2 ON T1.sid = T2.sid
+            JOIN Boats as T3 ON T3.bid = T2.bid
+WHERE T3.color = 'red'
+GROUP BY T1.rating
+
+S: Which sailors reserved a red boat?
+S: Of those, for each rating, what is the average age?
+
+
+SELECT sid FROM Sailors as T1
+            JOIN Reserves as T2 ON T1.sid = T2.sid
+            JOIN Boats as T3 ON T3.bid = T2.bid
+WHERE T3.color = 'red'
+
+SELECT avg(T1.age), T1.rating FROM Sailors as T1
+            JOIN Reserves as T2 ON T1.sid = T2.sid
+            JOIN Boats as T3 ON T3.bid = T2.bid
+WHERE T3.color = 'red'
+GROUP BY T1.rating
+  
+
+32. Find the name, rating and age of all sailors ordered by rating and age.
+P: What is the name, rating, and age for every sailor 
+
+SELECT name, rating, age 
+FROM Sailors
+ORDER BY rating, age
+
+S: What are the ratings and age of every sailor?
+S: Also what are their names?
+S: Sort them by rating, then by age for tiebreakers. 
+
+SELECT rating, age FROM Sailors
+
+SELECT name, rating, age FROM Sailors
+
+SELECT name, rating, age FROM Sailors ORDER BY rating, age
+
+
+33. Find the total number of boats.
+P: How many boats are there?
+
+SELECT count(*)
+FROM Boats
+
+S: Tell me everything about the boats.
+S: How many boats are there?
+
+34. How many boats are red?
+P: How many red boats exist?
+
+SELECT count(*)
+FROM Boats
+WHERE color = 'red'
+
+S: How many boats are there?
+S: How many of those are red?
+
+SELECT count(*) FROM Boats
+
+SELECT count(*) FROM Boats WHERE color = 'red'
+
+35. Find the names of boats booked by sailors whose age is between 20 and 30.
+P: What are the names of the boats booked by people between age 20 and 30?
+
+SELECT T3.name
+FROM Sailors as T1 
+     JOIN Reserves as T2 ON T1.sid = T2.sid
+     JOIN Boats as T3 ON T3.bid = T2.bid
+WHERE T1.age between 20 and 30
+
+S: What are the ids of the sailors that are between age 20 and 30?
+S: Which boats are reserved by the corresponding sailors?
+
+SELECT name FROM Sailors WHERE age between 20 and 30
+
+SELECT T3.name
+FROM Sailors as T1 
+     JOIN Reserves as T2 ON T1.sid = T2.sid
+     JOIN Boats as T3 ON T3.bid = T2.bid
+WHERE T1.age between 20 and 30
+
+36. Find the names of sailors whose rating is larger than the rating of all sailors who booked a red boat.
+P: What are the names of the sailors whose rating is larger than the rating of all sailors who booked a red boat?
+
+SELECT name
+FROM Sailors 
+WHERE rating > (SELECT max(T1.rating) 
+                   FROM Sailors as T1 
+                   JOIN Reserves as T2 ON T1.sid = T2.sid
+                   JOIN Boats as T3 ON T3.bid = T2.bid
+                   WHERE T3.color = 'red')
+
+S: What are the ids of all the sailors who booked a red boat?
+S: What is their maximum rating?
+S: What are the names of all sailors who are more highly rated than that?
+
+SELECT T1.sid FROM Sailors as T1 JOIN Reserves as T2 ON T1.sid = T2.sid
+                   JOIN Boats as T3 ON T3.bid = T2.bid
+                   WHERE T3.color = 'red'
+
+SELECT max(T1.rating) FROM Sailors as T1 JOIN Reserves as T2 ON T1.sid = T2.sid
+                   JOIN Boats as T3 ON T3.bid = T2.bid
+                   WHERE T3.color = 'red'
+
+SELECT name FROM Sailors WHERE rating > (SELECT max(T1.rating) FROM Sailors as T1 JOIN Reserves as T2 ON T1.sid = T2.sid
+                   JOIN Boats as T3 ON T3.bid = T2.bid
+                   WHERE T3.color = 'red')
+
+37. What is highest rating between sailors?
+P: What is the maximum rating for sailors?
+
+Select max(rating)
+From Sailors
+
+S: What are the ratings for each sailor?
+S: What is the maximum rating?
+
+SELECT rating FROM Sailors
+
+SELECT max(rating) FROM Sailors
+
+38. Find the names of sailors who reserved boat with the name Melon.
+What are the names of sailors who reserved a boat with the name Melon?
+
+SELECT T1.name
+FROM Sailors as T1 
+     JOIN Reserves as T2 ON T1.sid = T2.sid
+     JOIN Boats as T3 ON T3.bid = T2.bid
+WHERE T3.name = 'Melon'
+
+S: What are the ids of the boats whose name is Melon?
+S: What are the sailors' names who reserved them?
+
+SELECT T1.bid FROM Reserves as T1 JOIN Boats as T2 on T1.bid = T2.bid WHERE T2.name = 'Melon'
+
+SELECT T1.name
+FROM Sailors as T1 
+     JOIN Reserves as T2 ON T1.sid = T2.sid
+     JOIN Boats as T3 ON T3.bid = T2.bid
+WHERE T3.name = 'Melon'
+
+
+39. List the names and ages of all sailors sorted by rating in descending order.
+What are the names and ages of all sailors sorted by decreasing rating?
+
+SELECT name, age
+FROM Sailors
+ORDER BY rating desc
+
+S: Order everything you know about sailors by rating in descending order
+S: What are their names?
+S: Also, what are their ages?
+
+SELECT * FROM Sailors ORDER BY rating desc
+
+SELECT name FROM Sailors ORDER BY rating desc
+
+SELECT name, age FROM Sailors ORDER BY rating desc
