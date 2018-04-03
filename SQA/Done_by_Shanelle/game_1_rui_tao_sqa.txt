@@ -1,0 +1,897 @@
+Total = #  40
+
+
+1. How many video games exist?
+P: How many video games do you have?
+
+
+select count(*)
+from Video_games
+
+S: What information do you have on video games?
+S: How many of them are there?
+
+SELECT * FROM Video_games
+
+SELECT count(*) FROM Video_games
+
+
+2. How many video game types exist?
+P: What is the count of different game types?
+
+
+select count(distinct gtype)
+from Video_games
+
+S: What are the game types for each video game?
+S: Give me a list of the different game types?
+S: How long is that list?
+
+SELECT gytype from Video_games
+
+SELECT distinct gytype from Video_games
+
+SELECT count(distinct gtype) from Video_games
+
+3. Show all video game types.
+P: What are the different types of video games?
+
+
+select distinct gtype
+from Video_games
+
+S: What is the type of each game?
+S: What is a list of the different types?
+
+SELECT gtype from Video_games
+
+SELECT distinct gtype from Video_games
+
+
+4. Show all video games and their types in the order of their names.
+P: What are the names of all the video games and their types in alphabetical order?
+
+select gname, gtype
+from Video_games
+order by gname
+
+S: What is the type of each video game?
+S: Also, what are their names?
+S: Order the above information by the game name alphabetically. 
+
+SELECT gytype from Video_games
+
+SELECT gname, gtype from Video_games
+
+select gname, gtype
+from Video_games
+order by gname
+
+5. Show all video games with type Collectible card game.
+P: What are the names of all video games that are collectible cards?
+
+select gname
+from Video_games
+where gtype = "Collectible card game"
+
+S: What information is there on video games?
+S: What information do you have on video games that are of type collectible card game?
+S: What are their names?
+
+SELECT * from Video_games
+
+SELECT * from Video_games WHERE gtype = "collectible card game"
+
+SELECT gname from Video_games WHERE gtype = "collectible card game"
+
+
+6. What is the type of video game Call of Destiny.
+P: What type of game is Call of Destiny?
+
+select gtype
+from Video_games
+where gname = "Call of Destiny"
+
+S: What is the name of each game?
+S: What information do you have on the game called Call of Destiny?
+S: What type is it?
+
+SELECT gname from Video_games
+
+SELECT * from Video_games WHERE gname = "Call of Destiny"
+
+SELECT gtype from Video_games WHERE gname = "Call of Destiny"
+
+7. How many video games have type Massively multiplayer online game?
+
+select count(*)
+from Video_games
+where gtype = "Massively multiplayer online game"
+
+8. Show all video game types and the number of video games in each type.
+P: What are the types of video games and how many are in each type?
+
+select gtype, count(*)
+from Video_games
+group by gtype
+
+S: What are the different types of video games?
+S: For each type, what information is there on the games?
+S: How many games are there for each type?
+
+SELECT gytype from Video_games
+
+SELECT * from Video_games GROUP BY gtype
+
+select gtype, count(*)
+from Video_games
+group by gtype
+
+
+9. Which game type has most number of games?
+P: What type has the most games?
+
+select gtype
+from Video_games
+group by gtype
+order by count(*) desc
+limit 1
+
+S: What are the game types?
+S: Order the list of game types by number of games in descending order.
+S: Which type has the most?
+
+SELECT gtype from Video_games
+
+select gtype
+from Video_games
+group by gtype
+order by count(*) desc
+
+select gtype
+from Video_games
+group by gtype
+order by count(*) desc
+limit 1
+
+10. Which game type has least number of games?
+P: What is the type with the fewest games?
+
+select gtype
+from Video_games
+group by gtype
+order by count(*)
+limit 1
+
+S: What are the different game types?
+S: Order the list of game types by number of games in ascending order.
+S: Which type has the most?
+
+select gtype
+from Video_games
+
+select gtype
+from Video_games
+group by gtype
+order by count(*)
+
+select gtype
+from Video_games
+group by gtype
+order by count(*)
+limit 1
+
+11. Show ids for all students who live in CHI.
+P: What are the ids of all students who live in CHI?
+
+select StuID
+from Student
+where city_code = "CHI"
+
+S: What are the student ids?
+S: Which of those are for students who live in the city with the code CHI?
+
+SELECT StuID from Student
+
+SELECT StuID from Student WHERE city_code = "CHI"
+
+
+12.  Show ids for all students who have advisor 1121.
+P: What are the ids of all students who have advisor number 1121?
+
+select StuID
+from Student
+where Advisor = 1121
+
+S: What information do you have on the students?
+S: What are their ids?
+S: Which of those are for students who have advisor 1121?
+
+SELECT * from Student
+
+SELECT StuID from Student
+
+SELECT StuID from Student WHERE Advisor = 1121
+
+
+13. Show first name for all students with major 600.
+P: What are the first names for all students who are from the major numbered 600?
+
+select Fname
+from Student
+where Major = 600
+
+S: List all student information
+S: Which of that information is for students in the major numbered 600?
+S: What are their first names?
+
+SELECT * from Student
+
+SELECT * from Student where major = 600
+
+SELECT Fname from Student where major = 600
+
+14. Show the average, minimum, and maximum age for different majors.
+P: What are the average, minimum, and max ages for each of the different majors?
+
+select major, avg(age), min(age), max(age)
+from Student
+group by major
+
+S: What are the different majors?
+S: For each of those, what is the average age?
+S: Also, what is the minimum and maximum for each of those?
+
+SELECT major from Student
+
+SELECT  avg(age) from Student group by major
+
+select major, avg(age), min(age), max(age)
+from Student
+group by major
+
+
+15. Show all advisors who have at least two students.
+P: What are the advisors
+
+select advisor
+from Student
+group by advisor
+having count(*) >= 2
+
+S: What information do you have on each advisor?
+S: What is the name for each advisor?
+S: Which of those are for advisors who have more than 1 students?
+
+SELECT * from Student group by advisor
+
+SELECT advisor from STUDENT group by advisor
+
+SELECT advisor from STUDENT group by advisor having count(*) >= 2
+
+16. How many sports do we have?
+P: How many different types of sports do we offer? 
+
+select count(distinct sportname)
+from Sportsinfo
+
+S: What sport does every student play?
+S: What is a list of the different types of sports?
+S: How long is that list?
+
+SELECT sportname from Sportsinfo
+
+SELECT distinct sportname from Sportsinfo
+
+SELECT count(distinct sportname) from Sports info
+
+
+17. How many students play sports?
+P: How many different students are involved in sports?
+
+select count(distinct StuID)
+from Sportsinfo
+
+S: What is the student id of every student involved in sports?
+S: Delete any repeats. 
+S: How many different student ids are there?
+
+SELECT StuID from Sportsinfo
+
+SELECT distinct StuID from Sportsinfo
+
+select count(distinct StuID)
+from Sportsinfo
+
+
+18. List ids for all student who are on scholarship.
+P: What are the ids for all sporty students who are on scholarship?
+
+select StuID
+from Sportsinfo
+where onscholarship = 'Y'
+
+S: What information is there on all sport players?
+S: Which of those are on scholarship?
+S: What are their student ids?
+
+SELECT * from Sportsinfo
+
+SELECT * from Sportsinfo WHERE onscholarship = 'Y'
+
+SELECT StuID from Sportsinfo WHERE onscholarship = 'Y'
+
+
+19. Show last names for all student who are on scholarship.
+P: What are the last names for all scholarship students?
+
+select T2.Lname
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.onscholarship = 'Y'
+
+S: What information is there on all students who play sports?
+S: Which subset of this information is for students on scholarships?
+S: What are their last names?
+
+SELECT * from Sportsinfo
+
+SELECT * from Sportsinfo WHERE onscholarship = 'Y'
+
+select T2.Lname
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.onscholarship = 'Y'
+
+
+20. How many games are played for all students?
+P: What is the total number of games played?
+
+select sum(gamesplayed)
+from Sportsinfo
+
+S: What sports information do you have?
+S: How many games did each student play?
+S: What is the total number played?
+
+SELECT * from Sportsinfo
+
+SELECT gamesplayed from Sportsinfo
+
+SELECT sum(gamesplayed) from Sportsinfo
+
+21. How many games are played for all football games by students on scholarship?
+P: What is the total number of all football games played by scholarship students?
+
+
+select sum(gamesplayed)
+from Sportsinfo
+where sportname = "Football" and onscholarship = 'Y'
+
+S: How many games has each student played?
+S: Which of those refer to football games played by scholarship students?
+S: What is the total number of those games played?
+
+SELECT gamesplayed from Sportsinfo
+
+SELECT gamesplayed from Sportsinfo where sportname = "Football" and onscholarship = 'Y'
+
+SELECT sum(gamesplayed) from Sportsinfo where sportname = "Football" and onscholarship = 'Y'
+
+22. Show all sport name and the number of students.
+P: How many students play each sport?
+
+select sportname, count(*)
+from Sportsinfo
+group by sportname
+
+S: What information do you have on each sport?
+S: How many students play each one?
+S: Also, what are the names of each sport?
+
+SELECT * from Sportsinfo group by sportname
+
+SELECT count(*) from Sportsinfo group by sportsname
+
+select sportname, count(*)
+from Sportsinfo
+group by sportname
+
+
+23. Show all student IDs with the number of sports and total number of games played
+P: What are the ids of all students along with how many sports and games did they play?
+
+
+select StuID, count(*), sum(gamesplayed)
+from Sportsinfo
+group by StuID
+
+S: How many sports does each student play?
+S: Also, how many games has each student played?
+S: Also, what are their different student ids?
+
+select count(*)
+from Sportsinfo
+group by StuID
+
+select count(*), sum(gamesplayed)
+from Sportsinfo
+group by StuID
+
+select StuID, count(*), sum(gamesplayed)
+from Sportsinfo
+group by StuID
+
+24. Show all student IDs with more than total 10 hours per week on all sports played.
+P: What are the student IDs for everybody who worked for more than 10 hours per week on all sports?
+
+
+select StuID
+from Sportsinfo
+group by StuID
+having sum(hoursperweek) > 10
+
+S: What are the student IDs for every student?
+S: Which of those are for students who played more than 10 hours of a week for all sports?
+
+select StuID
+from Sportsinfo
+group by StuID
+
+select StuID
+from Sportsinfo
+group by StuID
+having sum(hoursperweek) > 10
+
+
+25. What is the first name and last name of the student who have most number of sports?
+P: What is the first and last name of the student who played the most sports?
+
+
+select T2.Fname, T2.Lname
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+group by T1.StuID
+order by count(*) desc
+limit 1
+
+S: For each student, how many sports do they play?
+S: Order the information in descending order by number of sports played. 
+S: What is the first and last name of student who played the most?
+
+select count(*)
+from Sportsinfo 
+group by StuID
+
+select T1.count(*)
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+group by T1.StuID
+
+select T2.Fname, T2.Lname
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+group by T1.StuID
+order by count(*) desc
+limit 1
+
+26. Which sport has most number of students on scholarship?
+P: What is the sport with the most scholarship students?
+
+select sportname
+from Sportsinfo
+where onscholarship = 'Y'
+group by sportname
+order by count(*) desc
+limit 1
+
+S: What is the name of every sport?
+S: Of those, which had students on scholarship?
+S: Which sport has the most of those students?
+
+select sportname
+from Sportsinfo
+group by sportname
+
+select sportname
+from Sportsinfo
+where onscholarship = 'Y'
+group by sportname
+
+select sportname
+from Sportsinfo
+where onscholarship = 'Y'
+group by sportname
+order by count(*) desc
+limit 1
+
+27. Show student ids who don't have any sports.
+P: What are the ids of all students who don't play sports?
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Sportsinfo
+
+S: What are the student ids of all those who play sports?
+S: What are the ids of all students?
+S: Which ids are in the latter list but not the former?
+
+select StuID
+from Sportsinfo
+
+select StuID
+from Student
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Sportsinfo
+
+28. Show student ids who are on scholarship and have major 600.
+P: What are the student ids for those on scholarship in major number 600?
+
+select StuID
+from Student
+where major = 600
+INTERSECT
+select StuID
+from Sportsinfo
+where onscholarship = 'Y'
+
+S: What are the ids of all students who are in major 600?
+S: What are the student ids for all those on scholarship?
+S: What ids are in both categories?
+
+select StuID
+from Student
+where major = 600
+
+select StuID
+from Sportsinfo
+where onscholarship = 'Y'
+
+select StuID
+from Student
+where major = 600
+INTERSECT
+select StuID
+from Sportsinfo
+where onscholarship = 'Y'
+
+29. Show student ids who are female and play football.
+P: What are the ids of all female students who play football?
+
+select StuID
+from Student
+where sex = 'F'
+INTERSECT
+select StuID
+from Sportsinfo
+where sportname = "Football"
+
+S: What are the ids of all female students?
+S: What are the student ids of all those who play football?
+S: What ids are for both?
+
+select StuID
+from Student
+where sex = 'F'
+
+select StuID
+from Sportsinfo
+where sportname = "Football"
+
+select StuID
+from Student
+where sex = 'F'
+INTERSECT
+select StuID
+from Sportsinfo
+where sportname = "Football"
+
+30. Show all male student ids who don't play football.
+P: What are the ids of all male students who do not play football?
+
+select StuID
+from Student
+where sex = 'M'
+EXCEPT
+select StuID
+from Sportsinfo
+where sportname = "Football"
+
+S: What are the ids of all the students?
+S: What are the ids of all those who play football?
+S: What are the ids of those who don't play football?
+
+select StuID
+from Student
+where sex = 'M'
+
+select StuID
+from Sportsinfo
+where sportname = "Football"
+
+select StuID
+from Student
+where sex = 'M'
+EXCEPT
+select StuID
+from Sportsinfo
+where sportname = "Football"
+
+31. Show total hours per week and number of games played for student David Shieber.
+P: What is the total number of hours per work and number of games played by David Shieber?
+
+select sum(hoursperweek), sum(gamesplayed)
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.Fname = "David" and T2.Lname = "Shieber"
+
+S: What information on sports do you have for the student named David Shieber?
+S: How many hours per week does he practice in total?
+S: Also, how many games does he play overall?
+
+select *
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.Fname = "David" and T2.Lname = "Shieber"
+
+select sum(hoursperweek)
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.Fname = "David" and T2.Lname = "Shieber"
+
+select sum(hoursperweek), sum(gamesplayed)
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.Fname = "David" and T2.Lname = "Shieber"
+
+32. Show total hours per week and number of games played for students under 20.
+P: What is the total number of hours per week and number of games played by students under 20?
+
+select sum(hoursperweek), sum(gamesplayed)
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.age < 20
+
+S: What sports information is there on students under the age of 20?
+S: How many hours per week do they practice in total?
+S: Also, how many games do they play overall?
+
+select *
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.age < 20
+
+select sum(hoursperweek)
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.age < 20
+
+select sum(hoursperweek), sum(gamesplayed)
+from Sportsinfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.age < 20
+
+33. How many students play video games?
+P: How many different students play games?
+
+select count(distinct StuID)
+from Plays_games
+
+S: What are the student ids of those who play games?
+S: Give me a list of unique ids.
+S: How long is it?
+
+SELECT StuID from Plays_games
+
+SELECT distinct StuID from Plays_games
+
+select count(distinct StuID)
+from Plays_games
+
+34. Show ids of students who don't play video game.
+P: What are the ids of all students who are not video game players?
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Plays_games
+
+S: What are all the student ids?
+S: What are the student ids of all who play games?
+S: What are the ids of all those in the first category but not the second?
+
+select StuID
+from Student
+
+select StuID
+from Plays_games
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Plays_games
+
+35. Show ids of students who play video game and play sports.
+P: What are the ids of all students who played video games and sports?
+
+select StuID
+from Sportsinfo
+INTERSECT
+select StuID
+from Plays_games
+
+S: What are the ids of all students who play sports?
+S: What are the student ids of all those who play games?
+S: What are the ids of those who play sports but don't play games?
+
+select StuID
+from Sportsinfo
+
+select StuID
+from Plays_games
+
+select StuID
+from Sportsinfo
+INTERSECT
+select StuID
+from Plays_games
+
+
+36. Show all game ids and the number of hours played.
+P: What are ids and total number of hours played for each game?
+
+select gameid, sum(hours_played)
+from Plays_games
+group by gameid
+
+S: How many hours did each student play for each game?
+S: What is the toal number of hours played for each game?
+S: And what is the id of each game?
+
+select hours_played
+from Plays_games
+group by gameid
+
+select sum(hours_played)
+from Plays_games
+group by gameid
+
+select gameid, sum(hours_played)
+from Plays_games
+group by gameid
+
+
+37. Show all student ids and the number of hours played.
+P: What are the ids of all students and number of hours played?
+
+select Stuid, sum(hours_played)
+from Plays_games
+group by Stuid
+
+S: For each student id, how many hours did each student play?
+S: How much did they play in total?
+S: Also, what are their student ids?
+
+select hours_played
+from Plays_games
+group by Stuid
+
+select sum(hours_played)
+from Plays_games
+group by Stuid
+
+select Stuid, sum(hours_played)
+from Plays_games
+group by Stuid
+
+38. Show the game name that has most number of hours played.
+P: What is the name of the game that has been played the most?
+
+select gname
+from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid
+group by T1.gameid
+order by sum(hours_played) desc
+limit 1
+
+S: What is the name of each game from its id?
+S: Order the names by total hours played. 
+S: which one is first?
+
+select gname
+from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid
+group by T1.gameid
+
+select gname
+from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid
+group by T1.gameid
+order by sum(hours_played) desc
+
+select gname
+from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid
+group by T1.gameid
+order by sum(hours_played) desc
+limit 1
+
+39. Show all game names played by at least 1000 hours.
+P: What are the names of all the games that have been played for at least 1000 hours?
+
+select gname
+from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid
+group by T1.gameid
+having sum(hours_played) >= 1000
+
+P: What are the names of all games?
+P: What are the names for each id?
+P: Out of those, which have been played for a total of at least 1000 hours?
+
+
+40. Show all game names played by Linda Smith
+P: What are the names of all games played by Linda Smith?
+
+select Gname
+from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid join Student as T3 on T3.Stuid = T1.Stuid
+where T3.Lname = "Smith" and T3.Fname = "Linda"
+
+S: What are the ids of all students named Linda Smith?
+S: For those student ids, what are the ids of the games they played?
+S: What are the names of those games?
+
+41. Find the last and first name of students who are playing Football or Lacrosse.
+P: What is the first and last name of all students who play Football or Lacrosse?
+
+select T2.lname, T2.fname
+from SportsInfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.SportName = "Football" or T1.SportName = "Lacrosse"
+
+S: What are the ids of all students who played football or Lacrosse?
+S: What are the first names that correspond to those ids?
+S: Also, what are their last names?
+
+select StuID
+from SportsInfo 
+where SportName = "Football" or SportName = "Lacrosse"
+
+select T2.fname
+from SportsInfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.SportName = "Football" or T1.SportName = "Lacrosse"
+
+select T2.lname, T2.fname
+from SportsInfo as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.SportName = "Football" or T1.SportName = "Lacrosse"
+
+42. Find the first name and age of the students who are playing both Football and Lacrosse.
+P: What are the first names and ages of all students who are playing both Football and Lacrosse?
+
+select fname, age
+from Student
+where StuID in (select StuID from Sportsinfo where SportName = "Football"
+                INTERSECT
+                select StuID from Sportsinfo where SportName = "Lacrosse")
+
+S: What are the student ids of all who played Football?
+S: Which of those ids are also marked as having played Lacrosse?
+S: What are the first names and ages that correspond to those student ids?
+
+Select StuID from Sportsinfo where SportName = "Football"
+
+select StuID from Sportsinfo where SportName = "Football"
+                INTERSECT
+                select StuID from Sportsinfo where SportName = "Lacrosse"
+
+select fname, age
+from Student
+where StuID in (select StuID from Sportsinfo where SportName = "Football"
+                INTERSECT
+                select StuID from Sportsinfo where SportName = "Lacrosse")
+
+43. Find the last name and gender of the students who are playing both Call of Destiny and Works of Widenius games.
+P: what is the last name and gender of all students who played both Call of Destiny and Works of Widenius?
+
+select lname, sex
+from Student
+where StuID in (select T1.StuID
+                from Plays_games as T1 join Video_games as T2 on T1.GameID = T2.GameID
+                where T2.Gname = "Call of Destiny"
+                INTERSECT
+                select T1.StuID
+                from Plays_games as T1 join Video_games as T2 on T1.GameID = T2.GameID
+                where T2.Gname = "Works of Widenius")
+
+S: What are the ids of all those who play the video game Call of Destiny?
+S: Which of those ids refer to people who also play Works of Widenius?
+S: What are the last names and sex of those people? 

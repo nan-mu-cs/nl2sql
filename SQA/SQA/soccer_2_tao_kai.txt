@@ -1,0 +1,624 @@
+
+Total # = 52
+
+1. What is the total enrollment number of all colleges?
+P: How many students are enrolled in college?
+
+SELECT sum(enr)
+FROM College
+
+S: What can you tell me about college?
+S: What are the enrollment numbers for each college?
+S: What is the total enrollment number for all of the colleges? 
+
+2. What is the average enrollment number?
+P: How many students, on average, does each college have enrolled?
+
+SELECT avg(enr)
+FROM College
+
+S: How many are enrolled for each college?
+S: What is the average number?
+
+3. How many colleges in total?
+P: How many different colleges are there?
+
+SELECT count(*)
+FROM College
+
+S: What is all the information on each college?
+S: How many different ones exist?
+
+4. How many players have more than 1000 hours of training?
+P: How many different players trained for more than 1000 hours?
+
+SELECT count(*)
+FROM Player
+WHERE HS > 1000
+
+S: What information do you have on players?
+S: Which of those refer to people who trained for more than 1000 hours?
+S: How many of them are there?
+
+5. How many colleges has more than 15000 students?
+P: What is the number of colleges with a student population greater than 15000?
+
+SELECT count(*)
+FROM College
+WHERE enr > 15000
+
+S: What is all the information on colleges?
+S: Which of those have a student population greater than 15000?
+S: How many of them exist?
+
+6. What is the average training hours of all players?
+P: How many hours do the players train on average?
+
+SELECT avg(HS)
+FROM Player
+
+S: How many hours does each player train for?
+S: What is the average?
+
+7. Find the name and training hours of players whose hours are below 1500.
+P: What are the names and number of hours spent training for each player who trains for less than 1500 hours?
+
+SELECT pName, HS
+FROM Player
+WHERE HS < 1500
+
+S: What are the names of the players?
+S: Which of those practice for less than 1500 hours?
+S: Also, list the hours worked for each of them.
+
+8. How many different colleges do attend the tryout test?
+P: How many different colleges were represented at tryouts?
+
+SELECT count(distinct cName)
+FROM tryout
+
+S: What is the name of the college each student trying out from?
+S: What are the different college names?
+S: How many different ones exist?
+
+9. What are the unique types of player positions in the tryout?
+P: What are the different types of player positions?
+
+SELECT count(distinct pPos)
+FROM tryout
+
+S: What are the different player positions?
+S: How many of them exist?
+
+10. How many students got accepted after the tryout?
+P: How many students received a yes from tryouts?
+
+SELECT count(*)
+FROM tryout
+WHERE decision = 'yes'
+
+S: What were the decisions for each player?
+S: Which of the players received a yes?
+S: How many of them exist?
+
+11. How many students whose are playing the role of goalie?
+P: What is the number of students playing as a goalie?
+
+SELECT count(*)
+FROM tryout
+WHERE pPos = 'goalie'
+
+S: What information exists for players tried for the position of goalie?
+S: How many of them tried out?
+
+12. Find the max, average and min training hours of all players.
+P: What is the average, maximum, and minimum for the number of hours spent training?
+
+SELECT avg(HS), max(HS), min(HS)
+FROM Player
+
+S: How many hours does each player spend training?
+S: What is the average?
+S: Also, what is the maximum and minimum?
+
+13. What is average enrollment of colleges in the state FL?
+P: What is average number of students enrolled in Florida colleges?
+
+SELECT avg(enr)
+FROM College
+WHERE state = 'FL'
+
+S: What is the number of students enrolled in each college?
+S: Of those, which refer to students enrolled in places in Florida?
+S: What is the average number enrolled for them?
+
+14. What are the names of players whose training hours is between 500 and 1500?
+P: What are the names of players who train between 500 and 1500 hours?
+
+SELECT pName
+FROM Player
+WHERE HS between 500 AND 1500
+
+S: Give me all information about players who train between 500 and 1500 hours. 
+S: What are their names?
+
+15. Find the players whose names contain letter 'a'.
+P: Who are the players that have names containing the letter a?
+
+SELECT DISTINCT pName
+FROM Player
+WHERE pName LIKE '%a%'
+
+S: What information is there on players whose name contains the letter a?
+S: What are their names?
+S: What is a list of the unique names?
+
+16. Find the name, enrollment of the colleges whose size is bigger than 10000 and location is in state LA.
+P: What are the names and enrollment numbers for colleges that have more than 10000 enrolled and are located in Louisiana?
+
+SELECT cName, enr
+FROM College
+WHERE enr > 10000 AND state="LA"
+
+S: What information you have on colleges that have more than 10000 students enrolled?
+S: Of those, which refer to colleges in the state of LA?
+S: What are these colleges' names and enrollment numbers?
+
+17. List all information about college sorted by enrollment number in the ascending order.
+P: What information do you have on colleges sorted by increasing enrollment numbers?
+
+SELECT * FROM College
+ORDER BY enr
+
+S: What information do you have on the colleges?
+S: Sort the information by enrollment numbers.
+
+18. List the name of the colleges whose enrollment is greater 18000 sorted by the college's name.
+P: What is the name of every college in alphabetical order that has more than 18000 students enrolled?
+
+SELECT cName
+FROM College
+WHERE enr > 18000
+ORDER BY cName
+
+S: What are the college names?
+S: Which of those have more than 18000 students enrolled?
+S: Order them alphabetically. 
+
+19. Find the name of players whose card is yes in the descending order of training hours.
+P: What are the name of the players who received a card in descending order of the hours of training?
+
+SELECT pName
+FROM Player
+WHERE yCard = 'yes'
+ORDER BY HS desc
+
+S: What are the names of all the players?
+S: Which of those received a card?
+S: Set them in descending order of hours spent training. 
+
+20. Find the name of different colleges involved in the tryout in alphabetical order.
+P: What are the different names of the colleges involved in the tryout in alphabetical order?
+
+SELECT distinct cName
+FROM tryout
+ORDER BY cName
+
+S: Order the information on tryouts by college name
+S: What are the names of the colleges?
+S: Make sure they are all unique. 
+
+21. Which position is most popular among players in the tryout?
+P: What was the most popular position at tryouts? 
+
+SELECT pPos
+FROM tryout
+GROUP BY pPos
+ORDER BY count(*) desc
+LIMIT 1
+
+S: What information do you have for each position?
+S: How many players tried out for each position?
+S: What was the most popular one?
+
+22. Find the number of students who participate in the tryout for each college ordered by descending count.
+P: How many students participated in tryouts for each college by descennding count?
+
+SELECT count(*), cName
+FROM tryout
+GROUP BY cName
+ORDER BY count(*) desc
+
+S: How many students participated in tryouts for each college?
+S: Order them by number of participants.
+S: Make sure it is in descending order. 
+
+23. What is minimum hours of the students playing in different position?
+P: For each position, what is the minimum time students spent practicing? 
+
+SELECT min(T2.HS),  T1.pPos
+FROM tryout as T1 JOIN player as T2 ON T1.pID = T2.pID
+GROUP BY T1.pPos
+
+S: For each position, how much did each player practice?
+S: What is the minimum for each position?
+
+24. What are the names of schools with the top 3 largest size?
+P: What are the names of the schools with the top 3 largest class sizes?
+
+SELECT cName
+FROM college
+ORDER BY enr desc
+LIMIT 3
+
+S: What are the names of each college?
+S: List them in order of descending class size. 
+S: What are the top 3?
+
+25. What is the name of school that has the smallest enrollment in each state?
+P: What is the name of the school with smallest enrollment size per state?
+
+SELECT cName, state
+from college
+group by state
+having enr = min(enr)
+
+S: What colleges are located in each state?
+S: Also, list all of the states. 
+S: For each state, which college has the smallest enrollment size?
+
+26.Find the states where have some college students in tryout.
+P: What are the different states that have students trying out?
+
+SELECT distinct state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+
+S: Which colleges have students trying out?
+S: What are the different state they are located in?
+
+27. Find the states where have some college students in tryout and their decisions are yes.
+P: What are the different states that had students successfully try out?
+
+SELECT distinct T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.decision = 'yes'
+
+S: What are the name of the colleges that had students participate in tryouts?
+S: Of those colleges, which had students that received a yes?
+S: What are the different states those colleges are located in?
+
+28. Find the name and college of students whose decisions are yes in the tryout.
+P: What are the names of all the players who received a yes during tryouts, and also what are the names of their colleges?
+
+SELECT T1.pName, T2.cName
+FROM player as T1 JOIN tryout as T2 ON T1.pID = T2.pID 
+WHERE T2.decision = 'yes'
+
+S: What are all the players names?
+S: Which of those players tried out and received a yes?
+S: Also, what colleges are they from?
+
+29. Find the name of all students who were in the tryout sorted in alphabetic order.
+P: What are the names of all students who tried out in alphabetical order?
+
+SELECT T1.pName
+FROM player as T1 JOIN tryout as T2 ON T1.pID = T2.pID 
+ORDER BY T1.pName
+
+S: What are the players' names?
+S: Which of them tried out?
+S: Sort the list alphabetically. 
+
+30. Find the name and hours of the students whose tryout decision is yes.
+P: What are the names and hours spent practicing of every student who received a yes at tryouts?
+
+SELECT T1.pName, T1.HS
+FROM player as T1 JOIN tryout as T2 ON T1.pID = T2.pID 
+WHERE T2.decision = 'yes'
+
+S: What are the names of all players who participated in tryouts?
+S: Which of those received a yes?
+S: How many hours did each of them practice for?
+
+31. Find the states of the colleges that have students in the tryout who played in striker position.
+P: What are the states of the colleges where students who tried out for the striker position attend?
+
+SELECT T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.pPos = 'striker'
+
+S: Which colleges did the students who tried out for the position of striker attend?
+S: What states are those colleges located in?
+
+32. Find the names of the students who are in the position of striker and got a yes tryout decision.
+P: What are the names of all students who successfully tried out for the position of striker?
+
+SELECT T1.pName
+FROM player as T1 JOIN tryout as T2 ON T1.pID = T2.pID 
+WHERE T2.decision = 'yes' and T2.pPos = 'striker'
+
+S: What is every player's name?
+S: Which of those tried out for the position of striker?
+S: Of those, who made the team?
+
+33. Find the state of the college which player Charles is attending.
+P: In which state is the college that Charles attends?
+
+SELECT T1.state
+FROM college as T1 
+     JOIN tryout as T2 ON T1.cName = T2.cName 
+     JOIN player as T3 ON T2.pID = T3.pID
+WHERE T3.pName = 'Charles'
+
+S: What information is there on the player named Charles?
+S: What college is he attending?
+S: What state is that college located in?
+
+34. Find the average and maximum hours for the students whose tryout decision is yes.
+P: What is the average and maximum number of hours students who made the team practiced?
+
+SELECT avg(T1.HS), max(T1.HS)
+FROM player as T1 JOIN tryout as T2 ON T1.pID = T2.pID 
+WHERE T2.decision = 'yes'
+
+S: What are the player ids of all students who made the team?
+S: What is the maximum number of hours they spent practicing?
+S: What was the average?
+
+35. Find the average hours for the students whose tryout decision is no.
+P: What is the average number of hours spent practicing for students who got rejected?
+
+SELECT avg(T1.HS)
+FROM player as T1 JOIN tryout as T2 ON T1.pID = T2.pID 
+WHERE T2.decision = 'no'
+
+S: Which players received a decision of no from tryouts?
+S: How many hours did they practice?
+S: What was the average?
+
+36. What is the maximum training hours for the students whose training hours is greater than 1000 in different positions?
+P: For each position, what is the maximum number of  hours for students who spent more than 1000 hours training?
+
+SELECT max(T1.HS), pPos
+FROM player as T1 JOIN tryout as T2 ON T1.pID = T2.pID
+WHERE T1.HS > 1000
+GROUP BY T2.pPos
+
+S: What information is there on students who spent more than 1000 hours training?
+S: For each position, how many hours did each student spent training?
+S: What was the maximum time spent for each position?
+
+37. Which colleges do the tryout players whose name starts with letter D go to?
+P: Which colleges does each player with a name that starts with the letter D  who tried out go to?
+
+SELECT T1.cName
+FROM  tryout as T1 JOIN player as T2 ON T1.pID = T2.pID
+WHERE T2.pName LIKE 'D%'
+
+S: What are the player ids of every player whose name starts with D?
+S: Of those, who tried out?
+S: What college did they go to?
+
+38. Which college has any student who is a goalie and succeeded in the tryout.
+P: What college has a student who successfully made the team in the role of a goalie? 
+
+SELECT cName
+FROM  tryout
+WHERE decision = 'yes' and pPos = 'goalie'
+
+S: What can you tell me about the students who made the team?
+S: of those, who tried out for the position of goalie?
+S: What college do they attend?
+
+39. Find the name of the tryout players who are from the college with largest size.
+P: What are the names of all tryout participants who are from the largest college?
+
+SELECT T2.pName
+FROM  tryout as T1 JOIN player as T2 ON T1.pID = T2.pID
+WHERE T1.cName = (SELECT cName
+                  FROM college
+                  ORDER BY enr DESC
+                  LIMIT 1)
+S: What is the largest college?
+S: What are the names of players are from that college?
+S: Of those, who tried out for the team?
+
+40. What is the state and enrollment of the colleges where have any students who got accepted in the tryout decision.
+P: How many students are enrolled in colleges that have student accepted during tryouts, and in which states are those colleges?
+
+SELECT distinct T1.state, T1.enr
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.decision = 'yes'
+
+S: What are the names of colleges that have students who made the team?
+S: How many students are enrolled in each of them?
+S: Also, what are the different states in which those colleges reside?
+
+41. Find the names of all the players who have yCards AND hours less than some other Player.
+P: What are the names of all the players who have yCards and practiced for less time than some other player?
+
+SELECT DISTINCT T1.pName
+FROM Player as T1, Player as T2
+WHERE T1.yCard = "yes" AND T1.HS < T2.HS;
+
+S: What can you tell me about players who have a yCard?
+S: What are their different names?
+S: Which of those practiced for less time than another player?
+
+42. Find the names of either colleges in LA with greater than 15000 size or in state AZ with less than 13000 enrollment.
+P: What are the names of colleges in LA that have more than 15,000 students and of colleges in AZ with less than 13,000 students?
+
+(SELECT cName FROM College WHERE enr < 13000 AND state="AZ")
+UNION
+(SELECT cName FROM College WHERE enr > 15000 AND state="LA")
+
+S: What are the names of colleges with less than 13,000 students?
+S: Which of those are in AZ?
+S: Combine that with colleges in LA that have more than 15,000 students?
+
+43. Find the names of schools that have some students playing in goalie and mid positions. 
+P: What are the names of all schools that have students trying out for the position of goal and 'mid'-field. 
+
+SELECT cName
+FROM  tryout
+WHERE pPos = 'goalie'
+INTERSECT
+SELECT cName
+FROM  tryout
+WHERE pPos = 'mid'
+
+S: What are the names of colleges that have students who tried out for the goalie?
+S: Of those, which also have students who tried out for the position of mid-field?
+
+44. Find the names of states that have some college students playing in goalie and mid positions. 
+P: What are the names of the states that have some college students playing in the positions of goalie and mid-field?
+
+SELECT T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.pPos = 'goalie'
+INTERSECT
+SELECT T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.pPos = 'mid'
+
+S: What are the names of colleges that have students who tried out for the goalie?
+S: What states are they located in?
+S: Of those states, which also have colleges where students tried out for mid-field?
+
+45. How many schools have some students playing in goalie and mid positions.
+P: How many schools have students playing in goalie and mid-field positions?
+
+SELECT COUNT(*)
+FROM (SELECT cName
+FROM  tryout
+WHERE pPos = 'goalie'
+INTERSECT
+SELECT cName
+FROM  tryout
+WHERE pPos = 'mid')
+
+S: What are the names of colleges where students tried for the goalie position?
+S: Of those, which also had students that tried out for the mid position?
+S: How many of them are there?
+
+46. Find the names of schools that have some players in the mid position but not in the goalie position.
+P: What are the names of the schools with some players in the mid position but no goalies?
+
+SELECT cName
+FROM  tryout
+WHERE pPos = 'mid'
+Except
+SELECT cName
+FROM  tryout
+WHERE pPos = 'goalie'
+
+S: What schools have players that tried out for goalies?
+S: What schools have players that tried out for the mid position?
+S: What are the names of schools that fit into the latter category but not the former?
+
+47. Find the names of states that have some college students playing in the mid position but not in the goalie position. 
+P: What are the names of all the states with college students playing in the mid position but no goalies?
+
+SELECT T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.pPos = 'mid'
+Except
+SELECT T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.pPos = 'goalie'
+
+S: What schools have players that tried out for goalies?
+S: What schools have players that tried out for the mid position?
+S: In which states are the schools that fit into the latter category but not the former?
+
+48. How many states that have some college students playing in the mid position but not in the goalie position. 
+P: What is the count of states with college students playing in the mid position but not as goalies?
+
+SELECT COUNT(*)
+FROM
+(SELECT T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.pPos = 'mid'
+Except
+SELECT T1.state
+FROM college as T1 JOIN tryout as T2 ON T1.cName = T2.cName 
+WHERE T2.pPos = 'goalie')
+
+S: What schools have players that tried out for the mid position but not as goalies?
+S: In which states do those states reside?
+S: How many of them exist?
+
+49. Find the states where have the colleges whose enrollments are less than the largest size.
+P: What are the states with colleges that have enrollments less than the some other college?
+
+select distinct T1.state
+from college as T1, college as T2
+where T1.enr < T2.enr
+
+S: What is the largest enrollment size for a college?
+S: What information is there on all the smaller colleges?
+S: What are the different states in which those colleges reside?
+
+50. Find names of colleges with enrollment greater than that of some (at least one) college in the FL state.
+P: What are the names of the colleges that are larger than at least one college in Florida?
+
+select distinct T1.cName
+from college as T1, college as T2
+where T1.enr > T2.enr and T2.state = 'FL'
+
+S: Which colleges are in Florida?
+S: What is the smallest enrollment size of those?
+S: What are the names of all colleges larger than that?
+
+51. Find names of all colleges whose enrollment is greater than that of all colleges in the FL state.
+P: What are the names of all colleges with a larger enrollment than the largest college in Florida?
+
+select cName
+from college
+where enr > (select max(enr)
+                from college
+                where state = 'FL')
+
+S: What information is there on colleges in Florida?
+S: What is their maximum enrollment size?
+S: What is the name of every college that is larger than that? 
+
+52. What is the total number of enrollment of schools that do not have any goalie player?
+P: What is the total number of students enrolled in schools without any goalies?
+
+SELECT sum(enr)
+FROM college
+WHERE cName NOT IN
+(SELECT cName
+FROM tryout
+WHERE pPos = "goalie")
+
+P: What are the names of all colleges with students who tried out for the position of goalie?
+P: What is the number of people enrolled in all the other colleges?
+P: How many is that in total?
+
+53. What is the number of states that has some college whose enrollment is larger than the average enrollment?
+P: How many states have a college with more students than average?
+
+SELECT count(distinct state)
+FROM college
+WHERE enr > (SELECT avg(enr)
+             FROM college)
+
+S: What is the average number of students enrolled per college?
+S: What are the states that have larger colleges than that?
+S: How many of them are there?
+
+54. What is the number of states that has some colleges whose enrollment is smaller than the average enrollment?
+P: How many states have smaller colleges than average?
+
+SELECT count(distinct state)
+FROM college
+WHERE enr < (SELECT avg(enr)
+             FROM college)
+
+S: What is the average number of students per college?
+S: What states have colleges that are smaller than that?
+S: How many of them are there? 
+
+
