@@ -42,8 +42,15 @@ Select T1.title
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
 Where T2.name = 'Odeon'
 
-S: What are the ids for movies played in the Odeon theater?
+
+# comment: can further decompose
+
+S: What are the ids for movies played in any of the theaters?
+S: What are the ids for those played in the Odeon theater?
 S: For those ids, what are the titles?
+
+select T1.code
+From movies as T1 join movietheaters as T2 on T1.code = T2.movie
 
 Select T1.code
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
@@ -142,7 +149,9 @@ Select rating
 From movies
 Where title LIKE '%Citizen%'
 
-S: Which movies have a title includign the word 'Citizen'?
+# comment: fix typo. Don't use too many examples only adding the column information in the last question...
+
+S: Which movies have a title including the word 'Citizen'?
 S: What are their ratings?
 
 Select *
@@ -290,7 +299,9 @@ Select title
 From movies
 Order by rating
 
-S: Filter the movies by ratings
+# comment: Filter or order?
+
+S: Order the movies by ratings
 S: List their names
 
 Select *
@@ -310,9 +321,12 @@ Group by name
 Order by count(*) desc
 Limit 1
 
+# comment: descending is not default order.
+
 S: What are the names of the movie theaters?
-S: Order them by number of movies playing?
+S: Order them by number of movies playing descendingly?
 S: Which one is playing the most?
+
 
 Select name
 From movietheaters
@@ -381,9 +395,11 @@ From movies
 Where rating is not NULL
 Group by rating
 
+# comment: if add new column, should indicate, for example, 'Also', 'Combine'...
+
 S: What are the unique ratings for all movies?
 S: How many movies are there for each rating category?
-S: How many are there for each type except null?
+S: Also, How many are there for each type except null?
 
 Select distinct rating
 From movies
@@ -397,28 +413,13 @@ From movies
 Where rating is not NULL
 Group by rating
 
-20. Find the number of movies for each rating except NULL.
+(20. Find the number of movies for each rating except NULL.
 ISSUE: How is this different than the above?
 P: How many movies are there for each non-NULL rating?
 
-Select count(*), rating
-From movies
-Group by rating
-Having rating is not NULL
+# comment: Good point! Fixed in the original label. We can skip this example.)
 
-S: How many movies are there for each rating type?
-S: How about for every non-null type?
-
-Select count(*), rating
-From movies
-Group by rating
-
-Select count(*), rating
-From movies
-Group by rating
-Having rating is not NULL
-
-21. Find the name of theaters that has at least one movie playing.
+20. Find the name of theaters that has at least one movie playing.
 P: What are the names of every theater with at least one movie playing?
 
 Select name
@@ -426,8 +427,14 @@ From movietheaters
 Group by name
 Having count(*) >= 1
 
-S: Which theaters have more than one film playing?
+# comment: can decompose further 
+
+S: Which theaters have film on?
+S: Which one have at least 1 film on?
 S: What is that theater's name?
+
+Select *
+From movietheaters
 
 Select *
 From movietheaters
@@ -439,7 +446,7 @@ From movietheaters
 Group by name
 Having count(*) >= 1
 
-22. Select the name of all movie theaters that are not currently showing a movie.
+21. Select the name of all movie theaters that are not currently showing a movie.
 P: What are the names of all cinemas not showing any movies?
 
 select DISTINCT name
@@ -456,15 +463,23 @@ select DISTINCT name
 from MovieTheaters
 where Movie is NULL
 
-23. Find the name of the movie theaters that are playing the movies whose rating is ‘G’.
+
+22. Find the name of the movie theaters that are playing the movies whose rating is ‘G’.
 P: What are the names of theaters playing 'G' rated movies? 
 
 Select T2.name
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
 Where T1.rating = 'G'
 
+# comment: can further decompose
+
+S: Which movies are 'G'-rated?
 S: What theaters are playing 'G'-rated movies?
 S: What are the names of the theaters?
+
+Select *
+From movies
+Where rating = 'G'
 
 Select *
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
@@ -535,8 +550,16 @@ WHERE Code NOT IN
 FROM MovieTheaters
 WHERE Movie IS NOT NULL)
 
+# comment: Should not only specify column in the sequential questions, should further decompose.
+
+S: What are all the movies shown in the theaters?
 S: Which movies are not being shown in any theaters?
 S: What are their names
+
+
+SELECT *
+FROM MovieTheaters
+WHERE Movie IS NOT NULL
 
 SELECT *
 FROM Movies

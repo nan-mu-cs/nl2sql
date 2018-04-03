@@ -116,19 +116,16 @@ Select count(*), rating
 From movies
 Group by rating
 
-Find the number of movies whose rating is not null in each rating.
+
+
+Find the number of movies for each rating excepts NULL.
+
+Paraphrase: Find the number of movies whose rating is not null in each rating.
 
 Select count(*), rating
 From movies
 Where rating is not NULL
 Group by rating
-
-Find the number of movies for each rating excepts NULL.
-
-Select count(*), rating
-From movies
-Group by rating
-Having rating is not NULL
 
 Find the name of theaters that has at least one movie playing.
 
@@ -139,7 +136,7 @@ Having count(*) >= 1
 
 Select the name of all movie theaters that are not currently showing a movie.
 
-select name
+select distinct name
 from MovieTheaters
 where Movie is NULL
 
