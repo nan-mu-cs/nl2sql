@@ -2,6 +2,8 @@ Total # = 50
 
 1. What is the name of the song that was released in the most recent year?
 
+comment: releasedate is a string...
+
 select song_name, releasedate
 from song
 order by releasedate desc
@@ -144,11 +146,11 @@ group by languages
 
 
 
-***10. Return the gender and name of artist who produced the song with the lowest resolution.
+10. Return the gender and name of artist who produced the song with the lowest resolution.
 
 Select T1.gender, T1.artist_name
 From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
-Order by T2.resolution Desc
+Order by T2.resolution
 LIMIT 1
 
 
@@ -159,16 +161,16 @@ From files
 Group by formats
 
 
-11.  Find the distinct names of all songs that have a higher resolution than some songs  in English.
+11.  Find the distinct names of all songs that have a higher resolution than some songs in English.
 
 Select distinct T1.song_name
 From song as T1, song as T2
 where T1.resolution > T2.resolution and T2.languages = "english"
 
 
-What are the distinct ids of all songs that have a lower rating than some songs of blues genre?
+What are the names of all songs that have a lower rating than some song of blues genre?
 
-Select distinct T1.song_name
+Select T1.song_name
 From song as T1, song as T2
 where T1.rating < T2.rating and T2.genre_is = "blues"
 
@@ -181,7 +183,7 @@ From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
 Where T2.song_name LIKE "%love%"
 
 
-List the name and gender for all artists who released songs on March.
+List the name and gender for all artists who released songs in March.
 
 Select T1.artist_name, T1.gender
 From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
@@ -225,7 +227,7 @@ where languages = "english"
 
 
 
-15. What is the language used the least often in the songs?
+15. What is the language used most often in the songs?
 
 Select languages
 From song
@@ -238,8 +240,8 @@ What is the language that was used most often in songs with resolution above 500
 
 Select artist_name
 From song
+where resolution > 500
 Group by languages
-having resolution > 500
 Order by count(*) DESC
 LIMIT 1
 
@@ -255,7 +257,7 @@ Find the names of songs whose genre is modern or language is English.
 
 Select song_name
 From song
-Where genre_is = "modern" and languages = "english"
+Where genre_is = "modern" or languages = "english"
 
 
 
@@ -283,7 +285,7 @@ Where T2.languages = "english"
 
 
 
-18. What are the average rating and resolution of songs that are in Bangra?
+18. What are the average rating and resolution of songs that are in Bangla?
 
 Select avg(rating), avg(resolution)
 From song
@@ -393,7 +395,7 @@ LIMIT 3
 
 Select f_id, genre_is, artist_name
 From song
-where languages =  "English"
+where languages =  "english"
 order by rating
 
 
@@ -405,7 +407,7 @@ where T2.genre_is = "pop"
 order by T2.song_name
 
 
-25. Find the names of the artists have produced English songs but have never received rating higher than 8.
+25. Find the names of the artists who have produced English songs but have never received rating higher than 8.
 
 Select distinct artist_name
 From song
@@ -416,7 +418,7 @@ From song
 where rating > 8
 
 
-Find the names of the artists are from Bangladesh and have never received rating higher than 7.
+Find the names of the artists who are from Bangladesh and have never received rating higher than 7.
 
 Select distinct artist_name
 From artist
