@@ -72,7 +72,7 @@ FROM station
 
 6. How many stations does Mountain View city has?
 
-SELECT COUNT(id)
+SELECT COUNT(*)
 FROM station
 WHERE city = "Mountain View"
 
@@ -83,7 +83,7 @@ FROM station as T1 JOIN status as T2 ON T1.id = T2.station_id
 WHERE T2.bikes_available = 7
 
 
-7. Which station had the most trips starting from August? Give me the name and id of the station.
+7. Which start station had the most trips starting from August? Give me the name and id of the station.
 
 SELECT start_station_name, start_station_id
 FROM trip
@@ -155,7 +155,7 @@ What is the zip code in which the average mean sea level pressure is the lowest?
 SELECT zip_code
 FROM weather
 GROUP BY zip_code 
-ORDER BY mean_sea_level_pressure_inches
+ORDER BY avg(mean_sea_level_pressure_inches)
 LIMIT 1
 
 
@@ -198,7 +198,7 @@ having avg(T2.mean_temperature_f) > 60
 
 For each zip code, return how many times max wind speed reached 25?
 
-Select count(*)
+Select zip_code,count(*)
 From weather 
 Where max_wind_Speed_mph >= 25
 Group by zip_code
@@ -268,7 +268,7 @@ WHERE city = "San Jose"
 
 SELECT name, lat, city
 FROM station
-ORDER BY lat DESC
+ORDER BY lat
 LIMIT 1
 
 
@@ -293,7 +293,7 @@ Find the ids and names of stations from which at least 200 trips started.
 SELECT start_station_id, start_station_name
 FROM trip
 GROUP BY start_station_name
-HAVING COUNT(*) >= 100
+HAVING COUNT(*) >= 200
 
 
 18. Find the zip code in which the average mean visibility is lower than 10.
@@ -428,7 +428,7 @@ Having count(*) > 100
 
 Select count(*)
 From station as T1 JOIN trip as T2 JOIN station as T3 JOIN trip as T4 ON T1.id = T2.start_station_id and T2.id = T4.id and T3.id = T4.end_station_id
-Where T1.city = "Mountain View" and T3.city = "San Francisco"
+Where T1.city = "Mountain View" and T3.city = "Palo Alto"
 
 
 What is the average latitude and longitude of the starting points of all trips?
