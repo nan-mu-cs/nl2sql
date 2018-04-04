@@ -53,9 +53,11 @@ WHERE T1.age > T2.age and T2.rating > 7
 SELECT DISTINCT T1.name, T1.sid
 FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
 
-find the name of the sailors who reserved more than one boat?
+find the id and name of the sailors who reserved more than one boat?
 
-SELECT DISTINCT T1.name 
+# comment: when you group by a column, you should select it.
+
+SELECT DISTINCT T1.name, T2.sid
 FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
 GROUP BY T2.sid
 HAVING COUNT(*) > 1
