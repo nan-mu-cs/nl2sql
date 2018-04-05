@@ -68,7 +68,6 @@ WHERE Continent = "Asia"
 order by LifeExpectancy
 LIMIT 1
 
-
 5. What is the total population and maximum GNP in Asia?
 How many people lives in Asia, and what is the largest GNP among them?
 
@@ -178,7 +177,7 @@ WHERE T2.Language = "French" and T2.IsOfficial = "T"
 
 What is the number of distinct continents which speak Chinese?
 
-SELECT COUNT( DISTINCT Continent)
+SELECT COUNT( DISTINCT T1.Continent)
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T2.Language = "Chinese"
 
@@ -273,13 +272,13 @@ what are the African countries whose population is less than any country in Asia
 
 SELECT Name
 FROM country
-WHERE Continent = "Africa"  and SurfaceArea < (SELECT max(SurfaceArea) FROM country WHERE Continent = "Asia")
+WHERE Continent = "Africa"  and population < (SELECT max(population) FROM country WHERE Continent = "Asia")
 
 what are the Asian countries whose population is larger than any country in African?
 
 SELECT Name
 FROM country
-WHERE Continent = "Asia"  and SurfaceArea > (SELECT min(SurfaceArea) FROM country WHERE Continent = "Africa")
+WHERE Continent = "Asia"  and population > (SELECT min(population) FROM country WHERE Continent = "Africa")
 
 17.	What are the countries that do not speak English?
 	
