@@ -38,15 +38,15 @@ WHERE name LIKE '%e%'
 
 5. return the unique ids of sailors who is older than any sailors.
 
-SELECT DISTINCT T1.sid
-FROM Sailors AS T1, Sailors AS T2
-WHERE T1.age > T2.age
+SELECT DISTINCT sid
+FROM Sailors
+WHERE age > (select min(age) from Sailors);
 
 return the unique names of sailors who is older than any sailors whose rating is larger than 7.
 
-SELECT DISTINCT T1.name
-FROM Sailors AS T1, Sailors AS T2
-WHERE T1.age > T2.age and T2.rating > 7 
+SELECT DISTINCT name
+FROM Sailors
+WHERE age > (select min(age) from Sailors where rating > 7);
 
 6. find the name and id of the sailors who reserved at least one boat?
 
