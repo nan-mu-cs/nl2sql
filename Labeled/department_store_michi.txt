@@ -1,0 +1,344 @@
+Total # = 40
+
+1. What are the ids of the top three products that were purchased for the largest amount?
+
+Select product_id
+from product_suppliers
+order by total_amount_purchased desc
+limit 3
+
+What are the product id and product type of the cheapest product?
+
+select product_id, product_type_code
+from products
+order by product_price
+limit 1
+
+
+2. Return the address of customer id 10.
+
+Select T1.address_details
+From addresses as T1 JOIN customer_addresses as T2 ON T1.address_id = T2.address_id
+Where T2.customer_id = 10
+
+
+What are the staff ids and genders of all the Department Managers?
+
+Select T1.staff_id, T1.staff_gender
+From staff as T1 JOIN staff_department_assignments as T2 ON T1.staff_id = T2.staff_id
+Where T2.job_title_code = "Department Manager"
+
+
+3. For each payment method, return how many customers used it.
+
+Select payment_method_code, count(*)
+From customers
+Group by payment_method_code
+
+
+What is the product that were ordered the most often? Return the product id.
+
+Select product_id
+From order_items
+Group by product_id
+Order by count(*) Desc
+LIMIT 1
+
+
+
+4. What are the name, phone number and email address of the customer who made the largest number of orders? 
+
+Select T1.customer_name, T1.customer_phone, T1.customer_email
+From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id
+Group by T2.customer_id
+Order by count(*) Desc
+LIMIT 1
+
+
+What is the average price for each type of product?
+
+Select product_type_code, avg(product_price)
+From products
+Group by product_type_code
+
+
+5. How many department stores does store chain South has?
+
+Select count(*)
+From department_stores as T1 JOIN department_store_chain as T2 ON T1.dept_store_chain_id = T2.dept_store_chain_id
+where T2.dept_store_chain_name = "South"
+
+
+What is the name and job title of the staff who was assigned the latest?
+
+Select T1.staff_name, T2.job_title_code
+From staff as T1 JOIN staff_department_assignments as T2 ON T1.staff_id = T2.staff_id
+Order by T2.date_assigned_to Desc
+LIMIT 1
+
+
+
+6. Give me the product type, name and price for all the products supplied by supplier id 3.
+
+Select T2.product_type, T2.product_name, T2.product_price
+From product_suppliers as T1 JOIN products as T2 ON T1.product_id = T2.product_id
+Where T1.supplier_id = 3
+
+
+Return the distinct name of customers whose order status is Pending, in the order of customer id.
+
+Select Distinct T1.customer_name
+From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id
+Where T2.order_status_code = "Pending"
+Order by T2.customer_id
+
+
+
+7. Find the name and address of the customers who have both New and Pending orders.
+
+Select T1.customer_name, T1.customer_address
+From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id
+Where T2.order_status_code = "New"
+INTERSECT
+Select T1.customer_name, T1.customer_address
+From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id
+Where T2.order_status_code = "Pending"
+
+
+Return ids of all the products that are supplied by supplier id 2 and are more expensive than the average price of all products.
+
+Select T1.product_id
+From product_suppliers as T1 JOIN products as T2 ON T1.product_id = T2.product_id
+Where T1.supplier_id = 2 and T2.product_price > (Select avg(product_price) From products)
+
+
+What is the id and name of the department store that has both marketing and managing department?
+
+Select T2.dept_store_id, T2.store_name
+From departments as T1 JOIN department_stores as T2 ON T1.dept_store_id = T2.dept_store_id
+Where T1.department_name = "marketing"
+INTERSECT
+Select T2.dept_store_id, T2.store_name
+From departments as T1 JOIN department_stores as T2 ON T1.dept_store_id = T2.dept_store_id
+Where T1.department_name = "managing"
+
+
+
+8. Which department store chain has the largest number of department stores? Give me the ids of the top two department store chains.
+
+Select dept_store_chain_id
+From department_stores
+Group by dept_store_chain_id
+Order by count(*) Desc 
+LIMIT 2
+
+
+Which department has the least number of staff? Return the id of the department.
+
+Select department_id
+From staff_department_assignments
+Group by department_id
+Order by count(*) 
+LIMIT 1
+
+
+
+9. For each product type, return the maximum and minimum price.
+
+Select product_type_code, max(product_price), min(product_price)
+From products
+Group by product_type_code 
+
+
+Find the product type whose average price is higher than the average price of all products.
+
+Select product_type_code
+From products
+Group by product_type_code
+Having avg(product_price) > (Select avg(product_price) From products)
+
+
+
+10. 
+Find the id and name of the staff who has been assigned for the shortest period.
+ 
+Select T1.staff_id, T1.staff_name
+from staff as T1 JOIN Staff_Department_Assignments as T2 ON T1.staff_id = T2.staff_id
+Order by date_assigned_to - date_assigned_from
+LIMIT 1
+
+
+Return the name and id of all products whose price is between 600 and 700.
+
+Select product_name, product_id
+From products 
+Where product_price between 600 and 700
+
+
+11.  Find the ids of all distinct customers who made order after some orders that were Cancelled.
+ 
+Select distinct T1.customer_id 
+From Customer_Orders as T1, Customer_Orders as T2
+Where T1.order_date > T2.order_date and T2.order_status_code = "Cancelled"
+
+
+What is the staff of the Department Manager who was assigned earlier than any Clerical Staff?
+
+Select T1.staff_id
+From Staff_Department_Assignments as T1, Staff_Department_Assignments as T2 
+Where T1.
+
+
+
+
+
+12. Which customer's address is in TN state? Give me the name and id of the customer.
+
+Select customer_name, customer_id
+From customers
+Where customer_address LIKE "%TN%"
+
+
+Return the name and gender of the staff who was assigned in 2016.
+
+Select T1.staff_name, T1.staff_gender
+From staff as T1 JOIN staff_department_assignments as T2 ON T1.staff_id = T2.staff_id
+Where T2.date_assigned_from LIKE "2016%"
+
+
+13. List the name of staff who has been assigned multiple jobs.
+
+Select T1.staff_name
+From staff as T1 JOIN staff_department_assignments as T2 ON T1.staff_id = T2.staff_id
+Group by T2.staff_id
+Having count (*) > 1
+
+
+List the name and phone number of all suppliers in the alphabetical order of their addresses.
+
+Select T1.supplier_name, T1.supplier_phone
+From Suppliers as T1 JOIN supplier_addresses as T2 ON T1.supplier_id = T2.supplier_id JOIN addresses as T3 ON T2.address_id = T3.address_id
+Order by T3.address_details
+
+
+
+14. What are the phone numbers of all customers and suppliers.
+
+Select customer_phone
+From customers
+UNION
+Select supplier_phone
+From suppliers
+
+
+Return the ids of all products that were ordered more than three times or supplied more than 80000. 
+
+Select product_id
+From Order_Items
+Group by product_id
+Having count(*) > 3
+UNION 
+Select product_id
+From Product_Suppliers
+Group by product_id
+Having sum(total_amount_purchased) > 80000
+
+
+15. What are id and name of the products whose price is lower than 600 or higher than 900?
+
+Select product_id, product_name
+From products
+where product_price < 600 or product_price > 900
+
+
+Find the id of suppliers whose average supply amount per each product is above 50000 or below 30000.
+
+Select supplier_id 
+From Product_Suppliers 
+Group by supplier_id
+Having avg(total_amount_purchased) > 50000 or avg(total_amount_purchased) < 30000
+
+
+
+16. What are the average supply amount and value from the supplier who supplies the most products.
+
+Select avg(total_amount_purchased), avg(total_value_purchased)
+From Product_Suppliers
+Where supplier_id = (Select supplier_id From Product_Suppliers Group by supplier_id Order by count(*) Desc LIMIT 1)
+
+
+What is the largest and smallest customer codes?
+
+Select max(customer_code), min(customer_code)
+From Customers 
+
+
+
+17. List the names of all the distinct customers who bought a keyboard.
+
+Select Distinct T1.customer_name
+From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id JOIN order_items as T3 ON T2.order_id = T3.order_id JOIN products as T4 ON T3.product_id = T4.product_id
+Where T4.product_name = "keyboard"
+
+
+List the names and phone numbers of all the distinct suppliers who supply red jeans.
+
+Select Distinct T1.supplier_name, T1.supplier_phone
+From suppliers as T1 JOIN product_suppliers as T2 ON T1.supplier_id = T2.supplier_id JOIN products as T3 ON T2.product_id = T3.product_id
+Where T3.product_name = "red jeans"
+
+
+18.  What are the highest and lowest prices of products, grouped by and alphabetically ordered by product type?
+
+Select max(product_price), min(product_price), product_type_code
+From products
+group by product_type_code
+order by product_type_code
+
+
+List the order id, customer id for orders in Cancelled status, ordered by their order dates.
+
+Select order_id, customer_id
+From customer_orders
+where order_status_code =  "Cancelled"
+Order by order_date
+
+
+
+19. Find the names of products that were bought by at least two distinct customers.
+
+Select Distinct T3.product_name
+From customer_orders as T1 JOIN order_items as T2 ON T1.order_id = T2.order_id JOIN products as T3 ON T2.product_id = T3.product_id
+Group by T3.product_id
+Having count (distinct T1.customer_id) >= 2
+
+
+Find the names of customers who have bought by at least three distinct products.
+
+Select Distinct T1.customer_name
+From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id JOIN order_items as T3 ON T2.order_id = T3.order_id 
+Group by T1.customer_id
+Having count (distinct T3.product_id) >= 3
+
+
+
+20. Find the name and gender of the staff who has been assigned the job of Sales Person but never Clerical Staff.
+
+Select T1.staff_name, T1.staff_gender
+From staff as T1 JOIN Staff_Department_Assignments as T2 ON T1.staff_id = T2.staff_id
+where T2.job_title_code = "Sales Person"
+EXCEPT
+Select T1.staff_name, T1.staff_gender
+From staff as T1 JOIN Staff_Department_Assignments as T2 ON T1.staff_id = T2.staff_id
+where T2.job_title_code = "Clerical Staff"
+
+
+Find the id and name of customers whose address is in WY state and do not use credit card for payment.
+
+Select customer_id, customer_name
+From customers
+Where customer_address LIKE "%WY%" and payment_method_code != "Credit Card"
+
+
+
+

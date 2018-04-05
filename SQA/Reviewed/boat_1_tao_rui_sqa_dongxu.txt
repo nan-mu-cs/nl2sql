@@ -95,25 +95,25 @@ SELECT name FROM Sailors WHERE name LIKE '%e%'
 7. return the unique ids of sailors who are older than any sailors.
 P: What is the different id of every sailor who is not the youngest?
 
-SELECT DISTINCT T1.sid
-FROM Sailors AS T1, Sailors AS T2
-WHERE T1.age > T2.age
+SELECT DISTINCT sid
+FROM Sailors
+WHERE age > (select min(age) from Sailors);
 
 S: What are the different ids of every sailor?
 S: Which of those refer to sailors who are not the youngest?
 
 SELECT DISTINCT sid from Sailors
 
-SELECT DISTINCT T1.sid
-FROM Sailors AS T1, Sailors AS T2
-WHERE T1.age > T2.age
+SELECT DISTINCT sid
+FROM Sailors
+WHERE age > (select min(age) from Sailors);
 
 8. Return the unique names of sailors who are older than any sailors whose rating is larger than 7.
 P: What are the different names of sailors who are older than some other sailor with a rating larger than 7?
 
-SELECT DISTINCT T1.name
-FROM Sailors AS T1, Sailors AS T2
-WHERE T1.age > T2.age and T2.rating > 7 
+SELECT DISTINCT name
+FROM Sailors
+WHERE age > (select min(age) from Sailors where rating > 7);
 
 
 S: Which sailors have a rating greater than 7?
@@ -124,9 +124,9 @@ SELECT * from Sailors WHERE rating > 7
 
 SELECT age from Sailors WHERE rating > 7
 
-SELECT DISTINCT T1.name
-FROM Sailors AS T1, Sailors AS T2
-WHERE T1.age > T2.age and T2.rating > 7 
+SELECT DISTINCT name
+FROM Sailors
+WHERE age > (select min(age) from Sailors where rating > 7);
 
 9.Find the name and id of the sailors who reserved at least one boat?
 P: What is the name and id of every sailor who reserved one or more boats?
