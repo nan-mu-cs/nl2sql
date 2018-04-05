@@ -1,4 +1,4 @@
-Total # = 76
+Total # = 83
 
 1. Find the number of professors in accounting department.
 P: How many professors are in the accounting dept?
@@ -421,6 +421,19 @@ S: What are the different school codes?
 S: For each one, how many professors does it have?
 S: Which one has the most?
 
+Select distinct school_code
+From department
+
+Select T1.school_code, count(*)
+From department as T1 join professor as T2 on T1.dept_code = T2.dept_code
+Group by T1.school_code
+
+Select T1.school_code
+From department as T1 join professor as T2 on T1.dept_code = T2.dept_code
+Group by T1.school_code
+Order by count(*)
+Limit 1
+
 22. Find the number of professors with a Ph.D. degree in each department.
 P: How many professors have a Ph.D. in each department?
 
@@ -429,9 +442,17 @@ From professor
 Where prof_high_degree = 'Ph.D.'
 Group by dept_code
 
-S: What are the different department codes?
-S: For each one, what can you tell me about the professors that have a Ph.D. degree?
-S: How many are there for each one?
+S: How many professors do have a Ph.D.?
+S: Count the number of these professors for each department.
+
+Select count(*)
+From professor
+Where prof_high_degree = 'Ph.D.'
+
+Select count(*), dept_code
+From professor
+Where prof_high_degree = 'Ph.D.'
+Group by dept_code
 
 23. Find the number of students for each department.
 P: How many students are in each department?
@@ -440,9 +461,19 @@ Select count(*), dept_code
 From student
 group by dept_code
 
-S: What are the different departments?
-S: For each one, what can you tell me about the students?
+S: What are all students?
+S: How many of them? 
 S: How many are there in each department?
+
+Select *
+From student
+
+Select count(*)
+From student
+
+Select count(*), dept_code
+From student
+group by dept_code
 
 24. Find the total number of hours have done for all students in each department.
 P: How many hours do the students spend studying in each department?
@@ -451,9 +482,16 @@ Select sum(stu_hrs), dept_code
 From student
 group by dept_code
 
-S: For each department, tell me everything about the students?
-S: How mcuh does each one work?
-S: For each department, what is the total hours worked by the students?
+S: For each department, how many students does it have?
+S: For each department, what is the total hours worked by those students?
+
+Select count(*), dept_code
+From student
+group by dept_code
+
+Select sum(stu_hrs), dept_code
+From student
+group by dept_code
 
 25. Find the max, average, and minimum gpa of all students in each department.
 P: What is the highest, lowest, and average student GPA for every department?
@@ -462,12 +500,23 @@ Select max(stu_gpa), avg(stu_gpa), min(stu_gpa), dept_code
 From student
 group by dept_code
 
-S: What is each department's code?
-S: For each of those, what are the student GPAs?
-S: What is the maximum, minimum, and average for each?
+S: what are the student GPAs?
+S: What is average for each department?
+S: Also, find the highest and lowest pga?
+
+Select stu_gpa
+From student
+
+Select avg(stu_gpa), dept_code
+From student
+group by dept_code
+
+Select max(stu_gpa), avg(stu_gpa), min(stu_gpa), dept_code
+From student
+group by dept_code
 
 26. What is the name and the average gpa of department whose students have the highest average gpa?
-P: Which department has the highest average student GPA, and what is the highest one?
+P: Which department has the highest average student GPA, and what is the average gpa?
 
 Select T2.dept_name, avg(T1.stu_gpa)
 From student as T1 join department as T2 on T1.dept_code = T2.dept_code
@@ -475,9 +524,27 @@ group by T1.dept_code
 order by avg(T1.stu_gpa) desc
 limit 1
 
-S: For each department code, what are the student gpas?
+S: What is the average GPA of all students?
+S: How about the average GPA of students in each department?
+S: Also, find the corresponding name of each department?
 S: Which one has the highest average GPA?
-S: What is the corresponding name of that department code?
+
+Select avg(stu_gpa)
+From student
+
+Select dept_code, avg(stu_gpa)
+From student
+group by dept_code
+
+Select T2.dept_name, avg(T1.stu_gpa)
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+
+Select T2.dept_name, avg(T1.stu_gpa)
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+order by avg(T1.stu_gpa) desc
+limit 1
 
 27. how many schools exist in total?
 P: How many schools are there in the department?
@@ -489,6 +556,15 @@ S: What are the school codes?
 S: Remove any repeating ones.
 S: How many are there?
 
+select school_code
+From department
+
+select distinct school_code
+From department
+
+select count(distinct school_code)
+From department
+
 28. How many different classes are there?
 P: How many unique classes are offered?
 
@@ -497,6 +573,12 @@ From class
 
 S: What are the different class codes?
 S: How many of them are there?
+
+Select distinct class_code
+From class
+
+Select count(distinct class_code)
+From class
 
 29. How many courses are offered?
 P: What are the number of different course codes? 
@@ -508,6 +590,15 @@ S: What are the course codes?
 S: What are the unique ones?
 S: How many are there?
 
+Select crs_code
+From class
+
+Select distinct crs_code
+From class
+
+Select count(distinct crs_code)
+From class
+
 30. How many departments does the college has?
 P: How many different departments are there?
 
@@ -517,6 +608,12 @@ From department
 S: What are the different department names?
 S: How many does it offer?
 
+Select distinct dept_name
+From department
+
+Select count(distinct dept_name)
+From department
+
 31. How many courses are offered by the Computer Info. Systems department? 
 P: How many courses does the department of Computer Information Systmes offer?
 
@@ -525,8 +622,20 @@ From department as T1 join course as T2 on T1.dept_code = T2.dept_code
 where dept_name = "Computer Info. Systems"
 
 S: What can you tell me about the Computer Info. Systems department?
-S: For its department code, what courses are offered?
+S: What courses does it offer?
 S: How many courses is that?
+
+Select *
+From department
+where dept_name = "Computer Info. Systems"
+
+Select *
+From department as T1 join course as T2 on T1.dept_code = T2.dept_code
+where dept_name = "Computer Info. Systems"
+
+Select count(*)
+From department as T1 join course as T2 on T1.dept_code = T2.dept_code
+where dept_name = "Computer Info. Systems"
 
 32. How many sections does course ACCT-211 has?
 P: What is the number of different class sections offered in the course ACCT-211?
@@ -539,6 +648,17 @@ S: What are the different class sections?
 S: What about for the course ACCT-211?
 S: How many different ones does it offer?
 
+select distinct class_section
+From class
+
+select distinct class_section
+From class
+Where crs_code = 'ACCT-211'
+
+select count(distinct class_section)
+From class
+Where crs_code = 'ACCT-211'
+
 33. Find the total credits of all classes offered by each department.
 P: What are the total number of credits offered by each department?
 
@@ -546,9 +666,15 @@ Select sum(T1.crs_credit), T1.dept_code
 From course as T1 join class as T2 on T1.crs_code = T2.crs_code
 group by T1.dept_code
 
-S: For each department, what are the course codes?
-S: What are the corresponding credits for each course code?
+S: List codes of all courses and their credits.
 S: What is the total number of credits for each department?
+
+Select crs_credit, crs_code
+From course
+
+Select sum(T1.crs_credit), T1.dept_code
+From course as T1 join class as T2 on T1.crs_code = T2.crs_code
+group by T1.dept_code
 
 34. Find the name of the department that offers the largest number of credits of all classes.
 P: Which department offers the most credits all together?
@@ -561,9 +687,27 @@ group by T1.dept_code
 Order by sum(T1.crs_credit) desc
 Limit 1
 
-S: What are the different department codes?
-S: For each one, how many total course credits does it offer?
-S: Which one offers the most?
+S: how many total course credits does each department offer?
+S: Find the department that offers the most number of credits of classes?
+S: What is the name of that department?
+
+Select sum(T1.crs_credit), T1.dept_code
+From course as T1 join class as T2 on T1.crs_code = T2.crs_code
+group by T1.dept_code
+
+Select *
+From course as T1 join class as T2 on T1.crs_code = T2.crs_code
+group by T1.dept_code
+Order by sum(T1.crs_credit) desc
+Limit 1
+
+Select T3.dept_name
+From course as T1 
+     join class as T2 on T1.crs_code = T2.crs_code
+     Join department as T3 on T1.dept_code = T3.dept_code
+group by T1.dept_code
+Order by sum(T1.crs_credit) desc
+Limit 1
 
 35. How many students enrolled in class ACCT-211?
 P: What are the total number of students enrolled in ACCT-211?
@@ -572,12 +716,19 @@ select count(*)
 From class as T1 join enroll as T2 on T1.class_code = T2.class_code
 Where T1.crs_code = 'ACCT-211'
 
-S: What can you tell me about ACCT-211?
-S: For each class code, how many students are enrolled?
-S: How many are there in total?
+S: Can you tell me about course ACCT-211?
+S: How many students are enrolled in this class?
+
+select *
+From class
+Where crs_code = 'ACCT-211'
+
+select count(*)
+From class as T1 join enroll as T2 on T1.class_code = T2.class_code
+Where T1.crs_code = 'ACCT-211'
 
 36. What is the first name of each student enrolled in class ACCT-211?
-P: What are the first names of all students in ACCT-211?
+P: What are the first names of all students in course ACCT-211?
 
 select T3.stu_fname
 From class as T1 
@@ -585,9 +736,23 @@ From class as T1
      Join student as T3 on T2.stu_num = T3.stu_num
 Where T1.crs_code = 'ACCT-211'
 
-S: What can you tell me about ACCT-211?
-S: What is the id number of every student enrolled?
+S: Can you tell me about course ACCT-211?
+S: How many students are enrolled in this class?
 S: What are their corresponding first names?
+
+select *
+From class
+Where crs_code = 'ACCT-211'
+
+select count(*)
+From class as T1 join enroll as T2 on T1.class_code = T2.class_code
+Where T1.crs_code = 'ACCT-211'
+
+select T3.stu_fname
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T2.stu_num = T3.stu_num
+Where T1.crs_code = 'ACCT-211'
 
 37. What is the first name of students enrolled in class ACCT-211 and got grade C?
 P: What are the first names of all students who took ACCT-211 and received a C?
@@ -598,9 +763,27 @@ From class as T1
      Join student as T3 on T2.stu_num = T3.stu_num
 Where T1.crs_code = 'ACCT-211' and T2.enroll_grade = 'C'
 
-S: Which students received C's as grades?
-S: Which of those were enrollment in ACCT-211?
+S: Which students were enrollment in the course ACCT-211?
+S: Which of those received C's as grades?
 S: What are their first names?
+
+Select *
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T2.stu_num = T3.stu_num
+Where T1.crs_code = 'ACCT-211'
+
+Select *
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T2.stu_num = T3.stu_num
+Where T1.crs_code = 'ACCT-211' and T2.enroll_grade = 'C'
+
+Select T3.stu_fname
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T2.stu_num = T3.stu_num
+Where T1.crs_code = 'ACCT-211' and T2.enroll_grade = 'C'
 
 38. Find the total number of employees.
 P: How many employees are there all together?
@@ -611,6 +794,12 @@ From employee
 S: Tell me everything about the employees.
 S: How many of them are there?
 
+Select *
+From employee
+
+Select count(*)
+From employee
+
 39. How many professors do have a Ph.D. degree?
 P: What is the total number of professors with a Ph.D. ?
 
@@ -618,12 +807,23 @@ Select count(*)
 From professor
 Where prof_high_degree = 'Ph.D.'
 
-S: What can you tell me about professors whose highest degress is a Ph.D.?
+S: Who are all professors?
+S: What about those who have a Ph.D. degree.
 S: How many of them are there?
 
-40. How many students are enrolled in the class taught by professor from the accounting department?
-P: How many students are enrolled in accounting classes?
-ISSUE: I don't think this is the correct translation - how many accounting classes are there?
+Select *
+From professor
+
+Select *
+From professor
+Where prof_high_degree = 'Ph.D.'
+
+Select count(*)
+From professor
+Where prof_high_degree = 'Ph.D.'
+
+40. How many students are enrolled in the class taught by some professor from the accounting department?
+P: How many students are enrolled in some classes that are taught by an accounting professor?
 
 Select count(*)
 From class as T1
@@ -632,9 +832,26 @@ From class as T1
      Join department as T4 on T3.dept_code = T4.dept_code
 Where T4.dept_name = 'Accounting'
 
-S: What are the codes of all accounting courses?
-S: What are all the corresponding class codes?
-S: How many students are enrolled in each class?
+S: Find the all info about the accounting department. 
+S: Which classes are taught the department?
+S: How many students are enrolled in those classes?
+
+Select *
+From department
+Where dept_name = 'Accounting'
+
+Select *
+From class as T1
+     Join course as T2 on T1.crs_code = T2.crs_code
+     Join department as T3 on T3.dept_code = T2.dept_code
+Where T3.dept_name = 'Accounting'
+
+Select count(*)
+From class as T1
+     Join enroll as T2 on T1.class_code = T2.class_code
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join department as T4 on T3.dept_code = T4.dept_code
+Where T4.dept_name = 'Accounting'
 
 41. What is the name of the department that has the largest number of students enrolled?
 P: What is the name of the department with the most students enrolled?
@@ -644,13 +861,36 @@ From class as T1
      Join enroll as T2 on T1.class_code = T2.class_code
      Join course as T3 on T1.crs_code = T3.crs_code
      Join department as T4 on T3.dept_code = T4.dept_code
-Group by T4.dept_name
+Group by T3.dept_code
 Order by count(*) desc
 Limit 1
 
-S: What are the different department names?
-S: For each one, how many students are enrolled?
-S: Which one has the most?
+S: Find number of students enrolled in some classes offered by each department.
+S: Which department has the most number of students enrolled?
+S: What is the corresponding department name?
+
+Select count(*), T3.dept_code
+From class as T1
+     Join enroll as T2 on T1.class_code = T2.class_code
+     Join course as T3 on T1.crs_code = T3.crs_code
+Group by T3.dept_code
+
+Select *
+From class as T1
+     Join enroll as T2 on T1.class_code = T2.class_code
+     Join course as T3 on T1.crs_code = T3.crs_code
+Group by T3.dept_code
+Order by count(*) desc
+Limit 1
+
+Select T4.dept_name
+From class as T1
+     Join enroll as T2 on T1.class_code = T2.class_code
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join department as T4 on T3.dept_code = T4.dept_code
+Group by T3.dept_code
+Order by count(*) desc
+Limit 1
 
 42. list names of all departments ordered by their names.
 P: What are the names of all departments in alphabetical order?
@@ -660,7 +900,14 @@ From department
 order by dept_name
 
 S: What are the names of each department?
-S: Order them alphabetically
+S: Order them alphabetically.
+
+Select dept_name
+From department
+
+Select dept_name
+From department
+order by dept_name
 
 43. List the codes of all courses that take place in room KLR209.
 P: What are the codes of all the courses that are located in room KLR209?
@@ -669,9 +916,20 @@ select class_code
 From class
 Where class_room = 'KLR209'
 
-S: What can you tell me about classes?
+S: Tell me about all classes.
 S: Which of those take place in room KLR209?
 S: What are their codes?
+
+select *
+From class
+
+select *
+From class
+Where class_room = 'KLR209'
+
+select class_code
+From class
+Where class_room = 'KLR209'
 
 44. List the first name of all employees with job code PROF ordered by their date of birth.
 P: What are the first names of all employees that are professors ordered by date of birth?
@@ -685,6 +943,20 @@ S: Order the employee information by date of birth.
 S: Which of these employees have jobs as professors?
 S: What are their first names?
 
+Select *
+From employee
+Order by emp_dob
+
+Select *
+From employee
+Where emp_jobcode = 'PROF'
+Order by emp_dob
+
+Select emp_fname
+From employee
+Where emp_jobcode = 'PROF'
+Order by emp_dob
+
 45. Find the first names and offices of all professors sorted by alphabetical order of their first name.
 P: What are the first names and office locations for all professors sorted alphabetically by first name?
 
@@ -695,6 +967,18 @@ Order by T2.emp_fname
 S: Order the employees alphabetically by first name
 S: Which of those are professors?
 S: What are their first names and office locations?
+
+Select *
+From employee
+Order by emp_fname
+
+Select *
+From professor as T1 join employee as T2 on T1.emp_num = T2.emp_num
+Order by T2.emp_fname
+
+Select T2.emp_fname, T1.prof_office
+From professor as T1 join employee as T2 on T1.emp_num = T2.emp_num
+Order by T2.emp_fname
 
 46. What is the first and last name of the oldest employee?
 P: What are the first and last names of the employee with the earliest date of birth? 
@@ -708,6 +992,17 @@ S: What are the employees' first names?
 S: Also, what are their last names?
 S: Which of those refer to the oldest employee?
 
+Select emp_fname
+From employee
+
+Select emp_fname, emp_lname
+From employee
+
+Select emp_fname, emp_lname
+From employee
+Order by emp_dob
+Limit 1
+
 47. What is the first, last name, gpa of the youngest one among students whose GPA is above 3?
 P: What is the first and last name of the youngest student with a GPA above 3, and what is their GPA?
 
@@ -719,10 +1014,26 @@ Limit 1
 
 S: List all information on students with a higher GPA than 3
 S: What information is for the youngest student?
-S: What is their first name, last name, and GPA?
+S: What are their first name, last name, and GPA?
+
+Select *
+From student
+Where stu_gpa > 3
+
+Select *
+From student
+Where stu_gpa > 3
+Order by stu_dob desc
+Limit 1
+
+Select stu_fname, stu_lname, stu_gpa
+From student
+Where stu_gpa > 3
+Order by stu_dob desc
+Limit 1
 
 48. What is the first name of students who got grade C in any class?
-P: What are the first names of all students who got a C in a class?
+P: What are the first names of all students who got a grade C in a class?
 
 Select distinct stu_fname
 From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
@@ -732,18 +1043,39 @@ S: What are the student ids of all students who received an enrollment grade of 
 S: What are the first names that correspond to each student id?
 S: What is a list of distinct first names?
 
+Select stu_num
+From enroll
+Where enroll_grade = 'C' 
+
+Select stu_fname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where enroll_grade = 'C' 
+
+Select distinct stu_fname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where enroll_grade = 'C' 
+
 49. What is the name of department where has the smallest number of professors?
 P: What is the name of the department with the fewest professors?
+
+Select T2.dept_name
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+Order by count(*)
+Limit 1
+
+S: For each department, what is the corresponding number of professors?
+S: For the department with the fewest professors, what is its name and code?
+
+Select count(*), T1.dept_code
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
 
 Select T2.dept_name, T1.dept_code
 From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
 group by T1.dept_code
 Order by count(*)
 Limit 1
-
-S: What are the different department codes?
-S: For each one, what is the corresponding number of professors?
-S: For the department with the fewest professors, what is its name and code?
 
 50. What is the name of department where has the largest number of professors with a Ph.D. degree?
 P: Which department has the most professors with a Ph.D.?
@@ -755,11 +1087,35 @@ group by T1.dept_code
 Order by count(*) desc
 Limit 1
 
-S: What information do you have on professors with a Ph.D.?
+S: Which professors do have a Ph.D. degree?
 S: How many of those professors are in each department?
-S: Which department has the most of them?
+S: Find the code of the department that has the most of them.
+S: What is the name of that department?
 
-51.  What is the first names of the professors who do not teach a class.
+Select *
+From professor
+Where prof_high_degree = 'Ph.D.'
+
+Select count(*), dept_code
+From professor
+Where prof_high_degree = 'Ph.D.'
+group by dept_code
+
+Select dept_code
+From professor
+Where prof_high_degree = 'Ph.D.'
+group by dept_code
+Order by count(*) desc
+Limit 1
+
+Select T2.dept_name
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T1.prof_high_degree = 'Ph.D.'
+group by T1.dept_code
+Order by count(*) desc
+Limit 1
+
+51.  What are the first names of the professors who do not teach a class.
 P: What are the first names of all professors not teaching any classes?
 
 Select emp_fname
@@ -769,9 +1125,19 @@ except
 Select T1.emp_fname
 From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
 
-S: What is all the information on professors who are employees?
-S: What are the professors' first names who are teaching classes?
-S: List all the other first names. 
+S: What is the first names of employees whose job code is PROF?
+S: Which of them are not teaching any class?
+
+Select emp_fname
+From employee
+Where emp_jobcode = 'PROF'
+
+Select emp_fname
+From employee
+Where emp_jobcode = 'PROF'
+except
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
 
 52. What is the first names of the professors from the history department who do not teach a class.
 P: What are the first names of all history professors who do not teach?
@@ -789,6 +1155,26 @@ S: What are the first names of all employees who are teaching classes?
 S: Please list the first names of all other professors.
 S: Which of these refer to teachers in the history department?
 
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+
+Select T1.emp_fname
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+except
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+
+Select T1.emp_fname
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T3.dept_name = 'History'
+except
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+
 53. What is the last name and office of the professor from the history department?
 P: What are the last name and office of all history professors?
 
@@ -799,8 +1185,24 @@ From employee as T1
 Where T3.dept_name = 'History'
 
 S: What is all the information about the history department?
-S: What are the professors' names?
-S: Also, where are their offices located? 
+S: What are the names of professors in this department?
+S: Also, where are their offices located?
+
+Select *
+From department
+Where dept_name = 'History'
+
+Select T1.emp_lname
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T3.dept_name = 'History'
+
+Select T1.emp_lname, T2.prof_office
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T3.dept_name = 'History'
 
 54. What is department name and office for the professor whose last name is Heffington?
 P: What is the name of the department and office location for the professor with the last name of Heffington?
@@ -811,9 +1213,25 @@ From employee as T1
      Join department as T3 on T2.dept_code = T3.dept_code
 Where T1.emp_lname = 'Heffington'
 
-S: What can you tell me about all professors with the last name 'Heffington'?
+S: Find me all employees with the last name 'Heffington'?
 S: What are the names of their departments?
 S: Also, where are their offices located?
+
+Select *
+From employee
+Where emp_lname = 'Heffington'
+
+Select T3.dept_name
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T1.emp_lname = 'Heffington'
+
+Select T3.dept_name , T2.prof_office
+From employee as T1 
+     join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T2.dept_code = T3.dept_code
+Where T1.emp_lname = 'Heffington'
 
 55. Find the last name and hire date of the professor who is in office DRE 102.
 P: What is the last name of the professor whose office is located in DRE 102, and when were they hired?
@@ -822,9 +1240,21 @@ Select T1.emp_lname, T1.emp_hiredate
 From employee as T1 join professor as T2 on T1.emp_num = T2.emp_num
 Where T2.prof_office = 'DRE 102'
 
-S: What are the employee numbers of every professor whose office is located in room DRE 102?
+S: Find the professors whose office is located in room DRE 102?
 S: What are their last names?
-S: Also, when were they hired?
+S: When were they hired?
+
+Select *
+From professor
+Where prof_office = 'DRE 102'
+
+Select T1.emp_lname
+From employee as T1 join professor as T2 on T1.emp_num = T2.emp_num
+Where T2.prof_office = 'DRE 102'
+
+Select T1.emp_hiredate
+From employee as T1 join professor as T2 on T1.emp_num = T2.emp_num
+Where T2.prof_office = 'DRE 102'
 
 56. What is the code of the course which the student whose last name is Smithson took?
 P: What are the course codes for every class that the student with the last name Smithson took?
@@ -839,6 +1269,19 @@ S: Find all information on students.
 S: Which of that information refers to people with the last name Smithson?
 S: What are the codes of the courses they took?
 
+Select *
+From student
+
+Select *
+From student
+Where stu_lname = 'Smithson'
+
+Select T1.crs_code
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T3.stu_num = T2.stu_num
+Where T3.stu_lname = 'Smithson'
+
 57. What are the description and credit of the course which the student whose last name is Smithson took?
 P: How many credits is the course that the student with the last name Smithson took, and what is its description?
 
@@ -849,9 +1292,22 @@ From class as T1
      Join course as T4 on T4.crs_code = T1.crs_code
 Where T3.stu_lname = 'Smithson'
 
-S: What are the descriptions for every course?
-S: Also, How many credits is each course worth?
+S: What are the course descriptions?
+S: Also, show credits.
 S: Which of the above refer to courses that a student with the last name 'Smithson' took?
+
+Select crs_description
+From course
+
+Select crs_description, crs_credit
+From course
+
+Select T4.crs_description, T4.crs_credit
+From class as T1 
+     join enroll as T2 on T1.class_code = T2.class_code
+     Join student as T3 on T3.stu_num = T2.stu_num
+     Join course as T4 on T4.crs_code = T1.crs_code
+Where T3.stu_lname = 'Smithson'
 
 58. How many professors who has a either Ph.D. or MA degree?
 P: How many professors attained either Ph.D. or Masters degrees?
@@ -864,6 +1320,18 @@ S: What information do you have on professors who got a Ph.D.?
 S: Also, combine that with information you have on professors with a Masters?
 S: How many are there in total?
 
+Select *
+From professor
+Where prof_high_degree = 'Ph.D.'
+
+Select *
+From professor
+Where prof_high_degree = 'Ph.D.' or prof_high_degree = 'MA'
+
+Select count(*)
+From professor
+Where prof_high_degree = 'Ph.D.' or prof_high_degree = 'MA'
+
 59. How many professors who are from either Accounting or Biology department?
 P: What is the number of professors who are in the Accounting or Biology departments?
 
@@ -874,6 +1342,18 @@ Where T2.dept_name = 'Accounting' or T2.dept_name = 'Biology'
 S: What information do you have on professors in the Accounting department?
 S: Also, what do you have on professors in the Biology department?
 S: How many of them are there?
+
+Select *
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T2.dept_name = 'Accounting'
+
+Select *
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T2.dept_name = 'Accounting' or T2.dept_name = 'Biology'
+
+Select count(*)
+From professor as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T2.dept_name = 'Accounting' or T2.dept_name = 'Biology'
 
 60. Find the first name of the professor who is teaching two courses with code CIS-220 and QM-261.
 P: What is the first name of the professor who is teaching CIS-220 and QM-261?
@@ -889,6 +1369,22 @@ Where crs_code = 'QM-261'
 S: What are the first names of all professors teaching CIS-220?
 S: What are the first names of all professors teaching QM-261?
 S: Who is teaching both?
+
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Where crs_code = 'CIS-220'
+
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Where crs_code = 'QM-261'
+
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Where crs_code = 'CIS-220'
+Intersect
+Select T1.emp_fname
+From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Where crs_code = 'QM-261'
 
 61. Find the first name of student who is taking classes from accounting and Computer Info. Systems departments
 P: What are the first names of all students taking accoutning and Computer Information Systems classes?
@@ -909,9 +1405,32 @@ From student as T1
      Join department as T5 on T5.dept_code = T4.dept_code
 Where T5.dept_name = 'Computer Info. Systems'
 
-S: What are the first names of all students taking Accounting classes?
-S: What are the first names of all students taking Computer Information Systems courses?
-S: Which names are in both lists?
+S: What are the first names of all students taking some classes from the Accounting department?
+S: Of those, who also took some classes from the Computer Information Systems department?
+
+Select T1.stu_fname
+From student as T1 
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+     Join course as T4 on T3.crs_code = T4.crs_code
+     Join department as T5 on T5.dept_code = T4.dept_code
+Where T5.dept_name = 'Accounting'
+
+Select T1.stu_fname
+From student as T1 
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+     Join course as T4 on T3.crs_code = T4.crs_code
+     Join department as T5 on T5.dept_code = T4.dept_code
+Where T5.dept_name = 'Accounting'
+INTERSECT
+Select T1.stu_fname
+From student as T1 
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+     Join course as T4 on T3.crs_code = T4.crs_code
+     Join department as T5 on T5.dept_code = T4.dept_code
+Where T5.dept_name = 'Computer Info. Systems'
 
 62. What is the average gpa of the students enrolled in the course with code ACCT-211?
 P: What is the average GPA of students taking ACCT-211?
@@ -923,8 +1442,23 @@ From enroll as T1
 Where T3.crs_code = 'ACCT-211'
 
 S: What are all the student GPAs?
-S: Which of those are for students taking ACCT-211?
+S: Which of those are for students taking course ACCT-211?
 S: What is their average GPA?
+
+Select stu_gpa
+From student
+
+Select T2.stu_gpa
+From enroll as T1 
+     join student as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T1.class_code = T3.class_code
+Where T3.crs_code = 'ACCT-211'
+
+Select avg(T2.stu_gpa)
+From enroll as T1 
+     join student as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T1.class_code = T3.class_code
+Where T3.crs_code = 'ACCT-211'
 
 64. What is the first name, gpa and phone number of the top 5 students with highest gpa?
 P: What is the first name, GPA, and phone number of the students with the top 5 GPAs?
@@ -934,9 +1468,21 @@ From student
 order by stu_gpa desc
 Limit 5
 
-S: What is the GPA, phone number, and first name for each student?
+S: What is the GPA, phone number, and first name for all students?
 S: Order this information from highest GPA to lowest. 
 S: What is the information for the top 5 GPAs?
+
+Select stu_gpa, stu_phone, stu_fname
+From student
+
+Select stu_gpa, stu_phone, stu_fname
+From student
+order by stu_gpa desc
+
+Select stu_gpa, stu_phone, stu_fname
+From student
+order by stu_gpa desc
+Limit 5
 
 65. What is the department name of the students with lowest gpa belongs to?
 P: What is the name of the department with the student that has the lowest GPA?
@@ -946,9 +1492,18 @@ From student as T1 join department as T2 on T1.dept_code = T2.dept_code
 order by stu_gpa
 Limit 1
 
-S: What are department names for each student?
-S: Order the students by GPA
-S: What is the department name for the first student?
+S: Who is the student with lowest gpa?
+S: What is the department name for the student?
+
+Select *
+From student
+order by stu_gpa
+Limit 1
+
+Select T2.dept_name
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+order by stu_gpa
+Limit 1
 
 66. Find the first name and gpa of the students whose gpa is lower than the average gpa of all students.
 P: What is the first name and GPA of every student that has a GPA lower than average?
@@ -958,8 +1513,19 @@ From student
 Where stu_gpa < (select avg(stu_gpa) from student)
 
 S: What is the average student GPA?
-S: What information do you have on all students with a GPA less than that?
+S: Find students with a GPA less than that?
 S: What are their first names and GPAs?
+
+select avg(stu_gpa)
+from student
+
+select *
+From student
+Where stu_gpa < (select avg(stu_gpa) from student)
+
+select stu_fname, stu_gpa
+From student
+Where stu_gpa < (select avg(stu_gpa) from student)
 
 67. Find the name and address of the department that has the highest number of students.
 P: What is the name and address of the department with the most students?
@@ -970,9 +1536,25 @@ group by T1.dept_code
 Order by count(*) desc
 Limit 1
 
-S: What student information do you have for each department?
-S: Which department has the most students?
+S: What is the number of students in each department?
+S: Which one has the most students?
 S: What is that department's name and address?
+
+Select count(*), dept_code
+From student
+group by dept_code
+
+Select *
+From student
+group by dept_code
+Order by count(*) desc
+Limit 1
+
+Select T2.dept_name, T2.dept_address
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+Order by count(*) desc
+Limit 1
 
 68. Find the name, address, number of students in the departments that have the top 3 highest number of students.
 P: What is the name, address, and number of students in the departments that have the 3 most students?
@@ -987,6 +1569,19 @@ S: What are the names and address for each department?
 S: Also, how many students are in each department?
 S: Which of that information refers to the top 3 departments ordered by number of students?
 
+Select dept_name, dept_address
+From department
+
+Select T2.dept_name, T2.dept_address, count(*)
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+
+Select T2.dept_name, T2.dept_address, count(*)
+From student as T1 join department as T2 on T1.dept_code = T2.dept_code
+group by T1.dept_code
+Order by count(*) desc
+Limit 3
+
 69. Find the first name and office of the professor who is in the history department and has a Ph.D. degree.
 P: What are the first names and office of the professors who are in the history department and have a Ph.D?
 
@@ -996,9 +1591,23 @@ From employee as T1
      Join department as T3 on T3.dept_code = T2.dept_code
 Where T3.dept_name = 'History' and T2.prof_high_degree = 'Ph.D.'
 
-S: What can you tell me about professors who have a Ph.D.?
+S: Which professors do have a Ph.D.?
 S: Also, which of these are in the history department?
 S: What are their first names and location of their offices?
+
+Select *
+From professor
+Where prof_high_degree = 'Ph.D.'
+
+Select *
+From professor as T1 Join department as T2 on T1.dept_code = T2.dept_code
+Where T2.dept_name = 'History' and T1.prof_high_degree = 'Ph.D.'
+
+Select T1.emp_fname, T2.prof_office
+From employee as T1
+     Join professor as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T3.dept_code = T2.dept_code
+Where T3.dept_name = 'History' and T2.prof_high_degree = 'Ph.D.'
 
 70. Find the first names of all instructors who have taught some course and the course code.
 P: What are the first names of all teachers who have taught a course and the corresponding course codes?
@@ -1006,9 +1615,18 @@ P: What are the first names of all teachers who have taught a course and the cor
 Select T2.emp_fname, T1.crs_code
 From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
 
-S: What are the professor ids of all teachers who have taught a course?
-S: What are their corresponding first names?
+S: What are the first names of all employees?
+S: who are teaching some courses?
 S: Also, what courses do they teach?
+
+Select emp_fname
+From employee
+
+Select T2.emp_fname
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+
+Select T2.emp_fname, T1.crs_code
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
 
 71. Find the first names of all instructors who have taught some course and the course description.
 P: What are the first names of all teachers who have taught a course and the corresponding descriptions?
@@ -1018,9 +1636,20 @@ From class as T1
      join employee as T2 on T1.prof_num = T2.emp_num
      Join course as T3 on T1.crs_code = T3.crs_code
 
-S: What can you tell me about all employees who taught a course?
+S: Find all employees who taught a course?
 S: What are their first names?
 S: Also, what are the course descriptions of their classes?
+
+Select *
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+
+Select T2.emp_fname
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+
+Select T2.emp_fname, T3.crs_description
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
 
 72. Find the first names and offices of all instructors who have taught some course and also find the course description.
 P: What are the first names, office locations of all lecturers who have taught some course? 
@@ -1031,9 +1660,23 @@ From class as T1
      Join course as T3 on T1.crs_code = T3.crs_code
      Join professor as T4 on T2.emp_num = T4.emp_num
 
-S: Which professors have taught some course?
-S: What are the course descriptions?
+S: Which employees have taught some course?
+S: What are these courses' descriptions?
 S: Also, what are their office locations and the professors' first names? 
+
+Select *
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+
+Select T3.crs_description
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
+     
+Select T2.emp_fname, T4.prof_office, T3.crs_description
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join professor as T4 on T2.emp_num = T4.emp_num
 
 73. Find the first names and offices of all instructors who have taught some course and the course description and the department name.
 P: What are the first names, office locations, and departments of all instructors, and also what are the descriptions of the courses they teach?
@@ -1049,6 +1692,21 @@ S: Tell me all information on lecturers who have taught a course.
 S: What are the corresponding course descriptions?
 S: Also, what are those professors' first names, office locations, and department name?
 
+Select *
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+
+Select T3.crs_description
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
+     
+Select T2.emp_fname, T4.prof_office, T3.crs_description, T5.dept_name
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join course as T3 on T1.crs_code = T3.crs_code
+     Join professor as T4 on T2.emp_num = T4.emp_num
+     Join department as T5 on T4.dept_code = T5.dept_code
+
 74. Find names of all students who took some course and the course description.
 P: What are the names of all students who took a class and the corresponding course descriptions?
 
@@ -1062,18 +1720,40 @@ S: What information is there on students who are taking a class?
 S: What are their first and last names?
 S: Also, what are the descriptions for the courses they are taking?
 
-75. Find names of all students who took some course and got A or C and the class room.
-P: What are the names of all students taking a course who received an A or C, and also what are the classrooms of those courses?
+Select *
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
 
-Select T1.stu_fname, T1.stu_lname, T3.class_room
+Select T1.stu_fname, T1.stu_lname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+
+Select T1.stu_fname, T1.stu_lname, T4.crs_description
 From student as T1 
      join enroll as T2 on T1.stu_num = T2.stu_num
      Join class as T3 on T2.class_code = T3.class_code
+     Join course as T4 on T3.crs_code = T4.crs_code
+
+75. Find names of all students who took some course and got A or C.
+P: What are the names of all students taking a course who received an A or C?
+
+Select T1.stu_fname, T1.stu_lname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
 Where T2.enroll_grade = 'C' or T2.enroll_grade = 'A'
 
-S: What can you tell me about students who received an A or C in their courses?
-S: What are the classrooms for each of those courses?
-S: What are the students' first names and last names?
+S: Which students did receive an A in any courses?
+S: Who of them also received a C in any courses?
+S: What are their' first names and last names?
+
+Select *
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where T2.enroll_grade = 'A'
+
+Select *
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where T2.enroll_grade = 'C' or T2.enroll_grade = 'A'
+
+Select T1.stu_fname, T1.stu_lname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where T2.enroll_grade = 'C' or T2.enroll_grade = 'A'
 
 76. Find the first names of all professors in the Accounting department who is teaching some course and the class room.
 P: What are the first names of all Accounting professors who teach and what are the classrooms of the courses they teach?
@@ -1085,9 +1765,28 @@ From class as T1
      Join department as T4 on T4.dept_code = T3.dept_code
 Where T4.dept_name = 'Accounting'
 
-S: What are the first names of all professors?
-S: Which of those refer to teachers in the Accounting department?
+S: What are the first names of all professors who are teaching any classes?
+S: Which of them are from the Accounting department?
 S: Also, what classrooms do they teach in?
+
+Select T2.emp_fname
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+
+Select T2.emp_fname
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+     Join department as T4 on T4.dept_code = T3.dept_code
+Where T4.dept_name = 'Accounting'
+
+Select T2.emp_fname, T1.class_room
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+     Join department as T4 on T4.dept_code = T3.dept_code
+Where T4.dept_name = 'Accounting'
 
 77. Find the first names and degree of all professors who are teaching some class in Computer Info. Systems department.
 P: What are the different first names and highest degree attained for professors teaching in the Computer Information Systems department?
@@ -1099,9 +1798,28 @@ From class as T1
      Join department as T4 on T4.dept_code = T3.dept_code
 Where T4.dept_name = 'Computer Info. Systems'
 
-S: What information is on professors that are in the Computer Information Systems department?
-S: What are their first names?
-S: Also, what are their highest degrees?
+S: Which professors are teaching some classes?
+S: Which of them are from the Computer Information Systems department?
+S: What are their first names and highest degrees?
+
+Select *
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+
+Select *
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+     Join department as T4 on T4.dept_code = T3.dept_code
+Where T4.dept_name = 'Computer Info. Systems'
+
+Select distinct T2.emp_fname, T3.prof_high_degree
+From class as T1 
+     join employee as T2 on T1.prof_num = T2.emp_num
+     Join professor as T3 on T2.emp_num = T3.emp_num
+     Join department as T4 on T4.dept_code = T3.dept_code
+Where T4.dept_name = 'Computer Info. Systems'
 
 78. What is the last name of the student who got a grade A in the class with code 10018.
 P: What is the last name of the student who received an A in the class with the code 10018?
@@ -1111,8 +1829,19 @@ From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
 Where T2.enroll_grade = 'A' and T2.class_code = 10018
 
 S: What are the last names of all students?
-S: Which of those refer to students who received an A?
+S: Which of those refer to students who received a grade of A in some classes?
 S: Of those, who is enrolled in 10018?
+
+Select stu_lname
+From student
+
+Select T1.stu_lname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where T2.enroll_grade = 'A'
+
+Select T1.stu_lname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+Where T2.enroll_grade = 'A' and T2.class_code = 10018
 
 79. Find the first name and office of history professor who did not get a Ph.D. degree.
 P: What are the first names and offices of history professors who don't have Ph.D.s?
@@ -1127,6 +1856,21 @@ S: What are the first names of all professors?
 S: Which of those are in the History department?
 S: Of those, who does not have a Ph.D.?
 
+Select emp_fname
+From professor as T1 Join employee as T2 on T1.emp_num = T2.emp_num
+
+Select T2.emp_fname, T1.prof_office
+From professor as T1
+     Join employee as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T1.dept_code = T3.dept_code
+Where T3.dept_name = 'History'
+
+Select T2.emp_fname, T1.prof_office
+From professor as T1
+     Join employee as T2 on T1.emp_num = T2.emp_num
+     Join department as T3 on T1.dept_code = T3.dept_code
+Where T3.dept_name = 'History' and T1.prof_high_degree != 'Ph.D.'
+
 80. Find the first names of professors who are teaching more than one class.
 P: What are the first names of all professors who teach more than one class?
 
@@ -1135,9 +1879,16 @@ From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
 group by T1.prof_num
 Having count(*) > 1
 
-S: For each professor, what classes do they teach?
+S: Find the first names of all professors?
 S: Which of those teach more than one class?
-S: What are their first names?
+
+Select emp_fname
+From professor as T1 Join employee as T2 on T1.emp_num = T2.emp_num
+
+Select T2.emp_fname
+From class as T1 join employee as T2 on T1.prof_num = T2.emp_num
+group by T1.prof_num
+Having count(*) > 1
 
 81. Find the first names of students who took exactly one class.
 P: What are the first names of student who only took one course?
@@ -1151,6 +1902,20 @@ S: How many courses is each student enrolled in?
 S: Which students are enrolled in only one?
 S: What are their first names?
 
+Select count(*), T1.stu_num
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+group by T1.stu_num
+
+Select *
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+group by T2.stu_num
+Having count(*) = 1
+
+Select T1.stu_fname
+From student as T1 join enroll as T2 on T1.stu_num = T2.stu_num
+group by T2.stu_num
+Having count(*) = 1
+
 82. Find the name of department that offers the class whose description has the word "Statistics".
 P: What is the name of the department that offers a course that has a description including the word "Statistics"?
 
@@ -1160,6 +1925,14 @@ Where T1.crs_description LIKE '%Statistics%'
 
 S: Which courses have a description including the word "Statistics"?
 S: What is the name of the departments those courses are in?
+
+Select *
+From course
+Where crs_description LIKE '%Statistics%'
+
+Select T2.dept_name
+From course as T1 join department as T2 on T1.dept_code = T2.dept_code
+Where T1.crs_description LIKE '%Statistics%'
 
 83. What is the first name of the student whose last name starting with the letter S and is taking ACCT-211 class?
 P: What is the first name of the student whose last name starts with the letter S and is taking ACCT-211?
@@ -1171,5 +1944,21 @@ From student as T1
 Where T3.crs_code = 'ACCT-211' and T1.stu_lname LIKE 'S%'
 
 S: What information is on students whose name starts with 'S'?
-S: Which of that information refers to students taking ACCT-211?
+S: Which of them took course ACCT-211?
 S: What are their first names?
+
+Select *
+From student
+Where stu_lname LIKE 'S%'
+
+Select *
+From student as T1
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+Where T3.crs_code = 'ACCT-211' and T1.stu_lname LIKE 'S%'
+
+Select T1.stu_fname
+From student as T1
+     join enroll as T2 on T1.stu_num = T2.stu_num
+     Join class as T3 on T2.class_code = T3.class_code
+Where T3.crs_code = 'ACCT-211' and T1.stu_lname LIKE 'S%'
