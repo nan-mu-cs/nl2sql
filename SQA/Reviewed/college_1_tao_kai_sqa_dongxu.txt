@@ -11,16 +11,35 @@ S: What are the codes of the accounting department?
 S: Which professors are in that department?
 S: How many are there?
 
+SELECT dept_code
+FROM department
+WHERE DEPT_NAME = "Accounting"
+
+SELECT *
+FROM professor as T1 JOIN department as T2 ON T1.dept_code = T2.dept_code
+WHERE DEPT_NAME = "Accounting"
+
+SELECT count(*)
+FROM professor as T1 JOIN department as T2 ON T1.dept_code = T2.dept_code
+WHERE DEPT_NAME = "Accounting"
+
 2. How many professors are teaching class with code ACCT-211?
 P: How many professors teach a class with the code ACCT-211?
 
 SELECT count(distinct PROF_NUM)
-FROM class as T2
+FROM class
 WHERE CRS_CODE = "ACCT-211"
 
 S: What can you tell me about the class with code "ACCT-211"?
-S: What are the different professor numbers?
-S: How many professors teach that class? 
+S: How many different professors teach that class?
+
+SELECT *
+FROM class
+WHERE CRS_CODE = "ACCT-211"
+
+SELECT count(distinct PROF_NUM)
+FROM class
+WHERE CRS_CODE = "ACCT-211"
 
 3. What is the first and last name of the professor in biology department?
 P: What are the first and last name of all biology professors?
@@ -35,6 +54,22 @@ S: What can you tell me about the biology department?
 S: What are the first name of all professors in the department?
 S: What are their last names as well?
 
+SELECT *
+FROM department
+WHERE DEPT_NAME = "Biology"
+
+SELECT T3.EMP_FNAME
+FROM professor as T1
+JOIN department as T2 ON T1.dept_code = T2.dept_code
+JOIN employee as T3 ON T1.EMP_NUM = T3.EMP_NUM
+WHERE DEPT_NAME = "Biology"
+
+SELECT T3.EMP_FNAME, T3.EMP_LNAME
+FROM professor as T1
+JOIN department as T2 ON T1.dept_code = T2.dept_code
+JOIN employee as T3 ON T1.EMP_NUM = T3.EMP_NUM
+WHERE DEPT_NAME = "Biology"
+
 4. What are the first names and date of birth of professors teaching course ACCT-211?
 P: What are the first names and birthdates of the professors in charge of ACCT-211?
 
@@ -46,6 +81,18 @@ S: Which professors are in charge of ACCT-211?
 S: What are their first names?
 S: Also, what are their date of births?
 
+SELECT distinct T1.*
+FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
+WHERE CRS_CODE = "ACCT-211"
+
+SELECT distinct T1.EMP_FNAME
+FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
+WHERE CRS_CODE = "ACCT-211"
+
+SELECT distinct T1.EMP_FNAME, T1.EMP_DOB
+FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
+WHERE CRS_CODE = "ACCT-211"
+
 5. How many classes are professor whose last name is Graztevski has?
 P: How many classes does the professor whose last name is Graztevski teach?
 
@@ -53,9 +100,21 @@ SELECT count(*)
 FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
 WHERE T1.EMP_LNAME = 'Graztevski'
 
-S: What can you tell me about the professor with the last name Graztevski?
-S: Which classes do they teach?
-S: How many classes do they teach?
+S: Give all details about the professor with the last name Graztevski?
+S: Which classes does he teach? Return the class code.
+S: How many classes does he teach?
+
+SELECT *
+FROM employee
+WHERE EMP_LNAME = 'Graztevski'
+
+SELECT T2.CRS_CODE
+FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
+WHERE T1.EMP_LNAME = 'Graztevski'
+
+SELECT count(*)
+FROM employee as T1 JOIN class as T2 ON T1.EMP_NUM = T2.PROF_NUM
+WHERE T1.EMP_LNAME = 'Graztevski'
 
 6. What is the code of the school where the accounting department belongs to?
 P: What is the school code of the accounting department?
@@ -64,8 +123,16 @@ select school_code
 from department
 where dept_name = "Accounting"
 
-S: What can you tell me about the accounting department?
-S: What are the school codes?
+S: Find all info about the accounting department?
+S: What is its school code?
+
+select *
+from department
+where dept_name = "Accounting"
+
+select school_code
+from department
+where dept_name = "Accounting"
 
 7. How many credits does course CIS-220 have, and what its description?
 P: What is the description for the CIS-220 and how many credits does it have? 
@@ -78,6 +145,18 @@ S: How many credits does each course have?
 S: How many does CIS-220 have?
 S: What is its description?
 
+select crs_credit, crs_code
+from course
+group by crs_code
+
+select crs_credit
+from course
+where crs_code = 'CIS-220'
+
+select crs_description
+from course
+where crs_code = 'CIS-220'
+
 8. what is the address of history department?
 P: Where is the history department?
 
@@ -85,8 +164,15 @@ select dept_address
 from department
 where dept_name = 'History'
 
-S: What can you tell me about the history department?
-S: What is its address?
+S: List addresses of all departments.
+S: What is one for the history department?
+
+select dept_address
+from department
+
+select dept_address
+from department
+where dept_name = 'History'
 
 9. How many different locations does the school with code BUS has?
 P: What are the different locations of the school with the code BUS?
@@ -95,20 +181,38 @@ select count(distinct dept_address)
 from department
 where school_code = 'BUS'
 
-S: What can you tell me about the school with the code BUS?
-S: What are the addresses of the different departments?
+S: What are the names of departments in the school with the code BUS?
+S: What are different addresses of the school?
 S: How many of them are there?
 
+select DEPT_NAME
+from department
+where school_code = 'BUS'
+
+select distinct dept_address
+from department
+where school_code = 'BUS'
+
+select count(distinct dept_address)
+from department
+where school_code = 'BUS'
+
 10. How many different locations does each school have?
-P:
+P: Count different addresses of each school.
 
 select count(distinct dept_address), school_code
 from department
 Group by school_code
 
-S: What can you tell me about each school?
-S: What are the different department addresses for each one?
-S: How many are there for each one?
+S: How many different shools are there?
+S: How many different addresses does each one have?
+
+select count(distinct school_code)
+from department
+
+select count(distinct dept_address), school_code
+from department
+Group by school_code
 
 11. Find the description and credit for the course QM-261?
 P: What is the course description and number of credits for QM-261?
@@ -117,9 +221,20 @@ select crs_credit, crs_description
 from course
 where crs_code = 'QM-261'
 
-S: What can you tell me about the course number 'QM-261'?
-S: How many credits is it worth?
+S: Return all info about all courses.
+S: How many credits is the course QM-261 worth?
 S: WHat is its description?
+
+select *
+from course
+
+select crs_credit
+from course
+where crs_code = 'QM-261'
+
+select crs_credit, crs_description
+from course
+where crs_code = 'QM-261'
 
 12. Find the number of departments in each school.
 P: How many departments are in each school?
@@ -129,8 +244,14 @@ from department
 Group by school_code
 
 S: What are the different school codes?
-S: For each one, what are the different department names?
-S: How many are there for each school?
+S: For each one, how many different departments does it have?
+
+select distinct school_code
+from department
+
+select count(distinct dept_name), school_code
+from department
+Group by school_code
 
 13. Find the number of different departments in each school whose number of different departments is less than 5.
 P: How many different departments are there in each school that has less than 5 apartments?
@@ -141,8 +262,20 @@ Group by school_code
 Having count(distinct dept_name) < 5
 
 S: What are the different schools?
-S: Which of those have less than 5 deparments?
-S: How many departments does each one of those have?
+S: How many departments does each one of them have?
+S: Find the ones which have less than 5 deparments.
+
+select distinct school_code
+from department
+
+select count(distinct dept_name), school_code
+from department
+Group by school_code
+
+select count(distinct dept_name), school_code
+from department
+Group by school_code
+Having count(distinct dept_name) < 5
 
 14. How many sections does each course has?
 P: How many sections does each course have?
@@ -154,6 +287,12 @@ Group by crs_code
 S: What are the different course codes?
 S: How many sections exist for each one?
 
+Select distinct crs_code
+from class
+
+Select count(*), crs_code
+from class
+Group by crs_code
 
 15. What is the total credit does each department offer?
 P: How many credits does the department offer?
@@ -162,9 +301,15 @@ Select sum(crs_credit), dept_code
 From course
 Group by dept_code
 
-S: What are the different department codes?
-S: For each one, what are the course credits?
-S: For each one, how many are there in total?
+S: What is the total credits of all courses?
+S: Give the number for each department.
+
+Select sum(crs_credit)
+From course
+
+Select sum(crs_credit), dept_code
+From course
+Group by dept_code
 
 16. Find the number of classes offered for all class rooms that held at least 2 classes.
 P: For each classroom with at least 2 classes, how many classes are offered?
@@ -174,9 +319,17 @@ From class
 Group by class_room
 Having count(*) >= 2
 
-S: For each classroom, what can you tell me about the classes held there?
-S: How many are there for each classroom?
+S: For each classroom, how many the classes held there?
 S: How many are there for each classroom with at least 2 classes?
+
+Select count(*), class_room
+From class
+Group by class_room
+
+Select count(*), class_room
+From class
+Group by class_room
+Having count(*) >= 2
 
 17. Find the number of classes in each department.
 P: How many classes are held in each department?
@@ -185,8 +338,15 @@ Select count(*), dept_code
 From class as T1 join course as T2 on T1.crs_code = T2.crs_code
 Group by dept_code
 
-S: What are the course codes for each department?
-S: How many are there for each department?
+S: How many classes are offered?
+S: return the number for each department.
+
+Select count(*)
+From class
+
+Select count(*), dept_code
+From class as T1 join course as T2 on T1.crs_code = T2.crs_code
+Group by dept_code
 
 18. Find the number of classes in each school.
 P: How many classes exist for each school?
@@ -198,8 +358,16 @@ From class as T1
 Group by T3.school_code
 
 S: What are the different school codes?
-S: For each of those, what are the different classes?
 S: How many classes are there for each of them?
+
+select distinct school_code
+from department
+
+Select count(*), T3.school_code
+From class as T1 
+     join course as T2 on T1.crs_code = T2.crs_code
+     Join department as T3 on T2.dept_code = T3.dept_code
+Group by T3.school_code
 
 19. What is the number of professors for different school?
 P: How many different professors are there for the different schools?
@@ -208,9 +376,15 @@ Select count(*), T1.school_code
 From department as T1 join professor as T2 on T1.dept_code = T2.dept_code
 Group by T1.school_code
 
-S: What are the different school codes?
-S: What professors teach at each school?
-S: How many are there for each school?
+S: How many professors are there?
+S: How many of them are there for each school?
+
+Select count(*)
+From professor
+
+Select count(*), T1.school_code
+From department as T1 join professor as T2 on T1.dept_code = T2.dept_code
+Group by T1.school_code
 
 20. Find the count and code of the job has most employees.
 P: What is the count and code of the job with the most employee?
@@ -223,7 +397,16 @@ Limit 1
 
 S: For each job code, how many employees are there?
 S: Which one has the most?
-S: Also, what is the code with the most?
+
+Select emp_jobcode, count(*)
+From employee
+Group by emp_jobcode
+
+Select emp_jobcode, count(*)
+From employee
+Group by emp_jobcode
+Order by count(*) desc
+Limit 1
 
 21. Which school has the smallest amount of professors?
 P: Which school has the fewest professors?
