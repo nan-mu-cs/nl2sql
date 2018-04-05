@@ -1,0 +1,177 @@
+Total * = 30
+
+1. How many likes are there in total?
+P: 
+
+select count(*)
+from LIKES
+
+Show music and smoking preference of all students.
+
+select MusicType, Smoking
+from PREFERENCES
+
+Show all distinct sleep habits from students' preferences.
+
+select distinct SleepHabits
+from PREFERENCES
+
+How many distinct students are loved?
+
+select count(distinct WhoIsLoved)
+from LOVES
+
+
+2. What is the music preference of student Linda Smith?
+
+select T1.MusicType
+from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
+where T2.Fname = "Linda" and T2.LName = "Smith"
+
+What is the sleep habit of student Tracy Kim?
+
+select T1.SleepHabits
+from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
+where T2.Fname = "Tracy" and T2.LName = "Kim"
+
+What is the smoking preference for student Eric Tai.
+
+select T1.Smoking
+from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
+where T2.Fname = "Eric" and T2.LName = "Tai"
+
+Show all first names of student that answers yes for smoking.
+
+select T2.Fname
+from PREFERENCES as T1 JOIN STUDENT as T2
+on T1.StuID = T2.StuID
+where T1.Smoking = "Yes"
+
+Show all last names of male (sex is M) students that answer yes for smoking.
+
+select T2.LName
+from PREFERENCES as T1 JOIN STUDENT as T2
+on T1.StuID = T2.StuID
+where T1.Smoking = "Yes" and T2.Sex = "M"
+
+Show the smoking preference for all student that live in city NYC.
+
+select T1.Smoking
+from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
+where T2.city_code = "NYC"
+
+
+Who likes student Shiela Jones?
+
+select distinct T1.WhoLikes
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoIsLiked = T2.StuID
+where T2.Fname = "Shiela" and T2.LName = "Jones"
+
+How many distinct students like Dinesh Kumar?
+
+select COUNT(distinct T1.WhoLikes)
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoIsLiked = T2.StuID
+where T2.Fname = "Dinesh" and T2.LName = "Kumar"
+
+Who does student Paul Gompers love?
+
+select distinct T1.WhoIsLiked
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoLikes = T2.StuID
+where T2.Fname = "Paul" and T2.LName = "Gompers"
+
+How many distinct students love Paul Gompers?
+
+select distinct T1.WhoIsLiked
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
+where T2.Fname = "Paul" and T2.LName = "Gompers"
+
+What is the first name of the oldest student?
+
+SELECT Fname
+FROM STUDENT
+WHERE Age = (select max(Age) from STUDENT)
+
+What is the first name of the oldest female (sex is F) student?
+
+SELECT Fname
+FROM STUDENT
+WHERE Age = (select max(Age) from STUDENT WHERE Sex = "F") and Sex = "F"
+
+
+3. Show the student first names and the number of distinct people each student likes.
+
+select T2.Fname, count(distinct T1.WhoIsLiked)
+from LIKES as T1 JOIN STUDENT as T2 on T1.WhoLikes = T2.StuID
+group by T1.WhoLikes
+
+Show the last name of the student being loved by most students.
+
+select T2.LName
+from LOVES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
+group by T1.WhoIsLoved ORDER BY count(distinct T1.WhoLoves) DESC LIMIT 1
+
+Show me the first names of all students being loved by at least 4 students.
+
+select T2.Fname
+from LOVES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
+group by T1.WhoIsLoved HAVING count(distinct T1.WhoLoves) >= 4
+
+Find the last names of all students being loved by exactly 1 students
+
+select T2.LName
+from LOVES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
+group by T1.WhoIsLoved HAVING count(distinct T1.WhoLoves) = 1
+
+Show me the sleeping habits preferences that is shared by most students
+
+select SleepHabits
+from PREFERENCES group by SleepHabits
+order by COUNT(*) DESC LIMIT 1
+
+Show me the music preferences that is shared by fewest students
+
+select MusicType
+from PREFERENCES group by MusicType
+order by COUNT(*) ASC LIMIT 1
+
+
+4. What are the first names of the student that does not like any other student?
+
+select Fname
+From STUDENT 
+Except
+Select T2.Fname
+From LIKES as T1 join STUDENT as T2
+on T1.WhoLikes = T2.StuID
+
+
+What are the first names of the student that are not loved by any other student?
+
+select Fname
+From STUDENT 
+Except
+Select T2.Fname
+From LOVES as T1 join STUDENT as T2
+on T1.WhoIsLoved = T2.StuID
+
+What are the first names of students that are non smoking or live in NYC?
+
+Select T2.Fname
+From PREFERENCES as T1 JOIN STUDENT as T2
+on T1.StuID = T2.StuID
+WHERE T1.Smoking = "no"
+UNION
+Select Fname
+From STUDENT 
+WHERE city_code = "NYC"
+
+What are the first names of students that smokes or live in NYC with age bigger than 20?
+
+Select T2.Fname
+From PREFERENCES as T1 JOIN STUDENT as T2
+on T1.StuID = T2.StuID
+WHERE T1.Smoking = "yes"
+UNION
+Select Fname
+From STUDENT 
+WHERE city_code = "NYC" AND Age > 20
