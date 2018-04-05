@@ -1,0 +1,425 @@
+[
+    {
+        "col_data": [
+            {
+                "column_name": "building",
+                "data_type": "varchar(15)",
+                "default_column_name": "building",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "room_number",
+                "data_type": "varchar(7)",
+                "default_column_name": "room_number",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 2
+            },
+            {
+                "column_name": "capacity",
+                "data_type": "numeric(4,0)",
+                "default_column_name": "capacity",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "classroom"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "dept_name",
+                "data_type": "varchar(20)",
+                "default_column_name": "dept_name",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "building",
+                "data_type": "varchar(15)",
+                "default_column_name": "building",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "budget",
+                "data_type": "numeric(12,2)",
+                "default_column_name": "budget",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "department"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "course_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "course_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "title",
+                "data_type": "varchar(50)",
+                "default_column_name": "title",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "dept_name",
+                "data_type": "varchar(20)",
+                "default_column_name": "dept_name",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "credits",
+                "data_type": "numeric(2,0)",
+                "default_column_name": "credits",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "course"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "ID",
+                "data_type": "varchar(5)",
+                "default_column_name": "ID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "name",
+                "data_type": "varchar(20)",
+                "default_column_name": "name",
+                "default_value": null,
+                "not_null": 1,
+                "primary_key": 0
+            },
+            {
+                "column_name": "dept_name",
+                "data_type": "varchar(20)",
+                "default_column_name": "dept_name",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "salary",
+                "data_type": "numeric(8,2)",
+                "default_column_name": "salary",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "instructor"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "course_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "course_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "sec_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "sec_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 2
+            },
+            {
+                "column_name": "semester",
+                "data_type": "varchar(6)",
+                "default_column_name": "semester",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 3
+            },
+            {
+                "column_name": "year",
+                "data_type": "numeric(4,0)",
+                "default_column_name": "year",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 4
+            },
+            {
+                "column_name": "building",
+                "data_type": "varchar(15)",
+                "default_column_name": "building",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "room_number",
+                "data_type": "varchar(7)",
+                "default_column_name": "room_number",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "time_slot_id",
+                "data_type": "varchar(4)",
+                "default_column_name": "time_slot_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "section"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "ID",
+                "data_type": "varchar(5)",
+                "default_column_name": "ID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "course_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "course_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 2
+            },
+            {
+                "column_name": "sec_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "sec_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 3
+            },
+            {
+                "column_name": "semester",
+                "data_type": "varchar(6)",
+                "default_column_name": "semester",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 4
+            },
+            {
+                "column_name": "year",
+                "data_type": "numeric(4,0)",
+                "default_column_name": "year",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 5
+            }
+        ],
+        "table": "teaches"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "ID",
+                "data_type": "varchar(5)",
+                "default_column_name": "ID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "name",
+                "data_type": "varchar(20)",
+                "default_column_name": "name",
+                "default_value": null,
+                "not_null": 1,
+                "primary_key": 0
+            },
+            {
+                "column_name": "dept_name",
+                "data_type": "varchar(20)",
+                "default_column_name": "dept_name",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "tot_cred",
+                "data_type": "numeric(3,0)",
+                "default_column_name": "tot_cred",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "student"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "ID",
+                "data_type": "varchar(5)",
+                "default_column_name": "ID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "course_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "course_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 2
+            },
+            {
+                "column_name": "sec_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "sec_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 3
+            },
+            {
+                "column_name": "semester",
+                "data_type": "varchar(6)",
+                "default_column_name": "semester",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 4
+            },
+            {
+                "column_name": "year",
+                "data_type": "numeric(4,0)",
+                "default_column_name": "year",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 5
+            },
+            {
+                "column_name": "grade",
+                "data_type": "varchar(2)",
+                "default_column_name": "grade",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "takes"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "s_ID",
+                "data_type": "varchar(5)",
+                "default_column_name": "s_ID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "i_ID",
+                "data_type": "varchar(5)",
+                "default_column_name": "i_ID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "advisor"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "time_slot_id",
+                "data_type": "varchar(4)",
+                "default_column_name": "time_slot_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "day",
+                "data_type": "varchar(1)",
+                "default_column_name": "day",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 2
+            },
+            {
+                "column_name": "start_hr",
+                "data_type": "numeric(2)",
+                "default_column_name": "start_hr",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 3
+            },
+            {
+                "column_name": "start_min",
+                "data_type": "numeric(2)",
+                "default_column_name": "start_min",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 4
+            },
+            {
+                "column_name": "end_hr",
+                "data_type": "numeric(2)",
+                "default_column_name": "end_hr",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "end_min",
+                "data_type": "numeric(2)",
+                "default_column_name": "end_min",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "time_slot"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "course_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "course_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "prereq_id",
+                "data_type": "varchar(8)",
+                "default_column_name": "prereq_id",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 2
+            }
+        ],
+        "table": "prereq"
+    }
+]
