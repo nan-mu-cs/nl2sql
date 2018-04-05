@@ -330,12 +330,12 @@ S: How many are there?
 S: How many land in ASY Airport?
 
 select *
-from AIRLINES as T1 join FLIGHTS as T2 on T2.Airline = T1.uid
-where T1.Airline = "United Airlines"
+from AIRLINES
+where Airline = "United Airlines"
 
 select count(*)
-from AIRLINES as T1 join FLIGHTS as T2 on T2.Airline = T1.uid
-where T1.Airline = "United Airlines" 
+from AIRLINES
+where Airline = "United Airlines"
 
 select count(*)
 from AIRLINES as T1 join FLIGHTS as T2 on T2.Airline = T1.uid
@@ -353,8 +353,8 @@ S: Which ones leave from AHD?
 S: How many are there?
 
 select *
-from AIRLINES as T1 join FLIGHTS as T2 on T2.Airline = T1.uid
-where T1.Airline = "United Airlines"
+from AIRLINES
+where Airline = "United Airlines"
 
 select *
 from AIRLINES as T1 join FLIGHTS as T2 on T2.Airline = T1.uid
