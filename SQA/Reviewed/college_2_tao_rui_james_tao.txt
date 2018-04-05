@@ -46,7 +46,7 @@ S: What is the average department budget?
 S: Which departments have a budget higher than average?
 S: What are their names and buildings?
 
-select avg(budget) 
+select avg(budget)
 from department
 
 Select *
@@ -115,6 +115,7 @@ S: Which one has the most credits?
 
 Select name
 From student
+Where dept_name = 'History'
 
 Select name
 From student
@@ -201,8 +202,12 @@ From course as T1 join prereq as T2 on T1.course_id = T2.course_id
 Group by T2.course_id
 Having count(*) = 2
 
-S: Which courses have two prerequisites?
+S: Which courses have some prerequisite?
+S: Which ones have two prerequisites among them?
 S: What are their titles?
+
+Select *
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
 
 Select *
 From course as T1 join prereq as T2 on T1.course_id = T2.course_id
@@ -242,8 +247,8 @@ select count(*)
 From course
 where course_id NOT IN (Select course_id From prereq)
 
-S: What are the ids for prerequisites?
-S: How many courses do not have prerequisities?
+S: What are the ids for courses that have some prerequisites?
+S: How many courses do not in the resulting list?
 
 Select course_id From prereq
 
@@ -295,11 +300,16 @@ From department
 Where dept_name = 'Marketing' or dept_name = 'Finance'
 
 S: What are the budgets of the Marketing department?
-S: What is the sum of that and the budget of the Finance department?
+S: How about that for the Finance department?
+S: What is their total budget?
 
 Select budget
 From department
-Where dept_name = 'Marketing' 
+Where dept_name = 'Marketing'
+
+Select budget
+From department
+Where dept_name = 'Finance'
 
 Select sum(budget)
 From department
@@ -422,7 +432,7 @@ From course
 Where dept_name = 'Psychology'
 
 S: What are the titles of Statistics courses?
-S: Of these, which are not also Psychology courses?
+S: Of these, which are not provided by the Psychology department?
 
 Select title
 From course
@@ -560,11 +570,11 @@ S: Which has the lowest?
 Select dept_name
 From department
 Order by budget
-Limit 1
 
 Select dept_name
 From department
 Order by budget
+Limit 1
 
 29. List the names and buildings of all departments sorted by the budget from large to small.
 P: What are the names and buildings of the deparments, sorted by budget descending?
@@ -683,7 +693,6 @@ S: Of those, which advise more than one student?
 
 select T1.name
 From instructor as T1 join advisor as T2 on T1.id = T2.i_id
-Group by T2.i_id
 
 select T1.name
 From instructor as T1 join advisor as T2 on T1.id = T2.i_id
@@ -703,7 +712,6 @@ S: Which ones have more than one advisor?
 
 Select T1.name
 From student as T1 join advisor as T2 on T1.id = T2.s_id
-Group by T2.s_id
 
 Select T1.name
 From student as T1 join advisor as T2 on T1.id = T2.s_id
@@ -760,7 +768,6 @@ S: Of those, which are offered in more than one department?
 
 select title
 from course
-group by title
 
 select title
 from course
@@ -1032,7 +1039,7 @@ S: What is the id of the prerequisite for International Finance?
 S: What is its title?
 
 select prereq_id
-from prereq 
+from prereq
 
 select T1.prereq_id
 from prereq as T1 join course as T2 on T1.course_id = T2.course_id
@@ -1105,7 +1112,7 @@ from course as T1 join section as T2 on T1.course_id = T2.course_id
 where building = 'Chandler' and semester = 'Fall' and year = 2010
 
 S: What are the titles of courses offered in the Fall of 2010?
-S: Of these, which were offered in Chandler?
+S: Of these, which were offered in Chandler building?
 
 select T1.title
 from course as T1 join section as T2 on T1.course_id = T2.course_id
@@ -1401,20 +1408,12 @@ where id NOT IN
 from takes as T1 join course as T2 on T1.course_id = T2.course_id
 where T2.dept_name = 'Biology')
 
-S: What are the ids of students who have taken Biology courses?
-S: What are the ids of all other students?
-S: What are their names?
+S: Which students have taken Biology courses?
+S: What are the names of all students who did not take that class?
 
-select T1.id
+select *
 from takes as T1 join course as T2 on T1.course_id = T2.course_id
 where T2.dept_name = 'Biology'
-
-select id
-from student
-where id NOT IN
-(select T1.id
-from takes as T1 join course as T2 on T1.course_id = T2.course_id
-where T2.dept_name = 'Biology')
 
 select name
 from student
@@ -1524,18 +1523,11 @@ from course as T1
 where T1.dept_name = 'Statistics'
 
 S: What is all the information about the Statistics courses?
-S: What are the ids of students who have taken courses in the Statistics department?
-S: What are their names?
+S: What are the names of students who have taken courses in the Statistics department?
 
 select *
 from course 
 where dept_name = 'Statistics'
-
-select T3.id
-from course as T1 
-     join takes as T2 on T1.course_id = T2.course_id
-     join student as T3 on T2.id = T3.id
-where T1.dept_name = 'Statistics'
 
 select T3.name
 from course as T1 
@@ -1554,15 +1546,15 @@ order by T1.title
 S: What is all the information about the courses in the Psychology department, ordered by title?
 S: What are the building, room number, semester and year corresponding to these courses?
 
-select T2.building, T2.room_number, T2.semester, T2.year
-from course as T1 join section as T2 on T1.course_id = T2.course_id
-where T1.dept_name = 'Psychology'
-order by T1.title
-
 select *
 from course 
 where dept_name = 'Psychology'
 order by title
+
+select T2.building, T2.room_number, T2.semester, T2.year
+from course as T1 join section as T2 on T1.course_id = T2.course_id
+where T1.dept_name = 'Psychology'
+order by T1.title
 
 72. Find the names of all instructors in computer science department
 P: What are the names of all instructors in the Comp. Sci. department?
@@ -1669,7 +1661,7 @@ order by name
 P: What are the ids for courses in the Fall of 2009 or the Spring of 2010?
 
 select course_id from section where semester = 'Fall' and year = 2009
- union
+union
 select course_id from section where semester = 'Spring' and year = 2010
 
 S: What are the ids for courses offered in the Fall of 2009?
@@ -1678,7 +1670,7 @@ S: Also include the ids for courses offered in the Spring of 2010.
 select course_id from section where semester = 'Fall' and year = 2009
 
 select course_id from section where semester = 'Fall' and year = 2009
- union
+union
 select course_id from section where semester = 'Spring' and year = 2010
 
 79. Find courses that ran in Fall 2009 and in Spring 2010.
@@ -1807,18 +1799,11 @@ where salary > (select max(salary)
                 where dept_name = 'Biology')
                 
 S: What is the highest salary of instructors in the Biology department?
-S: What are the ids of instructors who earn more than this?
-S: What are their names?
+S: What are the names of instructors who earn more than this?
 
 select max(salary)
 from instructor
-where dept_name = 'Biology'
-                
-select id
-from instructor
-where salary > (select max(salary)
-                from instructor
-                where dept_name = 'Biology')
+where dept_name = 'Biology'      
                 
 select name
 from instructor
