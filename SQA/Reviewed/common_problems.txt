@@ -456,3 +456,81 @@ from countrylanguage
 group by CountryCode
 having Percentage = max(Percentage) and Language = "Spanish"
 
+
+
+
+allergy_1
+
+
+
+8. Comment: do not use group by here 
+
+Show all allergy types and the number of allergies in each type.
+P: What are the allergy types and how many allergies correspond to each one?
+
+select allergytype, count(*)
+from Allergy_type
+group by allergytype
+
+S: What are the different allergy types?
+S: How many are in each category?
+
+select allergytype
+from Allergy_type
+group by allergytype
+
+select allergytype, count(*)
+from Allergy_type
+group by allergytype
+
+
+9. Common: ASC is default, add descendingly here. 
+
+Which allergy type has most number of allergies?
+P: Which allergy type is most common?
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) desc
+limit 1
+
+S: What are all the different allergy types?
+S: Order them by number of allergies.
+S: Which one has the most?
+
+select distinct allergytype
+from Allergy_type
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) desc
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) desc
+limit 1
+
+
+
+19. Comment: it is better do not use '21' instead of '20'. It is hard for the model to generate this SQL from natural language.
+
+Show all student ids who are older than 20.
+P: What are the student ids for students over 20 years old?
+
+select StuID
+from Student
+where age > 20
+
+S: Who is age 21 or older?
+S: What are their student ids?
+
+select *
+from Student
+where age > 20
+
+select StuID
+from Student
+where age > 20
