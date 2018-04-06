@@ -515,7 +515,7 @@ limit 1
 
 
 
-19. Comment: it is better do not use '21' instead of '20'. It is hard for the model to generate this SQL from natural language.
+19. Comment: it is better not to use '21' instead of '20'. It is hard for the model to generate this SQL from natural language.
 
 Show all student ids who are older than 20.
 P: What are the student ids for students over 20 years old?
@@ -534,3 +534,45 @@ where age > 20
 select StuID
 from Student
 where age > 20
+
+
+37. # Comment: question 1: no need to join
+How many students have a food allergy?
+P: How many students are affected by food related allergies?
+		
+select count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+where T2.allergytype = "food"
+
+S: How many students are allergic to something?
+S: Of those, for how many is it a food allergy?
+
+select count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+
+select count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+where T2.allergytype = "food"
+
+
+
+40. # Comment: question 1: no need to join
+
+Show all allergy type with number of students affected.
+P: How many students are affected by each allergy type?
+		
+select T2.allergytype, count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+group by T2.allergytype
+
+S: What are the different allergy types?
+S: For each, how many students does it affect?
+
+select T2.allergytype
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+group by T2.allergytype
+
+select T2.allergytype, count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+group by T2.allergytype
+
