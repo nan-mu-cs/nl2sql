@@ -37,11 +37,9 @@ WHERE Room = 268
 
 Find the number of students that have at least one grade "B".
 
-SELECT COUNT(*)
+SELECT COUNT(distinct StuID)
 FROM ENROLLED_IN
 WHERE Grade = "B"
-group by StuID 
-HAVING COUNT(*) >= 1
 
 Find the max and min grade point for all letter grade.
 
@@ -68,6 +66,7 @@ WHERE Rank = "Professor" AND Building = "NEB"
 
 Find the department name that is in Building "Mergenthaler".
 
+SELECT DName
 FROM DEPARTMENT 
 WHERE Building = "Mergenthaler"
 
@@ -143,8 +142,9 @@ SELECT Rank
 FROM FACULTY
 GROUP BY Rank
 ORDER BY count(*) asc
+LIMIT 1
 
-What are the first and last names of the instructors that teach the top 3 number of courses?
+What are the first and last names of the instructors who teach the top 3 number of courses?
 
 SELECT T2.Fname, T2.Lname
 FROM COURSE as T1 JOIN FACULTY as T2
@@ -153,7 +153,7 @@ GROUP BY T1.Instructor
 ORDER BY count(*) desc
 LIMIT 3
 
-Which building does the instructor that teach the most number of courses live in?
+Which building does the instructor who teaches the most number of courses live in?
 
 SELECT T2.Building
 FROM COURSE as T1 JOIN FACULTY as T2
@@ -197,7 +197,7 @@ FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
 ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
 Where T2.gradepoint >= 3.8
 
-Find the first names of faculties that are members of department with department number 520.
+Find the first names of faculties who are members of department with department number 520.
 
 SELECT T1.Fname
 FROM FACULTY as T1 JOIN MEMBER_OF as T2 ON T1.FacID = T2.FacID
@@ -205,11 +205,11 @@ WHERE T2.DNO = 520
 
 What are the first names and last names of the students that minor in the department with DNO 140.
 
-SELECT T2.Fname
+SELECT T2.Fname, T2.Lname
 FROM MINOR_IN as T1 JOIN STUDENT as T2 ON T1.StuID = T2.StuID
 WHERE T1.DNO = 140
 
-Find the last names of faculties that are members of computer science department
+Find the last names of faculties who are members of computer science department.
 
 SELECT T2.Lname
 FROM DEPARTMENT as T1 
@@ -222,7 +222,7 @@ Find the average grade point of student whose last name is Smith.
 SELECT avg(T2.gradepoint)
 FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
 ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
-WHERE T3.Fname = "Linda" and T3.LName = "Smith"
+WHERE T3.LName = "Smith"
 
 What is the maximum and minimum grade point of students who live in NYC?
 
@@ -232,7 +232,7 @@ ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
 WHERE T3.city_code = "NYC"
 
 
-5. Find the names of courses that have either 3 credits or 1 credit but 4 hours
+5. Find the names of courses that have either 3 credits or 1 credit but 4 hours.
 
 SELECT CName 
 from COURSE 
@@ -242,7 +242,7 @@ SELECT CName
 from COURSE 
 WHERE Credits = 1 AND Hours = 4
 
-Find the names of departments that are either in division AS or in division EN and in Building NEB
+Find the names of departments that are either in division AS or in division EN and in Building NEB.
 
 SELECT DName
 from DEPARTMENT
