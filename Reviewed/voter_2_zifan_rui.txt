@@ -40,11 +40,13 @@ from STUDENT
 where Sex = "M"
 
 What is the average age of female (sex is F) students?
+
 select avg(Age)
 from STUDENT
 where Sex = "F"
 
 What are the maximum and minimum age of students with major 600?
+
 select max(Age), min(Age)
 from STUDENT
 where Major = 600
@@ -114,14 +116,14 @@ on T1.StuID = T2.Treasurer_Vote
 
 6. Find the first and last name of all female (sex is F) students who have president votes.
 
-select T1.Fname, T1.LName
+select distinct T1.Fname, T1.LName
 from STUDENT as T1 join VOTING_RECORD as T2
 on T1.StuID = T2.President_VOTE
 where T1.sex = "F"
 
 Find the first and last name of all students of age 18 and have vice president votes.
 
-select T1.Fname, T1.LName
+select distinct T1.Fname, T1.LName
 from STUDENT as T1 join VOTING_RECORD as T2
 on T1.StuID = T2.VICE_President_VOTE
 where T1.age = 18
@@ -223,6 +225,7 @@ order by count(*) desc
 limit 1
 
 What is the most common major among female (sex is F) students?
+
 select Major
 from STUDENT
 Where Sex = "F"
