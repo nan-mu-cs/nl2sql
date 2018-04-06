@@ -149,6 +149,8 @@ from customer_contact_channels
 
 21. What is the channel code and contact number of the customer contact channel that was active for the longset time?
 
+COMMENT: do not ask many this kinda problem A-/+* B. It is fine if a few files have it. can keep this one.
+
 select channel_code, contact_number
 from customer_contact_channels
 where active_to_date - active_from_date = (select active_to_date - active_from_date
@@ -157,12 +159,14 @@ order by (active_to_date - active_from_date) desc
 limit 1)
 limit 1
 
-22. Find the name of the customer that has a contact channel with active date beginning on 2017-12-07 18:18:15?
+22. Find the name and active date of the customer that use email as the contact channel?
 
-select t1.customer_name
+COMMENT: too wired question with 2017-12-07 18:18:15 and value too specific. changed
+
+select t1.customer_name, t2.active_from_date
 from customers as t1 join customer_contact_channels as t2
 on t1.customer_id = t2.customer_id
-where t2.active_from_date = "2017-12-07 18:18:15"
+where t2.channel_code = 'Email'
 
 23. What is the name of the customer that made the order with largest quantity?
 
