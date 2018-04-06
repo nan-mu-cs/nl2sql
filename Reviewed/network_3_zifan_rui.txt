@@ -39,28 +39,28 @@ select T1.Smoking
 from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
 where T2.Fname = "Eric" and T2.LName = "Tai"
 
-Show all first names of student that answers yes for smoking.
+Show all first names of students who answer yes for smoking.
 
 select T2.Fname
 from PREFERENCES as T1 JOIN STUDENT as T2
 on T1.StuID = T2.StuID
 where T1.Smoking = "Yes"
 
-Show all last names of male (sex is M) students that answer yes for smoking.
+Show all last names of male (sex is M) students who answer yes for smoking.
 
 select T2.LName
 from PREFERENCES as T1 JOIN STUDENT as T2
 on T1.StuID = T2.StuID
 where T1.Smoking = "Yes" and T2.Sex = "M"
 
-Show the smoking preference for all student that live in city NYC.
+Show the smoking preference for all students who live in city NYC.
 
 select T1.Smoking
 from PREFERENCES as T1 JOIN STUDENT as T2 on T1.StuID = T2.StuID
 where T2.city_code = "NYC"
 
 
-Who likes student Shiela Jones?
+Who like student Shiela Jones?
 
 select distinct T1.WhoLikes
 from LIKES as T1 JOIN STUDENT as T2 on T1.WhoIsLiked = T2.StuID
@@ -74,11 +74,15 @@ where T2.Fname = "Dinesh" and T2.LName = "Kumar"
 
 Who does student Paul Gompers love?
 
+comment: love or like?
+
 select distinct T1.WhoIsLiked
 from LIKES as T1 JOIN STUDENT as T2 on T1.WhoLikes = T2.StuID
 where T2.Fname = "Paul" and T2.LName = "Gompers"
 
 How many distinct students love Paul Gompers?
+
+comment: sql not runnable; count
 
 select distinct T1.WhoIsLiked
 from LIKES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
@@ -121,20 +125,20 @@ select T2.LName
 from LOVES as T1 JOIN STUDENT as T2 on T1.WhoIsLoved = T2.StuID
 group by T1.WhoIsLoved HAVING count(distinct T1.WhoLoves) = 1
 
-Show me the sleeping habits preferences that is shared by most students
+Show me the sleeping habit preference that is shared by most students.
 
 select SleepHabits
 from PREFERENCES group by SleepHabits
 order by COUNT(*) DESC LIMIT 1
 
-Show me the music preferences that is shared by fewest students
+Show me the music preference that is shared by fewest students.
 
 select MusicType
 from PREFERENCES group by MusicType
 order by COUNT(*) ASC LIMIT 1
 
 
-4. What are the first names of the student that does not like any other student?
+4. What are the first names of the students who do not like any other student?
 
 select Fname
 From STUDENT 
@@ -144,7 +148,7 @@ From LIKES as T1 join STUDENT as T2
 on T1.WhoLikes = T2.StuID
 
 
-What are the first names of the student that are not loved by any other student?
+What are the first names of the students who are not loved by any other student?
 
 select Fname
 From STUDENT 
@@ -153,7 +157,7 @@ Select T2.Fname
 From LOVES as T1 join STUDENT as T2
 on T1.WhoIsLoved = T2.StuID
 
-What are the first names of students that are non smoking or live in NYC?
+What are the first names of students who are not smoking or live in NYC?
 
 Select T2.Fname
 From PREFERENCES as T1 JOIN STUDENT as T2
@@ -164,7 +168,7 @@ Select Fname
 From STUDENT 
 WHERE city_code = "NYC"
 
-What are the first names of students that smokes or live in NYC with age bigger than 20?
+What are the first names of students who smoke or live in NYC with age bigger than 20?
 
 Select T2.Fname
 From PREFERENCES as T1 JOIN STUDENT as T2
