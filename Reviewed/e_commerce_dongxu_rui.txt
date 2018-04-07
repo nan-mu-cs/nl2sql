@@ -1,0 +1,390 @@
+1. List the id, first name and last name of the customers who both have placed more than 2 orders and have bought at least 3 items.
+
+
+select T1.customer_id, T1.customer_first_name, T1.customer_last_name
+from Customers as T1 JOIN Orders as T2
+on T1.customer_id = T2.customer_id
+group by T1.customer_id
+having count(*) > 2
+INTERSECT
+select T1.customer_id, T1.customer_first_name, T1.customer_last_name
+from Customers as T1 JOIN Orders as T2
+on T1.customer_id = T2.customer_id
+JOIN Order_items as T3
+on T2.order_id = T3.order_id
+group by T1.customer_id
+having count(*) >=3;
+
+
+
+
+2. For the orders with any produts, how many products does each orders contain ? List the order id, status and the number.
+
+
+select T1.order_id, T1.order_status_code, count(*)
+from Orders as T1 JOIN Order_items as T2
+on T1.order_id = T2.order_id
+group by T1.order_id;
+
+3. List the dates of the orders which were placed at the earliest time or have more than 1 items.
+
+select min(date_order_placed)
+from Orders
+UNION
+select T1.date_order_placed
+from Orders as T1 JOIN Order_items as T2
+on T1.order_id = T2.order_id
+group by T1.order_id
+having count(*) > 1;
+
+
+
+4. Which customers did not make any orders? List the first name, middle initial and last name.
+
+select customer_first_name, customer_middle_initial, customer_last_name
+from Customers
+EXCEPT
+select T1.customer_first_name, T1.customer_middle_initial, T1.customer_last_name
+from Customers as T1 JOIN Orders as T2
+on T1.customer_id = T2.customer_id;
+
+5. What are the id, name, price and color of the products which have not been placed in order for at least twice??
+
+select product_id, product_name, product_price, product_color
+from Products
+EXCEPT
+select T1.product_id, T1.product_name, T1.product_price, T1.product_color
+from Products as T1 JOIN Order_items as T2
+on T1.product_id = T2.product_id
+JOIN Orders as T3
+on T2.order_id = T3.order_id
+group by T1.product_id
+having count(*) >=2;
+
+
+
+
+6. Which orders have at least 2 products on it? List the order id and date.
+
+select T1.date_order_placed
+from Orders as T1 JOIN Order_items as T2
+on T1.order_id = T2.order_id
+group by T1.order_id
+having count(*) >= 2;
+
+
+7. Which product are listed in orders most frequently? List the id, product name and price.
+
+select T1.product_id, T1.product_name, T1.product_price
+from Products as T1 JOIN Order_items as T2
+on T1.product_id = T2.product_id
+GROUP by T1.product_id
+order by count(*) desc limit 1;
+
+
+
+8. Which order have the least sum of the product prices. List the order id and sum.
+
+select T1.order_id, sum(T2.product_price)
+from Order_items as T1 JOIN Products as T2
+on T1.product_id = T2.product_id
+group by T1.order_id
+order by sum(T2.product_price) asc limit 1;
+
+
+9. What is the most popular payment method?
+
+select Payment_method_code
+from Customer_Payment_Methods
+group by Payment_method_code
+order by count(*) desc limit 1;
+
+
+10. How many number of products does each gender of customers buy? List the gender and the number
+
+
+select T1.gender_code, count(*)
+from Customers as T1 JOIN Orders as T2
+on T1.customer_id = T2.customer_id
+JOIN Order_items as T3
+on T2.order_id = T3.order_id
+group by T1.gender_code;
+
+
+
+
+11. How many orders has each gender of customers placed?
+
+select T1.gender_code, count(*)
+from Customers as T1 JOIN Orders as T2
+on T1.customer_id = T2.customer_id
+group by T1.gender_code;
+
+
+
+12. List the customers' first name, middle initial, last name and payment methods.
+
+select T1.customer_first_name, T1.customer_middle_initial, T1.customer_last_name, T2.Payment_method_code
+from Customers as T1 JOIN Customer_Payment_Methods as T2
+on T1.customer_id = T2.customer_id;
+
+
+
+13. List the invoices' status, date and the date of shipment.
+
+select T1.invoice_status_code, T1.invoice_date, T2.shipment_date
+from Invoices as T1 JOIN Shipments as T2
+on T1.invoice_number = T2.invoice_number;
+
+
+14. List the names of the products being shipped and the corresponding shipment date.(4 tables)
+
+select T1.product_name, T4.shipment_date
+from Products as T1 JOIN Order_items as T2
+on T1.product_id = T2.product_id
+JOIN Shipment_Items as T3
+on T2.order_item_id = T3.order_item_id
+JOIN Shipments as T4
+on T3.shipment_id = T4.shipment_id;
+
+
+15. What is the status code of the items being ordered and shipped and its corresponding shipement tracking number?
+
+
+select T1.order_item_status_code, T3.shipment_date
+from Order_items as T1 JOIN Shipment_Items as T2
+on T1.order_item_id = T2.order_item_id
+JOIN Shipments as T3
+on T2.shipment_id = T3.shipment_id;
+
+
+
+16. What is the product name and the color of the ordered items which have been shipped?
+
+
+select T1.product_name, T1.product_color
+from Products as T1 JOIN Order_items as T2
+on T1.product_id = T2.product_id
+JOIN Shipment_Items as T3
+on T2.order_item_id = T3.order_item_id
+JOIN Shipments as T4
+on T3.shipment_id = T4.shipment_id;
+
+
+17. List all the distinct product names, price and descriptions which are bought by female customers.
+
+select distinct T1.product_name, T1.product_price, T1.product_description
+from Products as T1 JOIN Order_items as T2
+on T1.product_id = T2.product_id
+JOIN Orders as T3
+on T2.order_id = T3.order_id
+JOIN Customers as T4
+on T3.customer_id = T4.customer_id
+where T4.gender_code = 'Female';
+
+
+18. What are invoices status of all the orders which have not been shipped? 
+
+# comment: status code not unique, so use not in, cannot use except.
+
+select invoice_status_code
+from Invoices
+where invoice_number not in (
+select invoice_number
+from Shipments
+);
+
+
+
+19. What are the prices of all the orders? List the order id, date, and price.
+
+select T1.order_id, T1.date_order_placed, sum(T3.product_price)
+from Orders as T1 JOIN Order_items as T2
+on T1.order_id = T2.order_id
+JOIN Products as T3
+on T2.product_id = T3.product_id
+group by T1.order_id;
+
+
+
+
+
+20. How many customers has placed any order?
+
+select count(distinct (customer_id))
+from Orders;
+
+21. How many item states are there in the orders?
+
+
+select count(distinct order_item_status_code)
+from Order_items;
+
+
+22. How many different payment methods are there?
+
+select count(distinct Payment_method_code)
+from Customer_Payment_Methods;
+
+
+23. What are the log in names and passwords of the customers whose phone number have the prefix '+12'?
+
+
+select login_name, login_password
+from Customers
+where phone_number LIKE '+12%';
+
+24. What are the prodcut sizes of the products whose name has the substring 'Dell'?
+
+select product_size
+from Products
+where product_name LIKE '%Dell%';
+
+25. What are the product price and the product size of the products whose price is above average?
+
+
+select product_price, product_size
+from Products
+where product_price > 
+(
+	select avg(product_price)
+	from Products
+);
+
+26. How many kinds of products have not been sold?
+
+select count(*)
+from Products
+where product_id not in (
+select product_id
+from Order_items
+);
+
+
+27. How many customers do not have any payment method?
+
+
+select count(*)
+from Customers
+where customer_id
+not in (
+	select customer_id
+	from Customer_Payment_Methods
+);
+
+
+
+28. What are all the order status and all the dates of orders? 
+
+select order_status_code, date_order_placed
+from Orders;
+
+29. List the address, town and county information of the customers who lives in the USA.
+
+select address_line_1, town_city, county
+from Customers
+where Country = 'USA';
+
+
+30. List all the pairs of buyer first names and product names.
+
+
+select T1.customer_first_name, T4.product_name
+from Customers as T1 JOIN Orders as T2
+on T1.customer_id = T2.customer_id
+JOIN Order_items as T3
+on T2.order_id = T3.order_id
+JOIN Products as T4
+on T3.product_id = T4.product_id;
+
+
+31. How many items are shipped?
+
+select count(*)
+from Shipment_Items;
+
+32. What is the products' average price?
+
+select avg(product_price)
+from Products;
+
+33. What is the average price of the products being ordered?
+
+select avg(T1.product_price)
+from Products as T1 JOIN Order_items as T2
+on T1.product_id = T2.product_id;
+
+
+
+34. What are the email address, town and county of the customers who are of the least common gender?
+
+
+select email_address, town_city, county
+from Customers
+where gender_code = (
+select gender_code
+from Customers
+group by gender_code
+order by count(*) asc limit 1
+)
+
+
+35. List the order date of the orders who are placed by customers with at least 2 payment methods.
+# comment: 1 customer may have many orders / many payment methods, so cannot join 3 tables.
+
+
+select date_order_placed
+from Orders
+where customer_id in (
+	select T1.customer_id
+	from Customers as T1 JOIN Customer_Payment_Methods as T2
+	on T1.customer_id = T2.customer_id
+	group by T1.customer_id
+	having count(*) >=2
+);
+
+
+
+36. What is the most uncommon order status?
+
+select order_status_code
+from Orders
+group by order_status_code
+order by count(*) limit 1;
+
+
+
+37. For all the products sold for more than 3 times, list their id and description.
+
+
+select T1.product_id, T1.product_description
+from Products as T1 JOIN Order_items as T2
+on T1.product_id = T2.product_id
+group by T1.product_id
+having count(*) > 3;
+
+
+
+38. List the invoice dates and ids of the invoices causing at least 2 shipments.
+
+select T1.invoice_date, T1.invoice_number
+from Invoices as T1 JOIN Shipments as T2
+on T1.invoice_number = T2.invoice_number
+group by T1.invoice_number
+having count(*) >= 2;
+
+
+39. what are all the shipment tracking number and its shipment date?
+
+select shipment_tracking_number, shipment_date
+from Shipments;
+
+
+40. What are the color, description and size of the products priced below the maximum price.
+
+select product_color, product_description, product_size
+from Products
+where price < (
+select max(product_price)
+from products
+);
