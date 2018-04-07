@@ -1,0 +1,373 @@
+Total = #  40
+
+
+1. How many faculty do we have?
+
+
+select count(*)
+from Faculty
+
+
+2. What ranks do we have for faculty?
+
+
+select distinct rank
+from Faculty 
+
+
+3. Show all buildings for faculty rooms.
+
+
+select distinct building
+from Faculty 
+
+
+4. Show rank, first name, and last name for all faculty.
+
+
+select rank, Fname, Lname
+from Faculty
+
+
+5. Show first name, last name, and phone number for all female faculties.
+
+
+select Fname, Lname, phone
+from Faculty
+where Sex = 'F'
+
+
+6. Show ids for all male faculty.
+
+select FacID
+from Faculty
+where Sex = 'M'
+
+
+7. How many female Professors do we have?
+
+
+select count(*)
+from Faculty
+where Sex = 'F' and Rank = "Professor"
+
+8. Show phone, room, building for faculty Jerry Prince.
+
+select phone, room, building
+from Faculty
+where Fname = "Jerry" and Lname = "Prince"
+
+9. How many Professors are at building NEB?
+
+select count(*)
+from Faculty
+where Rank = "Professor" and building = "NEB"
+
+10. Show first name and last name for all instructors.
+
+select fname, lname
+from Faculty
+where Rank = "Instructor"
+
+11. Show all buildings and the number of faculty in each building.
+
+
+select building, count(*)
+from Faculty
+group by building
+
+
+12. Which building has most number of faculty?
+
+
+select building
+from Faculty
+group by building
+order by count(*) desc
+limit 1
+
+
+13. Show all buildings that have at least 10 professors.
+
+
+select building
+from Faculty
+where rank = "Professor"
+group by building
+having count(*) >= 10
+
+
+14. Show all ranks and the number of faculty for each rank.
+
+
+select rank, count(*)
+from Faculty
+group by rank
+
+
+15. Show all ranks and the number of male and female faculty for each rank.
+
+
+select rank, sex, count(*)
+from Faculty
+group by rank, sex
+
+
+16. Which rank has least number of faculty?
+
+select rank
+from Faculty
+group by rank
+order by count(*) asc
+limit 1
+
+
+17. Show the number of male and female assistant professors.
+
+
+select sex, count(*)
+from Faculty
+where rank = "AsstProf"
+group by sex
+
+18. What is the first name and last name of Linda Smith's advisor?
+
+
+select T1.fname, T1.lname
+from Faculty as T1 join Student as T2 on T1.FacID = T2.advisor
+where T2.fname = "Linda" and T2.lname = "Smith"
+
+
+19. Show student IDs whose advisors are professors.
+
+
+select T2.StuID
+from Faculty as T1 join Student as T2 on T1.FacID = T2.advisor
+where T1.rank = "Professor"
+
+
+20. Show first name and last name for all student advised by Michael Goodrich.
+
+
+select T2.fname, T2.lname
+from Faculty as T1 join Student as T2 on T1.FacID = T2.advisor
+where T1.fname = "Michael" and T1.lname = "Goodrich"
+
+
+21. Show all faculty ids and the number of students advised by each.
+
+select T1.FacID, count(*)
+from Faculty as T1 join Student as T2 on T1.FacID = T2.advisor
+group by T1.FacID
+
+22. Show all faculty ranks and the number of students advised by each rank.
+
+
+select T1.rank, count(*)
+from Faculty as T1 join Student as T2 on T1.FacID = T2.advisor
+group by T1.rank
+
+
+23. What is the first and last name of the faculty who has most number of students?
+
+
+select T1.fname, T1.lname
+from Faculty as T1 join Student as T2 on T1.FacID = T2.advisor
+group by T1.FacID
+order by count(*) desc
+limit 1
+
+
+24. Show ids for all faculty who have at least 2 students.
+
+
+select T1.FacID
+from Faculty as T1 join Student as T2 on T1.FacID = T2.advisor
+group by T1.FacID
+having count(*) >= 2
+
+
+25. Show ids for faculty who don't advise any student.
+
+
+select FacID
+from Faculty
+EXCEPT
+select advisor 
+from Student
+
+
+26. What activities do we have?
+
+
+select activity_name
+from Activity
+
+
+27. How many activities do we have?
+
+
+select count(*)
+from Activity
+
+
+28. How many faculty participate in an activity?
+
+
+select count(distinct FacID)
+from Faculty_participates_in
+
+
+29. Show all faculty ids who don't participate in any activity.
+
+
+select FacID
+from Faculty
+EXCEPT
+select FacID
+from Faculty_participates_in
+
+
+30.Show all faculty ids who participate in an activity and advise a student.
+
+
+select FacID
+from Faculty_participates_in
+INTERSECT
+select advisor
+from Student
+
+
+31. How many activities does Mark Giuliano participate in?
+
+
+select count(*)
+from Faculty as T1 join Faculty_participates_in as T2 on T1.facID = T2.facID
+where T1.fname = "Mark" and T1.lname = "Giuliano"
+
+
+32. Show all activity names which Mark Giuliano participate in.
+
+
+select T3.activity_name 
+from Faculty as T1 join Faculty_participates_in as T2 on T1.facID = T2.facID join Activity as T3 on T3.actid = T2.actid
+where T1.fname = "Mark" and T1.lname = "Giuliano"
+
+
+33. Show first and last name of all faculty who participated in any activity and number of activities for each of them.
+
+
+select  T1.fname, T1.lname, count(*), T1.FacID
+from Faculty as T1 join Faculty_participates_in as T2 on T1.facID = T2.facID
+group by T1.FacID
+
+
+34. Show all activity names and number of faculty participating in each activity.
+
+
+select T1.activity_name, count(*)
+from Activity as T1 join Faculty_participates_in as T2 on T1.actID = T2.actID
+group by T1.actID
+
+
+35. What is the first name and last name of faculty participating in most number of activities?
+
+
+select  T1.fname, T1.lname
+from Faculty as T1 join Faculty_participates_in as T2 on T1.facID = T2.facID
+group by T1.FacID
+order by count(*) desc
+limit 1
+
+
+36. What is the activity name with most number of faculty?
+
+
+select T1.activity_name
+from Activity as T1 join Faculty_participates_in as T2 on T1.actID = T2.actID
+group by T1.actID
+order by count(*) desc
+limit 1
+
+37. Show all student ids who don't participate in any activity.
+
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Participates_in
+
+
+38. Show ids for all student who participate in an activity and are under 20.
+
+
+select StuID
+from Participates_in
+INTERSECT
+select StuID
+from Student
+where age < 20
+
+
+39. What is the first name and last name of students participating in most number of activities?
+
+
+select T1.fname, T1.lname
+from Student as T1 join Participates_in as T2 on T1.StuID = T2.StuID
+group by T1.StuID
+order by count(*) desc
+limit 1
+
+40. What is the activity name with most number of students?
+
+
+select T1.activity_name
+from Activity as T1 join Participates_in as T2 on T1.actID = T2.actID
+group by T1.actID
+order by count(*) desc
+limit 1
+
+41. Find the first name of faculties who are playing Canoeing or Kayaking.
+
+select distinct T1.lname
+from Faculty as T1 
+     join Faculty_participates_in as T2 on T1.facID = T2.facID
+     join activity as T3 on T2.actid = T2.actid
+where T3.activity_name = 'Canoeing' or T3.activity_name = 'Kayaking'
+
+Find the first name of professors who are not playing Canoeing or Kayaking.
+
+select lname
+from faculty
+where rank = 'Professor'
+EXCEPT
+select distinct T1.lname
+from Faculty as T1 
+     join Faculty_participates_in as T2 on T1.facID = T2.facID
+     join activity as T3 on T2.actid = T2.actid
+where T3.activity_name = 'Canoeing' or T3.activity_name = 'Kayaking'
+
+Find the first name of faculties who participate in Canoeing and Kayaking.
+
+select T1.lname
+from Faculty as T1 
+     join Faculty_participates_in as T2 on T1.facID = T2.facID
+     join activity as T3 on T2.actid = T2.actid
+where T3.activity_name = 'Canoeing'
+INTERSECT
+select T1.lname
+from Faculty as T1 
+     join Faculty_participates_in as T2 on T1.facID = T2.facID
+     join activity as T3 on T2.actid = T2.actid
+where T3.activity_name = 'Kayaking'
+
+Find the ids of students who participate in Canoeing and Kayaking.
+
+select T1.stuid
+from participates_in as T1 join activity as T2 on T2.actid = T2.actid
+where T2.activity_name = 'Canoeing'
+INTERSECT
+select T1.stuid
+from participates_in as T1 join activity as T2 on T2.actid = T2.actid
+where T2.activity_name = 'Kayaking'
