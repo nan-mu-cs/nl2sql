@@ -1,4 +1,4 @@
-# Total = 41
+# Total = 41 comment: before is 37 -> added more 44
 
 1. Find the name of all customers
 
@@ -9,6 +9,11 @@ from customers
 
 select count(*)
 from customers
+
+what is the average amount of items in each order?
+
+select avg(order_quantity)
+from order_items
 
 3. What are the names of customers with payment method "Cash"?
 
@@ -45,6 +50,11 @@ limit 1)
 select distinct payment_method
 from customers
 
+What are the details of all products?
+
+select distinct product_details
+from products
+
 7. Find the name of all customers whose name contains "Alex"
 
 select customer_name
@@ -74,6 +84,15 @@ on t1.customer_id = t2.customer_id
 join addresses as t3
 on t2.address_id = t3.address_id
 where t3.city = "Lake Geovannyton"
+
+Find the name of customers who are living in Colorado?
+
+select t1.customer_name
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.state_province_county = "Colorado"
 
 11. Find the list of cities that no customer is living in.
 
@@ -157,7 +176,6 @@ where active_to_date - active_from_date = (select active_to_date - active_from_d
 from customer_contact_channels
 order by (active_to_date - active_from_date) desc
 limit 1)
-limit 1
 
 22. Find the name and active date of the customer that use email as the contact channel?
 
@@ -170,6 +188,8 @@ where t2.channel_code = 'Email'
 
 23. What is the name of the customer that made the order with largest quantity?
 
+COMMENT: do not put limit 1 at the end
+
 select t1.customer_name
 from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
@@ -181,7 +201,6 @@ from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id)
-limit 1
 
 24. What is the name of the customer that has purchased the most number of items?
 
@@ -202,7 +221,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 group by t1.customer_name
-order by sum(t3.order_quantity) asc
+order by sum(t3.order_quantity)
 limit 1
 
 26. How many type of products have Rodrick Heaney bought in total?
@@ -295,3 +314,53 @@ select address_content
 from addresses
 where city = "Gleasonmouth" and state_province_county = "Arizona"
 
+37. Find the name of customers who did not pay with Cash.
+
+select customer_name
+from customers
+where payment_method != 'Cash'
+
+38. Find the name of customers who never ordered product Latte.
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+
+39. Find the name of customers who never placed an order.
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+
+40. Find the name of customers who ordered both products Latte and Americano.
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+INTERSECT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Americano'
+
+OVERALL COMMENTS: 
+1. this one is pretty good!
+2. you can more simple questions on different tables (count/avg/+where). <15 out of 40
+3. I added INTERSECT AND EXCEPT, !=, etc.
