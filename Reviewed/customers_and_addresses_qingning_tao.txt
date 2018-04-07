@@ -1,0 +1,355 @@
+# Total = 44
+
+1. Find the name of all customers
+
+select customer_name
+from customers
+
+2. How many customers are there?
+
+select count(*)
+from customers
+
+what is the average amount of items in each order?
+
+select avg(order_quantity)
+from order_items
+
+3. What are the names of customers with payment method "Cash"?
+
+select customer_name
+from customers
+where payment_method = "Cash"
+
+Find the date became customers of the customers whose ID is between 10 and 20.
+
+select date_became_customer
+from customers
+where customer_id between 10 and 20
+
+4. Which payment method is used by most customers?
+
+select payment_method
+from customers
+group by payment_method
+order by count(*) desc
+limit 1
+
+5. What are the names of customers using the most popular payment method?
+
+select customer_name
+from customers
+where payment_method = (select payment_method
+from customers
+group by payment_method
+order by count(*) desc
+limit 1)
+
+6. What are all the payment methods?
+
+select distinct payment_method
+from customers
+
+What are the details of all products?
+
+select distinct product_details
+from products
+
+7. Find the name of all customers whose name contains "Alex"
+
+select customer_name
+from customers
+where customer_name like "%Alex%"
+
+8. Find the detail of products whose detail contains the word "Latte" or the word "Americano"
+
+select product_details
+from products
+where product_details like "%Latte%" or product_details like "%Americano%"
+
+9. What is the address content of the customer named "Maudie Kertzmann"?
+
+select t3.address_content
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t1.customer_name = "Maudie Kertzmann"
+
+10. How many customers are living in city Lake Geovannyton?
+
+select count(*)
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.city = "Lake Geovannyton"
+
+Find the name of customers who are living in Colorado?
+
+select t1.customer_name
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.state_province_county = "Colorado"
+
+11. Find the list of cities that no customer is living in.
+
+select city
+from addresses
+where city not in (
+select distinct t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id)
+
+12. Which city has the most customers living in?
+
+select t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+group by t3.city
+order by count(*) desc
+limit 1
+
+13. Retrieve the list of all cities.
+
+select distinct city
+from addresses
+
+14. Find the city with post code 255
+
+select city
+from addresses
+where zip_postcode = 255
+
+15. Find the state and country of all cities with post code starting with 4.
+
+select state_province_county, country
+from addresses
+where zip_postcode like "4%"
+
+16. List the countries having more than 4 addresses listed.
+
+select country
+from addresses
+group by country
+having count(address_id) > 4
+
+17. List all the contact channel codes that were used less than 5 times.
+
+select channel_code
+from customer_contact_channels
+group by channel_code
+having count(customer_id) < 5
+
+18. Which contact channel has been used by the customer with name "Tillman Ernser"?
+
+select distinct channel_code
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Tillman Ernser"
+
+19. What is the active to date of the latest contact channel used by "Tillman Ernser"?
+
+select max(active_to_date)
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Tillman Ernser"
+
+20. What is the average time span of contact channels in the database?
+
+select avg(active_to_date - active_from_date)
+from customer_contact_channels
+
+21. What is the channel code and contact number of the customer contact channel that was active for the longset time?
+
+select channel_code, contact_number
+from customer_contact_channels
+where active_to_date - active_from_date = (select active_to_date - active_from_date
+from customer_contact_channels
+order by (active_to_date - active_from_date) desc
+limit 1)
+
+22. Find the name and active date of the customer that use email as the contact channel?
+
+select t1.customer_name, t2.active_from_date
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t2.channel_code = 'Email'
+
+23. What is the name of the customer that made the order with largest quantity?
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t3.order_quantity = (
+select max(t3.order_quantity)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id)
+
+24. What is the name of the customer that has purchased the most number of items?
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+order by sum(t3.order_quantity) desc
+limit 1
+
+25. What is the payment method of the customer that has purchased the least number of items?
+
+select t1.payment_method
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+order by sum(t3.order_quantity)
+limit 1
+
+26. How many type of products have Rodrick Heaney bought in total?
+
+select count(product_id)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+27. What is the total quantity of products purchased by "Rodrick Heaney"?
+
+select sum(t3.order_quantity)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+28. How many customers have at least one order with status "Cancelled"?
+
+select count(distinct t1.customer_id)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+where order_status = "Cancelled"
+
+29. How many orders have detail "Second time"?
+
+select count(*)
+from customer_orders
+where order_details = "Second time"
+
+30. Find the customer name and date of the orders that has the status "Delivered".
+
+select t1.customer_name, t2.order_date
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+where order_status = "Delivered"
+
+31. What is the total number of products that are in orders with status "Cancelled"?
+
+select sum(t2.order_quantity)
+from customer_orders as t1 join order_items as t2
+on t1.order_id = t2.order_id
+where t1.order_status = "Cancelled"
+
+32. Find the total amount of delivered products before 2018-03-17 07:13:53.
+
+select sum(t2.order_quantity)
+from customer_orders as t1 join order_items as t2
+on t1.order_id = t2.order_id
+where t1.order_date < 2018-03-17 07:13:53
+
+33. Who made the latest order?
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+order by t2.order_date desc
+limit 1
+
+34. Which product has been ordered most number of times?
+
+select t2.product_details
+from order_items as t1 join products as t2
+on t1.product_id = t2.product_id
+group by t1.product_id
+order by count(*) desc
+limit 1
+
+35. Find the name and ID of the product in the order with largest quantity.
+
+select t2.product_details, t2.product_id
+from order_items as t1 join products as t2
+on t1.product_id = t2.product_id
+group by t1.product_id
+order by t1.order_quantity
+limit 1
+
+36. Find all the addresses in East Julianaside, Texas or in Gleasonmouth, Arizona.
+
+select address_content
+from addresses
+where city = "East Julianaside" and state_province_county = "Texas"
+union
+select address_content
+from addresses
+where city = "Gleasonmouth" and state_province_county = "Arizona"
+
+37. Find the name of customers who did not pay with Cash.
+
+select customer_name
+from customers
+where payment_method != 'Cash'
+
+38. Find the name of customers who never ordered product Latte.
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+
+39. Find the name of customers who never placed an order.
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+
+40. Find the name of customers who ordered both products Latte and Americano.
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+INTERSECT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Americano'
