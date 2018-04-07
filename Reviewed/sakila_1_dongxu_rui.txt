@@ -1,0 +1,359 @@
+Total # = 41
+
+
+1. How many different last names do the actors and actresses have?
+
+
+select count(distinct last_name)
+from actor;
+
+
+2. What is the most popular first name of the actors?
+
+select first_name
+from actor
+group by first_name
+order by count(*) DESC LIMIT 1;
+
+
+3. What is the most popular full name of the actors?
+
+
+select first_name, last_name
+from actor
+group by first_name, last_name
+order by count(*) DESC LIMIT 1;
+
+
+4. Which districts have at least two addresses?
+
+
+select district
+from address
+group by district
+having count(*) > 2;
+
+
+5. What is the phone number and postal code of the address 1031 Daugavpils Parkway?
+
+
+select phone, postal_code
+from address
+where address = '1031 Daugavpils Parkway';
+
+
+6. Which city has the most number of addresses? List the city name, number of addresses, and city id.
+
+
+select T2.city, count(*), T1.city_id
+from address as T1 JOIN city as T2 on T1.city_id = T2.city_id
+group by T1.city_id
+order by count(*) DESC LIMIT 1;
+
+
+7. How many addresses are in district California?
+
+
+select count(*)
+from address
+where district = 'California';
+
+
+8. Which film is rented at a fee of 0.99 but has less than 3 inventory? List the film title and id.
+
+ 
+select title, film_id from film
+where rental_rate = 0.99
+INTERSECT
+select T1.title, T1.film_id 
+from film as T1 JOIN inventory as T2 
+on T1.film_id = T2.film_id
+group by T1.film_id
+having count(*) < 3;
+
+
+
+9. How many cities are in Australia?
+
+
+select count(*)
+from city as T1 JOIN country as T2 on T1.country_id = T2.country_id
+where T2.country = 'Australia';
+
+
+10. Which countries have at least 3 cities?
+
+
+select T2.country
+from city as T1 JOIN country as T2 on T1.country_id = T2.country_id
+group by T2.country_id
+having count(*) >= 3;
+
+
+11. Find all the payment dates for the payments with an amount larger than 10 and the payments handled by the staff with the first name Elsa.
+
+select payment_date
+from payment
+where amount > 10
+UNION
+select T1.payment_date
+from payment as T1 JOIN staff as T2 on T1.staff_id = T2.staff_id
+where T2.first_name = 'Elsa';
+
+
+12. How many customers has an active value of 1?
+
+
+select count(*)
+from customer
+where active='1';
+
+
+13. Which film has the highest rental rate? And what is the rate?
+
+
+select title, rental_rate
+from film
+order by rental_rate DESC limit 1;
+
+
+14. Which film has the most number of actors or actresses? List the film name, film id and description.
+
+
+select T2.title, T2.film_id, T2.description
+from film_actor as T1 JOIN film as T2 on T1.film_id = T2.film_id
+group by T2.film_id
+order by count(*) DESC LIMIT 1;
+
+
+15. Which film actor (actress) starred the most films? List his or her first name, last name and actor id.
+
+
+select T2.first_name, T2.last_name, T2.actor_id
+from film_actor as T1 JOIN actor as T2 on T1.actor_id = T2.actor_id
+group by T2.actor_id
+order by count(*) DESC LIMIT 1;
+
+
+16. Which film actors (actresses) played a role in more than 30 films?
+
+
+select T2.first_name, T2.last_name
+from film_actor as T1 JOIN actor as T2 on T1.actor_id = T2.actor_id
+group by T2.actor_id
+having count(*) > 30
+
+
+17. Which store owns more items?
+
+
+select store_id
+from inventory
+group by store_id
+order by count(*) DESC LIMIT 1;
+
+
+18. What is the total revenue of both stores?
+
+
+select sum(amount)
+from payment;
+
+
+19. Which customer, who has made at least one payment, has spent the least money? List his or her first name, last name, and the id.
+
+
+select T1.first_name, T1.last_name, T1.customer_id
+from customer as T1 JOIN payment as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by sum(amount) ASC LIMIT 1;
+
+
+20. What is the genre of HUNGER ROOF?
+
+
+select T1.name
+from category as T1 JOIN film_category as T2 
+on T1.category_id = T2.category_id
+JOIN film as T3 on T2.film_id = T3.film_id
+where T3.title = 'HUNGER ROOF';
+
+
+21. How many films are there in each genre? List the genre name, genre id and the count.
+
+
+select T2.name, T1.category_id, count(*) 
+from film_category as T1 JOIN category as T2 on T1.category_id = T2.category_id
+group by T1.category_id;
+
+
+22. Which film has the most copies in the inventory? List both title and id.
+
+
+select T1.title, T1.film_id
+from film as T1 JOIN inventory as T2 on T1.film_id = T2.film_id
+group by T1.film_id
+order by count(*) DESC limit 1;
+
+
+23. What is the film title and inventory id of the item in the inventory which was rented most frequently?
+
+
+select T1.title, T2.inventory_id
+from film as T1 JOIN inventory as T2
+on T1.film_id = T2.film_id
+JOIN rental as T3 on T2.inventory_id = T3.inventory_id
+group by T2.inventory_id
+order by count(*) desc limit 1;
+
+
+24. How many languages are in these films?
+
+
+select count(distinct language_id)
+from film;
+
+
+25. What are all the movies rated as R? List the titles.
+
+
+select title
+from film
+where rating = 'R';
+
+
+26. Where is the store 1 located?
+
+
+select T2.address
+from store as T1 JOIN address as T2 on T1.address_id = T2.address_id
+where store_id = 1;
+
+
+27. Which staff handled less number of payments? List the full name and the id.
+
+
+select T1.first_name, T1.last_name, T1.staff_id
+from staff as T1 JOIN payment as T2 on T1.staff_id = T2.staff_id
+group by T1.staff_id
+order by count(*) asc limit 1; 
+
+
+28. Which language does the film AIRPORT POLLOCK use? List the language name
+
+
+select T2.name
+from film as T1 JOIN language as T2 on T1.language_id = T2.language_id
+where T1.title = 'AIRPORT POLLOCK';
+
+
+
+29. How many stores are there?
+
+select count(store_id)
+from store;
+
+
+30. How many kinds of different ratings are listed?
+
+
+select count(distinct rating)
+from film;
+
+
+31. Which movies have 'Deleted Scenes' as a substring in the special feature ?
+
+
+select title 
+from film
+where special_features LIKE '%Deleted Scenes%';
+
+
+32. How many inventories does store 1 has?
+
+
+select count(*)
+from inventory
+where store_id = 1;
+
+
+33. When did the first payment happened?
+
+
+select payment_date
+from payment
+order by payment_date asc LIMIT 1;
+
+
+
+34. Where does the customer with the first name Linda? And what is her email?
+
+
+select T2.address, T1.email
+from customer as T1 JOIN address as T2 on T2.address_id = T1.address_id
+where T1.first_name = 'LINDA';
+
+
+
+35. Find all the films longer than 100 minutes, or rated as PG, except those who cost more than 20 for replacement. List the titles.
+
+select title
+from film
+where length > 100 or rating = 'PG'
+EXCEPT
+select title
+from film
+where replacement_cost > 200;
+
+
+
+36. What is the first name and the last name of the customer who made the earliest rental?
+
+
+select T1.first_name, T1.last_name
+from customer as T1 JOIN rental as T2 on T1.customer_id = T2.customer_id
+order by T2.rental_date ASC LIMIT 1;
+
+
+37. Which staff has rent a film to the customer April Burns? April is the first name and Burns is the last name. List the staff's first name and last name.
+
+
+select distinct T1.first_name, T1.last_name
+from staff as T1 JOIN rental as T2 
+on T1.staff_id = T2.staff_id
+JOIN customer as T3
+on T2.customer_id = T3.customer_id
+where T3.first_name = 'APRIL' and T3.last_name = 'BURNS';
+
+
+38. Which store has more customers?
+
+
+select store_id
+from customer
+group by store_id
+order by count(*) DESC limit 1;
+
+
+39. What is the largest payment amount?
+
+
+select amount
+from payment
+order by amount desc LIMIT 1;
+
+
+40. Where does the staff with the first name Elsa lives?
+
+
+select T2.address
+from staff as T1 JOIN address as T2 on T1.address_id = T2.address_id
+where T1.first_name = 'Elsa';
+
+41. Who have not rented any films after '2005-08-23 02:06:01'? List the first names of the customers.
+
+select first_name
+from customer
+where customer_id not in(
+select customer_id from rental where rental_date > '2005-08-23 02:06:01'
+);
