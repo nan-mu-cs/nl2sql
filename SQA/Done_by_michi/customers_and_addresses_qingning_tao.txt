@@ -22,7 +22,7 @@ P: Return the total number of distinct customers.
 select count(*)
 from customers
 
-S: Return the information of all the customers.
+S: List all the customers.
 S: Count the number of the customers.
 
 select *
@@ -74,7 +74,7 @@ select date_became_customer
 from customers
 where customer_id between 10 and 20
 
-S: Find all the customers.
+S: List all the customers.
 S: What are the dates they became customers?
 S: For customer id between 10 and 20, what are the dates they became customers?
 
@@ -98,7 +98,7 @@ group by payment_method
 order by count(*) desc
 limit 1
 
-S: Find the payment method for all the customers.
+S: What is the payment method each customer uses?
 S: Group by the payment method, and return the frequency the method is used.
 S: Return the payment method that is used most frequently.
 
@@ -156,7 +156,7 @@ P: Return all the distinct payment methods used by customers.
 select distinct payment_method
 from customers
 
-S: For each customer, return the payment method used.
+S: What payment method does each customer use?
 S: Return all the distinct payment methods used.
 
 select payment_method
@@ -172,7 +172,7 @@ P: Return the the details of all products.
 select distinct product_details
 from products
 
-S: For each product, return its details.
+S: What is the detail of each product?
 S: What are the distinct product details?
 
 select product_details
@@ -253,7 +253,7 @@ where t1.customer_name = "Maudie Kertzmann"
 
 
 13. How many customers are living in city "Lake Geovannyton"?
-P: Find the number of customers who live in a city called Lake Geovannyton.
+P: Find the number of customers who live in the city called Lake Geovannyton.
 
 select count(*)
 from customers as t1 join customer_addresses as t2
@@ -262,8 +262,8 @@ join addresses as t3
 on t2.address_id = t3.address_id
 where t3.city = "Lake Geovannyton"
 
-S: Return all the address ids for a city called Lake Geovannyton.
-S: Return all the customers whose address is in this city.
+S: Find all the address ids for the city called Lake Geovannyton.
+S: Find all the customers whose address is in this city.
 S: How many customers are living there?
 
 Select address_id
@@ -296,7 +296,7 @@ on t2.address_id = t3.address_id
 where t3.state_province_county = "Colorado"
 
 S: What are the ids of addresses in Colorado state?
-S: Find the ids of customers who live there.
+S: Tell me the ids of customers who live there.
 S: What are the names of these customers?
 
 Select address_id
@@ -366,7 +366,7 @@ group by t3.city
 order by count(*) desc
 limit 1
 
-S: Return all the cities customers live in.
+S: List all the cities customers live in.
 S: Group by cities and count how many customers live there.
 S: Which city has the most customers?
 
@@ -399,7 +399,7 @@ P: List all the distinct cities
 select distinct city
 from addresses
 
-S: Return all addresses.
+S: List all the addresses.
 S: What is the list of distinct cities?
 
 select *
@@ -569,7 +569,7 @@ from customer_contact_channels
 order by (active_to_date - active_from_date) desc
 limit 1)
 
-S: Find the active duration for each customer contact channel.
+S: Tell me the active duration for each customer contact channel.
 S: Among them, what is the longest active duration?
 S: What is the channel code and contact number of the customer contact channel whose active duration was the longest
 
@@ -655,7 +655,7 @@ group by t1.customer_name
 order by sum(t3.order_quantity) desc
 limit 1
 
-S: Return the customer name for each order.
+S: Tell me the customer name for each order.
 S: What is the total quantity ordered by each customer?
 S: Give me the name of the customer who ordered the largest quantity in total.
 
@@ -734,7 +734,7 @@ join order_items as t3
 on t2.order_id = t3.order_id
 where t1.customer_name = "Rodrick Heaney"
 
-S: Return the id of product ordered in each order.
+S: Find the id of the product ordered in each order.
 S: What are the ids of products ordered by the customer named Rodrick Heaney?
 S: How many distinct products has he bought?
  
@@ -1058,7 +1058,7 @@ join products as t4 on t3.product_id = t4.product_id
 where product_details = 'Latte'
 
 S: Find the names of all the customers.
-S: Find the names of customers who bought the product "Latte" before.
+S: What are the names of customers who bought the product "Latte" before?
 S: Which customers never bought Latte"?
 
 select customer_name
@@ -1095,7 +1095,7 @@ from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 
 S: List the names of all the customers.
-S: List the names of customers who have made some orders before.
+S: What are the names of customers who have made some orders before?
 S: Which customers never made an order?
 
 select customer_name
@@ -1133,7 +1133,7 @@ join products as t4 on t3.product_id = t4.product_id
 where product_details = 'Americano'
 
 S: List the names of customers who have purchased Latte.
-S: List the names of customers who have purchased Americano.
+S: Give me the names of customers who have purchased Americano.
 S: Which customers have ordered both?
 
 select t1.customer_name
