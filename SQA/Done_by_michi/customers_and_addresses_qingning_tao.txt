@@ -1,0 +1,1173 @@
+# Total = 44
+
+1. Find the name of all customers.
+P: What are the names of all the customers?
+
+select customer_name
+from customers
+
+S: Return the information of all the customers.
+S: What are the name of the customers?
+
+select *
+from customers
+
+select customer_name
+from customers
+
+
+2. How many customers are there?
+P: Return the total number of distinct customers.
+
+select count(*)
+from customers
+
+S: Return the information of all the customers.
+S: Count the number of the customers.
+
+select *
+from customers
+
+select count(*)
+from customers
+
+
+3. What is the average amount of items ordered in each order?
+P: Find the average order quantity per order.
+
+select avg(order_quantity)
+from order_items
+
+S: Find the order quantity for each order.
+S: What is the average order quantity?
+
+select order_quantity
+from order_items
+
+select avg(order_quantity)
+from order_items
+
+
+4. What are the names of customers who use payment method "Cash"?
+P: Which customers use "Cash" for payment method? Return the customer names.
+
+select customer_name
+from customers
+where payment_method = "Cash"
+
+S: Which customers' payment method is "Cash"?
+S: What are the names of those customers?
+
+select *
+from customers
+where payment_method = "Cash"
+
+select customer_name
+from customers
+where payment_method = "Cash"
+
+
+5. Find the "date became customers" of the customers whose ID is between 10 and 20.
+P: What are the dates when customers with ids between 10 and 20 became customers?
+
+select date_became_customer
+from customers
+where customer_id between 10 and 20
+
+S: Find all the customers.
+S: What are the dates they became customers?
+S: For customer id between 10 and 20, what are the dates they became customers?
+
+select *
+from customers
+
+select date_became_customer
+from customers
+
+select date_became_customer
+from customers
+where customer_id between 10 and 20
+
+
+6. Which payment method is used by most customers?
+P: Find the payment method that is used most frequently.
+
+select payment_method
+from customers
+group by payment_method
+order by count(*) desc
+limit 1
+
+S: Find the payment method for all the customers.
+S: Group by the payment method, and return the frequency the method is used.
+S: Return the payment method that is used most frequently.
+
+select payment_method
+from customers
+
+select count(*)
+from customers
+group by payment_method
+
+select payment_method
+from customers
+group by payment_method
+order by count(*) desc
+limit 1
+
+
+7. What are the names of customers using the most popular payment method?
+P: Find the name of the customers who use the most frequently used payment method.
+
+select customer_name
+from customers
+where payment_method = (select payment_method
+from customers
+group by payment_method
+order by count(*) desc
+limit 1)
+
+S: For each payment method, count the number of customers who use it.
+S: What is the most frequently used payment method?
+S: Return the name of the customers who use this payment method.
+
+select count(*)
+from customers
+group by payment_method
+
+select payment_method
+from customers
+group by payment_method
+order by count(*) desc
+limit 1
+
+select customer_name
+from customers
+where payment_method = (select payment_method
+from customers
+group by payment_method
+order by count(*) desc
+limit 1)
+
+
+8. What are all the payment methods?
+P: Return all the distinct payment methods used by customers.
+
+select distinct payment_method
+from customers
+
+S: For each customer, return the payment method used.
+S: Return all the distinct payment methods used.
+
+select payment_method
+from customers
+
+select distinct payment_method
+from customers
+
+
+9. What are the details of all products?
+P: Return the the details of all products.
+
+select distinct product_details
+from products
+
+S: For each product, return its details.
+S: What are the distinct product details?
+
+select product_details
+from products
+
+select distinct product_details
+from products
+
+
+10. Find the name of all customers whose name contains "Alex".
+P: Which customer's name contains "Alex"? Find the full name.
+
+select customer_name
+from customers
+where customer_name like "%Alex%"
+
+S: Return customers whose name contains "Alex".
+S: What are the full names of these customers?
+
+select *
+from customers
+where customer_name like "%Alex%"
+
+select *
+from customers
+where customer_name like "%Alex%"
+
+
+11. Find the detail of products whose detail contains the word "Latte" or the word "Americano"
+P: Which product's detail contains the word "Latte" or "Americano"? Return the full detail.
+
+select product_details
+from products
+where product_details like "%Latte%" or product_details like "%Americano%"
+
+S: Return products whose details contain the word "Latte" or "Americano".
+S: What are the full details for these products?
+
+select *
+from products
+where product_details like "%Latte%" or product_details like "%Americano%"
+
+select product_details
+from products
+where product_details like "%Latte%" or product_details like "%Americano%"
+
+
+
+12. What is the address content of the customer named "Maudie Kertzmann"?
+P: Return the address content for the customer whose name is "Maudie Kertzmann".
+
+select t3.address_content
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t1.customer_name = "Maudie Kertzmann"
+
+S: Find the customer who is named "Maudie Kertzmann".
+S: What is the address id of this customer?
+S: What is the address content?
+
+select *
+from customers
+where customer_name = "Maudie Kertzmann"
+
+select t2.address_id
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Maudie Kertzmann"
+
+select t3.address_content
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t1.customer_name = "Maudie Kertzmann"
+
+
+13. How many customers are living in city "Lake Geovannyton"?
+P: Find the number of customers who live in a city called Lake Geovannyton.
+
+select count(*)
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.city = "Lake Geovannyton"
+
+S: Return all the address ids for a city called Lake Geovannyton.
+S: Return all the customers whose address is in this city.
+S: How many customers are living there?
+
+Select address_id
+From addresses
+where city = "Lake Geovannyton"
+
+Select *
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.city = "Lake Geovannyton"
+
+select count(*)
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.city = "Lake Geovannyton"
+
+
+14. Find the name of customers who are living in Colorado?
+P: What are the names of customers who live in Colorado state?
+
+select t1.customer_name
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.state_province_county = "Colorado"
+
+S: What are the ids of addresses in Colorado state?
+S: Find the ids of customers who live there.
+S: What are the names of these customers?
+
+Select address_id
+From addresses
+where state_province_county = "Colorado"
+
+select t2.customer_id
+from customer_addresses as t2 join addresses as t3
+on t2.address_id = t3.address_id
+where t3.state_province_county = "Colorado"
+
+select t1.customer_name
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+where t3.state_province_county = "Colorado"
+
+
+15. Find the list of cities that no customer is living in.
+P: What are the cities no customers live in?
+
+select city
+from addresses
+where city not in (
+select distinct t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id)
+
+S: For each customer, find the city he or she lives in.
+S: What are all the distinct cities customers live in?
+S: What are the cities no customers live in?
+
+Select t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+
+select distinct t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+
+select city
+from addresses
+where city not in (
+select distinct t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id)
+
+
+16. Which city has the most customers living in?
+P: Find the city where the most customers live.
+
+select t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+group by t3.city
+order by count(*) desc
+limit 1
+
+S: Return all the cities customers live in.
+S: Group by cities and count how many customers live there.
+S: Which city has the most customers?
+
+select t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+
+select count(*)
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+group by t3.city
+
+select t3.city
+from customers as t1 join customer_addresses as t2
+on t1.customer_id = t2.customer_id
+join addresses as t3
+on t2.address_id = t3.address_id
+group by t3.city
+order by count(*) desc
+limit 1
+
+
+17. Retrieve the list of all cities.
+P: List all the distinct cities
+
+select distinct city
+from addresses
+
+S: Return all addresses.
+S: What is the list of distinct cities?
+
+select *
+from addresses
+
+select distinct city
+from addresses
+
+
+18. Find the city with post code 255.
+P: Which city is post code 255 located in?
+
+select city
+from addresses
+where zip_postcode = 255
+
+S: Find the address with post code 255.
+S: Which city is this address in?
+
+select *
+from addresses
+where zip_postcode = 255
+
+select city
+from addresses
+where zip_postcode = 255
+
+
+19. Find the state and country of all cities with post code starting with 4.
+P: What are the state and country of all the cities that have post codes starting with 4.\
+
+select state_province_county, country
+from addresses
+where zip_postcode like "4%"
+
+S: Find the address with post code starting with 4.
+S: What are the state and country of these addresses?
+
+select *
+from addresses
+where zip_postcode like "4%"
+
+select state_province_county, country
+from addresses
+where zip_postcode like "4%"
+
+
+20. List the countries having more than 4 addresses listed.
+P: For which countries are there more than four distinct addresses listed?
+
+select country
+from addresses
+group by country
+having count(address_id) > 4
+
+S: Group all the addresses by the country.
+S: Which countries have more than four addresses listed?
+
+select *
+from addresses
+group by country
+
+select country
+from addresses
+group by country
+having count(address_id) > 4
+
+
+21. List all the contact channel codes that were used less than 5 times.
+P: Which contact channel codes were used less than 5 times?
+
+select channel_code
+from customer_contact_channels
+group by channel_code
+having count(customer_id) < 5
+
+S: List all the contact channel codes.
+S: For each contact channel code, return how many times it was used.
+S: Which contact channel codes were used less than 5 times?
+
+select channel_code
+from customer_contact_channels
+
+select count(customer_id)
+from customer_contact_channels
+group by channel_code
+
+select channel_code
+from customer_contact_channels
+group by channel_code
+having count(customer_id) < 5
+
+
+22. Which contact channel has been used by the customer with name "Tillman Ernser"?
+P: Find the contact channel code that was used by the customer named "Tillman Ernser".
+
+select distinct channel_code
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Tillman Ernser"
+
+S: Find the customer whose name is "Tillman Ernser".
+S: What are the channel codes used by this person?
+
+select *
+from customers
+where customer_name = "Tillman Ernser"
+
+select distinct channel_code
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Tillman Ernser"
+
+
+23. What is the "active to date" of the latest contact channel used by "Tillman Ernser"?
+Return the the "active to date" of the latest contact channel used by the customer named "Tillman Ernser".
+
+select max(t2.active_to_date)
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Tillman Ernser"
+
+S: What is the "active to date" for each customer?
+S: What is the latest "active to date" for each customer?
+S: Find that information for the customer named "Tillman Ernser".
+
+select active_to_date
+from customer_contact_channels
+
+select max(t2.active_to_date)
+from customer_contact_channels
+group by customer_id
+
+select max(t2.active_to_date)
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Tillman Ernser"
+
+
+24. What is the average time span of contact channels in the database?
+P: Compute the average active time span of contact channels.
+
+select avg(active_to_date - active_from_date)
+from customer_contact_channels
+
+S: For each contact channel, find when it started and ended being active.
+S: What is the time span between the starting date and ending date?
+S: What is the average across all the channels?
+
+select active_to_date, active_from_date
+from customer_contact_channels
+
+select active_to_date - active_from_date
+from customer_contact_channels
+
+select avg(active_to_date - active_from_date)
+from customer_contact_channels
+
+
+25. What is the channel code and contact number of the customer contact channel that was active for the longest time?
+P: Return the channel code and contact number of the customer contact channel whose active duration was the longest.
+
+select channel_code, contact_number
+from customer_contact_channels
+where active_to_date - active_from_date = (select active_to_date - active_from_date
+from customer_contact_channels
+order by (active_to_date - active_from_date) desc
+limit 1)
+
+S: Find the active duration for each customer contact channel.
+S: Among them, what is the longest active duration?
+S: What is the channel code and contact number of the customer contact channel whose active duration was the longest
+
+select active_to_date - active_from_date
+from customer_contact_channels
+
+select active_to_date - active_from_date
+from customer_contact_channels
+order by (active_to_date - active_from_date) desc
+limit 1
+
+select channel_code, contact_number
+from customer_contact_channels
+where active_to_date - active_from_date = (select active_to_date - active_from_date
+from customer_contact_channels
+order by (active_to_date - active_from_date) desc
+limit 1)
+
+
+26. Find the name and active date of the customer that use email as the contact channel.
+P: What are the name and active date of the customers whose contact channel code is email?
+
+select t1.customer_name, t2.active_from_date
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t2.channel_code = 'Email'
+
+S: Which customers use email as the contact channel?
+S: What are the dates these customers became active?
+S: What are the name and active date of these customers?
+
+select *
+from customer_contact_channels
+where channel_code = 'Email'
+
+select active_from_date
+customer_contact_channels
+where channel_code = 'Email'
+
+select t1.customer_name, t2.active_from_date
+from customers as t1 join customer_contact_channels as t2
+on t1.customer_id = t2.customer_id
+where t2.channel_code = 'Email'
+
+
+27. What is the name of the customer that made the order with the largest quantity?
+P: Find the name of the customer who made the order of the largest amount of goods.
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t3.order_quantity = (
+select max(order_quantity)
+from order_items)
+
+S: What is the largest order quantity listed in the database?
+S: What is the name of the customer who made that order?
+
+select max(order_quantity)
+from order_items
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t3.order_quantity = (
+select max(order_quantity)
+from order_items)
+
+
+28. What is the name of the customer that has purchased the most items?
+P: Give me the name of the customer who ordered the most items in total.
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+order by sum(t3.order_quantity) desc
+limit 1
+
+S: Return the customer name for each order.
+S: What is the total quantity ordered by each customer?
+S: Give me the name of the customer who ordered the largest quantity in total.
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+
+select sum(t3.order_quantity) 
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+order by sum(t3.order_quantity) desc
+limit 1
+
+
+29. What is the payment method of the customer that has purchased the least quantity of items?
+P: Tell me the payment method used by the customer who ordered the least amount of goods in total.
+
+select t1.payment_method
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+order by sum(t3.order_quantity)
+limit 1
+
+S: What is the total quantity ordered by each customer?
+S: Return the customer who ordered the least quantity in total.
+S: What is that customer's payment method?
+
+select sum(t3.order_quantity) 
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+
+select *
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+order by sum(t3.order_quantity)
+limit 1
+
+select t1.payment_method
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+group by t1.customer_name
+order by sum(t3.order_quantity)
+limit 1
+
+
+30. How many types of products have Rodrick Heaney bought in total?
+P: Find the number of distinct products Rodrick Heaney has bought so far.
+
+select count(distinct product_id)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+S: Return the id of product ordered in each order.
+S: What are the ids of products ordered by the customer named Rodrick Heaney?
+S: How many distinct products has he bought?
+ 
+select product_id
+from order_items 
+
+select product_id
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+select count(distinct product_id)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+
+31. What is the total quantity of products purchased by "Rodrick Heaney"?
+P: Tell me the total quantity of products bought by the customer called "Rodrick Heaney".
+
+select sum(t3.order_quantity)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+S: Find the id of product ordered in each order.
+S: What are the ids of products ordered by the customer named Rodrick Heaney?
+S: What is the total quantity of products bought by him?
+
+select product_id
+from order_items 
+
+select product_id
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+select sum(t3.order_quantity)
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+where t1.customer_name = "Rodrick Heaney"
+
+
+32. How many customers have at least one order with status "Cancelled"?
+P: Return the number of customers who have at least one order with "Cancelled" status.
+
+select count(distinct customer_id)
+from customer_orders 
+where order_status = "Cancelled"
+
+S: Which customer order have cancelled status?
+S: How many customers have cancelled status?
+
+select *
+from customer_orders
+where order_status = "Cancelled"
+
+select count(distinct customer_id)
+from customer_orders 
+where order_status = "Cancelled"
+
+
+33. How many orders have detail "Second time"?
+P: Tell me the number of orders with "Second time" as order detail.
+
+select count(*)
+from customer_orders
+where order_details = "Second time"
+
+S: Which customer orders have "Second time" as order detail?
+S: How many?
+
+select *
+from customer_orders
+where order_details = "Second time"
+
+select count(*)
+from customer_orders
+where order_details = "Second time"
+
+
+34. Find the customer name and date of the orders that have the status "Delivered".
+P: What are the customer name and date of the orders whose status is "Delivered".
+
+select t1.customer_name, t2.order_date
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+where order_status = "Delivered"
+
+S: Find all the customer orders whose status is "Delivered".
+S: What are the customer name and date for those orders?
+
+select *
+from customer_orders
+where order_status = "Delivered"
+
+select t1.customer_name, t2.order_date
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+where order_status = "Delivered"
+
+
+35. What is the total number of products that are in orders with status "Cancelled"?
+P: Find the total quantity of products associated with the orders in the "Cancelled" status.
+
+select sum(t2.order_quantity)
+from customer_orders as t1 join order_items as t2
+on t1.order_id = t2.order_id
+where t1.order_status = "Cancelled"
+
+S: List all the customer orders in the "Cancelled" status.
+S: Find the order quantity for these orders.
+S: Find the total quantity of products associated with those orders.
+
+select *
+from customer_orders 
+where t1.order_status = "Cancelled"
+
+select t2.order_quantity
+from customer_orders as t1 join order_items as t2
+on t1.order_id = t2.order_id
+where t1.order_status = "Cancelled"
+
+select sum(t2.order_quantity)
+from customer_orders as t1 join order_items as t2
+on t1.order_id = t2.order_id
+where t1.order_status = "Cancelled"
+
+
+36. Find the total amount of products ordered before 2018-03-17 07:13:53.
+P: What is the total amount of products purchased before 2018-03-17 07:13:53?
+
+select sum(t2.order_quantity)
+from customer_orders as t1 join order_items as t2
+on t1.order_id = t2.order_id
+where t1.order_date < 2018-03-17 07:13:53
+
+S: Find all the customer orders that made before 2018-03-17 07:13:53.
+S: Compute the total quantity of items purchased in this order.
+
+select *
+from customer_orders 
+where t1.order_date < 2018-03-17 07:13:53
+
+select sum(t2.order_quantity)
+from customer_orders as t1 join order_items as t2
+on t1.order_id = t2.order_id
+where t1.order_date < 2018-03-17 07:13:53
+
+
+37. Who made the latest order?
+P: Find the name of the customer who made an order most recently.
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+order by t2.order_date desc
+limit 1
+
+S: Order all the customer orders by the descending order date.
+S: What is the most recent order?
+S: Who made that order?
+
+select *
+from customer_orders
+order by t2.order_date desc
+
+select *
+from customer_orders
+order by t2.order_date desc
+limit 1
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+order by t2.order_date desc
+limit 1
+
+
+38. Which product has been ordered most number of times?
+P: What is the most frequently ordered product? Tell me the detail of the product
+
+select t2.product_details
+from order_items as t1 join products as t2
+on t1.product_id = t2.product_id
+group by t1.product_id
+order by count(*) desc
+limit 1
+
+S: Count the number of times each product is ordered.
+S: What is the most frequently ordered product?
+S: Tell me the detail of the product.
+
+select count(*)
+from order_items 
+group by product_id
+
+select *
+from order_items 
+group by product_id
+order by count(*) desc
+limit 1
+
+select t2.product_details
+from order_items as t1 join products as t2
+on t1.product_id = t2.product_id
+group by t1.product_id
+order by count(*) desc
+limit 1
+
+
+39. Find the name and ID of the product whose total order quantity is the largest.
+P: What are the name and ID of the product bought the most.
+
+select t2.product_details, t2.product_id
+from order_items as t1 join products as t2
+on t1.product_id = t2.product_id
+group by t1.product_id
+order by sum(t1.order_quantity)
+limit 1
+
+S: Find the total quantity order for each product.
+S: What is the id of the product whose total order quantity is the largest?
+S: What are the name and ID of that product?
+
+select sum(order_quantity)
+from order_items
+group by product_id
+
+select product_id
+from order_items
+group by product_id
+order by sum(order_quantity)
+limit 1
+
+select t2.product_details, t2.product_id
+from order_items as t1 join products as t2
+on t1.product_id = t2.product_id
+group by t1.product_id
+order by t1.order_quantity
+limit 1
+
+
+40. Find all the addresses in East Julianaside, Texas or in Gleasonmouth, Arizona.
+P: What are all the addresses in East Julianaside, Texas or in Gleasonmouth, Arizona.
+
+select address_content
+from addresses
+where city = "East Julianaside" and state_province_county = "Texas"
+union
+select address_content
+from addresses
+where city = "Gleasonmouth" and state_province_county = "Arizona"
+
+S: List all addresses in East Julianaside, Texas.
+S: List all addresses in Gleasonmouth, Arizona.
+S: List all addresses in either of them.
+
+select address_content
+from addresses
+where city = "East Julianaside" and state_province_county = "Texas"
+
+select address_content
+from addresses
+where city = "Gleasonmouth" and state_province_county = "Arizona"
+
+select address_content
+from addresses
+where city = "East Julianaside" and state_province_county = "Texas"
+union
+select address_content
+from addresses
+where city = "Gleasonmouth" and state_province_county = "Arizona"
+
+
+41. Find the name of customers who did not pay with Cash.
+P: What is the name of customers who do not use Cash as payment method.
+
+select customer_name
+from customers
+where payment_method != 'Cash'
+
+S: List all the customers' payment method
+S: Which customer does not use Cash?
+S: What is the name of the customer?
+
+select payment_method
+from customers
+
+select *
+from customers
+where payment_method != 'Cash'
+
+select customer_name
+from customers
+where payment_method != 'Cash'
+
+
+42. Find the names of customers who never ordered product Latte.
+P: What are names of customers who never ordered product Latte.
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+
+S: Find the names of all the customers.
+S: Find the names of customers who bought the product "Latte" before.
+S: Which customers never bought Latte"?
+
+select customer_name
+from customers
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+
+
+43. Find the names of customers who never placed an order.
+P: What are the names of customers who never made an order.
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+
+S: List the names of all the customers.
+S: List the names of customers who have made some orders before.
+S: Which customers never made an order?
+
+select customer_name
+from customers
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+
+select customer_name
+from customers
+EXCEPT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+
+
+44. Find the names of customers who ordered both products Latte and Americano.
+P: What are the names of customers who have purchased both products Latte and Americano?
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+INTERSECT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Americano'
+
+S: List the names of customers who have purchased Latte.
+S: List the names of customers who have purchased Americano.
+S: Which customers have ordered both?
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Americano'
+
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Latte'
+INTERSECT
+select t1.customer_name
+from customers as t1 join customer_orders as t2
+on t1.customer_id = t2.customer_id
+join order_items as t3
+on t2.order_id = t3.order_id
+join products as t4 on t3.product_id = t4.product_id
+where product_details = 'Americano'
+
+
+
