@@ -6,7 +6,7 @@ import sys
 import sqlparse
 import re
 import json
-
+from collections import OrderedDict
 def parse(filepath):
 	f = open(filepath,"r")
 	ret = []
@@ -34,6 +34,7 @@ def parse(filepath):
 		line = lines[i].lstrip().rstrip()
 		line = line.replace("\r","")
 		line = line.replace("\n","")
+		has_prefix = False
 		if len(line) == 0:
 			i += 1
 			continue
@@ -50,7 +51,7 @@ def parse(filepath):
 				q_list = []
 				sql_list = []
 				paraphrase = []
-				sqa = {
+				sqa =  {
 					"question":[],
 					"sql":[]
 				}
@@ -66,11 +67,13 @@ def parse(filepath):
 			index = line.find("P:")
 			line = line[index+3:]
 			paraphrase.append(line)
+			has_prefix = True
 		if line.startswith("S:"):
 			index = line.find("S:")
 			line = line[index+3:]
 			sqa["question"].append(line)
 			sql_key = "sql"
+			has_prefix = True
 		if line.startswith("S1:"):
 			index = line.find("S1:")
 			line = line[index+4:]
@@ -79,11 +82,12 @@ def parse(filepath):
 				sqa["sql2"] = []
 			sqa["question2"].append(line)
 			sql_key = "sql2"
+			has_prefix = True
 #		if line[0] == "#":
 #			line = line[1:]
 #			q_list.append(line)
-		if line.startswith("select") or line.startswith("SELECT") or line.startswith("Select") or \
-			line.startswith("with") or line.startswith("With") or line.startswith("WITH"):
+		if (line.startswith("select") or line.startswith("SELECT") or line.startswith("Select") or \
+			line.startswith("with") or line.startswith("With") or line.startswith("WITH") ) and not has_prefix :
 			sql = [line]
 			i += 1
 			while i < len(lines):
@@ -107,7 +111,7 @@ def parse(filepath):
 			continue
 		i += 1
 	if len(question) > 0:
-		ret.append({
+		ret.append( {
 			"question":question,
 			"paraphrase":paraphrase,
 			"sql":sql_list,
@@ -120,7 +124,7 @@ def parse(filepath):
 	}
 
 #filename = sys[0]
-#print(sys.argv)	
+#print(sys.argv)
 input_file = sys.argv[1]
 #input_file="./art_1_tao_sqa.txt"
 data = parse(input_file)
@@ -128,5 +132,5 @@ data = parse(input_file)
 #output_file = "test.json"
 output_file = sys.argv[2]
 outfile = open(output_file, 'w')
-json.dump(data,outfile,indent=4,separators=(',',':'))
+json.dump(data,outfile,indent=4,separators=(',',':'),sort_keys=True)
 
