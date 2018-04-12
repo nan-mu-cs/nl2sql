@@ -1,0 +1,819 @@
+Total = #  40
+
+
+1. How many cities do we have?
+P: Count the number of cities.
+
+select count(*)
+from City
+
+S: What is all the information about the cities?
+S: How many are there?
+
+select *
+from City
+
+select count(*)
+from City
+
+2. List all states.
+P: What are all the distinct states?
+
+select distinct state
+from City
+
+S: List all the information about the cities.
+S: What are the different states?
+
+select *
+from City
+
+select distinct state
+from City
+
+3. How many countries do we have?
+P: Count the number of coutries.
+
+select count(distinct country)
+from City
+
+S: What are the distinct countries?
+S: How many are there?
+
+select distinct country
+from City
+
+select count(distinct country)
+from City
+
+4. Show names, codes, states, countries for all cities.
+P: What are the names, codes, states, and countries for all cities?
+
+select city_name, city_code, state, country
+from City
+
+S: What is all the information about the cities?
+S: What are their names, codes, states, and countries?
+
+select *
+from City
+
+select city_name, city_code, state, country
+from City
+
+5. What is the latitude and longitude for Baltimore?
+P: What latitude and longitude correspond to Baltimore?
+
+select latitude, longitude
+from City
+where city_name = "Baltimore"
+
+S: What is all the city information about Baltimore?
+S: What are its latitude and longitude?
+
+select *
+from City
+where city_name = "Baltimore"
+
+select latitude, longitude
+from City
+where city_name = "Baltimore"
+
+6. Show names for all cities in state PA.
+P: What are the names of all cities in PA?
+
+select city_name
+from City
+where state = "PA"
+
+S: What are all the city names?
+S: Of these, which are in the state of PA?
+
+select city_name
+from City
+
+select city_name
+from City
+where state = "PA"
+
+7. How many cities are in Canada?
+P: Count the number of cities in Canada.
+
+select count(*)
+from City
+where country = "CANADA"
+
+S: How many cities are there?
+S: Of those, how many are in Canada?
+
+select count(*)
+from City
+
+select count(*)
+from City
+where country = "CANADA"
+
+8. Show names for all USA city ordered by latitude.
+P: What are all the city names for cities in the USA, ordered by latitude?
+
+select city_name
+from City
+where country = "USA"
+order by latitude
+
+S: What are all the city names in the USA?
+S: Order them by latitude.
+
+select city_name
+from City
+where country = "USA"
+
+select city_name
+from City
+where country = "USA"
+order by latitude
+
+9. Show all states and number of cities in each state.
+P: How many cities are in each state?
+
+select state, count(*)
+from City
+group by state
+
+S: How many cities are there?
+S: Count them by state.
+
+select count(*)
+from City
+
+select state, count(*)
+from City
+group by state
+
+10. Show all countries and number of cities in each state.
+P: How many cities are there in each country?
+
+select country, count(*)
+from City
+group by country
+
+S: How many cities are there?
+S: Count them by country.
+
+select count(*)
+from City
+
+select country, count(*)
+from City
+group by country
+
+11. List all states with at least two cities.
+P: Which states have at least two cities?
+
+select state
+from City
+group by state
+having count(*) >= 2
+
+S: What are the different states?
+S: Of these, which have at least two cities?
+
+select state
+from City
+group by state
+
+select state
+from City
+group by state
+having count(*) >= 2
+
+12. Which state has most number of cities?
+P: Give the state that has the most cities.
+
+select state
+from City
+group by state
+order by count(*) desc
+limit 1
+
+S: What are the different states?
+S: Order them by number of cities, from greatest to least. 
+S: Which has the most?
+
+select state
+from City
+group by state
+
+select state
+from City
+group by state
+order by count(*) desc
+
+select state
+from City
+group by state
+order by count(*) desc
+limit 1
+
+13. Which country has fewest number of cities?
+P: Give the country with the fewest number of cities.
+
+select country
+from City
+group by country
+order by count(*) asc
+limit 1
+
+S: What are the different countries?
+S: Order them by number of cities, from least to greatest. 
+S: Which has the least?
+
+select country
+from City
+group by country
+
+select country
+from City
+group by country
+order by count(*) asc
+
+select country
+from City
+group by country
+order by count(*) asc
+limit 1
+
+14. Show the first name and the last name for students living in state MD.
+P: What are the full names of students living in MD?
+
+select T2.Fname, T2.Lname
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.state = "MD"
+
+S: What are the full names of all students?
+S: Of those, which live in MD?
+
+select Fname, Lname
+from Student 
+
+select T2.Fname, T2.Lname
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.state = "MD"
+
+15. How many students live in China?
+P: Count the number of students living in China.
+
+select count(*)
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.country = "CHINA"
+
+S: What is all the information about students living in China?
+S: How many are there?
+
+select *
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.country = "CHINA"
+
+select count(*)
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.country = "CHINA"
+
+16. Return the first name and major of students are living in Baltimore?
+P: What are the first names and majors of students living in Baltimore?
+
+select T2.Fname, T2.Major
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.city_name = "Baltimore"
+
+S: What are the first names and majors of all students?
+S: Of those, which live in Baltimore?
+
+select Fname, Major
+from Student
+
+select T2.Fname, T2.Major
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.city_name = "Baltimore"
+
+17. Show the number of students living in each country.
+P: How many students live in each country?
+
+select T1.country, count(*)
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.country
+
+S: How many students are there?
+S: How many live in each country?
+
+select count(*)
+from Student
+
+select T1.country, count(*)
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.country
+
+18. Find the number of students living in each city.
+P: How many students live in each city?
+
+select T1.city_name, count(*)
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.city_code
+
+S: How many students are there?
+S: How many live in each city?
+
+select count(*)
+from Student
+
+select T1.city_name, count(*)
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.city_code
+
+19. Which state has most number of students?
+P: Give the state that has the most students.
+
+select T1.state
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.state
+order by count(*) desc
+limit 1
+
+S: What are the different states?
+S: Order them by the number of students living in each of them, descending.
+S: Which as the most?
+
+select state
+from City 
+group by state
+
+select T1.state
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.state
+order by count(*) desc
+
+select T1.state
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.state
+order by count(*) desc
+limit 1
+
+20. Which country has least number of students?
+P: Give the country with the fewest students.
+
+select T1.country
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.country
+order by count(*)
+limit 1
+
+S: What are the different countries?
+S: Order them by number of students.
+S: Which has the fewest?
+
+select country
+from City 
+group by country
+
+select T1.country
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.country
+order by count(*)
+
+select T1.country
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.country
+order by count(*)
+limit 1
+
+21. Show names for all cities where at least three students live.
+P: What are the names of cities with at least three students?
+
+select T1.city_name
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.city_code
+having count(*) >= 3
+
+S: What are all the different city names?
+S: Of these, which have more than three students?
+
+select city_name
+from City 
+group by city_code
+
+select T1.city_name
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.city_code
+having count(*) >= 3
+
+22. Show all states where more than 5 students live.
+P: What are the states with more than 5 students?
+
+select T1.state
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.state
+having count(*) > 5
+
+S: What are all the different states?
+S: How many have more than 5 students?
+
+select state
+from City 
+group by state
+
+select T1.state
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+group by T1.state
+having count(*) > 5
+
+23. Show ids for all students who don't live in USA.
+P: What the the student ids for students not living in the USA?
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where country = "USA" 
+
+S: What are all the students ids?
+S: Of those, which are for students in the USA?
+S: What are all the others?
+
+select StuID
+from Student 
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where country = "USA" 
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where country = "USA" 
+
+24. Show ids for all female (sex is F) students living in state PA.
+P: What are the student ids for female students in the state of PA?
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.state = "PA"  and T2.sex = 'F'
+
+S: What are the student ids of students in PA?
+S: Of these, which correspond to students with sex F?
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.state = "PA" 
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.state = "PA"  and T2.sex = 'F'
+
+25. Show ids for all male students living outside of USA.
+P: What are the ids for male students not in the USA?
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T2.sex = 'M' and T1.country != "USA"
+
+S: What are the student ids for students living in the USA?
+S: What are the student ids for students not living in the USA?
+S: Of these, which correspond to students with sex M?
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.country = "USA"
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T1.country != "USA"
+
+select StuID
+from City as T1 join Student as T2 on T1.city_code = T2.city_code
+where T2.sex = 'M' and T1.country != "USA"
+
+26. What is the distance between BAL and CHI?
+P: Give the distance between BAL and CHI?
+
+select distance
+from Direct_distance
+where city1_code = "BAL" and city2_code = "CHI"
+
+S: What is all the information about direct distances?
+S: Of these, which corresponds to the cities BAL and CHI?
+S: What is the distance?
+
+select *
+from Direct_distance
+
+select *
+from Direct_distance
+where city1_code = "BAL" and city2_code = "CHI"
+
+select distance
+from Direct_distance
+where city1_code = "BAL" and city2_code = "CHI"
+
+27. Show me the distance between Boston and Newark.
+P: What is the distance between Boston and Newark?
+
+select distance
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code join City as T3 on T1.city2_code = T3.city_code
+where T2.city_name = "Boston" and T3.city_name = "Newark"
+
+S: What is all the information about direct distances?
+S: What is all the information corresponding to cities Boston and Newark?
+S: What is the distance?
+
+select *
+from Direct_distance 
+
+select *
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code join City as T3 on T1.city2_code = T3.city_code
+where T2.city_name = "Boston" and T3.city_name = "Newark"
+
+select distance
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code join City as T3 on T1.city2_code = T3.city_code
+where T2.city_name = "Boston" and T3.city_name = "Newark"
+
+28. What is the average, minimum, maximum distance between two cities?
+P: Give the average, minimum, and maximum distances between two cities.
+
+select avg(distance), min(distance), max(distance)
+from Direct_distance
+
+S: What are the minimum and maximum distances between two cities?
+S: Also, what is the average?
+
+select min(distance), max(distance)
+from Direct_distance
+
+select avg(distance), min(distance), max(distance)
+from Direct_distance
+
+29. Show me the city code of two cities with maximum distance.
+P: What are the city codes of the cities with the maximum distance?
+
+select city1_code, city2_code
+from Direct_distance
+order by distance desc
+limit 1
+
+S: Order the direct distance information by decreasing distance.
+S: Which has the greatest distance?
+S: What are the city codes corresponding to this?
+
+select *
+from Direct_distance
+order by distance desc
+
+select *
+from Direct_distance
+order by distance desc
+limit 1
+
+select city1_code, city2_code
+from Direct_distance
+order by distance desc
+limit 1
+
+30. Show me the city code of two cities with a distance greater than the average.
+P: What are the city codes of cities with distance greater than average?
+
+select city1_code, city2_code
+from Direct_distance
+where distance > (select avg(distance) from Direct_distance)
+
+S: What is the average distance between two cities?
+S: Which are greater than that?
+S: What are the city codes corresponding to those?
+
+select avg(distance) 
+from Direct_distance
+
+select *
+from Direct_distance
+where distance > (select avg(distance) from Direct_distance)
+
+select city1_code, city2_code
+from Direct_distance
+where distance > (select avg(distance) from Direct_distance)
+
+31. Show me the city code of two cities with a distance less than 1000.
+P: What are the city codes corresponding to cities with distances less than 1000?
+
+select city1_code, city2_code
+from Direct_distance
+where distance < 1000
+
+S: What is all the information about direct distances?
+S: What are the two city codes for each?
+S: Of these, which have distance less than 1000?
+
+select *
+from Direct_distance
+
+select city1_code, city2_code
+from Direct_distance
+
+select city1_code, city2_code
+from Direct_distance
+where distance < 1000
+
+32. What is the total distance between city BAL and all other cities.
+P: What is the sum of distances between BAL and other cities?
+
+select sum(distance)
+from Direct_distance
+where city1_code = "BAL"
+
+S: What is the sum of all direct distances?
+S: What is it if the first city is BAL?
+
+select sum(distance)
+from Direct_distance
+
+select sum(distance)
+from Direct_distance
+where city1_code = "BAL"
+
+33. What is the average distance between Boston and all other cities.
+P: Give the average distance between Boston and other cities.
+
+select avg(distance)
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code
+where T2.city_name = "Boston"
+
+S: What is the average of all direct distances?
+S: What is it if the first city is Boston?
+
+select avg(distance)
+from Direct_distance
+
+select avg(distance)
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code
+where T2.city_name = "Boston"
+
+34. What is the name of the city closest to Chicago?
+P: Give the name of the nearest city to Chicago.
+
+select T3.city_name
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code join City as T3 on T1.city2_code = T3.city_code
+where T2.city_name = "Chicago"
+order by distance
+limit 1
+
+S: What is all the direct distance information with first city as Chicago?
+S: Order these by distance.
+S: What is the name of the closest one?
+
+select *
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code
+where T2.city_name = "Chicago"
+
+select *
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code
+where T2.city_name = "Chicago"
+order by distance
+
+select T3.city_name
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code join City as T3 on T1.city2_code = T3.city_code
+where T2.city_name = "Chicago"
+order by distance
+limit 1
+
+35. What is the name of the city furthest to Boston?
+P: Give the city name of the city with greatest distance from Boston.
+
+select T3.city_name
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code join City as T3 on T1.city2_code = T3.city_code
+where T2.city_name = "Boston"
+order by distance desc
+limit 1
+
+S: What is all the direct distance information with first city as Boston?
+S: Order these by decreasing distance.
+S: What is the name of the furthest one?
+
+select *
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code 
+where T2.city_name = "Boston"
+
+select *
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code 
+where T2.city_name = "Boston"
+order by distance desc
+
+select T3.city_name
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code join City as T3 on T1.city2_code = T3.city_code
+where T2.city_name = "Boston"
+order by distance desc
+limit 1
+
+36. Show all city codes and the total distance to all other cities.
+P: For each city, what is the the city code and sum of distances from each?
+
+select city1_code, sum(distance)
+from Direct_distance
+group by city1_code
+
+S: What is the sum of all distances?
+S: What is this for each first city code?
+
+select sum(distance)
+from Direct_distance
+
+select city1_code, sum(distance)
+from Direct_distance
+group by city1_code
+
+37. Show all city names and the average distance to all other cities.
+P: What are the city name and average distances from each city?
+
+select T2.city_name, avg(distance)
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code
+group by T1.city1_code
+
+S: What is the average direct distance?
+S: What is this for each first city name?
+
+select  avg(distance)
+from Direct_distance 
+
+select T2.city_name, avg(distance)
+from Direct_distance as T1 join City as T2 on T1.city1_code = T2.city_code
+group by T1.city1_code
+
+38. How far do Linda (first name) Smith (last name) and Tracy (first name) Kim (last name) live?
+P: What is the distance between the cities where Linda Smith and Tracy Kim live?
+
+select distance
+from Direct_distance as T1 join Student as T2 on T1.city1_code = T2.city_code join Student as T3 on T1.city2_code = T3.city_code
+where T2.Fname = "Linda" and T2.Lname = "Smith" and T3.Fname = "Tracy" and T3.Lname = "Kim"
+
+S: What are all the direct distances?
+S: Of these, which are from the city that Linda Smith lives?
+S: Which goes to the city that Tracy Kim lives?
+
+select distance
+from Direct_distance 
+
+select distance
+from Direct_distance as T1 join Student as T2 on T1.city1_code = T2.city_code
+where T2.Fname = "Linda" and T2.Lname = "Smith" 
+
+select distance
+from Direct_distance as T1 join Student as T2 on T1.city1_code = T2.city_code join Student as T3 on T1.city2_code = T3.city_code
+where T2.Fname = "Linda" and T2.Lname = "Smith" and T3.Fname = "Tracy" and T3.Lname = "Kim"
+
+39. What is the first name and last name of the student living furthest to Linda Smith?
+P: What is the full name of the student who lives furthest from Linda Smith?
+
+select T3.Fname, T3.Lname
+from Direct_distance as T1 join Student as T2 on T1.city1_code = T2.city_code join Student as T3 on T1.city2_code = T3.city_code
+where T2.Fname = "Linda" and T2.Lname = "Smith"
+order by distance desc
+limit 1
+
+S: What is all the direct distance information?
+S: Of these, have the first city as the one that Linda Smith lives in?
+S: What are the full names of students living in the second cities?
+S: Of these, who lives the greatest distance away?
+
+select *
+from Direct_distance 
+
+select *
+from Direct_distance as T1 join Student as T2 on T1.city1_code = T2.city_code 
+where T2.Fname = "Linda" and T2.Lname = "Smith"
+
+
+select T3.Fname, T3.Lname
+from Direct_distance as T1 join Student as T2 on T1.city1_code = T2.city_code join Student as T3 on T1.city2_code = T3.city_code
+where T2.Fname = "Linda" and T2.Lname = "Smith"
+
+select T3.Fname, T3.Lname
+from Direct_distance as T1 join Student as T2 on T1.city1_code = T2.city_code join Student as T3 on T1.city2_code = T3.city_code
+where T2.Fname = "Linda" and T2.Lname = "Smith"
+order by distance desc
+limit 1
+
+40. Which state does the student whose first name is Linda live in?
+P: Give the state that the student with first name Linda lives in.
+
+select state
+from Student as T1 join City as T2 on T1.city_code = T2.city_code
+where T1.Fname = "Linda"
+
+S: What is all the information about the student with first name Linda?
+S: What state does she live in?
+
+select *
+from Student 
+where Fname = "Linda"
+
+select state
+from Student as T1 join City as T2 on T1.city_code = T2.city_code
+where T1.Fname = "Linda"

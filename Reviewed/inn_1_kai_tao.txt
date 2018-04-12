@@ -1,107 +1,38 @@
-Total # = 25
+Total # = 38
 
 1.Find the name of all modern rooms with a base price below $160 and two beds.
 
-COMMENT: modern rooms NOT IN SQL? corrected for you, and add an extended example below. 
-         MAKE SURE IF QUESTION AND SQL ARE CONSISTENT/have the same meaning/info!
-
 SELECT roomName
 FROM Rooms
-WHERE basePrice<160 AND beds=2 and decor = 'modern';
+WHERE basePrice < 160 AND beds= 2 and decor = 'modern';
 
-Find all rooms with price higher than 160 and can accommodate more than 2 people. Report room names and codes.
+2.Find all rooms with price higher than 160 and can accommodate more than 2 people. Report room names and codes.
 
 SELECT roomName, RoomId
 FROM Rooms
 WHERE basePrice > 160 AND maxOccupancy > 2;
 
-2.Find all rooms occupied on February 6, 2010. Report full name of the room, the check-in and checkout dates of the reservation.
-
-COMMENT: TOO TOO MANY DATE!!!!! ALSO February 6, 2010 -> 2010-02-06 is not our research direction!
-
-SELECT T2.roomName, T1.CheckIn, T1.CheckOut
-FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
-WHERE date(T1.CheckIn) <= date("2010-02-06") and date(T1.CheckOut) > date("2010-02-06");
-
-3. For each reservation that starts on December 31, 2010 report the room name, nightly rate, number of nights spent and the total amount of money paid.
-
-COMMENT: TOO TOO MANY DATE!!!!! ALSO February 6, 2010 -> 2010-02-06 is not our research direction! AGAIN!
-
-SELECT T2.roomName,T1.Rate, julianday (date(T1.CheckOut))-julianday (date(T1.CheckIn)),T1.Rate*(julianday (date(T1.CheckOut))-julianday (date(T1.CheckIn)))
-FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
-WHERE date(T1.CheckIn) >= date("2010-12-31");
-
-4. Find the names of all people staying at the inn at the same time as HERBERT FRYDAY.
-
-COMMENT: TOO TOO MANY DATE!!!!! 
-         have to include more details for HERBERT FRYDAY -> FirstName="HERBERT" AND LastName="FRYDAY"
-
-SELECT FirstName, LastName
-FROM Reservations as T1,(
-SELECT CheckIn,CheckOut
-FROM Reservations
-WHERE FirstName="HERBERT" AND LastName="FRYDAY"
-) AS T2
-WHERE not(T1.FirstName="HERBERT" AND T1.LastName="FRYDAY") AND ((Date(T1.CheckIn)<Date(T2.CheckIn) AND Date(T1.CheckOut)>Date(T2.CheckIn)) OR (Date(T1.CheckIn)<Date(T2.CheckOut) AND Date(T1.CheckOut)>Date(T2.CheckIn)))
-
-
-5.Find the number of August reservations (both checkin and checkout dates are in August) where two adults are staying with two children.
-
-COMMENT: TOO TOO MANY DATE!!!!! what strftime?
-
-SELECT count(*)
-FROM Reservations
-WHERE strftime('%m',CheckIn) = "08" and strftime('%m',CheckOut) = "08" and Adults=2 and Kids=2;
-
-6. Find the most popular room in the hotel. The most popular room is the room that had seen the largest number of reservations
-
-COMMENT: count(T1.Room) -> count(*)
-         SELECT T2.roomName -> SELECT T2.roomName, group by -> select
-         Find the most popular -> Find the NAME OF THE most popular
+3.Find the most popular room in the hotel. The most popular room is the room that had seen the largest number of reservations
 
 SELECT T2.roomName
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
 GROUP BY T1.Room
-ORDER BY count(T1.Room) desc
+ORDER BY count(*) desc
 LIMIT 1;
 
-7. Find the room that has been occupied the largest number of days based on the reservations. Report the room name.
-
-COMMENT: TOO TOO MANY DATE!!!!! what Date?
-
-SELECT T2.roomName
-FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
-GROUP BY T1.Room
-ORDER BY sum(Date(T1.CheckOut)-Date(T1.CheckIn)) desc
-LIMIT 1;
-
-8. For each room, report the most expensive reservation. Report the full room name, dates of stay.
-
-COMMENT: TOO TOO MANY DATE!!!!! what julianday?
-
-SELECT T2.roomName, sum(julianday(Date(T1.CheckOut))-julianday(Date(T1.CheckIn)))
-FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
-GROUP BY T1.Room
-ORDER BY sum((julianday(Date(T1.CheckOut))-julianday(Date(T1.CheckIn)))*T1.Rate) desc
-LIMIT 1;
-
-9. How many kids lives in the room reserved by  ROY SWEAZY
-
-COMMENT: more details in question for ROY SWEAZY
+4.How many kids lives in the room reserved by ROY SWEAZY
 
 SELECT kids
 FROM Reservations
 WHERE FirstName="ROY" AND LastName = "SWEAZY";
 
-10. How many times does ROY SWEAZY has reserved a room.
-
-
+5.How many times does ROY SWEAZY has reserved a room.
 
 SELECT count(*)
 FROM Reservations
 WHERE FirstName="ROY" AND LastName = "SWEAZY";
 
-11.Which room has highest rate? List the room's full name, rate, check in and check out day.
+6.Which room has highest rate? List the room's full name, rate, check in and check out day.
 
 SELECT T2.roomName, T1.Rate, T1.CheckIn, T1.CheckOut
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
@@ -109,122 +40,200 @@ GROUP BY T1.Room
 ORDER BY T1.Rate desc
 Limit 1;
 
-12.List the first name and last name of top 3 customers that have longest overall reservation days and the total days they stayed.
+7.How many adults in CONRAD SELBIG Oct 23,2010's reservation?
 
-COMMENT: more details in question for ROY SWEAZY
-
-SELECT FirstName, LastName, sum(julianday(Date(CheckOut))-julianday(Date(CheckIn)))
-FROM Reservations
-GROUP BY FirstName,LastName
-ORDER BY sum(julianday(Date(CheckOut))-julianday(Date(CheckIn))) desc
-LIMIT 3;
-
-13. What is average rating for reservation check in date between Feb 1, 2010 and Feb 28, 2010?
-SELECT avg(Rate)
-FROM Reservations
-WHERE Date(CheckIn) >= Date("2010-02-01") and Date(CheckIn) <= Date("2010-02-28");
-
-14. How many adults in CONRAD SELBIG Oct 23,2010's reservation?
 SELECT Adults
 FROM Reservations
-WHERE CheckIn="2010-10-23" and FirstName="CONRAD" AND LastName="SELBIG";
+WHERE CheckIn = "2010-10-23" and FirstName = "CONRAD" AND LastName = "SELBIG";
 
-15. How many kids in DAMIEN TRACHSEL Sep 21,2010's reservation?
+8.How many kids in DAMIEN TRACHSEL Sep 21,2010's reservation?
+
 SELECT Kids
 FROM Reservations
-WHERE CheckIn="2010-09-21" and FirstName="DAMIEN" AND LastName="TRACHSEL";
+WHERE CheckIn = "2010-09-21" and FirstName = "DAMIEN" AND LastName = "TRACHSEL";
 
-16. How many beds does room Abscond or bolster has?
-SELECT beds
+9.How many king beds ar there?
+
+SELECT sum(beds)
 FROM Rooms
-WHERE roomName="Abscond or bolster";
+WHERE bedtype = 'King';
 
-17. What is room Recluse and defiance's bed type?
-SELECT bedType
+10. List the names and decor of rooms that have a king bed. Sort the list by their price.
+
+SELECT roomName, decor
 FROM Rooms
-WHERE roomName="Recluse and defiance";
+WHERE bedtype = 'King'
+ORDER BY basePrice;
 
-18. Which room has cheapest base price? List the room's full name and the base price.
+11.Which room has cheapest base price? List the room's name and the base price.
+
 SELECT roomName, basePrice
 FROM Rooms
 ORDER BY basePrice ASC
 LIMIT 1;
 
-19. What is the decor of room Recluse and defiance?
+12. What is the decor of room Recluse and defiance?
+
 SELECT decor
 FROM Rooms
-WHERE roomName="Recluse and defiance";
+WHERE roomName = "Recluse and defiance";
 
-20. What is the average base price of different bed type? List bed type and average base price.
-SELECT bedType,avg(basePrice)
+13. What is the average base price of different bed type? List bed type and average base price.
+
+SELECT bedType, avg(basePrice)
 FROM Rooms
 GROUP BY bedType;
 
-21. What is the maximum number of people could stay in room Harbinger but bequest?
-SELECT maxOccupancy
-FROM Rooms
-WHERE roomName="Harbinger but bequest";
+14.What is the total number of people could stay in the modern rooms?
 
-22. What kind or decor has least number of reservations? List decor and reservations times.
-SELECT T2.decor, count(*)
+SELECT sum(maxOccupancy)
+FROM Rooms
+WHERE decor = 'modern';
+
+15.What kind of decor has least number of reservations? 
+
+SELECT T2.decor
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
 GROUP BY T2.decor
 ORDER BY count(T2.decor) asc
 Limit 1;
 
-23. List how many times the number of people in the room reached the maximum occupancy of the room. The number of people include adults and kids.
+16.List how many times the number of people in the room reached the maximum occupancy of the room. The number of people include adults and kids.
+
 SELECT count(*)
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
-WHERE  T2. maxOccupancy = T1.Adults+T1. Kids;
+WHERE  T2.maxOccupancy = T1.Adults + T1.Kids;
 
-24. Which room people out payed most than its base price? List the room's full name.
-SELECT T2.roomName
+17. Find the first and last names of people who payed more than the rooms' base prices?
+
+SELECT T2.firstname, T2.lastname
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
-GROUP BY T2.roomName
-ORDER BY sum(T1.Rate-T2.basePrice) desc
+Where T1.Rate - T2.basePrice > 0
+
+18.How many rooms are there?
+
+SELECT count(*)
+FROM Rooms;
+
+19.Find the number of rooms with king bed.
+
+SELECT count(*)
+FROM Rooms
+WHERE bedType = "King";
+
+20.Find the number of rooms for each bed type.
+
+SELECT bedType, count(*)
+FROM Rooms
+GROUP BY bedType;
+
+21.Find the name of the room with the maximum occupancy.
+
+SELECT roomName
+FROM Rooms
+ORDER BY maxOccupancy DESC
 LIMIT 1;
 
-25. How many times does the room Convoke and sanguine was checked in between March 15,2010 and March 30,2010?
-SELECT count(*)
+22.Find the id and name of the most expensive base price room.
+
+SELECT roomName
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 1;
+
+
+23.List the type of bed and name of all traditional rooms.
+
+SELECT roomName, bedType
+FROM Rooms
+WHERE decor="traditional";
+
+24.Find the number of rooms with king bed for each decor type.
+
+SELECT decor, count(*)
+FROM Rooms
+WHERE bedType="King"
+GROUP BY decor;
+
+25.Find the average and minimum price of the rooms in different decor.
+
+SELECT decor,avg(basePrice), min(basePrice)
+FROM Rooms
+GROUP BY decor;
+
+26.List the name of all rooms sorted by their prices.
+
+SELECT roomName
+FROM Rooms
+Order by basePrice;
+
+27.Find the number of rooms with price higher than 120 for different decor.
+
+SELECT decor,count(*)
+FROM Rooms
+WHERE basePrice > 120
+GROUP BY decor;
+
+28.Find the average price for the room with each bed type.
+
+SELECT bedType, avg(basePrice)
+FROM Rooms
+GROUP BY bedType;
+
+29.List the name of rooms with king or queen bed.
+
+SELECT roomName
+FROM Rooms
+WHERE bedType = "King" OR bedType = "Queen";
+
+30.How many different type of bed for all rooms are there?
+
+SELECT count(distinct bedType)
+FROM Rooms;
+
+31.Find the name and id of the top 3 expensive rooms.
+
+SELECT RoomId, roomName
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 3;
+
+32.Find the name of rooms whose price is higher than the average price.
+
+SELECT roomName
+FROM Rooms
+WHERE basePrice > (
+	SELECT avg(basePrice)
+	FROM Rooms
+);
+
+33. Find the number of rooms that do not have any reservation. 
+
+select count(*)
+from rooms
+where roomid NOT IN (select room from reservations)
+
+34. Find the name of rooms and number of reservations for each of them.
+
+SELECT T2.roomName, count(*), T1.Room
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
-WHERE T2.roomName="Convoke and sanguine" and Date(T1.CheckIn) between Date("2010-03-15") and Date("2010-03-30");
+group by T1.Room
 
+35. Find the name of rooms that have been reserved for more than 60 times.
 
-OVERALL COMMENTS:
-1. too many complex SQL with date! time consuming for you and reviewer! also date is a sepecific column that is not our main research concern. It is hard for human as well.
-2. MAKE SURE IF QUESTION AND SQL ARE CONSISTENT/have the same meaning/info!
-3. maybe have to change most of questions here.
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+group by T1.Room
+having count(*) > 60
 
-How many rooms are there?
+36. find the name of rooms whose base price is between 120 and 150.
 
-Find the number of rooms with king bed.
+select roomname
+from rooms
+where baseprice between 120 and 150
 
-Find the number of rooms for each bed type.
+37. Find the name of rooms booked by some customers whose first name contains ROY.
 
-Find the name of the room with the maximum occupancy.
-
-Find the id and name of the most expensive room.
-
-List the type of bed and name of all traditional rooms.
-
-Find the number of rooms with king bed for each decor type.
-
-Find the average and minimum price of the rooms in different decor.
-
-Find the average and maximum occupancy of the rooms with more than 1 bed for different bed size.
-
-List the name of all rooms sorted by their prices.
-
-Find the number of rooms with price higher than 120 for different decor.
-
-Find the average price for the room with each bed type.
-
-List the name of rooms with king or queen bed.
-
-How many different type of bed for all rooms are there?
-
-Find the name and id of the top 3 expensive rooms.
-
-Find the name of rooms whose price is higher than the average price.
-
-and many many more for revervation table and JOIN two tables!!!!!!!!!
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+where firstname LIKE '%ROY%'

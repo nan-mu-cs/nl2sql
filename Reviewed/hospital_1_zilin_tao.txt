@@ -1,0 +1,389 @@
+Total = # 40 -> 51
+
+
+1. 
+which department has most number of employees?
+
+SELECT name
+FROM department
+GROUP BY departmentID
+ORDER BY count(departmentID) desc
+LIMIT 1;
+
+what is employee id of the head whose department has least number of employees?
+
+SELECT head
+FROM department
+GROUP BY departmentID
+ORDER BY count(departmentID)
+LIMIT 1;
+
+what is the name and position of the head whose department has least number of employees?
+
+SELECT T2.name, T2.position
+FROM department as T1 join physician as T2 on T1.head = T2.EmployeeID
+GROUP BY departmentID
+ORDER BY count(departmentID)
+LIMIT 1;
+
+2. 
+What are names of patients who made an appointment?
+
+SELECT name
+FROM appointment as T1 join patient as T2 on T1.patient = T2.ssn
+
+what are names and phone number of patients who had more than one appointment?
+
+SELECT name, phone
+FROM appointment as T1 join patient as T2 on T1.patient = T2.ssn
+group by T1.patient
+having count(*) > 1
+
+3. 
+Find the id of the most recent starting appointment?
+
+SELECT appointmentid 
+FROM appointment
+ORDER BY start desc
+LIMIT 1
+
+List the name of physicians who took some appointment.
+
+SELECT T2.name 
+FROM appointment as T1 join physician as T2 on T1.Physician = T2.EmployeeID
+
+List the name of physicians who never took any appointment.
+
+SELECT name 
+FROM physician
+except
+SELECT T2.name
+FROM appointment as T1 join physician as T2 on T1.Physician = T2.EmployeeID
+
+4.
+Find the names of all physicians and their primary affiliated departments' names.
+
+Select T1.name, T3.name
+from physician as T1
+     join affiliated_with as T2 on T1.EmployeeID = T2.physician
+     join department as T3 on T2.department = T3.DepartmentID
+Where T2.PrimaryAffiliation = 1
+
+What is the name of the patient who makes the most recent appointments?
+
+SELECT T1.name
+FROM patient as T1, appointment as T2
+WHERE T1.ssn=T2.patient 
+ORDER BY T2.start desc
+LIMIT 1
+
+5.
+How many patients stay in room 112?
+
+SELECT count(patient)
+FROM stay
+WHERE room = 112
+
+How many patients' prescribes are made by physician John Dorian?
+
+SELECT count(T1.SSN)
+FROM patient as T1 join prescribes as T2 on T1.SSN = T2.patient
+     join physician as T3 on T2.physician = T3.employeeid
+WHERE T3.name="John Dorian"
+
+6. 
+Find the name of medication used on the patient who stays in room 111?
+
+SELECT T4.name
+FROM stay as T1
+     join patient as T2 on T1.Patient = T2.SSN
+     join Prescribes as T3 on T3.Patient = T2.SSN
+     join Medication as T4 on T3.Medication = T4.Code
+WHERE room = 111
+
+Find the patient who most recently stay in room 111?
+
+SELECT patient
+FROM stay
+WHERE room = 111
+ORDER BY staystart desc
+LIMIT 1
+
+7.  
+What is the name of the nurse has the most number of appointments?
+
+SELECT T1.name
+FROM nurse as T1 join appointment as T2 on T1.employeeid = T2.prepnurse
+GROUP BY T1.employeeid
+ORDER BY count(T1.employeeid) desc
+LIMIT 1
+
+8. 
+How many patients do each physician take care of? list their names and number of patients they take care of.
+
+SELECT T1.name, count(*)
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+GROUP BY T1.employeeid
+
+Find the name of physicians who are in charge of more than one patient.
+
+SELECT T1.name
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+GROUP BY T1.employeeid
+Having count(*) > 1
+
+9.
+What are the numbers of rooms for different block floor?
+
+SELECT count(*), T1.blockfloor
+FROM block as T1 join room as T2 on T1.blockfloor = T2.blockfloor and T1.blockcode=T2.blockcode
+GROUP BY T1.blockfloor
+
+What are the numbers of rooms for different block code?
+
+SELECT count(*), T1.blockcode
+FROM block as T1 join room as T2 on T1.blockfloor = T2.blockfloor and T1.blockcode=T2.blockcode
+GROUP BY T1.blockcode
+
+10.
+What are the unique block codes that have available rooms? 
+
+SELECT DISTINCT blockcode
+FROM room 
+WHERE unavailable = 0
+
+How many different types of rooms are there? 
+
+SELECT count(DISTINCT roomtype)
+FROM room
+
+11.
+What is the name of physicians prescribes medication Thesisin?
+
+SELECT distinct T1.name
+FROM physician as T1 join prescribes as T2 on T1.employeeid=T2.physician join medication as T3 on T3.code=T2.medication
+where T3.name = "Thesisin"
+
+Find the name and position of physicians who prescribe some medication whose brand is X?
+
+SELECT distinct T1.name, T1.position
+FROM physician as T1 join prescribes as T2 on T1.employeeid=T2.physician join medication as T3 on T3.code=T2.medication
+where T3.Brand = "X"
+
+12.
+What are the numbers of medication prescribed in different brands?
+
+SELECT count(*), T1.name
+FROM medication as T1 join prescribes as T2 on T1.code=T2.medication
+GROUP BY T1.brand
+
+Find the name of physicians whose position tile contains the word 'senior'.
+
+select name
+from physician
+where position LIKE '%senior%'
+
+13.
+Find the patient who has most recently undergoing treatment?
+
+SELECT patient
+FROM undergoes
+ORDER BY dateundergoes
+LIMIT 1
+
+Find the name of all patients who have an undergoing treatment and stay in room 111?
+
+SELECT T2.name
+FROM undergoes as T1 
+     join patient as T2 on T1.patient=T2.SSN
+     join stay as T3 on T1.Stay = T3.StayID
+Where T3.room = 111
+
+14.
+List the names of all distinct nurses ordered by alphabetical order?
+
+SELECT DISTINCT name
+FROM nurse
+ORDER BY name
+
+Find the name of nurses who are nursing an undergoing treatment.
+
+SELECT DISTINCT T2.name
+FROM undergoes as T1 join nurse as T2 on T1.AssistingNurse = T2.EmployeeID
+
+List the names of all distinct medication ordered by alphabetical order?
+
+SELECT DISTINCT name
+FROM medication
+ORDER BY name
+
+15.
+What are the names of the physician who prescribed the highest dose?
+
+SELECT T1.name
+FROM physician as T1 join prescribes as T2 on T1.employeeid=T2.physician
+order by T2.dose desc
+limit 1
+
+16.
+List the physicians' employee id and corresponding department id that has primary affiliation?
+
+SELECT physician, department
+FROM affiliated_with
+WHERE primaryaffiliation
+
+List the name of departments where some physicians are primary affiliated with?
+
+SELECT  distinct T2.name
+FROM affiliated_with as T1 join department as T2 on T1.department=T2.departmentid
+where PrimaryAffiliation = 1
+
+17.
+What are the id of nurses who are on call with block floor 1 and block code 1?
+
+SELECT nurse
+FROM on_call
+WHERE blockfloor = 1 and blockcode = 1
+
+18.
+What are the highest cost, lowerst cost and average cost of procedures?
+
+SELECT MAX(cost), MIN(cost), AVG(cost)
+FROM procedures
+
+List the name and cost of all procedures sorted by the cost from the highest to lowest.
+
+SELECT name, cost
+FROM procedures
+order by cost desc
+
+Find the top three most expensive procedures?
+
+SELECT name
+FROM procedures
+ORDER BY cost
+LIMIT 3
+
+19.
+Find the physicians who are trained in a procedure whose cost is more than 5000?
+
+SELECT T1.name
+FROM physician as T1 
+     join trained_in as T2 on T1.employeeid = T2.physician
+     join procedures as T3 on T3.code = T2.treatment
+where T3.cost > 5000
+
+Find the physician who was trained in the most expensive procedure?
+
+SELECT T1.name
+FROM physician as T1 
+     join trained_in as T2 on T1.employeeid = T2.physician
+     join procedures as T3 on T3.code = T2.treatment
+order by T3.cost desc
+limit 1
+
+What is the average cost of procedures which physician John Wen was trained in?
+
+SELECT avg(T3.cost)
+FROM physician as T1 
+     join trained_in as T2 on T1.employeeid = T2.physician
+     join procedures as T3 on T3.code = T2.treatment
+where T1.name = "John Wen"
+
+Find the name of procedures which physician John Wen was trained in?
+
+SELECT T3.name
+FROM physician as T1 
+     join trained_in as T2 on T1.employeeid = T2.physician
+     join procedures as T3 on T3.code = T2.treatment
+where T1.name = "John Wen"
+
+20.
+Find all procedures which cost more than 1000 or physician John Wen was trained in?
+
+SELECT name
+FROM procedures
+WHERE cost > 1000
+UNION
+SELECT T3.name
+FROM physician as T1 
+     join trained_in as T2 on T1.employeeid = T2.physician
+     join procedures as T3 on T3.code = T2.treatment
+where T1.name = "John Wen"
+
+Find the name of all procedures which cost more than 1000 but physician John Wen was not trained in?
+
+SELECT name
+FROM procedures
+WHERE cost > 1000
+EXCEPT
+SELECT T3.name
+FROM physician as T1 
+     join trained_in as T2 on T1.employeeid = T2.physician
+     join procedures as T3 on T3.code = T2.treatment
+where T1.name = "John Wen"
+
+Find the name of all procedures which cost less than 5000 and physician John Wen was trained in?
+
+SELECT name
+FROM procedures
+WHERE cost < 5000
+INTERSECT
+SELECT T3.name
+FROM physician as T1 
+     join trained_in as T2 on T1.employeeid = T2.physician
+     join procedures as T3 on T3.code = T2.treatment
+where T1.name = "John Wen"
+
+Find the name of physicians who are in affilication with both Surgery and Psychiatry departments.
+
+Select T1.name
+from physician as T1
+     join affiliated_with as T2 on T1.EmployeeID = T2.physician
+     join department as T3 on T2.department = T3.DepartmentID
+Where T3.name = 'Surgery'
+INTERSECT
+Select T1.name
+from physician as T1
+     join affiliated_with as T2 on T1.EmployeeID = T2.physician
+     join department as T3 on T2.department = T3.DepartmentID
+Where T3.name = 'Psychiatry'
+
+Find the name of physicians who are in affilication with Surgery or Psychiatry department.
+
+Select T1.name
+from physician as T1
+     join affiliated_with as T2 on T1.EmployeeID = T2.physician
+     join department as T3 on T2.department = T3.DepartmentID
+Where T3.name = 'Surgery' or T3.name = 'Psychiatry'
+
+Find the name of patients who are not using the medication of Procrastin-X.
+
+select name
+from patient
+EXCEPT
+SELECT T1.name
+FROM patient as T1
+     join Prescribes as T2 on T2.Patient = T1.SSN
+     join Medication as T3 on T2.Medication = T3.Code
+WHERE T3.name = 'Procrastin-X'
+
+Find the number of patients who are not using the medication of Procrastin-X.
+
+select count(*)
+from patient
+where SSN NOT IN (
+SELECT T1.patient
+FROM Prescribes as T1 join Medication as T2 on T1.Medication = T2.Code
+WHERE T2.name = 'Procrastin-X'
+)
+
+How many appointments are there?
+
+select count(*)
+from appointment
+
+Find the names of nurses who are on call.
+
+select distinct T1.name
+from nurse as T1 join on_call as T2 on T1.EmployeeID = T2.nurse

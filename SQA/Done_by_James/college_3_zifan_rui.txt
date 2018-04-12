@@ -1,0 +1,780 @@
+Total # = 40
+
+1. How many courses are there in total?
+P: Count the number of courses.
+
+SELECT count(*)
+FROM COURSE
+
+S: What is all the course information?
+S: How many are there?
+
+SELECT *
+FROM COURSE
+
+SELECT count(*)
+FROM COURSE
+
+2. How many courses have more than 2 credits?
+P: Count the number of courses with more than 2 credits.
+
+SELECT count(*)
+FROM COURSE
+WHERE Credits > 2
+
+S: What is all the information for courses with more than 2 credits?
+S: How many are there?
+
+SELECT *
+FROM COURSE
+WHERE Credits > 2
+
+SELECT count(*)
+FROM COURSE
+WHERE Credits > 2
+
+3. List all names of courses with 1 credit?
+P: What are the names of courses with 1 credit?
+
+SELECT CName
+FROM COURSE
+WHERE Credits = 1
+
+S: What are all the course names?
+S: Of those, which give 1 credit?
+
+4. Which courses are taught on days MTW?
+P: What are the course names for courses taught on MTW?
+
+SELECT CName 
+FROM COURSE 
+WHERE Days = "MTW"
+
+S: What are all the course names?
+S: Of those, which are taught on the days MTW?
+
+SELECT CName 
+FROM COURSE 
+
+SELECT CName 
+FROM COURSE 
+WHERE Days = "MTW"
+
+5. What is the number of departments in Division "AS"?
+P: How many departments are in the division AS?
+
+SELECT count(*)
+FROM DEPARTMENT 
+WHERE Division = "AS"
+
+S: How many departments are there?
+S: Of those, how many are in the "AS" division?
+
+SELECT count(*)
+FROM DEPARTMENT 
+
+SELECT count(*)
+FROM DEPARTMENT 
+WHERE Division = "AS"
+
+6. What are the phones of departments in Room 268?
+P: Give the phones for departments in room 268.
+
+SELECT DPhone
+FROM DEPARTMENT 
+WHERE Room = 268
+
+S: What is all the information about departments in room 268?
+S: What are their phones?
+
+SELECT *
+FROM DEPARTMENT 
+WHERE Room = 268
+
+SELECT DPhone
+FROM DEPARTMENT 
+WHERE Room = 268
+
+7. Find the number of students that have at least one grade "B".
+P: How many students have had at least one "B" grade?
+
+SELECT COUNT(distinct StuID)
+FROM ENROLLED_IN
+WHERE Grade = "B"
+
+S: What are the distinct student ids for students who have gotten a "B" grade?
+S: How many are there?
+
+SELECT distinct StuID
+FROM ENROLLED_IN
+WHERE Grade = "B"
+
+SELECT COUNT(distinct StuID)
+FROM ENROLLED_IN
+WHERE Grade = "B"
+
+8. Find the max and min grade point for all letter grade.
+P: What are the maximum and minumum grade points?
+
+SELECT max(gradepoint), min(gradepoint)
+FROM GRADECONVERSION
+
+S: What is the maximum gradepoint?
+S: Also, what is the minimum gradepoint?
+
+SELECT max(gradepoint)
+FROM GRADECONVERSION
+
+SELECT max(gradepoint), min(gradepoint)
+FROM GRADECONVERSION
+
+9. Find the first names of students whose first names contain letter "a".
+P: What are the first names for students who have an "a" in their first name?
+
+SELECT DISTINCT Fname
+FROM STUDENT
+WHERE Fname LIKE '%a%'
+
+S: What are all the distinct student first names?
+S: Of those, which contain the letter "a"?
+
+SELECT DISTINCT Fname
+FROM STUDENT
+
+SELECT DISTINCT Fname
+FROM STUDENT
+WHERE Fname LIKE '%a%'
+
+10. Find the first names and last names of male (sex is M) faculties who live in building NEB.
+P: What are the full names of faculties with sex M and who live in building NEB?
+
+SELECT Fname, Lname
+FROM FACULTY
+WHERE sex = "M" AND Building = "NEB"
+
+S: What are the full names of all the faculty?
+S: Of those, which have sex M?
+S: Of those, which are in building NEB?
+
+SELECT Fname, Lname
+FROM FACULTY
+
+SELECT Fname, Lname
+FROM FACULTY
+WHERE sex = "M"
+
+SELECT Fname, Lname
+FROM FACULTY
+WHERE sex = "M" AND Building = "NEB"
+
+11. Find the rooms of faculties with rank professor who live in building NEB.
+P: What are the rooms for members of the faculty who are professors and who live in building NEB?
+
+SELECT Room
+FROM FACULTY
+WHERE Rank = "Professor" AND Building = "NEB"
+
+S: What are the rooms for all faculty with rank professor?
+S: Of those, which are for faculty who live in building NEB?
+
+SELECT Room
+FROM FACULTY
+WHERE Rank = "Professor" 
+
+SELECT Room
+FROM FACULTY
+WHERE Rank = "Professor" AND Building = "NEB"
+
+12. Find the department name that is in Building "Mergenthaler".
+P: What is the name of the department in the Building Mergenthaler?
+
+SELECT DName
+FROM DEPARTMENT 
+WHERE Building = "Mergenthaler"
+
+S: What are the names of the departments?
+S: Which corresponds to the one in building Mergenthaler?
+
+SELECT DName
+FROM DEPARTMENT 
+
+SELECT DName
+FROM DEPARTMENT 
+WHERE Building = "Mergenthaler"
+
+13. List all information about courses sorted by credits in the ascending order.
+P: What is all the information about courses, ordered by credits ascending?
+
+SELECT * 
+FROM COURSE
+ORDER BY Credits
+
+S: What is all the information about credits?
+S: Order this in ascending order.
+
+SELECT * 
+FROM COURSE
+
+SELECT * 
+FROM COURSE
+ORDER BY Credits
+
+14. List the course name of courses sorted by credits.
+P: What are the course names, ordered by credits?
+
+SELECT CName
+FROM COURSE
+ORDER BY Credits
+
+S: What are all the course names?
+S: Order them by credits.
+
+SELECT CName
+FROM COURSE
+
+SELECT CName
+FROM COURSE
+ORDER BY Credits
+
+15. Find the first name of students in the descending order of age.
+P: What are the first names of students, ordered by age from greatest to least?
+
+SELECT Fname
+FROM STUDENT
+ORDER BY Age desc
+
+S: What is all the student information, ordered by age descending?
+S: What are their first names?
+
+SELECT *
+FROM STUDENT
+ORDER BY Age desc
+
+SELECT Fname
+FROM STUDENT
+ORDER BY Age desc
+
+16. Find the last name of female (sex is F) students in the descending order of age.
+P: What are the last names of female students, ordered by age descending?
+
+SELECT LName
+FROM STUDENT
+WHERE Sex = "F"
+ORDER BY Age desc
+
+S: What are the last names of all the female students?
+S: Order this by age descending.
+
+SELECT LName
+FROM STUDENT
+WHERE Sex = "F"
+
+SELECT LName
+FROM STUDENT
+WHERE Sex = "F"
+ORDER BY Age desc
+
+17. Find the last names of faculties in building Barton in alphabetic order.
+P: What are the last names of faculty in building Barton, sorted by last name?
+
+SELECT Lname
+FROM FACULTY
+WHERE Building = "Barton"
+ORDER BY Lname
+
+S: What are the last names of faculty in building Barton?
+S: Order this alphabetically.
+
+SELECT Lname
+FROM FACULTY
+WHERE Building = "Barton"
+
+SELECT Lname
+FROM FACULTY
+WHERE Building = "Barton"
+ORDER BY Lname
+
+18. Find the first names of faculties of rank Professor in alphabetic order.
+P: What are the first names for all faculty professors, ordered by first name?
+
+SELECT Fname
+FROM FACULTY
+WHERE Rank = "Professor"
+ORDER BY Fname
+
+S: What are the first names of all the faculty?
+S: Of those, which are professors?
+S: Sort this in alphabetical order.
+
+SELECT Fname
+FROM FACULTY
+
+SELECT Fname
+FROM FACULTY
+WHERE Rank = "Professor"
+
+SELECT Fname
+FROM FACULTY
+WHERE Rank = "Professor"
+ORDER BY Fname
+
+19. Find the name of the department that has the biggest number of students minored in?
+P: What is the name of the department with the most students minoring in it?
+
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
+on T1.DNO = T2.DNO
+GROUP BY T2.DNO
+ORDER BY count(*) desc
+LIMIT 1
+
+S: What are all the department names?
+S: Order these descending by the number of students minoring in them.
+S: Which has the most?
+
+SELECT DName
+FROM DEPARTMENT
+
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
+on T1.DNO = T2.DNO
+GROUP BY T2.DNO
+ORDER BY count(*) desc
+
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
+on T1.DNO = T2.DNO
+GROUP BY T2.DNO
+ORDER BY count(*) desc
+LIMIT 1
+
+20. Find the name of the department that has no students minored in?
+S: What is the name of the department htat has no students minoring in it?
+
+SELECT DName FROM DEPARTMENT 
+EXCEPT
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
+on T1.DNO = T2.DNO
+
+S: What are the names of departments that have students minoring in them?
+S: What are all the other department names?
+
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
+on T1.DNO = T2.DNO
+
+SELECT DName FROM DEPARTMENT 
+EXCEPT
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MINOR_IN as T2
+on T1.DNO = T2.DNO
+
+21. Find the name of the department that has the fewest members.
+P: What is the name of the department with the fewest members?
+
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MEMBER_OF as T2
+on T1.DNO = T2.DNO
+GROUP BY T2.DNO
+ORDER BY count(*) asc
+LIMIT 1
+
+S: What are all the department names?
+S: Order them by the number of members in each.
+S: Which has the fewest?
+
+SELECT DName
+FROM DEPARTMENT
+
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MEMBER_OF as T2
+on T1.DNO = T2.DNO
+GROUP BY T2.DNO
+ORDER BY count(*) asc
+
+SELECT T1.DName
+FROM DEPARTMENT as T1 JOIN MEMBER_OF as T2
+on T1.DNO = T2.DNO
+GROUP BY T2.DNO
+ORDER BY count(*) asc
+LIMIT 1
+
+22. Find the rank of the faculty that the fewest faculties belong to.
+P: What is the least common faculty rank?
+
+SELECT Rank
+FROM FACULTY
+GROUP BY Rank
+ORDER BY count(*) asc
+LIMIT 1
+
+S: What are the different faculty ranks?
+S: Order them by the number of faculty in each rank.
+S: Which has the fewest?
+
+SELECT Rank
+FROM FACULTY
+GROUP BY Rank
+
+SELECT Rank
+FROM FACULTY
+GROUP BY Rank
+ORDER BY count(*) asc
+
+SELECT Rank
+FROM FACULTY
+GROUP BY Rank
+ORDER BY count(*) asc
+LIMIT 1
+
+23. What are the first and last names of the instructors who teach the top 3 number of courses?
+P: What are the full names of the 3 instructors who teach the most courses?
+
+SELECT T2.Fname, T2.Lname
+FROM COURSE as T1 JOIN FACULTY as T2
+on T1.Instructor = T2.FacID
+GROUP BY T1.Instructor
+ORDER BY count(*) desc
+LIMIT 3
+
+S: What are the full names of all the faculty?
+S: Order them by the number of courses they teach, descending.
+S: Who are the top three?
+
+SELECT Fname, Lname
+FROM FACULTY
+
+SELECT T2.Fname, T2.Lname
+FROM COURSE as T1 JOIN FACULTY as T2
+on T1.Instructor = T2.FacID
+GROUP BY T1.Instructor
+ORDER BY count(*) desc
+
+SELECT T2.Fname, T2.Lname
+FROM COURSE as T1 JOIN FACULTY as T2
+on T1.Instructor = T2.FacID
+GROUP BY T1.Instructor
+ORDER BY count(*) desc
+LIMIT 3
+
+24. Which building does the instructor who teaches the most number of courses live in?
+P: Give the building that the instructor who teaches the greatest number of courses lives in.
+
+SELECT T2.Building
+FROM COURSE as T1 JOIN FACULTY as T2
+on T1.Instructor = T2.FacID
+GROUP BY T1.Instructor
+ORDER BY count(*) desc
+LIMIT 1
+
+S: What is all the information about all the faculty?
+S: Order this by the number of courses each faculty teaches, descending.
+S: What is the building that the one who teachest the most lives in?
+
+SELECT *
+FROM FACULTY
+
+SELECT *
+FROM COURSE as T1 JOIN FACULTY as T2
+on T1.Instructor = T2.FacID
+GROUP BY T1.Instructor
+ORDER BY count(*) desc
+
+SELECT T2.Building
+FROM COURSE as T1 JOIN FACULTY as T2
+on T1.Instructor = T2.FacID
+GROUP BY T1.Instructor
+ORDER BY count(*) desc
+LIMIT 1
+
+25. What are the name of courses that have at least five enrollments?
+P: Give the names of the courses with at least five enrollments.
+
+SELECT T1.CName
+FROM COURSE as T1 JOIN ENROLLED_IN as T2
+on T1.CID = T2.CID
+GROUP BY T2.CID
+HAVING COUNT(*) >= 5
+
+S: What are all the course names?
+S: Of those, which have at least five students enrolled?
+
+SELECT CName
+FROM COURSE 
+
+SELECT T1.CName
+FROM COURSE as T1 JOIN ENROLLED_IN as T2
+on T1.CID = T2.CID
+GROUP BY T2.CID
+HAVING COUNT(*) >= 5
+
+26. Find the first name and last name of the instructor of course that has course name 
+COMPUTER LITERACY.
+P: What is the full name of the instructor who has a course named COMPUTER LITERACY?
+
+SELECT T2.Fname, T2.Lname
+FROM COURSE as T1 JOIN FACULTY as T2 ON T1.Instructor = T2.FacID
+WHERE T1.CName = "COMPUTER LITERACY"
+
+S: What are the full names of all faculty?
+S: Of those, which has a course named COMPUTER LITERACY?
+
+SELECT Fname, Lname
+FROM FACULTY 
+
+SELECT T2.Fname, T2.Lname
+FROM COURSE as T1 JOIN FACULTY as T2 ON T1.Instructor = T2.FacID
+WHERE T1.CName = "COMPUTER LITERACY"
+
+27. Find the department name and room of the course INTRODUCTION TO COMPUTER SCIENCE.
+P: What are the department name and room for the course INTRODUCTION TO COMPUTER SCIENCE?
+
+SELECT T2.Dname, T2.Room
+FROM COURSE as T1 JOIN DEPARTMENT as T2 ON T1.DNO = T2.DNO
+WHERE T1.CName = "INTRODUCTION TO COMPUTER SCIENCE"
+
+S: What is all the information about the course INTRODUCTION TO COMPUTER SCIENCE?
+S: What room is it held in?
+S: Also, what is the department name for the department that offers it?
+
+SELECT *
+FROM COURSE 
+WHERE CName = "INTRODUCTION TO COMPUTER SCIENCE"
+
+SELECT T2.Room
+FROM COURSE as T1 JOIN DEPARTMENT as T2 ON T1.DNO = T2.DNO
+WHERE T1.CName = "INTRODUCTION TO COMPUTER SCIENCE"
+
+SELECT T2.Dname, T2.Room
+FROM COURSE as T1 JOIN DEPARTMENT as T2 ON T1.DNO = T2.DNO
+WHERE T1.CName = "INTRODUCTION TO COMPUTER SCIENCE"
+
+28. Find the student first and last names and grade points of all enrollments.
+P: What are the full names and gradepoints for all enrollments?
+
+SELECT T3.Fname, T3.LName, T2.gradepoint
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+
+S: What are the full names of all students?
+S: Also, what are the gradepoints for any classes they are enrolled in?
+
+SELECT Fname, LName
+FROM STUDENT 
+
+SELECT T3.Fname, T3.LName, T2.gradepoint
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+
+29. Find the distinct student first names of all students that have grade point at least 3.8 in one course.
+P: What are the distinct first names for students with a grade point of 3.8 or above in at least one course?
+
+SELECT distinct T3.Fname
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+Where T2.gradepoint >= 3.8
+
+S: What are the distinct first names of students?
+S: Of those, which have a gradepoint of at least 3.8 in one course?
+
+SELECT distinct Fname
+FROM STUDENT
+
+SELECT distinct T3.Fname
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+Where T2.gradepoint >= 3.8
+
+30. Find the full names of faculties who are members of department with department number 520.
+P: What are the full names of faculty members who are a part of department 520?
+
+SELECT T1.Fname, T1.Lname
+FROM FACULTY as T1 JOIN MEMBER_OF as T2 ON T1.FacID = T2.FacID
+WHERE T2.DNO = 520
+
+S: What are the full names of all the faculty?
+S: Of those, which are a part of department 520?
+
+SELECT Fname, Lname
+FROM FACULTY 
+
+SELECT T1.Fname, T1.Lname
+FROM FACULTY as T1 JOIN MEMBER_OF as T2 ON T1.FacID = T2.FacID
+WHERE T2.DNO = 520
+
+31. What are the first names and last names of the students that minor in the department with DNO 140.
+P: What are the full names of students minoring in department 140?
+
+SELECT T2.Fname, T2.Lname
+FROM MINOR_IN as T1 JOIN STUDENT as T2 ON T1.StuID = T2.StuID
+WHERE T1.DNO = 140
+
+S: What are the full names of all students?
+S: Of those, which are minoring in the department with number 140?
+
+SELECT Fname, Lname
+FROM STUDENT
+
+SELECT T2.Fname, T2.Lname
+FROM MINOR_IN as T1 JOIN STUDENT as T2 ON T1.StuID = T2.StuID
+WHERE T1.DNO = 140
+
+32. Find the last names of faculties who are members of computer science department.
+P: What are the last names of faculty who are part of the computer science department?
+
+SELECT T2.Lname
+FROM DEPARTMENT as T1 
+     JOIN FACULTY as T2 ON T1.DNO = T3.DNO
+     JOIN MEMBER_OF as T3 ON T2.FacID = T3.FacID
+WHERE T1.DName = "Computer Science"
+
+S: What is all the information about faculty?
+S: Of those, which are in the computer science department?
+S: What are their last names?
+
+SELECT *
+FROM FACULTY 
+
+SELECT *
+FROM DEPARTMENT as T1 
+     JOIN FACULTY as T2 ON T1.DNO = T3.DNO
+     JOIN MEMBER_OF as T3 ON T2.FacID = T3.FacID
+WHERE T1.DName = "Computer Science"
+
+SELECT T2.Lname
+FROM DEPARTMENT as T1 
+     JOIN FACULTY as T2 ON T1.DNO = T3.DNO
+     JOIN MEMBER_OF as T3 ON T2.FacID = T3.FacID
+WHERE T1.DName = "Computer Science"
+
+33. Find the average grade point of student whose last name is Smith.
+P: What is the average gradepoint for students with the last name Smith?
+
+SELECT avg(T2.gradepoint)
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+WHERE T3.LName = "Smith"
+
+S: What is the average gradepoint for any students enrolled in courses?
+S: What is this for students with last name Smith?
+
+SELECT avg(T2.gradepoint)
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+
+SELECT avg(T2.gradepoint)
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+WHERE T3.LName = "Smith"
+
+
+34. What is the maximum and minimum grade point of students who live in NYC?
+P: Give the maximum and minimum gradepoints for students living in NYC?
+
+SELECT max(T2.gradepoint), min(T2.gradepoint)
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+WHERE T3.city_code = "NYC"
+
+S: What is all the information about students living in NYC?
+S: What are their gradepoints for the courses they are enrolled in?
+S: What are the maximum and minimum?
+
+SELECT *
+FROM STUDENT 
+WHERE city_code = "NYC"
+
+SELECT T2.gradepoint
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+WHERE T3.city_code = "NYC"
+
+SELECT max(T2.gradepoint), min(T2.gradepoint)
+FROM ENROLLED_IN as T1 JOIN GRADECONVERSION as T2 JOIN STUDENT as T3
+ON T1.Grade = T2.lettergrade AND T1.StuID = T3.StuID
+WHERE T3.city_code = "NYC"
+
+35. Find the names of courses that have either 3 credits or 1 credit but 4 hours.
+P: What are the names of courses that give either 3 credits, or 1 credit and 4 hours?
+
+SELECT CName 
+from COURSE 
+WHERE Credits = 3
+UNION 
+SELECT CName 
+from COURSE 
+WHERE Credits = 1 AND Hours = 4
+
+S: What are the names of courses with 3 credits?
+S: What are the names of courses with 1 credit and 4 hours?
+S: What are the names of courses in either group?
+
+SELECT CName 
+from COURSE 
+WHERE Credits = 3
+
+SELECT CName 
+from COURSE 
+WHERE Credits = 1 AND Hours = 4
+
+SELECT CName 
+from COURSE 
+WHERE Credits = 3
+UNION 
+SELECT CName 
+from COURSE 
+WHERE Credits = 1 AND Hours = 4
+
+36. Find the names of departments that are either in division AS or in division EN and in Building NEB.
+P: What are the names of departments either in division AS, or in division EN and in building NEB?
+
+SELECT DName
+from DEPARTMENT
+WHERE Division = "AS"
+UNION 
+SELECT DName
+from DEPARTMENT
+WHERE Division = "EN" AND Building = "NEB"
+
+S: What are the department names for departments in division AS?
+S: What are department names for departments in divison EN and building NEB?
+S: What are the names for departments in either group?
+
+SELECT DName
+from DEPARTMENT
+WHERE Division = "AS"
+
+SELECT DName
+from DEPARTMENT
+WHERE Division = "EN" AND Building = "NEB"
+
+SELECT DName
+from DEPARTMENT
+WHERE Division = "AS"
+UNION 
+SELECT DName
+from DEPARTMENT
+WHERE Division = "EN" AND Building = "NEB"
+
+37. Find the first name of students not enrolled in any course.
+P: What are the first names of all students that are not enrolled in courses?
+
+SELECT Fname from STUDENT
+Where StuID not in 
+(select StuID from ENROLLED_IN)
+
+S: What are the student ids for each student?
+S: Of those, which are not enrolled in any courses?
+S: What are their first names?
+
+select StuID 
+from STUDENT
+
+SELECT StuID from STUDENT
+Where StuID not in 
+(select StuID from ENROLLED_IN)
+
+SELECT Fname from STUDENT
+Where StuID not in 
+(select StuID from ENROLLED_IN)

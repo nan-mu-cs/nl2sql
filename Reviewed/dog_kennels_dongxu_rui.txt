@@ -1,0 +1,313 @@
+count # 40
+
+1. Which states have both owners and professionals living there?
+
+select state
+from Owners
+INTERSECT
+select state
+from Professionals
+
+2. What is the average age of the dogs who have went through any treatments?
+
+select avg(age)
+from Dogs
+where dog_id in (
+select dog_id
+from Treatments
+)
+
+3. Which professionals live in the state of Indiana or have done treatment on more than 2 treatments? List his or her id, last name and cell phone.
+
+select professional_id, last_name, cell_number
+from Professionals
+where state = 'Indiana'
+UNION
+select T1.professional_id, T1.last_name, T1.cell_number
+from Professionals as T1 JOIN Treatments as T2
+on T1.professional_id = T2.professional_id
+group by T1.professional_id
+having count(*) > 2
+
+4. Which dogs have not cost their owner more than 1000 for treatment? List the dog names.
+
+select name
+from Dogs
+where dog_id not in(
+select dog_id
+from Treatments
+group by dog_id
+having sum(cost_of_treatment) > 1000
+)
+
+5. Which first names are for professionals and owners but are not used as dog names?
+
+select first_name
+from Professionals
+UNION
+select first_name
+from Owners
+EXCEPT
+select name
+from Dogs
+
+
+6. Which professionals did not operate any treatment on dogs? List the professional's id, role and email.
+
+select professional_id, role_code, email_address
+from Professionals
+EXCEPT 
+select T1.professional_id, T1.role_code, T1.email_address
+from Professionals as T1 JOIN Treatments as T2
+on T1.professional_id = T2.professional_id
+
+7. Which owner owns the most number of dogs? List the owner id, first name and last name.
+
+select T1.owner_id, T2.first_name, T2.last_name
+from Dogs as T1 JOIN Owners as T2
+on T1.owner_id = T2.owner_id
+group by T1.owner_id
+order by count(*) desc limit 1
+
+8. Which professionals have done at least two treatment? List the professional's id, role, and first name.
+
+select T1.professional_id, T1.role_code, T1.first_name
+from Professionals as T1 JOIN Treatments as T2
+on T1.professional_id = T2.professional_id
+group by T1.professional_id
+having count(*) >= 2
+
+9. What is the name of the breed with the most number of dogs?
+
+select T1.breed_name
+from Breeds as T1 JOIN Dogs as T2
+on T1.breed_code = T2.breed_code
+group by T1.breed_name
+order by count(*) desc limit 1
+
+10. Which owner have paid for the most number of treatments on his or her dogs? List the owner id and last name.
+
+select T1.owner_id, T1.last_name
+from Owners as T1 JOIN Dogs as T2
+on T1.owner_id = T2.owner_id
+JOIN Treatments as T3
+on T2.dog_id = T3.dog_id
+group by T1.owner_id
+order by count(*) desc limit 1
+
+11. What is the description of the treatment type that costs the least money in total?
+
+select T1.treatment_type_description
+from Treatment_types as T1 JOIN Treatments as T2
+on T1.treatment_type_code = T2.treatment_type_code
+group by T1.treatment_type_code
+order by sum(cost_of_treatment) asc limit 1
+
+12. Which owner has paid the the largest amount of money in total for their dogs? Show the owner id and zip code.
+
+select T1.owner_id, T1.zip_code
+from Owners as T1 JOIN Dogs as T2
+on T1.owner_id = T2.owner_id
+JOIN Treatments as T3
+on T2.dog_id = T3.dog_id
+group by T1.owner_id
+order by sum(cost_of_treatment) desc limit 1
+
+13. Which professionals have done at least two types of treatments? List the professional id and cell phone.
+
+select T1.professional_id, T1.cell_number
+from Professionals as T1 JOIN Treatments as T2
+on T1.professional_id = T2.professional_id
+group by T1.professional_id
+having count(*) >= 2
+ 
+14. What is the first name and last name of the professional who have done treatment with the cost below average?
+
+select distinct T1.first_name, T1.last_name
+from Professionals as T1 JOIN Treatments as T2
+where cost_of_treatment < (
+select avg(cost_of_treatment)
+from Treatments
+)
+
+15. List all the dates of the treatments and the first name of the professional.
+
+select T1.date_of_treatment, T2.first_name
+from Treatments as T1 JOIN Professionals as T2
+on T1.professional_id = T2.professional_id
+
+16. List all the cost of treatments and the corresponding treatment type description.
+
+Select T1.cost_of_treatment, T2.treatment_type_description
+from Treatments as T1 JOIN treatment_types as T2
+on T1.treatment_type_code = T2.treatment_type_code
+
+17. List the owner's first name, last name, and the size of his for her dog.
+
+select T1.first_name, T1.last_name, T2.size_code
+from Owners as T1 JOIN Dogs as T2
+on T1.owner_id = T2.owner_id
+
+18. List pairs of the owner's first name and the dogs's name.
+
+select T1.first_name, T2.name
+from Owners as T1 JOIN Dogs as T2
+on T1.owner_id = T2.owner_id
+
+19. List the names of dogs of the rarest breed and the treatment dates of them.
+
+select T1.name, T2.date_of_treatment
+from Dogs as T1 JOIN Treatments as T2
+on T1.dog_id = T2.dog_id
+where T1.breed_code = (
+select breed_code
+from Dogs
+group by breed_code
+order by count(*) asc limit 1
+)
+
+20. Which dogs are owned by someone who lives in Virginia? List the owner's first name and the dog's name.
+
+select T1.first_name, T2.name
+from Owners as T1 JOIN Dogs as T2
+on T1.owner_id = T2.owner_id
+where T1.state = 'Virginia'
+
+
+21. What are the arriving date and the departing date of the dogs who have gone through any treatment?
+
+Select distinct T1.date_arrived, T1.date_departed
+from Dogs as T1 JOIN Treatments as T2
+on T1.dog_id = T2.dog_id
+
+
+22. List the onwer last name of the dogs who are of the oldest age.
+
+select T1.last_name
+from Owners as T1 JOIN Dogs as T2
+on T1.owner_id = T2.owner_id
+where T2.age = (
+select max(age)
+from Dogs
+)
+
+23. List the email of the professionals who live in the state of Hawaii or the state of Wisconsin.
+
+select email_address
+from Professionals
+where state = 'Hawaii' or state = 'Wisconsin'
+
+24. What are the arriving date and the departing date of all the dogs?
+
+select date_arrived, date_departed
+from Dogs
+
+25. How many dogs have went through any treatments?
+
+select count(distinct dog_id)
+from Treatments
+
+26. How many professionals have applied any treatment to dogs?
+
+select count(distinct professional_id)
+from Treatments
+
+27. Which professionals live in a city containing the substring 'West'? List his or her role, street, city and state.
+
+select role_code, street, city, state
+from professionals
+where city LIKE '%West%'
+
+
+28. Which owners live in the state whose name contains the substring 'North'? List his first name, last name and email.
+
+select first_name, last_name, email_address
+from Owners
+where state LIKE '%North%'
+
+29. How many dogs have an age below average?
+
+select count(*)
+from Dogs
+where age < (
+select avg(age)
+from Dogs
+)
+
+30. How much does the most recent treatment cost?
+
+select cost_of_treatment
+from Treatments
+order by date_of_treatment desc limit 1
+
+
+31. How many dogs have not gone through any treatment?
+
+select count(*)
+from Dogs
+where dog_id not in (
+select dog_id
+from Treatments
+)
+
+32. How many owners temporarily do not have any dogs?
+
+select count(*)
+from Owners
+where owner_id not in (
+select owner_id
+from Dogs
+)
+
+33. How many professionals did not operate any treatment on dogs? 
+
+select count(*)
+from Professionals
+where professional_id not in (
+	select professional_id
+	from Treatments
+)
+
+34. List the dog name, age and weight of the dogs who have been abandoned? 1 stands for yes, and 0 stands for no.
+
+select name, age, weight
+from Dogs 
+where abandoned_yn = 1
+
+35. What is the average age of all the dogs?
+
+select avg(age)
+from Dogs
+
+36. What is age of the oldest dog?
+
+select max(age)
+from Dogs
+
+37. How much does each charge type costs? List both charge type and amount.
+
+select charge_type, charge_amount
+from Charges
+
+38. How much does the most expensive charge type costs?
+
+select max(charge_amount)
+from Charges
+
+39. List the email, cell phone and home phone of the professionals
+
+select email_address, cell_number, home_phone
+from professionals
+
+40. What are all possible breed type and size type combinations?
+
+select distinct breed_code, size_code
+from dogs
+
+41. List all the professional first names and the description of the treatment he or she have done.
+
+select distinct T1.first_name, T3.treatment_type_description
+from professionals as T1 JOIN Treatments as T2
+on T1.professional_id = T2.professional_id
+JOIN Treatment_types as T3
+on T2.treatment_type_code = T3.treatment_type_code
