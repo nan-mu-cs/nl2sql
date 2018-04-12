@@ -1,7 +1,11 @@
 {
-    "label_id":"",
     "data":[
         {
+            "id":1,
+            "paraphrase":[
+                "What are the names of movies that do not have any ratings?"
+            ],
+            "question":" Find the titles of movies that don\u2019t have any rating.",
             "sqa":{
                 "question":[
                     "Which movies do not have any ratings?",
@@ -12,16 +16,16 @@
                     "SELECT title FROM movies WHERE rating IS NULL"
                 ]
             },
-            "paraphrase":[
-                "What are the names of movies that do not have any ratings?"
-            ],
-            "question":" Find the titles of movies that don\u2019t have any rating.",
-            "id":1,
             "sql":[
                 "SELECT title FROM movies WHERE rating IS NULL"
             ]
         },
         {
+            "id":2,
+            "paraphrase":[
+                "What are names of movies that have a 'G' ratings?"
+            ],
+            "question":" Find the names of movies whose rating is \u2018G\u2019.",
             "sqa":{
                 "question":[
                     "What is the name of each movie?",
@@ -32,16 +36,16 @@
                     "SELECT title FROM movies WHERE rating  =  'G'"
                 ]
             },
-            "paraphrase":[
-                "What are names of movies that have a 'G' ratings?"
-            ],
-            "question":" Find the names of movies whose rating is \u2018G\u2019.",
-            "id":2,
             "sql":[
                 "SELECT title FROM movies WHERE rating  =  'G'"
             ]
         },
         {
+            "id":3,
+            "paraphrase":[
+                "What are the movie titles for ones that are played in the Odeon theater?"
+            ],
+            "question":" Find the title of the movie that is played in the Odeon theater.",
             "sqa":{
                 "question":[
                     "What are the ids for movies played in any of the theaters?",
@@ -54,16 +58,16 @@
                     "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon'"
                 ]
             },
-            "paraphrase":[
-                "What are the movie titles for ones that are played in the Odeon theater?"
-            ],
-            "question":" Find the title of the movie that is played in the Odeon theater.",
-            "id":3,
             "sql":[
                 "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon'"
             ]
         },
         {
+            "id":4,
+            "paraphrase":[
+                "What are the names of the movies that are played in any theater and the name of the corresponding theater?"
+            ],
+            "question":" Find the names of movies that are played in any theater and the name of the corresponding theater.",
             "sqa":{
                 "question":[
                     "What are the ids of movies played in any theater?",
@@ -76,16 +80,16 @@
                     "SELECT T1.title ,  T2.name FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the movies that are played in any theater and the name of the corresponding theater?"
-            ],
-            "question":" Find the names of movies that are played in any theater and the name of the corresponding theater.",
-            "id":4,
             "sql":[
                 "SELECT T1.title ,  T2.name FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie"
             ]
         },
         {
+            "id":5,
+            "paraphrase":[
+                "How many movies had a 'G' rating?"
+            ],
+            "question":" Find the number of movies whose rating is \u2018G\u2019.",
             "sqa":{
                 "question":[
                     "What are the movies with a 'G' rating?",
@@ -96,16 +100,16 @@
                     "SELECT count(*) FROM movies WHERE rating  =  'G'"
                 ]
             },
-            "paraphrase":[
-                "How many movies had a 'G' rating?"
-            ],
-            "question":" Find the number of movies whose rating is \u2018G\u2019.",
-            "id":5,
             "sql":[
                 "SELECT count(*) FROM movies WHERE rating  =  'G'"
             ]
         },
         {
+            "id":6,
+            "paraphrase":[
+                "How many movies are playing in theaters?"
+            ],
+            "question":" How many movies are playing across all theaters?",
             "sqa":{
                 "question":[
                     "Which movies are playing in theaters?",
@@ -116,16 +120,16 @@
                     "SELECT count(*) FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie"
                 ]
             },
-            "paraphrase":[
-                "How many movies are playing in theaters?"
-            ],
-            "question":" How many movies are playing across all theaters?",
-            "id":6,
             "sql":[
                 "SELECT count(*) FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie"
             ]
         },
         {
+            "id":7,
+            "paraphrase":[
+                "How many different movies are playing?"
+            ],
+            "question":" How many distinct movies are on in theaters?",
             "sqa":{
                 "question":[
                     "What are the codes of all the movies playing in theaters?",
@@ -136,16 +140,16 @@
                     "SELECT count(DISTINCT T1.code) FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie"
                 ]
             },
-            "paraphrase":[
-                "How many different movies are playing?"
-            ],
-            "question":" How many distinct movies are on in theaters?",
-            "id":7,
             "sql":[
                 "SELECT count(DISTINCT T1.code) FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie"
             ]
         },
         {
+            "id":8,
+            "paraphrase":[
+                "How many different movie theaters exist?"
+            ],
+            "question":" How many distinct movie theaters are there?",
             "sqa":{
                 "question":[
                     "What are the different movie theater names?",
@@ -156,16 +160,16 @@
                     "SELECT count(DISTINCT name) FROM movietheaters"
                 ]
             },
-            "paraphrase":[
-                "How many different movie theaters exist?"
-            ],
-            "question":" How many distinct movie theaters are there?",
-            "id":8,
             "sql":[
                 "SELECT count(DISTINCT name) FROM movietheaters"
             ]
         },
         {
+            "id":9,
+            "paraphrase":[
+                "What is the rating of the movie what has a name including a word like 'Citizen'?"
+            ],
+            "question":" Find the rating of the movie whose name includes the word \u2018Citizen\u2019.",
             "sqa":{
                 "question":[
                     "Which movies have a title including the word 'Citizen'?",
@@ -176,16 +180,16 @@
                     "SELECT rating FROM movies WHERE title LIKE '%Citizen%'"
                 ]
             },
-            "paraphrase":[
-                "What is the rating of the movie what has a name including a word like 'Citizen'?"
-            ],
-            "question":" Find the rating of the movie whose name includes the word \u2018Citizen\u2019.",
-            "id":9,
             "sql":[
                 "SELECT rating FROM movies WHERE title LIKE '%Citizen%'"
             ]
         },
         {
+            "id":10,
+            "paraphrase":[
+                "What are the names of the movie theaters that are playing 'G' or 'PG' rated movies?"
+            ],
+            "question":" Find the name of the cinemas that are playing movies with either rating \u2018G\u2019 or rating \u2018PG\u2019.",
             "sqa":{
                 "question":[
                     "Which movies have a 'G' rating?",
@@ -198,16 +202,16 @@
                     "SELECT title FROM movies WHERE rating  =  'G' OR rating  =  'PG'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the movie theaters that are playing 'G' or 'PG' rated movies?"
-            ],
-            "question":" Find the name of the cinemas that are playing movies with either rating \u2018G\u2019 or rating \u2018PG\u2019.",
-            "id":10,
             "sql":[
                 "SELECT title FROM movies WHERE rating  =  'G' OR rating  =  'PG'"
             ]
         },
         {
+            "id":11,
+            "paraphrase":[
+                "What are the titles of all the movies that played at the Odeon or Imperial theater?"
+            ],
+            "question":" Find the name of the movies that are played in either cinema Odeon or Imperial.",
             "sqa":{
                 "question":[
                     "What are the codes of all movies that played at the Odeon theater?",
@@ -220,16 +224,16 @@
                     "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon' OR T2.name  =  'Imperial'"
                 ]
             },
-            "paraphrase":[
-                "What are the titles of all the movies that played at the Odeon or Imperial theater?"
-            ],
-            "question":" Find the name of the movies that are played in either cinema Odeon or Imperial.",
-            "id":11,
             "sql":[
                 "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon' OR T2.name  =  'Imperial'"
             ]
         },
         {
+            "id":12,
+            "paraphrase":[
+                "What movie is playing at both the Odeon and Imperial theater?"
+            ],
+            "question":" Find the name of the movie that is on in both Odeon and Imperial theaters.",
             "sqa":{
                 "question":[
                     "What are the codes for all movies playing at the 'Odeon' theater?",
@@ -242,16 +246,16 @@
                     "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon' INTERSECT SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Imperial'"
                 ]
             },
-            "paraphrase":[
-                "What movie is playing at both the Odeon and Imperial theater?"
-            ],
-            "question":" Find the name of the movie that is on in both Odeon and Imperial theaters.",
-            "id":12,
             "sql":[
                 "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon' INTERSECT SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Imperial'"
             ]
         },
         {
+            "id":13,
+            "paraphrase":[
+                "What are the names of every movie that is not playing at the Odeon theater?"
+            ],
+            "question":" Find the name of all movies that are not played in Odeon theater.",
             "sqa":{
                 "question":[
                     "What are the codes of all the movies playing at the Odeon theater?",
@@ -264,16 +268,16 @@
                     "SELECT title FROM movies EXCEPT SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of every movie that is not playing at the Odeon theater?"
-            ],
-            "question":" Find the name of all movies that are not played in Odeon theater.",
-            "id":13,
             "sql":[
                 "SELECT title FROM movies EXCEPT SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T2.name  =  'Odeon'"
             ]
         },
         {
+            "id":14,
+            "paraphrase":[
+                "\tWhat are the movie names in alphabetical order?"
+            ],
+            "question":" List in alphabetical order the titles of all movies.",
             "sqa":{
                 "question":[
                     "What are the movie names?",
@@ -284,16 +288,16 @@
                     "SELECT title FROM movies ORDER BY title"
                 ]
             },
-            "paraphrase":[
-                "\tWhat are the movie names in alphabetical order?"
-            ],
-            "question":" List in alphabetical order the titles of all movies.",
-            "id":14,
             "sql":[
                 "SELECT title FROM movies ORDER BY title"
             ]
         },
         {
+            "id":15,
+            "paraphrase":[
+                "What are the movie names sorted by rating?"
+            ],
+            "question":" Find the titles of all movies sorted by their ratings.",
             "sqa":{
                 "question":[
                     "Order the movies by ratings",
@@ -304,16 +308,16 @@
                     "SELECT title FROM movies ORDER BY rating"
                 ]
             },
-            "paraphrase":[
-                "What are the movie names sorted by rating?"
-            ],
-            "question":" Find the titles of all movies sorted by their ratings.",
-            "id":15,
             "sql":[
                 "SELECT title FROM movies ORDER BY rating"
             ]
         },
         {
+            "id":16,
+            "paraphrase":[
+                "What is the name of the theater playing the most movies?"
+            ],
+            "question":" Find the name of the theater that is playing the most number of movies.",
             "sqa":{
                 "question":[
                     "What are the names of the movie theaters?",
@@ -326,16 +330,16 @@
                     "SELECT name FROM movietheaters GROUP BY name ORDER BY count(*) DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "What is the name of the theater playing the most movies?"
-            ],
-            "question":" Find the name of the theater that is playing the most number of movies.",
-            "id":16,
             "sql":[
                 "SELECT name FROM movietheaters GROUP BY name ORDER BY count(*) DESC LIMIT 1"
             ]
         },
         {
+            "id":17,
+            "paraphrase":[
+                "What is the name of the film playing at the most number of theaters?"
+            ],
+            "question":" Find the name of the movie that is played in the most number of theaters.",
             "sqa":{
                 "question":[
                     "How many theaters is each movie playing at?",
@@ -348,16 +352,16 @@
                     "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie GROUP BY T1.title ORDER BY count(*) DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "What is the name of the film playing at the most number of theaters?"
-            ],
-            "question":" Find the name of the movie that is played in the most number of theaters.",
-            "id":17,
             "sql":[
                 "SELECT T1.title FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie GROUP BY T1.title ORDER BY count(*) DESC LIMIT 1"
             ]
         },
         {
+            "id":18,
+            "paraphrase":[
+                "How many movies exist for each rating?"
+            ],
+            "question":" Find the number of movies in each rating.",
             "sqa":{
                 "question":[
                     "What are the distinct ratings for all movies?",
@@ -368,16 +372,17 @@
                     "SELECT count(*) ,  rating FROM movies GROUP BY rating"
                 ]
             },
-            "paraphrase":[
-                "How many movies exist for each rating?"
-            ],
-            "question":" Find the number of movies in each rating.",
-            "id":18,
             "sql":[
                 "SELECT count(*) ,  rating FROM movies GROUP BY rating"
             ]
         },
         {
+            "id":19,
+            "paraphrase":[
+                "How many movies have a rating that is not null?",
+                "How many movies are there for each non-NULL rating?"
+            ],
+            "question":" Find the number of movies whose rating is not null.",
             "sqa":{
                 "question":[
                     "What are the unique ratings for all movies?",
@@ -390,17 +395,16 @@
                     "SELECT count(*) ,  rating FROM movies WHERE rating IS NOT NULL GROUP BY rating"
                 ]
             },
-            "paraphrase":[
-                "How many movies have a rating that is not null?",
-                "How many movies are there for each non-NULL rating?"
-            ],
-            "question":" Find the number of movies whose rating is not null.",
-            "id":19,
             "sql":[
                 "SELECT count(*) ,  rating FROM movies WHERE rating IS NOT NULL GROUP BY rating"
             ]
         },
         {
+            "id":20,
+            "paraphrase":[
+                "What are the names of every theater with at least one movie playing?"
+            ],
+            "question":" Find the name of theaters that has at least one movie playing.",
             "sqa":{
                 "question":[
                     "Which theaters have film on?",
@@ -413,16 +417,16 @@
                     "SELECT name FROM movietheaters GROUP BY name HAVING count(*)  >=  1"
                 ]
             },
-            "paraphrase":[
-                "What are the names of every theater with at least one movie playing?"
-            ],
-            "question":" Find the name of theaters that has at least one movie playing.",
-            "id":20,
             "sql":[
                 "SELECT name FROM movietheaters GROUP BY name HAVING count(*)  >=  1"
             ]
         },
         {
+            "id":21,
+            "paraphrase":[
+                "What are the names of all cinemas not showing any movies?"
+            ],
+            "question":" Select the name of all movie theaters that are not currently showing a movie.",
             "sqa":{
                 "question":[
                     "What are the names of every movie theater?",
@@ -433,16 +437,16 @@
                     "SELECT DISTINCT name FROM MovieTheaters WHERE Movie IS NULL"
                 ]
             },
-            "paraphrase":[
-                "What are the names of all cinemas not showing any movies?"
-            ],
-            "question":" Select the name of all movie theaters that are not currently showing a movie.",
-            "id":21,
             "sql":[
                 "SELECT DISTINCT name FROM MovieTheaters WHERE Movie IS NULL"
             ]
         },
         {
+            "id":22,
+            "paraphrase":[
+                "What are the names of theaters playing 'G' rated movies?"
+            ],
+            "question":" Find the name of the movie theaters that are playing the movies whose rating is \u2018G\u2019.",
             "sqa":{
                 "question":[
                     "Which movies are 'G'-rated?",
@@ -455,16 +459,16 @@
                     "SELECT T2.name FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T1.rating  =  'G'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of theaters playing 'G' rated movies?"
-            ],
-            "question":" Find the name of the movie theaters that are playing the movies whose rating is \u2018G\u2019.",
-            "id":22,
             "sql":[
                 "SELECT T2.name FROM movies AS T1 JOIN movietheaters AS T2 ON T1.code  =  T2.movie WHERE T1.rating  =  'G'"
             ]
         },
         {
+            "id":23,
+            "paraphrase":[
+                "What are all of the movie names?"
+            ],
+            "question":" Select the title of all movies.",
             "sqa":{
                 "question":[
                     "What are all the movies?",
@@ -475,16 +479,16 @@
                     "SELECT title FROM movie"
                 ]
             },
-            "paraphrase":[
-                "What are all of the movie names?"
-            ],
-            "question":" Select the title of all movies.",
-            "id":23,
             "sql":[
                 "SELECT title FROM movie"
             ]
         },
         {
+            "id":24,
+            "paraphrase":[
+                "What are the different movie ratings?"
+            ],
+            "question":" Show all the distinct ratings in the database.",
             "sqa":{
                 "question":[
                     "What is all the information about the movies?",
@@ -497,16 +501,16 @@
                     "SELECT DISTINCT rating FROM movies"
                 ]
             },
-            "paraphrase":[
-                "What are the different movie ratings?"
-            ],
-            "question":" Show all the distinct ratings in the database.",
-            "id":24,
             "sql":[
                 "SELECT DISTINCT rating FROM movies"
             ]
         },
         {
+            "id":25,
+            "paraphrase":[
+                "What is all the information about the unrated movies?"
+            ],
+            "question":" Show all information of all unrated movies.",
             "sqa":{
                 "question":[
                     "Show all information about the movies",
@@ -517,16 +521,15 @@
                     "SELECT * FROM movies WHERE rating IS NULL"
                 ]
             },
-            "paraphrase":[
-                "What is all the information about the unrated movies?"
-            ],
-            "question":" Show all information of all unrated movies.",
-            "id":25,
             "sql":[
                 "SELECT * FROM movies WHERE rating IS NULL"
             ]
         },
         {
+            "paraphrase":[
+                "What are the names of the movies not being shown in any theaters?"
+            ],
+            "question":" Show the titles of movies not currently being shown in any theaters.",
             "sqa":{
                 "question":[
                     "What are all the movies shown in the theaters?",
@@ -539,14 +542,11 @@
                     "SELECT Title FROM Movies WHERE Code NOT IN"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the movies not being shown in any theaters?"
-            ],
-            "question":" Show the titles of movies not currently being shown in any theaters.",
             "sql":[
                 "SELECT Title FROM Movies WHERE Code NOT IN"
             ]
         }
     ],
+    "label_id":"",
     "review_id":""
 }

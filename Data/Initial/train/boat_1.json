@@ -1,7 +1,11 @@
 {
-    "label_id":"",
     "data":[
         {
+            "id":1,
+            "paraphrase":[
+                "What can you tell me about sailors who are older than age 30?"
+            ],
+            "question":" Return all details of sailors who are older than 30.",
             "sqa":{
                 "question":[
                     "Return all details about the sailors",
@@ -12,16 +16,16 @@
                     "SELECT * FROM Sailors WHERE age  >  30"
                 ]
             },
-            "paraphrase":[
-                "What can you tell me about sailors who are older than age 30?"
-            ],
-            "question":" Return all details of sailors who are older than 30.",
-            "id":1,
             "sql":[
                 "SELECT * FROM Sailors WHERE age  >  30"
             ]
         },
         {
+            "id":2,
+            "paraphrase":[
+                "What is the name and age of every sailor who is younger than age 30?"
+            ],
+            "question":" Return name and age for sailors who are younger than 30.",
             "sqa":{
                 "question":[
                     "What is the name of every sailor?",
@@ -34,16 +38,16 @@
                     "SELECT name ,  age FROM Sailors WHERE age  <  30"
                 ]
             },
-            "paraphrase":[
-                "What is the name and age of every sailor who is younger than age 30?"
-            ],
-            "question":" Return name and age for sailors who are younger than 30.",
-            "id":2,
             "sql":[
                 "SELECT name ,  age FROM Sailors WHERE age  <  30"
             ]
         },
         {
+            "id":3,
+            "paraphrase":[
+                "What are the different boat ids reserved by the sailor whose id is 1?"
+            ],
+            "question":" Find boats reserved by Sailor with id 1.",
             "sqa":{
                 "question":[
                     "Tell me all the information about the reservations.",
@@ -56,16 +60,16 @@
                     "SELECT DISTINCT bid FROM Reserves WHERE sid = 1"
                 ]
             },
-            "paraphrase":[
-                "What are the different boat ids reserved by the sailor whose id is 1?"
-            ],
-            "question":" Find boats reserved by Sailor with id 1.",
-            "id":3,
             "sql":[
                 "SELECT DISTINCT bid FROM Reserves WHERE sid = 1"
             ]
         },
         {
+            "id":4,
+            "paraphrase":[
+                "What is the name of the sailor who reserved boat 102?"
+            ],
+            "question":" Who reserved boat 102?",
             "sqa":{
                 "question":[
                     "What are the names of all the sailors?",
@@ -76,16 +80,14 @@
                     "SELECT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE T2.bid  =  102"
                 ]
             },
-            "paraphrase":[
-                "What is the name of the sailor who reserved boat 102?"
-            ],
-            "question":" Who reserved boat 102?",
-            "id":4,
             "sql":[
                 "SELECT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE T2.bid  =  102"
             ]
         },
         {
+            "id":5,
+            "paraphrase":[],
+            "question":" Return the unique boat ids (bid) of all reserved boats.",
             "sqa":{
                 "question":[
                     "Return all information about the reserved boats.",
@@ -96,14 +98,16 @@
                     "SELECT DISTINCT bid FROM Reserves"
                 ]
             },
-            "paraphrase":[],
-            "question":" Return the unique boat ids (bid) of all reserved boats.",
-            "id":5,
             "sql":[
                 "SELECT DISTINCT bid FROM Reserves"
             ]
         },
         {
+            "id":6,
+            "paraphrase":[
+                "What is the name of every sailor whose name contains the letter e?"
+            ],
+            "question":" What is the name of sailors whose names contain letter e?",
             "sqa":{
                 "question":[
                     "What is the name of every sailor?",
@@ -114,16 +118,16 @@
                     "SELECT name FROM Sailors WHERE name LIKE '%e%'"
                 ]
             },
-            "paraphrase":[
-                "What is the name of every sailor whose name contains the letter e?"
-            ],
-            "question":" What is the name of sailors whose names contain letter e?",
-            "id":6,
             "sql":[
                 "SELECT name FROM Sailors WHERE name LIKE '%e%'"
             ]
         },
         {
+            "id":7,
+            "paraphrase":[
+                "What is the different id of every sailor who is not the youngest?"
+            ],
+            "question":" return the unique ids of sailors who are older than any sailors.",
             "sqa":{
                 "question":[
                     "What are the different ids of every sailor?",
@@ -134,16 +138,16 @@
                     "SELECT DISTINCT sid FROM Sailors WHERE age  >  (SELECT min(age) FROM Sailors);"
                 ]
             },
-            "paraphrase":[
-                "What is the different id of every sailor who is not the youngest?"
-            ],
-            "question":" return the unique ids of sailors who are older than any sailors.",
-            "id":7,
             "sql":[
                 "SELECT DISTINCT sid FROM Sailors WHERE age  >  (SELECT min(age) FROM Sailors);"
             ]
         },
         {
+            "id":8,
+            "paraphrase":[
+                "What are the different names of sailors who are older than some other sailor with a rating larger than 7?"
+            ],
+            "question":" Return the unique names of sailors who are older than any sailors whose rating is larger than 7.",
             "sqa":{
                 "question":[
                     "Which sailors have a rating greater than 7?",
@@ -156,16 +160,16 @@
                     "SELECT DISTINCT name FROM Sailors WHERE age  >  (SELECT min(age) FROM Sailors WHERE rating  >  7);"
                 ]
             },
-            "paraphrase":[
-                "What are the different names of sailors who are older than some other sailor with a rating larger than 7?"
-            ],
-            "question":" Return the unique names of sailors who are older than any sailors whose rating is larger than 7.",
-            "id":8,
             "sql":[
                 "SELECT DISTINCT name FROM Sailors WHERE age  >  (SELECT min(age) FROM Sailors WHERE rating  >  7);"
             ]
         },
         {
+            "id":9,
+            "paraphrase":[
+                "What is the name and id of every sailor who reserved one or more boats?"
+            ],
+            "question":"Find the name and id of the sailors who reserved at least one boat?",
             "sqa":{
                 "question":[
                     "What are the different sailor names?",
@@ -178,16 +182,16 @@
                     "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid"
                 ]
             },
-            "paraphrase":[
-                "What is the name and id of every sailor who reserved one or more boats?"
-            ],
-            "question":"Find the name and id of the sailors who reserved at least one boat?",
-            "id":9,
             "sql":[
                 "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid"
             ]
         },
         {
+            "id":10,
+            "paraphrase":[
+                "What are the different names of sailors who reserved two or more boats?"
+            ],
+            "question":" Find the id and name of the sailors who reserved more than one boat.",
             "sqa":{
                 "question":[
                     "What are the different sailors' names and ids?",
@@ -200,16 +204,16 @@
                     "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid GROUP BY T2.sid HAVING COUNT(*)  >  1"
                 ]
             },
-            "paraphrase":[
-                "What are the different names of sailors who reserved two or more boats?"
-            ],
-            "question":" Find the id and name of the sailors who reserved more than one boat.",
-            "id":10,
             "sql":[
                 "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid GROUP BY T2.sid HAVING COUNT(*)  >  1"
             ]
         },
         {
+            "id":11,
+            "paraphrase":[
+                "What are the sids for sailors who reserved red or blue boats?"
+            ],
+            "question":" Find the id of Sailors (sid) that reserved red or blue boat.",
             "sqa":{
                 "question":[
                     "What are the ids of boats that are blue?",
@@ -222,16 +226,16 @@
                     "SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  'red' OR T1.color  =  \"blue\""
                 ]
             },
-            "paraphrase":[
-                "What are the sids for sailors who reserved red or blue boats?"
-            ],
-            "question":" Find the id of Sailors (sid) that reserved red or blue boat.",
-            "id":11,
             "sql":[
                 "SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  'red' OR T1.color  =  \"blue\""
             ]
         },
         {
+            "id":12,
+            "paraphrase":[
+                "What are the names and ids of sailors who reserved red or blue boats?"
+            ],
+            "question":" Find the name and id of Sailors (sid) that reserved red or blue boat.",
             "sqa":{
                 "question":[
                     "What are the ids of boats that are blue?",
@@ -244,16 +248,16 @@
                     "SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  'red' OR T1.color  =  \"blue\""
                 ]
             },
-            "paraphrase":[
-                "What are the names and ids of sailors who reserved red or blue boats?"
-            ],
-            "question":" Find the name and id of Sailors (sid) that reserved red or blue boat.",
-            "id":12,
             "sql":[
                 "SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  'red' OR T1.color  =  \"blue\""
             ]
         },
         {
+            "id":13,
+            "paraphrase":[
+                "What are the ids of sailors who reserved red and blue boats?"
+            ],
+            "question":" Find the id of Sailors (sid) that reserved red and blue boat.",
             "sqa":{
                 "question":[
                     "What are the ids of all the different blue boats?",
@@ -266,16 +270,16 @@
                     "SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  'red' INTERSECT SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  \"blue\""
                 ]
             },
-            "paraphrase":[
-                "What are the ids of sailors who reserved red and blue boats?"
-            ],
-            "question":" Find the id of Sailors (sid) that reserved red and blue boat.",
-            "id":13,
             "sql":[
                 "SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  'red' INTERSECT SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  \"blue\""
             ]
         },
         {
+            "id":14,
+            "paraphrase":[
+                "What are the names and ids of sailors who reserved red and blue boats?"
+            ],
+            "question":" Find the name and id of Sailors (sid) that reserved red and blue boat.",
             "sqa":{
                 "question":[
                     "What are the ids of boats that are blue?",
@@ -288,16 +292,16 @@
                     "SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  'red' INTERSECT SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  \"blue\""
                 ]
             },
-            "paraphrase":[
-                "What are the names and ids of sailors who reserved red and blue boats?"
-            ],
-            "question":" Find the name and id of Sailors (sid) that reserved red and blue boat.",
-            "id":14,
             "sql":[
                 "SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  'red' INTERSECT SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  \"blue\""
             ]
         },
         {
+            "id":15,
+            "paraphrase":[
+                "What are the ids of sailors who have not reserved a boat?"
+            ],
+            "question":" What is the ids of sailors that haven\u2019t reserved a boat?",
             "sqa":{
                 "question":[
                     "What are all the sailor ids?",
@@ -310,16 +314,16 @@
                     "SELECT sid FROM Sailors EXCEPT SELECT sid FROM Reserves"
                 ]
             },
-            "paraphrase":[
-                "What are the ids of sailors who have not reserved a boat?"
-            ],
-            "question":" What is the ids of sailors that haven\u2019t reserved a boat?",
-            "id":15,
             "sql":[
                 "SELECT sid FROM Sailors EXCEPT SELECT sid FROM Reserves"
             ]
         },
         {
+            "id":16,
+            "paraphrase":[
+                "What are the names and ids of all sailors who do not have boat reservations?"
+            ],
+            "question":" what is the name and id of sailors who do not have a reservation of a boat?",
             "sqa":{
                 "question":[
                     "What are the all the sailor ids and names?",
@@ -332,16 +336,16 @@
                     "SELECT sid ,  name FROM Sailors EXCEPT SELECT T1.sid ,  T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid"
                 ]
             },
-            "paraphrase":[
-                "What are the names and ids of all sailors who do not have boat reservations?"
-            ],
-            "question":" what is the name and id of sailors who do not have a reservation of a boat?",
-            "id":16,
             "sql":[
                 "SELECT sid ,  name FROM Sailors EXCEPT SELECT T1.sid ,  T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid"
             ]
         },
         {
+            "id":17,
+            "paraphrase":[
+                "What is all the information about sailors who do not have boat reservations?"
+            ],
+            "question":" Find all information for the sailors who do not have a reservation of a boat?",
             "sqa":{
                 "question":[
                     "Which sailors have boat reservations?",
@@ -352,16 +356,16 @@
                     "SELECT * FROM SAILORS EXCEPT SELECT T1.* FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid"
                 ]
             },
-            "paraphrase":[
-                "What is all the information about sailors who do not have boat reservations?"
-            ],
-            "question":" Find all information for the sailors who do not have a reservation of a boat?",
-            "id":17,
             "sql":[
                 "SELECT * FROM Sailors EXCEPT SELECT T1.* FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid"
             ]
         },
         {
+            "id":18,
+            "paraphrase":[
+                "Find the name of the sailors who reserved boat with id 103."
+            ],
+            "question":" What is the name of the sailors who reserved boat with id 103?",
             "sqa":{
                 "question":[
                     "What can you tell me about the reservation for the boat with id 103?",
@@ -374,16 +378,16 @@
                     "SELECT DISTINCT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE  T2.bid  =  103"
                 ]
             },
-            "paraphrase":[
-                "Find the name of the sailors who reserved boat with id 103."
-            ],
-            "question":" What is the name of the sailors who reserved boat with id 103?",
-            "id":18,
             "sql":[
                 "SELECT DISTINCT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE  T2.bid  =  103"
             ]
         },
         {
+            "id":19,
+            "paraphrase":[
+                "What are the sailors' names, the ones whose rating is higher than any sailor named Luis?"
+            ],
+            "question":" What is the name of all sailors whose rating is higher than any sailor named Luis?",
             "sqa":{
                 "question":[
                     "What are the ratings of all sailors named Luis?",
@@ -396,16 +400,16 @@
                     "SELECT name FROM Sailors WHERE rating  >  (SELECT min(rating) FROM Sailors WHERE name  =  'Luis')"
                 ]
             },
-            "paraphrase":[
-                "What are the sailors' names, the ones whose rating is higher than any sailor named Luis?"
-            ],
-            "question":" What is the name of all sailors whose rating is higher than any sailor named Luis?",
-            "id":19,
             "sql":[
                 "SELECT name FROM Sailors WHERE rating  >  (SELECT min(rating) FROM Sailors WHERE name  =  'Luis')"
             ]
         },
         {
+            "id":20,
+            "paraphrase":[
+                "What are the names of all sailors with a higher rating than every sailor named Luis?"
+            ],
+            "question":" What is the name of all sailors whose rating is higher than all sailors named Luis?",
             "sqa":{
                 "question":[
                     "What are the ratings of every sailor named Luis?",
@@ -418,16 +422,16 @@
                     "SELECT name FROM Sailors WHERE rating  >  (SELECT max(rating) FROM Sailors WHERE name  =  'Luis')"
                 ]
             },
-            "paraphrase":[
-                "What are the names of all sailors with a higher rating than every sailor named Luis?"
-            ],
-            "question":" What is the name of all sailors whose rating is higher than all sailors named Luis?",
-            "id":20,
             "sql":[
                 "SELECT name FROM Sailors WHERE rating  >  (SELECT max(rating) FROM Sailors WHERE name  =  'Luis')"
             ]
         },
         {
+            "id":21,
+            "paraphrase":[
+                "What are the names and ids of all sailors who have a rating of at least 3 and reserved a boat?"
+            ],
+            "question":" what is the name and id of every sailor who has a rating greater than 2 and reserved a boat.",
             "sqa":{
                 "question":[
                     "What are the different names and sailor ids?",
@@ -440,16 +444,16 @@
                     "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE  T1.rating  >=  3"
                 ]
             },
-            "paraphrase":[
-                "What are the names and ids of all sailors who have a rating of at least 3 and reserved a boat?"
-            ],
-            "question":" what is the name and id of every sailor who has a rating greater than 2 and reserved a boat.",
-            "id":21,
             "sql":[
                 "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE  T1.rating  >  2"
             ]
         },
         {
+            "id":22,
+            "paraphrase":[
+                "What is the name and age of the sailor with maximum age?"
+            ],
+            "question":" Find the name and age of the oldest sailor.",
             "sqa":{
                 "question":[
                     "What is the age of every sailor?",
@@ -462,16 +466,16 @@
                     "SELECT name ,  max(age) FROM Sailors"
                 ]
             },
-            "paraphrase":[
-                "What is the name and age of the sailor with maximum age?"
-            ],
-            "question":" Find the name and age of the oldest sailor.",
-            "id":22,
             "sql":[
                 "SELECT name ,  age FROM Sailors WHERE age  = "
             ]
         },
         {
+            "id":23,
+            "paraphrase":[
+                "How many sailors exist?"
+            ],
+            "question":" how many sailors in total?",
             "sqa":{
                 "question":[
                     "Tell me what information you have on sailors",
@@ -482,16 +486,16 @@
                     "SELECT COUNT(*) FROM Sailors"
                 ]
             },
-            "paraphrase":[
-                "How many sailors exist?"
-            ],
-            "question":" how many sailors in total?",
-            "id":23,
             "sql":[
                 "SELECT COUNT(*) FROM Sailors"
             ]
         },
         {
+            "id":24,
+            "paraphrase":[
+                "What is average age of all sailors who have a rating of 7?"
+            ],
+            "question":" What is the average age of sailors whose rating is 7?",
             "sqa":{
                 "question":[
                     "What is age of every sailor?",
@@ -504,16 +508,16 @@
                     "SELECT AVG(age) FROM Sailors WHERE rating  =  7"
                 ]
             },
-            "paraphrase":[
-                "What is average age of all sailors who have a rating of 7?"
-            ],
-            "question":" What is the average age of sailors whose rating is 7?",
-            "id":24,
             "sql":[
                 "SELECT AVG(age) FROM Sailors WHERE rating  =  7"
             ]
         },
         {
+            "id":25,
+            "paraphrase":[
+                "What is the count of the sailors whose name starts with letter D?"
+            ],
+            "question":" How many unique sailors whose name starts with letter D exist?",
             "sqa":{
                 "question":[
                     "What can you tell me about sailors whose name starts with D?",
@@ -526,16 +530,16 @@
                     "SELECT COUNT(DISTINCT name) FROM Sailors WHERE name LIKE 'D%'"
                 ]
             },
-            "paraphrase":[
-                "What is the count of the sailors whose name starts with letter D?"
-            ],
-            "question":" How many unique sailors whose name starts with letter D exist?",
-            "id":25,
             "sql":[
                 "SELECT COUNT(DISTINCT name) FROM Sailors WHERE name LIKE 'D%'"
             ]
         },
         {
+            "id":26,
+            "paraphrase":[
+                "Find the average rating and largest age for the sailors"
+            ],
+            "question":" What are the average rating and max age of all sailors?",
             "sqa":{
                 "question":[
                     "What is the average rating for sailors?",
@@ -545,16 +549,16 @@
                     "SELECT AVG(rating) ,  MAX(age) FROM Sailors"
                 ]
             },
-            "paraphrase":[
-                "Find the average rating and largest age for the sailors"
-            ],
-            "question":" What are the average rating and max age of all sailors?",
-            "id":26,
             "sql":[
                 "SELECT AVG(rating) ,  MAX(age) FROM Sailors"
             ]
         },
         {
+            "id":27,
+            "paraphrase":[
+                "How many reservations exist for each boat?"
+            ],
+            "question":" Find the number of reservations for each boat.",
             "sqa":{
                 "question":[
                     "What are the boat ids for reservations?",
@@ -565,16 +569,16 @@
                     "SELECT bid ,  count(*) FROM Reserves GROUP BY bid"
                 ]
             },
-            "paraphrase":[
-                "How many reservations exist for each boat?"
-            ],
-            "question":" Find the number of reservations for each boat.",
-            "id":27,
             "sql":[
                 "SELECT bid ,  count(*) FROM Reserves GROUP BY bid"
             ]
         },
         {
+            "id":28,
+            "paraphrase":[
+                "How many reservations exist for each boat with an id greater than 50?"
+            ],
+            "question":" Find the number of reservations for each boat with id greater than 50.",
             "sqa":{
                 "question":[
                     "What are all the boat ids listed for reservations?",
@@ -587,16 +591,16 @@
                     "SELECT bid ,  count(*) FROM Reserves GROUP BY bid HAVING bid  >  50"
                 ]
             },
-            "paraphrase":[
-                "How many reservations exist for each boat with an id greater than 50?"
-            ],
-            "question":" Find the number of reservations for each boat with id greater than 50.",
-            "id":28,
             "sql":[
                 "SELECT bid ,  count(*) FROM Reserves GROUP BY bid HAVING bid  >  50"
             ]
         },
         {
+            "id":29,
+            "paraphrase":[
+                "How many reservations exist for each boat that has more than 1 reservation already?"
+            ],
+            "question":" Find the number of reservations for each boat with more than 1 reservation.",
             "sqa":{
                 "question":[
                     "How many reservations exist for each boat?",
@@ -607,16 +611,16 @@
                     "SELECT bid ,  count(*) FROM Reserves GROUP BY bid HAVING count(*)  >  1"
                 ]
             },
-            "paraphrase":[
-                "How many reservations exist for each boat that has more than 1 reservation already?"
-            ],
-            "question":" Find the number of reservations for each boat with more than 1 reservation.",
-            "id":29,
             "sql":[
                 "SELECT bid ,  count(*) FROM Reserves GROUP BY bid HAVING count(*)  >  1"
             ]
         },
         {
+            "id":30,
+            "paraphrase":[
+                "How many reservations for each boat did the sailors with an id greater than 1 make?"
+            ],
+            "question":" Find the number of reservations by sailors with id greater than 1 for each boat.",
             "sqa":{
                 "question":[
                     "What are the boat ids for all boats reserved by a sailor with an id greater than 1?",
@@ -627,16 +631,16 @@
                     "SELECT bid ,  count(*) FROM Reserves WHERE sid  >  1 GROUP BY bid"
                 ]
             },
-            "paraphrase":[
-                "How many reservations for each boat did the sailors with an id greater than 1 make?"
-            ],
-            "question":" Find the number of reservations by sailors with id greater than 1 for each boat.",
-            "id":30,
             "sql":[
                 "SELECT bid ,  count(*) FROM Reserves WHERE sid  >  1 GROUP BY bid"
             ]
         },
         {
+            "id":31,
+            "paraphrase":[
+                "What are the rating and average age for sailors who reserved red boats for each rating?"
+            ],
+            "question":" What is the rating and average age for sailors who have reserved red boat grouped by rating?",
             "sqa":{
                 "question":[
                     "List the sids of the sailors who reserved a boat.",
@@ -649,16 +653,16 @@
                     "SELECT avg(T1.age) ,  T1.rating FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.color  =  'red' GROUP BY T1.rating"
                 ]
             },
-            "paraphrase":[
-                "What are the rating and average age for sailors who reserved red boats for each rating?"
-            ],
-            "question":" What is the rating and average age for sailors who have reserved red boat grouped by rating?",
-            "id":31,
             "sql":[
                 "SELECT T1.rating ,  avg(T1.age) FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.color  =  'red' GROUP BY T1.rating"
             ]
         },
         {
+            "id":32,
+            "paraphrase":[
+                "What is the name, rating, and age for every sailor? And order them by rating and age."
+            ],
+            "question":" Find the name, rating and age of all sailors ordered by rating and age.",
             "sqa":{
                 "question":[
                     "What are the ratings and age of every sailor?",
@@ -671,16 +675,16 @@
                     "SELECT name ,  rating ,  age FROM Sailors ORDER BY rating ,  age"
                 ]
             },
-            "paraphrase":[
-                "What is the name, rating, and age for every sailor? And order them by rating and age."
-            ],
-            "question":" Find the name, rating and age of all sailors ordered by rating and age.",
-            "id":32,
             "sql":[
                 "SELECT name ,  rating ,  age FROM Sailors ORDER BY rating ,  age"
             ]
         },
         {
+            "id":33,
+            "paraphrase":[
+                "How many boats are there?"
+            ],
+            "question":" Find the total number of boats.",
             "sqa":{
                 "question":[
                     "Tell me everything about the boats.",
@@ -691,16 +695,16 @@
                     "SELECT count(*) FROM Boats"
                 ]
             },
-            "paraphrase":[
-                "How many boats are there?"
-            ],
-            "question":" Find the total number of boats.",
-            "id":33,
             "sql":[
                 "SELECT count(*) FROM Boats"
             ]
         },
         {
+            "id":34,
+            "paraphrase":[
+                "How many red boats exist?"
+            ],
+            "question":" How many boats are red?",
             "sqa":{
                 "question":[
                     "How many boats are there?",
@@ -711,16 +715,16 @@
                     "SELECT count(*) FROM Boats WHERE color  =  'red'"
                 ]
             },
-            "paraphrase":[
-                "How many red boats exist?"
-            ],
-            "question":" How many boats are red?",
-            "id":34,
             "sql":[
                 "SELECT count(*) FROM Boats WHERE color  =  'red'"
             ]
         },
         {
+            "id":35,
+            "paraphrase":[
+                "What are the names of the boats booked by people between age 20 and 30?"
+            ],
+            "question":" Find the names of boats booked by sailors whose age is between 20 and 30.",
             "sqa":{
                 "question":[
                     "What are the ids of the sailors that are between age 20 and 30?",
@@ -731,16 +735,16 @@
                     "SELECT T3.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T1.age BETWEEN 20 AND 30"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the boats booked by people between age 20 and 30?"
-            ],
-            "question":" Find the names of boats booked by sailors whose age is between 20 and 30.",
-            "id":35,
             "sql":[
                 "SELECT T3.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T1.age BETWEEN 20 AND 30"
             ]
         },
         {
+            "id":36,
+            "paraphrase":[
+                "What are the names of the sailors whose rating is larger than the rating of all sailors who booked a red boat?"
+            ],
+            "question":" Find the names of sailors whose rating is larger than the rating of all sailors who booked a red boat.",
             "sqa":{
                 "question":[
                     "What are the ids of all the sailors who booked a red boat?",
@@ -753,16 +757,16 @@
                     "SELECT name FROM Sailors WHERE rating  >  (SELECT max(T1.rating) FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.color  =  'red')"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the sailors whose rating is larger than the rating of all sailors who booked a red boat?"
-            ],
-            "question":" Find the names of sailors whose rating is larger than the rating of all sailors who booked a red boat.",
-            "id":36,
             "sql":[
                 "SELECT name FROM Sailors WHERE rating  >  (SELECT max(T1.rating) FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.color  =  'red')"
             ]
         },
         {
+            "id":37,
+            "paraphrase":[
+                "What is the maximum rating for sailors?"
+            ],
+            "question":" What is highest rating between sailors?",
             "sqa":{
                 "question":[
                     "What are the ratings for each sailor?",
@@ -773,16 +777,14 @@
                     "SELECT max(rating) FROM Sailors"
                 ]
             },
-            "paraphrase":[
-                "What is the maximum rating for sailors?"
-            ],
-            "question":" What is highest rating between sailors?",
-            "id":37,
             "sql":[
                 "SELECT max(rating) FROM Sailors"
             ]
         },
         {
+            "id":38,
+            "paraphrase":[],
+            "question":" Find the names of sailors who reserved boat with the name Melon.",
             "sqa":{
                 "question":[
                     "What are the ids of the boats whose name is Melon?",
@@ -793,14 +795,13 @@
                     "SELECT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.name  =  'Melon'"
                 ]
             },
-            "paraphrase":[],
-            "question":" Find the names of sailors who reserved boat with the name Melon.",
-            "id":38,
             "sql":[
                 "SELECT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.name  =  'Melon'"
             ]
         },
         {
+            "paraphrase":[],
+            "question":" List the names and ages of all sailors sorted by rating in descending order.",
             "sqa":{
                 "question":[
                     "Order everything you know about sailors by rating in descending order",
@@ -813,12 +814,11 @@
                     "SELECT name ,  age FROM Sailors ORDER BY rating DESC"
                 ]
             },
-            "paraphrase":[],
-            "question":" List the names and ages of all sailors sorted by rating in descending order.",
             "sql":[
                 "SELECT name ,  age FROM Sailors ORDER BY rating DESC"
             ]
         }
     ],
+    "label_id":"",
     "review_id":""
 }

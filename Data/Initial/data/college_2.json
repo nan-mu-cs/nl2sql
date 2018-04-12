@@ -1,7 +1,11 @@
 {
-    "label_id":"",
     "data":[
         {
+            "id":1,
+            "paraphrase":[
+                "What are the distinct buildings with capacities of greater than 50?"
+            ],
+            "question":" Find the buildings which have rooms with capacity more than 50.",
             "sqa":{
                 "question":[
                     "What are the distinct classroom buildings?",
@@ -12,16 +16,16 @@
                     "SELECT DISTINCT building FROM classroom WHERE capacity  >  50"
                 ]
             },
-            "paraphrase":[
-                "What are the distinct buildings with capacities of greater than 50?"
-            ],
-            "question":" Find the buildings which have rooms with capacity more than 50.",
-            "id":1,
             "sql":[
                 "SELECT DISTINCT building FROM classroom WHERE capacity  >  50"
             ]
         },
         {
+            "id":2,
+            "paraphrase":[
+                "How many classrooms are not in Lamberton?"
+            ],
+            "question":" Count the number of rooms that are not in the Lamberton building.",
             "sqa":{
                 "question":[
                     "Which classrooms are not in Lamberton?",
@@ -32,16 +36,16 @@
                     "SELECT count(*) FROM classroom WHERE building ! =  'Lamberton'"
                 ]
             },
-            "paraphrase":[
-                "How many classrooms are not in Lamberton?"
-            ],
-            "question":" Count the number of rooms that are not in the Lamberton building.",
-            "id":2,
             "sql":[
                 "SELECT count(*) FROM classroom WHERE building ! =  'Lamberton'"
             ]
         },
         {
+            "id":3,
+            "paraphrase":[
+                "Give the name and building of the departments with greater than average budget."
+            ],
+            "question":" What is the name and building of the departments whose budget is more than the average budget?",
             "sqa":{
                 "question":[
                     "What is the average department budget?",
@@ -54,16 +58,16 @@
                     "SELECT dept_name ,  building FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
                 ]
             },
-            "paraphrase":[
-                "Give the name and building of the departments with greater than average budget."
-            ],
-            "question":" What is the name and building of the departments whose budget is more than the average budget?",
-            "id":3,
             "sql":[
                 "SELECT dept_name ,  building FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
             ]
         },
         {
+            "id":4,
+            "paraphrase":[
+                "What are the room numbers and corresponding buildings for classrooms which can seat between 50 to 100 students?"
+            ],
+            "question":" Find the room number of the rooms which can sit 50 to 100 students and their buildings.",
             "sqa":{
                 "question":[
                     "Which classrooms have capacity between 50 and 100?",
@@ -74,16 +78,16 @@
                     "SELECT building ,  room_number FROM classroom WHERE capacity BETWEEN 50 AND 100"
                 ]
             },
-            "paraphrase":[
-                "What are the room numbers and corresponding buildings for classrooms which can seat between 50 to 100 students?"
-            ],
-            "question":" Find the room number of the rooms which can sit 50 to 100 students and their buildings.",
-            "id":4,
             "sql":[
                 "SELECT building ,  room_number FROM classroom WHERE capacity BETWEEN 50 AND 100"
             ]
         },
         {
+            "id":5,
+            "paraphrase":[
+                "What is the department name and corresponding building for the department with the greatest budget?"
+            ],
+            "question":" Find the name and building of the department with the highest budget.",
             "sqa":{
                 "question":[
                     "Order the departments by budget in decreasing order.",
@@ -96,16 +100,16 @@
                     "SELECT dept_name ,  building FROM department ORDER BY budget DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "What is the department name and corresponding building for the department with the greatest budget?"
-            ],
-            "question":" Find the name and building of the department with the highest budget.",
-            "id":5,
             "sql":[
                 "SELECT dept_name ,  building FROM department ORDER BY budget DESC LIMIT 1"
             ]
         },
         {
+            "id":6,
+            "paraphrase":[
+                "Give the name of the student in the History department with the most credits."
+            ],
+            "question":" What is the name of the student who has the highest total credits in the History department.",
             "sqa":{
                 "question":[
                     "What are the names of students in the History department?",
@@ -116,16 +120,16 @@
                     "SELECT name FROM student WHERE dept_name  =  'History' ORDER BY tot_cred DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "Give the name of the student in the History department with the most credits."
-            ],
-            "question":" What is the name of the student who has the highest total credits in the History department.",
-            "id":6,
             "sql":[
                 "SELECT name FROM student WHERE dept_name  =  'History' ORDER BY tot_cred DESC LIMIT 1"
             ]
         },
         {
+            "id":7,
+            "paraphrase":[
+                "Count the number of classrooms in Lamberton."
+            ],
+            "question":" How many rooms does the Lamberton building have?",
             "sqa":{
                 "question":[
                     "What are all the classrooms in Lamberton?",
@@ -136,16 +140,16 @@
                     "SELECT count(*) FROM classroom WHERE building  =  'Lamberton'"
                 ]
             },
-            "paraphrase":[
-                "Count the number of classrooms in Lamberton."
-            ],
-            "question":" How many rooms does the Lamberton building have?",
-            "id":7,
             "sql":[
                 "SELECT count(*) FROM classroom WHERE building  =  'Lamberton'"
             ]
         },
         {
+            "id":8,
+            "paraphrase":[
+                "Count the number of students who have advisors."
+            ],
+            "question":" How many students have advisors?",
             "sqa":{
                 "question":[
                     "What are the student ids of students with advisors?",
@@ -156,16 +160,16 @@
                     "SELECT count(DISTINCT s_id) FROM advisor"
                 ]
             },
-            "paraphrase":[
-                "Count the number of students who have advisors."
-            ],
-            "question":" How many students have advisors?",
-            "id":8,
             "sql":[
                 "SELECT count(DISTINCT s_id) FROM advisor"
             ]
         },
         {
+            "id":9,
+            "paraphrase":[
+                "Count the number of departments which offer courses."
+            ],
+            "question":" How many departments offer courses?",
             "sqa":{
                 "question":[
                     "What are all the department names of departments that offer courses?",
@@ -176,16 +180,16 @@
                     "SELECT count(DISTINCT dept_name) FROM course"
                 ]
             },
-            "paraphrase":[
-                "Count the number of departments which offer courses."
-            ],
-            "question":" How many departments offer courses?",
-            "id":9,
             "sql":[
                 "SELECT count(DISTINCT dept_name) FROM course"
             ]
         },
         {
+            "id":10,
+            "paraphrase":[
+                "Count the number of courses in the Physics department."
+            ],
+            "question":" How many different courses offered by Physics department?",
             "sqa":{
                 "question":[
                     "What are all the courses in the Physics department?",
@@ -198,16 +202,16 @@
                     "SELECT count(DISTINCT course_id) FROM course WHERE dept_name  =  'Physics'"
                 ]
             },
-            "paraphrase":[
-                "Count the number of courses in the Physics department."
-            ],
-            "question":" How many different courses offered by Physics department?",
-            "id":10,
             "sql":[
                 "SELECT count(DISTINCT course_id) FROM course WHERE dept_name  =  'Physics'"
             ]
         },
         {
+            "id":11,
+            "paraphrase":[
+                "What are the titles for courses with two prerequisites?"
+            ],
+            "question":" Find the title of courses that have two prerequisites?",
             "sqa":{
                 "question":[
                     "Which courses have some prerequisite?",
@@ -220,16 +224,16 @@
                     "SELECT T1.title FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  =  2"
                 ]
             },
-            "paraphrase":[
-                "What are the titles for courses with two prerequisites?"
-            ],
-            "question":" Find the title of courses that have two prerequisites?",
-            "id":11,
             "sql":[
                 "SELECT T1.title FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  =  2"
             ]
         },
         {
+            "id":12,
+            "paraphrase":[
+                "What is the title, credit value, and department name for courses with more than one prerequisite?"
+            ],
+            "question":" Find the title, credit, and department name of courses that have more than one prerequisites?",
             "sqa":{
                 "question":[
                     "Which courses have more than 1 prerequisite?",
@@ -240,16 +244,16 @@
                     "SELECT T1.title ,  T1.credits , T1.dept_name FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  >  1"
                 ]
             },
-            "paraphrase":[
-                "What is the title, credit value, and department name for courses with more than one prerequisite?"
-            ],
-            "question":" Find the title, credit, and department name of courses that have more than one prerequisites?",
-            "id":12,
             "sql":[
                 "SELECT T1.title ,  T1.credits , T1.dept_name FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  >  1"
             ]
         },
         {
+            "id":13,
+            "paraphrase":[
+                "Count the number of courses without prerequisites."
+            ],
+            "question":" How many courses that do not have prerequisite?",
             "sqa":{
                 "question":[
                     "What are the ids for courses that have some prerequisites?",
@@ -260,16 +264,16 @@
                     "SELECT count(*) FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
                 ]
             },
-            "paraphrase":[
-                "Count the number of courses without prerequisites."
-            ],
-            "question":" How many courses that do not have prerequisite?",
-            "id":13,
             "sql":[
                 "SELECT count(*) FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
             ]
         },
         {
+            "id":14,
+            "paraphrase":[
+                "What are the titles of courses without prerequisites?"
+            ],
+            "question":" Find the name of the courses that do not have any prerequisite?",
             "sqa":{
                 "question":[
                     "What are the ids for prerequisites?",
@@ -282,16 +286,16 @@
                     "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
                 ]
             },
-            "paraphrase":[
-                "What are the titles of courses without prerequisites?"
-            ],
-            "question":" Find the name of the courses that do not have any prerequisite?",
-            "id":14,
             "sql":[
                 "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
             ]
         },
         {
+            "id":15,
+            "paraphrase":[
+                "Count the number of distinct instructors who have taught a course."
+            ],
+            "question":" How many different instructors have taught some course?",
             "sqa":{
                 "question":[
                     "What are the ids of instructors who have taught a course?",
@@ -302,16 +306,16 @@
                     "SELECT COUNT (DISTINCT id) FROM teaches"
                 ]
             },
-            "paraphrase":[
-                "Count the number of distinct instructors who have taught a course."
-            ],
-            "question":" How many different instructors have taught some course?",
-            "id":15,
             "sql":[
                 "SELECT COUNT (DISTINCT id) FROM teaches"
             ]
         },
         {
+            "id":16,
+            "paraphrase":[
+                "What is the sum of budgets of the Marketing and Finance departments?"
+            ],
+            "question":" Find the total budgets of the Marketing or Finance department.",
             "sqa":{
                 "question":[
                     "What are the budgets of the Marketing department?",
@@ -324,16 +328,16 @@
                     "SELECT sum(budget) FROM department WHERE dept_name  =  'Marketing' OR dept_name  =  'Finance'"
                 ]
             },
-            "paraphrase":[
-                "What is the sum of budgets of the Marketing and Finance departments?"
-            ],
-            "question":" Find the total budgets of the Marketing or Finance department.",
-            "id":16,
             "sql":[
                 "SELECT sum(budget) FROM department WHERE dept_name  =  'Marketing' OR dept_name  =  'Finance'"
             ]
         },
         {
+            "id":17,
+            "paraphrase":[
+                "What is the name of the department with an instructure who has a name like 'Soisalon'?"
+            ],
+            "question":" Find the department name of the instructor whose name contains 'Soisalon'.",
             "sqa":{
                 "question":[
                     "What is all the information about an instructor whose name contains 'Soisalon'?",
@@ -344,16 +348,16 @@
                     "SELECT dept_name FROM instructor WHERE name LIKE '%Soisalon%'"
                 ]
             },
-            "paraphrase":[
-                "What is the name of the department with an instructure who has a name like 'Soisalon'?"
-            ],
-            "question":" Find the department name of the instructor whose name contains 'Soisalon'.",
-            "id":17,
             "sql":[
                 "SELECT dept_name FROM instructor WHERE name LIKE '%Soisalon%'"
             ]
         },
         {
+            "id":18,
+            "paraphrase":[
+                "Count the number of rooms in Lamberton with capacity lower than 50."
+            ],
+            "question":" How many rooms whose capacity is less than 50 does the Lamberton building have?",
             "sqa":{
                 "question":[
                     "How many rooms are there in Lamberton?",
@@ -364,16 +368,16 @@
                     "SELECT count(*) FROM classroom WHERE building  =  'Lamberton' AND capacity  <  50"
                 ]
             },
-            "paraphrase":[
-                "Count the number of rooms in Lamberton with capacity lower than 50."
-            ],
-            "question":" How many rooms whose capacity is less than 50 does the Lamberton building have?",
-            "id":18,
             "sql":[
                 "SELECT count(*) FROM classroom WHERE building  =  'Lamberton' AND capacity  <  50"
             ]
         },
         {
+            "id":19,
+            "paraphrase":[
+                "What are the names and budgets of departments with budgets greater than the average?"
+            ],
+            "question":" Find the name and budget of departments whose budgets are more than the average budget.",
             "sqa":{
                 "question":[
                     "What is the average department budget?",
@@ -386,16 +390,16 @@
                     "SELECT dept_name ,  budget FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
                 ]
             },
-            "paraphrase":[
-                "What are the names and budgets of departments with budgets greater than the average?"
-            ],
-            "question":" Find the name and budget of departments whose budgets are more than the average budget.",
-            "id":19,
             "sql":[
                 "SELECT dept_name ,  budget FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
             ]
         },
         {
+            "id":20,
+            "paraphrase":[
+                "Give the name of the lowest earning instructor in the Statistics department."
+            ],
+            "question":" what is the name of the instructor who is in Statistics department and earns the lowest salary?",
             "sqa":{
                 "question":[
                     "What are the names of the professors in the Statistics department?",
@@ -406,16 +410,16 @@
                     "SELECT name FROM instructor WHERE dept_name  =  'Statistics' ORDER BY salary LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "Give the name of the lowest earning instructor in the Statistics department."
-            ],
-            "question":" what is the name of the instructor who is in Statistics department and earns the lowest salary?",
-            "id":20,
             "sql":[
                 "SELECT name FROM instructor WHERE dept_name  =  'Statistics' ORDER BY salary LIMIT 1"
             ]
         },
         {
+            "id":21,
+            "paraphrase":[
+                "What is the title of a course that is listed in both the Statistics and Psychology departments?"
+            ],
+            "question":" Find the title of course that is provided by both Statistics and Psychology departments.",
             "sqa":{
                 "question":[
                     "What are the titles of Statistics courses?",
@@ -426,16 +430,16 @@
                     "SELECT title FROM course WHERE dept_name  =  'Statistics' INTERSECT SELECT title FROM course WHERE dept_name  =  'Psychology'"
                 ]
             },
-            "paraphrase":[
-                "What is the title of a course that is listed in both the Statistics and Psychology departments?"
-            ],
-            "question":" Find the title of course that is provided by both Statistics and Psychology departments.",
-            "id":21,
             "sql":[
                 "SELECT title FROM course WHERE dept_name  =  'Statistics' INTERSECT SELECT title FROM course WHERE dept_name  =  'Psychology'"
             ]
         },
         {
+            "id":22,
+            "paraphrase":[
+                "What are the titles of courses that are in the Statistics department but not the Psychology department?"
+            ],
+            "question":" Find the title of course that is provided by Statistics but not Psychology departments.",
             "sqa":{
                 "question":[
                     "What are the titles of Statistics courses?",
@@ -446,16 +450,16 @@
                     "SELECT title FROM course WHERE dept_name  =  'Statistics' EXCEPT SELECT title FROM course WHERE dept_name  =  'Psychology'"
                 ]
             },
-            "paraphrase":[
-                "What are the titles of courses that are in the Statistics department but not the Psychology department?"
-            ],
-            "question":" Find the title of course that is provided by Statistics but not Psychology departments.",
-            "id":22,
             "sql":[
                 "SELECT title FROM course WHERE dept_name  =  'Statistics' EXCEPT SELECT title FROM course WHERE dept_name  =  'Psychology'"
             ]
         },
         {
+            "id":23,
+            "paraphrase":[
+                "What are the ids of instructors who taught in the Fall of 2009 but not in the Spring of 2010?"
+            ],
+            "question":" Find the id of instructors who taught a class in Fall 2009 but not in Spring 2010.",
             "sqa":{
                 "question":[
                     "What are the ids of instructors who taught in the Fall of 2009?",
@@ -466,16 +470,16 @@
                     "SELECT id FROM teaches WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT id FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
                 ]
             },
-            "paraphrase":[
-                "What are the ids of instructors who taught in the Fall of 2009 but not in the Spring of 2010?"
-            ],
-            "question":" Find the id of instructors who taught a class in Fall 2009 but not in Spring 2010.",
-            "id":23,
             "sql":[
                 "SELECT id FROM teaches WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT id FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
             ]
         },
         {
+            "id":24,
+            "paraphrase":[
+                "What are the names of the students who took classes in 2009 or 2010?"
+            ],
+            "question":" Find the name of students who took any class in the years of 2009 and 2010.",
             "sqa":{
                 "question":[
                     "What are the distinct names of all the students?",
@@ -486,16 +490,16 @@
                     "SELECT DISTINCT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE YEAR  =  2009 OR YEAR  =  2010"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the students who took classes in 2009 or 2010?"
-            ],
-            "question":" Find the name of students who took any class in the years of 2009 and 2010.",
-            "id":24,
             "sql":[
                 "SELECT DISTINCT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE YEAR  =  2009 OR YEAR  =  2010"
             ]
         },
         {
+            "id":25,
+            "paraphrase":[
+                "What are the names of the 3 departments with the most courses?"
+            ],
+            "question":" Find the names of the top 3 departments that provide the largest amount of courses?",
             "sqa":{
                 "question":[
                     "How many courses does each department have?",
@@ -508,16 +512,16 @@
                     "SELECT dept_name FROM course GROUP BY dept_name ORDER BY count(*) DESC LIMIT 3"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the 3 departments with the most courses?"
-            ],
-            "question":" Find the names of the top 3 departments that provide the largest amount of courses?",
-            "id":25,
             "sql":[
                 "SELECT dept_name FROM course GROUP BY dept_name ORDER BY count(*) DESC LIMIT 3"
             ]
         },
         {
+            "id":26,
+            "paraphrase":[
+                "What is the name of the department with the most credits?"
+            ],
+            "question":" Find the name of the department that offers the highest total credits?",
             "sqa":{
                 "question":[
                     "How many credits does each department offer?",
@@ -528,16 +532,16 @@
                     "SELECT dept_name FROM course GROUP BY dept_name ORDER BY sum(credits) DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "What is the name of the department with the most credits?"
-            ],
-            "question":" Find the name of the department that offers the highest total credits?",
-            "id":26,
             "sql":[
                 "SELECT dept_name FROM course GROUP BY dept_name ORDER BY sum(credits) DESC LIMIT 1"
             ]
         },
         {
+            "id":27,
+            "paraphrase":[
+                "Given the titles of all courses, in order of titles and credits."
+            ],
+            "question":" List the names of all courses ordered by their titles and credits.",
             "sqa":{
                 "question":[
                     "What are the titles of all courses?",
@@ -548,16 +552,16 @@
                     "SELECT title FROM course ORDER BY title ,  credits"
                 ]
             },
-            "paraphrase":[
-                "Given the titles of all courses, in order of titles and credits."
-            ],
-            "question":" List the names of all courses ordered by their titles and credits.",
-            "id":27,
             "sql":[
                 "SELECT title FROM course ORDER BY title ,  credits"
             ]
         },
         {
+            "id":28,
+            "paraphrase":[
+                "Give the name of the department with the lowest budget."
+            ],
+            "question":" Which department has the lowest budget?",
             "sqa":{
                 "question":[
                     "Order the department names by increasing budget.",
@@ -568,16 +572,16 @@
                     "SELECT dept_name FROM department ORDER BY budget LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "Give the name of the department with the lowest budget."
-            ],
-            "question":" Which department has the lowest budget?",
-            "id":28,
             "sql":[
                 "SELECT dept_name FROM department ORDER BY budget LIMIT 1"
             ]
         },
         {
+            "id":29,
+            "paraphrase":[
+                "What are the names and buildings of the deparments, sorted by budget descending?"
+            ],
+            "question":" List the names and buildings of all departments sorted by the budget from large to small.",
             "sqa":{
                 "question":[
                     "Order the departments by decreasing budget.",
@@ -588,16 +592,16 @@
                     "SELECT dept_name ,  building FROM department ORDER BY budget DESC"
                 ]
             },
-            "paraphrase":[
-                "What are the names and buildings of the deparments, sorted by budget descending?"
-            ],
-            "question":" List the names and buildings of all departments sorted by the budget from large to small.",
-            "id":29,
             "sql":[
                 "SELECT dept_name ,  building FROM department ORDER BY budget DESC"
             ]
         },
         {
+            "id":30,
+            "paraphrase":[
+                "Give the name of the highest paid instructor."
+            ],
+            "question":" Who is the instructor with the highest salary?",
             "sqa":{
                 "question":[
                     "Order the instructor names by salary from greatest to least.",
@@ -608,16 +612,16 @@
                     "SELECT name FROM instructor ORDER BY salary DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "Give the name of the highest paid instructor."
-            ],
-            "question":" Who is the instructor with the highest salary?",
-            "id":30,
             "sql":[
                 "SELECT name FROM instructor ORDER BY salary DESC LIMIT 1"
             ]
         },
         {
+            "id":31,
+            "paraphrase":[
+                "Give all information regarding instructors, in order of salary from least to greatest."
+            ],
+            "question":" List the information of all instructors ordered by their salary in ascending order.",
             "sqa":{
                 "question":[
                     "What is all the information about instructors?",
@@ -628,16 +632,16 @@
                     "SELECT * FROM instructor ORDER BY salary"
                 ]
             },
-            "paraphrase":[
-                "Give all information regarding instructors, in order of salary from least to greatest."
-            ],
-            "question":" List the information of all instructors ordered by their salary in ascending order.",
-            "id":31,
             "sql":[
                 "SELECT * FROM instructor ORDER BY salary"
             ]
         },
         {
+            "id":32,
+            "paraphrase":[
+                "What are the names of students and their respective departments, ordered by number of credits from least to greatest?"
+            ],
+            "question":" Find the name of the students and their department names sorted by their total credits in ascending order.",
             "sqa":{
                 "question":[
                     "What are the names and department names for each student?",
@@ -648,16 +652,16 @@
                     "SELECT name ,  dept_name FROM student ORDER BY tot_cred"
                 ]
             },
-            "paraphrase":[
-                "What are the names of students and their respective departments, ordered by number of credits from least to greatest?"
-            ],
-            "question":" Find the name of the students and their department names sorted by their total credits in ascending order.",
-            "id":32,
             "sql":[
                 "SELECT name ,  dept_name FROM student ORDER BY tot_cred"
             ]
         },
         {
+            "id":33,
+            "paraphrase":[
+                "Show all titles and their instructors' names for courses in 2008, in alphabetical order by title."
+            ],
+            "question":" list in alphabetic order all course names and their instructors' names in year 2008.",
             "sqa":{
                 "question":[
                     "What were all the course titles in 2008?",
@@ -670,16 +674,16 @@
                     "SELECT T1.title ,  T3.name FROM course AS T1 JOIN teaches AS T2 ON T1.course_id  =  T2.course_id JOIN instructor AS T3 ON T2.id  =  T3.id WHERE YEAR  =  2008 ORDER BY T1.title"
                 ]
             },
-            "paraphrase":[
-                "Show all titles and their instructors' names for courses in 2008, in alphabetical order by title."
-            ],
-            "question":" list in alphabetic order all course names and their instructors' names in year 2008.",
-            "id":33,
             "sql":[
                 "SELECT T1.title ,  T3.name FROM course AS T1 JOIN teaches AS T2 ON T1.course_id  =  T2.course_id JOIN instructor AS T3 ON T2.id  =  T3.id WHERE YEAR  =  2008 ORDER BY T1.title"
             ]
         },
         {
+            "id":34,
+            "paraphrase":[
+                "What are the names of instructors who advise more than one student?"
+            ],
+            "question":" Find the name of instructors who are advising more than one student.",
             "sqa":{
                 "question":[
                     "What are the names of all instructors who advise students?",
@@ -690,16 +694,16 @@
                     "SELECT T1.name FROM instructor AS T1 JOIN advisor AS T2 ON T1.id  =  T2.i_id GROUP BY T2.i_id HAVING count(*)  >  1"
                 ]
             },
-            "paraphrase":[
-                "What are the names of instructors who advise more than one student?"
-            ],
-            "question":" Find the name of instructors who are advising more than one student.",
-            "id":34,
             "sql":[
                 "SELECT T1.name FROM instructor AS T1 JOIN advisor AS T2 ON T1.id  =  T2.i_id GROUP BY T2.i_id HAVING count(*)  >  1"
             ]
         },
         {
+            "id":35,
+            "paraphrase":[
+                "What are the names of students who have more than one advisor?"
+            ],
+            "question":" Find the name of the students who have more than one advisor?",
             "sqa":{
                 "question":[
                     "What are the names of students with advisors?",
@@ -710,16 +714,16 @@
                     "SELECT T1.name FROM student AS T1 JOIN advisor AS T2 ON T1.id  =  T2.s_id GROUP BY T2.s_id HAVING count(*)  >  1"
                 ]
             },
-            "paraphrase":[
-                "What are the names of students who have more than one advisor?"
-            ],
-            "question":" Find the name of the students who have more than one advisor?",
-            "id":35,
             "sql":[
                 "SELECT T1.name FROM student AS T1 JOIN advisor AS T2 ON T1.id  =  T2.s_id GROUP BY T2.s_id HAVING count(*)  >  1"
             ]
         },
         {
+            "id":36,
+            "paraphrase":[
+                "How many rooms in each building have a capacity of over 50?"
+            ],
+            "question":" Find the number of rooms with more than 50 capacity for each building.",
             "sqa":{
                 "question":[
                     "How many classrooms have capacity greater than 50?",
@@ -730,16 +734,16 @@
                     "SELECT count(*) ,  building FROM classroom WHERE capacity  >  50 GROUP BY building"
                 ]
             },
-            "paraphrase":[
-                "How many rooms in each building have a capacity of over 50?"
-            ],
-            "question":" Find the number of rooms with more than 50 capacity for each building.",
-            "id":36,
             "sql":[
                 "SELECT count(*) ,  building FROM classroom WHERE capacity  >  50 GROUP BY building"
             ]
         },
         {
+            "id":37,
+            "paraphrase":[
+                "What are the greatest and average capacity for rooms in each building?"
+            ],
+            "question":" Find the maximum and average capacity among rooms in each building.",
             "sqa":{
                 "question":[
                     "What are the maximum and average capacities across all classrooms?",
@@ -750,16 +754,16 @@
                     "SELECT max(capacity) ,  avg(capacity) ,  building FROM classroom GROUP BY building"
                 ]
             },
-            "paraphrase":[
-                "What are the greatest and average capacity for rooms in each building?"
-            ],
-            "question":" Find the maximum and average capacity among rooms in each building.",
-            "id":37,
             "sql":[
                 "SELECT max(capacity) ,  avg(capacity) ,  building FROM classroom GROUP BY building"
             ]
         },
         {
+            "id":38,
+            "paraphrase":[
+                "What are the titles of courses that are offered in more than one department?"
+            ],
+            "question":" Find the title of the course that is offered by more than one department.",
             "sqa":{
                 "question":[
                     "What are all the different course titles?",
@@ -770,16 +774,16 @@
                     "SELECT title FROM course GROUP BY title HAVING count(*)  >  1"
                 ]
             },
-            "paraphrase":[
-                "What are the titles of courses that are offered in more than one department?"
-            ],
-            "question":" Find the title of the course that is offered by more than one department.",
-            "id":38,
             "sql":[
                 "SELECT title FROM course GROUP BY title HAVING count(*)  >  1"
             ]
         },
         {
+            "id":39,
+            "paraphrase":[
+                "How many total credits are offered by each department?"
+            ],
+            "question":" Find the total credits of courses provided by different department.",
             "sqa":{
                 "question":[
                     "How many total credits are offered?",
@@ -790,16 +794,16 @@
                     "SELECT sum(credits) ,  dept_name FROM course GROUP BY dept_name"
                 ]
             },
-            "paraphrase":[
-                "How many total credits are offered by each department?"
-            ],
-            "question":" Find the total credits of courses provided by different department.",
-            "id":39,
             "sql":[
                 "SELECT sum(credits) ,  dept_name FROM course GROUP BY dept_name"
             ]
         },
         {
+            "id":40,
+            "paraphrase":[
+                "What is the lowest salary in departments with average salary greater than the overall average."
+            ],
+            "question":" Find the minimum salary for the departments whose average salary is above the average payment of all instructors.",
             "sqa":{
                 "question":[
                     "What is the average salary of an instructor?",
@@ -812,16 +816,16 @@
                     "SELECT min(salary) ,  dept_name FROM instructor GROUP BY dept_name HAVING avg(salary)  >  (SELECT avg(salary) FROM instructor)"
                 ]
             },
-            "paraphrase":[
-                "What is the lowest salary in departments with average salary greater than the overall average."
-            ],
-            "question":" Find the minimum salary for the departments whose average salary is above the average payment of all instructors.",
-            "id":40,
             "sql":[
                 "SELECT min(salary) ,  dept_name FROM instructor GROUP BY dept_name HAVING avg(salary)  >  (SELECT avg(salary) FROM instructor)"
             ]
         },
         {
+            "id":41,
+            "paraphrase":[
+                "How many courses are provided in each semester and year?"
+            ],
+            "question":" Find the number of courses provided in each semester and year.",
             "sqa":{
                 "question":[
                     "How many courses are offered in each year?",
@@ -832,16 +836,16 @@
                     "SELECT count(*) ,  semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR"
                 ]
             },
-            "paraphrase":[
-                "How many courses are provided in each semester and year?"
-            ],
-            "question":" Find the number of courses provided in each semester and year.",
-            "id":41,
             "sql":[
                 "SELECT count(*) ,  semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR"
             ]
         },
         {
+            "id":42,
+            "paraphrase":[
+                "Which year had the greatest number of courses?"
+            ],
+            "question":" Find the year which offers the largest number of courses.",
             "sqa":{
                 "question":[
                     "How many courses are offered in each year?",
@@ -852,16 +856,16 @@
                     "SELECT YEAR FROM SECTION GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "Which year had the greatest number of courses?"
-            ],
-            "question":" Find the year which offers the largest number of courses.",
-            "id":42,
             "sql":[
                 "SELECT YEAR FROM SECTION GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
             ]
         },
         {
+            "id":43,
+            "paraphrase":[
+                "What is the year and semester with the most courses?"
+            ],
+            "question":" Find the year and semester when offers the largest number of courses.",
             "sqa":{
                 "question":[
                     "Find the number of courses in each semester and year.",
@@ -872,16 +876,16 @@
                     "SELECT semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR ORDER BY count(*) DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "What is the year and semester with the most courses?"
-            ],
-            "question":" Find the year and semester when offers the largest number of courses.",
-            "id":43,
             "sql":[
                 "SELECT semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR ORDER BY count(*) DESC LIMIT 1"
             ]
         },
         {
+            "id":44,
+            "paraphrase":[
+                "What is the name of the deparment with the highest enrollment?"
+            ],
+            "question":" Find the name of department has the highest amount of students?",
             "sqa":{
                 "question":[
                     "How many students are in each department?",
@@ -892,16 +896,16 @@
                     "SELECT dept_name FROM student GROUP BY dept_name ORDER BY count(*) DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "What is the name of the deparment with the highest enrollment?"
-            ],
-            "question":" Find the name of department has the highest amount of students?",
-            "id":44,
             "sql":[
                 "SELECT dept_name FROM student GROUP BY dept_name ORDER BY count(*) DESC LIMIT 1"
             ]
         },
         {
+            "id":45,
+            "paraphrase":[
+                "How many students are in each department?"
+            ],
+            "question":" Find the total number of students in each department.",
             "sqa":{
                 "question":[
                     "How many students are there?",
@@ -912,16 +916,16 @@
                     "SELECT count(*) ,  dept_name FROM student GROUP BY dept_name"
                 ]
             },
-            "paraphrase":[
-                "How many students are in each department?"
-            ],
-            "question":" Find the total number of students in each department.",
-            "id":45,
             "sql":[
                 "SELECT count(*) ,  dept_name FROM student GROUP BY dept_name"
             ]
         },
         {
+            "id":46,
+            "paraphrase":[
+                "Which semeseter and year had the fewest students?"
+            ],
+            "question":" Find the semester and year which has the least number of student taking any class.",
             "sqa":{
                 "question":[
                     "How many students were taking classes in each semester and year?",
@@ -932,16 +936,16 @@
                     "SELECT semester ,  YEAR FROM takes GROUP BY semester ,  YEAR ORDER BY count(*) LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "Which semeseter and year had the fewest students?"
-            ],
-            "question":" Find the semester and year which has the least number of student taking any class.",
-            "id":46,
             "sql":[
                 "SELECT semester ,  YEAR FROM takes GROUP BY semester ,  YEAR ORDER BY count(*) LIMIT 1"
             ]
         },
         {
+            "id":47,
+            "paraphrase":[
+                "Give id of the instructor who advises students in the History department."
+            ],
+            "question":" What is the id of the instructor who advises of all students from History department?",
             "sqa":{
                 "question":[
                     "What are the ids of all instructors who are advisors?",
@@ -952,16 +956,16 @@
                     "SELECT i_id FROM advisor AS T1 JOIN student T2 ON T1.s_id  =  T2.id WHERE T2.dept_name  =  'History'"
                 ]
             },
-            "paraphrase":[
-                "Give id of the instructor who advises students in the History department."
-            ],
-            "question":" What is the id of the instructor who advises of all students from History department?",
-            "id":47,
             "sql":[
                 "SELECT i_id FROM advisor AS T1 JOIN student T2 ON T1.s_id  =  T2.id WHERE T2.dept_name  =  'History'"
             ]
         },
         {
+            "id":48,
+            "paraphrase":[
+                "What are the names and salaries of instructors who advises students in the History department?"
+            ],
+            "question":" Find the name and salary of the instructors who are advisors of any student from History department?",
             "sqa":{
                 "question":[
                     "What are the ids of all instructors who are advisors?",
@@ -974,16 +978,16 @@
                     "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'History'"
                 ]
             },
-            "paraphrase":[
-                "What are the names and salaries of instructors who advises students in the History department?"
-            ],
-            "question":" Find the name and salary of the instructors who are advisors of any student from History department?",
-            "id":48,
             "sql":[
                 "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'History'"
             ]
         },
         {
+            "id":49,
+            "paraphrase":[
+                "What are the ids of courses without prerequisites?"
+            ],
+            "question":" Find the id of the courses that do not have any prerequisite?",
             "sqa":{
                 "question":[
                     "What are the ids of courses with prerequisites?",
@@ -994,16 +998,16 @@
                     "SELECT course_id FROM course EXCEPT SELECT course_id FROM prereq"
                 ]
             },
-            "paraphrase":[
-                "What are the ids of courses without prerequisites?"
-            ],
-            "question":" Find the id of the courses that do not have any prerequisite?",
-            "id":49,
             "sql":[
                 "SELECT course_id FROM course EXCEPT SELECT course_id FROM prereq"
             ]
         },
         {
+            "id":50,
+            "paraphrase":[
+                "What are the names of courses without prerequisites?"
+            ],
+            "question":" Find the name of the courses that do not have any prerequisite?",
             "sqa":{
                 "question":[
                     "What are the ids of courses with prerequisites?",
@@ -1014,16 +1018,16 @@
                     "SELECT title FROM course WHERE course_id NOT IN"
                 ]
             },
-            "paraphrase":[
-                "What are the names of courses without prerequisites?"
-            ],
-            "question":" Find the name of the courses that do not have any prerequisite?",
-            "id":50,
             "sql":[
                 "SELECT title FROM course WHERE course_id NOT IN"
             ]
         },
         {
+            "id":51,
+            "paraphrase":[
+                "Give the title of the prerequisite to the course International Finance."
+            ],
+            "question":" What is the title of the prerequisite class of International Finance course?",
             "sqa":{
                 "question":[
                     "What are the ids of all prerequisites?",
@@ -1036,16 +1040,16 @@
                     "SELECT title FROM course WHERE course_id IN"
                 ]
             },
-            "paraphrase":[
-                "Give the title of the prerequisite to the course International Finance."
-            ],
-            "question":" What is the title of the prerequisite class of International Finance course?",
-            "id":51,
             "sql":[
                 "SELECT title FROM course WHERE course_id IN"
             ]
         },
         {
+            "id":52,
+            "paraphrase":[
+                "What is the title of the course with Differential Geometry as a prerequisite?"
+            ],
+            "question":" Find the title of course whose prerequisite is course Differential Geometry.",
             "sqa":{
                 "question":[
                     "What are the ids of all the prerequisites?",
@@ -1058,16 +1062,16 @@
                     "SELECT title FROM course WHERE course_id IN"
                 ]
             },
-            "paraphrase":[
-                "What is the title of the course with Differential Geometry as a prerequisite?"
-            ],
-            "question":" Find the title of course whose prerequisite is course Differential Geometry.",
-            "id":52,
             "sql":[
                 "SELECT title FROM course WHERE course_id IN"
             ]
         },
         {
+            "id":53,
+            "paraphrase":[
+                "What are the names of students who took a course in the Fall of 2003?"
+            ],
+            "question":" Find the names of students who have taken any course in the fall semester of year 2003.",
             "sqa":{
                 "question":[
                     "What are the ids of students who took courses in the Fall of 2003?",
@@ -1078,16 +1082,16 @@
                     "SELECT name FROM student WHERE id IN"
                 ]
             },
-            "paraphrase":[
-                "What are the names of students who took a course in the Fall of 2003?"
-            ],
-            "question":" Find the names of students who have taken any course in the fall semester of year 2003.",
-            "id":53,
             "sql":[
                 "SELECT name FROM student WHERE id IN"
             ]
         },
         {
+            "id":54,
+            "paraphrase":[
+                "Give the title of the course offered in Chandler during the Fall of 2010."
+            ],
+            "question":" What is the title of the course that was offered at building Chandler during the fall semester in the year of 2010?",
             "sqa":{
                 "question":[
                     "What are the titles of courses offered in the Fall of 2010?",
@@ -1098,16 +1102,16 @@
                     "SELECT T1.title FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE building  =  'Chandler' AND semester  =  'Fall' AND YEAR  =  2010"
                 ]
             },
-            "paraphrase":[
-                "Give the title of the course offered in Chandler during the Fall of 2010."
-            ],
-            "question":" What is the title of the course that was offered at building Chandler during the fall semester in the year of 2010?",
-            "id":54,
             "sql":[
                 "SELECT T1.title FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE building  =  'Chandler' AND semester  =  'Fall' AND YEAR  =  2010"
             ]
         },
         {
+            "id":55,
+            "paraphrase":[
+                "What are the names of instructors who have taught C Programming courses?"
+            ],
+            "question":" Find the name of the instructors who taught C Programming course before.",
             "sqa":{
                 "question":[
                     "What are the names of all instructors?",
@@ -1118,16 +1122,16 @@
                     "SELECT T1.name FROM instructor AS T1 JOIN teaches AS T2 ON T1.id  =  T2.id JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T3.title  =  'C Programming'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of instructors who have taught C Programming courses?"
-            ],
-            "question":" Find the name of the instructors who taught C Programming course before.",
-            "id":55,
             "sql":[
                 "SELECT T1.name FROM instructor AS T1 JOIN teaches AS T2 ON T1.id  =  T2.id JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T3.title  =  'C Programming'"
             ]
         },
         {
+            "id":56,
+            "paraphrase":[
+                "What are the names and salaries of instructors who advise students in the Math department?"
+            ],
+            "question":" Find the name and salary of instructors who are advisors of the students from the Math department.",
             "sqa":{
                 "question":[
                     "What are the ids of all advisors?",
@@ -1140,16 +1144,16 @@
                     "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math'"
                 ]
             },
-            "paraphrase":[
-                "What are the names and salaries of instructors who advise students in the Math department?"
-            ],
-            "question":" Find the name and salary of instructors who are advisors of the students from the Math department.",
-            "id":56,
             "sql":[
                 "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math'"
             ]
         },
         {
+            "id":57,
+            "paraphrase":[
+                "What are the names of all instructors who advise students in the math depart sorted by total credits of the student."
+            ],
+            "question":" Find the name of instructors who are advisors of the students from the Math department, and sort the results by students' total credit.",
             "sqa":{
                 "question":[
                     "What are the ids of advisors who advise students in the Math department?",
@@ -1162,16 +1166,16 @@
                     "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math' ORDER BY T3.tot_cred"
                 ]
             },
-            "paraphrase":[
-                "What are the names of all instructors who advise students in the math depart sorted by total credits of the student."
-            ],
-            "question":" Find the name of instructors who are advisors of the students from the Math department, and sort the results by students' total credit.",
-            "id":57,
             "sql":[
                 "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math' ORDER BY T3.tot_cred"
             ]
         },
         {
+            "id":58,
+            "paraphrase":[
+                "What is the title of the course that is a prerequisite for Mobile Computing?"
+            ],
+            "question":" What is the course title of the prerequisite of course Mobile Computing?",
             "sqa":{
                 "question":[
                     "What are all the ids of the prerequisite classes?",
@@ -1184,16 +1188,16 @@
                     "SELECT title FROM course WHERE course_id IN"
                 ]
             },
-            "paraphrase":[
-                "What is the title of the course that is a prerequisite for Mobile Computing?"
-            ],
-            "question":" What is the course title of the prerequisite of course Mobile Computing?",
-            "id":58,
             "sql":[
                 "SELECT title FROM course WHERE course_id IN"
             ]
         },
         {
+            "id":59,
+            "paraphrase":[
+                "What is the name of the instructor who advises the student with the greatest number of total credits?"
+            ],
+            "question":" Find the name of instructor who is the advisor of the student who has the highest number of total credits.",
             "sqa":{
                 "question":[
                     "What are names of instructors who advise students?",
@@ -1204,16 +1208,16 @@
                     "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id ORDER BY T3.tot_cred DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "What is the name of the instructor who advises the student with the greatest number of total credits?"
-            ],
-            "question":" Find the name of instructor who is the advisor of the student who has the highest number of total credits.",
-            "id":59,
             "sql":[
                 "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id ORDER BY T3.tot_cred DESC LIMIT 1"
             ]
         },
         {
+            "id":60,
+            "paraphrase":[
+                "What are the names of instructors who didn't teach?"
+            ],
+            "question":" Find the name of instructors who didn't teach any courses?",
             "sqa":{
                 "question":[
                     "What are the ids of instructors who taught courses?",
@@ -1226,16 +1230,16 @@
                     "SELECT name FROM instructor WHERE id NOT IN"
                 ]
             },
-            "paraphrase":[
-                "What are the names of instructors who didn't teach?"
-            ],
-            "question":" Find the name of instructors who didn't teach any courses?",
-            "id":60,
             "sql":[
                 "SELECT name FROM instructor WHERE id NOT IN"
             ]
         },
         {
+            "id":61,
+            "paraphrase":[
+                "What are the ids of instructors who didnt' teach?"
+            ],
+            "question":" Find the id of instructors who didn't teach any courses?",
             "sqa":{
                 "question":[
                     "What are the ids of instructors who taught courses?",
@@ -1246,16 +1250,16 @@
                     "SELECT id FROM instructor EXCEPT SELECT id FROM teaches"
                 ]
             },
-            "paraphrase":[
-                "What are the ids of instructors who didnt' teach?"
-            ],
-            "question":" Find the id of instructors who didn't teach any courses?",
-            "id":61,
             "sql":[
                 "SELECT id FROM instructor EXCEPT SELECT id FROM teaches"
             ]
         },
         {
+            "id":62,
+            "paraphrase":[
+                "What are the names of instructors who didn't teach courses in the Spring?"
+            ],
+            "question":" Find the names of instructors who didn't each any courses in any Spring semester.",
             "sqa":{
                 "question":[
                     "What are the ids of teachers who taught in the Spring?",
@@ -1268,16 +1272,16 @@
                     "SELECT name FROM instructor WHERE id NOT IN"
                 ]
             },
-            "paraphrase":[
-                "What are the names of instructors who didn't teach courses in the Spring?"
-            ],
-            "question":" Find the names of instructors who didn't each any courses in any Spring semester.",
-            "id":62,
             "sql":[
                 "SELECT name FROM instructor WHERE id NOT IN"
             ]
         },
         {
+            "id":63,
+            "paraphrase":[
+                "Which department has the highest average instructor salary?"
+            ],
+            "question":" Find the name of the department which has the highest average salary of professors.",
             "sqa":{
                 "question":[
                     "What are the average instructor salaries for each department?",
@@ -1288,16 +1292,16 @@
                     "SELECT dept_name FROM instructor GROUP BY dept_name ORDER BY avg(salary) DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "Which department has the highest average instructor salary?"
-            ],
-            "question":" Find the name of the department which has the highest average salary of professors.",
-            "id":63,
             "sql":[
                 "SELECT dept_name FROM instructor GROUP BY dept_name ORDER BY avg(salary) DESC LIMIT 1"
             ]
         },
         {
+            "id":64,
+            "paraphrase":[
+                "How many instructors are in the department with the highest budget, and what is their average salary?"
+            ],
+            "question":" Find the number and averaged salary of all instructors who are in the department with the highest budget.",
             "sqa":{
                 "question":[
                     "Order the departments by decreasing budget.",
@@ -1310,16 +1314,16 @@
                     "SELECT avg(T1.salary) ,  count(*) FROM instructor AS T1 JOIN department AS T2 ON T1.dept_name  =  T2.dept_name ORDER BY T2.budget DESC LIMIT 1"
                 ]
             },
-            "paraphrase":[
-                "How many instructors are in the department with the highest budget, and what is their average salary?"
-            ],
-            "question":" Find the number and averaged salary of all instructors who are in the department with the highest budget.",
-            "id":64,
             "sql":[
                 "SELECT avg(T1.salary) ,  count(*) FROM instructor AS T1 JOIN department AS T2 ON T1.dept_name  =  T2.dept_name ORDER BY T2.budget DESC LIMIT 1"
             ]
         },
         {
+            "id":65,
+            "paraphrase":[
+                "Give the title and credits for the course that is taught in the classroom with the greatest capacity."
+            ],
+            "question":" What is the title and credits of the course that is taught in the largest classroom (with the highest capacity)?",
             "sqa":{
                 "question":[
                     "What is the maximum capacity of any classroom?",
@@ -1332,16 +1336,16 @@
                     "SELECT T3.title ,  T3.credits FROM classroom AS T1 JOIN SECTION AS T2 ON T1.building  =  T2.building AND T1.room_number  =  T2.room_number JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T1.capacity  =  (SELECT max(capacity) FROM classroom)"
                 ]
             },
-            "paraphrase":[
-                "Give the title and credits for the course that is taught in the classroom with the greatest capacity."
-            ],
-            "question":" What is the title and credits of the course that is taught in the largest classroom (with the highest capacity)?",
-            "id":65,
             "sql":[
                 "SELECT T3.title ,  T3.credits FROM classroom AS T1 JOIN SECTION AS T2 ON T1.building  =  T2.building AND T1.room_number  =  T2.room_number JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T1.capacity  =  (SELECT max(capacity) FROM classroom)"
             ]
         },
         {
+            "id":66,
+            "paraphrase":[
+                "What are the names of students who haven't taken any Biology courses?"
+            ],
+            "question":" Find the name of students who didn't take any course from Biology department.",
             "sqa":{
                 "question":[
                     "Which students have taken Biology courses?",
@@ -1352,16 +1356,16 @@
                     "SELECT name FROM student WHERE id NOT IN"
                 ]
             },
-            "paraphrase":[
-                "What are the names of students who haven't taken any Biology courses?"
-            ],
-            "question":" Find the name of students who didn't take any course from Biology department.",
-            "id":66,
             "sql":[
                 "SELECT name FROM student WHERE id NOT IN"
             ]
         },
         {
+            "id":67,
+            "paraphrase":[
+                "How many students and instructors are in each department?"
+            ],
+            "question":" Find the total number of students and total number of instructors for each department.",
             "sqa":{
                 "question":[
                     "Find the total number of students.",
@@ -1374,16 +1378,16 @@
                     "SELECT count(DISTINCT T2.id) ,  count(DISTINCT T3.id) ,  T3.dept_name FROM department AS T1 JOIN student AS T2 ON T1.dept_name  =  T2.dept_name JOIN instructor AS T3 ON T1.dept_name  =  T3.dept_name GROUP BY T3.dept_name"
                 ]
             },
-            "paraphrase":[
-                "How many students and instructors are in each department?"
-            ],
-            "question":" Find the total number of students and total number of instructors for each department.",
-            "id":67,
             "sql":[
                 "SELECT count(DISTINCT T2.id) ,  count(DISTINCT T3.id) ,  T3.dept_name FROM department AS T1 JOIN student AS T2 ON T1.dept_name  =  T2.dept_name JOIN instructor AS T3 ON T1.dept_name  =  T3.dept_name GROUP BY T3.dept_name"
             ]
         },
         {
+            "id":68,
+            "paraphrase":[
+                "What are the names of students who have taken the prerequisite for the course International Finance?"
+            ],
+            "question":" Find the name of students who have taken the prerequisite course of the course with title International Finance.",
             "sqa":{
                 "question":[
                     "What is the id of the prerequisite of International Finance?",
@@ -1396,16 +1400,16 @@
                     "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN"
                 ]
             },
-            "paraphrase":[
-                "What are the names of students who have taken the prerequisite for the course International Finance?"
-            ],
-            "question":" Find the name of students who have taken the prerequisite course of the course with title International Finance.",
-            "id":68,
             "sql":[
                 "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN"
             ]
         },
         {
+            "id":69,
+            "paraphrase":[
+                "What are the names and salaries for instructors who earn less than the average salary of instructors in the Physics department?"
+            ],
+            "question":" Find the name and salary of instructors whose salary is below the average salary of the instructors in the Physics department.",
             "sqa":{
                 "question":[
                     "What is the average salary of instructors in the Physics department?",
@@ -1418,16 +1422,16 @@
                     "SELECT name ,  salary FROM instructor WHERE salary  < "
                 ]
             },
-            "paraphrase":[
-                "What are the names and salaries for instructors who earn less than the average salary of instructors in the Physics department?"
-            ],
-            "question":" Find the name and salary of instructors whose salary is below the average salary of the instructors in the Physics department.",
-            "id":69,
             "sql":[
                 "SELECT name ,  salary FROM instructor WHERE salary  < "
             ]
         },
         {
+            "id":70,
+            "paraphrase":[
+                "What are the names of students who have taken Statistics courses?"
+            ],
+            "question":" Find the name of students who took some course offered by Statistics department.",
             "sqa":{
                 "question":[
                     "What is all the information about the Statistics courses?",
@@ -1438,16 +1442,16 @@
                     "SELECT T3.name FROM course AS T1 JOIN takes AS T2 ON T1.course_id  =  T2.course_id JOIN student AS T3 ON T2.id  =  T3.id WHERE T1.dept_name  =  'Statistics'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of students who have taken Statistics courses?"
-            ],
-            "question":" Find the name of students who took some course offered by Statistics department.",
-            "id":70,
             "sql":[
                 "SELECT T3.name FROM course AS T1 JOIN takes AS T2 ON T1.course_id  =  T2.course_id JOIN student AS T3 ON T2.id  =  T3.id WHERE T1.dept_name  =  'Statistics'"
             ]
         },
         {
+            "id":71,
+            "paraphrase":[
+                "What are the building, room number, semester and year of courses in the Psychology department, sorted using course title?"
+            ],
+            "question":" Find the building, room number, semester and year of all courses offered by Psychology department sorted by course titles.",
             "sqa":{
                 "question":[
                     "What is all the information about the courses in the Psychology department, ordered by title?",
@@ -1458,16 +1462,16 @@
                     "SELECT T2.building ,  T2.room_number ,  T2.semester ,  T2.year FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE T1.dept_name  =  'Psychology' ORDER BY T1.title"
                 ]
             },
-            "paraphrase":[
-                "What are the building, room number, semester and year of courses in the Psychology department, sorted using course title?"
-            ],
-            "question":" Find the building, room number, semester and year of all courses offered by Psychology department sorted by course titles.",
-            "id":71,
             "sql":[
                 "SELECT T2.building ,  T2.room_number ,  T2.semester ,  T2.year FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE T1.dept_name  =  'Psychology' ORDER BY T1.title"
             ]
         },
         {
+            "id":72,
+            "paraphrase":[
+                "What are the names of all instructors in the Comp. Sci. department?"
+            ],
+            "question":" Find the names of all instructors in computer science department",
             "sqa":{
                 "question":[
                     "What are the names of all the instructors?",
@@ -1478,16 +1482,16 @@
                     "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of all instructors in the Comp. Sci. department?"
-            ],
-            "question":" Find the names of all instructors in computer science department",
-            "id":72,
             "sql":[
                 "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'"
             ]
         },
         {
+            "id":73,
+            "paraphrase":[
+                "What are the names of the instructors in the Comp. Sci. department who earn more than 80000?"
+            ],
+            "question":" Find the names of all instructors in Comp. Sci. department with salary > 80000.",
             "sqa":{
                 "question":[
                     "What are the names of all instructors who earn more than 80000?",
@@ -1498,16 +1502,16 @@
                     "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'  AND salary  >  80000"
                 ]
             },
-            "paraphrase":[
-                "What are the names of the instructors in the Comp. Sci. department who earn more than 80000?"
-            ],
-            "question":" Find the names of all instructors in Comp. Sci. department with salary > 80000.",
-            "id":73,
             "sql":[
                 "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'  AND salary  >  80000"
             ]
         },
         {
+            "id":74,
+            "paraphrase":[
+                "What are the names of all instructors who have taught a course, as well as the corresponding course id?"
+            ],
+            "question":" Find the names of all instructors who have taught some course and the course_id.",
             "sqa":{
                 "question":[
                     "What are all the names of teachers who have taught a course?",
@@ -1518,16 +1522,16 @@
                     "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID"
                 ]
             },
-            "paraphrase":[
-                "What are the names of all instructors who have taught a course, as well as the corresponding course id?"
-            ],
-            "question":" Find the names of all instructors who have taught some course and the course_id.",
-            "id":74,
             "sql":[
                 "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID"
             ]
         },
         {
+            "id":75,
+            "paraphrase":[
+                "What are the names of Art instructors who have taught a course, and the corresponding course id?"
+            ],
+            "question":" Find the names of all instructors in the Art department who have taught some course and the course_id.",
             "sqa":{
                 "question":[
                     "What are all the names of teachers who have taught a course, and what were the course ids?",
@@ -1538,16 +1542,16 @@
                     "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID WHERE T1.dept_name  =  'Art'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of Art instructors who have taught a course, and the corresponding course id?"
-            ],
-            "question":" Find the names of all instructors in the Art department who have taught some course and the course_id.",
-            "id":75,
             "sql":[
                 "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID WHERE T1.dept_name  =  'Art'"
             ]
         },
         {
+            "id":76,
+            "paraphrase":[
+                "What are the names of all instructors with names that include \"dar\"?"
+            ],
+            "question":" Find the names of all instructors whose name includes the substring \u201cdar\u201d.",
             "sqa":{
                 "question":[
                     "What are the names of all instructors?",
@@ -1558,16 +1562,16 @@
                     "SELECT name FROM instructor WHERE name LIKE '%dar%'"
                 ]
             },
-            "paraphrase":[
-                "What are the names of all instructors with names that include \"dar\"?"
-            ],
-            "question":" Find the names of all instructors whose name includes the substring \u201cdar\u201d.",
-            "id":76,
             "sql":[
                 "SELECT name FROM instructor WHERE name LIKE '%dar%'"
             ]
         },
         {
+            "id":77,
+            "paraphrase":[
+                "List the distinct names of the instructors, ordered by name."
+            ],
+            "question":" List in alphabetic order the names of all distinct instructors.",
             "sqa":{
                 "question":[
                     "What are the distinct names of all instructors?",
@@ -1578,16 +1582,16 @@
                     "SELECT DISTINCT name FROM  instructor ORDER BY name"
                 ]
             },
-            "paraphrase":[
-                "List the distinct names of the instructors, ordered by name."
-            ],
-            "question":" List in alphabetic order the names of all distinct instructors.",
-            "id":77,
             "sql":[
                 "SELECT DISTINCT name FROM  instructor ORDER BY name"
             ]
         },
         {
+            "id":78,
+            "paraphrase":[
+                "What are the ids for courses in the Fall of 2009 or the Spring of 2010?"
+            ],
+            "question":" Find courses that ran in Fall 2009 or in Spring 2010.",
             "sqa":{
                 "question":[
                     "What are the ids for courses offered in the Fall of 2009?",
@@ -1598,16 +1602,16 @@
                     "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 UNION SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
                 ]
             },
-            "paraphrase":[
-                "What are the ids for courses in the Fall of 2009 or the Spring of 2010?"
-            ],
-            "question":" Find courses that ran in Fall 2009 or in Spring 2010.",
-            "id":78,
             "sql":[
                 "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 UNION SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
             ]
         },
         {
+            "id":79,
+            "paraphrase":[
+                "What are the ids for courses that were offered in both Fall of 2009 and Spring of 2010?"
+            ],
+            "question":" Find courses that ran in Fall 2009 and in Spring 2010.",
             "sqa":{
                 "question":[
                     "What are the ids for courses offered in the Fall of 2009?",
@@ -1618,16 +1622,16 @@
                     "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 INTERSECT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
                 ]
             },
-            "paraphrase":[
-                "What are the ids for courses that were offered in both Fall of 2009 and Spring of 2010?"
-            ],
-            "question":" Find courses that ran in Fall 2009 and in Spring 2010.",
-            "id":79,
             "sql":[
                 "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 INTERSECT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
             ]
         },
         {
+            "id":80,
+            "paraphrase":[
+                "What are the ids of courses offered in Fall of 2009 but not in Spring of 2010?"
+            ],
+            "question":" Find courses that ran in Fall 2009 but not in Spring 2010.",
             "sqa":{
                 "question":[
                     "What are the ids of courses offered in the Fall of 2009?",
@@ -1638,16 +1642,16 @@
                     "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
                 ]
             },
-            "paraphrase":[
-                "What are the ids of courses offered in Fall of 2009 but not in Spring of 2010?"
-            ],
-            "question":" Find courses that ran in Fall 2009 but not in Spring 2010.",
-            "id":80,
             "sql":[
                 "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
             ]
         },
         {
+            "id":81,
+            "paraphrase":[
+                "What are the distinct salaries of all instructors who earned less than the maximum salary?"
+            ],
+            "question":" Find the salaries of all distinct instructors that are less than the largest salary.",
             "sqa":{
                 "question":[
                     "What was the largest salary across instructors?",
@@ -1658,16 +1662,16 @@
                     "SELECT DISTINCT salary FROM instructor WHERE salary  <  (SELECT max(salary) FROM instructor)"
                 ]
             },
-            "paraphrase":[
-                "What are the distinct salaries of all instructors who earned less than the maximum salary?"
-            ],
-            "question":" Find the salaries of all distinct instructors that are less than the largest salary.",
-            "id":81,
             "sql":[
                 "SELECT DISTINCT salary FROM instructor WHERE salary  <  (SELECT max(salary) FROM instructor)"
             ]
         },
         {
+            "id":82,
+            "paraphrase":[
+                "How many instructors teach a course in the Spring of 2010?"
+            ],
+            "question":" Find the total number of instructors who teach a course in the Spring 2010 semester.",
             "sqa":{
                 "question":[
                     "What are the distinct ids of instructors teaching in the Spring of 2010?",
@@ -1678,16 +1682,16 @@
                     "SELECT COUNT (DISTINCT ID) FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
                 ]
             },
-            "paraphrase":[
-                "How many instructors teach a course in the Spring of 2010?"
-            ],
-            "question":" Find the total number of instructors who teach a course in the Spring 2010 semester.",
-            "id":82,
             "sql":[
                 "SELECT COUNT (DISTINCT ID) FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
             ]
         },
         {
+            "id":83,
+            "paraphrase":[
+                "What are the names and average salaries for departments with average salary higher than 42000?"
+            ],
+            "question":" Find the names and average salaries of all departments whose average salary is greater than 42000.",
             "sqa":{
                 "question":[
                     "What are the names of departments that have average salaries higher than 42000?",
@@ -1698,16 +1702,16 @@
                     "SELECT dept_name ,  AVG (salary) FROM instructor GROUP BY dept_name HAVING AVG (salary)  >  42000"
                 ]
             },
-            "paraphrase":[
-                "What are the names and average salaries for departments with average salary higher than 42000?"
-            ],
-            "question":" Find the names and average salaries of all departments whose average salary is greater than 42000.",
-            "id":83,
             "sql":[
                 "SELECT dept_name ,  AVG (salary) FROM instructor GROUP BY dept_name HAVING AVG (salary)  >  42000"
             ]
         },
         {
+            "id":84,
+            "paraphrase":[
+                "What are the names of instructors who earn more than at least one instructor from the Biology department?"
+            ],
+            "question":" Find names of instructors with salary greater than that of some (at least one) instructor in the Biology department.",
             "sqa":{
                 "question":[
                     "What is the lowest salary of instructors in the Biology department?",
@@ -1720,16 +1724,15 @@
                     "SELECT name FROM instructor WHERE salary  >  (SELECT min(salary) FROM instructor WHERE dept_name  =  'Biology')"
                 ]
             },
-            "paraphrase":[
-                "What are the names of instructors who earn more than at least one instructor from the Biology department?"
-            ],
-            "question":" Find names of instructors with salary greater than that of some (at least one) instructor in the Biology department.",
-            "id":84,
             "sql":[
                 "SELECT name FROM instructor WHERE salary  >  (SELECT min(salary) FROM instructor WHERE dept_name  =  'Biology')"
             ]
         },
         {
+            "paraphrase":[
+                "What are the names of all instructors with a higher salary than any of the instructors in the Biology department?"
+            ],
+            "question":" Find the names of all instructors whose salary is greater than the salary of all instructors in the Biology department.",
             "sqa":{
                 "question":[
                     "What is the highest salary of instructors in the Biology department?",
@@ -1740,14 +1743,11 @@
                     "SELECT name FROM instructor WHERE salary  >  (SELECT max(salary) FROM instructor WHERE dept_name  =  'Biology')"
                 ]
             },
-            "paraphrase":[
-                "What are the names of all instructors with a higher salary than any of the instructors in the Biology department?"
-            ],
-            "question":" Find the names of all instructors whose salary is greater than the salary of all instructors in the Biology department.",
             "sql":[
                 "SELECT name FROM instructor WHERE salary  >  (SELECT max(salary) FROM instructor WHERE dept_name  =  'Biology')"
             ]
         }
     ],
+    "label_id":"",
     "review_id":""
 }
