@@ -1,0 +1,278 @@
+Total = 35
+
+1. How many albums are there?
+
+SELECT count(*)
+FROM ALBUM
+
+2. List the name of all music genres.
+
+SELECT Name 
+FROM GENRE
+
+3. Find all the customer information in state NY.
+
+SELECT *
+FROM CUSTOMER
+WHERE State = "NY"
+
+4. What are the first names and last names of the employees who live in Calgary
+
+SELECT FirstName, LastName
+FROM EMPLOYEE 
+WHERE City = "Calgary"
+
+5. What are the distinct billing countries of the invoices?
+
+SELECT distinct(BillingCountry) 
+FROM INVOICE
+
+6. Find the names of all artists that have "a" in their names.
+
+SELECT Name 
+FROM ARTIST
+WHERE Name LIKE "%a%"
+
+7. Find the title of all the albums of the artist "AC/DC".
+
+SELECT Title
+FROM ALBUM as T1 join ARTIST as T2 
+on T1.ArtistId = T2.ArtistId
+where T2.Name = "AC/DC"
+
+8. Hom many albums does the artist "Metallica" have?
+
+SELECT COUNT(*)
+FROM ALBUM as T1 join ARTIST as T2 
+on T1.ArtistId = T2.ArtistId
+where T2.Name = "Metallica"
+
+9. Which artist does the album "Balls to the Wall" belong to?
+
+SELECT T2.Name
+FROM ALBUM as T1 join ARTIST as T2 
+on T1.ArtistId = T2.ArtistId
+where T1.Title = "Balls to the Wall"
+
+10. Which artist has the most albums?
+
+SELECT T2.Name
+FROM ALBUM as T1 join ARTIST as T2 
+on T1.ArtistId = T2.ArtistId
+GROUP BY T2.Name
+ORDER BY COUNT(*) DESC 
+LIMIT 1
+
+11. Find the names of all the tracks that contain the word "you".
+
+SELECT Name
+from TRACK
+where Name like '%you%'
+
+12. What is the average unit price of all the tracks
+
+SELECT AVG(UnitPrice)
+FROM TRACK
+
+13. What are the duration of the longest and shortest track in milliseconds?
+
+SELECT max(Milliseconds), min(Milliseconds)
+FROM TRACK
+
+14. Please show the album names and the number of tracks for each album
+
+SELECT T1.Title, COUNT(*)
+FROM ALBUM as T1 join TRACK as T2 
+on T1.AlbumId = T2.AlbumId
+GROUP BY T2.AlbumID
+
+15. What is the name of the most common genre in all tracks?
+
+SELECT T1.Name
+FROM GENRE as T1 join TRACK as T2 
+on T1.GenreId = T2.GenreId
+GROUP BY T2.GenreId
+ORDER BY COUNT(*) DESC 
+LIMIT 1
+
+16. What is the least common media type in all tracks?
+
+SELECT T1.Name
+FROM MEDIATYPE as T1 join TRACK as T2 
+on T1.MediaTypeId = T2.MediaTypeId
+GROUP BY T2.MediaTypeId
+ORDER BY COUNT(*) ASC
+LIMIT 1
+
+17. Please show the album name that contains the most number of tracks with unit price bigger than 1.
+
+SELECT T1.Title
+FROM ALBUM as T1 join TRACK as T2 
+on T1.AlbumId = T2.AlbumId
+WHERE T2.UnitPrice > 1
+GROUP BY T2.AlbumID
+
+18. How many tracks belong to rock genre?
+
+SELECT COUNT(*)
+FROM GENRE as T1 join TRACK as T2 
+on T1.GenreId = T2.GenreId
+WHERE T1.Name = "Rock"
+
+19. What is the average unit price of tracks that belong to Jazz genre?
+
+SELECT AVG(UnitPrice)
+FROM GENRE as T1 join TRACK as T2 
+on T1.GenreId = T2.GenreId
+WHERE T1.Name = "Jazz"
+
+20. What is the first name and last name of the customer that has email "luisg@embraer.com.br"?
+
+SELECT FirstName, LastName 
+FROM CUSTOMER
+WHERE Email = "luisg@embraer.com.br"
+
+21. How many customers have email that contains "gmail.com"?
+
+SELECT COUNT(*)
+FROM CUSTOMER
+WHERE Email LIKE "%gmail.com%"
+
+22. What is the first name and last name employee helps the customer with first name Leonie?
+
+SELECT T2.FirstName, T2.LastName
+FROM CUSTOMER as T1 join EMPLOYEE as T2 
+on T1.SupportRepId = T2.EmployeeId
+where T1.FirstName = "Leonie"
+
+23. What city does the employee who helps the customer with postal code 70174 live in?
+
+SELECT T2.City
+FROM CUSTOMER as T1 join EMPLOYEE as T2 
+on T1.SupportRepId = T2.EmployeeId
+where T1.PostalCode = "70174"
+
+24. How many distinct cities does the employees live in?
+
+SELECT COUNT(distinct city) 
+FROM EMPLOYEE
+
+25. Find all invoice date information of customer with first name Astrid and last name Gruber.
+
+SELECT T2.InvoiceDate
+FROM CUSTOMER as T1 join INVOICE as T2 
+on T1.CustomerId = T2.CustomerId
+where T1.FirstName = "Astrid" and LastName = "Gruber"
+
+26. Find all the customer first names that do not have invoice.
+
+SELECT 	FirstName
+from CUSTOMER
+except
+select T1.FirstName
+from CUSTOMER as T1 JOIN Invoice as T2
+on T1.CustomerId = T2.CustomerId
+
+27. Find the first names of all customers that live in Brazil and have invoice.
+
+SELECT FirstName
+from CUSTOMER
+WHERE Country = "Brazil"
+INTERSECT
+SELECT T1.FirstName
+FROM CUSTOMER as T1 join INVOICE as T2 
+on T1.CustomerId = T2.CustomerId
+
+28. Find the address of all customers that live in Germany and have invoice.
+
+SELECT Address
+from CUSTOMER
+WHERE Country = "Germany"
+INTERSECT
+SELECT T1.Address
+FROM CUSTOMER as T1 join INVOICE as T2 
+on T1.CustomerId = T2.CustomerId
+
+29. List the phone of all employees
+
+SELECT Phone 
+FROM EMPLOYEE
+
+30. How many tracks is in AAC audio file media type?
+
+SELECT COUNT(*)
+FROM MEDIATYPE as T1 join TRACK as T2 
+on T1.MediaTypeId = T2.MediaTypeId
+WHERE T1.Name = "AAC audio file"
+
+31. What is the average duration in milliseconds of tracks that belong to Latin or Pop genre?
+
+SELECT AVG(Milliseconds)
+FROM GENRE as T1 join TRACK as T2 
+on T1.GenreId = T2.GenreId
+WHERE T1.Name = "Latin" OR T1.Name = "Pop"
+
+32. Please show the employee first names that serves at least 10 customers.
+
+SELECT T1.FirstName
+FROM CUSTOMER as T1 join EMPLOYEE as T2 
+on T1.SupportRepId = T2.EmployeeId
+GROUP BY T1.SupportRepId
+HAVING COUNT(*) >= 10
+
+33. Please show the employee last names that serves no more than 5 customers.
+
+SELECT T1.LastName
+FROM CUSTOMER as T1 join EMPLOYEE as T2 
+on T1.SupportRepId = T2.EmployeeId
+GROUP BY T1.SupportRepId
+HAVING COUNT(*) <=5
+
+34. Please list all album titles in alphabetical order
+
+SELECT Title 
+FROM ALBUM
+ORDER BY Title
+
+35. Please list the name of all artists that have at least 3 albums in alphabetical order.
+
+SELECT T2.Name
+FROM ALBUM as T1 join ARTIST as T2 
+on T1.ArtistId = T2.ArtistID
+GROUP BY T1.ArtistId
+HAVING COUNT(*) >= 3
+ORDER BY T2.Name
+
+36. Find the names of artists that do not have albums
+
+SELECT Name
+from ARTIST
+except
+SELECT T2.Name
+FROM ALBUM as T1 join ARTIST as T2 
+on T1.ArtistId = T2.ArtistId
+
+37. What is the average unit price of rock tracks
+
+SELECT AVG(T2.UnitPrice)
+FROM GENRE as T1 JOIN TRACK as T2
+on T1.GenreId = T2.GenreId
+WHERE T1.Name = "Rock"
+
+38. What are the duration of the longest and shortest pop tracks in milliseconds?
+
+SELECT max(Milliseconds), min(Milliseconds)
+FROM GENRE as T1 JOIN TRACK as T2
+on T1.GenreId = T2.GenreId
+WHERE T1.Name = "Pop"
+
+39. What is the birth date of the employees who live in Edmonton
+
+SELECT BirthDate
+FROM EMPLOYEE 
+WHERE City = "Edmonton"
+
+40. What are the distinct unit prices of all tracks?
+
+SELECT distinct(UnitPrice) 
+FROM TRACK
