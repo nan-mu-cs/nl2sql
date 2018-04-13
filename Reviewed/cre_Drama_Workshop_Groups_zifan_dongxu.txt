@@ -3,7 +3,7 @@ TOTAL = # 40
 1. How many bookings do we have?
 
 select count(*)
-from Products
+from BOOKINGS
 
 
 2. List all order dates of bookings.
@@ -133,20 +133,20 @@ on T1.Service_Type_Code = T2.Service_Type_Code
 where T2.Product_Price > 100
 
 
-20. What are the descriptions of types of services and the corresponding number of services?
+20. What are the descriptions and codes of types of services and the corresponding number of each service?
 
-select T1.Service_Type_Description, COUNT(*)
+select T1.Service_Type_Description, T2.Service_Type_Code, COUNT(*)
 from Ref_Service_Types as T1 join Services as T2
 on T1.Service_Type_Code = T2.Service_Type_Code
 group by T2.Service_Type_Code
 
 
-21. What is the description of the type of service that is performed the most number of times?
+21. What is the description and code of the type of service that is performed the most number of times?
 
-select T1.Service_Type_Description
+select T1.Service_Type_Description,T1.Service_Type_Code
 from Ref_Service_Types as T1 join Services as T2
 on T1.Service_Type_Code = T2.Service_Type_Code
-group by T2.Service_Type_Code
+group by T1.Service_Type_Code
 order by COUNT(*) DESC limit 1
 
 
@@ -207,8 +207,10 @@ WHERE T2.Order_Quantity = 1
 29. What are the order dates of orders with price bigger than 1000?
 
 select T1.Order_Date
-FROM Customer_Orders as T1 JOIN ORDER_ITEMS as T2 JOIN Products as T3
-on T1.Order_ID = T2.Order_ID AND T2.Product_ID = T3.Product_ID
+FROM Customer_Orders as T1 JOIN ORDER_ITEMS as T2
+on T1.Order_ID = T2.Order_ID 
+JOIN Products as T3 
+on T2.Product_ID = T3.Product_ID
 WHERE T3.Product_price > 1000
 
 
@@ -226,7 +228,7 @@ on T1.Address_ID = T2.Address_ID
 where T1.City_Town = "Feliciaberg"
 
 
-32. What are the phones of drama workshop groups with address in Alaska state?
+32. What are the email address of drama workshop groups with address in Alaska state?
 
 select T2.Store_Email_Address
 from Addresses as T1 join Drama_Workshop_Groups as T2
@@ -242,7 +244,7 @@ on T1.Address_ID = T2.Address_ID
 group by T1.City_Town
 
 
-34. What is the marketing region code with most number of drama workshop groups?
+34. What is the marketing region code with most drama workshop groups?
 
 select Marketing_Region_Code
 from Drama_Workshop_Groups
@@ -301,3 +303,16 @@ select Product_ID
 from INVOICES
 group by Product_ID
 order by COUNT(*) desc limit 1
+
+
+41. What is the description of the service type which both offer photo product and film product?
+
+select T1.Service_Type_Description
+from Ref_Service_Types as T1 JOIN Services as T2
+on T1.Service_Type_Code = T2.Service_Type_Code
+where T2.Product_Name = 'photo'
+INTERSECT
+select T1.Service_Type_Description
+from Ref_Service_Types as T1 JOIN Services as T2
+on T1.Service_Type_Code = T2.Service_Type_Code
+where T2.Product_Name = 'film'
