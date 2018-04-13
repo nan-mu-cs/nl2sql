@@ -1,0 +1,105 @@
+[
+    {
+        "col_data": [
+            {
+                "column_name": "cName",
+                "data_type": "varchar(20)",
+                "default_column_name": "cName",
+                "default_value": null,
+                "not_null": 1,
+                "primary_key": 1
+            },
+            {
+                "column_name": "state",
+                "data_type": "varchar(2)",
+                "default_column_name": "state",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "enr",
+                "data_type": "numeric(5,0)",
+                "default_column_name": "enr",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "College"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "pID",
+                "data_type": "numeric(5,0)",
+                "default_column_name": "pID",
+                "default_value": null,
+                "not_null": 1,
+                "primary_key": 1
+            },
+            {
+                "column_name": "pName",
+                "data_type": "varchar(20)",
+                "default_column_name": "pName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "yCard",
+                "data_type": "varchar(3)",
+                "default_column_name": "yCard",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "HS",
+                "data_type": "numeric(5,0)",
+                "default_column_name": "HS",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Player"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "pID",
+                "data_type": "numeric(5,0)",
+                "default_column_name": "pID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "cName",
+                "data_type": "varchar(20)",
+                "default_column_name": "cName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 2
+            },
+            {
+                "column_name": "pPos",
+                "data_type": "varchar(8)",
+                "default_column_name": "pPos",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "decision",
+                "data_type": "varchar(3)",
+                "default_column_name": "decision",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Tryout"
+    }
+]

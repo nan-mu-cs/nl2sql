@@ -1,0 +1,177 @@
+[
+    {
+        "col_data": [
+            {
+                "column_name": "artistID",
+                "data_type": "INTEGER",
+                "default_column_name": "artistID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "lname",
+                "data_type": "TEXT",
+                "default_column_name": "lname",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "fname",
+                "data_type": "TEXT",
+                "default_column_name": "fname",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "birthYear",
+                "data_type": "INTEGER",
+                "default_column_name": "birthYear",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "deathYear",
+                "data_type": "INTEGER",
+                "default_column_name": "deathYear",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Artists"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "paintingID",
+                "data_type": "INTEGER",
+                "default_column_name": "paintingID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "title",
+                "data_type": "TEXT",
+                "default_column_name": "title",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "year",
+                "data_type": "INTEGER",
+                "default_column_name": "year",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "height_mm",
+                "data_type": "INTEGER",
+                "default_column_name": "height_mm",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "width_mm",
+                "data_type": "INTEGER",
+                "default_column_name": "width_mm",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "medium",
+                "data_type": "TEXT",
+                "default_column_name": "medium",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "mediumOn",
+                "data_type": "TEXT",
+                "default_column_name": "mediumOn",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "location",
+                "data_type": "TEXT",
+                "default_column_name": "location",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "painterID",
+                "data_type": "INTEGER",
+                "default_column_name": "painterID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Paintings"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "sculptureID",
+                "data_type": "INTEGER",
+                "default_column_name": "sculptureID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "title",
+                "data_type": "TEXT",
+                "default_column_name": "title",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "year",
+                "data_type": "INTEGER",
+                "default_column_name": "year",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "medium",
+                "data_type": "TEXT",
+                "default_column_name": "medium",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "location",
+                "data_type": "TEXT",
+                "default_column_name": "location",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "sculptorID",
+                "data_type": "INTEGER",
+                "default_column_name": "sculptorID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Sculptures"
+    }
+]

@@ -467,7 +467,7 @@
                 ]
             },
             "sql":[
-                "SELECT name ,  age FROM Sailors WHERE age  = "
+                "SELECT name ,  age FROM Sailors WHERE age  =  ( SELECT max(age) FROM Sailors )"
             ]
         },
         {
@@ -783,7 +783,9 @@
         },
         {
             "id":38,
-            "paraphrase":[],
+            "paraphrase":[
+                "What are the names of sailors who reserved a boat with the name Melon?"
+            ],
             "question":" Find the names of sailors who reserved boat with the name Melon.",
             "sqa":{
                 "question":[
@@ -800,7 +802,10 @@
             ]
         },
         {
-            "paraphrase":[],
+            "id":39,
+            "paraphrase":[
+                "What are the names and ages of all sailors sorted by decreasing rating?"
+            ],
             "question":" List the names and ages of all sailors sorted by rating in descending order.",
             "sqa":{
                 "question":[

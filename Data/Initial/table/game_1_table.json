@@ -1,0 +1,174 @@
+[
+    {
+        "col_data": [
+            {
+                "column_name": "StuID",
+                "data_type": "INTEGER",
+                "default_column_name": "StuID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "LName",
+                "data_type": "VARCHAR(12)",
+                "default_column_name": "LName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Fname",
+                "data_type": "VARCHAR(12)",
+                "default_column_name": "Fname",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Age",
+                "data_type": "INTEGER",
+                "default_column_name": "Age",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Sex",
+                "data_type": "VARCHAR(1)",
+                "default_column_name": "Sex",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Major",
+                "data_type": "INTEGER",
+                "default_column_name": "Major",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Advisor",
+                "data_type": "INTEGER",
+                "default_column_name": "Advisor",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "city_code",
+                "data_type": "VARCHAR(3)",
+                "default_column_name": "city_code",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Student"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "GameID",
+                "data_type": "INTEGER",
+                "default_column_name": "GameID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "GName",
+                "data_type": "VARCHAR(40)",
+                "default_column_name": "GName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "GType",
+                "data_type": "VARCHAR(40)",
+                "default_column_name": "GType",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Video_Games"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "StuID",
+                "data_type": "INTEGER",
+                "default_column_name": "StuID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "GameID",
+                "data_type": "INTEGER",
+                "default_column_name": "GameID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Hours_Played",
+                "data_type": "INTEGER",
+                "default_column_name": "Hours_Played",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Plays_Games"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "StuID",
+                "data_type": "INTEGER",
+                "default_column_name": "StuID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "SportName",
+                "data_type": "VARCHAR(32)",
+                "default_column_name": "SportName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "HoursPerWeek",
+                "data_type": "INTEGER",
+                "default_column_name": "HoursPerWeek",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "GamesPlayed",
+                "data_type": "INTEGER",
+                "default_column_name": "GamesPlayed",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "OnScholarship",
+                "data_type": "VARCHAR(1)",
+                "default_column_name": "OnScholarship",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "SportsInfo"
+    }
+]

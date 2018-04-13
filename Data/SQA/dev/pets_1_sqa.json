@@ -183,13 +183,13 @@
                     "Also, how old are they?"
                 ],
                 "sql":[
-                    "SELECT * FROM student WHERE stuid NOT IN",
-                    "SELECT major FROM student WHERE stuid NOT IN",
-                    "SELECT major ,  age FROM student WHERE stuid NOT IN"
+                    "SELECT * FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')",
+                    "SELECT major FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')",
+                    "SELECT major ,  age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
                 ]
             },
             "sql":[
-                "SELECT major ,  age FROM student WHERE stuid NOT IN"
+                "SELECT major ,  age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
             ]
         },
         {
@@ -233,7 +233,7 @@
                 ]
             },
             "sql":[
-                "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' AND T1.stuid NOT IN"
+                "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
             ]
         },
         {
@@ -429,6 +429,7 @@
             ]
         },
         {
+            "id":21,
             "paraphrase":[
                 "What is the average age for all students who do not own any pets?"
             ],
@@ -439,12 +440,12 @@
                     "What is their average age?"
                 ],
                 "sql":[
-                    "SELECT * FROM student WHERE stuid NOT IN",
-                    "SELECT avg(age) FROM student WHERE stuid NOT IN"
+                    "SELECT * FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid)",
+                    "SELECT avg(age) FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid)"
                 ]
             },
             "sql":[
-                "SELECT avg(age) FROM student WHERE stuid NOT IN"
+                "SELECT avg(age) FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid)"
             ]
         }
     ],

@@ -526,6 +526,7 @@
             ]
         },
         {
+            "id":26,
             "paraphrase":[
                 "What are the names of the movies not being shown in any theaters?"
             ],
@@ -538,12 +539,12 @@
                 ],
                 "sql":[
                     "SELECT * FROM MovieTheaters WHERE Movie IS NOT NULL",
-                    "SELECT * FROM Movies WHERE Code NOT IN",
-                    "SELECT Title FROM Movies WHERE Code NOT IN"
+                    "SELECT * FROM Movies WHERE Code NOT IN (SELECT Movie FROM MovieTheaters WHERE Movie IS NOT NULL)",
+                    "SELECT Title FROM Movies WHERE Code NOT IN (SELECT Movie FROM MovieTheaters WHERE Movie IS NOT NULL)"
                 ]
             },
             "sql":[
-                "SELECT Title FROM Movies WHERE Code NOT IN"
+                "SELECT Title FROM Movies WHERE Code NOT IN (SELECT Movie FROM MovieTheaters WHERE Movie IS NOT NULL)"
             ]
         }
     ],

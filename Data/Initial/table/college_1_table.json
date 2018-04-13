@@ -1,0 +1,381 @@
+[
+    {
+        "col_data": [
+            {
+                "column_name": "CLASS_CODE",
+                "data_type": "varchar(5)",
+                "default_column_name": "CLASS_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "CRS_CODE",
+                "data_type": "varchar(10)",
+                "default_column_name": "CRS_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "CLASS_SECTION",
+                "data_type": "varchar(2)",
+                "default_column_name": "CLASS_SECTION",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "CLASS_TIME",
+                "data_type": "varchar(20)",
+                "default_column_name": "CLASS_TIME",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "CLASS_ROOM",
+                "data_type": "varchar(8)",
+                "default_column_name": "CLASS_ROOM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "PROF_NUM",
+                "data_type": "int",
+                "default_column_name": "PROF_NUM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "CLASS"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "CRS_CODE",
+                "data_type": "varchar(10)",
+                "default_column_name": "CRS_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "DEPT_CODE",
+                "data_type": "varchar(10)",
+                "default_column_name": "DEPT_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "CRS_DESCRIPTION",
+                "data_type": "varchar(35)",
+                "default_column_name": "CRS_DESCRIPTION",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "CRS_CREDIT",
+                "data_type": "float(8)",
+                "default_column_name": "CRS_CREDIT",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "COURSE"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "DEPT_CODE",
+                "data_type": "varchar(10)",
+                "default_column_name": "DEPT_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "DEPT_NAME",
+                "data_type": "varchar(30)",
+                "default_column_name": "DEPT_NAME",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "SCHOOL_CODE",
+                "data_type": "varchar(8)",
+                "default_column_name": "SCHOOL_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "EMP_NUM",
+                "data_type": "int",
+                "default_column_name": "EMP_NUM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DEPT_ADDRESS",
+                "data_type": "varchar(20)",
+                "default_column_name": "DEPT_ADDRESS",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DEPT_EXTENSION",
+                "data_type": "varchar(4)",
+                "default_column_name": "DEPT_EXTENSION",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "DEPARTMENT"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "EMP_NUM",
+                "data_type": "int",
+                "default_column_name": "EMP_NUM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "EMP_LNAME",
+                "data_type": "varchar(15)",
+                "default_column_name": "EMP_LNAME",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "EMP_FNAME",
+                "data_type": "varchar(12)",
+                "default_column_name": "EMP_FNAME",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "EMP_INITIAL",
+                "data_type": "varchar(1)",
+                "default_column_name": "EMP_INITIAL",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "EMP_JOBCODE",
+                "data_type": "varchar(5)",
+                "default_column_name": "EMP_JOBCODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "EMP_HIREDATE",
+                "data_type": "datetime",
+                "default_column_name": "EMP_HIREDATE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "EMP_DOB",
+                "data_type": "datetime",
+                "default_column_name": "EMP_DOB",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "EMPLOYEE"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "CLASS_CODE",
+                "data_type": "varchar(5)",
+                "default_column_name": "CLASS_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_NUM",
+                "data_type": "int",
+                "default_column_name": "STU_NUM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "ENROLL_GRADE",
+                "data_type": "varchar(50)",
+                "default_column_name": "ENROLL_GRADE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "ENROLL"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "EMP_NUM",
+                "data_type": "int",
+                "default_column_name": "EMP_NUM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DEPT_CODE",
+                "data_type": "varchar(10)",
+                "default_column_name": "DEPT_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "PROF_OFFICE",
+                "data_type": "varchar(50)",
+                "default_column_name": "PROF_OFFICE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "PROF_EXTENSION",
+                "data_type": "varchar(4)",
+                "default_column_name": "PROF_EXTENSION",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "PROF_HIGH_DEGREE",
+                "data_type": "varchar(5)",
+                "default_column_name": "PROF_HIGH_DEGREE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "PROFESSOR"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "STU_NUM",
+                "data_type": "int",
+                "default_column_name": "STU_NUM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "STU_LNAME",
+                "data_type": "varchar(15)",
+                "default_column_name": "STU_LNAME",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_FNAME",
+                "data_type": "varchar(15)",
+                "default_column_name": "STU_FNAME",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_INIT",
+                "data_type": "varchar(1)",
+                "default_column_name": "STU_INIT",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_DOB",
+                "data_type": "datetime",
+                "default_column_name": "STU_DOB",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_HRS",
+                "data_type": "int",
+                "default_column_name": "STU_HRS",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_CLASS",
+                "data_type": "varchar(2)",
+                "default_column_name": "STU_CLASS",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_GPA",
+                "data_type": "float(8)",
+                "default_column_name": "STU_GPA",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_TRANSFER",
+                "data_type": "numeric",
+                "default_column_name": "STU_TRANSFER",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DEPT_CODE",
+                "data_type": "varchar(18)",
+                "default_column_name": "DEPT_CODE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "STU_PHONE",
+                "data_type": "varchar(4)",
+                "default_column_name": "STU_PHONE",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "PROF_NUM",
+                "data_type": "int",
+                "default_column_name": "PROF_NUM",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "STUDENT"
+    }
+]

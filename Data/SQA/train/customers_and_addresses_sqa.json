@@ -1,0 +1,936 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "What are the names of all the customers?"
+            ],
+            "question":" Find the name of all customers.",
+            "sqa":{
+                "question":[
+                    "Return the information of all the customers.",
+                    "What are the name of the customers?"
+                ],
+                "sql":[
+                    "SELECT * FROM customers",
+                    "SELECT customer_name FROM customers"
+                ]
+            },
+            "sql":[
+                "SELECT customer_name FROM customers"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "Return the total number of distinct customers."
+            ],
+            "question":" How many customers are there?",
+            "sqa":{
+                "question":[
+                    "List all the customers.",
+                    "Count the number of the customers."
+                ],
+                "sql":[
+                    "SELECT * FROM customers",
+                    "SELECT count(*) FROM customers"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM customers"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "Find the average order quantity per order."
+            ],
+            "question":" What is the average amount of items ordered in each order?",
+            "sqa":{
+                "question":[
+                    "Find the order quantity for each order.",
+                    "What is the average order quantity?"
+                ],
+                "sql":[
+                    "SELECT order_quantity FROM order_items",
+                    "SELECT avg(order_quantity) FROM order_items"
+                ]
+            },
+            "sql":[
+                "SELECT avg(order_quantity) FROM order_items"
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "Which customers use \"Cash\" for payment method? Return the customer names."
+            ],
+            "question":" What are the names of customers who use payment method \"Cash\"?",
+            "sqa":{
+                "question":[
+                    "Which customers' payment method is \"Cash\"?",
+                    "What are the names of those customers?"
+                ],
+                "sql":[
+                    "SELECT * FROM customers WHERE payment_method  =  \"Cash\"",
+                    "SELECT customer_name FROM customers WHERE payment_method  =  \"Cash\""
+                ]
+            },
+            "sql":[
+                "SELECT customer_name FROM customers WHERE payment_method  =  \"Cash\""
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What are the dates when customers with ids between 10 and 20 became customers?"
+            ],
+            "question":" Find the \"date became customers\" of the customers whose ID is between 10 and 20.",
+            "sqa":{
+                "question":[
+                    "List all the customers.",
+                    "What are the dates they became customers?",
+                    "For customer id between 10 and 20, what are the dates they became customers?"
+                ],
+                "sql":[
+                    "SELECT * FROM customers",
+                    "SELECT date_became_customer FROM customers",
+                    "SELECT date_became_customer FROM customers WHERE customer_id BETWEEN 10 AND 20"
+                ]
+            },
+            "sql":[
+                "SELECT date_became_customer FROM customers WHERE customer_id BETWEEN 10 AND 20"
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "Find the payment method that is used most frequently."
+            ],
+            "question":" Which payment method is used by most customers?",
+            "sqa":{
+                "question":[
+                    "What is the payment method each customer uses?",
+                    "Group by the payment method, and return the frequency the method is used.",
+                    "Return the payment method that is used most frequently."
+                ],
+                "sql":[
+                    "SELECT payment_method FROM customers",
+                    "SELECT count(*) FROM customers GROUP BY payment_method",
+                    "SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "Find the name of the customers who use the most frequently used payment method."
+            ],
+            "question":" What are the names of customers using the most popular payment method?",
+            "sqa":{
+                "question":[
+                    "For each payment method, count the number of customers who use it.",
+                    "What is the most frequently used payment method?",
+                    "Return the name of the customers who use this payment method."
+                ],
+                "sql":[
+                    "SELECT count(*) FROM customers GROUP BY payment_method",
+                    "SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1",
+                    "SELECT customer_name FROM customers WHERE payment_method  =  (SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1)"
+                ]
+            },
+            "sql":[
+                "SELECT customer_name FROM customers WHERE payment_method  =  (SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1)"
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "Return all the distinct payment methods used by customers."
+            ],
+            "question":" What are all the payment methods?",
+            "sqa":{
+                "question":[
+                    "What payment method does each customer use?",
+                    "Return all the distinct payment methods used."
+                ],
+                "sql":[
+                    "SELECT payment_method FROM customers",
+                    "SELECT DISTINCT payment_method FROM customers"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT payment_method FROM customers"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "Return the the details of all products."
+            ],
+            "question":" What are the details of all products?",
+            "sqa":{
+                "question":[
+                    "What is the detail of each product?",
+                    "What are the distinct product details?"
+                ],
+                "sql":[
+                    "SELECT product_details FROM products",
+                    "SELECT DISTINCT product_details FROM products"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT product_details FROM products"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "Which customer's name contains \"Alex\"? Find the full name."
+            ],
+            "question":" Find the name of all customers whose name contains \"Alex\".",
+            "sqa":{
+                "question":[
+                    "Return customers whose name contains \"Alex\".",
+                    "What are the full names of these customers?"
+                ],
+                "sql":[
+                    "SELECT * FROM customers WHERE customer_name LIKE \"%Alex%\"",
+                    "SELECT * FROM customers WHERE customer_name LIKE \"%Alex%\""
+                ]
+            },
+            "sql":[
+                "SELECT customer_name FROM customers WHERE customer_name LIKE \"%Alex%\""
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "Which product's detail contains the word \"Latte\" or \"Americano\"? Return the full detail."
+            ],
+            "question":" Find the detail of products whose detail contains the word \"Latte\" or the word \"Americano\"",
+            "sqa":{
+                "question":[
+                    "Return products whose details contain the word \"Latte\" or \"Americano\".",
+                    "What are the full details for these products?"
+                ],
+                "sql":[
+                    "SELECT * FROM products WHERE product_details LIKE \"%Latte%\" OR product_details LIKE \"%Americano%\"",
+                    "SELECT product_details FROM products WHERE product_details LIKE \"%Latte%\" OR product_details LIKE \"%Americano%\""
+                ]
+            },
+            "sql":[
+                "SELECT product_details FROM products WHERE product_details LIKE \"%Latte%\" OR product_details LIKE \"%Americano%\""
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "Return the address content for the customer whose name is \"Maudie Kertzmann\"."
+            ],
+            "question":" What is the address content of the customer named \"Maudie Kertzmann\"?",
+            "sqa":{
+                "question":[
+                    "Find the customer who is named \"Maudie Kertzmann\".",
+                    "What is the address id of this customer?",
+                    "What is the address content?"
+                ],
+                "sql":[
+                    "SELECT * FROM customers WHERE customer_name  =  \"Maudie Kertzmann\"",
+                    "SELECT t2.address_id FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Maudie Kertzmann\"",
+                    "SELECT t3.address_content FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t1.customer_name  =  \"Maudie Kertzmann\""
+                ]
+            },
+            "sql":[
+                "SELECT t3.address_content FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t1.customer_name  =  \"Maudie Kertzmann\""
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "Find the number of customers who live in the city called Lake Geovannyton."
+            ],
+            "question":" How many customers are living in city \"Lake Geovannyton\"?",
+            "sqa":{
+                "question":[
+                    "Find all the address ids for the city called Lake Geovannyton.",
+                    "Find all the customers whose address is in this city.",
+                    "How many customers are living there?"
+                ],
+                "sql":[
+                    "SELECT address_id FROM addresses WHERE city  =  \"Lake Geovannyton\"",
+                    "SELECT * FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.city  =  \"Lake Geovannyton\"",
+                    "SELECT count(*) FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.city  =  \"Lake Geovannyton\""
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.city  =  \"Lake Geovannyton\""
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What are the names of customers who live in Colorado state?"
+            ],
+            "question":" Find the name of customers who are living in Colorado?",
+            "sqa":{
+                "question":[
+                    "What are the ids of addresses in Colorado state?",
+                    "Tell me the ids of customers who live there.",
+                    "What are the names of these customers?"
+                ],
+                "sql":[
+                    "SELECT address_id FROM addresses WHERE state_province_county  =  \"Colorado\"",
+                    "SELECT t2.customer_id FROM customer_addresses AS t2 JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.state_province_county  =  \"Colorado\"",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.state_province_county  =  \"Colorado\""
+                ]
+            },
+            "sql":[
+                "SELECT t1.customer_name FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.state_province_county  =  \"Colorado\""
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "What are the cities no customers live in?"
+            ],
+            "question":" Find the list of cities that no customer is living in.",
+            "sqa":{
+                "question":[
+                    "For each customer, find the city he or she lives in.",
+                    "What are all the distinct cities customers live in?",
+                    "What are the cities no customers live in?"
+                ],
+                "sql":[
+                    "SELECT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id",
+                    "SELECT DISTINCT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id",
+                    "SELECT city FROM addresses WHERE city NOT IN ( SELECT DISTINCT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id)"
+                ]
+            },
+            "sql":[
+                "SELECT city FROM addresses WHERE city NOT IN ( SELECT DISTINCT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id)"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "Find the city where the most customers live."
+            ],
+            "question":" Which city has the most customers living in?",
+            "sqa":{
+                "question":[
+                    "List all the cities customers live in.",
+                    "Group by cities and count how many customers live there.",
+                    "Which city has the most customers?"
+                ],
+                "sql":[
+                    "SELECT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id",
+                    "SELECT count(*) FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id GROUP BY t3.city",
+                    "SELECT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id GROUP BY t3.city ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id GROUP BY t3.city ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "List all the distinct cities"
+            ],
+            "question":" Retrieve the list of all cities.",
+            "sqa":{
+                "question":[
+                    "List all the addresses.",
+                    "What is the list of distinct cities?"
+                ],
+                "sql":[
+                    "SELECT * FROM addresses",
+                    "SELECT DISTINCT city FROM addresses"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT city FROM addresses"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "Which city is post code 255 located in?"
+            ],
+            "question":" Find the city with post code 255.",
+            "sqa":{
+                "question":[
+                    "Find the address with post code 255.",
+                    "Which city is this address in?"
+                ],
+                "sql":[
+                    "SELECT * FROM addresses WHERE zip_postcode  =  255",
+                    "SELECT city FROM addresses WHERE zip_postcode  =  255"
+                ]
+            },
+            "sql":[
+                "SELECT city FROM addresses WHERE zip_postcode  =  255"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "What are the state and country of all the cities that have post codes starting with 4.\\"
+            ],
+            "question":" Find the state and country of all cities with post code starting with 4.",
+            "sqa":{
+                "question":[
+                    "Find the address with post code starting with 4.",
+                    "What are the state and country of these addresses?"
+                ],
+                "sql":[
+                    "SELECT * FROM addresses WHERE zip_postcode LIKE \"4%\"",
+                    "SELECT state_province_county ,  country FROM addresses WHERE zip_postcode LIKE \"4%\""
+                ]
+            },
+            "sql":[
+                "SELECT state_province_county ,  country FROM addresses WHERE zip_postcode LIKE \"4%\""
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "For which countries are there more than four distinct addresses listed?"
+            ],
+            "question":" List the countries having more than 4 addresses listed.",
+            "sqa":{
+                "question":[
+                    "Group all the addresses by the country.",
+                    "Which countries have more than four addresses listed?"
+                ],
+                "sql":[
+                    "SELECT * FROM addresses GROUP BY country",
+                    "SELECT country FROM addresses GROUP BY country HAVING count(address_id)  >  4"
+                ]
+            },
+            "sql":[
+                "SELECT country FROM addresses GROUP BY country HAVING count(address_id)  >  4"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "Which contact channel codes were used less than 5 times?"
+            ],
+            "question":" List all the contact channel codes that were used less than 5 times.",
+            "sqa":{
+                "question":[
+                    "List all the contact channel codes.",
+                    "For each contact channel code, return how many times it was used.",
+                    "Which contact channel codes were used less than 5 times?"
+                ],
+                "sql":[
+                    "SELECT channel_code FROM customer_contact_channels",
+                    "SELECT count(customer_id) FROM customer_contact_channels GROUP BY channel_code",
+                    "SELECT channel_code FROM customer_contact_channels GROUP BY channel_code HAVING count(customer_id)  <  5"
+                ]
+            },
+            "sql":[
+                "SELECT channel_code FROM customer_contact_channels GROUP BY channel_code HAVING count(customer_id)  <  5"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "Find the contact channel code that was used by the customer named \"Tillman Ernser\"."
+            ],
+            "question":" Which contact channel has been used by the customer with name \"Tillman Ernser\"?",
+            "sqa":{
+                "question":[
+                    "Find the customer whose name is \"Tillman Ernser\".",
+                    "What are the channel codes used by this person?"
+                ],
+                "sql":[
+                    "SELECT * FROM customers WHERE customer_name  =  \"Tillman Ernser\"",
+                    "SELECT DISTINCT channel_code FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT channel_code FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[],
+            "question":" What is the \"active to date\" of the latest contact channel used by \"Tillman Ernser\"?",
+            "sqa":{
+                "question":[
+                    "What is the \"active to date\" for each customer?",
+                    "What is the latest \"active to date\" for each customer?",
+                    "Find that information for the customer named \"Tillman Ernser\"."
+                ],
+                "sql":[
+                    "SELECT active_to_date FROM customer_contact_channels",
+                    "SELECT max(t2.active_to_date) FROM customer_contact_channels GROUP BY customer_id",
+                    "SELECT max(t2.active_to_date) FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+                ]
+            },
+            "sql":[
+                "SELECT max(t2.active_to_date) FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "Compute the average active time span of contact channels."
+            ],
+            "question":" What is the average time span of contact channels in the database?",
+            "sqa":{
+                "question":[
+                    "For each contact channel, find when it started and ended being active.",
+                    "What is the time span between the starting date and ending date?",
+                    "What is the average across all the channels?"
+                ],
+                "sql":[
+                    "SELECT active_to_date ,  active_from_date FROM customer_contact_channels",
+                    "SELECT active_to_date - active_from_date FROM customer_contact_channels",
+                    "SELECT avg(active_to_date - active_from_date) FROM customer_contact_channels"
+                ]
+            },
+            "sql":[
+                "SELECT avg(active_to_date - active_from_date) FROM customer_contact_channels"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "Return the channel code and contact number of the customer contact channel whose active duration was the longest."
+            ],
+            "question":" What is the channel code and contact number of the customer contact channel that was active for the longest time?",
+            "sqa":{
+                "question":[
+                    "Tell me the active duration for each customer contact channel.",
+                    "Among them, what is the longest active duration?",
+                    "What is the channel code and contact number of the customer contact channel whose active duration was the longest"
+                ],
+                "sql":[
+                    "SELECT active_to_date - active_from_date FROM customer_contact_channels",
+                    "SELECT active_to_date - active_from_date FROM customer_contact_channels ORDER BY (active_to_date - active_from_date) DESC LIMIT 1",
+                    "SELECT channel_code ,  contact_number FROM customer_contact_channels WHERE active_to_date - active_from_date  =  (SELECT active_to_date - active_from_date FROM customer_contact_channels ORDER BY (active_to_date - active_from_date) DESC LIMIT 1)"
+                ]
+            },
+            "sql":[
+                "SELECT channel_code ,  contact_number FROM customer_contact_channels WHERE active_to_date - active_from_date  =  (SELECT active_to_date - active_from_date FROM customer_contact_channels ORDER BY (active_to_date - active_from_date) DESC LIMIT 1)"
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "What are the name and active date of the customers whose contact channel code is email?"
+            ],
+            "question":" Find the name and active date of the customer that use email as the contact channel.",
+            "sqa":{
+                "question":[
+                    "Which customers use email as the contact channel?",
+                    "What are the dates these customers became active?",
+                    "What are the name and active date of these customers?"
+                ],
+                "sql":[
+                    "SELECT * FROM customer_contact_channels WHERE channel_code  =  'Email'",
+                    "SELECT active_from_date customer_contact_channels WHERE channel_code  =  'Email'",
+                    "SELECT t1.customer_name ,  t2.active_from_date FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t2.channel_code  =  'Email'"
+                ]
+            },
+            "sql":[
+                "SELECT t1.customer_name ,  t2.active_from_date FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t2.channel_code  =  'Email'"
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "Find the name of the customer who made the order of the largest amount of goods."
+            ],
+            "question":" What is the name of the customer that made the order with the largest quantity?",
+            "sqa":{
+                "question":[
+                    "What is the largest order quantity listed in the database?",
+                    "What is the name of the customer who made that order?"
+                ],
+                "sql":[
+                    "SELECT max(order_quantity) FROM order_items",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t3.order_quantity  =  ( SELECT max(order_quantity) FROM order_items)"
+                ]
+            },
+            "sql":[
+                "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t3.order_quantity  =  ( SELECT max(order_quantity) FROM order_items)"
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "Give me the name of the customer who ordered the most items in total."
+            ],
+            "question":" What is the name of the customer that has purchased the most items?",
+            "sqa":{
+                "question":[
+                    "Tell me the customer name for each order.",
+                    "What is the total quantity ordered by each customer?",
+                    "Give me the name of the customer who ordered the largest quantity in total."
+                ],
+                "sql":[
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id",
+                    "SELECT sum(t3.order_quantity) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "Tell me the payment method used by the customer who ordered the least amount of goods in total."
+            ],
+            "question":" What is the payment method of the customer that has purchased the least quantity of items?",
+            "sqa":{
+                "question":[
+                    "What is the total quantity ordered by each customer?",
+                    "Return the customer who ordered the least quantity in total.",
+                    "What is that customer's payment method?"
+                ],
+                "sql":[
+                    "SELECT sum(t3.order_quantity) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name",
+                    "SELECT * FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) LIMIT 1",
+                    "SELECT t1.payment_method FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT t1.payment_method FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) LIMIT 1"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "Find the number of distinct products Rodrick Heaney has bought so far."
+            ],
+            "question":" How many types of products have Rodrick Heaney bought in total?",
+            "sqa":{
+                "question":[
+                    "Find the id of the product ordered in each order.",
+                    "What are the ids of products ordered by the customer named Rodrick Heaney?",
+                    "How many distinct products has he bought?"
+                ],
+                "sql":[
+                    "SELECT product_id FROM order_items",
+                    "SELECT product_id FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\"",
+                    "SELECT count(DISTINCT product_id) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+                ]
+            },
+            "sql":[
+                "SELECT count(DISTINCT product_id) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "Tell me the total quantity of products bought by the customer called \"Rodrick Heaney\"."
+            ],
+            "question":" What is the total quantity of products purchased by \"Rodrick Heaney\"?",
+            "sqa":{
+                "question":[
+                    "Find the id of product ordered in each order.",
+                    "What are the ids of products ordered by the customer named Rodrick Heaney?",
+                    "What is the total quantity of products bought by him?"
+                ],
+                "sql":[
+                    "SELECT product_id FROM order_items",
+                    "SELECT product_id FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\"",
+                    "SELECT sum(t3.order_quantity) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+                ]
+            },
+            "sql":[
+                "SELECT sum(t3.order_quantity) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "Return the number of customers who have at least one order with \"Cancelled\" status."
+            ],
+            "question":" How many customers have at least one order with status \"Cancelled\"?",
+            "sqa":{
+                "question":[
+                    "Which customer order have cancelled status?",
+                    "How many customers have cancelled status?"
+                ],
+                "sql":[
+                    "SELECT * FROM customer_orders WHERE order_status  =  \"Cancelled\"",
+                    "SELECT count(DISTINCT customer_id) FROM customer_orders WHERE order_status  =  \"Cancelled\""
+                ]
+            },
+            "sql":[
+                "SELECT count(DISTINCT customer_id) FROM customer_orders WHERE order_status  =  \"Cancelled\""
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "Tell me the number of orders with \"Second time\" as order detail."
+            ],
+            "question":" How many orders have detail \"Second time\"?",
+            "sqa":{
+                "question":[
+                    "Which customer orders have \"Second time\" as order detail?",
+                    "How many?"
+                ],
+                "sql":[
+                    "SELECT * FROM customer_orders WHERE order_details  =  \"Second time\"",
+                    "SELECT count(*) FROM customer_orders WHERE order_details  =  \"Second time\""
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM customer_orders WHERE order_details  =  \"Second time\""
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "What are the customer name and date of the orders whose status is \"Delivered\"."
+            ],
+            "question":" Find the customer name and date of the orders that have the status \"Delivered\".",
+            "sqa":{
+                "question":[
+                    "Find all the customer orders whose status is \"Delivered\".",
+                    "What are the customer name and date for those orders?"
+                ],
+                "sql":[
+                    "SELECT * FROM customer_orders WHERE order_status  =  \"Delivered\"",
+                    "SELECT t1.customer_name ,  t2.order_date FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id WHERE order_status  =  \"Delivered\""
+                ]
+            },
+            "sql":[
+                "SELECT t1.customer_name ,  t2.order_date FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id WHERE order_status  =  \"Delivered\""
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "Find the total quantity of products associated with the orders in the \"Cancelled\" status."
+            ],
+            "question":" What is the total number of products that are in orders with status \"Cancelled\"?",
+            "sqa":{
+                "question":[
+                    "List all the customer orders in the \"Cancelled\" status.",
+                    "Find the order quantity for these orders.",
+                    "Find the total quantity of products associated with those orders."
+                ],
+                "sql":[
+                    "SELECT * FROM customer_orders WHERE t1.order_status  =  \"Cancelled\"",
+                    "SELECT t2.order_quantity FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_status  =  \"Cancelled\"",
+                    "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_status  =  \"Cancelled\""
+                ]
+            },
+            "sql":[
+                "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_status  =  \"Cancelled\""
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "What is the total amount of products purchased before 2018-03-17 07:13:53?"
+            ],
+            "question":" Find the total amount of products ordered before 2018-03-17 07:13:53.",
+            "sqa":{
+                "question":[
+                    "Find all the customer orders that made before 2018-03-17 07:13:53.",
+                    "Compute the total quantity of items purchased in this order."
+                ],
+                "sql":[
+                    "SELECT * FROM customer_orders WHERE t1.order_date  <  2018-03-17 07:13:53",
+                    "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_date  <  2018-03-17 07:13:53"
+                ]
+            },
+            "sql":[
+                "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_date  <  2018-03-17 07:13:53"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "Find the name of the customer who made an order most recently."
+            ],
+            "question":" Who made the latest order?",
+            "sqa":{
+                "question":[
+                    "Order all the customer orders by the descending order date.",
+                    "What is the most recent order?",
+                    "Who made that order?"
+                ],
+                "sql":[
+                    "SELECT * FROM customer_orders ORDER BY t2.order_date DESC",
+                    "SELECT * FROM customer_orders ORDER BY t2.order_date DESC LIMIT 1",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id ORDER BY t2.order_date DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id ORDER BY t2.order_date DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "What is the most frequently ordered product? Tell me the detail of the product"
+            ],
+            "question":" Which product has been ordered most number of times?",
+            "sqa":{
+                "question":[
+                    "Count the number of times each product is ordered.",
+                    "What is the most frequently ordered product?",
+                    "Tell me the detail of the product."
+                ],
+                "sql":[
+                    "SELECT count(*) FROM order_items GROUP BY product_id",
+                    "SELECT * FROM order_items GROUP BY product_id ORDER BY count(*) DESC LIMIT 1",
+                    "SELECT t2.product_details FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT t2.product_details FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "What are the name and ID of the product bought the most."
+            ],
+            "question":" Find the name and ID of the product whose total order quantity is the largest.",
+            "sqa":{
+                "question":[
+                    "Find the total quantity order for each product.",
+                    "What is the id of the product whose total order quantity is the largest?",
+                    "What are the name and ID of that product?"
+                ],
+                "sql":[
+                    "SELECT sum(order_quantity) FROM order_items GROUP BY product_id",
+                    "SELECT product_id FROM order_items GROUP BY product_id ORDER BY sum(order_quantity) LIMIT 1",
+                    "SELECT t2.product_details ,  t2.product_id FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY t1.order_quantity LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT t2.product_details ,  t2.product_id FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY sum(t1.order_quantity) LIMIT 1"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "What are all the addresses in East Julianaside, Texas or in Gleasonmouth, Arizona."
+            ],
+            "question":" Find all the addresses in East Julianaside, Texas or in Gleasonmouth, Arizona.",
+            "sqa":{
+                "question":[
+                    "List all addresses in East Julianaside, Texas.",
+                    "List all addresses in Gleasonmouth, Arizona.",
+                    "List all addresses in either of them."
+                ],
+                "sql":[
+                    "SELECT address_content FROM addresses WHERE city  =  \"East Julianaside\" AND state_province_county  =  \"Texas\"",
+                    "SELECT address_content FROM addresses WHERE city  =  \"Gleasonmouth\" AND state_province_county  =  \"Arizona\"",
+                    "SELECT address_content FROM addresses WHERE city  =  \"East Julianaside\" AND state_province_county  =  \"Texas\" UNION SELECT address_content FROM addresses WHERE city  =  \"Gleasonmouth\" AND state_province_county  =  \"Arizona\""
+                ]
+            },
+            "sql":[
+                "SELECT address_content FROM addresses WHERE city  =  \"East Julianaside\" AND state_province_county  =  \"Texas\" UNION SELECT address_content FROM addresses WHERE city  =  \"Gleasonmouth\" AND state_province_county  =  \"Arizona\""
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What is the name of customers who do not use Cash as payment method."
+            ],
+            "question":" Find the name of customers who did not pay with Cash.",
+            "sqa":{
+                "question":[
+                    "List all the customers' payment method",
+                    "Which customer does not use Cash?",
+                    "What is the name of the customer?"
+                ],
+                "sql":[
+                    "SELECT payment_method FROM customers",
+                    "SELECT * FROM customers WHERE payment_method ! =  'Cash'",
+                    "SELECT customer_name FROM customers WHERE payment_method ! =  'Cash'"
+                ]
+            },
+            "sql":[
+                "SELECT customer_name FROM customers WHERE payment_method ! =  'Cash'"
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "What are names of customers who never ordered product Latte."
+            ],
+            "question":" Find the names of customers who never ordered product Latte.",
+            "sqa":{
+                "question":[
+                    "Find the names of all the customers.",
+                    "What are the names of customers who bought the product \"Latte\" before?",
+                    "Which customers never bought Latte\"?"
+                ],
+                "sql":[
+                    "SELECT customer_name FROM customers",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Latte'",
+                    "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Latte'"
+                ]
+            },
+            "sql":[
+                "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Latte'"
+            ]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "What are the names of customers who never made an order."
+            ],
+            "question":" Find the names of customers who never placed an order.",
+            "sqa":{
+                "question":[
+                    "List the names of all the customers.",
+                    "What are the names of customers who have made some orders before?",
+                    "Which customers never made an order?"
+                ],
+                "sql":[
+                    "SELECT customer_name FROM customers",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id",
+                    "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id"
+                ]
+            },
+            "sql":[
+                "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id"
+            ]
+        },
+        {
+            "id":44,
+            "paraphrase":[
+                "What are the names of customers who have purchased both products Latte and Americano?"
+            ],
+            "question":" Find the names of customers who ordered both products Latte and Americano.",
+            "sqa":{
+                "question":[
+                    "List the names of customers who have purchased Latte.",
+                    "Give me the names of customers who have purchased Americano.",
+                    "Which customers have ordered both?"
+                ],
+                "sql":[
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Latte'",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Americano'",
+                    "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Latte' INTERSECT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Americano'"
+                ]
+            },
+            "sql":[
+                "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Latte' INTERSECT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE product_details  =  'Americano'"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}
