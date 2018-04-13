@@ -16,7 +16,7 @@ SELECT *
 FROM CUSTOMER
 WHERE State = "NY"
 
-4. What are the first names and last names of the employees who live in Calgary
+4. What are the first names and last names of the employees who live in Calgary city.
 
 SELECT FirstName, LastName
 FROM EMPLOYEE 
@@ -74,14 +74,14 @@ where Name like '%you%'
 SELECT AVG(UnitPrice)
 FROM TRACK
 
-13. What are the duration of the longest and shortest track in milliseconds?
+13. What are the durations of the longest and the shortest tracks in milliseconds?
 
 SELECT max(Milliseconds), min(Milliseconds)
 FROM TRACK
 
-14. Please show the album names and the number of tracks for each album
+14. Please show the album names, ids and the number of tracks for each album
 
-SELECT T1.Title, COUNT(*)
+SELECT T1.Title, T2.AlbumID, COUNT(*)
 FROM ALBUM as T1 join TRACK as T2 
 on T1.AlbumId = T2.AlbumId
 GROUP BY T2.AlbumID
@@ -104,9 +104,9 @@ GROUP BY T2.MediaTypeId
 ORDER BY COUNT(*) ASC
 LIMIT 1
 
-17. Please show the album name that contains the most number of tracks with unit price bigger than 1.
+17. Please show the album name and id that contains the most number of tracks with unit price bigger than 1.
 
-SELECT T1.Title
+SELECT T1.Title, T2.AlbumID
 FROM ALBUM as T1 join TRACK as T2 
 on T1.AlbumId = T2.AlbumId
 WHERE T2.UnitPrice > 1
@@ -164,34 +164,29 @@ FROM CUSTOMER as T1 join INVOICE as T2
 on T1.CustomerId = T2.CustomerId
 where T1.FirstName = "Astrid" and LastName = "Gruber"
 
-26. Find all the customer first names that do not have invoice.
+26. Find all the customer last names that do not have invoice with the total amount larger than 20. 
 
-SELECT 	FirstName
+SELECT LastName
 from CUSTOMER
 except
-select T1.FirstName
+select T1.LastName
 from CUSTOMER as T1 JOIN Invoice as T2
 on T1.CustomerId = T2.CustomerId
+where T2.total > 20
 
 27. Find the first names of all customers that live in Brazil and have invoice.
 
-SELECT FirstName
-from CUSTOMER
-WHERE Country = "Brazil"
-INTERSECT
-SELECT T1.FirstName
+SELECT distinct T1.FirstName
 FROM CUSTOMER as T1 join INVOICE as T2 
 on T1.CustomerId = T2.CustomerId
+where T1.country = "Brazil"
 
 28. Find the address of all customers that live in Germany and have invoice.
 
-SELECT Address
-from CUSTOMER
-WHERE Country = "Germany"
-INTERSECT
-SELECT T1.Address
+SELECT distinct T1.Address
 FROM CUSTOMER as T1 join INVOICE as T2 
 on T1.CustomerId = T2.CustomerId
+where T1.country = "Germany"
 
 29. List the phone of all employees
 
@@ -201,7 +196,7 @@ FROM EMPLOYEE
 30. How many tracks is in AAC audio file media type?
 
 SELECT COUNT(*)
-FROM MEDIATYPE as T1 join TRACK as T2 
+FROM MEDIATYPE as T1 join TRACK as T2
 on T1.MediaTypeId = T2.MediaTypeId
 WHERE T1.Name = "AAC audio file"
 
@@ -212,21 +207,21 @@ FROM GENRE as T1 join TRACK as T2
 on T1.GenreId = T2.GenreId
 WHERE T1.Name = "Latin" OR T1.Name = "Pop"
 
-32. Please show the employee first names that serves at least 10 customers.
+32. Please show the employee first names and ids that serves at least 10 customers.
 
-SELECT T1.FirstName
+SELECT T1.FirstName, T1.SupportRepId
 FROM CUSTOMER as T1 join EMPLOYEE as T2 
 on T1.SupportRepId = T2.EmployeeId
 GROUP BY T1.SupportRepId
 HAVING COUNT(*) >= 10
 
-33. Please show the employee last names that serves no more than 5 customers.
+33. Please show the employee last names that serves no more than 20 customers.
 
 SELECT T1.LastName
 FROM CUSTOMER as T1 join EMPLOYEE as T2 
 on T1.SupportRepId = T2.EmployeeId
 GROUP BY T1.SupportRepId
-HAVING COUNT(*) <=5
+HAVING COUNT(*) <= 20
 
 34. Please list all album titles in alphabetical order
 
@@ -234,9 +229,9 @@ SELECT Title
 FROM ALBUM
 ORDER BY Title
 
-35. Please list the name of all artists that have at least 3 albums in alphabetical order.
+35. Please list the name and id of all artists that have at least 3 albums in alphabetical order.
 
-SELECT T2.Name
+SELECT T2.Name, T1.ArtistId
 FROM ALBUM as T1 join ARTIST as T2 
 on T1.ArtistId = T2.ArtistID
 GROUP BY T1.ArtistId
@@ -276,3 +271,28 @@ WHERE City = "Edmonton"
 
 SELECT distinct(UnitPrice) 
 FROM TRACK
+
+
+41. How many artists do not have any album?
+
+SELECT count(*)
+from ARTIST
+where artistid not in(SELECT artistid FROM ALBUM)
+
+
+42. What are the albums' titles which contains both 'Reggae' genre and 'Rock' genre tracks?
+
+select T1.Title
+from Album as T1 JOIN Track as T2
+on T1.AlbumId = T2.AlbumId
+JOIN Genre as T3
+on T2.GenreID = T3.GenreID
+where T3.Name = 'Reggae'
+INTERSECT
+select T1.Title
+from Album as T1 JOIN Track as T2
+on T1.AlbumId = T2.AlbumId
+JOIN Genre as T3
+on T2.GenreID = T3.GenreID
+where T3.Name = 'Rock'
+
