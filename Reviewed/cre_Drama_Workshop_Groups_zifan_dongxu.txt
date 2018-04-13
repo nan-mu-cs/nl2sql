@@ -1,0 +1,318 @@
+TOTAL = # 41
+
+1. How many bookings do we have?
+
+select count(*)
+from BOOKINGS
+
+
+2. List all order dates of bookings.
+
+select Order_Date
+from BOOKINGS
+
+
+3. Show all planned delivery dates and actual delivery dates of bookings.
+
+select Planned_Delivery_Date, Actual_Delivery_Date
+from BOOKINGS
+
+
+4. How many customers do we have?
+
+select count(*)
+from CUSTOMERS
+
+
+5. What are the phone and email for customer Harold?
+
+select Customer_Phone, Customer_Email_Address
+from CUSTOMERS
+where Customer_Name = "Harold"
+
+
+6. Show all Store_Name of drama workshop groups
+
+select Store_Name
+from Drama_Workshop_Groups
+
+
+7. Show the minimum, average, maximum order quantity of all invoices.
+
+select min(Order_Quantity), avg(Order_Quantity), max(Order_Quantity)
+from INVOICES
+
+
+8. What are the distinct payment method codes on all invoices?
+
+select distinct payment_method_code
+from INVOICES
+
+
+9. What is the description for marketing region China? 
+
+select Marketing_Region_Descriptrion
+from Marketing_Regions
+where Marketing_Region_Name = "China"
+
+
+10. Show all distinct product names with price higher than the average.
+
+select distinct Product_Name
+from PRODUCTS
+where Product_Price > (select avg(Product_Price) from PRODUCTS)
+
+
+11. What is the name of the most expensive product?
+
+select Product_Name
+from PRODUCTS
+order by Product_Price DESC
+limit 1
+
+
+12. List all product names in ascending order of price.
+
+select Product_Name
+from Products
+order by Product_Price ASC
+
+
+13. What is the phone number of the performer Ashley?
+
+select Customer_Phone
+from PERFORMERS
+where Customer_Name = "Ashley"
+
+
+14. Show all payment method codes and the number of orders for each code.
+
+select payment_method_code, count(*)
+from INVOICES
+group by payment_method_code
+
+
+15. What is the payment method code used by most number of orders?
+
+select payment_method_code
+from INVOICES
+group by payment_method_code
+order by count(*) desc
+limit 1
+
+
+16. What is the city of the address for the store with name FJA Filming?
+
+select T1.City_Town
+from Addresses as T1 join Stores as T2
+on T1.Address_ID = T2.Address_ID
+where T2.Store_Name = "FJA Filming"
+
+
+17. What are the states or counties of the address for the stores with marketing region code "CA"?
+
+select T1.State_County
+from Addresses as T1 join Stores as T2
+on T1.Address_ID = T2.Address_ID
+where T2.Marketing_Region_Code = "CA"
+
+
+18. What is the name of the marketing region where the store Rob Dinning belongs to?
+
+select T1.Marketing_Region_Name
+from Marketing_Regions as T1 join Stores as T2
+on T1.Marketing_Region_Code = T2.Marketing_Region_Code
+where T2.Store_Name = "Rob Dinning"
+
+
+19. What are the descriptions of types of services with product price bigger than 100?
+
+select T1.Service_Type_Description
+from Ref_Service_Types as T1 join Services as T2
+on T1.Service_Type_Code = T2.Service_Type_Code
+where T2.Product_Price > 100
+
+
+20. What are the descriptions and codes of types of services and the corresponding number of each service?
+
+select T1.Service_Type_Description, T2.Service_Type_Code, COUNT(*)
+from Ref_Service_Types as T1 join Services as T2
+on T1.Service_Type_Code = T2.Service_Type_Code
+group by T2.Service_Type_Code
+
+
+21. What is the description and code of the type of service that is performed the most number of times?
+
+select T1.Service_Type_Description,T1.Service_Type_Code
+from Ref_Service_Types as T1 join Services as T2
+on T1.Service_Type_Code = T2.Service_Type_Code
+group by T1.Service_Type_Code
+order by COUNT(*) DESC limit 1
+
+
+22. What are the phones and emails of workshop groups in which services are performed?
+
+select T1.Store_Phone, T1.Store_Email_Address
+from Drama_Workshop_Groups as T1 join Services as T2
+on T1.Workshop_Group_ID = T2.Workshop_Group_ID
+
+
+23. What are the names of workshop groups in which services with product name "film" are performed?
+
+select T1.Store_Phone, T1.Store_Email_Address
+from Drama_Workshop_Groups as T1 join Services as T2
+on T1.Workshop_Group_ID = T2.Workshop_Group_ID
+WHERE T2.Product_Name = "film"
+
+
+24. What are different product names and the average product price?
+
+select Product_Name, avg(Product_Price)
+from PRODUCTS
+group by Product_Name
+
+
+25. What are the product names with average product price smaller than 1000000?
+
+select Product_Name
+from PRODUCTS
+group by Product_Name
+HAVING avg(Product_Price) < 1000000
+
+
+26. What are the total order quantities of photo products?
+
+select sum(T1.Order_Quantity)
+FROM ORDER_ITEMS as T1 JOIN Products as T2
+on T1.Product_ID = T2.Product_ID
+WHERE T2.Product_Name = "photo"
+
+
+27. What are the order details of products with price bigger than 2000?
+
+select T1.Other_Item_Details
+FROM ORDER_ITEMS as T1 JOIN Products as T2
+on T1.Product_ID = T2.Product_ID
+WHERE T2.Product_price > 2000
+
+
+28. What are the actual delivery dates of orders with quantity 1?
+
+select T1.Actual_Delivery_Date
+FROM Customer_Orders as T1 JOIN ORDER_ITEMS as T2
+on T1.Order_ID = T2.Order_ID
+WHERE T2.Order_Quantity = 1
+
+
+29. What are the order dates of orders with price bigger than 1000?
+
+select T1.Order_Date
+FROM Customer_Orders as T1 JOIN ORDER_ITEMS as T2
+on T1.Order_ID = T2.Order_ID 
+JOIN Products as T3 
+on T2.Product_ID = T3.Product_ID
+WHERE T3.Product_price > 1000
+
+
+30. How many distinct currency code are there for all drama workshop groups?
+
+select count(distinct Currency_Code)
+from Drama_Workshop_Groups
+
+
+31. What are the name of drama workshop groups with address in Feliciaberg city?
+
+select T2.Store_Name
+from Addresses as T1 join Drama_Workshop_Groups as T2
+on T1.Address_ID = T2.Address_ID
+where T1.City_Town = "Feliciaberg"
+
+
+32. What are the email address of drama workshop groups with address in Alaska state?
+
+select T2.Store_Email_Address
+from Addresses as T1 join Drama_Workshop_Groups as T2
+on T1.Address_ID = T2.Address_ID
+where T1.State_County = "Alaska"
+
+
+33. Show all cities and the number of drama workshop groups in each city.
+
+select T1.City_Town, count(*)
+from Addresses as T1 join Drama_Workshop_Groups as T2
+on T1.Address_ID = T2.Address_ID
+group by T1.City_Town
+
+
+34. What is the marketing region code with most drama workshop groups?
+
+select Marketing_Region_Code
+from Drama_Workshop_Groups
+group by Marketing_Region_Code
+order by count(*) desc
+limit 1
+
+
+35. Show all cities where at least one customer lives in but no performer lives in.
+
+select T1.City_Town
+from Addresses as T1 join Customers as T2
+on T1.Address_ID = T2.Address_ID
+EXCEPT
+select T1.City_Town
+from Addresses as T1 join Performers as T2
+on T1.Address_ID = T2.Address_ID
+
+
+36. What is the most frequent status of bookings?
+
+select Status_Code
+from BOOKINGS
+group by Status_Code	
+order by count(*) desc limit 1
+
+
+37. What are the names of workshop groups that have bookings with status code "stop"? 
+
+select T2.Store_Name
+from Bookings as T1 join Drama_Workshop_Groups as T2 on 
+T1.Workshop_Group_ID = T2.Workshop_Group_ID
+where T1.Status_Code = "stop"
+
+
+38. Show all client names without a booking.
+
+select Customer_Name
+from Clients
+EXCEPT
+select T2.Customer_Name
+from Bookings as T1 join Clients as T2
+on T1.Customer_ID = T2.Client_ID
+
+
+39. What is the average quantities of orders with payment method code "MasterCard" on invoices?
+
+select avg(Order_Quantity)
+from Invoices
+where payment_method_code = "MasterCard"
+
+
+40. What is the product ID of the most frequently ordered item on invoices?
+
+select Product_ID
+from INVOICES
+group by Product_ID
+order by COUNT(*) desc limit 1
+
+
+41. What is the description of the service type which both offer photo product and film product?
+
+select T1.Service_Type_Description
+from Ref_Service_Types as T1 JOIN Services as T2
+on T1.Service_Type_Code = T2.Service_Type_Code
+where T2.Product_Name = 'photo'
+INTERSECT
+select T1.Service_Type_Description
+from Ref_Service_Types as T1 JOIN Services as T2
+on T1.Service_Type_Code = T2.Service_Type_Code
+where T2.Product_Name = 'film'
