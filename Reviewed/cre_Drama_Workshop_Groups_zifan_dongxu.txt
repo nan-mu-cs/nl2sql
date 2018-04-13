@@ -1,4 +1,4 @@
-TOTAL = # 40
+TOTAL = # 41
 
 1. How many bookings do we have?
 
