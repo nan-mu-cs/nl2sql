@@ -1015,11 +1015,11 @@
                 ],
                 "sql":[
                     "SELECT course_id FROM prereq",
-                    "SELECT title FROM course WHERE course_id NOT IN"
+                    "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
                 ]
             },
             "sql":[
-                "SELECT title FROM course WHERE course_id NOT IN"
+                "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
             ]
         },
         {
@@ -1037,11 +1037,11 @@
                 "sql":[
                     "SELECT prereq_id FROM prereq",
                     "SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'International Finance'",
-                    "SELECT title FROM course WHERE course_id IN"
+                    "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'International Finance')"
                 ]
             },
             "sql":[
-                "SELECT title FROM course WHERE course_id IN"
+                "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'International Finance')"
             ]
         },
         {
@@ -1059,11 +1059,11 @@
                 "sql":[
                     "SELECT course_id FROM prereq",
                     "SELECT T1.course_id FROM prereq AS T1 JOIN course AS T2 ON T1.prereq_id  =  T2.course_id WHERE T2.title  =  'Differential Geometry'",
-                    "SELECT title FROM course WHERE course_id IN"
+                    "SELECT title FROM course WHERE course_id IN (SELECT T1.course_id FROM prereq AS T1 JOIN course AS T2 ON T1.prereq_id  =  T2.course_id WHERE T2.title  =  'Differential Geometry')"
                 ]
             },
             "sql":[
-                "SELECT title FROM course WHERE course_id IN"
+                "SELECT title FROM course WHERE course_id IN (SELECT T1.course_id FROM prereq AS T1 JOIN course AS T2 ON T1.prereq_id  =  T2.course_id WHERE T2.title  =  'Differential Geometry')"
             ]
         },
         {
@@ -1079,11 +1079,11 @@
                 ],
                 "sql":[
                     "SELECT id FROM takes WHERE semester  =  'Fall' AND YEAR  =  2003",
-                    "SELECT name FROM student WHERE id IN"
+                    "SELECT name FROM student WHERE id IN (SELECT id FROM takes WHERE semester  =  'Fall' AND YEAR  =  2003)"
                 ]
             },
             "sql":[
-                "SELECT name FROM student WHERE id IN"
+                "SELECT name FROM student WHERE id IN (SELECT id FROM takes WHERE semester  =  'Fall' AND YEAR  =  2003)"
             ]
         },
         {
@@ -1185,11 +1185,11 @@
                 "sql":[
                     "SELECT prereq_id FROM prereq",
                     "SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'Mobile Computing'",
-                    "SELECT title FROM course WHERE course_id IN"
+                    "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'Mobile Computing')"
                 ]
             },
             "sql":[
-                "SELECT title FROM course WHERE course_id IN"
+                "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'Mobile Computing')"
             ]
         },
         {
@@ -1226,12 +1226,12 @@
                 ],
                 "sql":[
                     "SELECT id FROM teaches",
-                    "SELECT id FROM instructor WHERE id NOT IN",
-                    "SELECT name FROM instructor WHERE id NOT IN"
+                    "SELECT id FROM instructor WHERE id NOT IN (SELECT id FROM teaches)",
+                    "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches)"
                 ]
             },
             "sql":[
-                "SELECT name FROM instructor WHERE id NOT IN"
+                "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches)"
             ]
         },
         {
@@ -1268,12 +1268,12 @@
                 ],
                 "sql":[
                     "SELECT id FROM teaches WHERE semester  =  'Spring'",
-                    "SELECT id FROM instructor WHERE id NOT IN",
-                    "SELECT name FROM instructor WHERE id NOT IN"
+                    "SELECT id FROM instructor WHERE id NOT IN (SELECT id FROM teaches WHERE semester  =  'Spring')",
+                    "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches WHERE semester  =  'Spring')"
                 ]
             },
             "sql":[
-                "SELECT name FROM instructor WHERE id NOT IN"
+                "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches WHERE semester  =  'Spring')"
             ]
         },
         {
@@ -1353,11 +1353,11 @@
                 ],
                 "sql":[
                     "SELECT * FROM takes AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.dept_name  =  'Biology'",
-                    "SELECT name FROM student WHERE id NOT IN"
+                    "SELECT name FROM student WHERE id NOT IN (SELECT T1.id FROM takes AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.dept_name  =  'Biology')"
                 ]
             },
             "sql":[
-                "SELECT name FROM student WHERE id NOT IN"
+                "SELECT name FROM student WHERE id NOT IN (SELECT T1.id FROM takes AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.dept_name  =  'Biology')"
             ]
         },
         {
@@ -1396,12 +1396,12 @@
                 ],
                 "sql":[
                     "SELECT T2.prereq_id FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id WHERE T1.title  =  'International Finance'",
-                    "SELECT T1.id FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN",
-                    "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN"
+                    "SELECT T1.id FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN (SELECT T2.prereq_id FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id WHERE T1.title  =  'International Finance')",
+                    "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN (SELECT T2.prereq_id FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id WHERE T1.title  =  'International Finance')"
                 ]
             },
             "sql":[
-                "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN"
+                "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN (SELECT T2.prereq_id FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id WHERE T1.title  =  'International Finance')"
             ]
         },
         {
@@ -1418,12 +1418,12 @@
                 ],
                 "sql":[
                     "SELECT avg(salary) FROM instructor WHERE dept_name  =  'Physics'",
-                    "SELECT name FROM instructor WHERE salary  < ",
-                    "SELECT name ,  salary FROM instructor WHERE salary  < "
+                    "SELECT name FROM instructor WHERE salary  <  (SELECT avg(salary) FROM instructor WHERE dept_name  =  'Physics')",
+                    "SELECT name ,  salary FROM instructor WHERE salary  <  (SELECT avg(salary) FROM instructor WHERE dept_name  =  'Physics')"
                 ]
             },
             "sql":[
-                "SELECT name ,  salary FROM instructor WHERE salary  < "
+                "SELECT name ,  salary FROM instructor WHERE salary  <  (SELECT avg(salary) FROM instructor WHERE dept_name  =  'Physics')"
             ]
         },
         {
@@ -1729,6 +1729,7 @@
             ]
         },
         {
+            "id":85,
             "paraphrase":[
                 "What are the names of all instructors with a higher salary than any of the instructors in the Biology department?"
             ],

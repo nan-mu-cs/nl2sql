@@ -1,0 +1,522 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "Give the id and flavor of the most expensive cake."
+            ],
+            "question":" What is the most expensive cake and its flavor?",
+            "sql":[
+                "SELECT id ,  flavor FROM goods WHERE food  =  \"Cake\" ORDER BY price DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "What is the id and flavor of the cheapest cookie?"
+            ],
+            "question":" What is the cheapest cookie and its flavor?",
+            "sql":[
+                "SELECT id ,  flavor FROM goods WHERE food  =  \"Cookie\" ORDER BY price LIMIT 1"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "What are the ids with apple flavor?"
+            ],
+            "question":" Find the ids of goods that have apple flavor.",
+            "sql":[
+                "SELECT id FROM goods WHERE flavor  =  \"Apple\""
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "Give the ids of goods that cost less than 3 dollars."
+            ],
+            "question":" What are the ids of goods that cost less than 3 dollars?",
+            "sql":[
+                "SELECT id FROM goods WHERE price  <  3"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What are the distinct ids of customers who bought lemon flavored cake?"
+            ],
+            "question":" List the distinct ids of all customers who bought a cake with lemon flavor?",
+            "sql":[
+                "SELECT DISTINCT T3.CustomerId FROM goods AS T1 JOIN items AS T2 ON T1.Id  =  T2.Item JOIN receipts AS T3 ON T2.Receipt  =  T3.ReceiptNumber WHERE T1.Flavor  =  \"Lemon\" AND T1.Food  =  \"Cake\""
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "How many customers have bought each food?"
+            ],
+            "question":" For each type of food, tell me how many customers have ever bought it.",
+            "sql":[
+                "SELECT T1.food ,  count(DISTINCT T3.CustomerId) FROM goods AS T1 JOIN items AS T2 ON T1.Id  =  T2.Item JOIN receipts AS T3 ON T2.Receipt  =  T3.ReceiptNumber GROUP BY T1.food"
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "What are the customer ids of customers who have at least 15 receipts?"
+            ],
+            "question":" Find the id of customers who shopped at the bakery at least 15 times.",
+            "sql":[
+                "SELECT CustomerId FROM receipts GROUP BY CustomerId HAVING count(*)  >=  15"
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "Give the last names of customers who have been to the bakery more than 10 times?"
+            ],
+            "question":" What is the last name of the customers who shopped at the bakery more than 10 times?",
+            "sql":[
+                "SELECT T2.LastName FROM receipts AS T1 JOIN customers AS T2 ON T1.CustomerId  =  T2.id GROUP BY T2.id HAVING count(*)  >  10"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "Count the number of types of cake this bakery sells."
+            ],
+            "question":" How many types of Cake does this bakery sell?",
+            "sql":[
+                "SELECT count(*) FROM goods WHERE food  =  \"Cake\""
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "What are all the flavors of croissant?"
+            ],
+            "question":" List all the flavors of Croissant available in this bakery.",
+            "sql":[
+                "SELECT flavor FROM goods WHERE food  =  \"Croissant\""
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "What are all the distinct items bought by customer 15?"
+            ],
+            "question":" Give me a list of all the distinct items bought by the customer number 15.",
+            "sql":[
+                "SELECT DISTINCT T1.item FROM items AS T1 JOIN receipts AS T2 ON T1.receipt  =  T2.ReceiptNumber WHERE T2.CustomerId  =  15"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "What are the average, minimum and maximum prices for each food?"
+            ],
+            "question":" For each type of food, what are the average, maximum and minimum price?",
+            "sql":[
+                "SELECT food ,  avg(price) ,  max(price) ,  min(price) FROM goods GROUP BY food"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "What are the receipt numbers for instances where both cakes and cookies were purchased?"
+            ],
+            "question":" Find the receipt numbers where both Cake and Cookie were bought.",
+            "sql":[
+                "SELECT T1.receipt FROM items AS T1 JOIN goods AS T2 ON T1.item  =  T2.id WHERE T2.food  =  \"Cake\" INTERSECT SELECT T1.receipt FROM items AS T1 JOIN goods AS T2 ON T1.item  =  T2.id WHERE T2.food  =  \"Cookie\""
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What are the receipt numbers for a customer with the last name Logan who purchased a croissant?"
+            ],
+            "question":" Find all the receipt numbers in which customer with last name LOGAN purchased Croissant.",
+            "sql":[
+                "SELECT T1.ReceiptNumber FROM receipts AS T1 JOIN items AS T2 ON T1.ReceiptNumber  =  T2.receipt JOIN goods AS T3 ON T2.item  =  T3.id JOIN customers AS T4 ON T4.Id  =  T1.CustomerId WHERE T3.food  =  \"Croissant\" AND T4.LastName  =  'LOGAN'"
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "What is the receipt number and date corresponding to the receipt for which the most expensive item was purchased?"
+            ],
+            "question":" What is the receipt number and date of the receipt in which the most expensive item was bought?",
+            "sql":[
+                "SELECT T1.ReceiptNumber ,  T1.Date FROM receipts AS T1 JOIN items AS T2 ON T1.ReceiptNumber  =  T2.receipt JOIN goods AS T3 ON T2.item  =  T3.id ORDER BY T3.price DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "Which item was bought the fewest times?"
+            ],
+            "question":" What is the item that was bought the least number of times?",
+            "sql":[
+                "SELECT item FROM items GROUP BY item ORDER BY count(*) LIMIT 1"
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "Count the number of goods for each food type."
+            ],
+            "question":" How many goods are available for each food type?",
+            "sql":[
+                "SELECT count(*) ,  food FROM goods GROUP BY food"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "Give the average price for each food type."
+            ],
+            "question":" What is the average price for each food type?",
+            "sql":[
+                "SELECT avg(price) ,  food FROM goods GROUP BY food"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "Give the ids for goods that have Apricot flavor and have a price lower than 5 dollars."
+            ],
+            "question":" What are ids of the goods that have Apricot flavor and are cheaper than 5 dollars?",
+            "sql":[
+                "SELECT id FROM goods WHERE flavor  =  \"Apricot\" AND price  <  5"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "What are the flavors of cakes that cost more than 10 dollars?"
+            ],
+            "question":" Find flavor of cakes that cost more than 10 dollars.",
+            "sql":[
+                "SELECT flavor FROM goods WHERE food  =  \"Cake\" AND price  >  10"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "What are the distinct ids and prices for goods that cost less than the average good?"
+            ],
+            "question":" Give me the distinct id and price for all goods whose price is below the average of all goods?",
+            "sql":[
+                "SELECT DISTINCT id ,  price FROM goods WHERE price  <  (SELECT avg(price) FROM goods)"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "Give the distinct ids for goods that cost less than any Tart."
+            ],
+            "question":" What are the distinct ids of all goods that are cheaper than some goods of type Tart?",
+            "sql":[
+                "SELECT DISTINCT id FROM goods WHERE price  <  (SELECT max(price) FROM goods WHERE food  =  \"Tart\")"
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "What distinct receipt numbers correspond to someone who bought a good that costs more than 13 dollars?"
+            ],
+            "question":"  List distinct receipt numbers for which someone bought a good that costs more than 13 dollars.",
+            "sql":[
+                "SELECT DISTINCT T1.ReceiptNumber FROM receipts AS T1 JOIN items AS T2 ON T1.ReceiptNumber  =  T2.receipt JOIN goods AS T3 ON T2.item  =  T3.id WHERE T3.price  >  13"
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "Which date corresponds to when a customer purchased a good costing over 15 dollars?"
+            ],
+            "question":" On which date did some customer buy a good that costs more than 15 dollars?",
+            "sql":[
+                "SELECT DISTINCT T1.date FROM receipts AS T1 JOIN items AS T2 ON T1.ReceiptNumber  =  T2.receipt JOIN goods AS T3 ON T2.item  =  T3.id WHERE T3.price  >  15"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "What are all the ids of goods with an id which contains \"APP\"?"
+            ],
+            "question":" Give me the list of ids of all goods whose id has \"APP\".",
+            "sql":[
+                "SELECT id FROM goods WHERE id LIKE \"%APP%\""
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "What are the id and price for the good with \"70\" in its id?"
+            ],
+            "question":" Which good has \"70\" in its id? And what is its price?",
+            "sql":[
+                "SELECT id ,  price FROM goods WHERE id LIKE \"%70%\""
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "What are the last names of the customers in alphabetical order?"
+            ],
+            "question":" List the last names of all customers in an alphabetical order.",
+            "sql":[
+                "SELECT DISTINCT LastName FROM customers ORDER BY LastName"
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[],
+            "question":" Return the ordered list of all good ids.",
+            "sql":[]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are the receipt numbers for which either an apple flavor pie was purchased or the customer with id 12 shopped?"
+            ],
+            "question":" Find all receipts in which either apple flavor pie was bought or customer id 12 shopped.",
+            "sql":[
+                "SELECT T1.receipt FROM items AS T1 JOIN goods AS T2 ON T1.item  =  T2.id WHERE T2.flavor  =  \"Apple\" AND T2.food  =  \"Pie\" UNION SELECT ReceiptNumber FROM receipts WHERE CustomerId  =  12"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "What is the receipt number with the latest date, and what is that date?"
+            ],
+            "question":" Find all receipts which has the latest date. Also tell me that date.",
+            "sql":[
+                "SELECT ReceiptNumber ,  date FROM receipts WHERE date  =  (SELECT date FROM receipts ORDER BY date DESC LIMIT 1)"
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "What are all the receipt numbers that have a good with a price above 10 or have the earliest date?"
+            ],
+            "question":" Find all receipts which either has the earliest date or has a good with price above 10.",
+            "sql":[
+                "SELECT T1.Receipt FROM items AS T1 JOIN goods AS T2 ON T1.item  =  T2.id WHERE T2.price  >  10 UNION SELECT ReceiptNumber FROM receipts WHERE date  =  (SELECT date FROM receipts ORDER BY date LIMIT 1)"
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "Give the ids of Cookies or Cakes that cost between 3 and 7 dollars."
+            ],
+            "question":" What are the ids of Cookie and Cake that cost between 3 and 7 dollars.",
+            "sql":[
+                "SELECT id FROM goods WHERE (food  =  \"Cookie\" OR food  =  \"Cake\") AND price BETWEEN 3 AND 7"
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "What is the full name of the customer who visited on the earliest date?"
+            ],
+            "question":" Find the first name and last name of a customer who visited on the earliest date.",
+            "sql":[
+                "SELECT T1.FirstName ,  T1.LastName FROM customers AS T1 JOIN receipts AS T2 ON T1.id  =  T2.CustomerId ORDER BY T2.date LIMIT 1"
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "What are the average prices of goods with blackberry or blueberry flavor?"
+            ],
+            "question":" What is average price of goods whose flavor is blackberry or blueberry?",
+            "sql":[
+                "SELECT avg(price) FROM goods WHERE flavor  =  \"Blackberry\" OR flavor  =  \"Blueberry\""
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "What is the cheapest good with cheese flavor?"
+            ],
+            "question":" Return the cheapest price for goods with cheese flavor.",
+            "sql":[
+                "SELECT min(price) FROM goods WHERE flavor  =  \"Cheese\""
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "What are the maximum, minimum, and average prices of goods of each flavor, ordered by flavor?"
+            ],
+            "question":" What are highest, lowest, and average prices of goods, grouped and ordered by flavor?",
+            "sql":[
+                "SELECT max(price) ,  min(price) ,  avg(price) ,  flavor FROM goods GROUP BY flavor ORDER BY flavor"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "What are the minimum and maximum prices of food goods, ordered by food?"
+            ],
+            "question":" Return the lowest and highest prices of goods grouped and ordered by food type.",
+            "sql":[
+                "SELECT min(price) ,  max(price) ,  food FROM goods GROUP BY food ORDER BY food"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "What are the three dates for which the most receipts were given?"
+            ],
+            "question":" Find the top three dates with the most receipts.",
+            "sql":[
+                "SELECT date FROM receipts GROUP BY date ORDER BY count(*) DESC LIMIT 3"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "Give the customer id of the customer that made the most purchases, as well as the number of purchases made."
+            ],
+            "question":" Which customer shopped most often? How many times?",
+            "sql":[
+                "SELECT CustomerId ,  count(*) FROM receipts GROUP BY CustomerId ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "How many cusomters visited on each date?"
+            ],
+            "question":" For each date, return how many distinct customers visited on that day.",
+            "sql":[
+                "SELECT date ,  COUNT (DISTINCT CustomerId) FROM receipts GROUP BY date"
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What are the full names of customers who bought apple flavored Tarts?"
+            ],
+            "question":" Give me the first name and last name of customers who have bought apple flavor Tart.",
+            "sql":[
+                "SELECT DISTINCT T4.FirstName ,  T4.LastName FROM goods AS T1 JOIN items AS T2 ON T1.id  =  T2.item JOIN receipts AS T3 ON T2.receipt  =  T3.ReceiptNumber JOIN customers AS T4 ON T3.CustomerId  =  T4.id WHERE T1.flavor  =  \"Apple\" AND T1.food  =  \"Tart\""
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "Give the ids of cookes that are cheaper than any croissant."
+            ],
+            "question":" What are the ids of Cookies whose price is lower than any Croissant?",
+            "sql":[
+                "SELECT id FROM goods WHERE food  =  \"Cookie\" AND price  <  (SELECT min(price) FROM goods WHERE food  =  'Croissant')"
+            ]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "What are the ids of cakes that are at least three times as expensive as the average Tart?"
+            ],
+            "question":" Give me the ids of Cakes whose price is at least three times as much as the average price of Tart?",
+            "sql":[
+                "SELECT id FROM goods WHERE food  =  \"Cake\" AND price  >=  3 * (SELECT avg(price) FROM goods WHERE food  =  \"Tart\")"
+            ]
+        },
+        {
+            "id":44,
+            "paraphrase":[
+                "Give the ids of goods that are more than twice as expensive as the average good."
+            ],
+            "question":" What are the ids of goods whose price is above twice the average price of all goods?",
+            "sql":[
+                "SELECT id FROM goods WHERE price  >  2 * (SELECT avg(price) FROM goods)"
+            ]
+        },
+        {
+            "id":45,
+            "paraphrase":[
+                "What are the ids, flavors, and food types of goods, ordered by price?"
+            ],
+            "question":" List the id, flavor and type of food of goods ordered by price.",
+            "sql":[
+                "SELECT id ,  flavor ,  food FROM goods ORDER BY price"
+            ]
+        },
+        {
+            "id":46,
+            "paraphrase":[
+                "What are the ids and flavors of cakes, ordered by flavor?"
+            ],
+            "question":" Return a list of the id and flavor for Cakes ordered by flavor.",
+            "sql":[
+                "SELECT id ,  flavor FROM goods WHERE food  =  \"Cake\" ORDER BY flavor"
+            ]
+        },
+        {
+            "id":47,
+            "paraphrase":[
+                "What are the items with chocolate flavor that were purchased at most 10 times."
+            ],
+            "question":" Find all the items that have chocolate flavor but were not bought more than 10 times.",
+            "sql":[
+                "SELECT DISTINCT T1.item FROM items AS T1 JOIN goods AS T2 ON T1.item  =  T2.id WHERE T2.flavor  =  \"Chocolate\" GROUP BY item HAVING count(*)  <=  10"
+            ]
+        },
+        {
+            "id":48,
+            "paraphrase":[
+                "Give the flavors of Cakes that are not available for Tart."
+            ],
+            "question":" What are the flavors available for Cake but not for Tart?",
+            "sql":[
+                "SELECT DISTINCT flavor FROM goods WHERE food  =  \"Cake\" EXCEPT SELECT DISTINCT flavor FROM goods WHERE food  =  \"Tart\""
+            ]
+        },
+        {
+            "id":49,
+            "paraphrase":[
+                "Give the three most purchased items at this bakery."
+            ],
+            "question":" What is the three most popular goods in this bakery?",
+            "sql":[
+                "SELECT item FROM items GROUP BY item ORDER BY COUNT (*) DESC LIMIT 3"
+            ]
+        },
+        {
+            "id":50,
+            "paraphrase":[
+                "What are the ids of customers who have spent over 150 dollars in total?"
+            ],
+            "question":" Find the ids of customers who have spent more than 150 dollars in total.",
+            "sql":[
+                "SELECT T3.CustomerId FROM goods AS T1 JOIN items AS T2 ON T1.id  =  T2.item JOIN receipts AS T3 ON T2.receipt  =  T3.ReceiptNumber GROUP BY T3.CustomerId HAVING sum(T1.price)  >  150"
+            ]
+        },
+        {
+            "id":51,
+            "paraphrase":[
+                "What are the ids of customers who spend more than 5 on average for each good?"
+            ],
+            "question":" Find the ids of customers whose average spending for each good is above 5.",
+            "sql":[
+                "SELECT T3.CustomerId FROM goods AS T1 JOIN items AS T2 ON T1.id  =  T2.item JOIN receipts AS T3 ON T2.receipt  =  T3.ReceiptNumber GROUP BY T3.CustomerId HAVING avg(T1.price)  >  5"
+            ]
+        },
+        {
+            "id":52,
+            "paraphrase":[
+                "On what dates did the bakery sell more than 100 dollars worth of goods in total?"
+            ],
+            "question":" On which day did the bakery sell more than 100 dollars in total.",
+            "sql":[
+                "SELECT T3.date FROM goods AS T1 JOIN items AS T2 ON T1.id  =  T2.item JOIN receipts AS T3 ON T2.receipt  =  T3.ReceiptNumber GROUP BY T3.date HAVING sum(T1.price)  >  100"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

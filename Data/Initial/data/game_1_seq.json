@@ -1,0 +1,437 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "How many video games do you have?"
+            ],
+            "question":" How many video games exist?",
+            "sql":[
+                "SELECT count(*) FROM Video_games"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "What is the count of different game types?"
+            ],
+            "question":" How many video game types exist?",
+            "sql":[
+                "SELECT count(DISTINCT gtype) FROM Video_games"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "What are the different types of video games?"
+            ],
+            "question":" Show all video game types.",
+            "sql":[
+                "SELECT DISTINCT gtype FROM Video_games"
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "What are the names of all the video games and their types in alphabetical order?"
+            ],
+            "question":" Show all video games and their types in the order of their names.",
+            "sql":[
+                "SELECT gname ,  gtype FROM Video_games ORDER BY gname"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What are the names of all video games that are collectible cards?"
+            ],
+            "question":" Show all video games with type Collectible card game.",
+            "sql":[
+                "SELECT gname FROM Video_games WHERE gtype  =  \"Collectible card game\""
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "What type of game is Call of Destiny?"
+            ],
+            "question":" What is the type of video game Call of Destiny.",
+            "sql":[
+                "SELECT gtype FROM Video_games WHERE gname  =  \"Call of Destiny\""
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[],
+            "question":" How many video games have type Massively multiplayer online game?",
+            "sql":[
+                "SELECT count(*) FROM Video_games WHERE gtype  =  \"Massively multiplayer online game\""
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "What are the types of video games and how many are in each type?"
+            ],
+            "question":" Show all video game types and the number of video games in each type.",
+            "sql":[
+                "SELECT gtype ,  count(*) FROM Video_games GROUP BY gtype"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "What type has the most games?"
+            ],
+            "question":" Which game type has most number of games?",
+            "sql":[
+                "SELECT gtype FROM Video_games GROUP BY gtype ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "What is the type with the fewest games?"
+            ],
+            "question":" Which game type has least number of games?",
+            "sql":[
+                "SELECT gtype FROM Video_games GROUP BY gtype ORDER BY count(*) LIMIT 1"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "What are the ids of all students who live in CHI?"
+            ],
+            "question":" Show ids for all students who live in CHI.",
+            "sql":[
+                "SELECT StuID FROM Student WHERE city_code  =  \"CHI\""
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "What are the ids of all students who have advisor number 1121?"
+            ],
+            "question":"  Show ids for all students who have advisor 1121.",
+            "sql":[
+                "SELECT StuID FROM Student WHERE Advisor  =  1121"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "What are the first names for all students who are from the major numbered 600?"
+            ],
+            "question":" Show first name for all students with major 600.",
+            "sql":[
+                "SELECT Fname FROM Student WHERE Major  =  600"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What are the average, minimum, and max ages for each of the different majors?"
+            ],
+            "question":" Show the average, minimum, and maximum age for different majors.",
+            "sql":[
+                "SELECT major ,  avg(age) ,  min(age) ,  max(age) FROM Student GROUP BY major"
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "What are the advisors"
+            ],
+            "question":" Show all advisors who have at least two students.",
+            "sql":[
+                "SELECT advisor FROM Student GROUP BY advisor HAVING count(*)  >=  2"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "How many different types of sports do we offer?"
+            ],
+            "question":" How many sports do we have?",
+            "sql":[
+                "SELECT count(DISTINCT sportname) FROM Sportsinfo"
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "How many different students are involved in sports?"
+            ],
+            "question":" How many students play sports?",
+            "sql":[
+                "SELECT count(DISTINCT StuID) FROM Sportsinfo"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "What are the ids for all sporty students who are on scholarship?"
+            ],
+            "question":" List ids for all student who are on scholarship.",
+            "sql":[
+                "SELECT StuID FROM Sportsinfo WHERE onscholarship  =  'Y'"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "What are the last names for all scholarship students?"
+            ],
+            "question":" Show last names for all student who are on scholarship.",
+            "sql":[
+                "SELECT T2.Lname FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T1.onscholarship  =  'Y'"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "What is the total number of games played?"
+            ],
+            "question":" How many games are played for all students?",
+            "sql":[
+                "SELECT sum(gamesplayed) FROM Sportsinfo"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "What is the total number of all football games played by scholarship students?"
+            ],
+            "question":" How many games are played for all football games by students on scholarship?",
+            "sql":[
+                "SELECT sum(gamesplayed) FROM Sportsinfo WHERE sportname  =  \"Football\" AND onscholarship  =  'Y'"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "How many students play each sport?"
+            ],
+            "question":" Show all sport name and the number of students.",
+            "sql":[
+                "SELECT sportname ,  count(*) FROM Sportsinfo GROUP BY sportname"
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "What are the ids of all students along with how many sports and games did they play?"
+            ],
+            "question":" Show all student IDs with the number of sports and total number of games played",
+            "sql":[
+                "SELECT StuID ,  count(*) ,  sum(gamesplayed) FROM Sportsinfo GROUP BY StuID"
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "What are the student IDs for everybody who worked for more than 10 hours per week on all sports?"
+            ],
+            "question":" Show all student IDs with more than total 10 hours per week on all sports played.",
+            "sql":[
+                "SELECT StuID FROM Sportsinfo GROUP BY StuID HAVING sum(hoursperweek)  >  10"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "What is the first and last name of the student who played the most sports?"
+            ],
+            "question":" What is the first name and last name of the student who have most number of sports?",
+            "sql":[
+                "SELECT T2.Fname ,  T2.Lname FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID GROUP BY T1.StuID ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "What is the sport with the most scholarship students?"
+            ],
+            "question":" Which sport has most number of students on scholarship?",
+            "sql":[
+                "SELECT sportname FROM Sportsinfo WHERE onscholarship  =  'Y' GROUP BY sportname ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "What are the ids of all students who don't play sports?"
+            ],
+            "question":" Show student ids who don't have any sports.",
+            "sql":[
+                "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Sportsinfo"
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "What are the student ids for those on scholarship in major number 600?"
+            ],
+            "question":" Show student ids who are on scholarship and have major 600.",
+            "sql":[
+                "SELECT StuID FROM Student WHERE major  =  600 INTERSECT SELECT StuID FROM Sportsinfo WHERE onscholarship  =  'Y'"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are the ids of all female students who play football?"
+            ],
+            "question":" Show student ids who are female and play football.",
+            "sql":[
+                "SELECT StuID FROM Student WHERE sex  =  'F' INTERSECT SELECT StuID FROM Sportsinfo WHERE sportname  =  \"Football\""
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "What are the ids of all male students who do not play football?"
+            ],
+            "question":" Show all male student ids who don't play football.",
+            "sql":[
+                "SELECT StuID FROM Student WHERE sex  =  'M' EXCEPT SELECT StuID FROM Sportsinfo WHERE sportname  =  \"Football\""
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "What is the total number of hours per work and number of games played by David Shieber?"
+            ],
+            "question":" Show total hours per week and number of games played for student David Shieber.",
+            "sql":[
+                "SELECT sum(hoursperweek) ,  sum(gamesplayed) FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.Fname  =  \"David\" AND T2.Lname  =  \"Shieber\""
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "What is the total number of hours per week and number of games played by students under 20?"
+            ],
+            "question":" Show total hours per week and number of games played for students under 20.",
+            "sql":[
+                "SELECT sum(hoursperweek) ,  sum(gamesplayed) FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.age  <  20"
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "How many different students play games?"
+            ],
+            "question":" How many students play video games?",
+            "sql":[
+                "SELECT count(DISTINCT StuID) FROM Plays_games"
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "What are the ids of all students who are not video game players?"
+            ],
+            "question":" Show ids of students who don't play video game.",
+            "sql":[
+                "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Plays_games"
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "What are the ids of all students who played video games and sports?"
+            ],
+            "question":" Show ids of students who play video game and play sports.",
+            "sql":[
+                "SELECT StuID FROM Sportsinfo INTERSECT SELECT StuID FROM Plays_games"
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "What are ids and total number of hours played for each game?"
+            ],
+            "question":" Show all game ids and the number of hours played.",
+            "sql":[
+                "SELECT gameid ,  sum(hours_played) FROM Plays_games GROUP BY gameid"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "What are the ids of all students and number of hours played?"
+            ],
+            "question":" Show all student ids and the number of hours played.",
+            "sql":[
+                "SELECT Stuid ,  sum(hours_played) FROM Plays_games GROUP BY Stuid"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "What is the name of the game that has been played the most?"
+            ],
+            "question":" Show the game name that has most number of hours played.",
+            "sql":[
+                "SELECT gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid GROUP BY T1.gameid ORDER BY sum(hours_played) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "What are the names of all the games that have been played for at least 1000 hours?",
+                "What are the names of all games?",
+                "What are the names for each id?",
+                "Out of those, which have been played for a total of at least 1000 hours?"
+            ],
+            "question":" Show all game names played by at least 1000 hours.",
+            "sql":[
+                "SELECT gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid GROUP BY T1.gameid HAVING sum(hours_played)  >=  1000"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "What are the names of all games played by Linda Smith?"
+            ],
+            "question":" Show all game names played by Linda Smith",
+            "sql":[
+                "SELECT Gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid JOIN Student AS T3 ON T3.Stuid  =  T1.Stuid WHERE T3.Lname  =  \"Smith\" AND T3.Fname  =  \"Linda\""
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What is the first and last name of all students who play Football or Lacrosse?"
+            ],
+            "question":" Find the last and first name of students who are playing Football or Lacrosse.",
+            "sql":[
+                "SELECT T2.lname ,  T2.fname FROM SportsInfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T1.SportName  =  \"Football\" OR T1.SportName  =  \"Lacrosse\""
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "What are the first names and ages of all students who are playing both Football and Lacrosse?"
+            ],
+            "question":" Find the first name and age of the students who are playing both Football and Lacrosse.",
+            "sql":[
+                "SELECT fname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Sportsinfo WHERE SportName  =  \"Football\" INTERSECT SELECT StuID FROM Sportsinfo WHERE SportName  =  \"Lacrosse\")"
+            ]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "what is the last name and gender of all students who played both Call of Destiny and Works of Widenius?"
+            ],
+            "question":" Find the last name and gender of the students who are playing both Call of Destiny and Works of Widenius games.",
+            "sql":[
+                "SELECT lname ,  sex FROM Student WHERE StuID IN (SELECT T1.StuID FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.GameID  =  T2.GameID WHERE T2.Gname  =  \"Call of Destiny\" INTERSECT SELECT T1.StuID FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.GameID  =  T2.GameID WHERE T2.Gname  =  \"Works of Widenius\")"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

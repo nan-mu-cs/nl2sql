@@ -664,12 +664,12 @@
                 ],
                 "sql":[
                     "SELECT salary FROM employees WHERE employee_id = 163",
-                    "SELECT * FROM employees WHERE salary  > ",
-                    "SELECT first_name ,  last_name FROM employees WHERE salary  > "
+                    "SELECT * FROM employees WHERE salary  >  (SELECT salary FROM employees WHERE employee_id = 163 )",
+                    "SELECT first_name ,  last_name FROM employees WHERE salary  >  (SELECT salary FROM employees WHERE employee_id = 163 )"
                 ]
             },
             "sql":[
-                "SELECT first_name ,  last_name FROM employees WHERE salary  > "
+                "SELECT first_name ,  last_name FROM employees WHERE salary  >  (SELECT salary FROM employees WHERE employee_id = 163 )"
             ]
         },
         {
@@ -706,12 +706,12 @@
                 ],
                 "sql":[
                     "SELECT MIN(salary) FROM employees GROUP BY department_id",
-                    "SELECT * FROM employees WHERE salary IN",
-                    "SELECT first_name ,  last_name ,  department_id FROM employees WHERE salary IN"
+                    "SELECT * FROM employees WHERE salary IN (SELECT MIN(salary) FROM employees GROUP BY department_id)",
+                    "SELECT first_name ,  last_name ,  department_id FROM employees WHERE salary IN (SELECT MIN(salary) FROM employees GROUP BY department_id)"
                 ]
             },
             "sql":[
-                "SELECT first_name ,  last_name ,  department_id FROM employees WHERE salary IN"
+                "SELECT first_name ,  last_name ,  department_id FROM employees WHERE salary IN (SELECT MIN(salary) FROM employees GROUP BY department_id)"
             ]
         },
         {
@@ -728,12 +728,12 @@
                 ],
                 "sql":[
                     "SELECT AVG(salary) FROM employees",
-                    "SELECT * FROM employees WHERE salary  > ",
-                    "SELECT employee_id FROM employees WHERE salary  > "
+                    "SELECT * FROM employees WHERE salary  >  (SELECT AVG(salary) FROM employees)",
+                    "SELECT employee_id FROM employees WHERE salary  >  (SELECT AVG(salary) FROM employees)"
                 ]
             },
             "sql":[
-                "SELECT employee_id FROM employees WHERE salary  > "
+                "SELECT employee_id FROM employees WHERE salary  >  (SELECT AVG(salary) FROM employees)"
             ]
         },
         {
@@ -750,12 +750,12 @@
                 ],
                 "sql":[
                     "SELECT employee_id FROM employees WHERE first_name  =  'Payam'",
-                    "SELECT * FROM employees WHERE manager_id  = ",
-                    "SELECT employee_id ,  salary FROM employees WHERE manager_id  = "
+                    "SELECT * FROM employees WHERE manager_id  =  (SELECT employee_id FROM employees WHERE first_name  =  'Payam' )",
+                    "SELECT employee_id ,  salary FROM employees WHERE manager_id  =  (SELECT employee_id FROM employees WHERE first_name  =  'Payam' )"
                 ]
             },
             "sql":[
-                "SELECT employee_id ,  salary FROM employees WHERE manager_id  = "
+                "SELECT employee_id ,  salary FROM employees WHERE manager_id  =  (SELECT employee_id FROM employees WHERE first_name  =  'Payam' )"
             ]
         },
         {
@@ -932,12 +932,12 @@
                 ],
                 "sql":[
                     "SELECT MIN(salary) FROM employees",
-                    "SELECT * FROM employees WHERE salary  > ",
-                    "SELECT * FROM employees WHERE salary BETWEEN"
+                    "SELECT * FROM employees WHERE salary  >  (SELECT MIN(salary) FROM employees)",
+                    "SELECT * FROM employees WHERE salary BETWEEN (SELECT MIN(salary) FROM employees) AND 2500"
                 ]
             },
             "sql":[
-                "SELECT * FROM employees WHERE salary BETWEEN"
+                "SELECT * FROM employees WHERE salary BETWEEN (SELECT MIN(salary) FROM employees) AND 2500"
             ]
         },
         {
@@ -953,11 +953,11 @@
                 ],
                 "sql":[
                     "SELECT department_id FROM departments WHERE manager_id BETWEEN 100 AND 200",
-                    "SELECT * FROM employees WHERE department_id NOT IN"
+                    "SELECT * FROM employees WHERE department_id NOT IN (SELECT department_id FROM departments WHERE manager_id BETWEEN 100 AND 200)"
                 ]
             },
             "sql":[
-                "SELECT * FROM employees WHERE department_id NOT IN"
+                "SELECT * FROM employees WHERE department_id NOT IN (SELECT department_id FROM departments WHERE manager_id BETWEEN 100 AND 200)"
             ]
         },
         {
@@ -974,12 +974,12 @@
                 ],
                 "sql":[
                     "SELECT department_id FROM employees WHERE first_name  =  \"Clara\"",
-                    "SELECT * FROM employees WHERE department_id  = ",
-                    "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  = "
+                    "SELECT * FROM employees WHERE department_id  =  (SELECT department_id FROM employees WHERE first_name  =  \"Clara\")",
+                    "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  =  (SELECT department_id FROM employees WHERE first_name  =  \"Clara\")"
                 ]
             },
             "sql":[
-                "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  = "
+                "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  =  (SELECT department_id FROM employees WHERE first_name  =  \"Clara\")"
             ]
         },
         {
@@ -997,13 +997,13 @@
                 ],
                 "sql":[
                     "SELECT department_id FROM employees WHERE first_name  =  \"Clara\"",
-                    "SELECT * FROM employees WHERE department_id  = ",
-                    "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  = ",
-                    "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  = "
+                    "SELECT * FROM employees WHERE department_id  =  ( SELECT department_id FROM employees WHERE first_name  =  \"Clara\")",
+                    "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  =  ( SELECT department_id FROM employees WHERE first_name  =  \"Clara\")",
+                    "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  =  ( SELECT department_id FROM employees WHERE first_name  =  \"Clara\") AND first_name ! =  \"Clara\""
                 ]
             },
             "sql":[
-                "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  = "
+                "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  =  ( SELECT department_id FROM employees WHERE first_name  =  \"Clara\") AND first_name ! =  \"Clara\""
             ]
         },
         {
@@ -1020,12 +1020,12 @@
                 ],
                 "sql":[
                     "SELECT department_id FROM employees WHERE first_name LIKE '%T%'",
-                    "SELECT * FROM employees WHERE department_id IN",
-                    "SELECT employee_id ,  first_name ,  last_name FROM employees WHERE department_id IN"
+                    "SELECT * FROM employees WHERE department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%T%' )",
+                    "SELECT employee_id ,  first_name ,  last_name FROM employees WHERE department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%T%' )"
                 ]
             },
             "sql":[
-                "SELECT employee_id ,  first_name ,  last_name FROM employees WHERE department_id IN"
+                "SELECT employee_id ,  first_name ,  last_name FROM employees WHERE department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%T%' )"
             ]
         },
         {
@@ -1043,13 +1043,13 @@
                 ],
                 "sql":[
                     "SELECT AVG (salary) FROM employees",
-                    "SELECT * FROM employees WHERE salary  > ",
-                    "SELECT * FROM employees WHERE salary  > ",
-                    "SELECT employee_id ,  first_name ,  last_name ,  salary FROM employees WHERE salary  > "
+                    "SELECT * FROM employees WHERE salary  >  ( SELECT AVG (salary) FROM employees )",
+                    "SELECT * FROM employees WHERE salary  >  ( SELECT AVG (salary) FROM employees ) AND department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%J%')",
+                    "SELECT employee_id ,  first_name ,  last_name ,  salary FROM employees WHERE salary  >  ( SELECT AVG (salary) FROM employees ) AND department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%J%')"
                 ]
             },
             "sql":[
-                "SELECT employee_id ,  first_name ,  last_name ,  salary FROM employees WHERE salary  > "
+                "SELECT employee_id ,  first_name ,  last_name ,  salary FROM employees WHERE salary  >  ( SELECT AVG (salary) FROM employees ) AND department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%J%')"
             ]
         },
         {
@@ -1066,12 +1066,12 @@
                 ],
                 "sql":[
                     "SELECT min(salary) FROM employees WHERE job_id  =  'MK_MAN'",
-                    "SELECT * FROM employees WHERE salary  < ",
-                    "SELECT employee_id ,  job_id FROM employees WHERE salary  < "
+                    "SELECT * FROM employees WHERE salary  <  ( SELECT min(salary) FROM employees WHERE job_id  =  'MK_MAN' )",
+                    "SELECT employee_id ,  job_id FROM employees WHERE salary  <  ( SELECT min(salary) FROM employees WHERE job_id  =  'MK_MAN' )"
                 ]
             },
             "sql":[
-                "SELECT employee_id ,  job_id FROM employees WHERE salary  < "
+                "SELECT employee_id ,  job_id FROM employees WHERE salary  <  ( SELECT min(salary) FROM employees WHERE job_id  =  'MK_MAN' )"
             ]
         },
         {
@@ -1088,12 +1088,12 @@
                 ],
                 "sql":[
                     "SELECT max(salary) FROM employees WHERE job_id  =  'PU_MAN'",
-                    "SELECT * FROM employees WHERE salary  > ",
-                    "SELECT employee_id ,  first_name ,  last_name ,  job_id FROM employees WHERE salary  > "
+                    "SELECT * FROM employees WHERE salary  >  ( SELECT max(salary) FROM employees WHERE job_id  =  'PU_MAN' )",
+                    "SELECT employee_id ,  first_name ,  last_name ,  job_id FROM employees WHERE salary  >  ( SELECT max(salary) FROM employees WHERE job_id  =  'PU_MAN' )"
                 ]
             },
             "sql":[
-                "SELECT employee_id ,  first_name ,  last_name ,  job_id FROM employees WHERE salary  > "
+                "SELECT employee_id ,  first_name ,  last_name ,  job_id FROM employees WHERE salary  >  ( SELECT max(salary) FROM employees WHERE job_id  =  'PU_MAN' )"
             ]
         },
         {
@@ -1129,11 +1129,11 @@
                 ],
                 "sql":[
                     "SELECT employee_id FROM job_history GROUP BY employee_id",
-                    "SELECT * FROM employees WHERE employee_id NOT IN"
+                    "SELECT * FROM employees WHERE employee_id NOT IN (SELECT employee_id FROM job_history)"
                 ]
             },
             "sql":[
-                "SELECT * FROM employees WHERE employee_id NOT IN"
+                "SELECT * FROM employees WHERE employee_id NOT IN (SELECT employee_id FROM job_history)"
             ]
         },
         {
@@ -1261,6 +1261,7 @@
             ]
         },
         {
+            "id":62,
             "paraphrase":[
                 "What are full names and salaries of employees working in the city of London?"
             ],

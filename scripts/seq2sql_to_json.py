@@ -44,8 +44,8 @@ def parse(filepath):
 					"id":id,
 					"question":question,
 					"paraphrase":paraphrase,
-					"sql":sql_list,
-					"sqa":sqa
+					"sql":sql_list
+					# ,"sqa":sqa
 				})
 				id += 1
 				q_list = []
@@ -116,8 +116,8 @@ def parse(filepath):
 			"id": id,
 			"question":question,
 			"paraphrase":paraphrase,
-			"sql":sql_list,
-			"sqa":sqa
+			"sql":sql_list
+			# ,"sqa":sqa
 		})
 	return {
 		"label_id":"",
