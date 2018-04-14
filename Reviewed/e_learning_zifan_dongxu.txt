@@ -22,9 +22,9 @@ List all addresses of course authors or tutors.
 SELECT address_line_1
 FROM Course_Authors_and_Tutors
 
-List all login name of course author and tutors.
+List all login names and family names of course author and tutors.
 
-SELECT login_name
+SELECT login_name, family_name
 FROM Course_Authors_and_Tutors
 
 List all dates of enrollment and completion of students.
@@ -87,7 +87,7 @@ ORDER BY personal_name
 List personal names and family names of students in alphabetical order of family name.
 
 SELECT personal_name, family_name
-FROM Course_Authors_and_Tutors
+FROM Students
 ORDER BY family_name
 
 List each test result and the corresponding count order by count descending
@@ -129,7 +129,7 @@ on T1.author_id = T2.author_id
 group by T2.author_id
 HAVING Count(*) >= 2
 
-Find the names of courses taught by one who have personal name "Julio".
+Find the names of courses taught by the tutor who has personal name "Julio".
 
 SELECT T2.course_name
 FROM Course_Authors_and_Tutors as T1 JOIN Courses as T2
@@ -143,15 +143,14 @@ FROM Courses as T1 JOIN Subjects as T2
 ON T1.subject_id = T2.subject_id
 WHERE T2.subject_name = "Computer Science"
 
-Find the subject IDs, names of subjects, and the corresponding courses belong to each subject.
+Find the subject IDs, names of subjects, and the corresponding number of courses belong to each subject.
 
 SELECT T1.subject_id, T2.subject_name, COUNT(*)
 FROM Courses as T1 JOIN Subjects as T2
 ON T1.subject_id = T2.subject_id
 group by T1.subject_id
 
-Find the subject IDs, names of subjects and the corresponding courses belong to each subject 
-sorted by count in ascending order.
+Find the subject IDs, names of subjects and the corresponding number of courses belong to each subject sorted by count in ascending order.
 
 SELECT T1.subject_id, T2.subject_name, COUNT(*)
 FROM Courses as T1 JOIN Subjects as T2
@@ -171,7 +170,7 @@ What is the name of the course that has the most number of student enrollment?
 SELECT T1.course_name
 FROM Courses as T1 JOIN Student_Course_Enrolment as T2
 ON T1.course_id = T2.course_id
-group by T2.student_id
+group by T1.course_name
 order by COUNT(*) DESC LIMIT 1
 
 What are the names of the courses that have exactly 1 student enrollment?
@@ -179,15 +178,15 @@ What are the names of the courses that have exactly 1 student enrollment?
 SELECT T1.course_name
 FROM Courses as T1 JOIN Student_Course_Enrolment as T2
 ON T1.course_id = T2.course_id
-group by T2.student_id
+group by T1.course_name
 HAVING COUNT(*) = 1
  
-What are the descriptions of the courses that have student enrollment bigger than 2?
+What are the descriptions and names of the courses that have student enrollment bigger than 2?
 
-SELECT T1.course_description
+SELECT T1.course_description, T1.course_name
 FROM Courses as T1 JOIN Student_Course_Enrolment as T2
 ON T1.course_id = T2.course_id
-group by T2.student_id
+group by T1.course_name
 HAVING COUNT(*) > 2
 
 What are the names of courses and corresponding number of student enrollments?
@@ -195,7 +194,7 @@ What are the names of courses and corresponding number of student enrollments?
 SELECT T1.course_name, COUNT(*)
 FROM Courses as T1 JOIN Student_Course_Enrolment as T2
 ON T1.course_id = T2.course_id
-group by T2.student_id	
+group by T1.course_name
 
 What are the enrollment date of all tests that have result "Pass"?
 
@@ -218,12 +217,12 @@ FROM Student_Course_Enrolment as T1 JOIN Students as T2
 ON T1.student_id = T2.student_id
 WHERE T2.personal_name = "Karson"
 
-List the dates of enrollment and completion of the student with family name "Zieme".
+List the dates of enrollment and completion of the student with family name "Zieme" and personal name "Bernie".
 
 SELECT T1.date_of_enrolment, T1.date_of_completion
 FROM Student_Course_Enrolment as T1 JOIN Students as T2
 ON T1.student_id = T2.student_id
-WHERE T2.family_name = "Zieme"
+WHERE T2.family_name = "Zieme" and T2.personal_name = "Bernie" 
 
 Find the student ID and login name of the student with the most number of enrollments
 
@@ -253,9 +252,22 @@ HAVING COUNT(*) <= 2
 
 4. Find the personal name of students not enrolled in any course.
 
-SELECT personal_name from Students
+
+select personal_name
+from Students
+EXCEPT
+select T1.personal_name
+from Students as T1 JOIN Student_Course_Enrolment as T2
+on T1.student_id = T2.student_id
+
+How many students did not have any any course enrollment?
+
+
+SELECT count(*)
+from Students
 Where student_id not in 
 (select student_id from Student_Course_Enrolment)
+
 
 Find the common login name of course authors and students
 
@@ -268,4 +280,5 @@ Find the common personal name of course authors and students
 SELECT personal_name from Course_Authors_and_Tutors
 INTERSECT
 SELECT personal_name from Students
+
 
