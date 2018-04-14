@@ -679,8 +679,9 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
     cleaned_data[pointer]['group'] = group_list
 
     ### parse order by
-    parity = -1
+    parity = 1
     order_list = []
+    order_agg_list = []
     if 'order' in query_tok:
         key_ind = None
         for word in extra_sql_keywords[3:]:
@@ -695,9 +696,16 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
             order_clause = query_tok[order_ind + 2:]
 
         for col in order_clause:
+            for i, tok in enumerate(agg_toks):
+                if tok in order_clause:
+                    order_agg_list.append(i + 1)
+                    break
+            order_agg_list.append(0)
+
             if col == 'asc' or col == 'desc':
                 parity = 1 if col == 'asc' else 0
                 break
+                
             col_split = col.split('.')
             if len(col_split) == 1:
                 order_list.append(col_map[temp_map.index(col_split[0])][0])
@@ -707,7 +715,10 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
                 rel_cols_stripped = [entry[1] for entry in rel_cols] 
                 order_list.append(rel_cols[rel_cols_stripped.index(col_split[1])][0])
 
-    cleaned_data[pointer]['order'] = [order_list, parity]
+    if len(order_list) == 0:
+        parity = -1
+
+    cleaned_data[pointer]['order'] = [order_agg_list, order_list, parity]
 
     ### parse limit
     val = 0
@@ -717,6 +728,7 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
 
     cleaned_data[pointer]['limit'] = val
 
+    #parse union/intersect/except
     special_tok = None
     for i, word in enumerate(extra_sql_keywords[4:]):
         if word in query_tok:
