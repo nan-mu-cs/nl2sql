@@ -85,7 +85,7 @@ on T1.breed_code = T2.breed_code
 group by T1.breed_name
 order by count(*) desc limit 1
 
-10. Which owner have paid for the most number of treatments on his or her dogs? List the owner id and last name.
+10. Which owner has paid for most treatments on his or her dogs? List the owner id and last name.
 
 select T1.owner_id, T1.last_name
 from Owners as T1 JOIN Dogs as T2
@@ -181,7 +181,7 @@ from Dogs as T1 JOIN Treatments as T2
 on T1.dog_id = T2.dog_id
 
 
-22. List the onwer last name of the dogs who are of the oldest age.
+22. List the owner last names of the youngest dogs.
 
 select T1.last_name
 from Owners as T1 JOIN Dogs as T2
