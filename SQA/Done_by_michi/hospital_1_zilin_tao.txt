@@ -1,4 +1,4 @@
-Total = # 40 -> 51
+Total = # 40 -> 50
 
 1. Which department has the largest number of employees?
 P: Find the department with the most employees.
@@ -770,6 +770,10 @@ SELECT nurse
 FROM on_call
 WHERE blockfloor = 1 and blockcode = 1
 
+S:
+S:
+S:
+
 
 35. What are the highest cost, lowest cost and average cost of procedures?
 P: Tell me the highest, lowest, and average cost of procedures.
@@ -777,12 +781,22 @@ P: Tell me the highest, lowest, and average cost of procedures.
 SELECT MAX(cost), MIN(cost), AVG(cost)
 FROM procedures
 
+S:
+S:
+S:
+
+
 36. List the name and cost of all procedures sorted by the cost from the highest to the lowest.
 P: Sort the list of names and costs of all procedures in the descending order of cost.
 
 SELECT name, cost
 FROM procedures
 order by cost desc
+
+S:
+S:
+S:
+
 
 37. Find the three most expensive procedures.
 P: What are the three most costly procedures?
@@ -792,6 +806,10 @@ FROM procedures
 ORDER BY cost
 LIMIT 3
 
+S:
+S:
+S:
+
 38. Find the physicians who are trained in a procedure that costs more than 5000.
 P: Which physicians are trained in procedures that are more expensive than 5000?
 
@@ -800,6 +818,11 @@ FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T3.cost > 5000
+
+S:
+S:
+S:
+
 
 39. Find the physician who was trained in the most expensive procedure?
 P: Which physician was trained in the procedure that costs the most.
@@ -811,6 +834,11 @@ FROM physician as T1
 order by T3.cost desc
 limit 1
 
+S:
+S:
+S:
+
+
 40. What is the average cost of procedures that physician John Wen was trained in?
 P: Compute the mean price of procedures physician John Wen was trained in.
 
@@ -820,6 +848,11 @@ FROM physician as T1
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
 
+S:
+S:
+S:
+
+
 41. Find the names of procedures which physician John Wen was trained in.
 P: What are the names of procedures physician John Wen was trained in?
 
@@ -828,6 +861,11 @@ FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
+
+S:
+S:
+S:
+
 
 42. Find all procedures which cost more than 1000 or which physician John Wen was trained in.
 P: What are the procedures that cost more than 1000 or are specialized in by physician John Wen?
@@ -842,6 +880,11 @@ FROM physician as T1
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
 
+S:
+S:
+S:
+
+
 43. Find the names of all procedures which cost more than 1000 but which physician John Wen was not trained in?
 P: Among the procedures that cost more than 1000, which were not specialized in by physician John Wen?
 
@@ -855,6 +898,11 @@ FROM physician as T1
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
 
+S:
+S:
+S:
+
+
 44. Find the names of all procedures such that the cost is less than 5000 and physician John Wen was trained in.
 P: What procedures cost less than 5000 and have John Wen as a trained physician?
 
@@ -867,6 +915,11 @@ FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
+
+S:
+S:
+S:
+
 
 45. Find the name of physicians who are affiliated with both Surgery and Psychiatry departments.
 P: Which physicians are affiliated with both Surgery and Psychiatry departments? Tell me their names.
@@ -883,6 +936,10 @@ from physician as T1
      join department as T3 on T2.department = T3.DepartmentID
 Where T3.name = 'Psychiatry'
 
+S:
+S:
+S:
+
 
 46. Find the name of physicians who are affiliated with Surgery or Psychiatry department.
 P: Which physicians are affiliated with either Surgery or Psychiatry department? Give me their names.
@@ -892,6 +949,11 @@ from physician as T1
      join affiliated_with as T2 on T1.EmployeeID = T2.physician
      join department as T3 on T2.department = T3.DepartmentID
 Where T3.name = 'Surgery' or T3.name = 'Psychiatry'
+
+S:
+S:
+S:
+
 
 47. Find the names of patients who are not using the medication of Procrastin-X.
 P: What are the names of patients who are not taking the medication of Procrastin-X.
@@ -905,6 +967,11 @@ FROM patient as T1
      join Medication as T3 on T2.Medication = T3.Code
 WHERE T3.name = 'Procrastin-X'
 
+S:
+S:
+S:
+
+
 48. Find the number of patients who are not using the medication of Procrastin-X.
 P: How many patients are not using Procrastin-X as medication?
 
@@ -916,15 +983,30 @@ FROM Prescribes as T1 join Medication as T2 on T1.Medication = T2.Code
 WHERE T2.name = 'Procrastin-X'
 )
 
+S:
+S:
+S:
+
+
 49. How many appointments are there?
 P: Count how many appointments have been made in total.
 
 select count(*)
 from appointment
 
+S:
+S:
+S:
+
+
 50. Find the names of nurses who are on call.
 P: What are the distinct names of nurses on call?
 
 select distinct T1.name
 from nurse as T1 join on_call as T2 on T1.EmployeeID = T2.nurse
+
+S:
+S:
+S:
+
 
