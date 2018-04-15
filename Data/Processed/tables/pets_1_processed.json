@@ -1,0 +1,187 @@
+{
+    "tab_map": [
+        "student", 
+        "has_pet", 
+        "pets"
+    ], 
+    "col_map": [
+        [
+            0, 
+            "*"
+        ], 
+        [
+            1, 
+            "stuid", 
+            "student"
+        ], 
+        [
+            2, 
+            "lname", 
+            "student"
+        ], 
+        [
+            3, 
+            "fname", 
+            "student"
+        ], 
+        [
+            4, 
+            "age", 
+            "student"
+        ], 
+        [
+            5, 
+            "sex", 
+            "student"
+        ], 
+        [
+            6, 
+            "major", 
+            "student"
+        ], 
+        [
+            7, 
+            "advisor", 
+            "student"
+        ], 
+        [
+            8, 
+            "city_code", 
+            "student"
+        ], 
+        [
+            9, 
+            "stuid", 
+            "has_pet"
+        ], 
+        [
+            10, 
+            "petid", 
+            "has_pet"
+        ], 
+        [
+            11, 
+            "petid", 
+            "pets"
+        ], 
+        [
+            12, 
+            "pettype", 
+            "pets"
+        ], 
+        [
+            13, 
+            "pet_age", 
+            "pets"
+        ], 
+        [
+            14, 
+            "weight", 
+            "pets"
+        ]
+    ], 
+    "has_pet": {
+        "9": {
+            "name": "stuid", 
+            "name_tok": [
+                "stuid"
+            ], 
+            "foreign_key": null
+        }, 
+        "10": {
+            "name": "petid", 
+            "name_tok": [
+                "petid"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "student": {
+        "1": {
+            "name": "stuid", 
+            "name_tok": [
+                "stuid"
+            ], 
+            "foreign_key": null
+        }, 
+        "2": {
+            "name": "lname", 
+            "name_tok": [
+                "lname"
+            ], 
+            "foreign_key": null
+        }, 
+        "3": {
+            "name": "fname", 
+            "name_tok": [
+                "fname"
+            ], 
+            "foreign_key": null
+        }, 
+        "4": {
+            "name": "age", 
+            "name_tok": [
+                "age"
+            ], 
+            "foreign_key": null
+        }, 
+        "5": {
+            "name": "sex", 
+            "name_tok": [
+                "sex"
+            ], 
+            "foreign_key": null
+        }, 
+        "6": {
+            "name": "major", 
+            "name_tok": [
+                "major"
+            ], 
+            "foreign_key": null
+        }, 
+        "7": {
+            "name": "advisor", 
+            "name_tok": [
+                "advisor"
+            ], 
+            "foreign_key": null
+        }, 
+        "8": {
+            "name": "city_code", 
+            "name_tok": [
+                "city_code"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "pets": {
+        "11": {
+            "name": "petid", 
+            "name_tok": [
+                "petid"
+            ], 
+            "foreign_key": null
+        }, 
+        "12": {
+            "name": "pettype", 
+            "name_tok": [
+                "pettype"
+            ], 
+            "foreign_key": null
+        }, 
+        "13": {
+            "name": "pet_age", 
+            "name_tok": [
+                "pet_age"
+            ], 
+            "foreign_key": null
+        }, 
+        "14": {
+            "name": "weight", 
+            "name_tok": [
+                "weight"
+            ], 
+            "foreign_key": null
+        }
+    }
+}

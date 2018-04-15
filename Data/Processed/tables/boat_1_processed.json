@@ -1,0 +1,139 @@
+{
+    "sailors": {
+        "1": {
+            "name": "sid", 
+            "name_tok": [
+                "sid"
+            ], 
+            "foreign_key": null
+        }, 
+        "2": {
+            "name": "name", 
+            "name_tok": [
+                "name"
+            ], 
+            "foreign_key": null
+        }, 
+        "3": {
+            "name": "rating", 
+            "name_tok": [
+                "rating"
+            ], 
+            "foreign_key": null
+        }, 
+        "4": {
+            "name": "age", 
+            "name_tok": [
+                "age"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "boats": {
+        "5": {
+            "name": "bid", 
+            "name_tok": [
+                "bid"
+            ], 
+            "foreign_key": null
+        }, 
+        "6": {
+            "name": "name", 
+            "name_tok": [
+                "name"
+            ], 
+            "foreign_key": null
+        }, 
+        "7": {
+            "name": "color", 
+            "name_tok": [
+                "color"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "col_map": [
+        [
+            0, 
+            "*"
+        ], 
+        [
+            1, 
+            "sid", 
+            "sailors"
+        ], 
+        [
+            2, 
+            "name", 
+            "sailors"
+        ], 
+        [
+            3, 
+            "rating", 
+            "sailors"
+        ], 
+        [
+            4, 
+            "age", 
+            "sailors"
+        ], 
+        [
+            5, 
+            "bid", 
+            "boats"
+        ], 
+        [
+            6, 
+            "name", 
+            "boats"
+        ], 
+        [
+            7, 
+            "color", 
+            "boats"
+        ], 
+        [
+            8, 
+            "sid", 
+            "reserves"
+        ], 
+        [
+            9, 
+            "bid", 
+            "reserves"
+        ], 
+        [
+            10, 
+            "day", 
+            "reserves"
+        ]
+    ], 
+    "reserves": {
+        "8": {
+            "name": "sid", 
+            "name_tok": [
+                "sid"
+            ], 
+            "foreign_key": null
+        }, 
+        "9": {
+            "name": "bid", 
+            "name_tok": [
+                "bid"
+            ], 
+            "foreign_key": null
+        }, 
+        "10": {
+            "name": "day", 
+            "name_tok": [
+                "day"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "tab_map": [
+        "sailors", 
+        "boats", 
+        "reserves"
+    ]
+}

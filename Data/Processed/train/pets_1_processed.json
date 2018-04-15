@@ -1,0 +1,1551 @@
+[
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    14, 
+                    3, 
+                    "10"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of pets whose weight is heavier than 10.", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "pets", 
+            "where", 
+            "weight", 
+            ">", 
+            "10"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT count(*) FROM pets WHERE weight  >  10", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "pets", 
+            "whose", 
+            "weight", 
+            "is", 
+            "heavier", 
+            "than", 
+            "10", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": "1", 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                14
+            ], 
+            "order": [
+                [
+                    0
+                ], 
+                [
+                    13
+                ], 
+                1
+            ]
+        }, 
+        "question": " Find the weight of the youngest dog.", 
+        "query_tok": [
+            "select", 
+            "weight", 
+            "from", 
+            "pets", 
+            "order", 
+            "by", 
+            "pet_age", 
+            "limit", 
+            "1"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "weight", 
+            "of", 
+            "the", 
+            "youngest", 
+            "dog", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                1, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                12
+            ], 
+            "sel": [
+                14, 
+                12
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the maximum weight for each type of pet. List the maximum weight and pet type.", 
+        "query_tok": [
+            "select", 
+            "max", 
+            "(", 
+            "weight", 
+            ")", 
+            ",", 
+            "pettype", 
+            "from", 
+            "pets", 
+            "group", 
+            "by", 
+            "pettype"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT max(weight) ,  petType FROM pets GROUP BY petType", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "maximum", 
+            "weight", 
+            "for", 
+            "each", 
+            "type", 
+            "of", 
+            "pet", 
+            ".", 
+            "list", 
+            "the", 
+            "maximum", 
+            "weight", 
+            "and", 
+            "pet", 
+            "type", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    4, 
+                    3, 
+                    "20"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find number of pets owned by students who are older than 20.", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "where", 
+            "t1.age", 
+            ">", 
+            "20"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.age  >  20", 
+        "question_tok": [
+            "find", 
+            "number", 
+            "of", 
+            "pets", 
+            "owned", 
+            "by", 
+            "students", 
+            "who", 
+            "are", 
+            "older", 
+            "than", 
+            "20", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        1, 
+                        10
+                    ], 
+                    [
+                        2, 
+                        11
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    5, 
+                    2, 
+                    "'f'"
+                ], 
+                [
+                    0, 
+                    12, 
+                    2, 
+                    "'dog'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of dog pets that are raised by female students (with sex F).", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "join", 
+            "pets", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.petid", 
+            "=", 
+            "t3.petid", 
+            "where", 
+            "t1.sex", 
+            "=", 
+            "'f", 
+            "'", 
+            "and", 
+            "t3.pettype", 
+            "=", 
+            "'dog", 
+            "'"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T2.petid  =  T3.petid WHERE T1.sex  =  'F' AND T3.pettype  =  'dog'", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "dog", 
+            "pets", 
+            "that", 
+            "are", 
+            "raised", 
+            "by", 
+            "female", 
+            "students", 
+            "(", 
+            "with", 
+            "sex", 
+            "f", 
+            ")", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                12
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of distinct type of pets.", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "distinct", 
+            "pettype", 
+            ")", 
+            "from", 
+            "pets"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT count(DISTINCT pettype) FROM pets", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "distinct", 
+            "type", 
+            "of", 
+            "pets", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        11
+                    ], 
+                    [
+                        1, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    12, 
+                    2, 
+                    "'cat'"
+                ], 
+                [
+                    0, 
+                    12, 
+                    2, 
+                    "'dog'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                3
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the first name of students who have cat or dog pet.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t1.fname", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "join", 
+            "pets", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.petid", 
+            "=", 
+            "t2.petid", 
+            "where", 
+            "t3.pettype", 
+            "=", 
+            "'cat", 
+            "'", 
+            "or", 
+            "t3.pettype", 
+            "=", 
+            "'dog", 
+            "'"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' OR T3.pettype  =  'dog'", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "first", 
+            "name", 
+            "of", 
+            "students", 
+            "who", 
+            "have", 
+            "cat", 
+            "or", 
+            "dog", 
+            "pet", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        11
+                    ], 
+                    [
+                        1, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    12, 
+                    2, 
+                    "'cat'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                3
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        11
+                    ], 
+                    [
+                        1, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    12, 
+                    2, 
+                    "'dog'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                3
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": "Find the name of students who have both cat and dog pets.", 
+        "query_tok": [
+            "select", 
+            "t1.fname", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "join", 
+            "pets", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.petid", 
+            "=", 
+            "t2.petid", 
+            "where", 
+            "t3.pettype", 
+            "=", 
+            "'cat", 
+            "'", 
+            "intersect", 
+            "select", 
+            "t1.fname", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "join", 
+            "pets", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.petid", 
+            "=", 
+            "t2.petid", 
+            "where", 
+            "t3.pettype", 
+            "=", 
+            "'dog", 
+            "'"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' INTERSECT SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog'", 
+        "special": [
+            1, 
+            "sql2"
+        ], 
+        "question_tok": [
+            "find", 
+            "the", 
+            "name", 
+            "of", 
+            "students", 
+            "who", 
+            "have", 
+            "both", 
+            "cat", 
+            "and", 
+            "dog", 
+            "pets", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        11
+                    ], 
+                    [
+                        1, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        11
+                    ], 
+                    [
+                        1, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    12, 
+                    2, 
+                    "'cat'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the id of students who do not have a cat pet.", 
+        "query_tok": [
+            "select", 
+            "stuid", 
+            "from", 
+            "student", 
+            "except", 
+            "select", 
+            "t1.stuid", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "join", 
+            "pets", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.petid", 
+            "=", 
+            "t2.petid", 
+            "where", 
+            "t3.pettype", 
+            "=", 
+            "'cat", 
+            "'"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'", 
+        "special": [
+            3, 
+            "sql2"
+        ], 
+        "question_tok": [
+            "find", 
+            "the", 
+            "id", 
+            "of", 
+            "students", 
+            "who", 
+            "do", 
+            "not", 
+            "have", 
+            "a", 
+            "cat", 
+            "pet", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": "1", 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                12, 
+                14
+            ], 
+            "order": [
+                [
+                    0
+                ], 
+                [
+                    13
+                ], 
+                1
+            ]
+        }, 
+        "question": " Find the type and weight of the youngest pet.", 
+        "query_tok": [
+            "select", 
+            "pettype", 
+            ",", 
+            "weight", 
+            "from", 
+            "pets", 
+            "order", 
+            "by", 
+            "pet_age", 
+            "limit", 
+            "1"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT pettype ,  weight FROM pets ORDER BY pet_age LIMIT 1", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "type", 
+            "and", 
+            "weight", 
+            "of", 
+            "the", 
+            "youngest", 
+            "pet", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    13, 
+                    3, 
+                    "1"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                11, 
+                14
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the id and weight of all pets whose age is older than 1.", 
+        "query_tok": [
+            "select", 
+            "petid", 
+            ",", 
+            "weight", 
+            "from", 
+            "pets", 
+            "where", 
+            "pet_age", 
+            ">", 
+            "1"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT petid ,  weight FROM pets WHERE pet_age  >  1", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "id", 
+            "and", 
+            "weight", 
+            "of", 
+            "all", 
+            "pets", 
+            "whose", 
+            "age", 
+            "is", 
+            "older", 
+            "than", 
+            "1", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                3, 
+                1, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                12
+            ], 
+            "sel": [
+                13, 
+                13, 
+                12
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the average and maximum age for each type of pet.", 
+        "query_tok": [
+            "select", 
+            "avg", 
+            "(", 
+            "pet_age", 
+            ")", 
+            ",", 
+            "max", 
+            "(", 
+            "pet_age", 
+            ")", 
+            ",", 
+            "pettype", 
+            "from", 
+            "pets", 
+            "group", 
+            "by", 
+            "pettype"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "average", 
+            "and", 
+            "maximum", 
+            "age", 
+            "for", 
+            "each", 
+            "type", 
+            "of", 
+            "pet", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                3, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                12
+            ], 
+            "sel": [
+                14, 
+                12
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the average weight for each pet type.", 
+        "query_tok": [
+            "select", 
+            "avg", 
+            "(", 
+            "weight", 
+            ")", 
+            ",", 
+            "pettype", 
+            "from", 
+            "pets", 
+            "group", 
+            "by", 
+            "pettype"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "average", 
+            "weight", 
+            "for", 
+            "each", 
+            "pet", 
+            "type", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                3, 
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the first name and age of students who have a pet.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t1.fname", 
+            ",", 
+            "t1.age", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT DISTINCT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "first", 
+            "name", 
+            "and", 
+            "age", 
+            "of", 
+            "students", 
+            "who", 
+            "have", 
+            "a", 
+            "pet", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    2, 
+                    2, 
+                    "'smith'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                10
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the id of the pet owned by student whose last name is \u2018Smith\u2019.", 
+        "query_tok": [
+            "select", 
+            "t2.petid", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "where", 
+            "t1.lname", 
+            "=", 
+            "'smith", 
+            "'"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.Lname  =  'Smith'", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "id", 
+            "of", 
+            "the", 
+            "pet", 
+            "owned", 
+            "by", 
+            "student", 
+            "whose", 
+            "last", 
+            "name", 
+            "is", 
+            "\u2018smith\u2019", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                4, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                1
+            ], 
+            "sel": [
+                0, 
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of pets for each student who has any pet and student id.", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ",", 
+            "t1.stuid", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "group", 
+            "by", 
+            "t1.stuid"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT count(*) ,  T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "pets", 
+            "for", 
+            "each", 
+            "student", 
+            "who", 
+            "has", 
+            "any", 
+            "pet", 
+            "and", 
+            "student", 
+            "id", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                1, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    "1"
+                ]
+            ], 
+            "sel": [
+                3, 
+                5
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the first name and gender of student who have more than one pet.", 
+        "query_tok": [
+            "select", 
+            "t1.fname", 
+            ",", 
+            "t1.sex", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "group", 
+            "by", 
+            "t1.stuid", 
+            "having", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ">", 
+            "1"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT T1.fname ,  T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid HAVING count(*)  >  1", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "first", 
+            "name", 
+            "and", 
+            "gender", 
+            "of", 
+            "student", 
+            "who", 
+            "have", 
+            "more", 
+            "than", 
+            "one", 
+            "pet", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        1, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        11
+                    ], 
+                    [
+                        1, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    13, 
+                    2, 
+                    "3"
+                ], 
+                [
+                    0, 
+                    12, 
+                    2, 
+                    "'cat'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the last name of the student who has a cat that is age 3.", 
+        "query_tok": [
+            "select", 
+            "t1.lname", 
+            "from", 
+            "student", 
+            "as", 
+            "t1", 
+            "join", 
+            "has_pet", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.stuid", 
+            "=", 
+            "t2.stuid", 
+            "join", 
+            "pets", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.petid", 
+            "=", 
+            "t2.petid", 
+            "where", 
+            "t3.pet_age", 
+            "=", 
+            "3", 
+            "and", 
+            "t3.pettype", 
+            "=", 
+            "'cat", 
+            "'"
+        ], 
+        "table_id": "pets_1", 
+        "query": "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pet_age  =  3 AND T3.pettype  =  'cat'", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "last", 
+            "name", 
+            "of", 
+            "the", 
+            "student", 
+            "who", 
+            "has", 
+            "a", 
+            "cat", 
+            "that", 
+            "is", 
+            "age", 
+            "3", 
+            "."
+        ]
+    }
+]

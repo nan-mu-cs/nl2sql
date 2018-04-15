@@ -1,0 +1,4928 @@
+[
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                15, 
+                7
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Display the first name and department name for each employee.", 
+        "query_tok": [
+            "select", 
+            "t1.first_name", 
+            ",", 
+            "t2.department_name", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT T1.first_name ,  T2.department_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "first", 
+            "name", 
+            "and", 
+            "department", 
+            "name", 
+            "for", 
+            "each", 
+            "employee", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    4, 
+                    "6000"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " List the full name (first and last name), and salary for those employees who earn below 6000.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "salary", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            "<", 
+            "6000"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  salary FROM employees WHERE salary  <  6000", 
+        "question_tok": [
+            "list", 
+            "the", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            ",", 
+            "and", 
+            "salary", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "earn", 
+            "below", 
+            "6000", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    16, 
+                    2, 
+                    "'mcewen'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Display the first name, and department number for all employees whose last name is \"McEwen\".", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "last_name", 
+            "=", 
+            "'mcewen", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  department_id FROM employees WHERE last_name  =  'McEwen'", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "first", 
+            "name", 
+            ",", 
+            "and", 
+            "department", 
+            "number", 
+            "for", 
+            "all", 
+            "employees", 
+            "whose", 
+            "last", 
+            "name", 
+            "is", 
+            "``", 
+            "mcewen", 
+            "''", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    6, 
+                    9, 
+                    "null"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Return all the information for all employees without any department number.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "employees", 
+            "where", 
+            "department_id", 
+            "is", 
+            "null"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM employees WHERE department_id IS NULL", 
+        "question_tok": [
+            "return", 
+            "all", 
+            "the", 
+            "information", 
+            "for", 
+            "all", 
+            "employees", 
+            "without", 
+            "any", 
+            "department", 
+            "number", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'marketing'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Display all the information about the department Marketing.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "departments", 
+            "where", 
+            "department_name", 
+            "=", 
+            "'marketing", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM  departments WHERE department_name  =  'Marketing'", 
+        "question_tok": [
+            "display", 
+            "all", 
+            "the", 
+            "information", 
+            "about", 
+            "the", 
+            "department", 
+            "marketing", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    15, 
+                    0, 
+                    "'%m%'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                19
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " when is the hire date for those employees whose first name does not containing the letter M?", 
+        "query_tok": [
+            "select", 
+            "hire_date", 
+            "from", 
+            "employees", 
+            "where", 
+            "first_name", 
+            "not", 
+            "like", 
+            "'", 
+            "%", 
+            "m", 
+            "%", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT hire_date FROM employees WHERE first_name NOT LIKE '%M%'", 
+        "question_tok": [
+            "when", 
+            "is", 
+            "the", 
+            "hire", 
+            "date", 
+            "for", 
+            "those", 
+            "employees", 
+            "whose", 
+            "first", 
+            "name", 
+            "does", 
+            "not", 
+            "containing", 
+            "the", 
+            "letter", 
+            "m", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    15, 
+                    0, 
+                    "'%m%'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                19, 
+                21, 
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the full name (first and last), hire date, salary, and department number for those employees whose first name does not containing the letter M.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "hire_date", 
+            ",", 
+            "salary", 
+            ",", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "first_name", 
+            "not", 
+            "like", 
+            "'", 
+            "%", 
+            "m", 
+            "%", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  hire_date ,  salary ,  department_id FROM employees WHERE first_name NOT LIKE '%M%'", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "and", 
+            "last", 
+            ")", 
+            ",", 
+            "hire", 
+            "date", 
+            ",", 
+            "salary", 
+            ",", 
+            "and", 
+            "department", 
+            "number", 
+            "for", 
+            "those", 
+            "employees", 
+            "whose", 
+            "first", 
+            "name", 
+            "does", 
+            "not", 
+            "containing", 
+            "the", 
+            "letter", 
+            "m", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    15, 
+                    0, 
+                    "'%m%'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                19, 
+                21, 
+                24
+            ], 
+            "order": [
+                [
+                    0
+                ], 
+                [
+                    6
+                ], 
+                1
+            ]
+        }, 
+        "question": " display the full name (first and last), hire date, salary, and department number for those employees whose first name does not containing the letter M and make the result set in ascending order by department number.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "hire_date", 
+            ",", 
+            "salary", 
+            ",", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "first_name", 
+            "not", 
+            "like", 
+            "'", 
+            "%", 
+            "m", 
+            "%", 
+            "'", 
+            "order", 
+            "by", 
+            "department_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  hire_date ,  salary ,  department_id FROM employees WHERE first_name NOT LIKE '%M%' ORDER BY department_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "and", 
+            "last", 
+            ")", 
+            ",", 
+            "hire", 
+            "date", 
+            ",", 
+            "salary", 
+            ",", 
+            "and", 
+            "department", 
+            "number", 
+            "for", 
+            "those", 
+            "employees", 
+            "whose", 
+            "first", 
+            "name", 
+            "does", 
+            "not", 
+            "containing", 
+            "the", 
+            "letter", 
+            "m", 
+            "and", 
+            "make", 
+            "the", 
+            "result", 
+            "set", 
+            "in", 
+            "ascending", 
+            "order", 
+            "by", 
+            "department", 
+            "number", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    1, 
+                    [
+                        "8000", 
+                        "12000"
+                    ]
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                18
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " what is the phone number of employees whose salary is in the range of 8000 and 12000?", 
+        "query_tok": [
+            "select", 
+            "phone_number", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            "between", 
+            "8000", 
+            "and", 
+            "12000"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT phone_number FROM employees WHERE salary BETWEEN 8000 AND 12000", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "phone", 
+            "number", 
+            "of", 
+            "employees", 
+            "whose", 
+            "salary", 
+            "is", 
+            "in", 
+            "the", 
+            "range", 
+            "of", 
+            "8000", 
+            "and", 
+            "12000", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    1, 
+                    [
+                        "8000", 
+                        "12000"
+                    ]
+                ], 
+                [
+                    0, 
+                    22, 
+                    9, 
+                    ""
+                ], 
+                [
+                    0, 
+                    6, 
+                    2, 
+                    "40"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display all the information of employees whose salary is in the range of 8000 and 12000 and commission is not null or department number does not equal to 40.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            "between", 
+            "8000", 
+            "and", 
+            "12000", 
+            "and", 
+            "commission_pct", 
+            "is", 
+            "not", 
+            "null", 
+            "or", 
+            "department_id", 
+            "!", 
+            "=", 
+            "40"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM employees WHERE salary BETWEEN 8000 AND 12000 AND commission_pct IS NOT NULL OR  department_id ! =  40", 
+        "question_tok": [
+            "display", 
+            "all", 
+            "the", 
+            "information", 
+            "of", 
+            "employees", 
+            "whose", 
+            "salary", 
+            "is", 
+            "in", 
+            "the", 
+            "range", 
+            "of", 
+            "8000", 
+            "and", 
+            "12000", 
+            "and", 
+            "commission", 
+            "is", 
+            "not", 
+            "null", 
+            "or", 
+            "department", 
+            "number", 
+            "does", 
+            "not", 
+            "equal", 
+            "to", 
+            "40", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    22, 
+                    9, 
+                    "null"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What are the full name (first and last name) and salary for all employees who does not have any value for commission?", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "salary", 
+            "from", 
+            "employees", 
+            "where", 
+            "commission_pct", 
+            "is", 
+            "null"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  salary FROM  employees WHERE commission_pct IS NULL", 
+        "question_tok": [
+            "what", 
+            "are", 
+            "the", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            "and", 
+            "salary", 
+            "for", 
+            "all", 
+            "employees", 
+            "who", 
+            "does", 
+            "not", 
+            "have", 
+            "any", 
+            "value", 
+            "for", 
+            "commission", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    15, 
+                    8, 
+                    "'%m'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Display the first and last name, and salary for those employees whose first name is ending with the letter m.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "salary", 
+            "from", 
+            "employees", 
+            "where", 
+            "first_name", 
+            "like", 
+            "'", 
+            "%", 
+            "m", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  salary FROM employees WHERE first_name LIKE '%m'", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            ",", 
+            "and", 
+            "salary", 
+            "for", 
+            "those", 
+            "employees", 
+            "whose", 
+            "first", 
+            "name", 
+            "is", 
+            "ending", 
+            "with", 
+            "the", 
+            "letter", 
+            "m", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    19, 
+                    1, 
+                    [
+                        "'2007-11-05", 
+                        "'", 
+                        "'2009-07-05", 
+                        "'"
+                    ]
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                20, 
+                19
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find job id and date of hire for those employees who was hired between November 5th, 2007 and July 5th, 2009.", 
+        "query_tok": [
+            "select", 
+            "job_id", 
+            ",", 
+            "hire_date", 
+            "from", 
+            "employees", 
+            "where", 
+            "hire_date", 
+            "between", 
+            "'2007-11-05", 
+            "'", 
+            "and", 
+            "'2009-07-05", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT job_id ,  hire_date FROM employees WHERE hire_date BETWEEN '2007-11-05' AND '2009-07-05'", 
+        "question_tok": [
+            "find", 
+            "job", 
+            "id", 
+            "and", 
+            "date", 
+            "of", 
+            "hire", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "was", 
+            "hired", 
+            "between", 
+            "november", 
+            "5th", 
+            ",", 
+            "2007", 
+            "and", 
+            "july", 
+            "5th", 
+            ",", 
+            "2009", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    6, 
+                    2, 
+                    "70"
+                ], 
+                [
+                    0, 
+                    6, 
+                    2, 
+                    "90"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What are the first and last name for those employees who works either in department 70 or 90?", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            "from", 
+            "employees", 
+            "where", 
+            "department_id", 
+            "=", 
+            "70", 
+            "or", 
+            "department_id", 
+            "=", 
+            "90"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name FROM employees WHERE department_id  =  70 OR department_id  =  90", 
+        "question_tok": [
+            "what", 
+            "are", 
+            "the", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "works", 
+            "either", 
+            "in", 
+            "department", 
+            "70", 
+            "or", 
+            "90", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    8, 
+                    9, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                21, 
+                23
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the salary and manager number for those employees who is working under a manager.", 
+        "query_tok": [
+            "select", 
+            "salary", 
+            ",", 
+            "manager_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "manager_id", 
+            "is", 
+            "not", 
+            "null"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT salary ,  manager_id FROM employees WHERE manager_id IS NOT NULL", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "salary", 
+            "and", 
+            "manager", 
+            "number", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "is", 
+            "working", 
+            "under", 
+            "a", 
+            "manager", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    19, 
+                    4, 
+                    "'2002-06-21'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display all the details from Employees table for those employees who was hired before 2002-06-21.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "employees", 
+            "where", 
+            "hire_date", 
+            "<", 
+            "'2002-06-21", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM employees WHERE hire_date  <  '2002-06-21'", 
+        "question_tok": [
+            "display", 
+            "all", 
+            "the", 
+            "details", 
+            "from", 
+            "employees", 
+            "table", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "was", 
+            "hired", 
+            "before", 
+            "2002-06-21", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    15, 
+                    8, 
+                    "'%d%'"
+                ], 
+                [
+                    0, 
+                    15, 
+                    8, 
+                    "'%s%'"
+                ], 
+                [
+                    0, 
+                    15, 
+                    8, 
+                    "'%n%'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [
+                    0, 
+                    0
+                ], 
+                [
+                    21
+                ], 
+                0
+            ]
+        }, 
+        "question": " display all the information for all employees who have the letters D, S, or N in their first name and also arrange the result in descending order by salary.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "employees", 
+            "where", 
+            "first_name", 
+            "like", 
+            "'", 
+            "%", 
+            "d", 
+            "%", 
+            "'", 
+            "or", 
+            "first_name", 
+            "like", 
+            "'", 
+            "%", 
+            "s", 
+            "%", 
+            "'", 
+            "or", 
+            "first_name", 
+            "like", 
+            "'", 
+            "%", 
+            "n", 
+            "%", 
+            "'", 
+            "order", 
+            "by", 
+            "salary", 
+            "desc"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM employees WHERE first_name LIKE '%D%' OR first_name LIKE '%S%' OR first_name LIKE '%N%' ORDER BY salary DESC", 
+        "question_tok": [
+            "display", 
+            "all", 
+            "the", 
+            "information", 
+            "for", 
+            "all", 
+            "employees", 
+            "who", 
+            "have", 
+            "the", 
+            "letters", 
+            "d", 
+            ",", 
+            "s", 
+            ",", 
+            "or", 
+            "n", 
+            "in", 
+            "their", 
+            "first", 
+            "name", 
+            "and", 
+            "also", 
+            "arrange", 
+            "the", 
+            "result", 
+            "in", 
+            "descending", 
+            "order", 
+            "by", 
+            "salary", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    19, 
+                    3, 
+                    "'1987-09-07'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display those employees who joined after 7th September, 1987.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "employees", 
+            "where", 
+            "hire_date", 
+            ">", 
+            "'1987-09-07", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM employees WHERE hire_date  >  '1987-09-07'", 
+        "question_tok": [
+            "display", 
+            "those", 
+            "employees", 
+            "who", 
+            "joined", 
+            "after", 
+            "7th", 
+            "september", 
+            ",", 
+            "1987", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        3, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    12, 
+                    3, 
+                    "9000"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                11
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the job title of jobs which minimum salary is greater than 9000.", 
+        "query_tok": [
+            "select", 
+            "job_title", 
+            "from", 
+            "jobs", 
+            "where", 
+            "min_salary", 
+            ">", 
+            "9000"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT job_title FROM jobs WHERE min_salary  >  9000", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "job", 
+            "title", 
+            "of", 
+            "jobs", 
+            "which", 
+            "minimum", 
+            "salary", 
+            "is", 
+            "greater", 
+            "than", 
+            "9000", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    22, 
+                    9, 
+                    "null"
+                ], 
+                [
+                    0, 
+                    21, 
+                    1, 
+                    [
+                        "7000", 
+                        "12000"
+                    ]
+                ], 
+                [
+                    0, 
+                    6, 
+                    2, 
+                    "50"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                17
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the emails of the employees who have no commission percentage and salary within the range 7000 to 12000 and works in that department which number is 50.", 
+        "query_tok": [
+            "select", 
+            "email", 
+            "from", 
+            "employees", 
+            "where", 
+            "commission_pct", 
+            "is", 
+            "null", 
+            "and", 
+            "salary", 
+            "between", 
+            "7000", 
+            "and", 
+            "12000", 
+            "and", 
+            "department_id", 
+            "=", 
+            "50"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT email FROM employees WHERE commission_pct IS NULL AND salary BETWEEN 7000 AND 12000 AND department_id = 50", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "emails", 
+            "of", 
+            "the", 
+            "employees", 
+            "who", 
+            "have", 
+            "no", 
+            "commission", 
+            "percentage", 
+            "and", 
+            "salary", 
+            "within", 
+            "the", 
+            "range", 
+            "7000", 
+            "to", 
+            "12000", 
+            "and", 
+            "works", 
+            "in", 
+            "that", 
+            "department", 
+            "which", 
+            "number", 
+            "is", 
+            "50", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        5, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                1
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                14
+            ], 
+            "sel": [
+                25, 
+                27
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee ID for each employee and the date on which he ended his previous job.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            ",", 
+            "max", 
+            "(", 
+            "end_date", 
+            ")", 
+            "from", 
+            "job_history", 
+            "group", 
+            "by", 
+            "employee_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id ,  MAX(end_date) FROM job_history GROUP BY employee_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "id", 
+            "for", 
+            "each", 
+            "employee", 
+            "and", 
+            "the", 
+            "date", 
+            "on", 
+            "which", 
+            "he", 
+            "ended", 
+            "his", 
+            "previous", 
+            "job", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                6, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    "10"
+                ]
+            ], 
+            "sel": [
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display those departments where more than ten employees work who got a commission percentage.", 
+        "query_tok": [
+            "select", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "group", 
+            "by", 
+            "department_id", 
+            "having", 
+            "count", 
+            "(", 
+            "commission_pct", 
+            ")", 
+            ">", 
+            "10"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT department_id FROM employees GROUP BY department_id HAVING COUNT(commission_pct) > 10", 
+        "question_tok": [
+            "display", 
+            "those", 
+            "departments", 
+            "where", 
+            "more", 
+            "than", 
+            "ten", 
+            "employees", 
+            "work", 
+            "who", 
+            "got", 
+            "a", 
+            "commission", 
+            "percentage", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                6, 
+                8, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "sel": [
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the ids of the departments where any manager is managing 4 or more employees.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "group", 
+            "by", 
+            "department_id", 
+            ",", 
+            "manager_id", 
+            "having", 
+            "count", 
+            "(", 
+            "employee_id", 
+            ")", 
+            ">", 
+            "=", 
+            "4"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT DISTINCT department_id FROM employees GROUP BY department_id ,  manager_id HAVING COUNT(employee_id)  >= 4", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "ids", 
+            "of", 
+            "the", 
+            "departments", 
+            "where", 
+            "any", 
+            "manager", 
+            "is", 
+            "managing", 
+            "4", 
+            "or", 
+            "more", 
+            "employees", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                3
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    22, 
+                    9, 
+                    ""
+                ]
+            ], 
+            "group": [
+                6
+            ], 
+            "sel": [
+                24, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the average salary of employees for each department who gets a commission percentage.", 
+        "query_tok": [
+            "select", 
+            "department_id", 
+            ",", 
+            "avg", 
+            "(", 
+            "salary", 
+            ")", 
+            "from", 
+            "employees", 
+            "where", 
+            "commission_pct", 
+            "is", 
+            "not", 
+            "null", 
+            "group", 
+            "by", 
+            "department_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT department_id ,  AVG(salary) FROM employees WHERE commission_pct IS NOT NULL GROUP BY department_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "average", 
+            "salary", 
+            "of", 
+            "employees", 
+            "for", 
+            "each", 
+            "department", 
+            "who", 
+            "gets", 
+            "a", 
+            "commission", 
+            "percentage", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        6, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                3
+            ], 
+            "sel": [
+                35, 
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the country ID and number of cities for each country.", 
+        "query_tok": [
+            "select", 
+            "country_id", 
+            ",", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "locations", 
+            "group", 
+            "by", 
+            "country_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT country_id ,  COUNT(*) FROM locations GROUP BY country_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "country", 
+            "id", 
+            "and", 
+            "number", 
+            "of", 
+            "cities", 
+            "for", 
+            "each", 
+            "country", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        5, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    0, 
+                    3, 
+                    "300"
+                ]
+            ], 
+            "group": [
+                10, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "sel": [
+                28
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display job ID for those jobs that were done by two or more for more than 300 days.", 
+        "query_tok": [
+            "select", 
+            "job_id", 
+            "from", 
+            "job_history", 
+            "where", 
+            "end_date-start_date", 
+            ">", 
+            "300", 
+            "group", 
+            "by", 
+            "job_id", 
+            "having", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ">", 
+            "=", 
+            "2"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT job_id FROM job_history WHERE end_date-start_date  > 300 GROUP BY job_id HAVING COUNT(*) >= 2", 
+        "question_tok": [
+            "display", 
+            "job", 
+            "id", 
+            "for", 
+            "those", 
+            "jobs", 
+            "that", 
+            "were", 
+            "done", 
+            "by", 
+            "two", 
+            "or", 
+            "more", 
+            "for", 
+            "more", 
+            "than", 
+            "300", 
+            "days", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        5, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                14, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "sel": [
+                25
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the ID for those employees who did two or more jobs in the past.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            "from", 
+            "job_history", 
+            "group", 
+            "by", 
+            "employee_id", 
+            "having", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ">", 
+            "=", 
+            "2"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id FROM job_history GROUP BY employee_id HAVING COUNT(*)  >= 2", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "id", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "did", 
+            "two", 
+            "or", 
+            "more", 
+            "jobs", 
+            "in", 
+            "the", 
+            "past", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        9
+                    ], 
+                    [
+                        6, 
+                        30
+                    ]
+                ], 
+                [
+                    [
+                        6, 
+                        35
+                    ], 
+                    [
+                        1, 
+                        3
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                14, 
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find employee with ID and name of the country presently where (s)he is working.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            ",", 
+            "country_name", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "join", 
+            "locations", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.location_id", 
+            "=", 
+            "t3.location_id", 
+            "join", 
+            "countries", 
+            "as", 
+            "t4", 
+            "on", 
+            "t3.country_id", 
+            "=", 
+            "t4.country_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id ,  country_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id JOIN countries AS T4 ON T3.country_id  =  T4.country_id", 
+        "question_tok": [
+            "find", 
+            "employee", 
+            "with", 
+            "id", 
+            "and", 
+            "name", 
+            "of", 
+            "the", 
+            "country", 
+            "presently", 
+            "where", 
+            "(", 
+            "s", 
+            ")", 
+            "he", 
+            "is", 
+            "working", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                7
+            ], 
+            "sel": [
+                7, 
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the department name and number of employees in each of the department.", 
+        "query_tok": [
+            "select", 
+            "t2.department_name", 
+            ",", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "group", 
+            "by", 
+            "t2.department_name"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT T2.department_name ,  COUNT(*) FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id GROUP BY T2.department_name", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "department", 
+            "name", 
+            "and", 
+            "number", 
+            "of", 
+            "employees", 
+            "in", 
+            "each", 
+            "of", 
+            "the", 
+            "department", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        20
+                    ], 
+                    [
+                        3, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                3
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                11
+            ], 
+            "sel": [
+                11, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display job title and average salary of employees.", 
+        "query_tok": [
+            "select", 
+            "job_title", 
+            ",", 
+            "avg", 
+            "(", 
+            "salary", 
+            ")", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "jobs", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.job_id", 
+            "=", 
+            "t2.job_id", 
+            "group", 
+            "by", 
+            "t2.job_title"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT job_title ,  AVG(salary) FROM employees AS T1 JOIN jobs AS T2 ON T1.job_id  =  T2.job_id GROUP BY T2.job_title", 
+        "question_tok": [
+            "display", 
+            "job", 
+            "title", 
+            "and", 
+            "average", 
+            "salary", 
+            "of", 
+            "employees", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the full name ( first name and last name ) for those employees who gets more salary than the employee whose id is 163?", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            ">"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name FROM employees WHERE salary  > ", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "name", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "gets", 
+            "more", 
+            "salary", 
+            "than", 
+            "the", 
+            "employee", 
+            "whose", 
+            "id", 
+            "is", 
+            "163", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                2, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                6
+            ], 
+            "sel": [
+                21, 
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " return the smallest salary for every departments.", 
+        "query_tok": [
+            "select", 
+            "min", 
+            "(", 
+            "salary", 
+            ")", 
+            ",", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "group", 
+            "by", 
+            "department_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT MIN(salary) ,  department_id FROM employees GROUP BY department_id", 
+        "question_tok": [
+            "return", 
+            "the", 
+            "smallest", 
+            "salary", 
+            "for", 
+            "every", 
+            "departments", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    7, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the first name and last name and department id for those employees who earn such amount of salary which is the smallest salary of any of the departments.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            "in"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  department_id FROM employees WHERE salary IN", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "first", 
+            "name", 
+            "and", 
+            "last", 
+            "name", 
+            "and", 
+            "department", 
+            "id", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "earn", 
+            "such", 
+            "amount", 
+            "of", 
+            "salary", 
+            "which", 
+            "is", 
+            "the", 
+            "smallest", 
+            "salary", 
+            "of", 
+            "any", 
+            "of", 
+            "the", 
+            "departments", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                14
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the employee id for all employees who earn more than the average salary.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            ">"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id FROM employees WHERE salary  > ", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "employee", 
+            "id", 
+            "for", 
+            "all", 
+            "employees", 
+            "who", 
+            "earn", 
+            "more", 
+            "than", 
+            "the", 
+            "average", 
+            "salary", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    8, 
+                    2, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                14, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee id and salary of all employees who report to Payam (first name).", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            ",", 
+            "salary", 
+            "from", 
+            "employees", 
+            "where", 
+            "manager_id", 
+            "="
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id ,  salary FROM employees WHERE manager_id  = ", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "id", 
+            "and", 
+            "salary", 
+            "of", 
+            "all", 
+            "employees", 
+            "who", 
+            "report", 
+            "to", 
+            "payam", 
+            "(", 
+            "first", 
+            "name", 
+            ")", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                7
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " find the name of all departments that do actually have one or more employees assigned to them.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t2.department_name", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT DISTINCT T2.department_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "name", 
+            "of", 
+            "all", 
+            "departments", 
+            "that", 
+            "do", 
+            "actually", 
+            "have", 
+            "one", 
+            "or", 
+            "more", 
+            "employees", 
+            "assigned", 
+            "to", 
+            "them", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    14, 
+                    2, 
+                    "t2.manager_id"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " get the details of employees who manage a department.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "*", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "where", 
+            "t1.employee_id", 
+            "=", 
+            "t2.manager_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT DISTINCT * FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id WHERE T1.employee_id  =  T2.manager_id", 
+        "question_tok": [
+            "get", 
+            "the", 
+            "details", 
+            "of", 
+            "employees", 
+            "who", 
+            "manage", 
+            "a", 
+            "department", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'marketing'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display all the information about the department Marketing.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "departments", 
+            "where", 
+            "department_name", 
+            "=", 
+            "'marketing", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM  departments WHERE department_name  =  'Marketing'", 
+        "question_tok": [
+            "display", 
+            "all", 
+            "the", 
+            "information", 
+            "about", 
+            "the", 
+            "department", 
+            "marketing", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        5, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                14, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "sel": [
+                25
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the ID for those employees who did two or more jobs in the past.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            "from", 
+            "job_history", 
+            "group", 
+            "by", 
+            "employee_id", 
+            "having", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ">", 
+            "=", 
+            "2"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id FROM job_history GROUP BY employee_id HAVING COUNT(*)  >= 2", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "id", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "did", 
+            "two", 
+            "or", 
+            "more", 
+            "jobs", 
+            "in", 
+            "the", 
+            "past", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                6, 
+                8, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "sel": [
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What are the unique ids of those departments where any manager is managing 4 or more employees.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "group", 
+            "by", 
+            "department_id", 
+            ",", 
+            "manager_id", 
+            "having", 
+            "count", 
+            "(", 
+            "employee_id", 
+            ")", 
+            ">", 
+            "=", 
+            "4"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT DISTINCT department_id FROM employees GROUP BY department_id ,  manager_id HAVING COUNT(employee_id)  >= 4", 
+        "question_tok": [
+            "what", 
+            "are", 
+            "the", 
+            "unique", 
+            "ids", 
+            "of", 
+            "those", 
+            "departments", 
+            "where", 
+            "any", 
+            "manager", 
+            "is", 
+            "managing", 
+            "4", 
+            "or", 
+            "more", 
+            "employees", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                10, 
+                [
+                    3, 
+                    0, 
+                    3, 
+                    "8000"
+                ]
+            ], 
+            "sel": [
+                20
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the job ID for those jobs which average salary is above 8000.", 
+        "query_tok": [
+            "select", 
+            "job_id", 
+            "from", 
+            "employees", 
+            "group", 
+            "by", 
+            "job_id", 
+            "having", 
+            "avg", 
+            "(", 
+            "salary", 
+            ")", 
+            ">", 
+            "8000"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT job_id FROM employees GROUP BY job_id HAVING AVG(salary) > 8000", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "job", 
+            "id", 
+            "for", 
+            "those", 
+            "jobs", 
+            "which", 
+            "average", 
+            "salary", 
+            "is", 
+            "above", 
+            "8000", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        20
+                    ], 
+                    [
+                        3, 
+                        10
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    24, 
+                    2, 
+                    "80"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                14, 
+                11
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee ID and job name for all those jobs in department 80.", 
+        "query_tok": [
+            "select", 
+            "t1.employee_id", 
+            ",", 
+            "t2.job_title", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "jobs", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.job_id", 
+            "=", 
+            "t2.job_id", 
+            "where", 
+            "t1.department_id", 
+            "=", 
+            "80"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT T1.employee_id ,  T2.job_title FROM employees AS T1 JOIN jobs AS T2 ON T1.job_id  =  T2.job_id WHERE T1.department_id = 80", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "id", 
+            "and", 
+            "job", 
+            "name", 
+            "for", 
+            "all", 
+            "those", 
+            "jobs", 
+            "in", 
+            "department", 
+            "80", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'finance'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                20
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the first name and job id for all employees in the Finance department?", 
+        "query_tok": [
+            "select", 
+            "t1.first_name", 
+            ",", 
+            "t1.job_id", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "where", 
+            "t2.department_name", 
+            "=", 
+            "'finance", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT T1.first_name ,  T1.job_id FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id WHERE T2.department_name  =  'Finance'", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "first", 
+            "name", 
+            "and", 
+            "job", 
+            "id", 
+            "for", 
+            "all", 
+            "employees", 
+            "in", 
+            "the", 
+            "finance", 
+            "department", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    6, 
+                    0, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the ids of the employees who does not work in those departments where some employees works whose manager id within the range 100 and 200.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "employees", 
+            "where", 
+            "department_id", 
+            "not", 
+            "in"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM employees WHERE department_id NOT IN", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "ids", 
+            "of", 
+            "the", 
+            "employees", 
+            "who", 
+            "does", 
+            "not", 
+            "work", 
+            "in", 
+            "those", 
+            "departments", 
+            "where", 
+            "some", 
+            "employees", 
+            "works", 
+            "whose", 
+            "manager", 
+            "id", 
+            "within", 
+            "the", 
+            "range", 
+            "100", 
+            "and", 
+            "200", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    6, 
+                    2, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                19
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee name ( first name and last name ) and hire date for all employees in the same department as Clara.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "hire_date", 
+            "from", 
+            "employees", 
+            "where", 
+            "department_id", 
+            "="
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  = ", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "name", 
+            "(", 
+            "first", 
+            "name", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            "and", 
+            "hire", 
+            "date", 
+            "for", 
+            "all", 
+            "employees", 
+            "in", 
+            "the", 
+            "same", 
+            "department", 
+            "as", 
+            "clara", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    6, 
+                    2, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                19
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee name ( first name and last name ) and hire date for all employees in the same department as Clara excluding Clara.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "hire_date", 
+            "from", 
+            "employees", 
+            "where", 
+            "department_id", 
+            "="
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  = ", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "name", 
+            "(", 
+            "first", 
+            "name", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            "and", 
+            "hire", 
+            "date", 
+            "for", 
+            "all", 
+            "employees", 
+            "in", 
+            "the", 
+            "same", 
+            "department", 
+            "as", 
+            "clara", 
+            "excluding", 
+            "clara", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    6, 
+                    7, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                14, 
+                15, 
+                16
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee number and name( first name and last name ) for all employees who work in a department with any employee whose name contains a \u2019T\u2019.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            ",", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            "from", 
+            "employees", 
+            "where", 
+            "department_id", 
+            "in"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id ,  first_name ,  last_name FROM employees WHERE department_id IN", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "number", 
+            "and", 
+            "name", 
+            "(", 
+            "first", 
+            "name", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            "for", 
+            "all", 
+            "employees", 
+            "who", 
+            "work", 
+            "in", 
+            "a", 
+            "department", 
+            "with", 
+            "any", 
+            "employee", 
+            "whose", 
+            "name", 
+            "contains", 
+            "a", 
+            "\u2019t\u2019", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                14, 
+                15, 
+                16, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee number, name( first name and last name ), and salary for all employees who earn more than the average salary and who work in a department with any employee with a 'J' in their first name.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            ",", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "salary", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            ">"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id ,  first_name ,  last_name ,  salary FROM employees WHERE salary  > ", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "number", 
+            ",", 
+            "name", 
+            "(", 
+            "first", 
+            "name", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            ",", 
+            "and", 
+            "salary", 
+            "for", 
+            "all", 
+            "employees", 
+            "who", 
+            "earn", 
+            "more", 
+            "than", 
+            "the", 
+            "average", 
+            "salary", 
+            "and", 
+            "who", 
+            "work", 
+            "in", 
+            "a", 
+            "department", 
+            "with", 
+            "any", 
+            "employee", 
+            "with", 
+            "a", 
+            "'j", 
+            "'", 
+            "in", 
+            "their", 
+            "first", 
+            "name", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    4, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                14, 
+                20
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee number and job id for all employees whose salary is smaller than any salary of those employees whose job title is MK_MAN.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            ",", 
+            "job_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            "<"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id ,  job_id FROM employees WHERE salary  < ", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "number", 
+            "and", 
+            "job", 
+            "id", 
+            "for", 
+            "all", 
+            "employees", 
+            "whose", 
+            "salary", 
+            "is", 
+            "smaller", 
+            "than", 
+            "any", 
+            "salary", 
+            "of", 
+            "those", 
+            "employees", 
+            "whose", 
+            "job", 
+            "title", 
+            "is", 
+            "mk_man", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    21, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                14, 
+                15, 
+                16, 
+                20
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the employee number, name( first name and last name ) and job title for all employees whose salary is more than any salary of those employees whose job title is PU_MAN.", 
+        "query_tok": [
+            "select", 
+            "employee_id", 
+            ",", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "job_id", 
+            "from", 
+            "employees", 
+            "where", 
+            "salary", 
+            ">"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT employee_id ,  first_name ,  last_name ,  job_id FROM employees WHERE salary  > ", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "employee", 
+            "number", 
+            ",", 
+            "name", 
+            "(", 
+            "first", 
+            "name", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            "and", 
+            "job", 
+            "title", 
+            "for", 
+            "all", 
+            "employees", 
+            "whose", 
+            "salary", 
+            "is", 
+            "more", 
+            "than", 
+            "any", 
+            "salary", 
+            "of", 
+            "those", 
+            "employees", 
+            "whose", 
+            "job", 
+            "title", 
+            "is", 
+            "pu_man", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                5
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                6, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    ""
+                ]
+            ], 
+            "sel": [
+                24, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the department id and the total salary for those departments which contains at least two employees.", 
+        "query_tok": [
+            "select", 
+            "department_id", 
+            ",", 
+            "sum", 
+            "(", 
+            "salary", 
+            ")", 
+            "from", 
+            "employees", 
+            "group", 
+            "by", 
+            "department_id", 
+            "having", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ">", 
+            "=", 
+            "2"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT department_id ,  SUM(salary) FROM employees GROUP BY department_id HAVING count(*)  >=  2", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "department", 
+            "id", 
+            "and", 
+            "the", 
+            "total", 
+            "salary", 
+            "for", 
+            "those", 
+            "departments", 
+            "which", 
+            "contains", 
+            "at", 
+            "least", 
+            "two", 
+            "employees", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    14, 
+                    0, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display all the information of those employees who did not have any job in the past.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "employees", 
+            "where", 
+            "employee_id", 
+            "not", 
+            "in"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT * FROM employees WHERE employee_id NOT IN", 
+        "question_tok": [
+            "display", 
+            "all", 
+            "the", 
+            "information", 
+            "of", 
+            "those", 
+            "employees", 
+            "who", 
+            "did", 
+            "not", 
+            "have", 
+            "any", 
+            "job", 
+            "in", 
+            "the", 
+            "past", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                6, 
+                [
+                    1, 
+                    21, 
+                    2, 
+                    "max(salary)"
+                ]
+            ], 
+            "sel": [
+                15, 
+                16, 
+                21, 
+                24
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the department ID, full name (first and last name), salary for those employees who is highest salary in every department.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "salary", 
+            ",", 
+            "department_id", 
+            "from", 
+            "employees", 
+            "group", 
+            "by", 
+            "department_id", 
+            "having", 
+            "salary", 
+            "=", 
+            "max", 
+            "(", 
+            "salary", 
+            ")"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,   last_name ,   salary ,  department_id FROM employees GROUP BY department_id HAVING salary  =  MAX(salary)", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "department", 
+            "id", 
+            ",", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            ",", 
+            "salary", 
+            "for", 
+            "those", 
+            "employees", 
+            "who", 
+            "is", 
+            "highest", 
+            "salary", 
+            "in", 
+            "every", 
+            "department", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        9
+                    ], 
+                    [
+                        6, 
+                        30
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                7, 
+                33, 
+                34
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the first and last name, department, city, and state province for each employee.", 
+        "query_tok": [
+            "select", 
+            "t1.first_name", 
+            ",", 
+            "t1.last_name", 
+            ",", 
+            "t2.department_name", 
+            ",", 
+            "t3.city", 
+            ",", 
+            "t3.state_province", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "join", 
+            "locations", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.location_id", 
+            "=", 
+            "t3.location_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT T1.first_name ,  T1.last_name ,  T2.department_name ,  T3.city ,  T3.state_province FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            ",", 
+            "department", 
+            ",", 
+            "city", 
+            ",", 
+            "and", 
+            "state", 
+            "province", 
+            "for", 
+            "each", 
+            "employee", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        9
+                    ], 
+                    [
+                        6, 
+                        30
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    15, 
+                    8, 
+                    "'%z%'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                33
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display those employees who contain a letter z to their first name and also display their last name, city.", 
+        "query_tok": [
+            "select", 
+            "t1.first_name", 
+            ",", 
+            "t1.last_name", 
+            ",", 
+            "t3.city", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "join", 
+            "locations", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.location_id", 
+            "=", 
+            "t3.location_id", 
+            "where", 
+            "t1.first_name", 
+            "like", 
+            "'", 
+            "%", 
+            "z", 
+            "%", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT T1.first_name ,  T1.last_name ,  T3.city FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id WHERE T1.first_name LIKE '%z%'", 
+        "question_tok": [
+            "display", 
+            "those", 
+            "employees", 
+            "who", 
+            "contain", 
+            "a", 
+            "letter", 
+            "z", 
+            "to", 
+            "their", 
+            "first", 
+            "name", 
+            "and", 
+            "also", 
+            "display", 
+            "their", 
+            "last", 
+            "name", 
+            ",", 
+            "city", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        6, 
+                        30
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                7, 
+                33, 
+                34
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the department name, city, and state province for each department.", 
+        "query_tok": [
+            "select", 
+            "t1.department_name", 
+            ",", 
+            "t2.city", 
+            ",", 
+            "t2.state_province", 
+            "from", 
+            "departments", 
+            "as", 
+            "t1", 
+            "join", 
+            "locations", 
+            "as", 
+            "t2", 
+            "on", 
+            "t2.location_id", 
+            "=", 
+            "t1.location_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT T1.department_name ,  T2.city ,  T2.state_province FROM departments AS T1 JOIN locations AS T2 ON T2.location_id  =  T1.location_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "department", 
+            "name", 
+            ",", 
+            "city", 
+            ",", 
+            "and", 
+            "state", 
+            "province", 
+            "for", 
+            "each", 
+            "department", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        9
+                    ], 
+                    [
+                        6, 
+                        30
+                    ]
+                ], 
+                [
+                    [
+                        6, 
+                        35
+                    ], 
+                    [
+                        1, 
+                        3
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                14, 
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the full name (first and last name ) of employee with ID and name of the country presently where (s)he is working.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "employee_id", 
+            ",", 
+            "country_name", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "join", 
+            "locations", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.location_id", 
+            "=", 
+            "t3.location_id", 
+            "join", 
+            "countries", 
+            "as", 
+            "t4", 
+            "on", 
+            "t3.country_id", 
+            "=", 
+            "t4.country_id"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  employee_id ,  country_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id JOIN countries AS T4 ON T3.country_id  =  T4.country_id", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            "of", 
+            "employee", 
+            "with", 
+            "id", 
+            "and", 
+            "name", 
+            "of", 
+            "the", 
+            "country", 
+            "presently", 
+            "where", 
+            "(", 
+            "s", 
+            ")", 
+            "he", 
+            "is", 
+            "working", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                7
+            ], 
+            "sel": [
+                7, 
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the department name and number of employees in each of the department.", 
+        "query_tok": [
+            "select", 
+            "department_name", 
+            ",", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "group", 
+            "by", 
+            "department_name"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT department_name ,  COUNT(*) FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id GROUP BY department_name", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "department", 
+            "name", 
+            "and", 
+            "number", 
+            "of", 
+            "employees", 
+            "in", 
+            "each", 
+            "of", 
+            "the", 
+            "department", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        4, 
+                        24
+                    ], 
+                    [
+                        2, 
+                        6
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        9
+                    ], 
+                    [
+                        6, 
+                        30
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    33, 
+                    2, 
+                    "'london'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                15, 
+                16, 
+                21
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " display the full name (first and last name), and salary of those employees who working in any department located in London.", 
+        "query_tok": [
+            "select", 
+            "first_name", 
+            ",", 
+            "last_name", 
+            ",", 
+            "salary", 
+            "from", 
+            "employees", 
+            "as", 
+            "t1", 
+            "join", 
+            "departments", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.department_id", 
+            "=", 
+            "t2.department_id", 
+            "join", 
+            "locations", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.location_id", 
+            "=", 
+            "t3.location_id", 
+            "where", 
+            "t3.city", 
+            "=", 
+            "'london", 
+            "'"
+        ], 
+        "table_id": "hr_1", 
+        "query": "SELECT first_name ,  last_name ,  salary FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN  locations AS T3 ON T2.location_id  =  T3.location_id WHERE  T3.city  =  'London'", 
+        "question_tok": [
+            "display", 
+            "the", 
+            "full", 
+            "name", 
+            "(", 
+            "first", 
+            "and", 
+            "last", 
+            "name", 
+            ")", 
+            ",", 
+            "and", 
+            "salary", 
+            "of", 
+            "those", 
+            "employees", 
+            "who", 
+            "working", 
+            "in", 
+            "any", 
+            "department", 
+            "located", 
+            "in", 
+            "london", 
+            "."
+        ]
+    }
+]

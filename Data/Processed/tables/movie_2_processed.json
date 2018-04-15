@@ -1,0 +1,88 @@
+{
+    "movies": {
+        "1": {
+            "name": "code", 
+            "name_tok": [
+                "code"
+            ], 
+            "foreign_key": null
+        }, 
+        "2": {
+            "name": "title", 
+            "name_tok": [
+                "title"
+            ], 
+            "foreign_key": null
+        }, 
+        "3": {
+            "name": "rating", 
+            "name_tok": [
+                "rating"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "col_map": [
+        [
+            0, 
+            "*"
+        ], 
+        [
+            1, 
+            "code", 
+            "movies"
+        ], 
+        [
+            2, 
+            "title", 
+            "movies"
+        ], 
+        [
+            3, 
+            "rating", 
+            "movies"
+        ], 
+        [
+            4, 
+            "code", 
+            "movietheaters"
+        ], 
+        [
+            5, 
+            "name", 
+            "movietheaters"
+        ], 
+        [
+            6, 
+            "movie", 
+            "movietheaters"
+        ]
+    ], 
+    "movietheaters": {
+        "4": {
+            "name": "code", 
+            "name_tok": [
+                "code"
+            ], 
+            "foreign_key": null
+        }, 
+        "5": {
+            "name": "name", 
+            "name_tok": [
+                "name"
+            ], 
+            "foreign_key": null
+        }, 
+        "6": {
+            "name": "movie", 
+            "name_tok": [
+                "movie"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "tab_map": [
+        "movies", 
+        "movietheaters"
+    ]
+}
