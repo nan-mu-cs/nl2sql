@@ -51,6 +51,14 @@ For training we could be trying the DB approaches (e.g. NaLIR), or neural networ
 - then we would be having a list of training examples in the form `(question skeleton, pattern, is_match)`, feed this into the NLI model
 - we don't match question skeleton with query skeleton directly due to the consideration of the amount of data, as in that way the amount of training data would be exponential to the number of training examples
 
+Negative sampling generation:
+
+1. Random matching a question
+    - can try different positive-negative ratio (1:1, 1:2, 1:3 etc)
+2. Make small changes to existing data and mark them as negative
+    - like changing the value in the query or changing `min` to `max`
+3. Try using a similarity measure generating a floating point value instead of just the distinct between positive and negative samples
+
 #### Trained Process
 
 Use one of the exsiting models from [NLI](https://nlp.stanford.edu/projects/snli/).
