@@ -384,11 +384,11 @@ def table_create():
         db['tab_map'] = table_inds # list with table names corresponding to each index
         db['col_map'] = index_to_name # list with index, column name, and corresponding table for all columns in db
         schema[db_name] = db
-    # for db in schema.keys():
-    #     # print db
-    #     # print schema[db]
-    #     with open('processed/tables/' + db + '_processed.json', 'w') as fp:
-    #         json.dump(schema[db], fp, indent=4)
+    for db in schema.keys():
+        # print db
+        # print schema[db]
+        with open('processed/tables/' + db + '_processed.json', 'w') as fp:
+            json.dump(schema[db], fp, indent=4)
     # sys.sleep()
     
     ##### sql processing
@@ -401,10 +401,22 @@ def table_create():
 
             dbn = database['database_name']
             cleaned_data['table_id'] = dbn
-            cleaned_data['question']= item['sqa']['question'][0] # get first question
-            cleaned_data['query']= item['sqa']['sql'][0] # get first query
+            cleaned_data['question'] = item['question']# item['sqa']['question'][0] # get first question
+            cleaned_data['query'] = item['sql'][0] #item['sqa']['sql'][0] # get first query
             cleaned_data['query_tok'] = word_tokenize(cleaned_data['query'].lower())
             cleaned_data['question_tok'] = word_tokenize(cleaned_data['question'].lower())
+
+            # currently not handling case of expressions in columns (e.g. endyear - startyear)
+            if '-' in cleaned_data['query_tok']:
+                print 'minus', cleaned_data['query_tok']
+                continue
+
+            # currently not handling case of t1.*
+            if 'T1.*' in cleaned_data['query']:
+                print 'hello', cleaned_data['query']
+                continue
+
+            # print cleaned_data['query']
 
             sql_counter = 1
             print 'query_tok', cleaned_data['query_tok']
@@ -412,8 +424,8 @@ def table_create():
             print cleaned_data
             sql_data.append(cleaned_data)
             
-        # with open('processed/train/' + dbn + '_processed.json', 'w') as fp:
-        #     json.dump(sql_data, fp, indent=4)
+        with open('processed/train/' + dbn + '_processed.json', 'w') as fp:
+            json.dump(sql_data, fp, indent=4)
 
 def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
     # print sql_counter
@@ -425,6 +437,7 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
     for word in extra_sql_keywords:
         if word in query_tok:
             key_ind = query_tok.index(word)
+            break
 
     if key_ind is not None:
         from_clause = query_tok[from_ind + 1:key_ind]
@@ -541,11 +554,12 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
     ### parse where condition
     conds = []
     
-    if 'where' in query_tok: #temporarily disregard not, between
+    if 'where' in query_tok: 
         key_ind = None
         for word in extra_sql_keywords[1:]:
             if word in query_tok:
                 key_ind = query_tok.index(word)
+                break
 
         where_ind = query_tok.index('where')
 
@@ -554,90 +568,94 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
         else:
             where_clause = query_tok[where_ind + 1:]
 
-        if 'not' in where_clause:
-            not_ind = where_clause.index('not')
-            del where_clause[not_ind + 1] # delete the 'in' token
+        # print where_clause
+        if len(where_clause) > 0:
+            if 'not' in where_clause:
+                not_ind = where_clause.index('not')
+                del where_clause[not_ind + 1] # delete the 'in' token
 
-        if 'between' in where_clause: 
-            between_ind = where_clause.index('between')
-            after_between = where_clause[between_ind:]
-            between_and_ind = after_between.index('and')
-            del where_clause[between_ind + between_and_ind] # delete the 'and' token
+            if 'between' in where_clause: 
+                between_ind = where_clause.index('between')
+                after_between = where_clause[between_ind:]
+                between_and_ind = after_between.index('and')
+                del where_clause[between_ind + between_and_ind] # delete the 'and' token
 
-        and_inds = [ind for ind, tok in enumerate(where_clause) if tok == 'and' or tok == 'or']
-        st_inds = [0] + [ind + 1 for ind in and_inds]
-        end_inds = [ind for ind in and_inds] + [len(where_clause)]
-        where_ops = ['not', 'between', '=', '>', '<', '>=', '<=', 'in', 'like', 'is']#, 'between'] #worry about not in, between later
 
-        # pos = 0
-        # print st_inds, end_inds
-        for (st, ed) in zip(st_inds, end_inds):
-            curr = [0, 0, 0, 0]
-            curr_cond = where_clause[st:ed]
-            # print curr_cond
+            and_inds = [ind for ind, tok in enumerate(where_clause) if tok == 'and' or tok == 'or']
+            st_inds = [0] + [ind + 1 for ind in and_inds]
+            end_inds = [ind for ind in and_inds] + [len(where_clause)]
+            where_ops = ['not', 'between', '=', '>', '<', '>=', '<=', 'in', 'like', 'is']
 
-            # check for agg ops
-            for i, tok in enumerate(agg_toks):
-                if tok in curr_cond:
-                    curr[0] = i + 1
-                    break
+            # pos = 0
+            # print st_inds, end_inds
+            for (st, ed) in zip(st_inds, end_inds):
+                curr = [0, 0, 0, 0]
+                curr_cond = where_clause[st:ed]
+                # print curr_cond
 
-            # get cond operator
-            op_ind = st
-            between_flag = False
-            subquery_flag = False
+                # check for agg ops
+                for i, tok in enumerate(agg_toks):
+                    if tok in curr_cond:
+                        curr[0] = i + 1
+                        break
 
-            for i, op in enumerate(where_ops):
-                if op in curr_cond:
-                    op_ind += curr_cond.index(op)                           
-                    curr[2] = i
+                # get cond operator
+                op_ind = st
+                between_flag = False
+                subquery_flag = False
 
-                    if op == 'between':
-                        between_flag = True
-                    # if op == 'not' or op == 'in':
-                    #     subquery_flag = True
+                for i, op in enumerate(where_ops):
+                    if op in curr_cond:
+                        op_ind += curr_cond.index(op)                           
+                        curr[2] = i
 
-            # get where col
-            col = where_clause[st:op_ind] #hopefully just 1 token
-            # print where_clause
-            # print curr_cond
-            # print col, curr_cond
-            col_split = col[0].split('.')
+                        if op == 'between':
+                            between_flag = True
+                        # if op == 'not' or op == 'in':
+                        #     subquery_flag = True
 
-            if len(col_split) == 1:
-                try:
-                    curr[1] = col_map[temp_map.index(col_split[0])][0] # doesn't handle operators (e.g. end_date-start_date)
-                except: 
-                    curr[1] = 0
-            else:
-                curr_tab = tables[as_map.index(col_split[0])]
-                rel_cols = [entry for entry in col_map[1:] if entry[2] == curr_tab] 
-                rel_cols_stripped = [entry[1] for entry in rel_cols] 
-                curr[1] = rel_cols[rel_cols_stripped.index(col_split[1])][0]
+                # get where col
+                col = where_clause[st:op_ind] #hopefully just 1 token
+                # print where_clause
+                # print curr_cond
+                # print where_clause
+                # print sql_counter, col, curr_cond
+                col_split = col[0].split('.')
 
-            # get where val
-            # print op_ind, curr_cond
-            # val_ind = op_ind
-            # if val_ind > 1:
-            #     val_ind -= 1 # account for the and in between conditions
-            val = curr_cond[op_ind - st + 1:] #hopefully just 1 token
-            # print val
-            if 'select' in val or subquery_flag: # if there's a subquery or aggregation
-                # print subquery_flag, val
-                # break
-                sql_counter += 1
-                new_pointer = 'sql' + str(sql_counter)
-                curr[3] = new_pointer
-                subquery = val
-                if subquery[0] == '(':
-                    subquery = subquery[1:-1]
-                parse_sql(cleaned_data, subquery, schema, dbn, sql_counter, new_pointer)
-            elif between_flag:
-                curr[3] = val
-            else:
-                curr[3] = ''.join(val)
+                if len(col_split) == 1:
+                    try:
+                        curr[1] = col_map[temp_map.index(col_split[0])][0] # doesn't handle operators (e.g. end_date-start_date)
+                    except: 
+                        curr[1] = 0
+                else:
+                    curr_tab = tables[as_map.index(col_split[0])]
+                    rel_cols = [entry for entry in col_map[1:] if entry[2] == curr_tab] 
+                    rel_cols_stripped = [entry[1] for entry in rel_cols] 
+                    curr[1] = rel_cols[rel_cols_stripped.index(col_split[1])][0]
 
-            conds += [curr]
+                # get where val
+                # print op_ind, curr_cond
+                # val_ind = op_ind
+                # if val_ind > 1:
+                #     val_ind -= 1 # account for the and in between conditions
+                val = curr_cond[op_ind - st + 1:] #hopefully just 1 token
+                # print val
+                if 'select' in val or subquery_flag: # if there's a subquery or aggregation
+                    # print subquery_flag, val
+                    # break
+                    sql_counter += 1
+                    new_pointer = 'sql' + str(sql_counter)
+                    curr[3] = new_pointer
+                    subquery = val
+                    if subquery[0] == '(':
+                        subquery = subquery[1:-1]
+                    parse_sql(cleaned_data, subquery, schema, dbn, sql_counter, new_pointer)
+                elif between_flag:
+                    curr[3] = val
+                else:
+                    curr[3] = ''.join(val)
+
+                conds += [curr]
     # print conds
     cleaned_data[pointer]['cond'] = conds
 
@@ -648,6 +666,7 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
         for word in extra_sql_keywords[2:]:
             if word in query_tok:
                 key_ind = query_tok.index(word)
+                break
 
         group_ind = query_tok.index('group')
 
@@ -657,6 +676,7 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
             group_clause = query_tok[group_ind + 2:]
 
         having_flag = False
+        # print 'group_clause', group_clause
         for col in group_clause:
             if col == 'having':
                 having_flag = True
@@ -687,6 +707,7 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
         for word in extra_sql_keywords[3:]:
             if word in query_tok:
                 key_ind = query_tok.index(word)
+                break
 
         order_ind = query_tok.index('order')
 
@@ -695,17 +716,25 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
         else:
             order_clause = query_tok[order_ind + 2:]
 
+        print 'order_clause', order_clause
         for col in order_clause:
+            if col == ',':
+                continue
+
+            agg_found = False
             for i, tok in enumerate(agg_toks):
                 if tok in order_clause:
                     order_agg_list.append(i + 1)
+                    agg_found = True
                     break
+            if agg_found:
+                break
             order_agg_list.append(0)
 
             if col == 'asc' or col == 'desc':
                 parity = 1 if col == 'asc' else 0
                 break
-                
+
             col_split = col.split('.')
             if len(col_split) == 1:
                 order_list.append(col_map[temp_map.index(col_split[0])][0])
@@ -746,3 +775,4 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
 
 if __name__ == '__main__':
     table_create()
+
