@@ -34,13 +34,13 @@ Find the name of the airports located in Cuba or Argentina.
 
 select name
 from airports
-where country = 'Cuba' or country = 'Argentina
+where country = 'Cuba' or country = 'Argentina'
 
-Find the country of the airlines whose name starts with ‘Orbit’. 
+Find the country of the airlines whose name starts with 'Orbit'. 
 
 select country
 from airlines
-where name LIKE '%Orbit%'
+where name LIKE 'Orbit%'
 
 Find the name of airports whose latitude is between -50 and 50.
 
@@ -67,7 +67,7 @@ select count(distinct city)
 from airports
 where country = 'Greenland'
 
-Find the routes operated by American Airlines.
+Find the number of routes operated by American Airlines.
 
 select count(*)
 from airlines as T1 join routes as T2 on T1.alid = T2.alid
@@ -93,7 +93,7 @@ from airports
 order by elevation desc
 limit 1
 
-Find the name and city of the airport where is the destination of the most number of routes.
+Find the name and city of the airport which is the destination of the most number of routes.
 
 select T1.name, T1.city, T2.dst_apid
 from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
@@ -109,22 +109,22 @@ group by T2.alid
 order by count(*) desc
 limit 10
 
-Find the name, city and country of the airport where is the source for the most number of flight routes.
+Find the name and city of the airport which is the source for the most number of flight routes.
 
 select T1.name, T1.city, T2.src_apid
 from airports as T1 join routes as T2 on T1.apid = T2.src_apid
-group by T2.src_apid 
+group by T2.src_apid
 order by count(*) desc
 limit 1
 
-Find the number of different airports where are the destinations of the American Airlines.
+Find the number of different airports which are the destinations of the American Airlines.
 
 select count(distinct dst_apid)
 from airlines as T1 join routes as T2 on T1.alid = T2.alid
 where T1.name = 'American Airlines'
 
 
-Which counties has the most number of airlines?
+Which countries has the most number of airlines?
 
 select country
 from airlines
@@ -132,7 +132,7 @@ group by country
 order by count(*) desc
 limit 1
 
-Which counties has the most number of airlines whose active status is 'Y'?
+Which countries has the most number of airlines whose active status is 'Y'?
 
 select country
 from airlines
@@ -171,7 +171,7 @@ where country = 'United States'
 group by city
 having count(*) > 3
 
-How many cities are there have more than 3 airports?
+How many cities are there haing more than 3 airports?
 
 select count(*)
 from 
@@ -180,14 +180,14 @@ from airports
 group by city
 having count(*) > 3)
 
-List the cities where have more than one airports and number of airports.
+List the cities which have more than one airports and number of airports.
 
 select city, count(*)
 from airports
 group by city
 having count(*) > 1
 
-List the cities where have more than 2 airports sorted by the number of airports.
+List the cities which have more than 2 airports sorted by the number of airports.
 
 select city
 from airports
@@ -215,7 +215,7 @@ select avg(elevation), country
 from airports
 group by country
 
-Find the cities where have exactly two airports.
+Find the cities which have exactly two airports.
 
 select city
 from airports
@@ -235,7 +235,7 @@ select count(*)
 from routes as T1 join airports as T2 on T1.dst_apid = T2.apid
 where T2.country = 'Italy'
 
-return routes with destination airport in Italy operated by the airline with name ‘American Airlines’.
+Return the number of routes with destination airport in Italy operated by the airline with name 'American Airlines'.
 
 select count(*)
 from routes as T1 
@@ -243,27 +243,29 @@ from routes as T1
      join airlines as T3 on T1.alid = T3.alid
 where T2.country = 'Italy' and T3.name = 'American Airlines'
 
-Find the number of routes that have as destination the John F Kennedy International Airport.
+Find the number of routes that have destination John F Kennedy International Airport.
 
 select count(*)
 from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
 where T1.name = 'John F Kennedy International Airport'
 
-Find the number of routes from the United States to Canada operated by American Airlines.
+Find the number of routes from the United States to Canada.
 
 select count(*)
 from routes 
 where dst_apid IN (select apid from airports where country = 'Canada') 
       and src_apid IN (select apid from airports where country = 'United States')
 
-Find the id of routes which source and destination airports are in the United States.
+Find the id of routes whose source and destination airports are in the United States.
 
 select rid
 from routes 
 where dst_apid IN (select apid from airports where country = 'United States') 
       and src_apid IN (select apid from airports where country = 'United States')
 
-Find the number of routes which source and destination airports are in different countries.
+Find the number of routes whose source and destination airports are in different countries.
+
+COMMENT: sql not correct?
 
 select count(*)
 from routes
@@ -283,7 +285,7 @@ Find the busiest source airport that runs most number of routes in China.
 select T1.name
 from airports as T1 join routes as T2 on T1.apid = T2.src_apid
 where T1.country = 'China'
-group by city
+group by T1.name
 order by count(*) desc
 limit 1
 
@@ -292,6 +294,6 @@ Find the busiest destination airport that runs most number of routes in China.
 select T1.name
 from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
 where T1.country = 'China'
-group by city
+group by T1.name
 order by count(*) desc
 limit 1
