@@ -1,0 +1,826 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "How many professors are in the accounting dept?"
+            ],
+            "question":" Find the number of professors in accounting department.",
+            "sql":[
+                "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE DEPT_NAME  =  \"Accounting\""
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "How many professors teach a class with the code ACCT-211?"
+            ],
+            "question":" How many professors are teaching class with code ACCT-211?",
+            "sql":[
+                "SELECT count(DISTINCT PROF_NUM) FROM CLASS WHERE CRS_CODE  =  \"ACCT-211\""
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "What are the first and last name of all biology professors?"
+            ],
+            "question":" What is the first and last name of the professor in biology department?",
+            "sql":[
+                "SELECT T3.EMP_FNAME ,  T3.EMP_LNAME FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code JOIN employee AS T3 ON T1.EMP_NUM  =  T3.EMP_NUM WHERE DEPT_NAME  =  \"Biology\""
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "What are the first names and birthdates of the professors in charge of ACCT-211?"
+            ],
+            "question":" What are the first names and date of birth of professors teaching course ACCT-211?",
+            "sql":[
+                "SELECT DISTINCT T1.EMP_FNAME ,  T1.EMP_DOB FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE CRS_CODE  =  \"ACCT-211\""
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "How many classes does the professor whose last name is Graztevski teach?"
+            ],
+            "question":" How many classes are professor whose last name is Graztevski has?",
+            "sql":[
+                "SELECT count(*) FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE T1.EMP_LNAME  =  'Graztevski'"
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "What is the school code of the accounting department?"
+            ],
+            "question":" What is the code of the school where the accounting department belongs to?",
+            "sql":[
+                "SELECT school_code FROM department WHERE dept_name  =  \"Accounting\""
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "What is the description for the CIS-220 and how many credits does it have?"
+            ],
+            "question":" How many credits does course CIS-220 have, and what its description?",
+            "sql":[
+                "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'CIS-220'"
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "Where is the history department?"
+            ],
+            "question":" what is the address of history department?",
+            "sql":[
+                "SELECT dept_address FROM department WHERE dept_name  =  'History'"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "What are the different locations of the school with the code BUS?"
+            ],
+            "question":" How many different locations does the school with code BUS has?",
+            "sql":[
+                "SELECT count(DISTINCT dept_address) FROM department WHERE school_code  =  'BUS'"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "Count different addresses of each school."
+            ],
+            "question":" How many different locations does each school have?",
+            "sql":[
+                "SELECT count(DISTINCT dept_address) ,  school_code FROM department GROUP BY school_code"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "What is the course description and number of credits for QM-261?"
+            ],
+            "question":" Find the description and credit for the course QM-261?",
+            "sql":[
+                "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'QM-261'"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "How many departments are in each school?"
+            ],
+            "question":" Find the number of departments in each school.",
+            "sql":[
+                "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "How many different departments are there in each school that has less than 5 apartments?"
+            ],
+            "question":" Find the number of different departments in each school whose number of different departments is less than 5.",
+            "sql":[
+                "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code HAVING count(DISTINCT dept_name)  <  5"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "How many sections does each course have?"
+            ],
+            "question":" How many sections does each course has?",
+            "sql":[
+                "SELECT count(*) ,  crs_code FROM CLASS GROUP BY crs_code"
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "How many credits does the department offer?"
+            ],
+            "question":" What is the total credit does each department offer?",
+            "sql":[
+                "SELECT sum(crs_credit) ,  dept_code FROM course GROUP BY dept_code"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "For each classroom with at least 2 classes, how many classes are offered?"
+            ],
+            "question":" Find the number of classes offered for all class rooms that held at least 2 classes.",
+            "sql":[
+                "SELECT count(*) ,  class_room FROM CLASS GROUP BY class_room HAVING count(*)  >=  2"
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "How many classes are held in each department?"
+            ],
+            "question":" Find the number of classes in each department.",
+            "sql":[
+                "SELECT count(*) ,  dept_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY dept_code"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "How many classes exist for each school?"
+            ],
+            "question":" Find the number of classes in each school.",
+            "sql":[
+                "SELECT count(*) ,  T3.school_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T2.dept_code  =  T3.dept_code GROUP BY T3.school_code"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "How many different professors are there for the different schools?"
+            ],
+            "question":" What is the number of professors for different school?",
+            "sql":[
+                "SELECT count(*) ,  T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "What is the count and code of the job with the most employee?"
+            ],
+            "question":" Find the count and code of the job has most employees.",
+            "sql":[
+                "SELECT emp_jobcode ,  count(*) FROM employee GROUP BY emp_jobcode ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "Which school has the fewest professors?"
+            ],
+            "question":" Which school has the smallest amount of professors?",
+            "sql":[
+                "SELECT T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code ORDER BY count(*) LIMIT 1"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "How many professors have a Ph.D. in each department?"
+            ],
+            "question":" Find the number of professors with a Ph.D. degree in each department.",
+            "sql":[
+                "SELECT count(*) ,  dept_code FROM professor WHERE prof_high_degree  =  'Ph.D.' GROUP BY dept_code"
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "How many students are in each department?"
+            ],
+            "question":" Find the number of students for each department.",
+            "sql":[
+                "SELECT count(*) ,  dept_code FROM student GROUP BY dept_code"
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "How many hours do the students spend studying in each department?"
+            ],
+            "question":" Find the total number of hours have done for all students in each department.",
+            "sql":[
+                "SELECT sum(stu_hrs) ,  dept_code FROM student GROUP BY dept_code"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "What is the highest, lowest, and average student GPA for every department?"
+            ],
+            "question":" Find the max, average, and minimum gpa of all students in each department.",
+            "sql":[
+                "SELECT max(stu_gpa) ,  avg(stu_gpa) ,  min(stu_gpa) ,  dept_code FROM student GROUP BY dept_code"
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "Which department has the highest average student GPA, and what is the average gpa?"
+            ],
+            "question":" What is the name and the average gpa of department whose students have the highest average gpa?",
+            "sql":[
+                "SELECT T2.dept_name ,  avg(T1.stu_gpa) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY avg(T1.stu_gpa) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "How many schools are there in the department?"
+            ],
+            "question":" how many schools exist in total?",
+            "sql":[
+                "SELECT count(DISTINCT school_code) FROM department"
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "How many unique classes are offered?"
+            ],
+            "question":" How many different classes are there?",
+            "sql":[
+                "SELECT count(DISTINCT class_code) FROM CLASS"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are the number of different course codes?"
+            ],
+            "question":" How many courses are offered?",
+            "sql":[
+                "SELECT count(DISTINCT crs_code) FROM CLASS"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "How many different departments are there?"
+            ],
+            "question":" How many departments does the college has?",
+            "sql":[
+                "SELECT count(DISTINCT dept_name) FROM department"
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "How many courses does the department of Computer Information Systmes offer?"
+            ],
+            "question":" How many courses are offered by the Computer Info. Systems department?",
+            "sql":[
+                "SELECT count(*) FROM department AS T1 JOIN course AS T2 ON T1.dept_code  =  T2.dept_code WHERE dept_name  =  \"Computer Info. Systems\""
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "What is the number of different class sections offered in the course ACCT-211?"
+            ],
+            "question":" How many sections does course ACCT-211 has?",
+            "sql":[
+                "SELECT count(DISTINCT class_section) FROM CLASS WHERE crs_code  =  'ACCT-211'"
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "What are the total number of credits offered by each department?"
+            ],
+            "question":" Find the total credits of all classes offered by each department.",
+            "sql":[
+                "SELECT sum(T1.crs_credit) ,  T1.dept_code FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY T1.dept_code"
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "Which department offers the most credits all together?"
+            ],
+            "question":" Find the name of the department that offers the largest number of credits of all classes.",
+            "sql":[
+                "SELECT T3.dept_name FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T1.dept_code  =  T3.dept_code GROUP BY T1.dept_code ORDER BY sum(T1.crs_credit) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "What are the total number of students enrolled in ACCT-211?"
+            ],
+            "question":" How many students enrolled in class ACCT-211?",
+            "sql":[
+                "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code WHERE T1.crs_code  =  'ACCT-211'"
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "What are the first names of all students in course ACCT-211?"
+            ],
+            "question":" What is the first name of each student enrolled in class ACCT-211?",
+            "sql":[
+                "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211'"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "What are the first names of all students who took ACCT-211 and received a C?"
+            ],
+            "question":" What is the first name of students enrolled in class ACCT-211 and got grade C?",
+            "sql":[
+                "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211' AND T2.enroll_grade  =  'C'"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "How many employees are there all together?"
+            ],
+            "question":" Find the total number of employees.",
+            "sql":[
+                "SELECT count(*) FROM employee"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "What is the total number of professors with a Ph.D. ?"
+            ],
+            "question":" How many professors do have a Ph.D. degree?",
+            "sql":[
+                "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.'"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "How many students are enrolled in some classes that are taught by an accounting professor?"
+            ],
+            "question":" How many students are enrolled in the class taught by some professor from the accounting department?",
+            "sql":[
+                "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code WHERE T4.dept_name  =  'Accounting'"
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What is the name of the department with the most students enrolled?"
+            ],
+            "question":" What is the name of the department that has the largest number of students enrolled?",
+            "sql":[
+                "SELECT T4.dept_name FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code GROUP BY T3.dept_code ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "What are the names of all departments in alphabetical order?"
+            ],
+            "question":" list names of all departments ordered by their names.",
+            "sql":[
+                "SELECT dept_name FROM department ORDER BY dept_name"
+            ]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "What are the codes of all the courses that are located in room KLR209?"
+            ],
+            "question":" List the codes of all courses that take place in room KLR209.",
+            "sql":[
+                "SELECT class_code FROM CLASS WHERE class_room  =  'KLR209'"
+            ]
+        },
+        {
+            "id":44,
+            "paraphrase":[
+                "What are the first names of all employees that are professors ordered by date of birth?"
+            ],
+            "question":" List the first name of all employees with job code PROF ordered by their date of birth.",
+            "sql":[
+                "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' ORDER BY emp_dob"
+            ]
+        },
+        {
+            "id":45,
+            "paraphrase":[
+                "What are the first names and office locations for all professors sorted alphabetically by first name?"
+            ],
+            "question":" Find the first names and offices of all professors sorted by alphabetical order of their first name.",
+            "sql":[
+                "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num ORDER BY T2.emp_fname"
+            ]
+        },
+        {
+            "id":46,
+            "paraphrase":[
+                "What are the first and last names of the employee with the earliest date of birth?"
+            ],
+            "question":" What is the first and last name of the oldest employee?",
+            "sql":[
+                "SELECT emp_fname ,  emp_lname FROM employee ORDER BY emp_dob LIMIT 1"
+            ]
+        },
+        {
+            "id":47,
+            "paraphrase":[
+                "What is the first and last name of the youngest student with a GPA above 3, and what is their GPA?"
+            ],
+            "question":" What is the first, last name, gpa of the youngest one among students whose GPA is above 3?",
+            "sql":[
+                "SELECT stu_fname ,  stu_lname ,  stu_gpa FROM student WHERE stu_gpa  >  3 ORDER BY stu_dob DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":48,
+            "paraphrase":[
+                "What are the first names of all students who got a grade C in a class?"
+            ],
+            "question":" What is the first name of students who got grade C in any class?",
+            "sql":[
+                "SELECT DISTINCT stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE enroll_grade  =  'C'"
+            ]
+        },
+        {
+            "id":49,
+            "paraphrase":[
+                "What is the name of the department with the fewest professors?"
+            ],
+            "question":" What is the name of department where has the smallest number of professors?",
+            "sql":[
+                "SELECT T2.dept_name FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) LIMIT 1"
+            ]
+        },
+        {
+            "id":50,
+            "paraphrase":[
+                "Which department has the most professors with a Ph.D.?"
+            ],
+            "question":" What is the name of department where has the largest number of professors with a Ph.D. degree?",
+            "sql":[
+                "SELECT T2.dept_name ,  T1.dept_code FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.prof_high_degree  =  'Ph.D.' GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":51,
+            "paraphrase":[
+                "What are the first names of all professors not teaching any classes?"
+            ],
+            "question":"  What are the first names of the professors who do not teach a class.",
+            "sql":[
+                "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+            ]
+        },
+        {
+            "id":52,
+            "paraphrase":[
+                "What are the first names of all history professors who do not teach?"
+            ],
+            "question":" What is the first names of the professors from the history department who do not teach a class.",
+            "sql":[
+                "SELECT T1.emp_fname FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+            ]
+        },
+        {
+            "id":53,
+            "paraphrase":[
+                "What are the last name and office of all history professors?"
+            ],
+            "question":" What is the last name and office of the professor from the history department?",
+            "sql":[
+                "SELECT T1.emp_lname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History'"
+            ]
+        },
+        {
+            "id":54,
+            "paraphrase":[
+                "What is the name of the department and office location for the professor with the last name of Heffington?"
+            ],
+            "question":" What is department name and office for the professor whose last name is Heffington?",
+            "sql":[
+                "SELECT T3.dept_name  ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T1.emp_lname  =  'Heffington'"
+            ]
+        },
+        {
+            "id":55,
+            "paraphrase":[
+                "What is the last name of the professor whose office is located in DRE 102, and when were they hired?"
+            ],
+            "question":" Find the last name and hire date of the professor who is in office DRE 102.",
+            "sql":[
+                "SELECT T1.emp_lname ,  T1.emp_hiredate FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num WHERE T2.prof_office  =  'DRE 102'"
+            ]
+        },
+        {
+            "id":56,
+            "paraphrase":[
+                "What are the course codes for every class that the student with the last name Smithson took?"
+            ],
+            "question":" What is the code of the course which the student whose last name is Smithson took?",
+            "sql":[
+                "SELECT T1.crs_code FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num WHERE T3.stu_lname  =  'Smithson'"
+            ]
+        },
+        {
+            "id":57,
+            "paraphrase":[
+                "How many credits is the course that the student with the last name Smithson took, and what is its description?"
+            ],
+            "question":" What are the description and credit of the course which the student whose last name is Smithson took?",
+            "sql":[
+                "SELECT T4.crs_description ,  T4.crs_credit FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num JOIN course AS T4 ON T4.crs_code  =  T1.crs_code WHERE T3.stu_lname  =  'Smithson'"
+            ]
+        },
+        {
+            "id":58,
+            "paraphrase":[
+                "How many professors attained either Ph.D. or Masters degrees?"
+            ],
+            "question":" How many professors who has a either Ph.D. or MA degree?",
+            "sql":[
+                "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.' OR prof_high_degree  =  'MA'"
+            ]
+        },
+        {
+            "id":59,
+            "paraphrase":[
+                "What is the number of professors who are in the Accounting or Biology departments?"
+            ],
+            "question":" How many professors who are from either Accounting or Biology department?",
+            "sql":[
+                "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T2.dept_name  =  'Accounting' OR T2.dept_name  =  'Biology'"
+            ]
+        },
+        {
+            "id":60,
+            "paraphrase":[
+                "What is the first name of the professor who is teaching CIS-220 and QM-261?"
+            ],
+            "question":" Find the first name of the professor who is teaching two courses with code CIS-220 and QM-261.",
+            "sql":[
+                "SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'CIS-220' INTERSECT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'QM-261'"
+            ]
+        },
+        {
+            "id":61,
+            "paraphrase":[
+                "What are the first names of all students taking accoutning and Computer Information Systems classes?"
+            ],
+            "question":" Find the first name of student who is taking classes from accounting and Computer Info. Systems departments",
+            "sql":[
+                "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Accounting' INTERSECT SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Computer Info. Systems'"
+            ]
+        },
+        {
+            "id":62,
+            "paraphrase":[
+                "What is the average GPA of students taking ACCT-211?"
+            ],
+            "question":" What is the average gpa of the students enrolled in the course with code ACCT-211?",
+            "sql":[
+                "SELECT avg(T2.stu_gpa) FROM enroll AS T1 JOIN student AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T1.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211'"
+            ]
+        },
+        {
+            "id":63,
+            "paraphrase":[
+                "What is the first name, GPA, and phone number of the students with the top 5 GPAs?"
+            ],
+            "question":" What is the first name, gpa and phone number of the top 5 students with highest gpa?",
+            "sql":[
+                "SELECT stu_gpa ,  stu_phone ,  stu_fname FROM student ORDER BY stu_gpa DESC LIMIT 5"
+            ]
+        },
+        {
+            "id":64,
+            "paraphrase":[
+                "What is the name of the department with the student that has the lowest GPA?"
+            ],
+            "question":" What is the department name of the students with lowest gpa belongs to?",
+            "sql":[
+                "SELECT T2.dept_name FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code ORDER BY stu_gpa LIMIT 1"
+            ]
+        },
+        {
+            "id":65,
+            "paraphrase":[
+                "What is the first name and GPA of every student that has a GPA lower than average?"
+            ],
+            "question":" Find the first name and gpa of the students whose gpa is lower than the average gpa of all students.",
+            "sql":[
+                "SELECT stu_fname ,  stu_gpa FROM student WHERE stu_gpa  <  (SELECT avg(stu_gpa) FROM student)"
+            ]
+        },
+        {
+            "id":66,
+            "paraphrase":[
+                "What is the name and address of the department with the most students?"
+            ],
+            "question":" Find the name and address of the department that has the highest number of students.",
+            "sql":[
+                "SELECT T2.dept_name ,  T2.dept_address FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":67,
+            "paraphrase":[
+                "What is the name, address, and number of students in the departments that have the 3 most students?"
+            ],
+            "question":" Find the name, address, number of students in the departments that have the top 3 highest number of students.",
+            "sql":[
+                "SELECT T2.dept_name ,  T2.dept_address ,  count(*) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 3"
+            ]
+        },
+        {
+            "id":68,
+            "paraphrase":[
+                "What are the first names and office of the professors who are in the history department and have a Ph.D?"
+            ],
+            "question":" Find the first name and office of the professor who is in the history department and has a Ph.D. degree.",
+            "sql":[
+                "SELECT T1.emp_fname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T3.dept_code  =  T2.dept_code WHERE T3.dept_name  =  'History' AND T2.prof_high_degree  =  'Ph.D.'"
+            ]
+        },
+        {
+            "id":69,
+            "paraphrase":[
+                "What are the first names of all teachers who have taught a course and the corresponding course codes?"
+            ],
+            "question":" Find the first names of all instructors who have taught some course and the course code.",
+            "sql":[
+                "SELECT T2.emp_fname ,  T1.crs_code FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num"
+            ]
+        },
+        {
+            "id":70,
+            "paraphrase":[
+                "What are the first names of all teachers who have taught a course and the corresponding descriptions?"
+            ],
+            "question":" Find the first names of all instructors who have taught some course and the course description.",
+            "sql":[
+                "SELECT T2.emp_fname ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code"
+            ]
+        },
+        {
+            "id":71,
+            "paraphrase":[
+                "What are the first names, office locations of all lecturers who have taught some course?"
+            ],
+            "question":" Find the first names and offices of all instructors who have taught some course and also find the course description.",
+            "sql":[
+                "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num"
+            ]
+        },
+        {
+            "id":72,
+            "paraphrase":[
+                "What are the first names, office locations, and departments of all instructors, and also what are the descriptions of the courses they teach?"
+            ],
+            "question":" Find the first names and offices of all instructors who have taught some course and the course description and the department name.",
+            "sql":[
+                "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description ,  T5.dept_name FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num JOIN department AS T5 ON T4.dept_code  =  T5.dept_code"
+            ]
+        },
+        {
+            "id":73,
+            "paraphrase":[
+                "What are the names of all students who took a class and the corresponding course descriptions?"
+            ],
+            "question":" Find names of all students who took some course and the course description.",
+            "sql":[
+                "SELECT T1.stu_fname ,  T1.stu_lname ,  T4.crs_description FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code"
+            ]
+        },
+        {
+            "id":74,
+            "paraphrase":[
+                "What are the names of all students taking a course who received an A or C?"
+            ],
+            "question":" Find names of all students who took some course and got A or C.",
+            "sql":[
+                "SELECT T1.stu_fname ,  T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'C' OR T2.enroll_grade  =  'A'"
+            ]
+        },
+        {
+            "id":75,
+            "paraphrase":[
+                "What are the first names of all Accounting professors who teach and what are the classrooms of the courses they teach?"
+            ],
+            "question":" Find the first names of all professors in the Accounting department who is teaching some course and the class room.",
+            "sql":[
+                "SELECT T2.emp_fname ,  T1.class_room FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Accounting'"
+            ]
+        },
+        {
+            "id":76,
+            "paraphrase":[
+                "What are the different first names and highest degree attained for professors teaching in the Computer Information Systems department?"
+            ],
+            "question":" Find the first names and degree of all professors who are teaching some class in Computer Info. Systems department.",
+            "sql":[
+                "SELECT DISTINCT T2.emp_fname ,  T3.prof_high_degree FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Computer Info. Systems'"
+            ]
+        },
+        {
+            "id":77,
+            "paraphrase":[
+                "What is the last name of the student who received an A in the class with the code 10018?"
+            ],
+            "question":" What is the last name of the student who got a grade A in the class with code 10018.",
+            "sql":[
+                "SELECT T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'A' AND T2.class_code  =  10018"
+            ]
+        },
+        {
+            "id":78,
+            "paraphrase":[
+                "What are the first names and offices of history professors who don't have Ph.D.s?"
+            ],
+            "question":" Find the first name and office of history professor who did not get a Ph.D. degree.",
+            "sql":[
+                "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T1.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' AND T1.prof_high_degree ! =  'Ph.D.'"
+            ]
+        },
+        {
+            "id":79,
+            "paraphrase":[
+                "What are the first names of all professors who teach more than one class?"
+            ],
+            "question":" Find the first names of professors who are teaching more than one class.",
+            "sql":[
+                "SELECT T2.emp_fname FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num GROUP BY T1.prof_num HAVING count(*)  >  1"
+            ]
+        },
+        {
+            "id":80,
+            "paraphrase":[
+                "What are the first names of student who only took one course?"
+            ],
+            "question":" Find the first names of students who took exactly one class.",
+            "sql":[
+                "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num GROUP BY T2.stu_num HAVING count(*)  =  1"
+            ]
+        },
+        {
+            "id":81,
+            "paraphrase":[
+                "What is the name of the department that offers a course that has a description including the word \"Statistics\"?"
+            ],
+            "question":" Find the name of department that offers the class whose description has the word \"Statistics\".",
+            "sql":[
+                "SELECT T2.dept_name FROM course AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.crs_description LIKE '%Statistics%'"
+            ]
+        },
+        {
+            "id":82,
+            "paraphrase":[
+                "What is the first name of the student whose last name starts with the letter S and is taking ACCT-211?"
+            ],
+            "question":" What is the first name of the student whose last name starting with the letter S and is taking ACCT-211 class?",
+            "sql":[
+                "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211' AND T1.stu_lname LIKE 'S%'"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

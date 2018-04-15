@@ -47,7 +47,7 @@ For training we could be trying the DB approaches (e.g. NaLIR), or neural networ
     - remove by first getting all the non-keywords from the SQL
     - then for each of these non-keyword, try to find something similar from the question and remove it
 - then we would be having a `(question skeleton, pattern)` pair for each training exmaple
-- label all these with value `1` (indicating that they are indeed a match), and produce some random mismatched question-query pairs and label them with `0`
+- label all these with value `1` (indicating that they are indeed a match), and produce some random mismatched question-query pairs and label them with `0` (or use the overlapping score between the correct and fake queries)
 - then we would be having a list of training examples in the form `(question skeleton, pattern, is_match)`, feed this into the NLI model
 - we don't match question skeleton with query skeleton directly due to the consideration of the amount of data, as in that way the amount of training data would be exponential to the number of training examples
 

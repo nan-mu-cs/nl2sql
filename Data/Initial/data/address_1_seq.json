@@ -1,0 +1,406 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "Count the number of cities."
+            ],
+            "question":" How many cities do we have?",
+            "sql":[
+                "SELECT count(*) FROM City"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "What are all the distinct states?"
+            ],
+            "question":" List all states.",
+            "sql":[
+                "SELECT DISTINCT state FROM City"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "Count the number of coutries."
+            ],
+            "question":" How many countries do we have?",
+            "sql":[
+                "SELECT count(DISTINCT country) FROM City"
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "What are the names, codes, states, and countries for all cities?"
+            ],
+            "question":" Show names, codes, states, countries for all cities.",
+            "sql":[
+                "SELECT city_name ,  city_code ,  state ,  country FROM City"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What latitude and longitude correspond to Baltimore?"
+            ],
+            "question":" What is the latitude and longitude for Baltimore?",
+            "sql":[
+                "SELECT latitude ,  longitude FROM City WHERE city_name  =  \"Baltimore\""
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "What are the names of all cities in PA?"
+            ],
+            "question":" Show names for all cities in state PA.",
+            "sql":[
+                "SELECT city_name FROM City WHERE state  =  \"PA\""
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "Count the number of cities in Canada."
+            ],
+            "question":" How many cities are in Canada?",
+            "sql":[
+                "SELECT count(*) FROM City WHERE country  =  \"CANADA\""
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "What are all the city names for cities in the USA, ordered by latitude?"
+            ],
+            "question":" Show names for all USA city ordered by latitude.",
+            "sql":[
+                "SELECT city_name FROM City WHERE country  =  \"USA\" ORDER BY latitude"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "How many cities are in each state?"
+            ],
+            "question":" Show all states and number of cities in each state.",
+            "sql":[
+                "SELECT state ,  count(*) FROM City GROUP BY state"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "How many cities are there in each country?"
+            ],
+            "question":" Show all countries and number of cities in each state.",
+            "sql":[
+                "SELECT country ,  count(*) FROM City GROUP BY country"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "Which states have at least two cities?"
+            ],
+            "question":" List all states with at least two cities.",
+            "sql":[
+                "SELECT state FROM City GROUP BY state HAVING count(*)  >=  2"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "Give the state that has the most cities."
+            ],
+            "question":" Which state has most number of cities?",
+            "sql":[
+                "SELECT state FROM City GROUP BY state ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "Give the country with the fewest number of cities."
+            ],
+            "question":" Which country has fewest number of cities?",
+            "sql":[
+                "SELECT country FROM City GROUP BY country ORDER BY count(*) ASC LIMIT 1"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What are the full names of students living in MD?"
+            ],
+            "question":" Show the first name and the last name for students living in state MD.",
+            "sql":[
+                "SELECT T2.Fname ,  T2.Lname FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code WHERE T1.state  =  \"MD\""
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "Count the number of students living in China."
+            ],
+            "question":" How many students live in China?",
+            "sql":[
+                "SELECT count(*) FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code WHERE T1.country  =  \"CHINA\""
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "What are the first names and majors of students living in Baltimore?"
+            ],
+            "question":" Return the first name and major of students are living in Baltimore?",
+            "sql":[
+                "SELECT T2.Fname ,  T2.Major FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code WHERE T1.city_name  =  \"Baltimore\""
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "How many students live in each country?"
+            ],
+            "question":" Show the number of students living in each country.",
+            "sql":[
+                "SELECT T1.country ,  count(*) FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code GROUP BY T1.country"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "How many students live in each city?"
+            ],
+            "question":" Find the number of students living in each city.",
+            "sql":[
+                "SELECT T1.city_name ,  count(*) FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code GROUP BY T1.city_code"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "Give the state that has the most students."
+            ],
+            "question":" Which state has most number of students?",
+            "sql":[
+                "SELECT T1.state FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code GROUP BY T1.state ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "Give the country with the fewest students."
+            ],
+            "question":" Which country has least number of students?",
+            "sql":[
+                "SELECT T1.country FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code GROUP BY T1.country ORDER BY count(*) LIMIT 1"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "What are the names of cities with at least three students?"
+            ],
+            "question":" Show names for all cities where at least three students live.",
+            "sql":[
+                "SELECT T1.city_name FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code GROUP BY T1.city_code HAVING count(*)  >=  3"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "What are the states with more than 5 students?"
+            ],
+            "question":" Show all states where more than 5 students live.",
+            "sql":[
+                "SELECT T1.state FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code GROUP BY T1.state HAVING count(*)  >  5"
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "What the the student ids for students not living in the USA?"
+            ],
+            "question":" Show ids for all students who don't live in USA.",
+            "sql":[
+                "SELECT StuID FROM Student EXCEPT SELECT StuID FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code WHERE country  =  \"USA\""
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "What are the student ids for female students in the state of PA?"
+            ],
+            "question":" Show ids for all female (sex is F) students living in state PA.",
+            "sql":[
+                "SELECT StuID FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code WHERE T1.state  =  \"PA\"  AND T2.sex  =  'F'"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "What are the ids for male students not in the USA?"
+            ],
+            "question":" Show ids for all male students living outside of USA.",
+            "sql":[
+                "SELECT StuID FROM City AS T1 JOIN Student AS T2 ON T1.city_code  =  T2.city_code WHERE T2.sex  =  'M' AND T1.country ! =  \"USA\""
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "Give the distance between BAL and CHI?"
+            ],
+            "question":" What is the distance between BAL and CHI?",
+            "sql":[
+                "SELECT distance FROM Direct_distance WHERE city1_code  =  \"BAL\" AND city2_code  =  \"CHI\""
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "What is the distance between Boston and Newark?"
+            ],
+            "question":" Show me the distance between Boston and Newark.",
+            "sql":[
+                "SELECT distance FROM Direct_distance AS T1 JOIN City AS T2 ON T1.city1_code  =  T2.city_code JOIN City AS T3 ON T1.city2_code  =  T3.city_code WHERE T2.city_name  =  \"Boston\" AND T3.city_name  =  \"Newark\""
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "Give the average, minimum, and maximum distances between two cities."
+            ],
+            "question":" What is the average, minimum, maximum distance between two cities?",
+            "sql":[
+                "SELECT avg(distance) ,  min(distance) ,  max(distance) FROM Direct_distance"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are the city codes of the cities with the maximum distance?"
+            ],
+            "question":" Show me the city code of two cities with maximum distance.",
+            "sql":[
+                "SELECT city1_code ,  city2_code FROM Direct_distance ORDER BY distance DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "What are the city codes of cities with distance greater than average?"
+            ],
+            "question":" Show me the city code of two cities with a distance greater than the average.",
+            "sql":[
+                "SELECT city1_code ,  city2_code FROM Direct_distance WHERE distance  >  (SELECT avg(distance) FROM Direct_distance)"
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "What are the city codes corresponding to cities with distances less than 1000?"
+            ],
+            "question":" Show me the city code of two cities with a distance less than 1000.",
+            "sql":[
+                "SELECT city1_code ,  city2_code FROM Direct_distance WHERE distance  <  1000"
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "What is the sum of distances between BAL and other cities?"
+            ],
+            "question":" What is the total distance between city BAL and all other cities.",
+            "sql":[
+                "SELECT sum(distance) FROM Direct_distance WHERE city1_code  =  \"BAL\""
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "Give the average distance between Boston and other cities."
+            ],
+            "question":" What is the average distance between Boston and all other cities.",
+            "sql":[
+                "SELECT avg(distance) FROM Direct_distance AS T1 JOIN City AS T2 ON T1.city1_code  =  T2.city_code WHERE T2.city_name  =  \"Boston\""
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "Give the name of the nearest city to Chicago."
+            ],
+            "question":" What is the name of the city closest to Chicago?",
+            "sql":[
+                "SELECT T3.city_name FROM Direct_distance AS T1 JOIN City AS T2 ON T1.city1_code  =  T2.city_code JOIN City AS T3 ON T1.city2_code  =  T3.city_code WHERE T2.city_name  =  \"Chicago\" ORDER BY distance LIMIT 1"
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "Give the city name of the city with greatest distance from Boston."
+            ],
+            "question":" What is the name of the city furthest to Boston?",
+            "sql":[
+                "SELECT T3.city_name FROM Direct_distance AS T1 JOIN City AS T2 ON T1.city1_code  =  T2.city_code JOIN City AS T3 ON T1.city2_code  =  T3.city_code WHERE T2.city_name  =  \"Boston\" ORDER BY distance DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "For each city, what is the the city code and sum of distances from each?"
+            ],
+            "question":" Show all city codes and the total distance to all other cities.",
+            "sql":[
+                "SELECT city1_code ,  sum(distance) FROM Direct_distance GROUP BY city1_code"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "What are the city name and average distances from each city?"
+            ],
+            "question":" Show all city names and the average distance to all other cities.",
+            "sql":[
+                "SELECT T2.city_name ,  avg(distance) FROM Direct_distance AS T1 JOIN City AS T2 ON T1.city1_code  =  T2.city_code GROUP BY T1.city1_code"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "What is the distance between the cities where Linda Smith and Tracy Kim live?"
+            ],
+            "question":" How far do Linda (first name) Smith (last name) and Tracy (first name) Kim (last name) live?",
+            "sql":[
+                "SELECT distance FROM Direct_distance AS T1 JOIN Student AS T2 ON T1.city1_code  =  T2.city_code JOIN Student AS T3 ON T1.city2_code  =  T3.city_code WHERE T2.Fname  =  \"Linda\" AND T2.Lname  =  \"Smith\" AND T3.Fname  =  \"Tracy\" AND T3.Lname  =  \"Kim\""
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "What is the full name of the student who lives furthest from Linda Smith?"
+            ],
+            "question":" What is the first name and last name of the student living furthest to Linda Smith?",
+            "sql":[
+                "SELECT T3.Fname ,  T3.Lname FROM Direct_distance AS T1 JOIN Student AS T2 ON T1.city1_code  =  T2.city_code JOIN Student AS T3 ON T1.city2_code  =  T3.city_code WHERE T2.Fname  =  \"Linda\" AND T2.Lname  =  \"Smith\" ORDER BY distance DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "Give the state that the student with first name Linda lives in."
+            ],
+            "question":" Which state does the student whose first name is Linda live in?",
+            "sql":[
+                "SELECT state FROM Student AS T1 JOIN City AS T2 ON T1.city_code  =  T2.city_code WHERE T1.Fname  =  \"Linda\""
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

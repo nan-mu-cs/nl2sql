@@ -1,0 +1,1028 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "How many allergy entries are there?"
+            ],
+            "question":" How many allergies are there?",
+            "sqa":{
+                "question":[
+                    "What are the different allergies?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT allergy FROM Allergy_type",
+                    "SELECT count(DISTINCT allergy) FROM Allergy_type"
+                ]
+            },
+            "sql":[
+                "SELECT count(DISTINCT allergy) FROM Allergy_type"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "How many distinct allergies are there?"
+            ],
+            "question":" How many different allergy types exist?",
+            "sqa":{
+                "question":[
+                    "What are the different types of allergies?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT allergytype FROM Allergy_type",
+                    "SELECT count(DISTINCT allergytype) FROM Allergy_type"
+                ]
+            },
+            "sql":[
+                "SELECT count(DISTINCT allergytype) FROM Allergy_type"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "What are the different allergy types?"
+            ],
+            "question":" Show all allergy types.",
+            "sqa":{
+                "question":[
+                    "Show all allergy information.",
+                    "What are the different allergy types?"
+                ],
+                "sql":[
+                    "SELECT * FROM Allergy_type",
+                    "SELECT DISTINCT allergytype FROM Allergy_type"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT allergytype FROM Allergy_type"
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "What are the allergies and their types?"
+            ],
+            "question":" Show all allergies and their types.",
+            "sqa":{
+                "question":[
+                    "What are the allergies?",
+                    "What type is each one?"
+                ],
+                "sql":[
+                    "SELECT allergy FROM Allergy_type",
+                    "SELECT allergy ,  allergytype FROM Allergy_type"
+                ]
+            },
+            "sql":[
+                "SELECT allergy ,  allergytype FROM Allergy_type"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What are all the different food allergies?"
+            ],
+            "question":" Show all allergies with type food.",
+            "sqa":{
+                "question":[
+                    "What are all the different allergy names?",
+                    "Which of those are food-related?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT allergy FROM Allergy_type",
+                    "SELECT DISTINCT allergy FROM Allergy_type WHERE allergytype  =  \"food\""
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT allergy FROM Allergy_type WHERE allergytype  =  \"food\""
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "What is allergy type of a cat allergy?"
+            ],
+            "question":" What is the type of allergy Cat?",
+            "sqa":{
+                "question":[
+                    "What are the different types of allergies?",
+                    "Which one is a cat allergy?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT allergytype FROM Allergy_type",
+                    "SELECT allergytype FROM Allergy_type WHERE allergy  =  \"Cat\""
+                ]
+            },
+            "sql":[
+                "SELECT allergytype FROM Allergy_type WHERE allergy  =  \"Cat\""
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "How many animal type allergies exist?"
+            ],
+            "question":" How many allergies have type animal?",
+            "sqa":{
+                "question":[
+                    "What are all the allergies?",
+                    "Which allergies are categorized as type animal?",
+                    "How many are there in that category?"
+                ],
+                "sql":[
+                    "SELECT allergy FROM Allergy_type",
+                    "SELECT allergy FROM Allergy_type WHERE allergytype  =  \"animal\"",
+                    "SELECT count(*) FROM Allergy_type WHERE allergytype  =  \"animal\""
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Allergy_type WHERE allergytype  =  \"animal\""
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "What are the allergy types and how many allergies correspond to each one?"
+            ],
+            "question":" Show all allergy types and the number of allergies in each type.",
+            "sqa":{
+                "question":[
+                    "What are the different allergy types?",
+                    "How many are in each category?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT allergytype FROM Allergy_type",
+                    "SELECT allergytype ,  count(*) FROM Allergy_type GROUP BY allergytype"
+                ]
+            },
+            "sql":[
+                "SELECT allergytype ,  count(*) FROM Allergy_type GROUP BY allergytype"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "Which allergy type is most common?"
+            ],
+            "question":" Which allergy type has most number of allergies?",
+            "sqa":{
+                "question":[
+                    "What are all the different allergy types?",
+                    "Order them by number of allergies descendingly.",
+                    "Which one has the most?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT allergytype FROM Allergy_type",
+                    "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) DESC",
+                    "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "Which allergy type is the least common?"
+            ],
+            "question":" Which allergy type has least number of allergies?",
+            "sqa":{
+                "question":[
+                    "How many allergies exist for each allergy type?",
+                    "Which one has the fewest?"
+                ],
+                "sql":[
+                    "SELECT count(*) ,  allergytype FROM Allergy_type GROUP BY allergytype",
+                    "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) ASC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) ASC LIMIT 1"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "What is the total number of students?"
+            ],
+            "question":" How many students are there?",
+            "sqa":{
+                "question":[
+                    "Who are all the students?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student",
+                    "SELECT count(*) FROM Student"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Student"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "What are the full names of all students"
+            ],
+            "question":" Show first name and last name for all students.",
+            "sqa":{
+                "question":[
+                    "Who are all the students?",
+                    "What are their first names?",
+                    "And what about their last names?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student",
+                    "SELECT Fname FROM Student",
+                    "SELECT Lname FROM Student"
+                ]
+            },
+            "sql":[
+                "SELECT Fname ,  Lname FROM Student"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "How many advisors are there?"
+            ],
+            "question":" How many different advisors are listed?",
+            "sqa":{
+                "question":[
+                    "Who are the students?",
+                    "Who are the distinct advisors?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student",
+                    "SELECT DISTINCT advisor FROM Student",
+                    "SELECT count(DISTINCT advisor) FROM Student"
+                ]
+            },
+            "sql":[
+                "SELECT count(DISTINCT advisor) FROM Student"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What are the different majors?"
+            ],
+            "question":" Show all majors.",
+            "sqa":{
+                "question":[
+                    "Who are the students?",
+                    "What are their distinct majors?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student",
+                    "SELECT DISTINCT Major FROM Student"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT Major FROM Student"
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "What cities do students live in?"
+            ],
+            "question":" Show all cities where students live.",
+            "sqa":{
+                "question":[
+                    "Who are the students?",
+                    "What distinct cities are they from?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student",
+                    "SELECT DISTINCT city_code FROM Student"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT city_code FROM Student"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "What are the full names and ages for all female students whose sex is F?"
+            ],
+            "question":" Show first name, last name, age for all female students. Their sex is F.",
+            "sqa":{
+                "question":[
+                    "Who are the female students?",
+                    "What are their full names?",
+                    "How old are they?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE Sex  =  'F'",
+                    "SELECT Fname ,  Lname FROM Student WHERE Sex  =  'F'",
+                    "SELECT Age FROM Student WHERE Sex  =  'F'"
+                ]
+            },
+            "sql":[
+                "SELECT Fname ,  Lname ,  Age FROM Student WHERE Sex  =  'F'"
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "What are the student ids for all male students?"
+            ],
+            "question":" Show student ids for all male students.",
+            "sqa":{
+                "question":[
+                    "Which students are male?",
+                    "What are their student id numbers?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE Sex  =  'M'",
+                    "SELECT StuID FROM Student WHERE Sex  =  'M'"
+                ]
+            },
+            "sql":[
+                "SELECT StuID FROM Student WHERE Sex  =  'M'"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "How many students are 18 years old?"
+            ],
+            "question":" How many students are age 18?",
+            "sqa":{
+                "question":[
+                    "Which students are 18?",
+                    "How many are there in total?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE age  =  18",
+                    "SELECT count(*) FROM Student WHERE age  =  18"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Student WHERE age  =  18"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "What are the student ids for students over 20 years old?"
+            ],
+            "question":" Show all student ids who are older than 20.",
+            "sqa":{
+                "question":[
+                    "Who is older than 20?",
+                    "What are their student ids?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE age  >  20",
+                    "SELECT StuID FROM Student WHERE age  >  20"
+                ]
+            },
+            "sql":[
+                "SELECT StuID FROM Student WHERE age  >  20"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "Give the city that the student whose family name is Kim lives in."
+            ],
+            "question":" Which city does the student whose last name is \"Kim\" live in?",
+            "sqa":{
+                "question":[
+                    "Which student has the last name Kim?",
+                    "Where does she or he live?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE LName  =  \"Kim\"",
+                    "SELECT city_code FROM Student WHERE LName  =  \"Kim\""
+                ]
+            },
+            "sql":[
+                "SELECT city_code FROM Student WHERE LName  =  \"Kim\""
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "Who advises student 1004?"
+            ],
+            "question":" Who is the advisor of student with ID 1004?",
+            "sqa":{
+                "question":[
+                    "Who's student id is 1004?",
+                    "Who is her advisor?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE StuID  =  1004",
+                    "SELECT Advisor FROM Student WHERE StuID  =  1004"
+                ]
+            },
+            "sql":[
+                "SELECT Advisor FROM Student WHERE StuID  =  1004"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "Give the number of students living in either HKG or CHI."
+            ],
+            "question":" How many students live in HKG or CHI?",
+            "sqa":{
+                "question":[
+                    "Who lives in HKG or CHI?",
+                    "How many is that?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE city_code  =  \"HKG\" OR city_code  =  \"CHI\"",
+                    "SELECT count(*) FROM Student WHERE city_code  =  \"HKG\" OR city_code  =  \"CHI\""
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Student WHERE city_code  =  \"HKG\" OR city_code  =  \"CHI\""
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "What is the minimum, mean, and maximum age across all students?"
+            ],
+            "question":" Show the minimum, average, and maximum age of all students.",
+            "sqa":{
+                "question":[
+                    "How old is the youngest student?",
+                    "What about the eldest?",
+                    "What is the average age?"
+                ],
+                "sql":[
+                    "SELECT min(age) FROM Student",
+                    "SELECT max(age) FROM Student",
+                    "SELECT avg(age) FROM Student"
+                ]
+            },
+            "sql":[
+                "SELECT min(age) ,  avg(age) ,  max(age) FROM Student"
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "Provide the last name of the youngest student."
+            ],
+            "question":" What is the last name of the youngest student?",
+            "sqa":{
+                "question":[
+                    "What is the minimum age of the students?",
+                    "Who is the youngest student?",
+                    "What is his last name?"
+                ],
+                "sql":[
+                    "SELECT min(age) FROM Student",
+                    "SELECT * FROM Student WHERE age  =  (SELECT min(age) FROM Student)",
+                    "SELECT LName FROM Student WHERE age  =  (SELECT min(age) FROM Student)"
+                ]
+            },
+            "sql":[
+                "SELECT LName FROM Student WHERE age  =  (SELECT min(age) FROM Student)"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "What student id corresponds to the oldest student?"
+            ],
+            "question":" Show the student id of the oldest student.",
+            "sqa":{
+                "question":[
+                    "Who is the oldest student?",
+                    "What is their id?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE age  =  (SELECT max(age) FROM Student)",
+                    "SELECT StuID FROM Student WHERE age  =  (SELECT max(age) FROM Student)"
+                ]
+            },
+            "sql":[
+                "SELECT StuID FROM Student WHERE age  =  (SELECT max(age) FROM Student)"
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "How many students are there for each major?"
+            ],
+            "question":" Show all majors and corresponding number of students.",
+            "sqa":{
+                "question":[
+                    "What are the different majors?",
+                    "How many students are studying each subject?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT major FROM Student",
+                    "SELECT major ,  count(*) FROM Student GROUP BY major"
+                ]
+            },
+            "sql":[
+                "SELECT major ,  count(*) FROM Student GROUP BY major"
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "What is the largest major?"
+            ],
+            "question":" Which major has most number of students?",
+            "sqa":{
+                "question":[
+                    "What are the different majors?",
+                    "How many students does each major has?",
+                    "Which one has the most students?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT major FROM Student",
+                    "SELECT major ,  count(*) FROM Student GROUP BY major",
+                    "SELECT major FROM Student GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT major FROM Student GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "How old is each student and how many students are each age?"
+            ],
+            "question":" Show all ages and corresponding number of students.",
+            "sqa":{
+                "question":[
+                    "What are the different student ages?",
+                    "How many students are each age?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT age FROM Student",
+                    "SELECT age ,  count(*) FROM Student GROUP BY age"
+                ]
+            },
+            "sql":[
+                "SELECT age ,  count(*) FROM Student GROUP BY age"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are the average ages for male and female students?"
+            ],
+            "question":" Show the average age for male and female students.",
+            "sqa":{
+                "question":[
+                    "What are the different sex categories for students?",
+                    "How many are there for each category?",
+                    "What is the average age for each category?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT sex FROM Student",
+                    "SELECT count(*) ,  sex FROM Student GROUP BY sex",
+                    "SELECT avg(age) ,  sex FROM Student GROUP BY sex"
+                ]
+            },
+            "sql":[
+                "SELECT avg(age) ,  sex FROM Student GROUP BY sex"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "How many students live in each city?"
+            ],
+            "question":" Show all cities and corresponding number of students.",
+            "sqa":{
+                "question":[
+                    "What are the different cities that students live in?",
+                    "How many students are from each one?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT city_code FROM Student",
+                    "SELECT city_code ,  count(*) FROM Student GROUP BY city_code"
+                ]
+            },
+            "sql":[
+                "SELECT city_code ,  count(*) FROM Student GROUP BY city_code"
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "How many students does each advisor have?"
+            ],
+            "question":" Show all advisors and corresponding number of students.",
+            "sqa":{
+                "question":[
+                    "Who are the different advisors?",
+                    "How many students does each one have?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT advisor FROM Student",
+                    "SELECT advisor ,  count(*) FROM Student GROUP BY advisor"
+                ]
+            },
+            "sql":[
+                "SELECT advisor ,  count(*) FROM Student GROUP BY advisor"
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "Give the advisor with the most students."
+            ],
+            "question":" Which advisor has most number of students?",
+            "sqa":{
+                "question":[
+                    "Who are the advisors of the students?",
+                    "Order the advisors by the number of students they have.",
+                    "Who has the most?"
+                ],
+                "sql":[
+                    "SELECT advisor FROM Student",
+                    "SELECT advisor FROM Student GROUP BY advisor ORDER BY count(*)",
+                    "SELECT advisor FROM Student GROUP BY advisor ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT advisor FROM Student GROUP BY advisor ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "How many students are affected by cat allergies?"
+            ],
+            "question":" How many students have cat allergies?",
+            "sqa":{
+                "question":[
+                    "Who have allergies?",
+                    "Who has a cat allergy?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT * FROM Has_allergy",
+                    "SELECT * FROM Has_allergy WHERE Allergy  =  \"Cat\"",
+                    "SELECT count(*) FROM Has_allergy WHERE Allergy  =  \"Cat\""
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Has_allergy WHERE Allergy  =  \"Cat\""
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "What are the students ids of students who have more than one allergy?"
+            ],
+            "question":" Show all student IDs who have at least two allergies.",
+            "sqa":{
+                "question":[
+                    "Who has at least two allergies?",
+                    "What are their ids?"
+                ],
+                "sql":[
+                    "SELECT * FROM Has_allergy GROUP BY StuID HAVING count(*)  >=  2",
+                    "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING count(*)  >=  2"
+                ]
+            },
+            "sql":[
+                "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING count(*)  >=  2"
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "Which students are unaffected by allergies?"
+            ],
+            "question":" What are the student ids of students who don't have any allergies?",
+            "sqa":{
+                "question":[
+                    "What are all the student ids?",
+                    "Of these, which students ids correspond to students without allergies?"
+                ],
+                "sql":[
+                    "SELECT StuID FROM Student",
+                    "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Has_allergy"
+                ]
+            },
+            "sql":[
+                "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Has_allergy"
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "How many students who are female are allergic to milk or eggs?"
+            ],
+            "question":" How many female students have milk or egg allergies?",
+            "sqa":{
+                "question":[
+                    "How many studnets are allergic to milk?",
+                    "How many are allergic to that or to eggs?",
+                    "Of those, how many are female?"
+                ],
+                "sql":[
+                    "SELECT count(*) FROM has_allergy AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T1.allergy  =  \"Milk\"",
+                    "SELECT count(*) FROM has_allergy AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE (T1.allergy  =  \"Milk\" OR T1.allergy  =  \"Eggs\")",
+                    "SELECT count(*) FROM has_allergy AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.sex  =  \"F\" AND (T1.allergy  =  \"Milk\" OR T1.allergy  =  \"Eggs\")"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM has_allergy AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.sex  =  \"F\" AND (T1.allergy  =  \"Milk\" OR T1.allergy  =  \"Eggs\")"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "How many students are affected by food related allergies?"
+            ],
+            "question":" How many students have a food allergy?",
+            "sqa":{
+                "question":[
+                    "How many allergy cases are there?",
+                    "Of those, for how many is it a food allergy?"
+                ],
+                "sql":[
+                    "SELECT count(*) FROM Has_allergy",
+                    "SELECT count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy WHERE T2.allergytype  =  \"food\""
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy WHERE T2.allergytype  =  \"food\""
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "Which allergy is the most common?"
+            ],
+            "question":" Which allergy has most number of students affected?",
+            "sqa":{
+                "question":[
+                    "What are the different allergies?",
+                    "Which one has the most students affected?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT Allergy FROM Has_allergy",
+                    "SELECT Allergy FROM Has_allergy GROUP BY Allergy ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT Allergy FROM Has_allergy GROUP BY Allergy ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "How many students have each different allergy?"
+            ],
+            "question":" Show all allergies with number of students affected.",
+            "sqa":{
+                "question":[
+                    "What are all the different allergies?",
+                    "How many students does each of them affect?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT Allergy FROM Has_allergy",
+                    "SELECT Allergy ,  count(*) FROM Has_allergy GROUP BY Allergy"
+                ]
+            },
+            "sql":[
+                "SELECT Allergy ,  count(*) FROM Has_allergy GROUP BY Allergy"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "How many students are affected by each allergy type?"
+            ],
+            "question":" Show all allergy type with number of students affected.",
+            "sqa":{
+                "question":[
+                    "What are the different allergy types?",
+                    "For each, how many students does it affect?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT allergytype FROM Allergy_type",
+                    "SELECT T2.allergytype ,  count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy GROUP BY T2.allergytype"
+                ]
+            },
+            "sql":[
+                "SELECT T2.allergytype ,  count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy GROUP BY T2.allergytype"
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What are the last names and ages of the students who are allergic to milk and cat?"
+            ],
+            "question":" Find the last name and age of the student who has allergy to both milk and cat.",
+            "sqa":{
+                "question":[
+                    "What are student ids who are allergic to milk?",
+                    "Of these, who also have allergy to cat?",
+                    "List their last name and age."
+                ],
+                "sql":[
+                    "SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\"",
+                    "SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" INTERSECT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\"",
+                    "SELECT lname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" INTERSECT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+                ]
+            },
+            "sql":[
+                "SELECT lname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" INTERSECT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "What are the allergies the girl named Lisa has? And what are the types of them? Order the result by allergy names."
+            ],
+            "question":" What are the allergies and their types that the student with first name Lisa has? And order the result by name of allergies.",
+            "sqa":{
+                "question":[
+                    "What is the girl with first name Lisa allergic to?",
+                    "What type is each allergy?",
+                    "Order them by the name of allergies."
+                ],
+                "sql":[
+                    "SELECT T1.Allergy FROM Allergy_type AS T1 JOIN Has_allergy AS T2 ON T1.Allergy  =  T2.Allergy JOIN Student AS T3 ON T3.StuID  =  T2.StuID WHERE T3.Fname  =  \"Lisa\"",
+                    "SELECT T1.Allergy ,  T1.AllergyType FROM Allergy_type AS T1 JOIN Has_allergy AS T2 ON T1.Allergy  =  T2.Allergy JOIN Student AS T3 ON T3.StuID  =  T2.StuID WHERE T3.Fname  =  \"Lisa\"",
+                    "SELECT T1.Allergy ,  T1.AllergyType FROM Allergy_type AS T1 JOIN Has_allergy AS T2 ON T1.Allergy  =  T2.Allergy JOIN Student AS T3 ON T3.StuID  =  T2.StuID WHERE T3.Fname  =  \"Lisa\" ORDER BY T1.Allergy"
+                ]
+            },
+            "sql":[
+                "SELECT T1.Allergy ,  T1.AllergyType FROM Allergy_type AS T1 JOIN Has_allergy AS T2 ON T1.Allergy  =  T2.Allergy JOIN Student AS T3 ON T3.StuID  =  T2.StuID WHERE T3.Fname  =  \"Lisa\" ORDER BY T1.Allergy"
+            ]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "What are the first name and gender of the students who have allergy to milk but can put up with cats?"
+            ],
+            "question":" Find the first name and gender of the student who has allergy to milk but not cat.",
+            "sqa":{
+                "question":[
+                    "Which students are allergic to cats?",
+                    "Which students are not?",
+                    "Of these, list the first name and sex of students who are allergic to milk."
+                ],
+                "sql":[
+                    "SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\"",
+                    "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\"",
+                    "SELECT fname ,  sex FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" EXCEPT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+                ]
+            },
+            "sql":[
+                "SELECT fname ,  sex FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" EXCEPT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+            ]
+        },
+        {
+            "id":44,
+            "paraphrase":[
+                "How old are the students with allergies to food and animal types on average?"
+            ],
+            "question":" Find the average age of the students who have allergies with food and animal types.",
+            "sqa":{
+                "question":[
+                    "Which students have allergies to food type?",
+                    "Which of them have also have allergies to animal type?",
+                    "Find the average age of them."
+                ],
+                "sql":[
+                    "SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\"",
+                    "SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" INTERSECT SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"animal\"",
+                    "SELECT avg(age) FROM Student WHERE StuID IN ( SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" INTERSECT SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"animal\")"
+                ]
+            },
+            "sql":[
+                "SELECT avg(age) FROM Student WHERE StuID IN ( SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" INTERSECT SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"animal\")"
+            ]
+        },
+        {
+            "id":45,
+            "paraphrase":[
+                "What is the full name of each student who is not allergic to any type of food."
+            ],
+            "question":" List the first and last name of the students who do not have any food type allergy.",
+            "sqa":{
+                "question":[
+                    "What are the first and last name of all the students?",
+                    "Of them, who are allergic to any type of food?",
+                    "And who are not?"
+                ],
+                "sql":[
+                    "SELECT fname ,  lname FROM Student",
+                    "SELECT DISTINCT T3.fname ,  T3.lname FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy JOIN Student AS T3 ON T1.StuID  =  T3.StuID WHERE T2.allergytype  =  \"food\"",
+                    "SELECT fname ,  lname FROM Student WHERE StuID NOT IN (SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+                ]
+            },
+            "sql":[
+                "SELECT fname ,  lname FROM Student WHERE StuID NOT IN (SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+            ]
+        },
+        {
+            "id":46,
+            "paraphrase":[
+                "How many male students (sex is 'M') are allergic to any type of food?"
+            ],
+            "question":" Find the number of male (sex is 'M') students who have some food type allery.",
+            "sqa":{
+                "question":[
+                    "Who are all the male students?",
+                    "Of these, who have allergies to food type?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE sex  =  'M'",
+                    "SELECT * FROM Student WHERE sex  =  \"M\" AND StuID IN (SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")",
+                    "SELECT count(*) FROM Student WHERE sex  =  \"M\" AND StuID IN (SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Student WHERE sex  =  \"M\" AND StuID IN (SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+            ]
+        },
+        {
+            "id":47,
+            "paraphrase":[
+                "What are the distinct first names and cities of the students who have allergy either to milk or to cat?"
+            ],
+            "question":" Find the different first names and cities of the students who have allergy to milk or cat.",
+            "sqa":{
+                "question":[
+                    "What are the ids of the students who have any allergy?",
+                    "Of these, who are allergy to milk or cat?",
+                    "What are the different first names and city codes of them?"
+                ],
+                "sql":[
+                    "SELECT StuID FROM Has_allergy",
+                    "SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" OR Allergy  =  \"Cat\"",
+                    "SELECT DISTINCT T1.fname ,  T1.city_code FROM Student AS T1 JOIN Has_Allergy AS T2 ON T1.stuid  =  T2.stuid WHERE T2.Allergy  =  \"Milk\" OR T2.Allergy  =  \"Cat\""
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT T1.fname ,  T1.city_code FROM Student AS T1 JOIN Has_Allergy AS T2 ON T1.stuid  =  T2.stuid WHERE T2.Allergy  =  \"Milk\" OR T2.Allergy  =  \"Cat\""
+            ]
+        },
+        {
+            "id":48,
+            "paraphrase":[
+                "How many students are over 18 and do not have allergy to food type or animal type?"
+            ],
+            "question":" Find the number of students who are older than 18 and do not have allergy to either food or animal.",
+            "sqa":{
+                "question":[
+                    "Which students are over 18?",
+                    "Of them, who are not allergic to food or animal?",
+                    "How many?"
+                ],
+                "sql":[
+                    "SELECT * FROM Student WHERE age  >  18",
+                    "SELECT * FROM Student WHERE age  >  18 AND StuID NOT IN ( SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" OR T2.allergytype  =  \"animal\")",
+                    "SELECT count(*) FROM Student WHERE age  >  18 AND StuID NOT IN ( SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" OR T2.allergytype  =  \"animal\")"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM Student WHERE age  >  18 AND StuID NOT IN ( SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" OR T2.allergytype  =  \"animal\")"
+            ]
+        },
+        {
+            "id":49,
+            "paraphrase":[
+                "What are the first name and major of the students who are able to consume soy?"
+            ],
+            "question":" Find the first name and major of the students who are not allegry to soy.",
+            "sqa":{
+                "question":[
+                    "Who have allergy to soy?",
+                    "Who have not?",
+                    "List their first name and major."
+                ],
+                "sql":[
+                    "SELECT * FROM Has_allergy WHERE Allergy  =  \"Soy\"",
+                    "SELECT * FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Soy\")",
+                    "SELECT fname ,  major FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Soy\")"
+                ]
+            },
+            "sql":[
+                "SELECT fname ,  major FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Soy\")"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

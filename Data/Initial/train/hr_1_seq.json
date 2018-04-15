@@ -1,0 +1,626 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "What are the first name and department name of all employees?"
+            ],
+            "question":" Display the first name and department name for each employee.",
+            "sql":[
+                "SELECT T1.first_name ,  T2.department_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "What are the full names and salaries for any employees earning less than 6000?"
+            ],
+            "question":" List the full name (first and last name), and salary for those employees who earn below 6000.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  salary FROM employees WHERE salary  <  6000"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "What are the first names and department numbers for employees with last name McEwen?"
+            ],
+            "question":" Display the first name, and department number for all employees whose last name is \"McEwen\".",
+            "sql":[
+                "SELECT first_name ,  department_id FROM employees WHERE last_name  =  'McEwen'"
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "What are all the employees without a department number?"
+            ],
+            "question":" Return all the information for all employees without any department number.",
+            "sql":[
+                "SELECT * FROM employees WHERE department_id IS NULL"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What is all the information about the Marketing department?"
+            ],
+            "question":" Display all the information about the department Marketing.",
+            "sql":[
+                "SELECT * FROM  departments WHERE department_name  =  'Marketing'"
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "On what dates were employees without the letter M in their first names hired?"
+            ],
+            "question":" when is the hire date for those employees whose first name does not containing the letter M?",
+            "sql":[
+                "SELECT hire_date FROM employees WHERE first_name NOT LIKE '%M%'"
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "What are the full name, hire date, salary, and department id for employees without the letter M in their first name?"
+            ],
+            "question":" display the full name (first and last), hire date, salary, and department number for those employees whose first name does not containing the letter M.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  hire_date ,  salary ,  department_id FROM employees WHERE first_name NOT LIKE '%M%'"
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "What are the full name, hire data, salary and department id for employees without the letter M in their first name, ordered by ascending department id?"
+            ],
+            "question":" display the full name (first and last), hire date, salary, and department number for those employees whose first name does not containing the letter M and make the result set in ascending order by department number.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  hire_date ,  salary ,  department_id FROM employees WHERE first_name NOT LIKE '%M%' ORDER BY department_id"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "Return the phone numbers of employees with salaries between 8000 and 12000."
+            ],
+            "question":" what is the phone number of employees whose salary is in the range of 8000 and 12000?",
+            "sql":[
+                "SELECT phone_number FROM employees WHERE salary BETWEEN 8000 AND 12000"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "Return all information about employees with salaries between 8000 and 12000 for which commission is not null or where their department id is not 40."
+            ],
+            "question":" display all the information of employees whose salary is in the range of 8000 and 12000 and commission is not null or department number does not equal to 40.",
+            "sql":[
+                "SELECT * FROM employees WHERE salary BETWEEN 8000 AND 12000 AND commission_pct IS NOT NULL OR  department_id ! =  40"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "Return the full names and salaries of employees with null commissions."
+            ],
+            "question":" What are the full name (first and last name) and salary for all employees who does not have any value for commission?",
+            "sql":[
+                "SELECT first_name ,  last_name ,  salary FROM  employees WHERE commission_pct IS NULL"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "Return the full names and salaries for employees with first names that end with the letter m."
+            ],
+            "question":" Display the first and last name, and salary for those employees whose first name is ending with the letter m.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  salary FROM employees WHERE first_name LIKE '%m'"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "What are the job ids and dates of hire for employees hired after November 5th, 2007 and before July 5th, 2009?"
+            ],
+            "question":" Find job id and date of hire for those employees who was hired between November 5th, 2007 and July 5th, 2009.",
+            "sql":[
+                "SELECT job_id ,  hire_date FROM employees WHERE hire_date BETWEEN '2007-11-05' AND '2009-07-05'"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What are the full names of employees who with in department 70 or 90?"
+            ],
+            "question":" What are the first and last name for those employees who works either in department 70 or 90?",
+            "sql":[
+                "SELECT first_name ,  last_name FROM employees WHERE department_id  =  70 OR department_id  =  90"
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "What are the salaries and manager ids for employees who have managers?"
+            ],
+            "question":" Find the salary and manager number for those employees who is working under a manager.",
+            "sql":[
+                "SELECT salary ,  manager_id FROM employees WHERE manager_id IS NOT NULL"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "What is all the information about employees hired before June 21, 2002?"
+            ],
+            "question":" display all the details from Employees table for those employees who was hired before 2002-06-21.",
+            "sql":[
+                "SELECT * FROM employees WHERE hire_date  <  '2002-06-21'"
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "What is all the information about employees with D, S, or N in their first name, ordered by salary descending?"
+            ],
+            "question":" display all the information for all employees who have the letters D, S, or N in their first name and also arrange the result in descending order by salary.",
+            "sql":[
+                "SELECT * FROM employees WHERE first_name LIKE '%D%' OR first_name LIKE '%S%' OR first_name LIKE '%N%' ORDER BY salary DESC"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "Which employees were hired after September 7th, 1987?"
+            ],
+            "question":" display those employees who joined after 7th September, 1987.",
+            "sql":[
+                "SELECT * FROM employees WHERE hire_date  >  '1987-09-07'"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "Which job titles correspond to jobs with salaries over 9000?"
+            ],
+            "question":" display the job title of jobs which minimum salary is greater than 9000.",
+            "sql":[
+                "SELECT job_title FROM jobs WHERE min_salary  >  9000"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "What are the job titles, and range of salaries for jobs with maximum salary between 12000 and 18000?"
+            ],
+            "question":" display job Title, the difference between minimum and maximum salaries for those jobs which max salary within the range 12000 to 18000.",
+            "sql":[
+                "SELECT job_title ,  max_salary-min_salary FROM jobs WHERE max_salary BETWEEN 12000 AND 18000"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "What are the emails of employees with null commission, salary between 7000 and 12000, and who work in department 50?"
+            ],
+            "question":" display the emails of the employees who have no commission percentage and salary within the range 7000 to 12000 and works in that department which number is 50.",
+            "sql":[
+                "SELECT email FROM employees WHERE commission_pct IS NULL AND salary BETWEEN 7000 AND 12000 AND department_id = 50"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "What are the employee ids for each employee and final dates of employment at their last job?"
+            ],
+            "question":" display the employee ID for each employee and the date on which he ended his previous job.",
+            "sql":[
+                "SELECT employee_id ,  MAX(end_date) FROM job_history GROUP BY employee_id"
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "What are the department ids for which more than 10 employees had a commission?"
+            ],
+            "question":" display those departments where more than ten employees work who got a commission percentage.",
+            "sql":[
+                "SELECT department_id FROM employees GROUP BY department_id HAVING COUNT(commission_pct) > 10"
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "What are department ids for departments with managers managing more than 3 employees?"
+            ],
+            "question":" Find the ids of the departments where any manager is managing 4 or more employees.",
+            "sql":[
+                "SELECT DISTINCT department_id FROM employees GROUP BY department_id ,  manager_id HAVING COUNT(employee_id)  >= 4"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "What is the average salary of employees who have a commission percentage that is not null?"
+            ],
+            "question":" display the average salary of employees for each department who gets a commission percentage.",
+            "sql":[
+                "SELECT department_id ,  AVG(salary) FROM employees WHERE commission_pct IS NOT NULL GROUP BY department_id"
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "Give the country id and corresponding count of cities in each country."
+            ],
+            "question":" display the country ID and number of cities for each country.",
+            "sql":[
+                "SELECT country_id ,  COUNT(*) FROM locations GROUP BY country_id"
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "What are the job ids for jobs done more than once for a period of more than 300 days?"
+            ],
+            "question":" display job ID for those jobs that were done by two or more for more than 300 days.",
+            "sql":[
+                "SELECT job_id FROM job_history WHERE end_date-start_date  > 300 GROUP BY job_id HAVING COUNT(*) >= 2"
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "What are the employee ids for employees who have held two or more jobs?"
+            ],
+            "question":" display the ID for those employees who did two or more jobs in the past.",
+            "sql":[
+                "SELECT employee_id FROM job_history GROUP BY employee_id HAVING COUNT(*)  >= 2"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are all the employee ids and the names of the countries in which they work?"
+            ],
+            "question":" Find employee with ID and name of the country presently where (s)he is working.",
+            "sql":[
+                "SELECT employee_id ,  country_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id JOIN countries AS T4 ON T3.country_id  =  T4.country_id"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "Give the name of each department and the number of employees in each."
+            ],
+            "question":" display the department name and number of employees in each of the department.",
+            "sql":[
+                "SELECT T2.department_name ,  COUNT(*) FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id GROUP BY T2.department_name"
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "What is all the job history info done by employees earning a salary greater than or equal to 12000?"
+            ],
+            "question":" Can you return all detailed info of jobs which was done by any of the employees who is presently earning a salary on and above 12000?",
+            "sql":[
+                "SELECT T1.* FROM  job_history AS T1 JOIN employees AS T2 ON T1.employee_id  =  T2.employee_id WHERE T2.salary  >=  12000"
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "What is the average salary for each job title?"
+            ],
+            "question":" display job title and average salary of employees.",
+            "sql":[
+                "SELECT job_title ,  AVG(salary) FROM employees AS T1 JOIN jobs AS T2 ON T1.job_id  =  T2.job_id GROUP BY T2.job_title"
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "Provide the full names of employees earning more than the employee with id 163."
+            ],
+            "question":" What is the full name ( first name and last name ) for those employees who gets more salary than the employee whose id is 163?",
+            "sql":[
+                "SELECT first_name ,  last_name FROM employees WHERE salary  >  (SELECT salary FROM employees WHERE employee_id = 163 )"
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "What is the minimum salary in each department?"
+            ],
+            "question":" return the smallest salary for every departments.",
+            "sql":[
+                "SELECT MIN(salary) ,  department_id FROM employees GROUP BY department_id"
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "What are the full names and department ids for the lowest paid employees across all departments."
+            ],
+            "question":" Find the first name and last name and department id for those employees who earn such amount of salary which is the smallest salary of any of the departments.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  department_id FROM employees WHERE salary IN (SELECT MIN(salary) FROM employees GROUP BY department_id)"
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "What are the employee ids for employees who make more than the average?"
+            ],
+            "question":" Find the employee id for all employees who earn more than the average salary.",
+            "sql":[
+                "SELECT employee_id FROM employees WHERE salary  >  (SELECT AVG(salary) FROM employees)"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "What are the employee ids of employees who report to Payam, and what are their salaries?"
+            ],
+            "question":" display the employee id and salary of all employees who report to Payam (first name).",
+            "sql":[
+                "SELECT employee_id ,  salary FROM employees WHERE manager_id  =  (SELECT employee_id FROM employees WHERE first_name  =  'Payam' )"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "What are the names of departments that have at least one employee."
+            ],
+            "question":" find the name of all departments that do actually have one or more employees assigned to them.",
+            "sql":[
+                "SELECT DISTINCT T2.department_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "What is all the information regarding employees who are managers?"
+            ],
+            "question":" get the details of employees who manage a department.",
+            "sql":[
+                "SELECT DISTINCT * FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id WHERE T1.employee_id  =  T2.manager_id"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "What is all the information about the Marketing department?"
+            ],
+            "question":" display all the information about the department Marketing.",
+            "sql":[
+                "SELECT * FROM  departments WHERE department_name  =  'Marketing'"
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What are the employee ids for those who had two or more jobs."
+            ],
+            "question":" display the ID for those employees who did two or more jobs in the past.",
+            "sql":[
+                "SELECT employee_id FROM job_history GROUP BY employee_id HAVING COUNT(*)  >= 2"
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "Give the distinct department ids of departments in which a manager is in charge of 4 or more employees?"
+            ],
+            "question":" What are the unique ids of those departments where any manager is managing 4 or more employees.",
+            "sql":[
+                "SELECT DISTINCT department_id FROM employees GROUP BY department_id ,  manager_id HAVING COUNT(employee_id)  >= 4"
+            ]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "What are the job ids corresponding to jobs with average salary above 8000?"
+            ],
+            "question":" Find the job ID for those jobs which average salary is above 8000.",
+            "sql":[
+                "SELECT job_id FROM employees GROUP BY job_id HAVING AVG(salary) > 8000"
+            ]
+        },
+        {
+            "id":44,
+            "paraphrase":[
+                "what are the employee ids and job titles for employees in department 80?"
+            ],
+            "question":" display the employee ID and job name for all those jobs in department 80.",
+            "sql":[
+                "SELECT T1.employee_id ,  T2.job_title FROM employees T1 JOIN jobs AS T2 ON T1.job_id  =  T2.job_id WHERE T1.department_id = 80"
+            ]
+        },
+        {
+            "id":45,
+            "paraphrase":[
+                "Give the first name and job id for all employees in the Finance department."
+            ],
+            "question":" What is the first name and job id for all employees in the Finance department?",
+            "sql":[
+                "SELECT T1.first_name ,  T1.job_id FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id WHERE T2.department_name  =  'Finance'"
+            ]
+        },
+        {
+            "id":46,
+            "paraphrase":[
+                "What is all the information regarding employees with salaries above the minimum and under 2500?"
+            ],
+            "question":" display all the information of the employees whose salary if within the range of smallest salary and 2500.",
+            "sql":[
+                "SELECT * FROM employees WHERE salary BETWEEN (SELECT MIN(salary) FROM employees) AND 2500"
+            ]
+        },
+        {
+            "id":47,
+            "paraphrase":[
+                "What are the ids for employees who do not work in departments with managers that have ids between 100 and 200?"
+            ],
+            "question":" Find the ids of the employees who does not work in those departments where some employees works whose manager id within the range 100 and 200.",
+            "sql":[
+                "SELECT * FROM employees WHERE department_id NOT IN (SELECT department_id FROM departments WHERE manager_id BETWEEN 100 AND 200)"
+            ]
+        },
+        {
+            "id":48,
+            "paraphrase":[
+                "What are the full names and hire dates for employees in the same department as someone with the first name Clara?"
+            ],
+            "question":" display the employee name ( first name and last name ) and hire date for all employees in the same department as Clara.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  =  (SELECT department_id FROM employees WHERE first_name  =  \"Clara\")"
+            ]
+        },
+        {
+            "id":49,
+            "paraphrase":[
+                "What are the full names and hire dates for employees in the same department as someone with the first name Clara, not including Clara?"
+            ],
+            "question":" display the employee name ( first name and last name ) and hire date for all employees in the same department as Clara excluding Clara.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  hire_date FROM employees WHERE department_id  =  ( SELECT department_id FROM employees WHERE first_name  =  \"Clara\") AND first_name ! =  \"Clara\""
+            ]
+        },
+        {
+            "id":50,
+            "paraphrase":[
+                "What are the ids and full names for employees who work in a department that has someone with a first name that contains the letter T?"
+            ],
+            "question":" display the employee number and name( first name and last name ) for all employees who work in a department with any employee whose name contains a \u2019T\u2019.",
+            "sql":[
+                "SELECT employee_id ,  first_name ,  last_name FROM employees WHERE department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%T%' )"
+            ]
+        },
+        {
+            "id":51,
+            "paraphrase":[
+                "What are the ids, full names, and salaries for employees making more than average and who work in a department with employees who have the letter J in their first name?"
+            ],
+            "question":" display the employee number, name( first name and last name ), and salary for all employees who earn more than the average salary and who work in a department with any employee with a 'J' in their first name.",
+            "sql":[
+                "SELECT employee_id ,  first_name ,  last_name ,  salary FROM employees WHERE salary  >  ( SELECT AVG (salary) FROM employees ) AND department_id IN ( SELECT department_id FROM employees WHERE first_name LIKE '%J%')"
+            ]
+        },
+        {
+            "id":52,
+            "paraphrase":[
+                "What are the employee ids and job ids for employees who make less than the lowest earning employee with title MK_MAN?"
+            ],
+            "question":" display the employee number and job id for all employees whose salary is smaller than any salary of those employees whose job title is MK_MAN.",
+            "sql":[
+                "SELECT employee_id ,  job_id FROM employees WHERE salary  <  ( SELECT min(salary) FROM employees WHERE job_id  =  'MK_MAN' )"
+            ]
+        },
+        {
+            "id":53,
+            "paraphrase":[
+                "What are the employee ids, full names, and job ids for employees who make more than the highest earning employee with title PU_MAN?"
+            ],
+            "question":" display the employee number, name( first name and last name ) and job title for all employees whose salary is more than any salary of those employees whose job title is PU_MAN.",
+            "sql":[
+                "SELECT employee_id ,  first_name ,  last_name ,  job_id FROM employees WHERE salary  >  ( SELECT max(salary) FROM employees WHERE job_id  =  'PU_MAN' )"
+            ]
+        },
+        {
+            "id":54,
+            "paraphrase":[
+                "What are total salaries and department id for each department that has more than 2 employees?"
+            ],
+            "question":" display the department id and the total salary for those departments which contains at least two employees.",
+            "sql":[
+                "SELECT department_id ,  SUM(salary) FROM employees GROUP BY department_id HAVING count(*)  >=  2"
+            ]
+        },
+        {
+            "id":55,
+            "paraphrase":[
+                "What is all the information about employees who have never had a job in the past?"
+            ],
+            "question":" display all the information of those employees who did not have any job in the past.",
+            "sql":[
+                "SELECT * FROM employees WHERE employee_id NOT IN (SELECT employee_id FROM job_history)"
+            ]
+        },
+        {
+            "id":56,
+            "paraphrase":[
+                "What are the department ids, full names, and salaries for employees who make the most in their departments?"
+            ],
+            "question":" display the department ID, full name (first and last name), salary for those employees who is highest salary in every department.",
+            "sql":[
+                "SELECT first_name ,   last_name ,   salary ,  department_id FROM employees GROUP BY department_id HAVING salary  =  MAX(salary)"
+            ]
+        },
+        {
+            "id":57,
+            "paraphrase":[
+                "What are the full names, departments, cities, and state provinces for each employee?"
+            ],
+            "question":" display the first and last name, department, city, and state province for each employee.",
+            "sql":[
+                "SELECT T1.first_name ,  T1.last_name ,  T2.department_name ,  T3.city ,  T3.state_province FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id"
+            ]
+        },
+        {
+            "id":58,
+            "paraphrase":[
+                "What are the full names and cities of employees who have the letter Z in their first names?"
+            ],
+            "question":" display those employees who contain a letter z to their first name and also display their last name, city.",
+            "sql":[
+                "SELECT T1.first_name ,  T1.last_name ,  T3.city FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id WHERE T1.first_name LIKE '%z%'"
+            ]
+        },
+        {
+            "id":59,
+            "paraphrase":[
+                "What are the department names, cities, and state provinces for each department?"
+            ],
+            "question":" display the department name, city, and state province for each department.",
+            "sql":[
+                "SELECT T1.department_name ,  T2.city ,  T2.state_province FROM departments AS T1 JOIN locations AS T2 ON T2.location_id  =  T1.location_id"
+            ]
+        },
+        {
+            "id":60,
+            "paraphrase":[
+                "What the full names, ids of each employee and the name of the country they are in?"
+            ],
+            "question":" display the full name (first and last name ) of employee with ID and name of the country presently where (s)he is working.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  employee_id ,  country_name FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN locations AS T3 ON T2.location_id  =  T3.location_id JOIN countries AS T4 ON T3.country_id  =  T4.country_id"
+            ]
+        },
+        {
+            "id":61,
+            "paraphrase":[
+                "What are the department names and how many employees work in each of them?"
+            ],
+            "question":" display the department name and number of employees in each of the department.",
+            "sql":[
+                "SELECT department_name ,  COUNT(*) FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id GROUP BY department_name"
+            ]
+        },
+        {
+            "id":62,
+            "paraphrase":[
+                "What are full names and salaries of employees working in the city of London?"
+            ],
+            "question":" display the full name (first and last name), and salary of those employees who working in any department located in London.",
+            "sql":[
+                "SELECT first_name ,  last_name ,  salary FROM employees AS T1 JOIN departments AS T2 ON T1.department_id  =  T2.department_id JOIN  locations AS T3 ON T2.location_id  =  T3.location_id WHERE  T3.city  =  'London'"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

@@ -1,0 +1,547 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "How many students are enrolled in college?"
+            ],
+            "question":" What is the total enrollment number of all colleges?",
+            "sql":[
+                "SELECT sum(enr) FROM College"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "How many students, on average, does each college have enrolled?"
+            ],
+            "question":" What is the average enrollment number?",
+            "sql":[
+                "SELECT avg(enr) FROM College"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "How many different colleges are there?"
+            ],
+            "question":" How many colleges in total?",
+            "sql":[
+                "SELECT count(*) FROM College"
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "How many different players trained for more than 1000 hours?"
+            ],
+            "question":" How many players have more than 1000 hours of training?",
+            "sql":[
+                "SELECT count(*) FROM Player WHERE HS  >  1000"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What is the number of colleges with a student population greater than 15000?"
+            ],
+            "question":" How many colleges has more than 15000 students?",
+            "sql":[
+                "SELECT count(*) FROM College WHERE enr  >  15000"
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "How many hours do the players train on average?"
+            ],
+            "question":" What is the average training hours of all players?",
+            "sql":[
+                "SELECT avg(HS) FROM Player"
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "What are the names and number of hours spent training for each player who trains for less than 1500 hours?"
+            ],
+            "question":" Find the name and training hours of players whose hours are below 1500.",
+            "sql":[
+                "SELECT pName ,  HS FROM Player WHERE HS  <  1500"
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "How many different colleges were represented at tryouts?"
+            ],
+            "question":" How many different colleges do attend the tryout test?",
+            "sql":[
+                "SELECT count(DISTINCT cName) FROM tryout"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "What are the different types of player positions?"
+            ],
+            "question":" What are the unique types of player positions in the tryout?",
+            "sql":[
+                "SELECT count(DISTINCT pPos) FROM tryout"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "How many students received a yes from tryouts?"
+            ],
+            "question":" How many students got accepted after the tryout?",
+            "sql":[
+                "SELECT count(*) FROM tryout WHERE decision  =  'yes'"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "What is the number of students playing as a goalie?"
+            ],
+            "question":" How many students whose are playing the role of goalie?",
+            "sql":[
+                "SELECT count(*) FROM tryout WHERE pPos  =  'goalie'"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "What is the average, maximum, and minimum for the number of hours spent training?"
+            ],
+            "question":" Find the max, average and min training hours of all players.",
+            "sql":[
+                "SELECT avg(HS) ,  max(HS) ,  min(HS) FROM Player"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "What is average number of students enrolled in Florida colleges?"
+            ],
+            "question":" What is average enrollment of colleges in the state FL?",
+            "sql":[
+                "SELECT avg(enr) FROM College WHERE state  =  'FL'"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What are the names of players who train between 500 and 1500 hours?"
+            ],
+            "question":" What are the names of players whose training hours is between 500 and 1500?",
+            "sql":[
+                "SELECT pName FROM Player WHERE HS BETWEEN 500 AND 1500"
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "Who are the players that have names containing the letter a?"
+            ],
+            "question":" Find the players whose names contain letter 'a'.",
+            "sql":[
+                "SELECT DISTINCT pName FROM Player WHERE pName LIKE '%a%'"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "What are the names and enrollment numbers for colleges that have more than 10000 enrolled and are located in Louisiana?"
+            ],
+            "question":" Find the name, enrollment of the colleges whose size is bigger than 10000 and location is in state LA.",
+            "sql":[
+                "SELECT cName ,  enr FROM College WHERE enr  >  10000 AND state = \"LA\""
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "What information do you have on colleges sorted by increasing enrollment numbers?"
+            ],
+            "question":" List all information about college sorted by enrollment number in the ascending order.",
+            "sql":[
+                "SELECT * FROM College ORDER BY enr"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "What is the name of every college in alphabetical order that has more than 18000 students enrolled?"
+            ],
+            "question":" List the name of the colleges whose enrollment is greater 18000 sorted by the college's name.",
+            "sql":[
+                "SELECT cName FROM College WHERE enr  >  18000 ORDER BY cName"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "What are the name of the players who received a card in descending order of the hours of training?"
+            ],
+            "question":" Find the name of players whose card is yes in the descending order of training hours.",
+            "sql":[
+                "SELECT pName FROM Player WHERE yCard  =  'yes' ORDER BY HS DESC"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "What are the different names of the colleges involved in the tryout in alphabetical order?"
+            ],
+            "question":" Find the name of different colleges involved in the tryout in alphabetical order.",
+            "sql":[
+                "SELECT DISTINCT cName FROM tryout ORDER BY cName"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "What was the most popular position at tryouts?"
+            ],
+            "question":" Which position is most popular among players in the tryout?",
+            "sql":[
+                "SELECT pPos FROM tryout GROUP BY pPos ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "How many students participated in tryouts for each college by descennding count?"
+            ],
+            "question":" Find the number of students who participate in the tryout for each college ordered by descending count.",
+            "sql":[
+                "SELECT count(*) ,  cName FROM tryout GROUP BY cName ORDER BY count(*) DESC"
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "For each position, what is the minimum time students spent practicing?"
+            ],
+            "question":" What is minimum hours of the students playing in different position?",
+            "sql":[
+                "SELECT min(T2.HS) ,   T1.pPos FROM tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID GROUP BY T1.pPos"
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "What are the names of the schools with the top 3 largest class sizes?"
+            ],
+            "question":" What are the names of schools with the top 3 largest size?",
+            "sql":[
+                "SELECT cName FROM college ORDER BY enr DESC LIMIT 3"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "What is the name of the school with smallest enrollment size per state?"
+            ],
+            "question":" What is the name of school that has the smallest enrollment in each state?",
+            "sql":[
+                "SELECT cName ,  state FROM college GROUP BY state HAVING enr  =  min(enr)"
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "What are the different states that have students trying out?"
+            ],
+            "question":"Find the states where have some college students in tryout.",
+            "sql":[
+                "SELECT DISTINCT state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName"
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "What are the different states that had students successfully try out?"
+            ],
+            "question":" Find the states where have some college students in tryout and their decisions are yes.",
+            "sql":[
+                "SELECT DISTINCT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "What are the names of all the players who received a yes during tryouts, and also what are the names of their colleges?"
+            ],
+            "question":" Find the name and college of students whose decisions are yes in the tryout.",
+            "sql":[
+                "SELECT T1.pName ,  T2.cName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are the names of all students who tried out in alphabetical order?"
+            ],
+            "question":" Find the name of all students who were in the tryout sorted in alphabetic order.",
+            "sql":[
+                "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID ORDER BY T1.pName"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "What are the names and hours spent practicing of every student who received a yes at tryouts?"
+            ],
+            "question":" Find the name and hours of the students whose tryout decision is yes.",
+            "sql":[
+                "SELECT T1.pName ,  T1.HS FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "What are the states of the colleges where students who tried out for the striker position attend?"
+            ],
+            "question":" Find the states of the colleges that have students in the tryout who played in striker position.",
+            "sql":[
+                "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'striker'"
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "What are the names of all students who successfully tried out for the position of striker?"
+            ],
+            "question":" Find the names of the students who are in the position of striker and got a yes tryout decision.",
+            "sql":[
+                "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes' AND T2.pPos  =  'striker'"
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "In which state is the college that Charles attends?"
+            ],
+            "question":" Find the state of the college which player Charles is attending.",
+            "sql":[
+                "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName JOIN player AS T3 ON T2.pID  =  T3.pID WHERE T3.pName  =  'Charles'"
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "What is the average and maximum number of hours students who made the team practiced?"
+            ],
+            "question":" Find the average and maximum hours for the students whose tryout decision is yes.",
+            "sql":[
+                "SELECT avg(T1.HS) ,  max(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "What is the average number of hours spent practicing for students who got rejected?"
+            ],
+            "question":" Find the average hours for the students whose tryout decision is no.",
+            "sql":[
+                "SELECT avg(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'no'"
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "For each position, what is the maximum number of  hours for students who spent more than 1000 hours training?"
+            ],
+            "question":" What is the maximum training hours for the students whose training hours is greater than 1000 in different positions?",
+            "sql":[
+                "SELECT max(T1.HS) ,  pPos FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T1.HS  >  1000 GROUP BY T2.pPos"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "Which colleges does each player with a name that starts with the letter D  who tried out go to?"
+            ],
+            "question":" Which colleges do the tryout players whose name starts with letter D go to?",
+            "sql":[
+                "SELECT T1.cName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T2.pName LIKE 'D%'"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "What college has a student who successfully made the team in the role of a goalie?"
+            ],
+            "question":" Which college has any student who is a goalie and succeeded in the tryout.",
+            "sql":[
+                "SELECT cName FROM  tryout WHERE decision  =  'yes' AND pPos  =  'goalie'"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "What are the names of all tryout participants who are from the largest college?"
+            ],
+            "question":" Find the name of the tryout players who are from the college with largest size.",
+            "sql":[
+                "SELECT T2.pName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T1.cName  =  (SELECT cName FROM college ORDER BY enr DESC LIMIT 1) S: What IS the largest college? S: What ARE the NAMES OF players ARE FROM that college? S: OF those ,  who tried OUT FOR the team?"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "How many students are enrolled in colleges that have student accepted during tryouts, and in which states are those colleges?"
+            ],
+            "question":" What is the state and enrollment of the colleges where have any students who got accepted in the tryout decision.",
+            "sql":[
+                "SELECT DISTINCT T1.state ,  T1.enr FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What are the names of all the players who have yCards and practiced for less time than some other player?"
+            ],
+            "question":" Find the names of all the players who have yCards AND hours less than some other Player.",
+            "sql":[
+                "SELECT DISTINCT T1.pName FROM Player AS T1 ,  Player AS T2 WHERE T1.yCard  =  \"yes\" AND T1.HS  <  T2.HS;"
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "What are the names of colleges in LA that have more than 15,000 students and of colleges in AZ with less than 13,000 students?"
+            ],
+            "question":" Find the names of either colleges in LA with greater than 15000 size or in state AZ with less than 13000 enrollment.",
+            "sql":[]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "What are the names of all schools that have students trying out for the position of goal and 'mid'-field."
+            ],
+            "question":" Find the names of schools that have some students playing in goalie and mid positions.",
+            "sql":[
+                "SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid'"
+            ]
+        },
+        {
+            "id":44,
+            "paraphrase":[
+                "What are the names of the states that have some college students playing in the positions of goalie and mid-field?"
+            ],
+            "question":" Find the names of states that have some college students playing in goalie and mid positions.",
+            "sql":[
+                "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie' INTERSECT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid'"
+            ]
+        },
+        {
+            "id":45,
+            "paraphrase":[
+                "How many schools have students playing in goalie and mid-field positions?"
+            ],
+            "question":" How many schools have some students playing in goalie and mid positions.",
+            "sql":[
+                "SELECT COUNT(*) FROM (SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid')"
+            ]
+        },
+        {
+            "id":46,
+            "paraphrase":[
+                "What are the names of the schools with some players in the mid position but no goalies?"
+            ],
+            "question":" Find the names of schools that have some players in the mid position but not in the goalie position.",
+            "sql":[
+                "SELECT cName FROM  tryout WHERE pPos  =  'mid' EXCEPT SELECT cName FROM  tryout WHERE pPos  =  'goalie'"
+            ]
+        },
+        {
+            "id":47,
+            "paraphrase":[
+                "What are the names of all the states with college students playing in the mid position but no goalies?"
+            ],
+            "question":" Find the names of states that have some college students playing in the mid position but not in the goalie position.",
+            "sql":[
+                "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie'"
+            ]
+        },
+        {
+            "id":48,
+            "paraphrase":[
+                "What is the count of states with college students playing in the mid position but not as goalies?"
+            ],
+            "question":" How many states that have some college students playing in the mid position but not in the goalie position.",
+            "sql":[
+                "SELECT COUNT(*) FROM (SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie')"
+            ]
+        },
+        {
+            "id":49,
+            "paraphrase":[
+                "What are the states with colleges that have enrollments less than the some other college?"
+            ],
+            "question":" Find the states where have the colleges whose enrollments are less than the largest size.",
+            "sql":[
+                "SELECT DISTINCT T1.state FROM college AS T1 ,  college AS T2 WHERE T1.enr  <  T2.enr"
+            ]
+        },
+        {
+            "id":50,
+            "paraphrase":[
+                "What are the names of the colleges that are larger than at least one college in Florida?"
+            ],
+            "question":" Find names of colleges with enrollment greater than that of some (at least one) college in the FL state.",
+            "sql":[
+                "SELECT DISTINCT T1.cName FROM college AS T1 ,  college AS T2 WHERE T1.enr  >  T2.enr AND T2.state  =  'FL'"
+            ]
+        },
+        {
+            "id":51,
+            "paraphrase":[
+                "What are the names of all colleges with a larger enrollment than the largest college in Florida?"
+            ],
+            "question":" Find names of all colleges whose enrollment is greater than that of all colleges in the FL state.",
+            "sql":[
+                "SELECT cName FROM college WHERE enr  >  (SELECT max(enr) FROM college WHERE state  =  'FL')"
+            ]
+        },
+        {
+            "id":52,
+            "paraphrase":[
+                "What is the total number of students enrolled in schools without any goalies?",
+                "What are the names of all colleges with students who tried out for the position of goalie?",
+                "What is the number of people enrolled in all the other colleges?",
+                "How many is that in total?"
+            ],
+            "question":" What is the total number of enrollment of schools that do not have any goalie player?",
+            "sql":[
+                "SELECT sum(enr) FROM college WHERE cName NOT IN (SELECT cName FROM tryout WHERE pPos  =  \"goalie\")"
+            ]
+        },
+        {
+            "id":53,
+            "paraphrase":[
+                "How many states have a college with more students than average?"
+            ],
+            "question":" What is the number of states that has some college whose enrollment is larger than the average enrollment?",
+            "sql":[
+                "SELECT count(DISTINCT state) FROM college WHERE enr  >  (SELECT avg(enr) FROM college)"
+            ]
+        },
+        {
+            "id":54,
+            "paraphrase":[
+                "How many states have smaller colleges than average?"
+            ],
+            "question":" What is the number of states that has some colleges whose enrollment is smaller than the average enrollment?",
+            "sql":[
+                "SELECT count(DISTINCT state) FROM college WHERE enr  <  (SELECT avg(enr) FROM college)"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

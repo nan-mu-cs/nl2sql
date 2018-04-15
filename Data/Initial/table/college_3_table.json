@@ -1,0 +1,354 @@
+[
+    {
+        "col_data": [
+            {
+                "column_name": "StuID",
+                "data_type": "INTEGER",
+                "default_column_name": "StuID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "LName",
+                "data_type": "VARCHAR(12)",
+                "default_column_name": "LName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Fname",
+                "data_type": "VARCHAR(12)",
+                "default_column_name": "Fname",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Age",
+                "data_type": "INTEGER",
+                "default_column_name": "Age",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Sex",
+                "data_type": "VARCHAR(1)",
+                "default_column_name": "Sex",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Major",
+                "data_type": "INTEGER",
+                "default_column_name": "Major",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Advisor",
+                "data_type": "INTEGER",
+                "default_column_name": "Advisor",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "city_code",
+                "data_type": "VARCHAR(3)",
+                "default_column_name": "city_code",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Student"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "FacID",
+                "data_type": "INTEGER",
+                "default_column_name": "FacID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "Lname",
+                "data_type": "VARCHAR(15)",
+                "default_column_name": "Lname",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Fname",
+                "data_type": "VARCHAR(15)",
+                "default_column_name": "Fname",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Rank",
+                "data_type": "VARCHAR(15)",
+                "default_column_name": "Rank",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Sex",
+                "data_type": "VARCHAR(1)",
+                "default_column_name": "Sex",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Phone",
+                "data_type": "INTEGER",
+                "default_column_name": "Phone",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Room",
+                "data_type": "VARCHAR(5)",
+                "default_column_name": "Room",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Building",
+                "data_type": "VARCHAR(13)",
+                "default_column_name": "Building",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Faculty"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "DNO",
+                "data_type": "INTEGER",
+                "default_column_name": "DNO",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "Division",
+                "data_type": "VARCHAR(2)",
+                "default_column_name": "Division",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DName",
+                "data_type": "VARCHAR(25)",
+                "default_column_name": "DName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Room",
+                "data_type": "VARCHAR(5)",
+                "default_column_name": "Room",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Building",
+                "data_type": "VARCHAR(13)",
+                "default_column_name": "Building",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DPhone",
+                "data_type": "INTEGER",
+                "default_column_name": "DPhone",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Department"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "FacID",
+                "data_type": "INTEGER",
+                "default_column_name": "FacID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DNO",
+                "data_type": "INTEGER",
+                "default_column_name": "DNO",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Appt_Type",
+                "data_type": "VARCHAR(15)",
+                "default_column_name": "Appt_Type",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Member_of"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "CID",
+                "data_type": "VARCHAR(7)",
+                "default_column_name": "CID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "CName",
+                "data_type": "VARCHAR(40)",
+                "default_column_name": "CName",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Credits",
+                "data_type": "INTEGER",
+                "default_column_name": "Credits",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Instructor",
+                "data_type": "INTEGER",
+                "default_column_name": "Instructor",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Days",
+                "data_type": "VARCHAR(5)",
+                "default_column_name": "Days",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Hours",
+                "data_type": "VARCHAR(11)",
+                "default_column_name": "Hours",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DNO",
+                "data_type": "INTEGER",
+                "default_column_name": "DNO",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Course"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "StuID",
+                "data_type": "INTEGER",
+                "default_column_name": "StuID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "DNO",
+                "data_type": "INTEGER",
+                "default_column_name": "DNO",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Minor_in"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "StuID",
+                "data_type": "INTEGER",
+                "default_column_name": "StuID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "CID",
+                "data_type": "VARCHAR(7)",
+                "default_column_name": "CID",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            },
+            {
+                "column_name": "Grade",
+                "data_type": "VARCHAR(2)",
+                "default_column_name": "Grade",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Enrolled_in"
+    },
+    {
+        "col_data": [
+            {
+                "column_name": "lettergrade",
+                "data_type": "VARCHAR(2)",
+                "default_column_name": "lettergrade",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 1
+            },
+            {
+                "column_name": "gradepoint",
+                "data_type": "FLOAT",
+                "default_column_name": "gradepoint",
+                "default_value": null,
+                "not_null": 0,
+                "primary_key": 0
+            }
+        ],
+        "table": "Gradeconversion"
+    }
+]

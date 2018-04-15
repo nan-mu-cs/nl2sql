@@ -1,0 +1,1218 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "What is the name of the scuplture that was created most recently?"
+            ],
+            "question":" What is the title of the sculpture that was created in the most recent year?",
+            "sqa":{
+                "question":[
+                    "What is the name and year created of each sculpture?",
+                    "Which one was created most recently?"
+                ],
+                "question2":[
+                    "Find all info of the sculpture was created most recently.",
+                    "What is its name and year?"
+                ],
+                "sql":[
+                    "SELECT title ,  YEAR FROM sculptures",
+                    "SELECT title ,  YEAR FROM sculptures ORDER BY YEAR DESC LIMIT 1"
+                ],
+                "sql2":[
+                    "SELECT * FROM sculptures ORDER BY YEAR DESC LIMIT 1",
+                    "SELECT title ,  YEAR FROM sculptures ORDER BY YEAR DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT title ,  YEAR FROM sculptures ORDER BY YEAR DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "What is the name of the oldest painting and where is it located?"
+            ],
+            "question":" What is the title and location of the oldest painting?",
+            "sqa":{
+                "question":[
+                    "Which is the oldest painting?",
+                    "What is its title, location and year created?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings ORDER BY YEAR LIMIT 1",
+                    "SELECT title ,  LOCATION ,  YEAR FROM paintings ORDER BY YEAR LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT title ,  LOCATION ,  YEAR FROM paintings ORDER BY YEAR LIMIT 1"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "What are the names of all sculptures in gallery 226?"
+            ],
+            "question":" Find the names of all sculptures located in gallery 226.",
+            "sqa":{
+                "question":[
+                    "What are the titles of all the sculptures?",
+                    "Which ones are located in gallery 226?"
+                ],
+                "sql":[
+                    "SELECT title FROM sculptures",
+                    "SELECT title FROM sculptures WHERE LOCATION  =  \"Gallery 226\""
+                ]
+            },
+            "sql":[
+                "SELECT title FROM sculptures WHERE LOCATION  =  \"Gallery 226\""
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "What are the paintings called and where are they located?"
+            ],
+            "question":" List the title and location of all paintings.",
+            "sqa":{
+                "question":[
+                    "What are the titles of all the paintings?",
+                    "Also list their locations."
+                ],
+                "sql":[
+                    "SELECT title FROM paintings",
+                    "SELECT title ,  LOCATION FROM paintings"
+                ]
+            },
+            "sql":[
+                "SELECT title ,  LOCATION FROM paintings"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "What are the sculptures called and where are they located?"
+            ],
+            "question":" List the title and location of all sculptures.",
+            "sqa":{
+                "question":[
+                    "What are the titles of all the sculptures?",
+                    "Also list their locations."
+                ],
+                "sql":[
+                    "SELECT title FROM sculptures",
+                    "SELECT title ,  LOCATION FROM sculptures"
+                ]
+            },
+            "sql":[
+                "SELECT title ,  LOCATION FROM sculptures"
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "What mediums were used for the paining with id = 80?"
+            ],
+            "question":" What are the medium types of the painting with id = 80",
+            "sqa":{
+                "question":[
+                    "Which painting has an id equal to 80?",
+                    "What is its medium type?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE paintingID  =  80",
+                    "SELECT medium FROM paintings WHERE paintingID  =  80"
+                ]
+            },
+            "sql":[
+                "SELECT medium FROM paintings WHERE paintingID  =  80"
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "What are the full names of artists born after 1850?"
+            ],
+            "question":" Find the first and last names of all artists who were born after 1850.",
+            "sqa":{
+                "question":[
+                    "What are the first and last names of all the artists?",
+                    "Which of those were born after 1850?"
+                ],
+                "sql":[
+                    "SELECT lname ,  fname FROM artists",
+                    "SELECT lname ,  fname FROM artists WHERE birthYear  >  1850"
+                ]
+            },
+            "sql":[
+                "SELECT lname ,  fname FROM artists WHERE birthYear  >  1850"
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "What are the names and dates created for all sculptures not located in gallery 226?"
+            ],
+            "question":" Find the names and years of all sculptures that are not located in gallery 226.",
+            "sqa":{
+                "question":[
+                    "Which sculptures are not located in gallery 226?",
+                    "Of those, what are their names and years?"
+                ],
+                "sql":[
+                    "SELECT title FROM sculptures WHERE LOCATION ! =  \"Gallery 226\"",
+                    "SELECT title ,  YEAR FROM sculptures WHERE LOCATION ! =  \"Gallery 226\""
+                ]
+            },
+            "sql":[
+                "SELECT title ,  YEAR FROM sculptures WHERE LOCATION ! =  \"Gallery 226\""
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "What is the first and last name of each distinct artists who made a sculpture before 1900?"
+            ],
+            "question":" What are the first and last names of all distinct artists who made sculptures before 1900?",
+            "sqa":{
+                "question":[
+                    "Who were all the distinct artists who made sculptures?",
+                    "Of those, which made them before 1900?",
+                    "What were their first and last names?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID",
+                    "SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.year  <  1900",
+                    "SELECT DISTINCT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.year  <  1900"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.year  <  1900"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "What is the birth year of each distinct artists who created sculptures after 1920?"
+            ],
+            "question":" Find the birth years of all distinct artists who made sculptures after 1920?",
+            "sqa":{
+                "question":[
+                    "Who are all the distinct artists?",
+                    "Which of them made sculptures after 1920?",
+                    "What are their birth years?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID",
+                    "SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.year  >  1920",
+                    "SELECT DISTINCT T1.birthYear FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.year  >  1920"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT T1.birthYear FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.year  >  1920"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "Give the full name of the artist who lived the longest."
+            ],
+            "question":" What are the first and last names of the artist who lived the longest?",
+            "sqa":{
+                "question":[
+                    "Who are all the artists?",
+                    "Order the result by their lifetime.",
+                    "What was the first and last name of the one who lived the longest?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists",
+                    "SELECT * FROM artists ORDER BY deathYear - birthYear DESC",
+                    "SELECT lname ,  fname FROM artists ORDER BY deathYear - birthYear DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT lname ,  fname FROM artists ORDER BY deathYear - birthYear DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "How old is the artist who lived the shortest life?"
+            ],
+            "question":" What is the age of the artist who had the shortest life?",
+            "sqa":{
+                "question":[
+                    "Who are all the artists?",
+                    "Which one lived the shortest?",
+                    "What was his/her age?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists",
+                    "SELECT * FROM artists ORDER BY deathYear - birthYear LIMIT 1",
+                    "SELECT deathYear - birthYear FROM artists ORDER BY deathYear - birthYear LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT deathYear - birthYear FROM artists ORDER BY deathYear - birthYear LIMIT 1"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "What is the first name and age of the artist who lived the longest?"
+            ],
+            "question":" What are the first name and age of the artist who had the longest life?",
+            "sqa":{
+                "question":[
+                    "Who are all the artists?",
+                    "Which one lived the longests?",
+                    "What was his/her first name and age?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists",
+                    "SELECT * FROM artists ORDER BY deathYear - birthYear DESC LIMIT 1",
+                    "SELECT fname ,  deathYear - birthYear FROM artists ORDER BY deathYear - birthYear DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT fname  ,  deathYear - birthYear FROM artists ORDER BY deathYear - birthYear DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What is the total number of paintings exhibited in gallery 240?"
+            ],
+            "question":" How many paintings are exhibited at gallery 240?",
+            "sqa":{
+                "question":[
+                    "How many paintings are there?",
+                    "How many of those are exhibited at gallery 240?"
+                ],
+                "sql":[
+                    "SELECT count(*) FROM paintings",
+                    "SELECT count(*) FROM paintings WHERE LOCATION  =  \"Gallery 240\""
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM paintings WHERE LOCATION  =  \"Gallery 240\""
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "What is the painting count of the artist with the longest life?"
+            ],
+            "question":" How many paintings did the artist with the longest life make?",
+            "sqa":{
+                "question":[
+                    "How many paintings did each artist make?",
+                    "How many paintings did the oldest of them make?"
+                ],
+                "sql":[
+                    "SELECT count(*) ,  T2.painterID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID",
+                    "SELECT count(*) ,  T2.painterID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID ORDER BY T1.deathYear - T1.birthYear DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) ,  T2.painterID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID ORDER BY T1.deathYear - T1.birthYear DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "What is the name and year of each painting created by the artist whose first name is Mary?"
+            ],
+            "question":" Give me a list of names and years of paintings that were created by the artist whose first name is Mary.",
+            "sqa":{
+                "question":[
+                    "Which artist has a first name of Mary?",
+                    "Select all paintings created by Mary.",
+                    "What are the names and years of all those paintings?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists WHERE fname  =  \"Mary\"",
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.fname  =  \"Mary\"",
+                    "SELECT T2.title ,   T2.year FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.fname  =  \"Mary\""
+                ]
+            },
+            "sql":[
+                "SELECT T2.title ,   T2.year FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.fname  =  \"Mary\""
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "How wide were the paintings by the artist who was born prior to 1850?"
+            ],
+            "question":" What are the widths of the paintings that were created by the artist who was born before 1850?",
+            "sqa":{
+                "question":[
+                    "Which artist was born before 1850?",
+                    "What paintings did he/she create?",
+                    "What are the widths of those paintings?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists WHERE birthYear  <  1850",
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.birthYear  <  1850",
+                    "SELECT T2.width_mm FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.birthYear  <  1850"
+                ]
+            },
+            "sql":[
+                "SELECT T2.width_mm FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.birthYear  <  1850"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "In what locations and on what mediums are the paintings created by the artist with the first name Pablo?"
+            ],
+            "question":" What are the location and medium type of paintings that are created by the artist whose first name is Pablo?",
+            "sqa":{
+                "question":[
+                    "Which artist has a first name of Pablo?",
+                    "What paintings are created by him?",
+                    "What are the location and medium types of those paintings?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists WHERE fname  =  \"Pablo\"",
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.fname  =  \"Pablo\"",
+                    "SELECT T2.location ,   T2.medium FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.fname  =  \"Pablo\""
+                ]
+            },
+            "sql":[
+                "SELECT T2.location ,   T2.medium FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.fname  =  \"Pablo\""
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "Give the full names of artists who have created paintings and sculptures."
+            ],
+            "question":" Find the first and last names of the artists who have both works of paintings and sculptures?",
+            "sqa":{
+                "question":[
+                    "Which artists have works of paintings?",
+                    "Which artists created some sculptures?",
+                    "What are the first and last names of the artists who have all of them?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID",
+                    "SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID",
+                    "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID INTERSECT SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID"
+                ]
+            },
+            "sql":[
+                "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID INTERSECT SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "What are the first and last names of artists who have painted using both oil and lithographic mediums?"
+            ],
+            "question":" What are the first and last names of the artists who have not only medium oil paintings but also paintings with the lithographic medium?",
+            "sqa":{
+                "question":[
+                    "Which artists have medium oil paintings?",
+                    "Of those, who also have paintings with the lithographic medium?",
+                    "What are their first and last names?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\"",
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" INTERSECT SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"lithograph\"",
+                    "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" INTERSECT SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"lithograph\""
+                ]
+            },
+            "sql":[
+                "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" INTERSECT SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"lithograph\""
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "In what year was the artist who created a painting in 1884 born?"
+            ],
+            "question":" What is the birth year of the artist who created a painting in 1884 that is on canvas?",
+            "sqa":{
+                "question":[
+                    "Find the ids of the artists who created a painting in 1884.",
+                    "Of those, which are ids of artists that painted the work on canvas?",
+                    "What is his birthyear?"
+                ],
+                "sql":[
+                    "SELECT T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.year  =  1884",
+                    "SELECT T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.year  =  1884 AND mediumOn  =  \"canvas\"",
+                    "SELECT T1.birthYear FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.year  =  1884 AND mediumOn  =  \"canvas\""
+                ]
+            },
+            "sql":[
+                "SELECT T1.birthYear FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.year  =  1884 AND mediumOn  =  \"canvas\""
+            ]
+        },
+        {
+            "id":22,
+            "paraphrase":[
+                "What are first names of the artists with oil paintings in gallery 241?"
+            ],
+            "question":" What are the unique first names of the artists who had medium oil paintings located in gallery 241?",
+            "sqa":{
+                "question":[
+                    "Find the ids of the artists who have medium oil paintings?",
+                    "Of those artists, who has their oil paintings located in gallery 241?",
+                    "What are the different first names of these artists?"
+                ],
+                "sql":[
+                    "SELECT T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\"",
+                    "SELECT T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" AND LOCATION  =  \"Gallery 241\"",
+                    "SELECT DISTINCT T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" AND LOCATION  =  \"Gallery 241\""
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" AND LOCATION  =  \"Gallery 241\""
+            ]
+        },
+        {
+            "id":23,
+            "paraphrase":[
+                "How many works are there in each medium?"
+            ],
+            "question":" What are the numbers of works for different medium type?",
+            "sqa":{
+                "question":[
+                    "What are the different mediums?",
+                    "How many works are there for each of them?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT medium FROM paintings",
+                    "SELECT count(*) ,  medium FROM paintings GROUP BY medium"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) ,  medium FROM paintings GROUP BY medium"
+            ]
+        },
+        {
+            "id":24,
+            "paraphrase":[
+                "What is the average height of paintings for different medium types?"
+            ],
+            "question":" What are the average height of paintings for different medium types?",
+            "sqa":{
+                "question":[
+                    "What are the different medium types for paintings?",
+                    "For each of them, what is the average height of the works in mm?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT medium FROM paintings",
+                    "SELECT avg(height_mm) ,  medium FROM paintings GROUP BY medium"
+                ]
+            },
+            "sql":[
+                "SELECT avg(height_mm) ,  medium FROM paintings GROUP BY medium"
+            ]
+        },
+        {
+            "id":25,
+            "paraphrase":[
+                "How many paintings were created before 1900 in different locations?"
+            ],
+            "question":" What are the numbers of paintings created before 1900 in different places?",
+            "sqa":{
+                "question":[
+                    "How many paintings were created before 1900?",
+                    "How many were shown/collected in different places?"
+                ],
+                "sql":[
+                    "SELECT count(*) FROM paintings WHERE YEAR  <  1900",
+                    "SELECT count(*) ,  LOCATION FROM paintings WHERE YEAR  <  1900 GROUP BY LOCATION"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) ,  LOCATION FROM paintings WHERE YEAR  <  1900 GROUP BY LOCATION"
+            ]
+        },
+        {
+            "id":26,
+            "paraphrase":[
+                "Give the names of all oil paintings created after 1910."
+            ],
+            "question":" What are the titles of paintings that are created after 1910 and whose medium is oil?",
+            "sqa":{
+                "question":[
+                    "Which paintings created after 1910?",
+                    "Of those, which have a medium of oil?",
+                    "What are their titles?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE YEAR  >  1910",
+                    "SELECT * FROM paintings WHERE YEAR  >  1910 AND medium  =  \"oil\"",
+                    "SELECT title FROM paintings WHERE YEAR  >  1910 AND medium  =  \"oil\""
+                ]
+            },
+            "sql":[
+                "SELECT title FROM paintings WHERE YEAR  >  1910 AND medium  =  \"oil\""
+            ]
+        },
+        {
+            "id":27,
+            "paraphrase":[
+                "What is the unique id of every painter who had a medium oil painting displayed at gallery 240?"
+            ],
+            "question":" Find the unique id of the painters who had medium oil paintings exhibited at gallery 240?",
+            "sqa":{
+                "question":[
+                    "Which painters created works in oil?",
+                    "What is id of every painter who has oil paintings exhibited at gallery 240?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE medium  =  \"oil\"",
+                    "SELECT DISTINCT painterID FROM paintings WHERE medium  =  \"oil\" AND LOCATION  =  \"Gallery 240\""
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT painterID FROM paintings WHERE medium  =  \"oil\" AND LOCATION  =  \"Gallery 240\""
+            ]
+        },
+        {
+            "id":28,
+            "paraphrase":[
+                "What are the distinct titles of every painting that has a greater height than some painting on canvas?"
+            ],
+            "question":" Find the distinct titles of all the paintings that have a longer height than some painting on canvas?",
+            "sqa":{
+                "question":[
+                    "What are the heights of all the paintings?",
+                    "Which of these have a longer height than some paintings on canvas?",
+                    "What are their distinct titles?"
+                ],
+                "sql":[
+                    "SELECT height_mm FROM paintings",
+                    "SELECT height_mm FROM paintings WHERE height_mm  >  (SELECT min(height_mm) FROM paintings WHERE mediumOn  =  \"canvas\")",
+                    "SELECT DISTINCT title FROM paintings WHERE height_mm  >  (SELECT min(height_mm) FROM paintings WHERE mediumOn  =  \"canvas\")"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT title FROM paintings WHERE height_mm  >  (SELECT min(height_mm) FROM paintings WHERE mediumOn  =  \"canvas\")"
+            ]
+        },
+        {
+            "id":29,
+            "paraphrase":[
+                "What are the distinct ids of every painting that is older than some painting in gallery 240?"
+            ],
+            "question":" Find the distinct ids of all paintings that are older than some painting at location gallery 240.",
+            "sqa":{
+                "question":[
+                    "In what year was the oldest painting in Gallery 240 created?",
+                    "Of these, which are older than one in gallery 240?"
+                ],
+                "sql":[
+                    "SELECT max(YEAR) FROM paintings WHERE LOCATION  =  \"Gallery 240\"",
+                    "SELECT paintingID FROM paintings WHERE YEAR  <  (SELECT max(YEAR) FROM paintings WHERE LOCATION  =  \"Gallery 240\")"
+                ]
+            },
+            "sql":[
+                "SELECT paintingID FROM paintings WHERE YEAR  <  (SELECT max(YEAR) FROM paintings WHERE LOCATION  =  \"Gallery 240\")"
+            ]
+        },
+        {
+            "id":30,
+            "paraphrase":[
+                "What is the id of the oldest painting?"
+            ],
+            "question":" Find the id of the oldest painting.",
+            "sqa":{
+                "question":[
+                    "Find the year of the oldest painting.",
+                    "what is the id of that painting?"
+                ],
+                "sql":[
+                    "SELECT YEAR FROM paintings ORDER BY YEAR LIMIT 1",
+                    "SELECT paintingID FROM paintings ORDER BY YEAR LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT paintingID FROM paintings ORDER BY YEAR LIMIT 1"
+            ]
+        },
+        {
+            "id":31,
+            "paraphrase":[
+                "What is the full name of the artist with a sculpture whose title includes the word \"female\"?"
+            ],
+            "question":" What are the first and last name of the artist who had a sculpture work whose title has the word \u201cfemale\u201d in it?",
+            "sqa":{
+                "question":[
+                    "Which artists created sculptures?",
+                    "Of these artists, who created ones with a title that has the word \"female\" in it?",
+                    "What is his/her first and last name?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID",
+                    "SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.title LIKE \"%female%\"",
+                    "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.title LIKE \"%female%\""
+                ]
+            },
+            "sql":[
+                "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T2.title LIKE \"%female%\""
+            ]
+        },
+        {
+            "id":32,
+            "paraphrase":[
+                "What is the name of every distinct painting in alphabetical order?"
+            ],
+            "question":" List the names of all distinct paintings in alphabetical order.",
+            "sqa":{
+                "question":[
+                    "What are the names of all the paintings?",
+                    "List them in alphabetical order."
+                ],
+                "sql":[
+                    "SELECT DISTINCT title FROM paintings",
+                    "SELECT DISTINCT title FROM paintings ORDER BY title"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT title FROM paintings ORDER BY title"
+            ]
+        },
+        {
+            "id":33,
+            "paraphrase":[
+                "List the names of all distinct paintings from shortest to longest in height."
+            ],
+            "question":" List the names of all distinct paintings ordered by length.",
+            "sqa":{
+                "question":[
+                    "What are the names of all distinct paintings?",
+                    "Order them by length."
+                ],
+                "sql":[
+                    "SELECT DISTINCT title FROM paintings",
+                    "SELECT DISTINCT title FROM paintings ORDER BY height_mm"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT title FROM paintings ORDER BY height_mm"
+            ]
+        },
+        {
+            "id":34,
+            "paraphrase":[
+                "What are the names of  paintings and scupltures created between 1900 and 1950?"
+            ],
+            "question":" What are the names of both paintings and sculptures created between 1900 and 1950?",
+            "sqa":{
+                "question":[
+                    "Which are the names of all the paintings and sculptures?",
+                    "Which of those were created between 1900 and 1950?"
+                ],
+                "sql":[
+                    "SELECT title FROM paintings UNION SELECT title FROM sculptures",
+                    "SELECT title FROM paintings WHERE YEAR BETWEEN 1900 AND 1950 UNION SELECT title FROM sculptures WHERE YEAR BETWEEN 1900 AND 1950"
+                ]
+            },
+            "sql":[
+                "SELECT title FROM paintings WHERE YEAR BETWEEN 1900 AND 1950 UNION SELECT title FROM sculptures WHERE YEAR BETWEEN 1900 AND 1950"
+            ]
+        },
+        {
+            "id":35,
+            "paraphrase":[
+                "What are the titles of all paintings and sculpture works made by the artist whose id is 222?"
+            ],
+            "question":" Find the titles of paintings and sculpture works made by the artist whose id is 222?",
+            "sqa":{
+                "question":[
+                    "Which artist has an id of 222?",
+                    "What are the titles of all paintings and sculpture works created by him?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists WHERE artistID  =  222",
+                    "SELECT T2.title FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.artistID  =  222 UNION SELECT T2.title FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T1.artistID  =  222"
+                ]
+            },
+            "sql":[
+                "SELECT T2.title FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T1.artistID  =  222 UNION SELECT T2.title FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID WHERE T1.artistID  =  222"
+            ]
+        },
+        {
+            "id":36,
+            "paraphrase":[
+                "What is the id of the artist with the most paintings before 1900?"
+            ],
+            "question":" What is the id of the artist who has the highest number of painting works before 1900?",
+            "sqa":{
+                "question":[
+                    "How many paintings did each artist create?",
+                    "How many did each create before 1900?",
+                    "Who painted the most?"
+                ],
+                "sql":[
+                    "SELECT count(*) ,  T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T1.artistID",
+                    "SELECT count(*) ,  T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.year  <  1900 GROUP BY T1.artistID",
+                    "SELECT T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.year  <  1900 GROUP BY T1.artistID ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT T1.artistID FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.year  <  1900 GROUP BY T1.artistID ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":37,
+            "paraphrase":[
+                "What is the first name of the sculptor with the greatest number of works?"
+            ],
+            "question":" What is the first name of the artist who has the highest number of sculptures?",
+            "sqa":{
+                "question":[
+                    "How many sculptures did each artist create?",
+                    "Who created the most?",
+                    "What is their first name?"
+                ],
+                "sql":[
+                    "SELECT T2.sculptorID ,  count(*) FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID GROUP BY T2.sculptorID",
+                    "SELECT T2.sculptorID FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID GROUP BY T2.sculptorID ORDER BY count(*) DESC LIMIT 1",
+                    "SELECT T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID GROUP BY T2.sculptorID ORDER BY count(*) DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID GROUP BY T2.sculptorID ORDER BY count(*) DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":38,
+            "paraphrase":[
+                "What are the titles of paintings that have a width less than 600 or a height taller taller than 800?"
+            ],
+            "question":" What are the names of paintings whose width is less than 600 or height is larger than 800?",
+            "sqa":{
+                "question":[
+                    "What are the names of all the paintings?",
+                    "Which of these have a width less than 600 or a height larger than 800?"
+                ],
+                "sql":[
+                    "SELECT title FROM paintings",
+                    "SELECT title FROM paintings WHERE width_mm  <  600 OR height_mm  >  800"
+                ]
+            },
+            "sql":[
+                "SELECT title FROM paintings WHERE width_mm  <  600 OR height_mm  >  800"
+            ]
+        },
+        {
+            "id":39,
+            "paraphrase":[
+                "What locations have works painted before 1885 or after 1930?"
+            ],
+            "question":" Which locations have paintings created before 1885 or after 1930?",
+            "sqa":{
+                "question":[
+                    "Which paintings were created before 1885 or after 1930?",
+                    "Where are they all located?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE YEAR  < 1885 OR YEAR  >  1930",
+                    "SELECT DISTINCT LOCATION FROM paintings WHERE YEAR  < 1885 OR YEAR  >  1930"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT LOCATION FROM paintings WHERE YEAR  < 1885 OR YEAR  >  1930"
+            ]
+        },
+        {
+            "id":40,
+            "paraphrase":[
+                "What are the ids of paintings that are taller than 500 and shorter than 2000?"
+            ],
+            "question":" Find the ids of paintings whose height is bigger than 500 and less than 2000?",
+            "sqa":{
+                "question":[
+                    "What are the painting ids that have a height larger than 500?",
+                    "Of these, which also are shorter than 2000?"
+                ],
+                "sql":[
+                    "SELECT paintingID FROM paintings WHERE height_mm  >  500",
+                    "SELECT paintingID FROM paintings WHERE height_mm  >  500 AND height_mm  <  2000"
+                ]
+            },
+            "sql":[
+                "SELECT paintingID FROM paintings WHERE height_mm  >  500 AND height_mm  <  2000"
+            ]
+        },
+        {
+            "id":41,
+            "paraphrase":[
+                "What are the locations that have paintings in the mediums of on panels and on canvas?"
+            ],
+            "question":" Which locations have paintings in the mediums of on panel and on canvas?",
+            "sqa":{
+                "question":[
+                    "Which paintings are on panels?",
+                    "Which paintings are on canvas?",
+                    "Which locations contain both?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE mediumOn  =  \"panel\"",
+                    "SELECT * FROM paintings WHERE mediumOn  =  \"canvas\"",
+                    "SELECT DISTINCT LOCATION FROM paintings WHERE mediumOn  =  \"panel\" INTERSECT SELECT DISTINCT LOCATION FROM paintings WHERE mediumOn  =  \"canvas\""
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT LOCATION FROM paintings WHERE mediumOn  =  \"panel\" INTERSECT SELECT DISTINCT LOCATION FROM paintings WHERE mediumOn  =  \"canvas\""
+            ]
+        },
+        {
+            "id":42,
+            "paraphrase":[
+                "What are the locations that have works painted before 1885 and after 1930?"
+            ],
+            "question":" Find the locations that have paintings created before 1885 and after 1930?",
+            "sqa":{
+                "question":[
+                    "Which paintings were created before 1885?",
+                    "Where were these paintings located?",
+                    "Which of these locations also had paintings created after 1930?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE YEAR  <  1885",
+                    "SELECT LOCATION FROM paintings WHERE YEAR  <  1885",
+                    "SELECT DISTINCT LOCATION FROM paintings WHERE YEAR  <  1885 INTERSECT SELECT DISTINCT LOCATION FROM paintings WHERE YEAR  >  1930"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT LOCATION FROM paintings WHERE YEAR  <  1885 INTERSECT SELECT DISTINCT LOCATION FROM paintings WHERE YEAR  >  1930"
+            ]
+        },
+        {
+            "id":43,
+            "paraphrase":[
+                "What is the average height and width of paintings that are oil medium in gallery 241?"
+            ],
+            "question":" What are the average height and width of paintings that are oil medium in the place of gallery 241?",
+            "sqa":{
+                "question":[
+                    "Which paintings are on oil medium?",
+                    "Of these, which are located in gallery 241?",
+                    "What is their average height and width?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE medium  =  \"oil\"",
+                    "SELECT * FROM paintings WHERE medium  =  \"oil\" AND LOCATION  =  \"Gallery 241\"",
+                    "SELECT avg(height_mm) ,  avg(width_mm) FROM paintings WHERE medium  =  \"oil\" AND LOCATION  =  \"Gallery 241\""
+                ]
+            },
+            "sql":[
+                "SELECT avg(height_mm) ,  avg(width_mm) FROM paintings WHERE medium  =  \"oil\" AND LOCATION  =  \"Gallery 241\""
+            ]
+        },
+        {
+            "id":44,
+            "paraphrase":[
+                "What is the height and id of the tallest painting created before 1900?"
+            ],
+            "question":" What are the maximum height and id of paintings painted before 1900?",
+            "sqa":{
+                "question":[
+                    "Which paintings were created before 1900?",
+                    "What is the id of the painting with the maximum height?",
+                    "Also what is that height?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE YEAR  <  1900",
+                    "SELECT paintingID FROM paintings WHERE YEAR  <  1900 ORDER BY height_mm DESC LIMIT 1",
+                    "SELECT height_mm FROM paintings WHERE YEAR  <  1900 ORDER BY height_mm DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT max(height_mm) ,  paintingID FROM paintings WHERE YEAR  <  1900"
+            ]
+        },
+        {
+            "id":45,
+            "paraphrase":[
+                "What are largest height and width dimensions for paintings in each year?"
+            ],
+            "question":" What are the maximum height and width of paintings for each year?",
+            "sqa":{
+                "question":[
+                    "Group and order the paintings by year.",
+                    "For each year, what are the maximum height and width?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings GROUP BY YEAR ORDER BY YEAR",
+                    "SELECT max(height_mm) ,  max(width_mm) ,  YEAR FROM paintings GROUP BY YEAR ORDER BY YEAR"
+                ]
+            },
+            "sql":[
+                "SELECT max(height_mm) ,  max(width_mm) ,  YEAR FROM paintings GROUP BY YEAR ORDER BY YEAR"
+            ]
+        },
+        {
+            "id":46,
+            "paraphrase":[
+                "Find the average height and width of paintings grouped by painters and ordered by name"
+            ],
+            "question":" What are the average height and width of paintings grouped by painters and ordered by name?",
+            "sqa":{
+                "question":[
+                    "What are the average height and width of the paintings?",
+                    "Order them by their names.",
+                    "Group them by the painters' ids."
+                ],
+                "sql":[
+                    "SELECT avg(height_mm) ,  avg(width_mm) FROM paintings",
+                    "SELECT avg(height_mm) ,  avg(width_mm) FROM paintings ORDER BY title",
+                    "SELECT avg(height_mm) ,  avg(width_mm) ,  painterID FROM paintings GROUP BY painterID ORDER BY title"
+                ]
+            },
+            "sql":[
+                "SELECT avg(height_mm) ,  avg(width_mm) ,  painterID FROM paintings GROUP BY painterID ORDER BY title"
+            ]
+        },
+        {
+            "id":47,
+            "paraphrase":[
+                "What are the first names of all artists who have at least two paintings, and how many works did each create?"
+            ],
+            "question":" Find the first names and number of works of all artists who have at least two paintings?",
+            "sqa":{
+                "question":[
+                    "Which artists have at least two paintings?",
+                    "What are their first names?",
+                    "Also, how many works did each artist produce?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID HAVING count(*)  >=  2",
+                    "SELECT T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID HAVING count(*)  >=  2",
+                    "SELECT T1.artistID ,  count(*) FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID HAVING count(*)  >=  2"
+                ]
+            },
+            "sql":[
+                "SELECT T1.fname ,  count(*) FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID HAVING count(*)  >=  2"
+            ]
+        },
+        {
+            "id":48,
+            "paraphrase":[
+                "When did each artist who created less than 4 paintings die?"
+            ],
+            "question":" Find the death year of all artists who have at most 3 paintings?",
+            "sqa":{
+                "question":[
+                    "Which artists created less than 4 paintings?",
+                    "When did each one die?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID HAVING count(*)  <  4",
+                    "SELECT T1.deathYear FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID HAVING count(*)  <  4"
+                ]
+            },
+            "sql":[
+                "SELECT T1.deathYear FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID GROUP BY T2.painterID HAVING count(*)  <=  3"
+            ]
+        },
+        {
+            "id":49,
+            "paraphrase":[
+                "When did the artist who made the fewest sculptures die?"
+            ],
+            "question":" Find the death year of the artist who made the least number of sculptures?",
+            "sqa":{
+                "question":[
+                    "Find the id of all artists who made some scupltures.",
+                    "Of these, who created the fewest?",
+                    "When did he die?"
+                ],
+                "sql":[
+                    "SELECT T1.artistID FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID",
+                    "SELECT T1.artistID FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID GROUP BY T2.sculptorID ORDER BY count(*) LIMIT 1",
+                    "SELECT T1.deathYear FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID GROUP BY T2.sculptorID ORDER BY count(*) LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT T1.deathYear FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID GROUP BY T2.sculptorID ORDER BY count(*) LIMIT 1"
+            ]
+        },
+        {
+            "id":50,
+            "paraphrase":[
+                "Tell me the height and id number of the widest painting in gallery 240."
+            ],
+            "question":" What are the id and height of the painting with the longest width in gallery 240?",
+            "sqa":{
+                "question":[
+                    "What are all the paintings in gallery 240?",
+                    "Out of those, which is the widest?",
+                    "What is its id and height?"
+                ],
+                "sql":[
+                    "SELECT paintingID FROM paintings WHERE LOCATION  =  'Gallery 240'",
+                    "SELECT paintingID FROM paintings WHERE LOCATION  =  'Gallery 240' ORDER BY width_mm DESC LIMIT 1",
+                    "SELECT paintingID ,  height_mm FROM paintings WHERE LOCATION  =  'Gallery 240' ORDER BY width_mm DESC LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT paintingID ,  height_mm FROM paintings WHERE LOCATION  =  'Gallery 240' ORDER BY width_mm DESC LIMIT 1"
+            ]
+        },
+        {
+            "id":51,
+            "paraphrase":[
+                "What is the id of every painting created before the oldest painting in gallery 240?"
+            ],
+            "question":" What are the ids of the paintings created before all of the paintings in gallery 240?",
+            "sqa":{
+                "question":[
+                    "When was each painting in gallery 240 created?",
+                    "Which one is the oldest?",
+                    "Select the ids of all paintings older than that one."
+                ],
+                "sql":[
+                    "SELECT YEAR FROM paintings WHERE LOCATION  =  'Gallery 240'",
+                    "SELECT * FROM paintings WHERE LOCATION  =  'Gallery 240' ORDER BY YEAR LIMIT 1",
+                    "SELECT paintingID FROM paintings WHERE YEAR  <   (SELECT min(YEAR) FROM paintings WHERE LOCATION  =  'Gallery 240')"
+                ]
+            },
+            "sql":[
+                "SELECT paintingID FROM paintings WHERE YEAR  <   (SELECT min(YEAR) FROM paintings WHERE LOCATION  =  'Gallery 240')"
+            ]
+        },
+        {
+            "id":52,
+            "paraphrase":[
+                "List the ids of all paintings that are taller than the longest painting created after 1900."
+            ],
+            "question":" What are the ids of the paintings whose height is longer than the height of all paintings created after 1900?",
+            "sqa":{
+                "question":[
+                    "Show all paintings created after 1900",
+                    "What is their maximum height?",
+                    "What are the ids of the paintings whose height is higher than that maximum height?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE YEAR  >  1900",
+                    "SELECT max(height_mm) FROM paintings WHERE YEAR  >  1900",
+                    "SELECT paintingID FROM paintings WHERE height_mm  >   (SELECT max(height_mm) FROM paintings WHERE YEAR  >  1900)"
+                ]
+            },
+            "sql":[
+                "SELECT paintingID FROM paintings WHERE height_mm  >   (SELECT max(height_mm) FROM paintings WHERE YEAR  >  1900)"
+            ]
+        },
+        {
+            "id":53,
+            "paraphrase":[
+                "Which artists have the most paintings in oil?"
+            ],
+            "question":" Find the top 3 artists who have the biggest number of painting works whose medium is oil?",
+            "sqa":{
+                "question":[
+                    "Which artists created paintings in oil?",
+                    "How many did each paint?",
+                    "Find the last and first name of the three created the most."
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\"",
+                    "SELECT count(*) FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\"",
+                    "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" GROUP BY T2.painterID ORDER BY count(*) DESC LIMIT 3"
+                ]
+            },
+            "sql":[
+                "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID WHERE T2.medium  =  \"oil\" GROUP BY T2.painterID ORDER BY count(*) DESC LIMIT 3"
+            ]
+        },
+        {
+            "id":54,
+            "paraphrase":[
+                "Order all of the oil paintings by date of creation and list their ids, locations, and titles."
+            ],
+            "question":" List the painting id, location and title of the medium oil paintings ordered by year.",
+            "sqa":{
+                "question":[
+                    "Select all of the medium oil paintings",
+                    "Order them by date of creation.",
+                    "What are their ids, locations, and names?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE medium  =  \"oil\"",
+                    "SELECT * FROM paintings WHERE medium  =  \"oil\" ORDER BY YEAR",
+                    "SELECT paintingID ,  title ,  LOCATION FROM paintings WHERE medium  =   \"oil\" ORDER BY YEAR"
+                ]
+            },
+            "sql":[
+                "SELECT paintingID ,  title ,  LOCATION FROM paintings WHERE medium  =  \"oil\" ORDER BY YEAR"
+            ]
+        },
+        {
+            "id":55,
+            "paraphrase":[
+                "List the year, location, and name of all paintings that are taller than 1000 in alphabetical order."
+            ],
+            "question":" List the year, location and title of paintings whose height is longer than 1000 ordered by title.",
+            "sqa":{
+                "question":[
+                    "Order the paintings alphabetically by their titles.",
+                    "Which ones are taller than 1000?",
+                    "Select their title, when were they created and where are they located?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings ORDER BY title",
+                    "SELECT * FROM paintings WHERE height_mm  >  1000 ORDER BY title",
+                    "SELECT title ,  LOCATION ,  YEAR FROM paintings WHERE height_mm  >  1000 ORDER BY title"
+                ]
+            },
+            "sql":[
+                "SELECT title ,  LOCATION ,  YEAR FROM paintings WHERE height_mm  >  1000 ORDER BY title"
+            ]
+        },
+        {
+            "id":56,
+            "paraphrase":[
+                "What are the first and last names of the artists who did not sculpt but could paint."
+            ],
+            "question":" Find the first and last name of artists who have painting but no sculpture work.",
+            "sqa":{
+                "question":[
+                    "Which artists created paintings?",
+                    "Out of those, who never created a sculpture?",
+                    "What are their first and last names?"
+                ],
+                "sql":[
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID",
+                    "SELECT * FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID EXCEPT SELECT * FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID",
+                    "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID EXCEPT SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID"
+                ]
+            },
+            "sql":[
+                "SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN paintings AS T2 ON T1.artistID  =  T2.painterID EXCEPT SELECT T1.lname ,  T1.fname FROM artists AS T1 JOIN sculptures AS T2 ON T1.artistID  =  T2.sculptorID"
+            ]
+        },
+        {
+            "id":57,
+            "paraphrase":[
+                "Where do you have paintings that were created before 1885 that are not on canvas?"
+            ],
+            "question":" Find the locations that have paintings before 1885 and no work with medium on canvas?",
+            "sqa":{
+                "question":[
+                    "Which paintings are not on canvas?",
+                    "Which of these were created before 1885?",
+                    "Where are they located?"
+                ],
+                "sql":[
+                    "SELECT * FROM paintings WHERE mediumOn ! =  \"canvas\"",
+                    "SELECT * FROM paintings WHERE YEAR  <  1885 AND mediumOn ! =  \"canvas\"",
+                    "SELECT LOCATION FROM paintings WHERE YEAR  <  1885 AND mediumOn ! =  \"canvas\""
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT LOCATION FROM paintings WHERE YEAR  <  1885 AND mediumOn ! =  \"canvas\""
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}

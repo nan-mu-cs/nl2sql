@@ -1,0 +1,309 @@
+Total #= 46
+
+1.List all vehicle id
+
+SELECT vehicle_id FROM Vehicles;
+
+2. How many vehicle in total?
+
+SELECT count(*)
+FROM Vehicles;
+
+3.Show the detail of vehicle with id 1.
+
+SELECT vehicle_details
+FROM Vehicles
+WHERE vehicle_id=1;
+
+4.List the first name middle name and last name of all staff.
+
+SELECT first_name, middle_name, last_name
+FROM Staff;
+
+5.What is the birthday of staff with first name as Janessa and last name as Sawayn?
+
+SELECT date_of_birth
+FROM Staff
+WHERE first_name="Janessa" AND last_name="Sawayn";
+
+6. When is staff with first name as Janessa and last name as Sawayn join the company?
+
+SELECT date_joined_staff
+FROM Staff
+WHERE first_name="Janessa" AND last_name="Sawayn";
+
+7. When is staff with first name as Janessa and last name as Sawayn left the company?
+
+SELECT date_left_staff
+FROM Staff
+WHERE first_name="Janessa" AND last_name="Sawayn";
+
+8. How many staff has first name Ludie?
+
+SELECT count(*)
+FROM Staff
+WHERE first_name="Ludie";
+
+9. What is the nickname of staff with first name as Janessa and last name as Sawayn?
+
+SELECT nickname
+FROM Staff
+WHERE first_name="Janessa" AND last_name="Sawayn";
+
+10. How many staff in total?
+
+SELECT count(*)
+FROM Staff;
+
+11. Which city does staff with first name as Janessa and last name as Sawayn lived?
+
+SELECT T1.city
+FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id=T2.staff_address_id
+WHERE T2.first_name="Janessa" AND T2.last_name="Sawayn";
+
+12. Which country and state does staff with first name as Janessa and last name as Sawayn lived?
+
+SELECT T1.country, T1.state_province_county
+FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id=T2.staff_address_id
+WHERE T2.first_name="Janessa" AND T2.last_name="Sawayn";
+
+13. How long is the total lesson time took by customer with first name as Rylan and last name as Goodwin?
+
+Select sum(T1.lesson_time)
+FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id =T2.customer_id
+WHERE T2.first_name="Rylan" AND T2.last_name="Goodwin";
+
+14. What is the zip code of staff with first name as Janessa and last name as Sawayn lived?
+
+SELECT T1.zip_postcode
+FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id=T2.staff_address_id
+WHERE T2.first_name="Janessa" AND T2.last_name="Sawayn";
+
+15. How many staff lived in state Georgia?
+
+SELECT count(*)
+FROM Addresses
+WHERE state_province_county="Georgia";
+
+16. Find out the first name and last name of staff lived in city Damianfort.
+
+
+SELECT T2.first_name, T2.last_name
+FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id=T2.staff_address_id
+WHERE T1.city="Damianfort";
+
+
+
+17. Which city lives most of staffs? List the city name and number of staffs.
+
+SELECT T1.city, count(*)
+FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id=T2.staff_address_id
+GROUP BY T1.city
+ORDER BY count(*) DESC
+LIMIT 1;
+
+
+18. List the states which have between 2 to 4 staffs living there.
+
+SELECT T1.state_province_county
+FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id=T2.staff_address_id
+GROUP BY T1.state_province_county
+HAVING count(*) between 2 and 4;
+
+19. List the first name and last name of all customers.
+
+SELECT first_name, last_name
+FROM Customers;
+
+20. List email address and birthday of customer whose first name as Carole.
+
+SELECT email_address, date_of_birth
+FROM Customers
+WHERE first_name="Carole"
+
+21. List phone number and email address of customer with more than 2000 outstanding balance.
+
+SELECT phone_number, email_address
+FROM Customers
+WHERE amount_outstanding > 2000;
+
+22. What is the status code, mobile phone number and email address of customer with last name as Kohler or first name as Marina?
+
+
+SELECT customer_status_code, cell_mobile_phone_number, email_address
+FROM Customers
+WHERE first_name="Marina" or last_name = "Kohler"
+
+
+23. When are the birthdays of customer who are classified as 'Good Customer' status?
+
+SELECT date_of_birth
+FROM Customers
+WHERE customer_status_code = 'Good Customer'
+
+24. When did customer with first name as Carole and last name as Bernhard became a customer?
+
+SELECT date_became_customer
+FROM Customers
+WHERE first_name="Carole" AND last_name="Bernhard";
+
+25. How many customers in total?
+
+SELECT count(*)
+FROM Customers;
+
+26. List all customer status codes and the number of customers having each status code.
+
+SELECT customer_status_code,count(*)
+FROM Customers
+GROUP BY customer_status_code;
+
+26. Which customer status code has least number of customers?
+
+SELECT customer_status_code
+FROM Customers
+GROUP BY customer_status_code
+ORDER BY count(*) ASC
+LIMIT 1;
+
+
+27. How many lesson took by customer with first name as Rylan and last name as Goodwin was completed?
+
+SELECT count(*)
+FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id =T2.customer_id
+WHERE T2.first_name="Rylan" AND T2.last_name="Goodwin" AND T1.lesson_status_code="Completed";
+
+
+28. What is maximum, minimum and average amount of outstanding of customer?
+
+SELECT max(amount_outstanding), min(amount_outstanding), avg(amount_outstanding)
+FROM Customers;
+
+29. List the first name and last name of customers have the amount of outstanding between 1000 and 3000.
+
+SELECT first_name, last_name
+FROM Customers
+WHERE amount_outstanding BETWEEN 1000 AND 3000;
+
+30. List first name and last name of customers lived in city Lockmanfurt.
+
+SELECT T1.first_name, T1.last_name
+FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id=T2.address_id
+WHERE T2.city="Lockmanfurt";
+
+31. Which country does customer with first name as Carole and last name as Bernhard lived in?
+
+SELECT T2.country
+FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id=T2.address_id
+WHERE T1.first_name="Carole" AND T1.last_name="Bernhard"
+
+
+32. What is zip code of customer with first name as Carole and last name as Bernhard?
+ 
+SELECT T2.zip_postcode
+FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id=T2.address_id
+WHERE T1.first_name="Carole" AND T1.last_name="Bernhard"
+
+33. Which city does has most number of customers?
+
+SELECT T2.city
+FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id=T2.address_id
+GROUP BY T2.city
+ORDER BY count(*) DESC
+LIMIT 1;
+
+34. How much in total does customer with first name as Carole and last name as Bernhard paid?
+
+SELECT sum(T1.amount_payment)
+FROM Customer_Payments AS T1 JOIN Customers AS T2 ON T1.customer_id=T2.customer_id
+WHERE T2.first_name="Carole" AND T2.last_name="Bernhard"
+
+35. List the number of customers that did not have any payment history.
+
+SELECT count(*)
+FROM Customers
+WHERE customer_id NOT IN (
+	SELECT customer_id
+	FROM Customer_Payments
+);
+
+36. List first name and last name of customers that have more than 2 payments.
+
+SELECT T2.first_name, T2.last_name
+FROM Customer_Payments AS T1 JOIN Customers AS T2 ON T1.customer_id=T2.customer_id
+GROUP BY T1.customer_id
+HAVING count(*) > 2;
+
+37. List all payment methods and number of payments using each payment methods.
+
+SELECT payment_method_code, count(*)
+FROM Customer_Payments
+GROUP BY payment_method_code;
+
+
+38. How many lessons were in cancelled state?
+
+SELECT count(*)
+FROM Lessons
+WHERE lesson_status_code="Cancelled";
+
+39. List lesson id of all lessons taught by staff with first name as Janessa, last name as Sawayn and nickname containing letter 's'.
+
+SELECT T1.lesson_id
+FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id=T2.staff_id
+WHERE T2.first_name="Janessa" and T2.last_name="Sawayn" and nickname LIKE "%s%";
+
+40. How many lessons taught by staff whose first name has letter 'a' in it?
+
+SELECT count(*)
+FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id=T2.staff_id
+WHERE T2.first_name LIKE "%a%"
+
+41. How long is the total lesson time taught by staff with first name as Janessa and last name as Sawayn?
+
+SELECT sum(lesson_time)
+FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id=T2.staff_id
+WHERE T2.first_name="Janessa" and T2.last_name="Sawayn";
+
+42. What is average lesson price taught by staff with first name as Janessa and last name as Sawayn?
+
+SELECT avg(price)
+FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id=T2.staff_id
+WHERE T2.first_name="Janessa" and T2.last_name="Sawayn";
+
+
+43. How many lesson does customer with first name as Ray took?
+
+SELECT count(*)
+FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id =T2.customer_id
+WHERE T2.first_name="Ray"
+
+
+44. Which last names are both used by customers and by staff?
+
+select last_name
+from Customers
+INTERSECT
+select last_name
+from Staff
+
+
+45. What is the first name of the staff who did not give any lesson?
+
+
+select first_name
+from Staff
+EXCEPT
+select T2.first_name
+from Lessons as T1 JOIN Staff as T2
+on T1.staff_id = T2.staff_id
+
+
+46. What is the id and detail of the vehicle used in lessons for most of the times?
+
+select T1.vehicle_id, T1.vehicle_details
+from Vehicles as T1 JOIN Lessons as T2
+on T1.vehicle_id = T2.vehicle_id
+group by T1.vehicle_id
+order by count(*) desc limit 1
+

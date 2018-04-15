@@ -1,0 +1,454 @@
+{
+    "data":[
+        {
+            "id":1,
+            "paraphrase":[
+                "How many pets have a greater weight than 10?"
+            ],
+            "question":" Find the number of pets whose weight is heavier than 10.",
+            "sqa":{
+                "question":[
+                    "What information is there on pets?",
+                    "Which pets weigh more than 10?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT * FROM pets",
+                    "SELECT * FROM pets WHERE weight  >  10",
+                    "SELECT count(*) FROM pets WHERE weight  >  10"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM pets WHERE weight  >  10"
+            ]
+        },
+        {
+            "id":2,
+            "paraphrase":[
+                "How much does the youngest dog weigh?"
+            ],
+            "question":" Find the weight of the youngest dog.",
+            "sqa":{
+                "question":[
+                    "Order the pets by age",
+                    "How much does each one weigh?",
+                    "What about the first one?"
+                ],
+                "sql":[
+                    "SELECT * FROM pets ORDER BY pet_age",
+                    "SELECT weight FROM pets ORDER BY pet_age",
+                    "SELECT weight FROM pets ORDER BY pet_age LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT weight FROM pets ORDER BY pet_age LIMIT 1"
+            ]
+        },
+        {
+            "id":3,
+            "paraphrase":[
+                "List the maximum weight and type for each type of pet."
+            ],
+            "question":" Find the maximum weight for each type of pet. List the maximum weight and pet type.",
+            "sqa":{
+                "question":[
+                    "What are the different types of pets?",
+                    "For each of those types, what is the maximum weight?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT petType FROM pets",
+                    "SELECT max(weight) ,  petType FROM pets GROUP BY petType"
+                ]
+            },
+            "sql":[
+                "SELECT max(weight) ,  petType FROM pets GROUP BY petType"
+            ]
+        },
+        {
+            "id":4,
+            "paraphrase":[
+                "How many pets are owned by students that have an age greater than 20?"
+            ],
+            "question":" Find number of pets owned by students who are older than 20.",
+            "sqa":{
+                "question":[
+                    "Which pets are owned by students older than 20?",
+                    "How many are there?"
+                ],
+                "sql":[
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.age  >  20",
+                    "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.age  >  20"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.age  >  20"
+            ]
+        },
+        {
+            "id":5,
+            "paraphrase":[
+                "How many dog pets are raised by female students?"
+            ],
+            "question":" Find the number of dog pets that are raised by female students (with sex F).",
+            "sqa":{
+                "question":[
+                    "Who are the female students?",
+                    "Of those, who has a pet?",
+                    "How many of those have dogs?"
+                ],
+                "sql":[
+                    "SELECT * FROM student WHERE sex  =  'F'",
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.sex  =  'F'",
+                    "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T2.petid  =  T3.petid WHERE T1.sex  =  'F' AND T3.pettype  =  'dog'"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T2.petid  =  T3.petid WHERE T1.sex  =  'F' AND T3.pettype  =  'dog'"
+            ]
+        },
+        {
+            "id":6,
+            "paraphrase":[
+                "How many different types of pet are there?"
+            ],
+            "question":" Find the number of distinct type of pets.",
+            "sqa":{
+                "question":[
+                    "What are the different pet types?",
+                    "How many exist?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT pettype FROM pets",
+                    "SELECT count(DISTINCT pettype) FROM pets"
+                ]
+            },
+            "sql":[
+                "SELECT count(DISTINCT pettype) FROM pets"
+            ]
+        },
+        {
+            "id":7,
+            "paraphrase":[
+                "What are the first names of every student who has a cat or dog as a pet?"
+            ],
+            "question":" Find the first name of students who have cat or dog pet.",
+            "sqa":{
+                "question":[
+                    "what is the first name of every student?",
+                    "Of those names, which ones correspond to somebody who has a cat?",
+                    "Also, combine those names with those who have a dog."
+                ],
+                "sql":[
+                    "SELECT DISTINCT T1.Fname FROM student AS T1",
+                    "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'",
+                    "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' OR T3.pettype  =  'dog'"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' OR T3.pettype  =  'dog'"
+            ]
+        },
+        {
+            "id":8,
+            "paraphrase":[
+                "What are the students' first names who have both cats and dogs as pets?"
+            ],
+            "question":"Find the name of students who have both cat and dog pets.",
+            "sqa":{
+                "question":[
+                    "Which students have a dog as their type of pet?",
+                    "Who also has a cat?",
+                    "What are their first names?"
+                ],
+                "sql":[
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog'",
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' INTERSECT SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog'",
+                    "SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' INTERSECT SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog'"
+                ]
+            },
+            "sql":[
+                "SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat' INTERSECT SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog'"
+            ]
+        },
+        {
+            "id":9,
+            "paraphrase":[
+                "What major is every student who does not own a cat as a pet, and also how old are they?"
+            ],
+            "question":" Find the major and age of students who do not have a cat pet.",
+            "sqa":{
+                "question":[
+                    "Which students have a cat as their pets?",
+                    "What are they majoring in?",
+                    "Also, how old are they?"
+                ],
+                "sql":[
+                    "SELECT * FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')",
+                    "SELECT major FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')",
+                    "SELECT major ,  age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+                ]
+            },
+            "sql":[
+                "SELECT major ,  age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+            ]
+        },
+        {
+            "id":10,
+            "paraphrase":[
+                "What are the ids of the students who do not own cats as pets?"
+            ],
+            "question":" Find the id of students who do not have a cat pet.",
+            "sqa":{
+                "question":[
+                    "What is every student's id?",
+                    "Of those ids, which correspond to those who own cats as pets?",
+                    "List all the other ids."
+                ],
+                "sql":[
+                    "SELECT stuid FROM student",
+                    "SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'",
+                    "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'"
+                ]
+            },
+            "sql":[
+                "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'"
+            ]
+        },
+        {
+            "id":11,
+            "paraphrase":[
+                "What is the first name of every student who has a dog but does not have a cat?"
+            ],
+            "question":" Find the first name and age of students who have a dog but do not have a cat as a pet.",
+            "sqa":{
+                "question":[
+                    "Which students have dogs?",
+                    "Of those, who does not own a cat?",
+                    "What are their first names and ages?"
+                ],
+                "sql":[
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog'",
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' EXCEPT SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'",
+                    "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' EXCEPT SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat'"
+                ]
+            },
+            "sql":[
+                "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+            ]
+        },
+        {
+            "id":12,
+            "paraphrase":[
+                "What type of pet is the youngest animal, and how much does it weigh?"
+            ],
+            "question":" Find the type and weight of the youngest pet.",
+            "sqa":{
+                "question":[
+                    "Who is the youngest pet?",
+                    "What type are they?",
+                    "Also, how much do they weigh?"
+                ],
+                "sql":[
+                    "SELECT * FROM pets ORDER BY pet_age LIMIT 1",
+                    "SELECT pettype FROM pets ORDER BY pet_age LIMIT 1",
+                    "SELECT pettype ,  weight FROM pets ORDER BY pet_age LIMIT 1"
+                ]
+            },
+            "sql":[
+                "SELECT pettype ,  weight FROM pets ORDER BY pet_age LIMIT 1"
+            ]
+        },
+        {
+            "id":13,
+            "paraphrase":[
+                "What is the id and weight of every pet who is older than 1?"
+            ],
+            "question":" Find the id and weight of all pets whose age is older than 1.",
+            "sqa":{
+                "question":[
+                    "What are ids of every pet?",
+                    "For those, which refer to pets older than 1?",
+                    "Also, how much do they weigh?"
+                ],
+                "sql":[
+                    "SELECT petid FROM pets",
+                    "SELECT petid FROM pets WHERE pet_age  >  1",
+                    "SELECT petid ,  weight FROM pets WHERE pet_age  >  1"
+                ]
+            },
+            "sql":[
+                "SELECT petid ,  weight FROM pets WHERE pet_age  >  1"
+            ]
+        },
+        {
+            "id":14,
+            "paraphrase":[
+                "What is the average and maximum age for each pet type?"
+            ],
+            "question":" Find the average and maximum age for each type of pet.",
+            "sqa":{
+                "question":[
+                    "What are the different pet types?",
+                    "For each of those, what is the maximum age?",
+                    "What about the average age?"
+                ],
+                "sql":[
+                    "SELECT DISTINCT pettype FROM pets",
+                    "SELECT max(pet_age) ,  pettype FROM pets GROUP BY pettype",
+                    "SELECT avg(pet_age) ,  pettype FROM pets GROUP BY pettype"
+                ]
+            },
+            "sql":[
+                "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype"
+            ]
+        },
+        {
+            "id":15,
+            "paraphrase":[
+                "What is the average weight for each type of pet?"
+            ],
+            "question":" Find the average weight for each pet type.",
+            "sqa":{
+                "question":[
+                    "What information is there on pets?",
+                    "For each pet type, what is the average weight?"
+                ],
+                "sql":[
+                    "SELECT * FROM pets",
+                    "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype"
+                ]
+            },
+            "sql":[
+                "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype"
+            ]
+        },
+        {
+            "id":16,
+            "paraphrase":[
+                "What are the different first names and ages of the students who do have pets?"
+            ],
+            "question":" Find the first name and age of students who have a pet.",
+            "sqa":{
+                "question":[
+                    "Which students have pets?",
+                    "What are the different first names?",
+                    "Also, what are their ages?"
+                ],
+                "sql":[
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid",
+                    "SELECT DISTINCT T1.fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid",
+                    "SELECT DISTINCT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid"
+                ]
+            },
+            "sql":[
+                "SELECT DISTINCT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid"
+            ]
+        },
+        {
+            "id":17,
+            "paraphrase":[
+                "What is the id of the pet owned by the student whose last name is 'Smith'?"
+            ],
+            "question":" Find the id of the pet owned by student whose last name is \u2018Smith\u2019.",
+            "sqa":{
+                "question":[
+                    "Which students have pets?",
+                    "Of those, whose last name is smith?",
+                    "What is their pet's id?"
+                ],
+                "sql":[
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid",
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.Lname  =  'Smith'",
+                    "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.Lname  =  'Smith'"
+                ]
+            },
+            "sql":[
+                "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.Lname  =  'Smith'"
+            ]
+        },
+        {
+            "id":18,
+            "paraphrase":[
+                "For students who have pets, how many pets does each student have?"
+            ],
+            "question":" Find the number of pets for each student who has any pet and student id.",
+            "sqa":{
+                "question":[
+                    "Which of the students have pets?",
+                    "How many pets does each of them have?"
+                ],
+                "sql":[
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid",
+                    "SELECT count(*) ,  T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid"
+                ]
+            },
+            "sql":[
+                "SELECT count(*) ,  T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid"
+            ]
+        },
+        {
+            "id":19,
+            "paraphrase":[
+                "What is the first name and gender of the all the students who have more than one pet?"
+            ],
+            "question":" Find the first name and gender of student who have more than one pet.",
+            "sqa":{
+                "question":[
+                    "What is the first name and sex of each student?",
+                    "Which of those belong to somebody who has more than one pet?"
+                ],
+                "sql":[
+                    "SELECT T1.fname ,  T1.sex FROM student AS T1",
+                    "SELECT T1.fname ,  T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid HAVING count(*)  >  1"
+                ]
+            },
+            "sql":[
+                "SELECT T1.fname ,  T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid HAVING count(*)  >  1"
+            ]
+        },
+        {
+            "id":20,
+            "paraphrase":[
+                "What is the last name of the student who has a cat that is 3 years old?"
+            ],
+            "question":" Find the last name of the student who has a cat that is age 3.",
+            "sqa":{
+                "question":[
+                    "What is the id of the three-year old cat?",
+                    "Who is the owner of that cat?",
+                    "What is their last name?"
+                ],
+                "sql":[
+                    "SELECT petid FROM pets WHERE pet_age  =  3 AND pettype  =  'cat'",
+                    "SELECT * FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pet_age  =  3 AND T3.pettype  =  'cat'",
+                    "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pet_age  =  3 AND T3.pettype  =  'cat'"
+                ]
+            },
+            "sql":[
+                "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pet_age  =  3 AND T3.pettype  =  'cat'"
+            ]
+        },
+        {
+            "id":21,
+            "paraphrase":[
+                "What is the average age for all students who do not own any pets?"
+            ],
+            "question":" Find the average age of students who do not have any pet.",
+            "sqa":{
+                "question":[
+                    "Which students do not own any pets?",
+                    "What is their average age?"
+                ],
+                "sql":[
+                    "SELECT * FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid)",
+                    "SELECT avg(age) FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid)"
+                ]
+            },
+            "sql":[
+                "SELECT avg(age) FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid)"
+            ]
+        }
+    ],
+    "label_id":"",
+    "review_id":""
+}
