@@ -142,9 +142,11 @@ WHERE T1.Tourist_Details = "Vincent"
 Which tourist attractions does the visitor with the detail 'Vincent' visit?
 
 select T1.Name
-FROM Tourist_Attractions as T1 JOIN VISITORS as T2 JOIN VISITS as T3 
-on T1.Tourist_Attraction_ID = T3.Tourist_Attraction_ID AND T2.Tourist_ID = T3.Tourist_ID
-WHERE T2.Tourist_Details = "Vincent"
+FROM Tourist_Attractions as T1 JOIN VISITS as T2 
+on T1.Tourist_Attraction_ID = T2.Tourist_Attraction_ID 
+JOIN VISITORS as T3 
+on T2.Tourist_ID = T3.Tourist_ID
+WHERE T3.Tourist_Details = "Vincent"
 
 What are the names of tourist attraction and dates that the tourists named Vincent or Vivian visited?
 
