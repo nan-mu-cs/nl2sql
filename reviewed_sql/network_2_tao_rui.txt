@@ -7,7 +7,7 @@ SELECT count(T2.friend)
 FROM Person as T1 JOIN PersonFriend as T2 ON T1.name = T2.name
 WHERE T1.name = 'Dan'
 
-How many females do this network has?
+How many females does this network has?
 
 SELECT count(*)
 FROM Person
@@ -36,7 +36,6 @@ WHERE age = (select max(age) from person)
 
 Who is the oldest person whose job is student?
 
-SELECT name
 SELECT name
 FROM Person
 WHERE job = 'student' and age = (select max(age) from person WHERE job = 'student' )
@@ -122,7 +121,7 @@ SELECT name
 FROM Person
 ORDER BY age desc
 
-Find the name and age of all males in alphabetic order of their age.
+Find the name and age of all males in order of their age.
 
 SELECT name
 FROM Person
@@ -233,7 +232,7 @@ Who is the friend of Zach with longest year relationship?
 
 SELECT friend
 FROM PersonFriend
-WHERE name= 'Zach' and T2.year = (select max(year) FROM PersonFriend WHERE name= 'Zach')
+WHERE name= 'Zach' and year = (select max(year) FROM PersonFriend WHERE name= 'Zach')
 
 What is the age of the friend of Zach with longest year relationship?
 
@@ -271,13 +270,13 @@ LIMIT 1
 
 What is the total number of people who has no friend living in the city of Austin.
 
-Select count(*)
+Select count(distinct name)
 From PersonFriend
 Where friend NOT IN (select name From person where city = 'Austin')
 
 6. Find Alice's friends of friends.
 
-SELECT T4.name
+SELECT distinct T4.name
 FROM PersonFriend as T1 
      JOIN Person as T2 ON T1.name = T2.name
      JOIN PersonFriend T3 ON T1.friend = T3.name
