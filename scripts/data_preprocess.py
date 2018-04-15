@@ -14,6 +14,7 @@ TRAIN_EXT = '/train'
 DEV_EXT = '/dev'
 TABLE_EXT = '/tables'
 extra_sql_keywords = ['where', 'group', 'order', 'limit', 'intersect', 'union', 'except']
+where_ops = ['not', 'between', '=', '>', '<', '>=', '<=', 'in', 'like', 'is']
 
 class agg(Enum):
     none = 0
@@ -427,6 +428,10 @@ def table_create():
         with open('processed/train/' + dbn + '_processed.json', 'w') as fp:
             json.dump(sql_data, fp, indent=4)
 
+
+
+### Need fix:
+# 1) >= or <= operators in where/having condition (these get tokenized)
 def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
     # print sql_counter
     cleaned_data[pointer] = {}
@@ -584,7 +589,6 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
             and_inds = [ind for ind, tok in enumerate(where_clause) if tok == 'and' or tok == 'or']
             st_inds = [0] + [ind + 1 for ind in and_inds]
             end_inds = [ind for ind in and_inds] + [len(where_clause)]
-            where_ops = ['not', 'between', '=', '>', '<', '>=', '<=', 'in', 'like', 'is']
 
             # pos = 0
             # print st_inds, end_inds
@@ -692,9 +696,55 @@ def parse_sql(cleaned_data, query_tok, schema, dbn, sql_counter, pointer):
                 rel_cols_stripped = [entry[1] for entry in rel_cols] 
                 group_list.append(rel_cols[rel_cols_stripped.index(col_split[1])][0])
 
-        if having_flag: #fix this
+        if having_flag: 
             having_ind = group_clause.index('having')
-            group_list.append(group_clause[having_ind + 1:])
+            print 'having', group_clause[having_ind + 1:]
+
+            curr = [0, 0, 0, 0]
+            curr_cond = group_clause[having_ind + 1:]
+            # print curr_cond
+
+            # check for agg ops
+            for i, tok in enumerate(agg_toks):
+                if tok in curr_cond:
+                    curr[0] = i + 1
+                    break
+
+            # get cond operator
+            st = 0
+            op_ind = 0
+            between_flag = False
+
+            for i, op in enumerate(where_ops):
+                if op in curr_cond:
+                    op_ind += curr_cond.index(op)                           
+                    curr[2] = i
+
+                    if op == 'between':
+                        between_flag = True
+
+            # get where col
+            col = curr_cond[st:op_ind] #hopefully just 1 token
+            col_split = col[0].split('.')
+
+            if len(col_split) == 1:
+                try:
+                    curr[1] = col_map[temp_map.index(col_split[0])][0] # doesn't handle operators (e.g. end_date-start_date)
+                except: 
+                    curr[1] = 0
+            else:
+                curr_tab = tables[as_map.index(col_split[0])]
+                rel_cols = [entry for entry in col_map[1:] if entry[2] == curr_tab] 
+                rel_cols_stripped = [entry[1] for entry in rel_cols] 
+                curr[1] = rel_cols[rel_cols_stripped.index(col_split[1])][0]
+
+            # get where val
+            val = curr_cond[op_ind - st + 1:]
+            curr[3] = ''.join(val)
+            if between_flag:
+                curr[3] = val
+
+            group_list.append(curr)#group_clause[having_ind + 1:])
 
     cleaned_data[pointer]['group'] = group_list
 
