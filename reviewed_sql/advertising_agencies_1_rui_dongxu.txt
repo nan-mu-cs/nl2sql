@@ -1,142 +1,102 @@
 Total = # 40
 
-
 1. How many agencies do we have?
-
 
 select count(*)
 from Agencies
-
 
 2. Show all agency ids and details.
 
-
 select agency_id, agency_details
 from Agencies
-________________
-
 
 3. Show the number of clients.
-
 
 select count(*)
 from Clients
 
-
 4. List all client ids and client details.
-
 
 select client_id, client_details
 from Clients
-________________
-
 
 5. Show agency ids and the number of clients for each agent.
-
 
 select agency_id, count(*)
 from Clients
 group by agency_id
 
+6. What is the agency id and details with most number of clients?
 
-6. What is the agent id with most number of clients?
-
-
-select agency_id
-from Clients
-group by agency_id
+select T1.agency_id, T1.agency_details
+from Agencies as T1 JOIN Clients as T2
+on T1.agency_id = T2.agency_id
+group by T1.agency_id
 order by count(*) desc
 limit 1
 
+7. Show agency ids and details with at least 2 clients.
 
-7. Show agency ids with at least 2 clients.
-
-
-select agency_id
-from Clients
-group by agency_id
+select T1.agency_id, T1.agency_details
+from Agencies as T1 JOIN Clients as T2
+on T1.agency_id = T2.agency_id
+group by T1.agency_id
 having count(*) >= 2
-________________
 
-
-8. Show agency details for client with id 1.
-
+8. Show agency details for client with detail 'Mac'.
 
 select T2.agency_details
 from Clients as T1 join Agencies as T2 on T1.agency_id = T2.agency_id
-where T1.client_id = 1
+where T1.client_details = 'Mac'
 
+9. Show details for all clients and the details of their corresponding agents.
 
-9. Show ids for all clients of agent 1.
-
-
-select T1.client_id
+select T1.client_details, T2.agency_details
 from Clients as T1 join Agencies as T2 on T1.agency_id = T2.agency_id
-where T2.agency_id = 1
- 
-________________
-10. Show all sic codes and the number of clients with each code.
 
+10. Show all sic codes and the number of clients with each code.
 
 select sic_code, count(*)
 from Clients
 group by sic_code
 
-
 11. Show all client ids and details with sic code "Bad".
-
 
 select client_id, client_details
 from Clients
-where sic_code = "Bad"
-________________
-
+where sic_code = "Bad";
 
 12. Show all agency ids and details with a client.
 
-
-select agency_id, agency_details
-from Agencies
-where agency_id IN (select agency_id from Clients)
-
+select T1.agency_id, T1.agency_details
+from Agencies as T1 JOIN Clients as T2
+on T1.agency_id = T2.agency_id
 
 13. Show all agency ids without any client.
-
 
 select agency_id
 from Agencies
 EXCEPT
 select agency_id
 from Clients
-________________
-
 
 14. How many invoices do we have?
-
 
 select count(*)
 from Invoices
 
+15. Show ids, status codes, and details for all invoices for clients.
 
-15. Show ids, status codes, and details for all invoices for client 15.
-
-
-select invoice_id, invoice_status_code, invoice_details
+select invoice_id, invoice_status, invoice_details
 from Invoices
-where client_id = 15
-________________
-
 
 16. Show all client ids and the number of invoices for each client.
-
 
 select client_id, count(*)
 from Invoices
 group by client_id
 
-
 17. List the client id and detail with most number of invoices.
-
 
 select T1.client_id, T2.client_details
 from Invoices as T1 join Clients as T2 on T1.client_id = T2.client_id
@@ -144,89 +104,72 @@ group by T1.client_id
 order by count(*) desc
 limit 1
 
-
-18. What are client ids with at least 2 invoices.
-
+18. What are client ids and details with at least 2 invoices.
 
 select client_id
 from Invoices
 group by client_id
 having count(*) >= 2
-________________
-
 
 19. Show all invoice status codes and the number of invoices with each status.
 
-
-select invoice_status_code, count(*)
+select invoice_status, count(*)
 from Invoices
-group by invoice_status_code
-
+group by invoice_status
 
 20. What is the invoice status code with most number of invoices.
 
-
-select invoice_status_code
+select invoice_status
 from Invoices
-group by invoice_status_code
+group by invoice_status
 order by count(*) desc
 limit 1
-________________
+
+21. Show all invoice status codes and details and the corresponding client id and details and agency id and details.
+
+select T1.invoice_status, T1.invoice_details, T2.client_id, T2.client_details, T3.agency_id, T3.agency_details
+from Invoices as T1 JOIN Clients as T2
+on T1.client_id = T2.client_id
+JOIN Agencies as T3
+on T2.agency_id = T3.agency_id;
+
+22. List all meeting type codes and details.
+
+select meeting_type, other_details
+from meetings;
 
 
-21. Show all invoice status codes and descriptions.
+23. Show all meeting outcomes and purposes.
+
+select meeting_outcome, purpose_of_meeting
+from meetings
+
+24. Show all payment ids and details for invoices whose status is 'Working'.
+
+select T1.payment_id, T1.payment_details
+from Payments as T1 JOIN Invoices as T2
+ont T1.invoice_id = T2.invoice_id
+where T2.invoice_status = 'Working'
 
 
-select invoice_status_code, invoice_status_description
-from Ref_invoice_status
+25. Show all invoice ids and statuses without a payment.
 
-
-22. List all meeting type codes and descriptions.
-
-
-select meeting_type_code, meeting_type_description
-from Ref_meeting_types
-
-
-23. Show all meeting outcome codes and descriptions.
-
-
-select meeting_outcome_code, meeting_outcome_description
-from Ref_meeting_outcomes
-________________
-
-
-24. Show all payment ids and details for invoice 8.
-
-
-select payment_id, payment_details
-from Payments
-where invoice_id = 8
-
-
-25. Show all invoice ids without a payment.
-
-
-select invoice_id
+select invoice_id, invoice_status
 from Invoices
 EXCEPT
-select invoice_id
-from Payments
-
+select T1.invoice_id, T1.invoice_status
+from Invoices as T1 join Payments as T2
+on T1.invoice_id = T2.invoice_id
 
 26. How many payments do we have?
-
 
 select count(*)
 from Payments
 
-
 27. List all payment ids with invoice ids and details.
-
 
 select payment_id, invoice_id, payment_details
 from Payments
-
 
 28. Show all invoice ids with a payment.
 
