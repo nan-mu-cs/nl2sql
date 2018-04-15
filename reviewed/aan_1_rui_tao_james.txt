@@ -1,0 +1,443 @@
+Total = # 40
+
+
+1. How many authors do we have?
+P: Count the number of authors.
+
+select count(*)
+from Author
+
+
+How many papers do we have?
+P: Count the number of papers.
+
+select count(*)
+from Paper
+
+
+How many affiliations do we have?
+P: Count the number of affiliations.
+
+select count(*)
+from Affiliation
+
+
+2. How many papers do we have in NAACL 2000?
+P: Count the number of papers in NAACL 2000.
+
+select count(*)
+from Paper
+where venue = "NAACL" and year = 2000
+
+
+How many papers are published in year 2009 by Columbia University?
+P: Count the number of papers published by Columbia University in 2009.
+
+select count(distinct T1.paper_id)
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id
+where T3.name like "Columbia University" and T1.year = 2009
+
+2. List names and addresses for all affiliations.
+P: What are the names and addresses for all affiliations?
+
+select distinct name, address
+from Affiliation
+
+
+List all venues and years for papers ordered by year.
+P: What are the distinct venues for papers, ordered by year?
+
+select distinct venue, year
+from paper
+order by year
+
+
+3. Find the titles and paper IDs for papers written by Harvard University.
+P: What are the titles and paper ids for papers written in affiliation with Harvard University?
+
+select distinct T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id
+where T3.name = "Harvard University"
+
+
+Find all papers with titles and paper IDs written by Mckeown.
+P: What are the titles and paper ids for papers written by Mckeown?
+
+select T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T3.author_id = T2.author_id
+where T3.name like "%Mckeown%"
+
+
+4. Find all papers with titles and paper IDs collaborated by Stanford University and Columbia University.
+P: What are the titles and paper ids for papers which were affiliated with both Stanford and Columbia University?
+
+select T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id 
+where T3.name like "Stanford University"
+intersect
+select T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id 
+where T3.name like "Columbia University"
+
+Find all papers with titles and paper IDs co-authored by Mckeown, Kathleen and Rambow, Owen.
+P: What are the titles and paper ids co-authored by Mckeown, Kathleen and Rambow, Owen?
+
+select T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+where T3.name like "%Mckeown, Kathleen%"
+intersect
+select T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+where T3.name like "%Rambow, Owen%"
+
+Find the titles and paper IDs for papers which have Mckeown but not Rambow in author list.
+P: What are the titles and paper ids which have Mckeown as an author, but not Rambow?
+
+select T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+where T3.name like "%Mckeown%"
+except
+select T1.title, T1.paper_id
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+where T3.name like "%Rambow%"
+
+
+Find the titles and paper IDs for papers which have Mckeown, Kathleen or Rambow, Owen in author list.
+P: What are the titles and paper ids for papers that have Mckeown, Kathleen or Rambow, Owen in their author list?
+
+select distinct Paper.title, Paper.paper_id
+from Paper, Author_list, Author
+where Paper.paper_id = Author_list.paper_id and Author_list.author_id = Author.author_id and 
+(Author.name like "%Mckeown, Kathleen%" or Author.name like "%Rambow, Owen%")
+
+
+5. List the names of all authors and their number of papers in descending order by number of papers.
+P: How many papers did each author publish, ordered by number of papers?
+
+select T1.name, count(*)
+from Author as T1 join Author_list as T2 on T1.author_id = T2.author_id
+group by T1.author_id
+order by count(*) desc
+
+
+List all affiliations with ascending ordered number of papers.
+P: What are the names of all affiliations, ordered by number of papers?
+
+select T1.name
+from Affiliation as T1 join Author_list as T2 on T1.affiliation_id = T2.affiliation_id
+group by T1.affiliation_id
+order by count(*) desc
+
+
+6. List names of all authors who have more than 50 papers.
+P: What are the names of all authors who have more than 50 papers?
+
+select T1.name
+from Author as T1 join Author_list as T2 on T1.author_id = T2.author_id
+group by T1.author_id
+having count(*) > 50
+
+
+List names of all authors who have only 1 paper.
+P: What are the names of authors who have exactly 1 paper?
+
+select T1.name
+from Author as T1 join Author_list as T2 on T1.author_id = T2.author_id
+group by T1.author_id
+having count(*) = 1
+
+
+List all affiliations who have greater than or equal to 100 papers.
+P: What are the names of affiliations with at least 100 papers?
+
+with Distinct_Paper(paper_id, affiliation_id) as
+         (select distinct paper_id, affiliation_id
+          from Author_list)
+select T1.name
+from Affiliation as T1 join Distinct_Paper as T2 on T1.affiliation_id = T2.affiliation_id
+group by T1.affiliation_id
+having count(*) >= 100
+
+
+7. What is the venue and year with the most number of publications?
+P: What was the venue and year with the most publications?
+
+select venue, year
+from paper
+group by venue, year
+order by count(*) desc
+limit 1
+
+
+What is the venue with the least number of publications?
+P: Which venue has the fewest publications?
+
+select venue
+from paper
+group by venue
+order by count(*)
+limit 1
+
+
+8. How many papers cite paper with id A00-1002?
+P: Count the number of papers which cited a paper with id A00-1002.
+
+select count(*)
+from Citation
+where cited_paper_id = "A00-1002"
+
+
+How many reference papers does paper with id D12-1027 have?
+P: Count the number of references the paper with id D12-1027 has.
+
+select count(*)
+from Citation
+where paper_id = "D12-1027"
+
+
+9. What is the id and the number of citations of the most cited paper?
+P: Give the id and the number of citations of the most cited paper.
+
+select paper_id, count(*)
+from Citation
+group by cited_paper_id
+order by count(*) desc
+limit 1
+
+
+Give the title of the paper which cites most number of papers?
+P: What is the title of the paper which cites the most other papers?
+
+select T2.title
+from Citation as T1 join Paper as T2 on T2.paper_id = T1.paper_id
+group by T1.paper_id
+order by count(*) desc
+limit 1
+
+
+List top 10 most cited papers and their numbers of citations.
+P: What are the 10 most cited papers, and how many citations did each have?
+
+select paper_id, count(*)
+from Citation
+group by cited_paper_id
+order by count(*) desc
+limit 10
+
+
+10. How many citations does Mckeown, Kathleen have?
+P: Count the number of citations Mckeown, Kathleen has.
+
+select count(*)
+from Citation as T1 join Author_list as T2 on T1.cited_paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+where T3.name like "%Mckeown, Kathleen%"
+
+
+How many papers does Mckeown, Kathleen cite?
+P: Count the number of papers Mckeown, Kathleen has cited.
+
+select count(*)
+from Citation as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+where T3.name like "%Mckeown, Kathleen%"
+
+11. Find the name and number of citations of the author who has most citations among all authors?
+P: What is the name and number of citations of the author with the greatest number of citations among authors?
+
+select T3.name, count(*)
+from Citation as T1 join Author_list as T2 on T1.cited_paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+group by T2.author_id
+order by count(*) desc
+limit 1
+
+
+Which authors have more citations than "Mckeown, Kathleen"?
+P: What are the names of authors with more citations than Kathleen?
+
+with author_citation (author_name, citation_number) as 
+(select T3.name, count(*)
+from Citation as T1 join Author_list as T2 on T1.cited_paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+group by T2.author_id
+order by count(*) desc)
+select author_name
+from author_citation
+where citation_number > (select citation_number from author_citation where author_name like "%Mckeown, Kathleen%")
+
+
+12. What are the venues and years where Mckeown, Kathleen had papers?
+P: Which venues and years did Mckeown, Kathleen have papers?
+
+select distinct T1.venue, T1.year
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
+where T3.name like "%Mckeown, Kathleen%"
+
+What are the venues and years where Columbia University had papers?
+P: Which venues and years did Columbia University have papers?
+
+select distinct T1.venue, T1.year
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id
+where T3.name like "Columbia University"
+
+
+13. Which author had the most papers in the year 2009?
+P: What is the name of the author with the most papers in 2009?
+
+select T3.name
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Author as T3 on T3.author_id = T2.author_id
+where T1.year = 2009
+group by T2.author_id
+order by count(*) desc
+limit 1
+
+
+What are the names of the top 3 affiliations that have the most papers in year 2009?
+P: Which 3 affiliations had the most papers in 2009?
+
+select T3.name
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id
+where T1.year = 2009
+group by T2.affiliation_id
+order by count(*) desc
+limit 3
+
+
+14. How many papers does Columbia University have in or before 2009?
+P: Count the number of papers Columbia University had during or prior to 2009.
+
+select count(distinct T1.paper_id)
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id
+where T1.year <= 2009 and T3.name like "Columbia University"
+
+
+How many papers does Stanford University have between 2000 and 2009?
+P: Count the number of papers Stanford University had between 2000 and 2009.
+
+select count(distinct T1.paper_id)
+from Paper as T1 join Author_list as T2 on T1.paper_id = T2.paper_id join Affiliation as T3 on T2.affiliation_id = T3.affiliation_id
+where T1.year >= 2000 and T1.year <= 2009 and T3.name like "Stanford University"
+
+
+15. What is the title of the paper that has most number of authors?
+P: Give the title of the paper with the most authors.
+
+select T2.title
+from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
+group by T2.paper_id
+order by count(*) desc
+limit 1
+
+What is the average number of authors in each paper?
+P: Return the average number of authors for a paper.
+
+with paper_author_number (paper_id, author_number) as 
+(select paper_id, count(*)
+from Author_list
+group by paper_id)
+select avg(author_number)
+from paper_author_number
+
+
+What is the average number of papers for an author?
+P: Return the average number of papers published for an author.
+
+with author_paper_number (author_id, paper_number) as 
+(select author_id, count(*)
+from Author_list
+group by author_id)
+select avg(paper_number)
+from author_paper_number
+
+
+16. How many collaborators has Mckeown, Kathleen had?
+P: Count the number of collaborators that Mckeown, Kathleen has had.
+
+select count (distinct T2.author_id)
+from Author_list as T1 join Author_list as T2 on T1.paper_id = T2.paper_id and T1.author_id != T2.author_id join Author as T3 on T1.author_id = T3.author_id 
+where T3.name like "%Mckeown, Kathleen%"
+
+Who has the most papers co-authored with Mckeown, Kathleen?
+P: What is the name of the author who has co-authored the most papers with Mckeown, Kathleen?
+
+select T4.name
+from Author_list as T1 join Author_list as T2 on T1.paper_id = T2.paper_id and T1.author_id != T2.author_id join Author as T3 on T1.author_id = T3.author_id join Author as T4 on T2.author_id = T4.author_id
+where T3.name like "%Mckeown, Kathleen%"
+group by T2.author_id
+order by count(*) desc
+limit 1
+
+Find the id of the papers whose title has the key word 'translation'.
+P: What are the ids for papers with titles containing 'translation'?
+
+select paper_id
+from Paper
+where title like "%translation%"
+
+Find the id and title of the papers that are never cited by others.
+P: What are the ids and titles for papers that have never been cited?
+
+select paper_id, title
+from Paper
+where paper_id NOT IN (select cited_paper_id from Citation)
+
+Find the name of the affiliation whose address contains 'China' and publishes the greatest number of papers.
+P: What is the name of the affiliation which publishes the greatest number of papers among those whose address contains 'China'.
+
+select T1.name
+from Affiliation as T1 join Author_list as T2 on T1.affiliation_id = T2.affiliation_id
+where T1.address like "%China%"
+group by T1.affiliation_id
+order by count(*) desc
+limit 1
+
+Find the number of papers published in different conferences each year.
+P: How many papers are published in each venue in each year?
+
+select count(*), venue, year
+from Paper
+group by venue, year
+
+Find the total number of papers for each affiliation.
+P: How many papers has each affiliation published?
+
+select count(distinct T2.paper_id), T1.name
+from Affiliation as T1 join Author_list as T2 on T1.affiliation_id = T2.affiliation_id
+group by T1.affiliation_id
+
+Find the titles of papers that have more than 50 citations.
+P: What are the titles for papers with more than 50 citations?
+
+select T2.title
+from Citation as T1 join Paper as T2 on T1.cited_paper_id = T2.paper_id
+group by T1.cited_paper_id
+having count(*) > 50
+
+Find the number of authors who did not publish any paper that is cited more than 50 times.
+P: How many authors have not published a paper with more than 50 citations?
+
+select count(*)
+from Author
+where Author_id NOT IN ( select T2.author_id
+                        from Citation as T1 join Author_list as T2 on T1.cited_paper_id = T2.paper_id
+                        group by T1.cited_paper_id
+                        having count(distinct T1.paper_id) > 50)
+
+Find the names of authors who published some paper on NAACL and ACL in the year 2009.
+P: What are the names of authors who published in both NAACL and ACL in 2009?
+
+select name
+from Author
+where author_id IN (select T1.author_id
+                    from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
+                    where T2.venue = "ACL" and T2.year = 2009
+                    INTERSECT
+                    select T1.author_id
+                    from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
+                    where T2.venue = "NAACL" and T2.year = 2009)
+
+Find the name of authors who have never published a paper in ACL.
+P: What are the names of authors who have not published a paper in ACL?
+
+select name
+from Author
+where author_id NOT IN (select T1.author_id
+                        from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
+                        where T2.venue = "ACL")

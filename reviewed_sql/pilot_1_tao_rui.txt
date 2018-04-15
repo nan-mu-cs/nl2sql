@@ -9,7 +9,7 @@ FROM PilotSkills
 ORDER BY age DESC
 LIMIT 1
 
-What are the pilots whose age is below the average age, and list their names by their age?
+What are the pilots whose age is below the average age, and list their names ordered by their age?
 
 SELECT pilot_name
 FROM PilotSkills 
@@ -28,7 +28,7 @@ SELECT pilot_name
 FROM PilotSkills 
 WHERE age < 35 and plane_name = 'Piper Cub'
 
-Where is the plane F-14 Fighter locates?
+Where is the plane F-14 Fighter located?
 
 SELECT location
 FROM hangar 
@@ -43,7 +43,7 @@ Which plane does the pilot Jones with age 32 has?
 
 SELECT plane_name
 FROM pilotskills
-WHERE pilot_name = 'Jones'  and age < 32
+WHERE pilot_name = 'Jones'  and age = 32
 
 2. How many pilots who are older than 40? 
 
@@ -83,7 +83,7 @@ LIMIT 1
 
 How many pilots whose planes are in Chicago?
 
-SELECT 	count(*)
+SELECT 	count(distinct T1.pilot_name)
 FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
 WHERE T2.location = 'Chicago'
 
@@ -176,7 +176,7 @@ What are the average and smallest ages of all pilots?
 SELECT avg(age), min(age)
 FROM pilotskills
 
-What are the names of pilots who have some plane in Austin and Boston?
+What are the names of pilots who have planes in both Austin and Boston?
 
 SELECT T1.pilot_name
 FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
@@ -225,15 +225,15 @@ SELECT max(age), pilot_name
 FROM pilotskills
 GROUP BY pilot_name
 
-Find the number and average age of pilots who have a plane in each city.
+Find the number and average age of pilots who have a plane for each city.
 
 SELECT count(T1.pilot_name), avg(T1.age), T2.location
 FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
 GROUP BY T2.location
 
-Find the number of pilots for the plane type which its pilot's average age is below 35.
+Find the number of pilots for the plane types with average pilot age below 35.
 
-SELECT count(*),  plane_name
+SELECT count(*), plane_name
 FROM pilotskills
 GROUP BY plane_name
 HAVING avg(age) < 35
