@@ -1,0 +1,451 @@
+{
+    "col_map": [
+        [
+            0, 
+            "*"
+        ], 
+        [
+            1, 
+            "region_id", 
+            "regions"
+        ], 
+        [
+            2, 
+            "region_name", 
+            "regions"
+        ], 
+        [
+            3, 
+            "country_id", 
+            "countries"
+        ], 
+        [
+            4, 
+            "country_name", 
+            "countries"
+        ], 
+        [
+            5, 
+            "region_id", 
+            "countries"
+        ], 
+        [
+            6, 
+            "department_id", 
+            "departments"
+        ], 
+        [
+            7, 
+            "department_name", 
+            "departments"
+        ], 
+        [
+            8, 
+            "manager_id", 
+            "departments"
+        ], 
+        [
+            9, 
+            "location_id", 
+            "departments"
+        ], 
+        [
+            10, 
+            "job_id", 
+            "jobs"
+        ], 
+        [
+            11, 
+            "job_title", 
+            "jobs"
+        ], 
+        [
+            12, 
+            "min_salary", 
+            "jobs"
+        ], 
+        [
+            13, 
+            "max_salary", 
+            "jobs"
+        ], 
+        [
+            14, 
+            "employee_id", 
+            "employees"
+        ], 
+        [
+            15, 
+            "first_name", 
+            "employees"
+        ], 
+        [
+            16, 
+            "last_name", 
+            "employees"
+        ], 
+        [
+            17, 
+            "email", 
+            "employees"
+        ], 
+        [
+            18, 
+            "phone_number", 
+            "employees"
+        ], 
+        [
+            19, 
+            "hire_date", 
+            "employees"
+        ], 
+        [
+            20, 
+            "job_id", 
+            "employees"
+        ], 
+        [
+            21, 
+            "salary", 
+            "employees"
+        ], 
+        [
+            22, 
+            "commission_pct", 
+            "employees"
+        ], 
+        [
+            23, 
+            "manager_id", 
+            "employees"
+        ], 
+        [
+            24, 
+            "department_id", 
+            "employees"
+        ], 
+        [
+            25, 
+            "employee_id", 
+            "job_history"
+        ], 
+        [
+            26, 
+            "start_date", 
+            "job_history"
+        ], 
+        [
+            27, 
+            "end_date", 
+            "job_history"
+        ], 
+        [
+            28, 
+            "job_id", 
+            "job_history"
+        ], 
+        [
+            29, 
+            "department_id", 
+            "job_history"
+        ], 
+        [
+            30, 
+            "location_id", 
+            "locations"
+        ], 
+        [
+            31, 
+            "street_address", 
+            "locations"
+        ], 
+        [
+            32, 
+            "postal_code", 
+            "locations"
+        ], 
+        [
+            33, 
+            "city", 
+            "locations"
+        ], 
+        [
+            34, 
+            "state_province", 
+            "locations"
+        ], 
+        [
+            35, 
+            "country_id", 
+            "locations"
+        ]
+    ], 
+    "jobs": {
+        "10": {
+            "name": "job_id", 
+            "name_tok": [
+                "job_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "11": {
+            "name": "job_title", 
+            "name_tok": [
+                "job_title"
+            ], 
+            "foreign_key": null
+        }, 
+        "12": {
+            "name": "min_salary", 
+            "name_tok": [
+                "min_salary"
+            ], 
+            "foreign_key": null
+        }, 
+        "13": {
+            "name": "max_salary", 
+            "name_tok": [
+                "max_salary"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "tab_map": [
+        "regions", 
+        "countries", 
+        "departments", 
+        "jobs", 
+        "employees", 
+        "job_history", 
+        "locations"
+    ], 
+    "countries": {
+        "3": {
+            "name": "country_id", 
+            "name_tok": [
+                "country_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "4": {
+            "name": "country_name", 
+            "name_tok": [
+                "country_name"
+            ], 
+            "foreign_key": null
+        }, 
+        "5": {
+            "name": "region_id", 
+            "name_tok": [
+                "region_id"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "employees": {
+        "14": {
+            "name": "employee_id", 
+            "name_tok": [
+                "employee_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "15": {
+            "name": "first_name", 
+            "name_tok": [
+                "first_name"
+            ], 
+            "foreign_key": null
+        }, 
+        "16": {
+            "name": "last_name", 
+            "name_tok": [
+                "last_name"
+            ], 
+            "foreign_key": null
+        }, 
+        "17": {
+            "name": "email", 
+            "name_tok": [
+                "email"
+            ], 
+            "foreign_key": null
+        }, 
+        "18": {
+            "name": "phone_number", 
+            "name_tok": [
+                "phone_number"
+            ], 
+            "foreign_key": null
+        }, 
+        "19": {
+            "name": "hire_date", 
+            "name_tok": [
+                "hire_date"
+            ], 
+            "foreign_key": null
+        }, 
+        "20": {
+            "name": "job_id", 
+            "name_tok": [
+                "job_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "21": {
+            "name": "salary", 
+            "name_tok": [
+                "salary"
+            ], 
+            "foreign_key": null
+        }, 
+        "22": {
+            "name": "commission_pct", 
+            "name_tok": [
+                "commission_pct"
+            ], 
+            "foreign_key": null
+        }, 
+        "23": {
+            "name": "manager_id", 
+            "name_tok": [
+                "manager_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "24": {
+            "name": "department_id", 
+            "name_tok": [
+                "department_id"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "locations": {
+        "32": {
+            "name": "postal_code", 
+            "name_tok": [
+                "postal_code"
+            ], 
+            "foreign_key": null
+        }, 
+        "33": {
+            "name": "city", 
+            "name_tok": [
+                "city"
+            ], 
+            "foreign_key": null
+        }, 
+        "34": {
+            "name": "state_province", 
+            "name_tok": [
+                "state_province"
+            ], 
+            "foreign_key": null
+        }, 
+        "35": {
+            "name": "country_id", 
+            "name_tok": [
+                "country_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "30": {
+            "name": "location_id", 
+            "name_tok": [
+                "location_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "31": {
+            "name": "street_address", 
+            "name_tok": [
+                "street_address"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "departments": {
+        "8": {
+            "name": "manager_id", 
+            "name_tok": [
+                "manager_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "9": {
+            "name": "location_id", 
+            "name_tok": [
+                "location_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "6": {
+            "name": "department_id", 
+            "name_tok": [
+                "department_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "7": {
+            "name": "department_name", 
+            "name_tok": [
+                "department_name"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "regions": {
+        "1": {
+            "name": "region_id", 
+            "name_tok": [
+                "region_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "2": {
+            "name": "region_name", 
+            "name_tok": [
+                "region_name"
+            ], 
+            "foreign_key": null
+        }
+    }, 
+    "job_history": {
+        "25": {
+            "name": "employee_id", 
+            "name_tok": [
+                "employee_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "26": {
+            "name": "start_date", 
+            "name_tok": [
+                "start_date"
+            ], 
+            "foreign_key": null
+        }, 
+        "27": {
+            "name": "end_date", 
+            "name_tok": [
+                "end_date"
+            ], 
+            "foreign_key": null
+        }, 
+        "28": {
+            "name": "job_id", 
+            "name_tok": [
+                "job_id"
+            ], 
+            "foreign_key": null
+        }, 
+        "29": {
+            "name": "department_id", 
+            "name_tok": [
+                "department_id"
+            ], 
+            "foreign_key": null
+        }
+    }
+}

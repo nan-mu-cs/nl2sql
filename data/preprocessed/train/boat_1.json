@@ -1,0 +1,3166 @@
+[
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    4, 
+                    3, 
+                    "30"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Return all details of sailors who are older than 30.", 
+        "query_tok": [
+            "select", 
+            "*", 
+            "from", 
+            "sailors", 
+            "where", 
+            "age", 
+            ">", 
+            "30"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT * FROM Sailors WHERE age  >  30", 
+        "question_tok": [
+            "return", 
+            "all", 
+            "details", 
+            "of", 
+            "sailors", 
+            "who", 
+            "are", 
+            "older", 
+            "than", 
+            "30", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    4, 
+                    4, 
+                    "30"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2, 
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Return name and age for sailors who are younger than 30.", 
+        "query_tok": [
+            "select", 
+            "name", 
+            ",", 
+            "age", 
+            "from", 
+            "sailors", 
+            "where", 
+            "age", 
+            "<", 
+            "30"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name ,  age FROM Sailors WHERE age  <  30", 
+        "question_tok": [
+            "return", 
+            "name", 
+            "and", 
+            "age", 
+            "for", 
+            "sailors", 
+            "who", 
+            "are", 
+            "younger", 
+            "than", 
+            "30", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    1, 
+                    2, 
+                    "1"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                9
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find boats reserved by Sailor with id 1.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "bid", 
+            "from", 
+            "reserves", 
+            "where", 
+            "sid", 
+            "=", 
+            "1"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT bid FROM Reserves WHERE sid = 1", 
+        "question_tok": [
+            "find", 
+            "boats", 
+            "reserved", 
+            "by", 
+            "sailor", 
+            "with", 
+            "id", 
+            "1", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    9, 
+                    2, 
+                    "102"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Who reserved boat 102?", 
+        "query_tok": [
+            "select", 
+            "t1.name", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "where", 
+            "t2.bid", 
+            "=", 
+            "102"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE T2.bid  =  102", 
+        "question_tok": [
+            "who", 
+            "reserved", 
+            "boat", 
+            "102", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                9
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Return the unique boat ids (bid) of all reserved boats.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "bid", 
+            "from", 
+            "reserves"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT bid FROM Reserves", 
+        "question_tok": [
+            "return", 
+            "the", 
+            "unique", 
+            "boat", 
+            "ids", 
+            "(", 
+            "bid", 
+            ")", 
+            "of", 
+            "all", 
+            "reserved", 
+            "boats", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    2, 
+                    8, 
+                    "'%e%'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the name of sailors whose names contain letter e?", 
+        "query_tok": [
+            "select", 
+            "name", 
+            "from", 
+            "sailors", 
+            "where", 
+            "name", 
+            "like", 
+            "'", 
+            "%", 
+            "e", 
+            "%", 
+            "'"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name FROM Sailors WHERE name LIKE '%e%'", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "name", 
+            "of", 
+            "sailors", 
+            "whose", 
+            "names", 
+            "contain", 
+            "letter", 
+            "e", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    2, 
+                    4, 
+                    3, 
+                    "sql2"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                2
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " return the unique ids of sailors who are older than any sailors.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "sid", 
+            "from", 
+            "sailors", 
+            "where", 
+            "age", 
+            ">", 
+            "(", 
+            "select", 
+            "min", 
+            "(", 
+            "age", 
+            ")", 
+            "from", 
+            "sailors", 
+            ")", 
+            ";"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT sid FROM Sailors WHERE age  >  (SELECT min(age) FROM Sailors);", 
+        "question_tok": [
+            "return", 
+            "the", 
+            "unique", 
+            "ids", 
+            "of", 
+            "sailors", 
+            "who", 
+            "are", 
+            "older", 
+            "than", 
+            "any", 
+            "sailors", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    2, 
+                    4, 
+                    3, 
+                    "sql2"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                2
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    3, 
+                    3, 
+                    "7)"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Return the unique names of sailors who are older than any sailors whose rating is larger than 7.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "name", 
+            "from", 
+            "sailors", 
+            "where", 
+            "age", 
+            ">", 
+            "(", 
+            "select", 
+            "min", 
+            "(", 
+            "age", 
+            ")", 
+            "from", 
+            "sailors", 
+            "where", 
+            "rating", 
+            ">", 
+            "7", 
+            ")", 
+            ";"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT name FROM Sailors WHERE age  >  (SELECT min(age) FROM Sailors WHERE rating  >  7);", 
+        "question_tok": [
+            "return", 
+            "the", 
+            "unique", 
+            "names", 
+            "of", 
+            "sailors", 
+            "who", 
+            "are", 
+            "older", 
+            "than", 
+            "any", 
+            "sailors", 
+            "whose", 
+            "rating", 
+            "is", 
+            "larger", 
+            "than", 
+            "7", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                2, 
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": "Find the name and id of the sailors who reserved at least one boat?", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t1.name", 
+            ",", 
+            "t1.sid", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "name", 
+            "and", 
+            "id", 
+            "of", 
+            "the", 
+            "sailors", 
+            "who", 
+            "reserved", 
+            "at", 
+            "least", 
+            "one", 
+            "boat", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                8, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    "1"
+                ]
+            ], 
+            "sel": [
+                2, 
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the id and name of the sailors who reserved more than one boat.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t1.name", 
+            ",", 
+            "t1.sid", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "group", 
+            "by", 
+            "t2.sid", 
+            "having", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ">", 
+            "1"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid GROUP BY T2.sid HAVING COUNT(*)  >  1", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "id", 
+            "and", 
+            "name", 
+            "of", 
+            "the", 
+            "sailors", 
+            "who", 
+            "reserved", 
+            "more", 
+            "than", 
+            "one", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'red'"
+                ], 
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "``blue''"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                8
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the id of Sailors (sid) that reserved red or blue boat.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t2.sid", 
+            "from", 
+            "boats", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.bid", 
+            "=", 
+            "t2.bid", 
+            "where", 
+            "t1.color", 
+            "=", 
+            "'red", 
+            "'", 
+            "or", 
+            "t1.color", 
+            "=", 
+            "``", 
+            "blue", 
+            "''"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  'red' OR T1.color  =  \"blue\"", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "id", 
+            "of", 
+            "sailors", 
+            "(", 
+            "sid", 
+            ")", 
+            "that", 
+            "reserved", 
+            "red", 
+            "or", 
+            "blue", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        8
+                    ], 
+                    [
+                        0, 
+                        1
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'red'"
+                ], 
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "``blue''"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                8, 
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the name and id of Sailors (sid) that reserved red or blue boat.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t2.sid", 
+            ",", 
+            "t3.name", 
+            "from", 
+            "boats", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.bid", 
+            "=", 
+            "t2.bid", 
+            "join", 
+            "sailors", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.sid", 
+            "=", 
+            "t3.sid", 
+            "where", 
+            "t1.color", 
+            "=", 
+            "'red", 
+            "'", 
+            "or", 
+            "t1.color", 
+            "=", 
+            "``", 
+            "blue", 
+            "''"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  'red' OR T1.color  =  \"blue\"", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "name", 
+            "and", 
+            "id", 
+            "of", 
+            "sailors", 
+            "(", 
+            "sid", 
+            ")", 
+            "that", 
+            "reserved", 
+            "red", 
+            "or", 
+            "blue", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'red'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                8
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "``blue''"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                8
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the id of Sailors (sid) that reserved red and blue boat.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t2.sid", 
+            "from", 
+            "boats", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.bid", 
+            "=", 
+            "t2.bid", 
+            "where", 
+            "t1.color", 
+            "=", 
+            "'red", 
+            "'", 
+            "intersect", 
+            "select", 
+            "distinct", 
+            "t2.sid", 
+            "from", 
+            "boats", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.bid", 
+            "=", 
+            "t2.bid", 
+            "where", 
+            "t1.color", 
+            "=", 
+            "``", 
+            "blue", 
+            "''"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  'red' INTERSECT SELECT DISTINCT T2.sid FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid WHERE T1.color  =  \"blue\"", 
+        "special": [
+            1, 
+            "sql2"
+        ], 
+        "question_tok": [
+            "find", 
+            "the", 
+            "id", 
+            "of", 
+            "sailors", 
+            "(", 
+            "sid", 
+            ")", 
+            "that", 
+            "reserved", 
+            "red", 
+            "and", 
+            "blue", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        8
+                    ], 
+                    [
+                        0, 
+                        1
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'red'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                8, 
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ], 
+                [
+                    [
+                        2, 
+                        8
+                    ], 
+                    [
+                        0, 
+                        1
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "``blue''"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                8, 
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the name and id of Sailors (sid) that reserved red and blue boat.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t2.sid", 
+            ",", 
+            "t3.name", 
+            "from", 
+            "boats", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.bid", 
+            "=", 
+            "t2.bid", 
+            "join", 
+            "sailors", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.sid", 
+            "=", 
+            "t3.sid", 
+            "where", 
+            "t1.color", 
+            "=", 
+            "'red", 
+            "'", 
+            "intersect", 
+            "select", 
+            "distinct", 
+            "t2.sid", 
+            ",", 
+            "t3.name", 
+            "from", 
+            "boats", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.bid", 
+            "=", 
+            "t2.bid", 
+            "join", 
+            "sailors", 
+            "as", 
+            "t3", 
+            "on", 
+            "t2.sid", 
+            "=", 
+            "t3.sid", 
+            "where", 
+            "t1.color", 
+            "=", 
+            "``", 
+            "blue", 
+            "''"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  'red' INTERSECT SELECT DISTINCT T2.sid ,  T3.name FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid  =  T2.bid JOIN Sailors AS T3 ON T2.sid  =  T3.sid WHERE T1.color  =  \"blue\"", 
+        "special": [
+            1, 
+            "sql2"
+        ], 
+        "question_tok": [
+            "find", 
+            "the", 
+            "name", 
+            "and", 
+            "id", 
+            "of", 
+            "sailors", 
+            "(", 
+            "sid", 
+            ")", 
+            "that", 
+            "reserved", 
+            "red", 
+            "and", 
+            "blue", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                8
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the ids of sailors that haven\u2019t reserved a boat?", 
+        "query_tok": [
+            "select", 
+            "sid", 
+            "from", 
+            "sailors", 
+            "except", 
+            "select", 
+            "sid", 
+            "from", 
+            "reserves"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT sid FROM Sailors EXCEPT SELECT sid FROM Reserves", 
+        "special": [
+            3, 
+            "sql2"
+        ], 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "ids", 
+            "of", 
+            "sailors", 
+            "that", 
+            "haven\u2019t", 
+            "reserved", 
+            "a", 
+            "boat", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                1, 
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "sql2": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                1, 
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " what is the name and id of sailors who do not have a reservation of a boat?", 
+        "query_tok": [
+            "select", 
+            "sid", 
+            ",", 
+            "name", 
+            "from", 
+            "sailors", 
+            "except", 
+            "select", 
+            "t1.sid", 
+            ",", 
+            "t1.name", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT sid ,  name FROM Sailors EXCEPT SELECT T1.sid ,  T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid", 
+        "special": [
+            3, 
+            "sql2"
+        ], 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "name", 
+            "and", 
+            "id", 
+            "of", 
+            "sailors", 
+            "who", 
+            "do", 
+            "not", 
+            "have", 
+            "a", 
+            "reservation", 
+            "of", 
+            "a", 
+            "boat", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    9, 
+                    2, 
+                    "103"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the name of the sailors who reserved boat with id 103?", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t1.name", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "where", 
+            "t2.bid", 
+            "=", 
+            "103"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE  T2.bid  =  103", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "name", 
+            "of", 
+            "the", 
+            "sailors", 
+            "who", 
+            "reserved", 
+            "boat", 
+            "with", 
+            "id", 
+            "103", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    2, 
+                    3, 
+                    3, 
+                    "')"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the name of all sailors whose rating is higher than any sailor named Luis?", 
+        "query_tok": [
+            "select", 
+            "name", 
+            "from", 
+            "sailors", 
+            "where", 
+            "rating", 
+            ">", 
+            "(", 
+            "select", 
+            "min", 
+            "(", 
+            "rating", 
+            ")", 
+            "from", 
+            "sailors", 
+            "where", 
+            "name", 
+            "=", 
+            "'luis", 
+            "'", 
+            ")"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name FROM Sailors WHERE rating  >  (SELECT min(rating) FROM Sailors WHERE name  =  'Luis')", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "name", 
+            "of", 
+            "all", 
+            "sailors", 
+            "whose", 
+            "rating", 
+            "is", 
+            "higher", 
+            "than", 
+            "any", 
+            "sailor", 
+            "named", 
+            "luis", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    1, 
+                    3, 
+                    3, 
+                    "')"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the name of all sailors whose rating is higher than all sailors named Luis?", 
+        "query_tok": [
+            "select", 
+            "name", 
+            "from", 
+            "sailors", 
+            "where", 
+            "rating", 
+            ">", 
+            "(", 
+            "select", 
+            "max", 
+            "(", 
+            "rating", 
+            ")", 
+            "from", 
+            "sailors", 
+            "where", 
+            "name", 
+            "=", 
+            "'luis", 
+            "'", 
+            ")"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name FROM Sailors WHERE rating  >  (SELECT max(rating) FROM Sailors WHERE name  =  'Luis')", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "name", 
+            "of", 
+            "all", 
+            "sailors", 
+            "whose", 
+            "rating", 
+            "is", 
+            "higher", 
+            "than", 
+            "all", 
+            "sailors", 
+            "named", 
+            "luis", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    3, 
+                    3, 
+                    "2"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2, 
+                1
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " what is the name and id of every sailor who has a rating greater than 2 and reserved a boat.", 
+        "query_tok": [
+            "select", 
+            "distinct", 
+            "t1.name", 
+            ",", 
+            "t1.sid", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "where", 
+            "t1.rating", 
+            ">", 
+            "2"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT DISTINCT T1.name ,  T1.sid FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid WHERE  T1.rating  >  2", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "name", 
+            "and", 
+            "id", 
+            "of", 
+            "every", 
+            "sailor", 
+            "who", 
+            "has", 
+            "a", 
+            "rating", 
+            "greater", 
+            "than", 
+            "2", 
+            "and", 
+            "reserved", 
+            "a", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    4, 
+                    2, 
+                    ""
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2, 
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the name and age of the oldest sailor.", 
+        "query_tok": [
+            "select", 
+            "name", 
+            ",", 
+            "age", 
+            "from", 
+            "sailors", 
+            "where", 
+            "age", 
+            "="
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name ,  age FROM Sailors WHERE age  = ", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "name", 
+            "and", 
+            "age", 
+            "of", 
+            "the", 
+            "oldest", 
+            "sailor", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " how many sailors in total?", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "sailors"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT COUNT(*) FROM Sailors", 
+        "question_tok": [
+            "how", 
+            "many", 
+            "sailors", 
+            "in", 
+            "total", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                3
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    3, 
+                    2, 
+                    "7"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the average age of sailors whose rating is 7?", 
+        "query_tok": [
+            "select", 
+            "avg", 
+            "(", 
+            "age", 
+            ")", 
+            "from", 
+            "sailors", 
+            "where", 
+            "rating", 
+            "=", 
+            "7"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT AVG(age) FROM Sailors WHERE rating  =  7", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "average", 
+            "age", 
+            "of", 
+            "sailors", 
+            "whose", 
+            "rating", 
+            "is", 
+            "7", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    2, 
+                    8, 
+                    "'d%'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " How many unique sailors whose name starts with letter D exist?", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "distinct", 
+            "name", 
+            ")", 
+            "from", 
+            "sailors", 
+            "where", 
+            "name", 
+            "like", 
+            "'d", 
+            "%", 
+            "'"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT COUNT(DISTINCT name) FROM Sailors WHERE name LIKE 'D%'", 
+        "question_tok": [
+            "how", 
+            "many", 
+            "unique", 
+            "sailors", 
+            "whose", 
+            "name", 
+            "starts", 
+            "with", 
+            "letter", 
+            "d", 
+            "exist", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                3, 
+                1
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                3, 
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What are the average rating and max age of all sailors?", 
+        "query_tok": [
+            "select", 
+            "avg", 
+            "(", 
+            "rating", 
+            ")", 
+            ",", 
+            "max", 
+            "(", 
+            "age", 
+            ")", 
+            "from", 
+            "sailors"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT AVG(rating) ,  MAX(age) FROM Sailors", 
+        "question_tok": [
+            "what", 
+            "are", 
+            "the", 
+            "average", 
+            "rating", 
+            "and", 
+            "max", 
+            "age", 
+            "of", 
+            "all", 
+            "sailors", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                5
+            ], 
+            "sel": [
+                9, 
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of reservations for each boat.", 
+        "query_tok": [
+            "select", 
+            "bid", 
+            ",", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "reserves", 
+            "group", 
+            "by", 
+            "bid"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT bid ,  count(*) FROM Reserves GROUP BY bid", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "reservations", 
+            "for", 
+            "each", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                5, 
+                [
+                    0, 
+                    5, 
+                    3, 
+                    "50"
+                ]
+            ], 
+            "sel": [
+                9, 
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of reservations for each boat with id greater than 50.", 
+        "query_tok": [
+            "select", 
+            "bid", 
+            ",", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "reserves", 
+            "group", 
+            "by", 
+            "bid", 
+            "having", 
+            "bid", 
+            ">", 
+            "50"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT bid ,  count(*) FROM Reserves GROUP BY bid HAVING bid  >  50", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "reservations", 
+            "for", 
+            "each", 
+            "boat", 
+            "with", 
+            "id", 
+            "greater", 
+            "than", 
+            "50", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [
+                5, 
+                [
+                    4, 
+                    0, 
+                    3, 
+                    "1"
+                ]
+            ], 
+            "sel": [
+                9, 
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of reservations for each boat with more than 1 reservation.", 
+        "query_tok": [
+            "select", 
+            "bid", 
+            ",", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "reserves", 
+            "group", 
+            "by", 
+            "bid", 
+            "having", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            ">", 
+            "1"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT bid ,  count(*) FROM Reserves GROUP BY bid HAVING count(*)  >  1", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "reservations", 
+            "for", 
+            "each", 
+            "boat", 
+            "with", 
+            "more", 
+            "than", 
+            "1", 
+            "reservation", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        2, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                4
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    1, 
+                    3, 
+                    "1"
+                ]
+            ], 
+            "group": [
+                5
+            ], 
+            "sel": [
+                9, 
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the number of reservations by sailors with id greater than 1 for each boat.", 
+        "query_tok": [
+            "select", 
+            "bid", 
+            ",", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "reserves", 
+            "where", 
+            "sid", 
+            ">", 
+            "1", 
+            "group", 
+            "by", 
+            "bid"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT bid ,  count(*) FROM Reserves WHERE sid  >  1 GROUP BY bid", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "number", 
+            "of", 
+            "reservations", 
+            "by", 
+            "sailors", 
+            "with", 
+            "id", 
+            "greater", 
+            "than", 
+            "1", 
+            "for", 
+            "each", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ], 
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                3
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'red'"
+                ]
+            ], 
+            "group": [
+                3
+            ], 
+            "sel": [
+                3, 
+                4
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is the rating and average age for sailors who have reserved red boat grouped by rating?", 
+        "query_tok": [
+            "select", 
+            "t1.rating", 
+            ",", 
+            "avg", 
+            "(", 
+            "t1.age", 
+            ")", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "join", 
+            "boats", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.bid", 
+            "=", 
+            "t2.bid", 
+            "where", 
+            "t3.color", 
+            "=", 
+            "'red", 
+            "'", 
+            "group", 
+            "by", 
+            "t1.rating"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT T1.rating ,  avg(T1.age) FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.color  =  'red' GROUP BY T1.rating", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "the", 
+            "rating", 
+            "and", 
+            "average", 
+            "age", 
+            "for", 
+            "sailors", 
+            "who", 
+            "have", 
+            "reserved", 
+            "red", 
+            "boat", 
+            "grouped", 
+            "by", 
+            "rating", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                2, 
+                3, 
+                4
+            ], 
+            "order": [
+                [
+                    0, 
+                    0
+                ], 
+                [
+                    3, 
+                    4
+                ], 
+                1
+            ]
+        }, 
+        "question": " Find the name, rating and age of all sailors ordered by rating and age.", 
+        "query_tok": [
+            "select", 
+            "name", 
+            ",", 
+            "rating", 
+            ",", 
+            "age", 
+            "from", 
+            "sailors", 
+            "order", 
+            "by", 
+            "rating", 
+            ",", 
+            "age"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name ,  rating ,  age FROM Sailors ORDER BY rating ,  age", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "name", 
+            ",", 
+            "rating", 
+            "and", 
+            "age", 
+            "of", 
+            "all", 
+            "sailors", 
+            "ordered", 
+            "by", 
+            "rating", 
+            "and", 
+            "age", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        1, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the total number of boats.", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "boats"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT count(*) FROM Boats", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "total", 
+            "number", 
+            "of", 
+            "boats", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        1, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                4
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    7, 
+                    2, 
+                    "'red'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                0
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " How many boats are red?", 
+        "query_tok": [
+            "select", 
+            "count", 
+            "(", 
+            "*", 
+            ")", 
+            "from", 
+            "boats", 
+            "where", 
+            "color", 
+            "=", 
+            "'red", 
+            "'"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT count(*) FROM Boats WHERE color  =  'red'", 
+        "question_tok": [
+            "how", 
+            "many", 
+            "boats", 
+            "are", 
+            "red", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ], 
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    4, 
+                    1, 
+                    [
+                        "20", 
+                        "30"
+                    ]
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                6
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the names of boats booked by sailors whose age is between 20 and 30.", 
+        "query_tok": [
+            "select", 
+            "t3.name", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "join", 
+            "boats", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.bid", 
+            "=", 
+            "t2.bid", 
+            "where", 
+            "t1.age", 
+            "between", 
+            "20", 
+            "and", 
+            "30"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT T3.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T1.age BETWEEN 20 AND 30", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "names", 
+            "of", 
+            "boats", 
+            "booked", 
+            "by", 
+            "sailors", 
+            "whose", 
+            "age", 
+            "is", 
+            "between", 
+            "20", 
+            "and", 
+            "30", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    1, 
+                    3, 
+                    3, 
+                    "joinboatsast3ont3.bid=t2.bidwheret3.color='red')"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the names of sailors whose rating is larger than the rating of all sailors who booked a red boat.", 
+        "query_tok": [
+            "select", 
+            "name", 
+            "from", 
+            "sailors", 
+            "where", 
+            "rating", 
+            ">", 
+            "(", 
+            "select", 
+            "max", 
+            "(", 
+            "t1.rating", 
+            ")", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "join", 
+            "boats", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.bid", 
+            "=", 
+            "t2.bid", 
+            "where", 
+            "t3.color", 
+            "=", 
+            "'red", 
+            "'", 
+            ")"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name FROM Sailors WHERE rating  >  (SELECT max(T1.rating) FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.color  =  'red')", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "names", 
+            "of", 
+            "sailors", 
+            "whose", 
+            "rating", 
+            "is", 
+            "larger", 
+            "than", 
+            "the", 
+            "rating", 
+            "of", 
+            "all", 
+            "sailors", 
+            "who", 
+            "booked", 
+            "a", 
+            "red", 
+            "boat", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                1
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                3
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " What is highest rating between sailors?", 
+        "query_tok": [
+            "select", 
+            "max", 
+            "(", 
+            "rating", 
+            ")", 
+            "from", 
+            "sailors"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT max(rating) FROM Sailors", 
+        "question_tok": [
+            "what", 
+            "is", 
+            "highest", 
+            "rating", 
+            "between", 
+            "sailors", 
+            "?"
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        1
+                    ], 
+                    [
+                        2, 
+                        8
+                    ]
+                ], 
+                [
+                    [
+                        1, 
+                        5
+                    ], 
+                    [
+                        2, 
+                        9
+                    ]
+                ]
+            ], 
+            "agg": [
+                0
+            ], 
+            "limit": 0, 
+            "cond": [
+                [
+                    0, 
+                    6, 
+                    2, 
+                    "'melon'"
+                ]
+            ], 
+            "group": [], 
+            "sel": [
+                2
+            ], 
+            "order": [
+                [], 
+                [], 
+                -1
+            ]
+        }, 
+        "question": " Find the names of sailors who reserved boat with the name Melon.", 
+        "query_tok": [
+            "select", 
+            "t1.name", 
+            "from", 
+            "sailors", 
+            "as", 
+            "t1", 
+            "join", 
+            "reserves", 
+            "as", 
+            "t2", 
+            "on", 
+            "t1.sid", 
+            "=", 
+            "t2.sid", 
+            "join", 
+            "boats", 
+            "as", 
+            "t3", 
+            "on", 
+            "t3.bid", 
+            "=", 
+            "t2.bid", 
+            "where", 
+            "t3.name", 
+            "=", 
+            "'melon", 
+            "'"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT T1.name FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid  =  T2.sid JOIN Boats AS T3 ON T3.bid  =  T2.bid WHERE T3.name  =  'Melon'", 
+        "question_tok": [
+            "find", 
+            "the", 
+            "names", 
+            "of", 
+            "sailors", 
+            "who", 
+            "reserved", 
+            "boat", 
+            "with", 
+            "the", 
+            "name", 
+            "melon", 
+            "."
+        ]
+    }, 
+    {
+        "sql1": {
+            "from": [
+                [
+                    [
+                        0, 
+                        null
+                    ], 
+                    [
+                        null, 
+                        null
+                    ]
+                ]
+            ], 
+            "agg": [
+                0, 
+                0
+            ], 
+            "limit": 0, 
+            "cond": [], 
+            "group": [], 
+            "sel": [
+                2, 
+                4
+            ], 
+            "order": [
+                [
+                    0, 
+                    0
+                ], 
+                [
+                    3
+                ], 
+                0
+            ]
+        }, 
+        "question": " List the names and ages of all sailors sorted by rating in descending order.", 
+        "query_tok": [
+            "select", 
+            "name", 
+            ",", 
+            "age", 
+            "from", 
+            "sailors", 
+            "order", 
+            "by", 
+            "rating", 
+            "desc"
+        ], 
+        "table_id": "boat_1", 
+        "query": "SELECT name ,  age FROM Sailors ORDER BY rating DESC", 
+        "question_tok": [
+            "list", 
+            "the", 
+            "names", 
+            "and", 
+            "ages", 
+            "of", 
+            "all", 
+            "sailors", 
+            "sorted", 
+            "by", 
+            "rating", 
+            "in", 
+            "descending", 
+            "order", 
+            "."
+        ]
+    }
+]
