@@ -27,7 +27,7 @@ Who is the director of movie Avatar?
 How many reviewers listed?
 
 Select count(*)
-From Reviewers
+From Reviewer
 
 What is the id of the reviewer whose name has substring “Mike”?
 
@@ -100,12 +100,6 @@ What is the maximum stars and year for the most recent movie?
 select max(T1.stars), T2.year
 from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
 where T2.year = (select max(year) from Movie)
-
-What is the names of movies whose created year is after all movies directed by Steven Spielberg?
-
-select title
-from Movie
-where year > (select max(year) from Movie where director = "Steven Spielberg")
 
 What is the names of movies whose created year is after all movies directed by Steven Spielberg?
 
@@ -187,7 +181,7 @@ order by name
  
 11. Find the titles of all movies not reviewed by Chris Jackson.
 
-select distinct tiTle 
+select distinct title 
 from Movie
 EXCEPT
 select T2.title
@@ -221,7 +215,7 @@ having count(*) = 1
 
 select director
 from Movie
-Where director is not NULL
+where director is not NULL
 group by director
 having count(*) = 1
 
@@ -253,7 +247,7 @@ What are the names and years of the movies that has the top 3 highest rating sta
 
 select T2.title, T2.year
 from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
-order by T1.stars
+order by T1.stars desc
 limit 3
  
 19. For each director, return the director's name together with the title of the movie they directed that received the highest rating among all of their movies, and the value of that rating. Ignore movies whose director is NULL.
@@ -292,7 +286,7 @@ select T2.title
 from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
 where T1.stars between 3 and 5
 
-find the names of reviewers who had given bigger than 3 star ratings?
+find the names of reviewers who had given higher than 3 star ratings?
 
 select T2.name
 from Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
@@ -324,7 +318,7 @@ from Rating
 GROUP BY mID
 having count(*) >= 2
 
-23. find the ids of reviewers who did give 4 star.
+23. find the ids of reviewers who did not give 4 star.
 
 select rID
 from Rating
@@ -333,7 +327,7 @@ select rID
 from Rating
 where stars = 4
 
-Find the ids of reviewer who didn’t only give 4 star.
+Find the ids of reviewers who didn't only give 4 star.
 
 select rID
 from Rating
