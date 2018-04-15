@@ -407,10 +407,9 @@ S:
 S:
 
 
-32. Find the most popular airline (airline that has the most routes) in each country.
-P: Which airline operates the most routes in each country?
+32. Find the number of routes for each airline in each country.
+P: Return the number of routes operated by each airline in each country?
 
-###wrong check
 select T1.country, T1.name, count(*)
 from airlines as T1 join routes as T2 on T1.alid = T2.alid
 group by T1.country, T1.name
