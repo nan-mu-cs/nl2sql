@@ -43,7 +43,7 @@ limit 1;
 
 6. How many players enter hall of fame each year?
 
-SELECT yearid, count(player_id)
+SELECT yearid, count(*)
 FROM hall_of_fame
 GROUP BY yearid;
 
@@ -77,7 +77,7 @@ SELECT count(*)
 FROM park
 WHERE state = 'NY';
 
-11. Which 3 players won most of player award? List their full name and id.
+11. Which 3 players won most player awards? List their full name and id.
 	
 SELECT T1.name_first, T1.name_last, T1.player_id
 FROM player as T1 join player_award as T2 on T1.player_id = T2.player_id
@@ -309,7 +309,7 @@ WHERE active='Y';
 SELECT city
 FROM park
 GROUP BY city
-HAVING count(city) between 2 and 4;
+HAVING count(*) between 2 and 4;
 
 41. Which park had most attendances in 2008?
 
