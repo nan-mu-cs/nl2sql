@@ -17,7 +17,6 @@ Where founder = 'James'
 Select name, headquarter
 From manufacturers
 Order by revenue desc
-Limit 1
 
 4. What are the average, maximum and total revenues of all companies?
 
@@ -41,17 +40,17 @@ Where headquarter = 'Austin'
 Select distinct headquarter
 From manufacturers
 
-8. Find the name of manufactures that are based in Tokyo or Beijing.
+8. Find the number of manufactures that are based in Tokyo or Beijing.
 
 Select count(*)
 From manufacturers
 Where headquarter = 'Tokyo' or headquarter = 'Beijing'
 
-9. Find the founder of the company whose name beginning with the letter 'S'.
+9. Find the founder of the company whose name begins with the letter 'S'.
 
 Select founder
 From manufacturers
-Where name LIKE '%S%'
+Where name LIKE 'S%'
 
 10. Find the name of companies whose benefit is between 100 and 150.
 
@@ -59,7 +58,7 @@ Select name
 From manufacturers
 Where revenue between 100 and 150
 
-11. What is the total revenue of the companies whose main office is at Tokyo or Taiwan?
+11. What is the total revenue of all companies whose main office is at Tokyo or Taiwan?
 
 Select sum(revenue)
 From manufacturers
@@ -79,7 +78,7 @@ where T2.name = 'Sony'
 
 Select name, headquarter, founder
 From manufacturers
-Order by Revenue desc
+Order by revenue desc
 Limit 1
 
 14. Find the name, headquarter and revenue of all manufacturers sorted by their revenue in the descending order.
@@ -135,7 +134,7 @@ Group by T2.name
 
 Select count(distinct T1.name), T2.Headquarter
 From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
-Group by T2. Headquarter
+Group by T2.Headquarter
 
 23. Find number of products which Sony does not make.
 
@@ -221,7 +220,7 @@ select avg(T1.Price), T2.name
 from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
 group by T2.name
  
-37. Select the names of manufacturer whose products have an average price larger than or equal to $150.
+37. Select the names of manufacturer whose products have an average price higher than or equal to $150.
 
 select avg(T1.Price), T2.name
 from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code

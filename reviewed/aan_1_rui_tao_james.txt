@@ -106,10 +106,9 @@ Find the titles and paper IDs for papers which have Mckeown, Kathleen or Rambow,
 P: What are the titles and paper ids for papers that have Mckeown, Kathleen or Rambow, Owen in their author list?
 
 select distinct Paper.title, Paper.paper_id
-from Paper, Author_list, Author
-where Paper.paper_id = Author_list.paper_id and Author_list.author_id = Author.author_id and 
-(Author.name like "%Mckeown, Kathleen%" or Author.name like "%Rambow, Owen%")
-
+from Paper as T1 JOIN Author_list as T2 on T1.paper_id = T2.paper_id
+     JOIN Author as T3 on T2.author_id = T3.author_id
+where  T3.name like "%Mckeown, Kathleen%" or T3.name like "%Rambow, Owen%"
 
 5. List the names of all authors and their number of papers in descending order by number of papers.
 P: How many papers did each author publish, ordered by number of papers?
