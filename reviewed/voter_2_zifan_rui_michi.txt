@@ -237,8 +237,8 @@ S:
 S:
 
 
-21. Find the first and last name of all students of age 18 and have vice president votes.
-P:
+21. Find the first and last name of all the students of age 18 who have vice president votes.
+P: What are the first names and last names of the students who are 18 years old and have vice president votes.
 
 select distinct T1.Fname, T1.LName
 from STUDENT as T1 join VOTING_RECORD as T2
@@ -250,8 +250,8 @@ S:
 S:
 
 
-22. How many male (sex is M) students have class senator votes in fall election cycle?
-P:
+22. How many male (sex is M) students have class senator votes in the fall election cycle?
+P: Count the number of male students who had class senator votes in the fall election cycle.
 
 select count(*)
 from STUDENT as T1 join VOTING_RECORD as T2
@@ -263,8 +263,8 @@ S:
 S:
 
 
-23. Find the number of students whose city code is NYC and have class senator votes in spring election cycle.
-P:
+23. Find the number of students whose city code is NYC and who have class senator votes in the spring election cycle.
+P: Which students live in the city with code "NYC" and have class senator votes in the spring election cycle? Count the numbers.
 
 select count(*)
 from STUDENT as T1 join VOTING_RECORD as T2
@@ -376,8 +376,9 @@ S:
 
 
 31. Report all majors that have less than 3 students.
-P:What are the majors only less than three students are studying?
 
+
+What are the majors only less than three students are studying?
 select Major
 from STUDENT
 group by Major
