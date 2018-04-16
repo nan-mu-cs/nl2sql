@@ -1,7 +1,7 @@
 Total = # 40 -> 50
 
 1. Which department has the largest number of employees?
-P: Find the department with the most employees.
+P: Find the department with the most employees. 
 
 SELECT name
 FROM department
@@ -1008,5 +1008,4 @@ from nurse as T1 join on_call as T2 on T1.EmployeeID = T2.nurse
 S:
 S:
 S:
-
 
