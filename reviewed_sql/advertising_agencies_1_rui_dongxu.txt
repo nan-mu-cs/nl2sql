@@ -166,112 +166,141 @@ on T1.invoice_id = T2.invoice_id
 select count(*)
 from Payments
 
-27. List all payment ids with invoice ids and details.
+27. List all payment ids and its corresponding invoice ids and details.
 
 select payment_id, invoice_id, payment_details
 from Payments
 
-28. Show all invoice ids with a payment.
+28. Show all the different invoice ids and statuses of the payments
 
-
-select distinct invoice_id
-from Payments
-
+select distinct T1.invoice_id, T1.invoice_status
+from Invoices as T1 JOIN Payments as T2
+on T1.invoice_id = T2.invoice_id
 
 29. Show all invoice ids and the number of payments for each invoice.
-
 
 select invoice_id, count(*)
 from Payments
 group by invoice_id
 
-
 30. What is the invoice id, status code, and details for the invoice with most number of payments.
 
-
-select T1.invoice_id, T2.invoice_status_code, T2.invoice_details
+select T1.invoice_id, T2.invoice_status, T2.invoice_details
 from Payments as T1 join Invoices as T2 on T1.invoice_id = T2.invoice_id
 group by T1.invoice_id
 order by count(*) desc
 limit 1
-31. How many staff do we have?
 
+31. How many staff do we have?
 
 select count(*)
 from Staff
 
-
 32. Show the agency ids and the number of staff in each agent?
-
 
 select agency_id, count(*)
 from Staff
 group by agency_id
 
-
 33. What is the agent id and details for the agent with most number of staff?
-
 
 select T1.agency_id, T2.agency_details
 from Staff as T1 join Agencies as T2 on T1.agency_id = T2.agency_id
 group by T1.agency_id
 order by count(*) desc
 limit 1
-________________
-
 
 34. Show meeting outcome codes and the number of meeting in each outcome.
 
-
-select meeting_outcome_code, count(*)
+select meeting_outcome, count(*)
 from Meetings
-group by meeting_outcome_code
-
+group by meeting_outcome
 
 35. List the client ids and the number of meeting for each client.
-
 
 select client_id, count(*)
 from Meetings
 group by client_id
 
-
 36. Show the meeting type codes and the number of meeting for each client.
 
-
-select meeting_type_code, count(*)
+select meeting_type, count(*)
 from Meetings
-group by meeting_type_code
+group by meeting_type
 
+37. Show all meeting ids, meeting outcomes, meeting types and the details of the client atttending it.
 
-37. Show all meeting ids with meeting outcome descriptions and meeting type descriptions.
+select T1.meeting_id, T1.meeting_outcome, T1.meeting_type, T2.client_details
+from meetings as T1 join clients as T2
+on T1.client_id = T2.client_id
 
-
-select T1.meeting_id, T2.meeting_outcome_description, T3.meeting_type_description
-from Meetings as T1 join Ref_meeting_outcomes as T2 on T1.meeting_outcome_code = T2.meeting_outcome_code join Ref_meeting_types as T3 on T1.meeting_type_code = T3.meeting_type_code
-
-
-________________
-
-
-38. Show the meeting ids and the number of staff in each meeting
-
+38. Show the meeting ids and the number of staff in each meeting.
 
 select meeting_id, count(*)
 from Staff_in_meetings
 group by meeting_id
 
-
-39. Show the staff ids and the number of meetings attended by each staff.
-
+39. Show the staff id and the number of meetings attended by the staff who attended some meeting but had least attendance.
 
 select staff_id, count(*)
 from Staff_in_meetings
 group by staff_id
-
+order by count(*) asc limit 1;
 
 40. How many staff have attended a meeting?
 
-
 select count(distinct staff_id)
 from Staff_in_meetings
+
+41. How many staff did not attend any meeting?
+
+select count(*)
+from Staff
+where staff_id not in (
+select staff_id
+from Staff_in_meetings
+)
+
+42. What are the ids and details of the clients who have attended any meeting or have any invoice?
+
+select T1.client_id, T1.client_details
+from Clients as T1 join meetings as T2
+on T1.client_id = T2.client_id
+union
+select T1.client_id, T1.client_details
+from Clients as T1 join invoices as T2
+on T1.client_id = T2.client_id
+
+
+43. What are the ids and details of the staff who have attended at least 1 meetings and have the detail with letter 's'?
+
+select staff_id, staff_details
+from staff
+where staff_details like "%s%"
+group by staff_id
+having count(*) >= 1
+
+44. What are the id, sic code and agency id of the client who has attended 1 meeting and has any invoice.
+
+select T1.client_id, T1.sic_code, T1.agency_id
+from clients as T1 join meetings as T2
+on T1.client_id = T2.client_id
+group by T1.client_id
+having count(*) = 1
+INTERSECT
+select T1.client_id, T1.sic_code, T1.agency_id
+from clients as T1 join invoices as T2
+on T1.client_id = T2.client_id
+
+
+45. List the start time, end time of each meeting, and the corresponding client detail and staff detail.
+
+select T1.start_date_time, T1.end_date_time, T2.client_details, T4.staff_details
+from meetings as T1 join clients as T2
+on T1.client_id = T2.client_id
+join staff_in_meetings as T3
+on T1.meeting_id = T3.meeting_id
+join staff as T4
+on T3.staff_id = T4.staff_id
+
+
