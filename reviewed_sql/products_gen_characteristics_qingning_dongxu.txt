@@ -1,4 +1,4 @@
-Total = 46
+Total = 43
 
 1. How many products are there?
 
@@ -15,9 +15,9 @@ How many characteristics are there?
 select count(*)
 from characteristics
 
-2. What are the names of all the products?
+2. What are the names and buying prices of all the products?
 
-select product_name
+select product_name, typical_buying_price
 from products
 
 List the description of all the colors.
@@ -36,10 +36,11 @@ select product_name
 from products
 where product_category_code = "Spices"
 
-List the names of products with category "Herbs".
+List the names, color descriptions and product descriptions of products with category "Herbs".
 
-select product_name
-from products
+select T1.product_name, T2.color_description, T1.product_description
+from products as T1 JOIN Ref_colors as T2
+on T1.color_code = T2.color_code
 where product_category_code = "Herbs"
 
 4. How many products are there under the category "Seeds"?
@@ -48,15 +49,15 @@ select count(*)
 from products
 where product_category_code = "Seeds"
 
-Find the number of products with category "Spices".
+Find the number of products with category "Spices" and typically sold above 1000.
 
 select count(*)
 from products
-where product_category_code = "Spices"
+where product_category_code = "Spices" and typical_buying_price > 1000
 
-5. What is the category of the product with name "cumin"?
+5. What is the category and typical buying price  of the product with name "cumin"?
 
-select product_category_code
+select product_category_code, typical_buying_price
 from products
 where product_name = "cumin"
 
@@ -64,70 +65,77 @@ Which category does the product named "flax" belong to?
 
 select product_category_code
 from products
-where product_name = "flax"
+where product_name = "flax" 
 
-6. What is the name of the product with id "1"?
+6. What is the name of the product with color with description 'yello'?
 
-select product_name
-from products
-where product_id = "1"
+select T1.product_name
+from products as T1 join ref_colors as T2
+on T1.color_code = T2.color_code
+where T2.color_description = 'yellow'
 
-Find the category of the product that have id "11".
+Find the category descriptions of the products whose descriptions include letter 't'.
 
-select product_name
-from products
-where product_id = "11"
+select T1.product_category_description
+from ref_product_categories as T1 join products as T2
+on T1.product_category_code = T2.product_category_code
+where T2.product_description like '%t%'
 
-7. What is the color of the product "catnip"?
+7. What is the color description of the product with name "catnip"?
 
 select t2.color_description
 from products as t1 join ref_colors as t2
 on t1.color_code = t2.color_code
 where t1.product_name = "catnip"
 
-What is the color of the product "chervil"?
+What is the color code and description of the product named "chervil"?
 
-select t2.color_description
+select t1.color_code, t2.color_description
 from products as t1 join ref_colors as t2
 on t1.color_code = t2.color_code
 where t1.product_name = "chervil"
 
-Find the color of the product "cumin".
+Find the id and color description of the products with at least 2 characteristics.
 
-select t2.color_description
+select t1.product_id, t2.color_description
 from products as t1 join ref_colors as t2
 on t1.color_code = t2.color_code
-where t1.product_name = "cumin"
+join product_characteristics as t3
+on t1.product_id = t3.product_id
+group by t1.product_id
+having count(*) >= 2
 
-8. List all the products with color "white".
+8. List all the product names with color with description "white".
 
 select t1.product_name
 from products as t1 join ref_colors as t2
 on t1.color_code = t2.color_code
 where t2.color_description = "white"
 
-What are the name of the products that are "yellow" colored?
+What are the name and typical buying and selling prices of the products that have color described as "yellow".
 
-select t1.product_name
+select t1.product_name, t1.typical_buying_price, t1.typical_selling_price
 from products as t1 join ref_colors as t2
 on t1.color_code = t2.color_code
 where t2.color_description = "yellow"
 
-9. How many characteristics does the product "sesame" have?
+9. How many characteristics does the product named "sesame" have?
 
 select count(*)
 from products as t1 join product_characteristics as t2
 on t1.product_id = t2.product_id
 where t1.product_name = "sesame"
 
-How many characteristics does the product "cumin" have?
+How many the distinct characteristic names does the product "cumin" have?
 
-select count(*)
+select count(distinct t3.characteristic_name)
 from products as t1 join product_characteristics as t2
 on t1.product_id = t2.product_id
-where t1.product_name = "cumin"
+join Characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "sesame"
 
-10. What are all the characteristics of product "sesame"?
+10. What are all the characteristic names of product "sesame"?
 
 select t3.characteristic_name
 from products as t1 join product_characteristics as t2
@@ -136,16 +144,16 @@ join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 where t1.product_name = "sesame"
 
-List all the characteristics of product "cumin".
+List all the characteristic names and data types of product "cumin".
 
-select t3.characteristic_name
+select t3.characteristic_name, t3.characteristic_data_type
 from products as t1 join product_characteristics as t2
 on t1.product_id = t2.product_id
 join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 where t1.product_name = "cumin"
 
-11. List all the "Grade" type characteristics of product "sesame".
+11. List all characteristics of product named "sesame" with type code "Grade".
 
 select t3.characteristic_name
 from products as t1 join product_characteristics as t2
@@ -154,16 +162,7 @@ join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 where t1.product_name = "sesame" and t3.characteristic_type_code = "Grade"
 
-List all the "Purity" type characteristics of product "cumin".
-
-select t3.characteristic_name
-from products as t1 join product_characteristics as t2
-on t1.product_id = t2.product_id
-join characteristics as t3
-on t2.characteristic_id = t3.characteristic_id
-where t1.product_name = "cumin" and t3.characteristic_type_code = "Purity"
-
-12. How many characteristics does the product "laurel" have?
+12. How many characteristics does the product named"laurel" have?
 
 select count(*)
 from products as t1 join product_characteristics as t2
@@ -181,7 +180,7 @@ join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 where t1.product_name = "flax"
 
-13. Find the name of the products that have the color "red" and have the characteristic "slow".
+13. Find the name of the products that have the color description "red" and have the characteristic name "fast".
 
 select product_name
 from products as t1 join product_characteristics as t2
@@ -190,20 +189,9 @@ join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 join ref_colors as t4
 on t1.color_code = t4.color_code
-where t4.color_description = "red" and t3.characteristic_name = "slow"
+where t4.color_description = "red" and t3.characteristic_name = "fast"
 
-List products that have the color "white" and have the characteristic "hot".
-
-select product_name
-from products as t1 join product_characteristics as t2
-on t1.product_id = t2.product_id
-join characteristics as t3
-on t2.characteristic_id = t3.characteristic_id
-join ref_colors as t4
-on t1.color_code = t4.color_code
-where t4.color_description = "white" and t3.characteristic_name = "hot"
-
-14. How many products have the characteristic "hot"?
+14. How many products have the characteristic named "hot"?
 
 select count(*)
 from products as t1 join product_characteristics as t2
@@ -212,16 +200,7 @@ join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 where t3.characteristic_name = "hot"
 
-Find the number of products that are "fast".
-
-select count(*)
-from products as t1 join product_characteristics as t2
-on t1.product_id = t2.product_id
-join characteristics as t3
-on t2.characteristic_id = t3.characteristic_id
-where t3.characteristic_name = "fast"
-
-15. List all the "warm" products.
+15. List the all the distinct names of the products with the characteristic name 'warm'.
 
 select distinct t1.product_name
 from products as t1 join product_characteristics as t2
@@ -230,16 +209,7 @@ join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 where t3.characteristic_name = "warm"
 
-Which products have the characteristic "cool"?
-
-select distinct t1.product_name
-from products as t1 join product_characteristics as t2
-on t1.product_id = t2.product_id
-join characteristics as t3
-on t2.characteristic_id = t3.characteristic_id
-where t3.characteristic_name = "cool"
-
-16. Find the number of the products that have the color "red" and have the characteristic "slow".
+16. Find the number of the products that have the color described as "red" and have the characteristic named "slow".
 
 select count(*)
 from products as t1 join product_characteristics as t2
@@ -250,7 +220,7 @@ join ref_colors as t4
 on t1.color_code = t4.color_code
 where t4.color_description = "red" and t3.characteristic_name = "slow"
 
-Count the products that have the color "white" and have the characteristic "hot".
+Count the products that have the color description "white" or have the characteristic name "hot".
 
 select count(*)
 from products as t1 join product_characteristics as t2
@@ -259,19 +229,13 @@ join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 join ref_colors as t4
 on t1.color_code = t4.color_code
-where t4.color_description = "white" and t3.characteristic_name = "hot"
+where t4.color_description = "white" or t3.characteristic_name = "hot"
 
-17. What is the unit of measuerment of the product category "Herbs"?
+17. What is the unit of measuerment of the product category code "Herbs"?
 
 select unit_of_measure
 from ref_product_categories
 where product_category_code = "Herbs"
-
-What is the unit of measuerment of the product category "Seeds"?
-
-select unit_of_measure
-from ref_product_categories
-where product_category_code = "Seeds"
 
 18. Find the product category description of the product category with code "Spices".
 
@@ -279,36 +243,36 @@ select product_category_description
 from ref_product_categories
 where product_category_code = "Spices"
 
-What is the product category description of category "Herbs"?
+What is the product category description and unit of measurement of category "Herbs"?
 
-select product_category_description
+select product_category_description, unit_of_measure
 from ref_product_categories
 where product_category_code = "Herbs"
 
-19. What is the unit of measurement of product "cumin"?
+19. What is the unit of measurement of product named "cumin"?
 
 select t2.unit_of_measure
 from products as t1 join ref_product_categories as t2
 on t1.product_category_code = t2.product_category_code
 where t1.product_name = "cumin"
 
-Find the unit of measurement of product "chervil".
+Find the unit of measurement and product category code of product named "chervil".
 
-select t2.unit_of_measure
+select t2.unit_of_measure, t2.product_category_code
 from products as t1 join ref_product_categories as t2
 on t1.product_category_code = t2.product_category_code
 where t1.product_name = "chervil"
 
-20. Find the products that are white and have unit of measurement "Handful"
+20. Find the product names that are colored 'white' but do not have unit of measurement "Handful"
 
 select t1.product_name
 from products as t1 join ref_product_categories as t2
 on t1.product_category_code = t2.product_category_code
 join ref_colors as t3
 on t1.color_code = t3.color_code
-where t3.color_description = "white" and t2.unit_of_measure = "Handful"
+where t3.color_description = "white" and t2.unit_of_measure != "Handful"
 
-21. What is the most popular color?
+21. What is the description of the color for most products?
 
 select t2.color_description
 from products as t1 join ref_colors as t2
@@ -317,7 +281,7 @@ group by t2.color_description
 order by count(*) desc
 limit 1
 
-22. What is the least popular color?
+22. What is the description of the color used by least products?
 
 select t2.color_description
 from products as t1 join ref_colors as t2
@@ -326,7 +290,7 @@ group by t2.color_description
 order by count(*) asc
 limit 1
 
-23. What is the most popular characteristic?
+23. What is the characteristic name used by most number of the products?
 
 select t3.characteristic_name
 from products as t1 join product_characteristics as t2
@@ -337,7 +301,16 @@ group by t3.characteristic_name
 order by count(*) desc
 limit 1
 
-24. What is the least popular characteristic?
+24. What are the names, details and data types of the characteristics which are never used by any prodct?
+
+select characteristic_name, other_characteristic_details, characteristic_data_type
+from Characteristics
+except
+select t1.characteristic_name, t1.other_characteristic_details, t1.characteristic_data_type
+from characteristics as t1 join product_characteristics as t2
+on t1.characteristic_id = t2.characteristic_id
+
+What is the characteristic name used at least twice by products?
 
 select t3.characteristic_name
 from products as t1 join product_characteristics as t2
@@ -345,5 +318,14 @@ on t1.product_id = t2.product_id
 join characteristics as t3
 on t2.characteristic_id = t3.characteristic_id
 group by t3.characteristic_name
-order by count(*) asc
-limit 1
+having count(*) >=2
+
+
+How many colors are never used by any product?
+
+select count(*)
+from Ref_colors
+where color_code not in (
+select color_code
+from products
+)
