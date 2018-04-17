@@ -41,7 +41,7 @@ Where hours > (select avg(hours) from projects)
 
 Find the name and hours of project that has the most number of scientists.
 
-Select T1.name
+Select T1.name, T1.hours
 From projects as T1 join assignedto as T2 on T1.code = T2.project
 Group by T2.project
 Order by count(*) desc
@@ -85,20 +85,20 @@ From assignedto as T1
 Where T2.name = 'A Puzzling Parallax'
 
 
-List the names of all scientists sorted in in alphabetical order.
+List the names of all scientists sorted in alphabetical order.
 
 Select name
 From scientists
 Order by name
 
-Find the number of scientists are involved for each project and project name.
+Find the number of scientists involved for each project and project name.
 
 Select count(*), T1.name
 From projects as T1 join assignedto as T2 on T1.code = T2.project
 group by T1.name
 
 
-Find the number of scientists are involved for these projects that require more than 300 hours.
+Find the number of scientists involved for the projects that require more than 300 hours.
 
 Select count(*), T1.name
 From projects as T1 join assignedto as T2 on T1.code = T2.project
@@ -169,7 +169,7 @@ FROM Scientists as T1
 ORDER BY T3.Name, T1.Name
 
 
-Find name of the project that needs the fastest time to finish and the name of scientists who worked on it.
+Find name of the project that needs the least amount of time to finish and the name of scientists who worked on it.
 
 Select T2.name, T3.name
 From assignedto as T1
