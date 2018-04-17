@@ -2,12 +2,14 @@ Total = # 40
 
 1.
 What is the race name that are held most recently?
+
 SELECT name
 FROM races
 ORDER BY date desc
 LIMIT 1
 
 What is the name and date of the most recent race?
+
 SELECT name, date
 FROM races
 ORDER BY date desc
@@ -15,281 +17,354 @@ LIMIT 1
 
 
 2.
-Find the names of all races held in 2017?
+Find the names of all races held in 2017.
+
 SELECT name
 FROM races
 WHERE year=2017
 
-Find the names of all races held after 2017?
-SELECT name
+Find the distinct names of all races held between 2014 and 2017?
+
+SELECT distinct name
 FROM races
-WHERE year>2017
+WHERE year between 2014 and 2017
 
 
 3.
 List the forename and surname of all distinct drivers who once had laptime less than 93000 milliseconds?
-SELECT distinct T1.forename, T1.surname
-FROM drivers as T1, laptimes as T2
-WHERE T1.driverid=T2.driverid and T2.milliseconds<93000
 
-Find all the distinct id of drivers who once had laptime more than 100000 milliseconds?
-SELECT distinct T1.driverid
-FROM drivers as T1, laptimes as T2
-WHERE T1.driverid=T2.driverid and T2.milliseconds>100000
+SELECT distinct T1.forename, T1.surname
+FROM drivers as T1 join laptimes as T2
+on T1.driverid=T2.driverid
+WHERE T2.milliseconds<93000
+
+Find all the distinct id and nationality of drivers who have had laptime more than 100000 milliseconds?
+
+SELECT distinct T1.driverid, T1.nationality
+FROM drivers as T1 join laptimes as T2
+on T1.driverid=T2.driverid 
+where T2.milliseconds> 100000
 
 
 4.
 What are the forename and surname of the driver who has the smallest laptime?
+
 SELECT T1.forename, T1.surname
-FROM drivers as T1, laptimes as T2
-WHERE T1.driverid=T2.driverid
+FROM drivers as T1 join laptimes as T2
+on T1.driverid=T2.driverid
 ORDER BY T2.milliseconds 
 LIMIT 1
 
-What is the id of the driver who has the longest laptime?
-SELECT T1.driverid
-FROM drivers as T1, laptimes as T2
-WHERE T1.driverid=T2.driverid
+What is the id and family name of the driver who has the longest laptime?
+
+SELECT T1.driverid, T1.surname
+FROM drivers as T1 join laptimes as T2
+on T1.driverid=T2.driverid
 ORDER BY T2.milliseconds desc
 LIMIT 1
 
+What is the id, forname and surname of the driver who had the first position in terms of laptime at least twice?
+
+SELECT T1.driverid, T1.forename, T1.surname
+FROM drivers as T1 join laptimes as T2
+on T1.driverid=T2.driverid
+where position = '1'
+group by T1.driverid
+having count(*) >= 2
 
 5.
 How many drivers participated in the race Australian Grand Prix held in 2009?
-SELECT count(*)
-FROM results as T1, races as T2
-WHERE T1.raceid=T2.raceid and T2.name="Australian Grand Prix" and year=2009
 
-Hom many drivers participated in the race which is held most recently?
 SELECT count(*)
-FROM results as T1, races as T2
-WHERE T1.raceid=T2.raceid
-GROUP BY T1.raceid
-ORDER BY T2.date DESC
-LIMIT 1
+FROM results as T1 join races as T2
+on T1.raceid=T2.raceid 
+where T2.name="Australian Grand Prix" and year=2009
 
+How many drivers did not participate in the races held in 2009?
+
+SELECT count(distinct driverId)
+FROM results
+where raceId not in(
+select raceId
+from races
+where year != 2009
+)
 
 6.
-Give me a list of names and years of races that the drivers whose forename is Lewis?
-SELECT T2.name, T2.year
-FROM drivers as T1, races as T2, results as T3
-WHERE T1.driverid=T3.driverid and T2.raceid=T3.raceid and T1.forename="Lewis"
+Give me a list of names and years of races that had any driver whose forename is Lewis?
 
+select T2.name, T2.year
+from results as T1 join races as T2
+on T1.raceid=T2.raceid
+join drivers as T3
+on T1.driverid=T3.driverid
+where T3.forename="Lewis"
 
 Find the forename and surname of drivers whose nationality is German?
+
 SELECT forename, surname
 FROM drivers
 WHERE nationality="German"
 
 
 7.
-Find the id of drivers who participated both Australian Grand Prix and Chinese Grand Prix?
-SELECT T2.driverid
-FROM races as T1, results as T2
-WHERE T1.raceid=T2.raceid and T1.name="Australian Grand Prix"
-INTERSECT
-SELECT T2.driverid
-FROM races as T1, results as T2
-WHERE T1.raceid=T2.raceid and T1.name="Chinese Grand Prix"
+Find the id and forenames of drivers who participated both the races with name Australian Grand Prix and the races with name Chinese Grand Prix?
 
-What are the forename and surname of drivers participated in not only Australian Grand Prix but also Chinese Grand Prix?
-SELECT T3.forename, T3.surname
-FROM races as T1, results as T2, drivers as T3
-WHERE T1.raceid=T2.raceid and T2.driverid=T3.driverid and T1.name="Australian Grand Prix"
+SELECT T2.driverid, T3.forename
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+join drivers as T3
+on T2.driverid = T3.driverid
+where T1.name="Australian Grand Prix"
 INTERSECT
-SELECT T3.forename, T3.surname
-FROM races as T1, results as T2, drivers as T3
-WHERE T1.raceid=T2.raceid and T2.driverid=T3.driverid and T1.name="Chinese Grand Prix"
+SELECT T2.driverid, T3.forename
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+join drivers as T3
+on T2.driverid = T3.driverid
+where T1.name="Chinese Grand Prix"
 
+What are the forenames and surnames of drivers who participated in the races named Australian Grand Prix but not the races named Chinese Grand Prix?
+
+SELECT T3.forename, T3.surname
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+join drivers as T3
+on T2.driverid=T3.driverid 
+where T1.name="Australian Grand Prix"
+EXCEPT
+SELECT T3.forename, T3.surname
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+join drivers as T3
+on T2.driverid=T3.driverid 
+where T1.name="Chinese Grand Prix"
 
 8.
-Find all the forenames of distinct drivers who was in position 1 and won?
-SELECT distinct T1.forename
-FROM drivers as T1, driverstandings as T2
-WHERE T1.driverid=T2.driverid and T2.position=1 and T2.wins=1
+Find all the forenames of distinct drivers who was in position 1 as standing and won?
 
-Find all the forenames of distinct drivers who won in position 1 and had more than 20 points?
 SELECT distinct T1.forename
-FROM drivers as T1, driverstandings as T2
-WHERE T1.driverid=T2.driverid and T2.position=1 and T2.wins=1 and T2.points>20
+FROM drivers as T1 join driverstandings as T2
+on T1.driverid=T2.driverid
+where T2.position=1 and T2.wins=1
+
+Find all the forenames of distinct drivers who won in position 1 as driver standing and had more than 20 points?
+
+SELECT distinct T1.forename
+FROM drivers as T1 join driverstandings as T2
+on T1.driverid=T2.driverid
+where T2.position=1 and T2.wins=1 and T2.points>20
 
 
 9.
-What are the numbers of constructors for different nationality?
+What are the numbers of constructors for different nationalities?
+
 SELECT count(*), nationality
 FROM constructors
 GROUP BY nationality
 
-What are the numbers of races for different constructor id?
+What are the numbers of races for each constructor id?
+
 SELECT count(*), constructorid
 FROM constructorStandings
 GROUP BY constructorid
 
 
 10.
-What are the names of races that was held after 2017 and the circuit was from Spain?
-SELECT T1.name
-FROM races as T1, circuits as T2
-WHERE T1.circuitid=T2.circuitid and T2.country="Spain" and T1.year>2017
+What are the names of races that were held after 2017 and the circuits were in the country of Spain?
 
-What are the unique id of races that held after 2017 and the circuit was from Spain?
-SELECT T1.raceid
+SELECT T1.name
+FROM races as T1 join circuits as T2
+on T1.circuitid=T2.circuitid 
+WHERE T2.country="Spain" and T1.year>2017
+
+What are the unique names of races that held after 2000 and the circuits were in Spain?
+
+SELECT distinct T1.name
 FROM races as T1, circuits as T2
-WHERE T1.circuitid=T2.circuitid and T2.country="Spain" and T1.year>
+WHERE T1.circuitid=T2.circuitid and T2.country="Spain" and T1.year>2000
 
 
 11.
-Find the distinct driver id of all drivers that have a shorter stop duration than some drivers in the race whose id is 841?
-SELECT distinct T1.driverid
-FROM pitstops as T1, pitstops as T2
-WHERE T1.duration<T2.duration and T2.raceid=841
+Find the distinct driver id and the stop number of all drivers that have a shorter pit stop duration than some drivers in the race with id 841.
+
+SELECT distinct driverid, stop
+FROM pitstops
+WHERE duration < 
+(select max(duration)
+from pitstops
+where raceid = 841)
 
 Find the distinct driver id of all drivers that have a longer stop duration than some drivers in the race whose id is 841?
-SELECT distinct T1.driverid
-FROM pitstops as T1, pitstops as T2
-WHERE T1.duration>T2.duration and T2.raceid=841
+
+SELECT distinct driverid, stop
+FROM pitstops
+WHERE duration > 
+(select min(duration)
+from pitstops
+where raceid = 841)
 
 
 12.
 List the forenames of all distinct drivers in alphabetical order?
+
 SELECT distinct forename
 FROM drivers
-ORDER BY forename desc
+ORDER BY forename asc
 
-List the names of all distinct races in alphabetical order?
+List the names of all distinct races in reversed  lexicographic order?
+
 SELECT distinct name
 FROM races
 ORDER BY name desc
 
-
 13.
 What are the names of races held between 2009 and 2011 or between 2014 and 2017?
+
 SELECT name
 FROM races
-WHERE year between 2009 and 2011
-UNION
-SELECT name
-FROM races
-WHERE year between 2014 and 2017
+WHERE year between 2009 and 2011 or year between 2014 and 2017
 
 
 What are the names of races held after 12:00:00 or before 09:00:00?
-SELECT name
-FROM races
-WHERE time>"12:00:00"
-UNION
-SELECT name
-FROM races
-WHERE time<"09:00:00"
 
+SELECT name
+FROM races
+WHERE time>"12:00:00" or time<"09:00:00"
+
+What are the drivers' first, last names and id who had more than 8 pit stops or participated in more than 5 race results?
+
+select T1.forename, T1.surname, T1.driverid
+from drivers as T1 join pitstops as T2
+on T1.driverid = T2.driverid
+group by T1.driverid
+having count(*) > 8
+union
+select T1.forename, T1.surname, T1.driverid
+from drivers as T1 join results as T2
+on T1.driverid = T2.driverid
+group by T1.driverid
+having count(*) > 5
+
+
+What are the drivers' last names and id who had 11 pit stops and participated in more than 5 race results?
+
+select T1.surname, T1.driverid
+from drivers as T1 join pitstops as T2
+on T1.driverid = T2.driverid
+group by T1.driverid
+having count(*) = 11
+intersect
+select T1.surname, T1.driverid
+from drivers as T1 join results as T2
+on T1.driverid = T2.driverid
+group by T1.driverid
+having count(*) > 5
 
 14.
-What is the id of the driver who participated in the most races after 2010?
-SELECT T1.driverid
-FROM drivers as T1, races as T2, results as T3
-WHERE T1.driverid=T3.driverid and T2.raceid=T3.raceid and T2.year>2010
+What is the id and last name of the driver who participated in the most races after 2010?
+
+select T1.driverid, T1.surname
+from drivers as T1 join results as T2
+on T1.driverid = T2.driverid
+join races as T3
+on T2.raceid=T3.raceid
+where T3.year>2010
 GROUP BY T1.driverid
 ORDER BY count(*) desc
 LIMIT 1
 
-What is the forename and surname of the driver who participated in the most races after 2010?
-SELECT T1.forename, T1.surname
-FROM drivers as T1, races as T2, results as T3
-WHERE T1.driverid=T3.driverid and T2.raceid=T3.raceid and T2.year>2010
-GROUP BY T1.driverid
-ORDER BY count(*) desc
-LIMIT 1
 
 
 15.
 What are the names of circuits that belong to UK or Malaysia?
+
 SELECT name
 FROM circuits
 WHERE country="UK" or country="Malaysia"
 
 Find the id and location of circuits that belong to France or Belgium?
+
 SELECT circuitid, location
 FROM circuits
 WHERE country="France" or country="Belgium"
 
-
 16.
-Which Japanese constructors have once earned more than 5 points?
-SELECT T1.name
-FROM constructors as T1, constructorstandings as T2
-WHERE T1.constructorid=T2.constructorid and T1.nationality="Japanese"
-INTERSECT
-SELECT T1.name
-FROM constructors as T1, constructorstandings as T2
-WHERE T1.constructorid=T2.constructorid and T2.points>5
 
-Find the id of Japanese constructors that have once earned more than 5 points?
-SELECT T1.constructorid
-FROM constructors as T1, constructorstandings as T2
-WHERE T1.constructorid=T2.constructorid and T1.nationality="Japanese"
-INTERSECT
-SELECT T1.constructorid
-FROM constructors as T1, constructorstandings as T2
-WHERE T1.constructorid=T2.constructorid and T2.points>5
+Find the names of Japanese constructors that have once earned more than 5 points?
+
+SELECT T1.name
+FROM constructors as T1 join constructorstandings as T2
+on T1.constructorid=T2.constructorid
+where T1.nationality="Japanese" and T2.points>5
 
 
 17.
-What is the average fastest lap speed in 2008 Monaco Grand Prix?
-SELECT avg(T2.fastestlapspeed)
-FROM races as T1, results as T2
-WHERE T1.raceid=T2.raceid and T1.year=2008 and T1.name="Monaco Grand Prix"
+What is the average fastest lap speed in race named 'Monaco Grand Prix' in 2008 ?
 
-What is the maximum fastest lap speed in 2008 Monaco Grand Prix?
+SELECT avg(T2.fastestlapspeed)
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+where T1.year=2008 and T1.name="Monaco Grand Prix"
+
+What is the maximum fastest lap speed in race named 'Monaco Grand Prix' in 2008 ?
+
 SELECT max(T2.fastestlapspeed)
-FROM races as T1, results as T2
-WHERE T1.raceid=T2.raceid and T1.year=2008 and T1.name="Monaco Grand Prix"
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+where T1.year=2008 and T1.name="Monaco Grand Prix"
 
 
 18.
 What are the maximum fastest lap speed in races held after 2004 grouped by race name and ordered by year?
+
 SELECT max(T2.fastestlapspeed), T1.name, T1.year
-FROM races as T1, results as T2
-WHERE T1.raceid=T2.raceid and T1.year>2014
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+where T1.year>2014
 GROUP BY T1.name
 ORDER BY T1.year
 
 What are the average fastest lap speed in races held after 2004 grouped by race name and ordered by year?
+
 SELECT avg(T2.fastestlapspeed), T1.name, T1.year
-FROM races as T1, results as T2
-WHERE T1.raceid=T2.raceid and T1.year>2014
+FROM races as T1 join results as T2
+on T1.raceid=T2.raceid
+where T1.year>2014
 GROUP BY T1.name
 ORDER BY T1.year
 
 
 19.
-Find the forename and number of races of all drivers who have at least participated in two races?
-SELECT T1.forename, count(*)
-FROM drivers as T1, races as T2, results as T3
-WHERE T1.driverid=T3.driverid and T2.raceid=T3.raceid
+Find the id, forename and number of races of all drivers who have at least participated in two races?
+
+SELECT T1.driverid, T1.forename, count(*)
+from drivers as T1 join results as T2
+on T1.driverid=T2.driverid
+join races as T3
+on T2.raceid=T3.raceid
 GROUP BY T1.driverid
-HAVING count(*) > 1
+HAVING count(*) >= 2 
 
 Find the driver id and number of races of all drivers who have at most participated in 30 races?
+
 SELECT T1.driverid, count(*)
-FROM drivers as T1, races as T2, results as T3
-WHERE T1.driverid=T3.driverid and T2.raceid=T3.raceid
+from drivers as T1 join results as T2
+on T1.driverid=T2.driverid
+join races as T3
+on T2.raceid=T3.raceid
 GROUP BY T1.driverid
-HAVING count(*) < 30
+HAVING count(*) <= 30
 
 
 20.
-Find the id of the driver who participated the most number of races?
-SELECT T1.driverid
-FROM drivers as T1, races as T2, results as T3
-WHERE T1.driverid=T3.driverid and T2.raceid=T3.raceid
-GROUP BY T1.driverid
-ORDER BY count(*) desc
-LIMIT 1
+Find the id and surname of the driver who participated the most number of races?
 
-What is the forename and surname of the driver with the most number of races?
-SELECT T1.forename, T1.surname
-FROM drivers as T1, races as T2, results as T3
-WHERE T1.driverid=T3.driverid and T2.raceid=T3.raceid
+SELECT T1.driverid, T1.surname
+from drivers as T1 join results as T2
+on T1.driverid=T2.driverid
+join races as T3
+on T2.raceid=T3.raceid
 GROUP BY T1.driverid
 ORDER BY count(*) desc
 LIMIT 1
