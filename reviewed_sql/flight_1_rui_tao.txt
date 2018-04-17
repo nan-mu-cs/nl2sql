@@ -1,0 +1,352 @@
+Total = #  43
+
+
+1. How many aircrafts do we have?
+
+select count(*)
+from Aircraft
+
+2. Show name and distance for all aircrafts.
+
+select name, distance
+from Aircraft
+
+3. Show ids for all aircrafts with more than 1000 distance.
+
+
+select aid
+from Aircraft
+where distance > 1000
+
+
+4. How many aircrafts have distance between 1000 and 5000?
+
+
+select count(*)
+from Aircraft
+where distance between 1000 and 5000
+
+
+5. What is the name and distance for aircraft with id 12?
+
+select name, distance
+from Aircraft
+where aid = 12
+
+
+6. What is the minimum, average, and maximum distance of all aircrafts.
+
+select min(distance), avg(distance), max(distance)
+from Aircraft
+
+
+7. Show the id and name of the aircraft with the maximum distance.
+
+
+select aid, name
+from Aircraft
+order by distance desc
+limit 1
+
+
+8. Show the name of aircrafts with top three lowest distances.
+
+select name
+from Aircraft
+order by distance
+limit 3
+
+9. Show names for all aircrafts with distances more than the average.
+
+select name
+from Aircraft
+where distance > (select avg(distance) from Aircraft)
+
+10. Show names for all aircrafts with distance at least a quarter of the maximum.
+
+
+select name
+from Aircraft
+where distance >= (select max(distance)/4 from Aircraft)
+
+11. How many employees do we have?
+
+
+select count(*)
+from Employee
+
+
+12. Show name and salary for all employees sorted by salary.
+
+
+select name, salary
+from Employee
+order by salary
+
+13. Show ids for all employees with at least 100000 salary.
+
+select eid
+from Employee
+where salary > 100000
+
+14. How many employees have salary between 100000 and 200000?
+
+select count(*)
+from Employee
+where salary between 100000 and 200000
+
+
+15. What is the name and salary for employee with id 242518965?
+
+select name, salary
+from Employee
+where eid = 242518965
+
+16. What is average and maximum salary of all employees.
+
+
+select avg(salary), max(salary)
+from Employee
+
+
+17. Show the id and name of the employee with maximum salary.
+
+select eid, name
+from Employee
+order by salary desc
+limit 1
+
+
+18. Show the name of employees with three lowest salaries.
+
+
+select name
+from Employee
+order by salary asc
+limit 3
+
+
+19. Show names for all employees with salary more than the average.
+
+
+select name
+from Employee
+where salary > (select avg(salary) from Employee)
+
+
+20. Show the id and salary of Mark Young.
+
+
+select eid, salary
+from Employee
+where name = 'Mark Young'
+
+
+21. How many flights do we have?
+
+select count(*)
+from Flight
+
+22. Show flight number, origin, destination of all flights in the alphabetical order of the departure cities.
+
+select flno, origin, destination
+from Flight
+order by origin
+
+23. Show all flight number from Los Angeles.
+
+select flno
+from Flight
+where origin = "Los Angeles"
+
+24. Show origins of all flights with destination Honolulu.
+
+
+select origin
+from Flight
+where destination = "Honolulu"
+
+
+25. Show me the departure date and arrival date for all flights from Los Angeles to Honolulu.
+
+select departure_date, arrival_date
+from Flight
+where origin = "Los Angeles" and destination = "Honolulu"
+
+26. Show flight number for all flights with more than 2000 distance.
+
+select flno
+from Flight
+where distance > 2000
+
+27. What is the average price for flights from Los Angeles to Honolulu.
+
+select avg(price)
+from Flight
+where origin = "Los Angeles" and destination = "Honolulu"
+
+28. Show origin and destination for flights with price higher than 300.
+
+select origin, destination
+from Flight
+where price > 300
+
+29. Show the flight number and distance of the flight with maximum price.
+
+select flno, distance
+from Flight
+order by price desc
+limit 1
+
+30. Show the flight number of flights with three lowest distances.
+
+select flno
+from Flight
+order by distance asc
+limit 3
+
+31. What is the average distance and average price for flights from Los Angeles.
+
+
+select avg(distance), avg(price)
+from Flight
+where origin = "Los Angeles"
+
+
+32. Show all origins and the number of flights from each origin.
+
+select origin, count(*)
+from Flight
+group by origin
+
+33. Show all destinations and the number of flights to each destination.
+
+select destination, count(*)
+from Flight
+group by destination
+
+34. Which origin has most number of flights?
+
+select origin
+from Flight
+group by origin
+order by count(*) desc
+limit 1
+
+35. Which destination has least number of flights?
+
+
+select destination
+from Flight
+group by destination
+order by count(*)
+limit 1
+
+
+36. What is the aircraft name for the flight with number 99
+
+
+select T2.name
+from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
+where T1.flno = 99
+
+
+37. Show all flight numbers with aircraft Airbus A340-300.
+
+
+select T1.flno
+from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
+where T2.name = "Airbus A340-300"
+
+
+38. Show aircraft names and number of flights for each aircraft.
+
+select T2.name, count(*)
+from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
+group by T1.aid
+
+39. Show names for all aircraft with at least two flights.
+
+select T2.name
+from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
+group by T1.aid
+having count(*) >=2
+
+40. How many employees have certificate.
+
+select count(distinct eid)
+from Certificate
+
+41. Show ids for all employees who don't have a certificate.
+
+select eid
+from Employee
+EXCEPT
+select eid
+from Certificate
+
+42. Show names for all aircrafts of which John Williams has certificates.
+
+
+select T3.name
+from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
+where T1.name = "John Williams"
+
+
+43. Show names for all employees who have certificate of Boeing 737-800.
+
+select T1.name
+from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
+where T3.name = "Boeing 737-800"
+
+Show names for all employees who have certificates on both Boeing 737-800 and Airbus A340-300.
+
+select T1.name
+from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
+where T3.name = "Boeing 737-800"
+INTERSECT
+select T1.name
+from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
+where T3.name = "Airbus A340-300"
+
+Show names for all employees who do not have certificate of Boeing 737-800.
+
+select name
+from Employee
+EXCEPT
+select T1.name
+from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
+where T3.name = "Boeing 737-800"
+
+Show the name of aircraft which fewest people have its certificate.
+
+select T2.name
+from Certificate as T1 join Aircraft as T2 on T2.aid = T1.aid
+group by T1.aid
+order by count(*) desc
+limit 1
+
+Show the name and distance of the aircrafts with more than 5000 distance and which at least 5 people have its certificate.
+
+select T2.name
+from Certificate as T1 join Aircraft as T2 on T2.aid = T1.aid
+where T2.distance > 5000
+group by T1.aid
+order by count(*) >= 5
+
+what is the salary and name of the employee who has the most number of aircraft certificates?
+
+select T1.name, T1.salary
+from Employee as T1 join Certificate as T2 on T1.eid = T2.eid
+group by T1.eid
+order by count(*) desc
+limit 1
+
+what is the salary and name of the employee who has the most number of certificates on aircrafts with distance more than 5000?
+
+select T1.name
+from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
+where T3.distance > 5000
+group by T1.eid
+order by count(*) desc
+limit 1
