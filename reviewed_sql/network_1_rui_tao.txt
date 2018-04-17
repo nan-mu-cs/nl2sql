@@ -1,0 +1,231 @@
+Total = # 30
+
+
+1. How many high schooler?
+
+
+select count(*)
+from Highschooler
+
+
+Show all names and grades of high schoolers.
+
+
+select name, grade
+from Highschooler
+
+
+Show all grades.
+
+
+select grade
+from Highschooler
+
+
+2. What is the grade of Kyle?
+
+
+select grade
+from Highschooler
+where name = "Kyle"
+
+
+Show the name of all high schooler with grade 10.
+
+
+select name
+from Highschooler
+where grade = 10
+
+
+Show the ID of high schooler Kyle.
+
+
+select ID
+from Highschooler
+where name = "Kyle"
+
+
+How many high schoolers are there in grade 9 or 10.
+
+
+select count(*)
+from Highschooler
+where grade = 9 or grade = 10
+
+
+3. Show the number of high schoolers for each grade.
+
+
+select grade, count(*)
+from Highschooler
+group by grade
+
+
+Which grade has the most number of high schoolers?
+
+
+select grade
+from Highschooler
+group by grade
+order by count(*) desc
+limit 1
+
+
+Show me all grades that have at least 4 students.
+
+
+select grade
+from Highschooler
+group by grade
+having count(*) >= 4
+
+
+4. Show the student IDs and numbers of friends.
+
+
+select student_id, count(*)
+from Friend
+group by student_id
+
+
+Show the name of high students and numbers of friends.
+
+
+select T2.name, count(*)
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
+group by T1.student_id
+
+
+What is the name of the high schooler who has most number of friends?
+
+
+select T2.name
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
+group by T1.student_id
+order by count(*) desc
+limit 1
+
+
+Show the high schooler names who has at least 3 friends.
+
+select T2.name
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
+group by T1.student_id
+having count(*) >= 3
+
+What is the average, minimum, maximum number of friends for each high schooler?
+
+with friend_num (num) as (select count(*)
+from Friend
+group by student_id)
+select avg(num), min(num), max(num)
+from friend_num
+
+5. Show the name of all friends of high schooler Kyle.
+
+select T3.name
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id join Highschooler as T3 on T1.friend_id = T3.id
+where T2.name = "Kyle"
+
+How many friends does high schooler Kyle have.
+
+select count(*)
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
+where T2.name = "Kyle"
+
+6. Show ids of all high students who do not have any friends.
+
+select id
+from Highschooler
+EXCEPT
+select student_id
+from Friend
+
+Show name of all high students who do not have any friends.
+
+select name
+from Highschooler
+EXCEPT
+select T2.name
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
+
+Show all high schooler IDs who have friends and also are liked by someone else.
+
+select student_id
+from Friend
+INTERSECT
+select liked_id
+from Likes
+
+Show name of all high students who have some friends and also are liked by someone else.
+
+select T2.name
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
+INTERSECT
+select T2.name
+from Likes as T1 join Highschooler as T2 on T1.liked_id = T2.id
+
+7. Show the high schooler IDs and numbers of likes.
+
+select student_id, count(*)
+from Likes
+group by student_id
+
+Show the high schooler names and numbers of likes.
+
+select T2.name, count(*)
+from Likes as T1 join Highschooler as T2 on T1.student_id = T2.id
+group by T1.student_id
+
+What is the name of the high schooler who has most number of likes?
+
+select T2.name
+from Likes as T1 join Highschooler as T2 on T1.student_id = T2.id
+group by T1.student_id
+order by count(*) desc
+limit 1
+
+Show the high student names who has at least 2 likes.
+
+select T2.name
+from Likes as T1 join Highschooler as T2 on T1.student_id = T2.id
+group by T1.student_id
+having count(*) >= 2
+
+Show the name of high students who have grade higher than 5 and has at least 2 friends.
+
+select T2.name
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
+where T2.grade > 5
+group by T1.student_id
+having count(*) >= 2
+
+What is the average, minimum, maximum number of likes for each high schooler?
+
+
+with like_num (num) as (select count(*)
+from Likes
+group by student_id)
+select avg(num), min(num), max(num)
+from like_num
+
+8. How many likes does high schooler Kyle have.
+
+select count(*)
+from Likes as T1 join Highschooler as T2 on T1.student_id = T2.id
+where T2.name = "Kyle"
+
+Find the average grade of all students who has some friends.
+
+select avg(grade)
+From Highschooler
+where id IN (select T1.student_id
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id)
+
+Find the minimum grade of all students who do not have any friend.
+
+select min(grade)
+From Highschooler
+where id NOT IN (select T1.student_id
+from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id)
