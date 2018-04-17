@@ -12,7 +12,7 @@ from Apartment_Bookings
 
 Show all distinct building descriptions.
 
-select building_description
+select distinct building_description
 from Apartment_Buildings
 
 Show all short names of buildings managed by "Emma".
@@ -58,7 +58,7 @@ Return all apartment numbers of apartments with type code "Flat".
 
 select apt_number
 from Apartments
-Where apt_type_code = "Studio"
+Where apt_type_code = "Flat"
 
 Return the first names and last names of all guests
 
@@ -161,7 +161,7 @@ from Apartment_Buildings as T1 JOIN Apartments as T2
 on T1.building_id = T2.building_id
 Where T2.bathroom_count > 2
 
-Show the apartment type code and number of apartments in buildings managed by "Kyle"
+Show the apartment type codes and apartment numbers in buildings managed by "Kyle"
 
 select T2.apt_type_code, T2.apt_number
 from Apartment_Buildings as T1 JOIN Apartments as T2 
@@ -201,9 +201,9 @@ from Apartments
 group by apt_type_code
 order by avg(room_count) DESC limit 3
 
-Show the apartment type code that have the biggest number of total rooms.
+Show the apartment type code, number of bathrooms and number of bedrooms that have the biggest number of total rooms.
 
-select apt_type_code
+select apt_type_code, bathroom_count, bedroom_count
 from Apartments
 group by apt_type_code
 order by sum(room_count) DESC limit 1
@@ -237,9 +237,9 @@ group by gender_code
 order by COUNT(*) DESC
 
 
-4. What are the apartment numbers of apartments with no facility.
+4. How many apartments do not have any facility?
 
-select apt_number
+select count(*)
 from Apartments 
 Where apt_id not in (select apt_id from Apartment_Facilities)
 
