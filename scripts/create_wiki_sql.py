@@ -11,7 +11,7 @@ python3 create_wiki_sql.py output_file_name (dev|train|test) tableid1 tableid2 t
 data_dir = "./WikiSQL-master/data"
 
 train_type = sys.argv[2]
-data_file = os.path.join(data_dir, "{}.tables.jsonl".format(sys.argv[1]))
+data_file = os.path.join(data_dir, "{}.tables.jsonl".format(sys.argv[2]))
 tables = sys.argv[3:]
 tables = ["-".join(table.split("_")) for table in tables]
 
