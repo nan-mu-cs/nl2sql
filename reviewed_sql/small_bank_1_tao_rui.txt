@@ -182,7 +182,7 @@ Select T1.name, T3.balance + T2.balance
 From accounts as T1
      Join checking as T2 on T1.custid = T2.custid
      Join savings as T3 on T1.custid = T3.custid
-Where T2.balance > T3.balance
+Where T3.balance < T2.balance
 
 Find the name and saving balance of the top 3 accounts with the highest saving balance sorted by the balance in the descending order.
 
