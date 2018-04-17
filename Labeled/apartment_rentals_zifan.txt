@@ -1,0 +1,269 @@
+Total * = 40
+
+1. How many apartment bookings are there in total?
+
+select count(*)
+from Apartment_Bookings
+
+Show the start dates and end dates of all apartment bookings.
+
+select booking_start_date, 	booking_end_date
+from Apartment_Bookings
+
+Show all distinct building descriptions.
+
+select building_description
+from Apartment_Buildings
+
+Show all short names of buildings managed by "Emma".
+
+select building_short_name
+from Apartment_Buildings
+Where building_manager	= "Emma"
+
+Show all addresses and phones of buildings managed by "Brenden".
+
+select building_address, building_phone
+from Apartment_Buildings
+Where building_manager	= "Brenden"
+
+What are the building full names that contain the word "court"
+
+Select building_full_name
+from Apartment_Buildings
+WHERE building_full_name LIKE "%court%"
+
+What is the minimum and maximum number of bathrooms of all apartments?
+
+select min(bathroom_count), max(bathroom_count)
+from Apartments
+
+What is the average number of bedrooms of all apartments?
+
+select avg(bedroom_count)
+from Apartments
+
+Return the apartment number and the number of rooms of all apartments.
+
+select apt_number, room_count
+from Apartments
+
+What is the average number of rooms of apartments with type code "Studio"?
+
+select avg(room_count)
+from Apartments
+Where apt_type_code = "Studio"
+
+Return all apartment numbers of apartments with type code "Flat".
+
+select apt_number
+from Apartments
+Where apt_type_code = "Studio"
+
+Return the first names and last names of all guests
+
+select guest_first_name, guest_last_name
+from Guests
+
+Return the date of birth of all guests with gender code "Male".
+
+select date_of_birth
+from Guests
+Where gender_code = "Male"
+
+
+2. Show the apartment numbers, start dates, and end dates of all apartment bookings.
+
+select T2.apt_number, T1.booking_start_date, T1.booking_start_date
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+
+What are the booking start and end dates of the apartments with type code "Duplex"?
+
+select T1.booking_start_date, T1.booking_start_date
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+where T2.apt_type_code = "Duplex"
+
+What are the booking start and end dates of the apartments with more than 2 bedrooms?
+
+select T1.booking_start_date, T1.booking_start_date
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+where T2.bedroom_count > 2
+
+What are the booking status code of the apartments with apartment number "Suite 634"?
+
+select T1.booking_status_code
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+where T2.apt_number = "Suite 634"
+
+Show the distinct apartment number of the apartments that have booking with status code "Confirmed".
+
+select distinct T2.apt_number
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+where T1.booking_status_code = "Confirmed"
+
+Show the average number of rooms of the apartments that have booking with status code "Provisional".
+
+select avg(room_count)
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+where T1.booking_status_code = "Provisional"
+
+Show the guest first names, start dates, and end dates of all apartment bookings.
+
+select T2.guest_first_name, T1.booking_start_date, T1.booking_start_date
+from Apartment_Bookings as T1 JOIN Guests as T2 
+on T1.guest_id = T2.guest_id
+
+Show the start dates and end dates of all apartment bookings made by guests with gender code "Female".
+
+select T1.booking_start_date, T1.booking_start_date
+from Apartment_Bookings as T1 JOIN Guests as T2 
+on T1.guest_id = T2.guest_id
+Where T2.gender_code = "Female"
+
+Show the first names and last names of all guests that have apartment bookings with status code "Confirmed".
+
+select T2.guest_first_name, T2.guest_last_name
+from Apartment_Bookings as T1 JOIN Guests as T2 
+on T1.guest_id = T2.guest_id
+Where T1.booking_status_code = "Confirmed"
+
+Show the facility code of apartments with more than 4 bedrooms.
+
+select T1.facility_code
+from Apartment_Facilities as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+Where T2.bedroom_count > 4
+
+Show the total number of rooms of all apartments with facility code "Gym".
+
+select sum(T2.room_count)
+from Apartment_Facilities as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+Where T1.facility_code = "Gym"
+
+Show the total number of rooms of apartments in building with short name "Columbus Square".
+
+select sum(T2.room_count)
+from Apartment_Buildings as T1 JOIN Apartments as T2 
+on T1.building_id = T2.building_id
+Where T1.building_short_name = "Columbus Square"
+
+Show the addresses of buildings that have apartments with more than 2 bathrooms
+
+select T1.building_address
+from Apartment_Buildings as T1 JOIN Apartments as T2 
+on T1.building_id = T2.building_id
+Where T2.bathroom_count > 2
+
+Show the apartment type code and number of apartments in buildings managed by "Kyle"
+
+select T2.apt_type_code, T2.apt_number
+from Apartment_Buildings as T1 JOIN Apartments as T2 
+on T1.building_id = T2.building_id
+Where T1.building_manager = "Kyle"
+
+
+3. Show the booking status code and the corresponding number of bookings.
+
+select 	booking_status_code, COUNT(*)
+from Apartment_Bookings
+group by booking_status_code
+
+Return all apartment numbers sorted by the number of rooms in ascending order.
+
+select apt_number
+from Apartments
+order by room_count ASC
+
+Return the apartment number with the biggest number of bedrooms
+
+select apt_number
+from Apartments
+order by bedroom_count DESC limit 1
+
+Show the apartment type codes and the corresponding number of apartments sorted by the number of apartments in ascending order.
+
+select apt_type_code, COUNT(*)
+from Apartments
+group by apt_type_code
+order by COUNT(*) ASC
+
+Show the top 3 apartment type codes sorted by the average number of rooms in descending order.
+
+select apt_type_code
+from Apartments
+group by apt_type_code
+order by avg(room_count) DESC limit 3
+
+Show the apartment type code that have the biggest number of total rooms.
+
+select apt_type_code
+from Apartments
+group by apt_type_code
+order by sum(room_count) DESC limit 1
+
+Show the most common apartment type code.
+
+select apt_type_code
+from Apartments
+group by apt_type_code
+order by count(*) DESC limit 1
+
+Show the most common apartment type code among apartments with more than 1 bathroom.
+
+select apt_type_code
+from Apartments
+Where bathroom_count > 1
+group by apt_type_code
+order by count(*) DESC limit 1
+
+Show the apartment type code and the maximum and minimum number of rooms of each type.
+
+select apt_type_code, max(room_count), min(room_count)
+from Apartments
+group by apt_type_code
+
+Show the gender code and the corresponding number of guests sorted by the number of guests in descending order.
+
+select gender_code, COUNT(*)
+from Guests
+group by gender_code
+order by COUNT(*) DESC
+
+
+4. What are the apartment numbers of apartments with no facility.
+
+select apt_number
+from Apartments 
+Where apt_id not in (select apt_id from Apartment_Facilities)
+
+Show the apartment numbers of apartments with bookings that have status code both "Provisional"
+and "Confirmed"
+
+select T2.apt_number
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+where T1.booking_status_code = "Confirmed"
+Intersect 
+select T2.apt_number
+from Apartment_Bookings as T1 JOIN Apartments as T2 
+on T1.apt_id = T2.apt_id
+where T1.booking_status_code = "Provisional"
+
+Show the apartment numbers of apartments with unit status availability of both 0 and 1.
+
+select T1.apt_number
+from Apartments as T1 JOIN View_Unit_Status as T2 
+on T1.apt_id = T2.apt_id
+where T2.available_yn = 0
+Intersect 
+select T1.apt_number
+from Apartments as T1 JOIN View_Unit_Status as T2 
+on T1.apt_id = T2.apt_id
+where T2.available_yn = 1
