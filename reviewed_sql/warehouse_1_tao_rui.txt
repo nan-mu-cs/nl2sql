@@ -101,7 +101,7 @@ select T1.contents
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
 where T2.location = 'New York'
 
-Find the location of the warehouses where have contents Rocks but not Scissors.
+Find the location of the warehouses which have contents Rocks but not Scissors.
 
 select T2.location
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
@@ -111,13 +111,13 @@ select T2.location
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
 where T1.contents = 'Scissors'
 
-Find the warehouses where store contents Rocks or Scissors.
+Find the warehouses which store contents Rocks or Scissors.
 
 select distinct warehouse
 from boxes
 where contents = 'Rocks' or contents = 'Scissors'
 
-Find the location of the warehouses where store contents Rocks and Scissors.
+Find the location of the warehouses which store contents Rocks and Scissors.
 
 select T2.location
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
@@ -177,7 +177,7 @@ Select the warehouse code and the average value of the boxes only for those ware
 select warehouse, avg(value)
 from boxes
 group by warehouse
-having avg(value)> 150
+having avg(value) > 150
 
 Find the total value and number of each content in all boxes.
 
@@ -185,7 +185,7 @@ select sum(value), count(*), contents
 from boxes
 group by contents
 
-Find the total, average, and maximum capacity for different location.
+Find the total, average, and maximum capacity for different locations.
 
 select sum(capacity), avg(capacity), max(capacity), location
 from warehouses
@@ -202,7 +202,7 @@ select max(T1.value), T2.location
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
 group by T2.location
 
-Find the value and contents of the most expensive boxes saved in each warehouse.
+Find the value and contents of the most expensive boxes saved in each location.
 
 select T1.value, T1.contents, T2.location
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
@@ -215,7 +215,7 @@ select Warehouse, count(*)
 from boxes
 group by warehouse
 
-Find the number of different locations which content Rocks is stored.
+Find the number of different locations where content Rocks is stored.
 
 select count(distinct location)
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
@@ -249,12 +249,12 @@ Select the codes of all warehouses that are saturated (a warehouse is saturated 
 select T2.code
 from boxes as T1 join Warehouses as T2 on T1.warehouse = T2.code
 group by T2.code
-having T2.capacity < count(*)
+having count(*) > T2.capacity
 
 ——or ———
-SELECT Code
+SELECT code
 FROM Warehouses
-WHERE Capacity <
+WHERE capacity <
 (SELECT COUNT(*)
 FROM Boxes
 WHERE Warehouse = Warehouses.Code)
