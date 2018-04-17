@@ -1,12 +1,12 @@
 
 Total # = 31
 
-Find the total number of players are there.
+Find the total number of players.
 
 select count(*)
 from players
 
-Find the total number of matches are there.
+Find the total number of matches.
 
 select count(*)
 from matches
@@ -18,40 +18,40 @@ from players
 where country_code = 'USA'
 
 
-find the average age of losers and winners of all matches.
+Find the average age of losers and winners of all matches.
 
 select avg(loser_age), avg(winner_age)
 from matches
 
-find the average rank of winners in all matches.
+Find the average rank of winners in all matches.
 
 select avg(winner_rank)
 from matches
 
-find the highest rank of losers in all matches.
+Find the highest rank of losers in all matches.
 
 select min(loser_rank)
 from matches
 
 
-find the number of distinct country codes of all players are there.
+find the number of distinct country codes of all players.
 
-select count (distinct country_code)
+select count(distinct country_code)
 from players
 
-Find the number of distinct name of losers
+Find the number of distinct name of losers.
 
 select count(distinct loser_name)
 from matches
 
 Find the name of tourney that has more than 10 matches.
 
-select distinct tourney_name
+select tourney_name
 from matches
 group by tourney_name
 having count(*) > 10
 
-List the name of all winners who played in years of 2013 and 2016.
+List the name of all winners who played in both 2013 and 2016.
 
 select winner_name
 from matches
@@ -81,7 +81,7 @@ where T2.tourney_name = 'Australian Open'
 
 Find the first name and country code of the oldest player.
 
-select first_name
+select first_name, country_code
 from players
 order by birth_date
 limit 1
@@ -191,7 +191,7 @@ from matches
 order by winner_age
 limit 3
 
-How many different left hand winner players did participate in the WTA Championships.
+How many different left hand winner players participating in the WTA Championships?
 
 select count(distinct winner_name)
 from matches
