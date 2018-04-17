@@ -6,7 +6,7 @@ how many bank branches are there?
 select count(*)
 from bank
 
-How many total customers are there?
+How many customers are there?
 
 select sum(no_of_customers)
 from bank
@@ -61,12 +61,12 @@ from customer
 where no_of_loans = 0
 
 
-Find the number of different cities which all banks are located at.
+Find the number of different cities which banks are located at.
 
 select count(distinct city)
 from bank
 
-Find the number of different states which all banks are located at.
+Find the number of different states which banks are located at.
 
 select count(distinct state)
 from bank
@@ -74,7 +74,7 @@ from bank
 How many distinct types of accounts are there?
 
 select count(distinct acc_type)
-from bank
+from customer
 
 find the name and account balance of the customer whose name includes letter ‘a’.
 
@@ -164,7 +164,7 @@ order by sum(T2.amount) desc
 limit 1
 
 
-find the state where has the most number of customers.
+find the state which has the most number of customers.
 
 select state
 from bank
@@ -181,7 +181,7 @@ group by acc_type
 
 find the total account balance of customers whose credit score is above 100 from each state.
 
-select sum(acc_bal)
+select sum(acc_bal), state
 from customer
 where credit_score > 100
 group by state
@@ -257,7 +257,7 @@ from loan as T1
      join customer as T3 on T1.cust_id = T3.cust_id
 where T3.credit_score < 100
 
-Find the total amount of loans provided by some bank branch in the state of New York.
+Find the total amount of loans provided by bank branchs in the state of New York.
 
 select sum(T2.amount)
 from bank as T1 join loan as T2 on T1.branch_id = T2.branch_id
