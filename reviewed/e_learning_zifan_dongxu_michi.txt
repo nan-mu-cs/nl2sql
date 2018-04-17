@@ -1,7 +1,8 @@
+# Total = 41
+
 1. How many courses are there in total?
 P: Find the total number of courses offered.
 
-Total # = 41
 SELECT count(*)
 FROM COURSES
 
