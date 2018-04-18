@@ -142,9 +142,8 @@ S:
 
 
 10. Which claim incurred the most number of settlements? List the claim id, the date the claim was made, and the number.
-P: Find the claim id and claim date of the claim that incurred the most settlement count.
+P: Find the claim id and claim date of the claim that incurred the most settlement count. Also tell me the count.
 
-Also tell me the count.
 select T1.claim_id, T1.date_claim_made, count(*)
 from Claims as T1 JOIN Settlements as T2
 on T1.claim_id = T2.claim_id

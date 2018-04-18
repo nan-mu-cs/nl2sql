@@ -1,4 +1,4 @@
-# count 43
+# count 40
 
 1. Which countries and cities are listed in the addresses?
 
@@ -13,7 +13,6 @@ select distinct T1.county_state_province
 from Addresses as T1 JOIN Properties as T2 on T1.address_id = T2.property_address_id;
 
 
-
 3. How is the feature rooftop described?
 
 
@@ -24,13 +23,10 @@ where feature_name = 'rooftop';
 
 4. What is the most commonly seen feature for the properties? Show the feature name and description.
 
-
 select T1.feature_name, T1.feature_description
 from Features as T1 JOIN Property_Features as T2 on T1.feature_id = T2.feature_id
 group by T1.feature_name
 order by count(*) desc limit 1;
-
-
 
 5. How many rooms can a house have at least?
 
@@ -47,55 +43,33 @@ from Properties
 where parking_lots = 1 or garage_yn = 1;
 
 
-7. What are all the descriptions of property features of the property with the most features?
-
- COMMENT: in -> = ? Fixed
+7. What are all the descriptions of the property with the most features?
 
 select property_feature_description
 from Property_Features
-where property_id = 
-(select property_id
-	from Property_Features
-	group by property_id
-	order by count(*) desc limit 1 
-);
+group by property_id
+order by count(*) desc
+limit 1
 
+8. What is the first name of the user who own the most number of properties?
 
-
-8. What is the user category of the users who own the most number of properties?
-
-select T1.user_category_code
+select T1.first_name
 from Users as T1 JOIN Properties as T2 on T2.owner_user_id = T1.User_id
-group by T1.user_category_code
-order by count(*) desc limit 1;
+group by T1.User_id
+order by count(*) desc
+limit 1;
 
+9. List the average room count of the properties which have the garden feature.
 
-9. List the room count of the properties which have the garden feature.
-
- 
- select T3.room_count
- from Property_Features as T1 JOIN Features as T2 on T1.feature_id = T2.feature_id JOIN Properties as T3 on T1.property_id = T3.property_id
+select avg(T3.room_count)
+from Property_Features as T1 JOIN Features as T2 on T1.feature_id = T2.feature_id JOIN Properties as T3 on T1.property_id = T3.property_id
  where T2.feature_name = 'garden';
 
-
-
  10. In which cities are there any properties equipped with a swimming pool?
-
 
 select T2.town_city
 from Properties as T1 JOIN Addresses as T2 on T1.property_address_id = T2.address_id JOIN Property_Features as T3 on T1.property_id = T3.property_id JOIN Features as T4 on T4.feature_id = T3.feature_id
 where T4.feature_name = 'swimming pool';
-
-
-
-
-11. How many features does the property which was the first to get into the market have? List also the id.
-
-select count(*), T1.property_id
-from Properties as T1 JOIN Property_Features as T2 on T1.property_id = T2.property_id
-group by T1.property_id
-order by T1.date_on_market limit 1;
-
 
 12. Which property was requested the lowest price by the vendor? List the id and the price.
 
@@ -103,13 +77,10 @@ select property_id, vendor_requested_price
 from Properties
 order by vendor_requested_price limit 1;
 
-
 13. On average, how many rooms does a property has?
 
 select avg(room_count)
 from Properties;
-
-
 
 14. How many kinds of room sizes are listed?
 
@@ -119,73 +90,53 @@ from Rooms;
 
 15. What are the search contents of the user who searched for at least 2 times? Also list the user id.
 
-COMMENT: in -> = ? (too many this kind pattern IN + NESTED limit 1) Fixed
-
 select search_seq, user_id
 from User_Searches
-where user_id =
-(select user_id
-from User_Searches
 group by user_id
-having count(*)>=2);
+having count(*)>=2;
 
-
-
-
-16. When was the latest search by a user?
+16. When was the time of the latest search by a user?
 
 select max(search_datetime)
 from User_Searches;
 
-
 17. What are all the user searches time and content? Sort the result descending by content.
-
 
 select search_datetime, search_string
 from User_Searches
 order by search_string desc;
 
+18. Where are the zip codes of properties which do not belong to the user who owns at most 2 properties?
 
-18. Where are the properties which do not belong to the user who owns at most 2 properties? List the building, and the street.
-
-COMMENT: do not use limit 1 too much, sepecially in NOT IN/IN, in this case = is enough.
-
-select T1.line_1_number_building, T1.line_2_number_street
+select T1.zip_postcode
 from Addresses as T1 JOIN Properties as T2 on T1.address_id = T2.property_address_id
-where T2.owner_user_id != (
+where T2.owner_user_id NOT IN (
 select owner_user_id
 from Properties
 group by owner_user_id
 having count(*) <= 2
 );
 
-
-
-19. What are all the user categories of the users making only one search? List both category and user id.
+19. What are the users making only one search? List both category and user id.
 
 select T1.user_category_code, T1.user_id
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
 group by T1.user_id
 having count(*) = 1;
 
-
 20. What is the age range category of the user who made the first search?
-
 
 select T1.age_category_code
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
-order by T2.search_datetime limit 1;
+order by T2.search_datetime
+limit 1;
 
-
-21. Which users are buyers with the buyer value equal to 1? List their log in names.
-
-COMMENT: INTERESTING, can discuss Fixed
+21. Find the login names of all senior citizen users ordered by their first names.
 
 select login_name
 from Users
-where is_buyer = 1;
-
-
+where user_category_code = 'Senior Citizen'
+order by first_name
 
 22. How many searches does buyers make in total?
 
@@ -193,13 +144,11 @@ select count(*)
 from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
 where T1.is_buyer = 1;
 
-
-23. When did the user with log in name ratione registered?
+23. When did the user with login name ratione registered?
 
 select date_registered
 from Users
 where login_name = 'ratione';
-
 
 24. List the first name, middle name and last name, and log in name of all the seller users, whose seller value is 1.
 
@@ -207,87 +156,25 @@ select first_name, middle_name, last_name, login_name
 from Users
 where is_seller = 1;
 
- 
 25. Where do the Senior Citizens live? List building, street, and the city.
-Paraphrase: what are the addresses of all the senior citizens?
 
 select T1.line_1_number_building, T1.line_2_number_street, T1.town_city
 from Addresses as T1 JOIN Users as T2 on T1.address_id = T2.user_address_id
 where T2.user_category_code = 'Senior Citizen';
 
-26. Which users who live together with any other users? That is, the users sharing the same address with other users. List their first names and address id.
 
+27.  How many properties are there with at least 2 features?
 
-select first_name, user_address_id
-from Users
-group by user_address_id
-having count(*) > 1;
-
-
-
-
-27.  In which cities are there properties with at least 2 features? List the city and the property id.
-
-COMMENT: USE 2 JOIN INSTEAD OF NESTED SQL. Fixed
-
-
-select T1.town_city
-from Addresses as T1 JOIN Properties as T2 on T1.address_id = T2.property_address_id
-JOIN Property_Features as T3
-on T2.property_id = T3.property_id
-group by T2.property_id
+select count(*)
+from Properties
+group by property_id
 having count(*) >=2;
 
-
-28. On which date did the last property go into the market?
-
-select max(date_on_market)
-from Properties;
-
-
-
-29. List the names of the properties which have the a room described as living room and the properties which have 1 parking lot. 
-
-COMMENT: property_name UNION property_id?
-
-select property_name
-from Properties
-where property_id in (
-select distinct T1.property_id
-from Rooms as T1 JOIN Ref_Room_Types as T2
-on T1.room_type_code = T2.room_type_code
-where T2.room_type_description = 'living'
-UNION
-select property_id
-from Properties
-where parking_lots = 1);
-
-
-
-30. List the users who have searched at least twice but do not live in state Wyoming. List first names and ids.
-
-COMMENT: can discuss more Fixed
-
-
-select distinct T1.first_name, T1.user_id
-from Users as T1 JOIN User_Searches as T2 
-on T1.user_id = T2.user_id
-JOIN Addresses as T3
-on T1.user_address_id = T3.address_id
-where T3.county_state_province != 'Wyoming'
-group by T1.user_id
-having count(*) >= 2;
-
-
-
-
-31. For the properties with at least one photo, how many photos does each property have? Also list the property id.
+31. how many photos does each property have?
 
 select count(*), property_id
 from Property_Photos
 group by property_id;
-
-
 
 32. How many photos does each owner has of his or her properties? List user id and number of photos.
 
@@ -295,22 +182,17 @@ select T1.owner_user_id, count(*)
 from Properties as T1 JOIN Property_Photos as T2 on T1.property_id = T2.property_id
 group by T1.owner_user_id;
 
-
 33. What is the total max price of the properties owned by single mothers or students?
 
 select sum(T1.price_max)
 from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
 where T2.user_category_code = 'Single Mother' or T2.user_category_code = 'Student';
 
-
 34. When did all the user property history happened? Sort them ascending by timestamp, list the timestamp and list the property name.
-
-COMMENT: asc is defaulted, so do not add asc Fixed
 
 select T1.datestamp, T2.property_name
 from User_Property_History as T1 JOIN Properties as T2 on T1.property_id = T2.property_id
 order by datestamp;
-
 
 35. What is the description of the most common property type? List the description and the id.
 
@@ -344,32 +226,16 @@ where T2.first_name = 'Robbie';
 
 39. Who lives in the property he or she owns? List the first name, middle name and last name.
 
-COMMENT: be more sepecific: T1.property_address_id = T2.user_address_id Fixed
-
 select first_name, middle_name, last_name
 from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
 Where T1.property_address_id = T2.user_address_id;
-
-40. Paraphrase: Which owner's address is the same as one of the propertie he or she owns? List the first name, middle name and last name.
-
-
-
-COMMENT: be more sepecific: T1.property_address_id = T2.user_address_id Fixed
-
-select first_name, middle_name, last_name
-from Properties as T1 JOIN Users as T2 on T1.owner_user_id = T2.user_id
-Where T1.property_address_id = T2.user_address_id;
-
-
-
-
 
 41. List the search content of the poor users who do not own a single property.
 
 select search_string
 from User_Searches
 EXCEPT
-select distinct T1.search_string
+select T1.search_string
 from User_Searches as T1 JOIN Properties as T2 on T1.user_id = T2.owner_user_id;
 
 
