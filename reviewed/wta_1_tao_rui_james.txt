@@ -1,0 +1,241 @@
+Total # = 31
+
+1. Find the total number of players.
+P: How many players are there?
+
+select count(*)
+from players
+
+2. Find the total number of matches.
+P: Count the number of matches.
+
+select count(*)
+from matches
+
+3. List the first name and birth date of all players from the country with code USA.
+P: What are the first names and birth dates of players from the USA?
+
+select first_name, birth_date
+from players
+where country_code = 'USA'
+
+
+4. Find the average age of losers and winners of all matches.
+P: What are the average ages of losers and winners across matches?
+
+select avg(loser_age), avg(winner_age)
+from matches
+
+5. Find the average rank of winners in all matches.
+P: What is the average rank for winners in all matches?
+
+select avg(winner_rank)
+from matches
+
+6. Find the highest rank of losers in all matches.
+P: What is the best rank of losers across all matches?
+
+select min(loser_rank)
+from matches
+
+
+7. find the number of distinct country codes of all players.
+P: How many distinct countries do players come from?
+
+select count(distinct country_code)
+from players
+
+8. Find the number of distinct name of losers.
+P: How many different loser names are there?
+
+select count(distinct loser_name)
+from matches
+
+9. Find the name of tourney that has more than 10 matches.
+P: What are the names of tournaments that have more than 10 matches?
+
+select tourney_name
+from matches
+group by tourney_name
+having count(*) > 10
+
+10. List the names of all winners who played in both 2013 and 2016.
+P: What are the names of players who won in both 2013 and 2016?
+
+select winner_name
+from matches
+where year = 2013
+intersect
+select winner_name
+from matches
+where year = 2016
+
+11. List the number of all matches who played in years of 2013 or 2016.
+P: How many matches were played in 2013 or 2016?
+
+select count(*)
+from matches
+where year = 2013 or year = 2016
+
+
+12. What are the country code and first name of the players who won in both tourney WTA Championships and Australian Open?
+P: What are the first names and country codes for players who won both the WTA Championships and the Australian Open?
+
+select T1.country_code, T1.first_name
+from players as T1 join matches as T2 on T1.player_id = T2.winner_id
+where T2.tourney_name = 'WTA Championships'
+intersect
+select T1.country_code, T1.first_name
+from players as T1 join matches as T2 on T1.player_id = T2.winner_id
+where T2.tourney_name = 'Australian Open'
+
+
+13. Find the first name and country code of the oldest player.
+P: What is the first name and country code of the oldest player?
+
+select first_name, country_code
+from players
+order by birth_date
+limit 1
+
+14. List the first and last name of all players in the order of birth date.
+P: What are the full names of all players, sorted by birth date?
+
+select first_name, last_name
+from players
+order by birth_date
+
+15. List the first and last name of all players who are left / L hand in the order of birth date.
+P: What are the full names of all left handed players, in order of birth date?
+
+select first_name, last_name
+from players
+where hand = 'L'
+order by birth_date
+
+16. Find the first name and country code of the player who did the most number of tours.
+P: What is the first name and country code of the player with the most tours?
+
+select T1.country_code, T1.first_name
+from players as T1 join rankings as T2 on T1.player_id = T2.player_id
+order by T2.tours desc
+limit 1
+
+17. Find the year that has the most number of matches.
+P: Which year had the most matches?
+
+select year
+from matches
+group by year
+order by count(*) desc
+limit 1
+
+18. Find the name and rank points of the winner who won the most times.
+P: What is the name of the winner who has won the most matches, and how many rank points does this player have?
+
+select winner_name, winner_rank_points
+from matches
+group by winner_name
+order by count(*) desc
+limit 1
+
+19. Find the name of the winner who has the highest rank points and participated in the Australian Open tourney.
+P: What is the name of the winner with the most rank points who participated in the Australian Open tournament?
+
+select winner_name
+from matches
+where tourney_name = 'Australian Open'
+order by winner_rank_points desc
+limit 1
+
+20. find the names of loser and winner who played in the match with greatest number of minutes.
+P: What are the names of the winner and loser who played in the longest match?
+
+select winner_name, loser_name
+from matches
+order by minutes desc
+limit 1
+
+21. Find the average ranking for each player and their first name.
+P: What are the first names of all players, and their average rankings?
+
+select avg(ranking), T1.first_name
+from players as T1 join rankings as T2 on T1.player_id = T2.player_id
+group by T1.first_name
+
+22. Find the total ranking points for each player and their first name.
+P: What are the first names of all players, and their total ranking points?
+
+select sum(ranking_points), T1.first_name
+from players as T1 join rankings as T2 on T1.player_id = T2.player_id
+group by T1.first_name
+
+23. find the number of players for each country.
+P: How many players are from each country?
+
+select count(*), country_code
+from players
+group by country_code
+
+24. find the code of the country where has the greatest number of players.
+P: What is the code of the country with the most players?
+
+select country_code
+from players
+group by country_code
+order by count(*) desc
+limit 1
+
+25. Find the codes of countries that have more than 50 players.
+P: What are the codes of countries with more than 50 players?
+
+select country_code
+from players
+group by country_code
+having count(*) > 50
+
+26. Find the total number of tours for each ranking date.
+P: How many total tours were there for each ranking date?
+
+select sum(tours), ranking_date
+from rankings
+group by ranking_date
+
+
+27. Find the number of matches happened in each year.
+P: How many matches were played in each year?
+
+select count(*), year
+from matches
+group by year
+
+28. Find the name and rank of the 3 youngest winners across all matches.
+P: What are the names and ranks of the three youngest winners across all matches?
+
+select distinct winner_name, winner_rank
+from matches
+order by winner_age
+limit 3
+
+29. How many different winners both participated in the WTA Championships and were left handed?
+P: Find the number of left handed winners who participated in the WTA Championships.
+
+select count(distinct winner_name)
+from matches
+where tourney_name = 'WTA Championships' and winner_hand = 'L'
+
+
+30. Find the first name, country code and birth date of the winner who has the highest rank points in all matches.
+P: What is the first name, country code, and birth date of the player with the most winner rank points across all matches?
+
+select T1.first_name, T1.country_code, T1.birth_date
+from players as T1 join matches as T2 on T1.player_id = T2.winner_id
+order by T2.winner_rank_points desc
+limit 1
+
+31. Find the number of players for each hand type.
+P: How many players are there for each hand type?
+
+select count(*), hand
+from players
+group by hand
