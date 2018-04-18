@@ -1,0 +1,214 @@
+Total # = 26
+
+1. Find the total savings balance of all accounts except the account with name ‘Brown’.
+P: What is the total balance of savings accounts not belonging to someone with the name Brown?
+
+SELECT sum(T2.balance)
+FROM accounts as T1 join savings as T2 on T1.custid = T2.custid
+Where T1.name != 'Brown'
+
+2. How many accounts are there in total?
+P: Count the number of accounts.
+
+Select count(*)
+From accounts
+
+3. What is the total checking balance in all accounts?
+P: Find the total balance across checking accounts.
+
+Select sum(balance)
+From checking
+
+4. Find the average checking balance.
+P: What is the average balance in checking accounts?
+
+Select avg(balance)
+From checking
+
+5. How many accounts have a savings balance above the average savings balance?
+P: Find the number of accounts with a savings balance that is higher than the average savings balance.
+
+Select count(*)
+From savings
+Where balance > (select avg(balance) from savings)
+
+6. Find the name and id of accounts whose checking balance is below the maximum checking balance.
+P: What are the customer id and name corresponding to accounts with a checking balance less than the largest checking balance?
+
+Select T1.custid, T1.name
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+Where T2.balance < (select max(balance) from checking)
+
+7. What is the checking balance of the account whose owner’s name contains the substring ‘ee’?
+P: Find the balance of the checking account belonging to an owner whose name contains 'ee'.
+
+Select T2.balance
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+Where T1.name LIKE '%ee%'
+
+8. Find the checking balance and saving balance in the Brown’s account.
+P: What are the checking and savings balances in accounts belonging to Brown?
+
+Select T2.balance, T3.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 ON T1.custid = T3.custid
+Where T1.name = 'Brown'
+
+
+9. Find the names of accounts whose checking balance is above the average checking balance, but savings balance is below the average savings balance.
+P: What are the names of accounts with checking balances greater than the average checking balance and savings balances below the average savings balance?
+
+Select T1.name
+From accounts as T1 Join checking as T2 on T1.custid = T2.custid
+Where T2.balance > (select avg(balance) from checking)
+INTERSECT
+Select T1.name
+From accounts as T1 Join savings as T2 ON T1.custid = T2.custid
+Where T2.balance < (select avg(balance) from savings)
+
+10. Find the checking balance of the accounts whose savings balance is higher than the average savings balance.
+P: What are the balances of checking accounts belonging to people with savings balances greater than the average savings balance?
+
+Select T2.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid  
+Where T1.name IN (Select T1.name 
+                  From accounts as T1 Join savings as T2 ON T1.custid = T2.custid
+                  Where T2.balance > (select avg(balance) from savings))
+
+
+11. List all customers’ names in the alphabetical order.
+P: What are the names of all the customers in alphabetical order?
+
+Select name
+From accounts
+Order by name
+
+12. Find the name of account that has the lowest total checking and saving balance.
+P: What is the name corresponding to the accoung with the lowest sum of checking and savings balances?
+
+#should use left join
+Select T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 ON T1.custid = T3.custid
+order by T2.balance + T3.balance
+Limit 1
+
+13. Find the names and total checking and savings balances of accounts whose savings balance is higher than the average savings balance.
+P: What are the names and sum of checking and savings balances for accounts with savings balances higher than the average savings balance?
+
+Select T1.name, T2.balance + T3.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 ON T1.custid = T3.custid
+Where T3.balance > (select avg(balance) from savings)
+
+14. What is the sum of total saving and checking balances in the bank?
+P: What is the sum of all savings and checking balances together?
+
+Select sum(T1.balance) + sum(T2.balance)
+From checking as T1, savings as T2
+
+15. Find the name and checking balance of the account with the lowest savings balance.
+P: What are the names and balances of checking accounts belonging to the customer with the lowest savings balance?
+
+Select T1.name, T2.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Order by T3.balance
+Limit 1
+
+16. Find the number of checking accounts for each account name.
+P: What are the names of customers with accounts, and how many checking accounts do each of them have?
+
+select count(*), T1.name
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+group by T1.name
+
+17. Find the total saving balance for each account name.
+P: What are the names of customers with accounts, and what are the total savings balances for each?
+
+Select sum(T2.balance), T1.name
+From accounts as T1 join savings as T2 on T1.custid = T2.custid
+Group by T1.name
+
+18. Find the name of accounts whose checking balance is below the average checking balance.
+P: What are the names of customers with checking balances lower than the average checking balance?
+
+Select T1.name
+From accounts as T1 join checking as T2 on T1.custid = T2.custid
+Where T2.balance < (select avg(balance) from checking)
+
+19. Find the saving balance of the account with the highest checking balance.
+P: What is the savings balance of the account belonging to the customer with the highest checking balance?
+
+Select T3.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+order by T2.balance desc
+Limit 1
+
+20. Find the total checking and saving balance of all accounts sorted by the total balance in ascending order.
+P: What is the sum of checking and savings balances for all customers, ordered by the total balance?
+
+Select T1.balance + T2.balance
+From checking as T1 join savings as T2 on T1.custid = T2.custid
+Order by T1.balance + T2.balance
+
+21. Find the name and checking balance of the account with the lowest saving balance.
+P: What is the name and checking balance of the account which has the lowest savings balance?
+
+Select T2.balance, T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+order by T3.balance
+Limit 1
+
+
+22. Find the name, checking balance and saving balance of all accounts in the bank.
+P: What are the names, checking balances, and savings balances for all customers?
+
+Select T2.balance, T3.balance, T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+
+23. Find the name, checking balance and savings balance of all accounts in the bank sorted by their total checking and savings balance in descending order.
+P: What are the names, checking balances, and savings balances of customers, ordered by the total of checking and savings balances descending?
+
+Select T2.balance, T3.balance, T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Order by T2.balance + T3.balance desc
+
+24. Find the name of accounts whose checking balance is higher than corresponding saving balance.
+P: What are the names of customers with a higher checking balance than savings balance?
+
+Select T1.name
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Where T2.balance > T3.balance
+
+25. Find the name and total checking and savings balance of the accounts whose savings balance is lower than corresponding checking balance.
+P: What are the names of customers who have a savings balance lower than their checking balance, and what is the total of their checking and savings balances?
+
+Select T1.name, T3.balance + T2.balance
+From accounts as T1
+     Join checking as T2 on T1.custid = T2.custid
+     Join savings as T3 on T1.custid = T3.custid
+Where T3.balance < T2.balance
+
+26. Find the name and savings balance of the top 3 accounts with the highest saving balance sorted by savings balance in descending order.
+P: What are names and savings balances of the three accounts with the highest savings balances?
+
+Select T1.name, T2.balance
+From accounts as T1 join savings as T2 on T1.custid = T2.custid
+Order by T2.balance desc
+Limit 3
