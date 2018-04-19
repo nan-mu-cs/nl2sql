@@ -1,0 +1,342 @@
+Total = # 41
+
+
+1. Show the number of accounts.
+
+
+select count(*)
+from Accounts
+
+
+2. How many customers have opened an account?
+
+
+select count(distinct customer_id)
+from Accounts
+
+
+3. Show the id, the date of account opened, the account name, and other account detail for all accounts.
+
+
+select account_id, date_account_opened, account_name, other_account_details
+from Accounts
+
+
+4. Show the id, the account name, and other account detail for all accounts by the customer with first name 'Meaghan'.
+
+
+select T1.account_id, T1.date_account_opened, T1.account_name, T1.other_account_details
+from Accounts as T1 join Customers as T2
+on T1.customer_id = T2.customer_id
+where T2.customer_first_name = 'Meaghan'
+
+
+5. Show the account name and other account detail for all accounts by the customer with first name Meaghan and last name Keeling.
+
+
+select T1.account_name, T1.other_account_details
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T2.customer_first_name = "Meaghan" and T2.customer_last_name = "Keeling"
+
+
+6. Show the first name and last name for the customer with account name 900.
+
+
+select T2.customer_first_name, T2.customer_last_name
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T1.account_name = "900"
+
+
+
+7. How many customers don't have an account?
+
+
+select count(*)
+from Customers
+where customer_id NOT IN (select customer_id from Accounts)
+
+
+8. Show the unique first, last name, and phone number for all customers with any account.
+
+
+select distinct T1.customer_first_name, T1.customer_last_name, T1.phone_number
+from Customers as T1 join Accounts as T2
+on T1.customer_id = T2.customer_id
+
+
+
+9. Show customer ids who don't have an account.
+
+
+select customer_id
+from Customers
+EXCEPT
+select customer_id
+from Accounts
+
+
+10. How many account does each customer have? List the number and customer id.
+
+
+select count(*), customer_id
+from Accounts
+group by customer_id
+
+
+11. What is the customer id, first and last name with most number of accounts.
+
+
+select T1.customer_id, T2.customer_first_name, T2.customer_last_name
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by count(*) desc
+limit 1 
+
+
+12. Show id, first name and last name for all customers and the number of accounts.
+
+
+select T1.customer_id, T2.customer_first_name, T2.customer_last_name, count(*)
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+
+
+13. Show first name and id for all customers with at least 2 accounts.
+
+
+select T2.customer_first_name, T1.customer_id
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+having count(*) >= 2
+
+
+14. Show the number of customers.
+
+
+select count(*)
+from Customers
+
+
+15. Show the number of customers for each gender.
+
+
+select gender, count(*)
+from Customers
+group by gender
+
+
+16. How many transactions do we have?
+
+
+select count(*)
+from Financial_transactions
+
+
+17. How many transaction does each account have？Show the number and account id.
+
+
+select count(*), account_id
+from Financial_transactions
+
+
+18. How many transaction does account with name 337 have?
+
+
+select count(*)
+from Financial_transactions as T1 join Accounts as T2 on T1.account_id = T2.account_id
+where T2.account_name = "337"
+
+
+19. What is the average, minimum, maximum, and total transaction amount?
+
+
+select avg(transaction_amount), min(transaction_amount), max(transaction_amount),  sum(transaction_amount)
+from Financial_transactions
+
+
+20. Show ids for all transactions whose amounts are greater than the average.
+
+
+select transaction_id
+from Financial_transactions
+where transaction_amount > (select avg(transaction_amount) from Financial_transactions)
+
+
+
+
+21. Show the transaction types and the total amount of transactions.
+
+
+select transaction_type, sum(transaction_amount)
+from Financial_transactions
+group by transaction_type
+
+
+22. Show the account name, id and the number of transactions for each account.
+
+
+select T2.account_name, T1.account_id, count(*)
+from Financial_transactions as T1 join Accounts as T2 on T1.account_id = T2.account_id
+group by T1.account_id
+
+
+23. Show the account id with most number of transactions.
+
+
+select account_id
+from Financial_transactions
+group by account_id
+order by count(*) desc
+limit 1
+
+
+24. Show the account id and name with at least 4 transactions.
+
+
+select T1.account_id, T2.account_name
+from Financial_transactions as T1 join Accounts as T2 on T1.account_id = T2.account_id
+group by T1.account_id
+having count(*) >= 4
+
+
+25. Show all product sizes.
+
+
+select distinct product_size
+from Products
+
+
+26. Show all product colors.
+
+
+select distinct product_color
+from Products
+
+27. Show the invoice number and the number of transactions for each invoice.
+
+
+select invoice_number, count(*)
+from Financial_transactions
+group by invoice_number
+
+
+28. What is the invoice number and invoice date for the invoice with most number of transactions?
+
+
+select T2.invoice_number, T2.invoice_date
+from Financial_transactions as T1 join Invoices as T2 on T1.invoice_number = T2.invoice_number
+group by T1.invoice_number
+order by count(*) desc
+limit 1
+
+
+
+29. How many invoices do we have?
+
+
+select count(*)
+from Invoices
+
+
+30. Show invoide dates and order id and details for all invoices.
+
+
+select T1.invoice_date, T1.order_id, T2.order_details
+from Invoices as T1 join Orders as T2
+on T1.order_id = T2.order_id
+
+
+31. Show order ids and the number of invoices in each order.
+
+
+select order_id, count(*)
+from Invoices
+group by order_id
+
+
+32. What is the order id and order details for the order more than two invoices.
+
+
+select T2.order_id, T2.order_details
+from Invoices as T1 join Orders as T2 on T1.order_id = T2.order_id
+group by T2.order_id
+having count(*) > 2
+
+
+33. What is the customer last name, id and phone number with most number of orders?
+
+
+select T2.customer_last_name, T1.customer_id, T2.phone_number
+from Orders as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by count(*) desc
+limit 1
+
+
+34. Show all product names without an order.
+
+select product_name
+from Products
+except
+select T1.product_name
+from Products as T1 join Order_items as T2
+on T1.product_id = T2.product_id
+
+
+35. Show all product names and the total quantity ordered for each product name.
+
+
+select T2.product_name, sum(T1.product_quantity)
+from Order_items as T1 join Products as T2 on T1.product_id = T2.product_id
+group by T2.product_name
+
+
+36. Show the order ids and the number of order items in each order.
+
+
+select order_id, count(*)
+from Order_items
+group by order_id
+
+
+37. Show the product ids and the number of unique orders containing each product.
+
+
+select product_id, count(distinct order_id)
+from Order_items
+group by product_id
+
+
+38. Show all product names and the number of customers having an order on each product.
+
+
+select T2.product_name, count(*)
+from Order_items as T1 join Products as T2 on T1.product_id = T2.product_id join Orders as T3 on T3.order_id = T1.order_id
+group by T2.product_name
+
+
+39. Show order ids and the number of products in each order.
+
+
+select order_id, count(distinct product_id)
+from Order_items
+group by order_id
+
+
+40. Show order ids and the total quantity in each order.
+
+
+select order_id, sum(product_quantity)
+from Order_items
+group by order_id
+
+41. How many products are not shoppend in any order?
+
+
+select count(*)
+from products
+where product_id not in
+(
+select product_id
+from Order_items
+)
