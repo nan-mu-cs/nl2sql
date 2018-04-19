@@ -2,36 +2,64 @@ Total = #  43
 
 
 1. How many aircrafts do we have?
+P: How many aircrafts exist in the database?
 
 select count(*)
 from Aircraft
 
+S:
+S:
+S:
+
 2. Show name and distance for all aircrafts.
+P: What are the names and distances for all airplanes?
 
 select name, distance
 from Aircraft
 
-3. Show ids for all aircrafts with more than 1000 distance.
+S:
+S:
+S:
 
+3. Show ids for all aircrafts with more than 1000 distance.
+P: What are the ids of all aircrafts that can cover a distance of more than 1000?
 
 select aid
 from Aircraft
 where distance > 1000
 
 
-4. How many aircrafts have distance between 1000 and 5000?
+S:
+S:
+S:
 
+
+
+4. How many aircrafts have distance between 1000 and 5000?
+P: What is the count of aircrafts that have a distance between 1000 and 5000?
 
 select count(*)
 from Aircraft
 where distance between 1000 and 5000
 
 
+S:
+S:
+S:
+
+
+
 5. What is the name and distance for aircraft with id 12?
+P: What is the name and distance for the aircraft that has an id of 12?
 
 select name, distance
 from Aircraft
 where aid = 12
+
+
+S:
+S:
+S:
 
 
 6. What is the minimum, average, and maximum distance of all aircrafts.
@@ -41,13 +69,17 @@ from Aircraft
 
 
 7. Show the id and name of the aircraft with the maximum distance.
-
+P: What is the id and name of the aircraft that can cover the maximum distance?
 
 select aid, name
 from Aircraft
 order by distance desc
 limit 1
 
+
+S:
+S:
+S:
 
 8. Show the name of aircrafts with top three lowest distances.
 
@@ -57,68 +89,115 @@ order by distance
 limit 3
 
 9. Show names for all aircrafts with distances more than the average.
+P: What are the names of all aircrafts that can cover more distances than average?
 
 select name
 from Aircraft
 where distance > (select avg(distance) from Aircraft)
 
-10. Show names for all aircrafts with distance at least a quarter of the maximum.
 
+S:
+S:
+S:
+
+
+10. Show names for all aircrafts with distance at least a quarter of the maximum.
+P: What are the names of all aircrafts that have a distance of at least a quarter of the maximum?
 
 select name
 from Aircraft
 where distance >= (select max(distance)/4 from Aircraft)
 
-11. How many employees do we have?
 
+S:
+S:
+S:
+
+11. How many employees do we have?
+P: What is the number of employees?
 
 select count(*)
 from Employee
 
+S:
+S:
+S:
+
 
 12. Show name and salary for all employees sorted by salary.
+P: What is the name and salary of all employees in order of salary?
 
 
 select name, salary
 from Employee
 order by salary
 
+S:
+S:
+S:
+
 13. Show ids for all employees with at least 100000 salary.
+P:What is the id of every employee who has at least a salary of  100000?
 
 select eid
 from Employee
 where salary > 100000
 
+
+S:
+S:
+S:
+
+
+
 14. How many employees have salary between 100000 and 200000?
+P: What is the number of employees that have a salary between 100000 and 200000?
 
 select count(*)
 from Employee
 where salary between 100000 and 200000
 
+S:
+S:
+S:
 
 15. What is the name and salary for employee with id 242518965?
+P: What is the name and salary of the employee with the id 242518965?
 
 select name, salary
 from Employee
 where eid = 242518965
 
-16. What is average and maximum salary of all employees.
+S:
+S:
+S:
 
+
+16. What is average and maximum salary of all employees.
+P: What is the average and largest salary of all employees?
 
 select avg(salary), max(salary)
 from Employee
 
+S:
+S:
+S:
 
 17. Show the id and name of the employee with maximum salary.
+P: What is the id and name of the employee with the highest salary?
 
 select eid, name
 from Employee
 order by salary desc
 limit 1
 
+S:
+S:
+S:
+
 
 18. Show the name of employees with three lowest salaries.
-
+P: What is the name of the 3 employees who get paid the least?
 
 select name
 from Employee
@@ -126,106 +205,204 @@ order by salary asc
 limit 3
 
 
-19. Show names for all employees with salary more than the average.
+S:
+S:
+S:
 
+
+19. Show names for all employees with salary more than the average.
+P: What are the names of all employees who have a salary higher than average?
 
 select name
 from Employee
 where salary > (select avg(salary) from Employee)
 
+S:
+S:
+S:
+
 
 20. Show the id and salary of Mark Young.
-
+P: What is the id and salary of the employee named Mark Young?
 
 select eid, salary
 from Employee
 where name = 'Mark Young'
 
 
+S:
+S:
+S:
+
+
 21. How many flights do we have?
+P: What is the number of flights?
 
 select count(*)
 from Flight
 
+
+S:
+S:
+S:
+
+
 22. Show flight number, origin, destination of all flights in the alphabetical order of the departure cities.
+P: What is the flight number, origin, and destination for all flights in alphabetical order by departure cities?
 
 select flno, origin, destination
 from Flight
 order by origin
 
+
+S:
+S:
+S:
+
+
 23. Show all flight number from Los Angeles.
+P: What are the numbers of all flights coming from Los Angeles?
 
 select flno
 from Flight
 where origin = "Los Angeles"
 
-24. Show origins of all flights with destination Honolulu.
 
+S:
+S:
+S:
+
+
+24. Show origins of all flights with destination Honolulu.
+P: What are the origins of all flights that are headed to Honolulu?
 
 select origin
 from Flight
 where destination = "Honolulu"
 
+S:
+S:
+S:
+
 
 25. Show me the departure date and arrival date for all flights from Los Angeles to Honolulu.
+P: What are the departure and arrival dates of all flights from LA to Honolulu?
 
 select departure_date, arrival_date
 from Flight
 where origin = "Los Angeles" and destination = "Honolulu"
 
+
+S:
+S:
+S:
+
+
 26. Show flight number for all flights with more than 2000 distance.
+P: What are the numbers of all flights that can cover a distance of more than 2000?
 
 select flno
 from Flight
 where distance > 2000
 
+
+S:
+S:
+S:
+
+
 27. What is the average price for flights from Los Angeles to Honolulu.
+P: What is the average price for flights from LA to Honolulu?
 
 select avg(price)
 from Flight
 where origin = "Los Angeles" and destination = "Honolulu"
 
+
+S:
+S:
+S:
+
+
 28. Show origin and destination for flights with price higher than 300.
+P: What is the origin and destination for all flights whose price is higher than 300?
 
 select origin, destination
 from Flight
 where price > 300
 
+
+S:
+S:
+S:
+
+
 29. Show the flight number and distance of the flight with maximum price.
+P: What is the flight number and its distance for the one with the maximum price?
 
 select flno, distance
 from Flight
 order by price desc
 limit 1
 
+
+S:
+S:
+S:
+
 30. Show the flight number of flights with three lowest distances.
+P: What are the numbers of the shortest flights?
 
 select flno
 from Flight
 order by distance asc
 limit 3
 
-31. What is the average distance and average price for flights from Los Angeles.
 
+S:
+S:
+S:
+
+
+31. What is the average distance and average price for flights from Los Angeles.
+P: What is the average distance and price for all flights from LA?
 
 select avg(distance), avg(price)
 from Flight
 where origin = "Los Angeles"
 
 
+S:
+S:
+S:
+
 32. Show all origins and the number of flights from each origin.
+P: For each origin, how many flights came from there?
 
 select origin, count(*)
 from Flight
 group by origin
 
+
+S:
+S:
+S:
+
 33. Show all destinations and the number of flights to each destination.
+P: What are the destinations and number of flights to each one?
 
 select destination, count(*)
 from Flight
 group by destination
 
+
+S:
+S:
+S:
+
+
 34. Which origin has most number of flights?
+P: What place has the most flights coming from there?
 
 select origin
 from Flight
@@ -233,8 +410,14 @@ group by origin
 order by count(*) desc
 limit 1
 
-35. Which destination has least number of flights?
 
+S:
+S:
+S:
+
+
+35. Which destination has least number of flights?
+P: What destination has the fewest number of flights?
 
 select destination
 from Flight
@@ -243,41 +426,77 @@ order by count(*)
 limit 1
 
 
-36. What is the aircraft name for the flight with number 99
+S:
+S:
+S:
 
+
+36. What is the aircraft name for the flight with number 99
+P: What is the name of the aircraft that was on flight number 99?
 
 select T2.name
 from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
 where T1.flno = 99
 
 
-37. Show all flight numbers with aircraft Airbus A340-300.
+S:
+S:
+S:
 
+
+37. Show all flight numbers with aircraft Airbus A340-300.
+P: What are the flight numbers for the aircraft Airbus A340-300?
 
 select T1.flno
 from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
 where T2.name = "Airbus A340-300"
 
+S:
+S:
+S:
+
+
 
 38. Show aircraft names and number of flights for each aircraft.
+P: What is the name of each aircraft and how many flights does each one complete?
 
 select T2.name, count(*)
 from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
 group by T1.aid
 
-39. Show names for all aircraft with at least two flights.
 
+S:
+S:
+S:
+
+
+39. Show names for all aircraft with at least two flights.
+P: What are the names for all aircrafts with at least 2 flights?
 select T2.name
 from Flight as T1 join Aircraft as T2 on T1.aid = T2.aid
 group by T1.aid
 having count(*) >=2
 
+
+S:
+S:
+S:
+
+
 40. How many employees have certificate.
+P: What is the count of distinct employees with certificates?
 
 select count(distinct eid)
 from Certificate
 
+
+S:
+S:
+S:
+
+
 41. Show ids for all employees who don't have a certificate.
+P: What are the ids of all employees that don't have certificates?
 
 select eid
 from Employee
@@ -285,21 +504,39 @@ EXCEPT
 select eid
 from Certificate
 
-42. Show names for all aircrafts of which John Williams has certificates.
 
+S:
+S:
+S:
+
+
+42. Show names for all aircrafts of which John Williams has certificates.
+P: What are the names of all aircrafts that John Williams have certificates to be able to fly?
 
 select T3.name
 from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
 where T1.name = "John Williams"
 
 
+S:
+S:
+S:
+
+
+
 43. Show names for all employees who have certificate of Boeing 737-800.
+P: What are the names of all employees who have a certificate to fly Boeing 737-800?
 
 select T1.name
 from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
 where T3.name = "Boeing 737-800"
 
-Show names for all employees who have certificates on both Boeing 737-800 and Airbus A340-300.
+S:
+S:
+S:
+
+44. Show names for all employees who have certificates on both Boeing 737-800 and Airbus A340-300.
+P: What are the names of all employees who can fly both the Boeing 737-800 and the Airbus A340-300?
 
 select T1.name
 from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
@@ -309,7 +546,12 @@ select T1.name
 from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
 where T3.name = "Airbus A340-300"
 
-Show names for all employees who do not have certificate of Boeing 737-800.
+S:
+S:
+S:
+
+45. Show names for all employees who do not have certificate of Boeing 737-800.
+P: What are the names of all employees who are not certified to fly Boeing 737-800s?
 
 select name
 from Employee
@@ -318,7 +560,12 @@ select T1.name
 from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
 where T3.name = "Boeing 737-800"
 
-Show the name of aircraft which fewest people have its certificate.
+S:
+S:
+S:
+
+45. Show the name of aircraft which fewest people have its certificate.
+P: What are the names of the aircraft that the least people are certified to fly?
 
 select T2.name
 from Certificate as T1 join Aircraft as T2 on T2.aid = T1.aid
@@ -326,7 +573,12 @@ group by T1.aid
 order by count(*) desc
 limit 1
 
-Show the name and distance of the aircrafts with more than 5000 distance and which at least 5 people have its certificate.
+S:
+S:
+S:
+
+46. Show the name and distance of the aircrafts with more than 5000 distance and which at least 5 people have its certificate.
+P: What is the name and distance of every aircraft that can cover a distance of more than 5000 and which at least 5 people can fly?
 
 select T2.name
 from Certificate as T1 join Aircraft as T2 on T2.aid = T1.aid
@@ -334,7 +586,12 @@ where T2.distance > 5000
 group by T1.aid
 order by count(*) >= 5
 
-what is the salary and name of the employee who has the most number of aircraft certificates?
+S:
+S:
+S:
+
+47. what is the salary and name of the employee who has the most number of aircraft certificates?
+P: What is the salaray and name of the employee that is certified to fly the most planes?
 
 select T1.name, T1.salary
 from Employee as T1 join Certificate as T2 on T1.eid = T2.eid
@@ -342,7 +599,13 @@ group by T1.eid
 order by count(*) desc
 limit 1
 
-what is the salary and name of the employee who has the most number of certificates on aircrafts with distance more than 5000?
+S:
+S:
+S:
+
+
+48. What is the salary and name of the employee who has the most number of certificates on aircrafts with distance more than 5000?
+P: What is the salaray and name of the employee with the most certificates to fly planes more than 5000?
 
 select T1.name
 from Employee as T1 join Certificate as T2 on T1.eid = T2.eid join Aircraft as T3 on T3.aid = T2.aid
@@ -350,3 +613,7 @@ where T3.distance > 5000
 group by T1.eid
 order by count(*) desc
 limit 1
+
+S:
+S:
+S:

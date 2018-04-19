@@ -1,0 +1,311 @@
+Total # = 40
+
+1. How many bank branches are there?
+P: Count the number of bank branches. 
+
+select count(*)
+from bank
+
+2. How many customers are there?
+P: What is the total number of customers across banks?
+
+select sum(no_of_customers)
+from bank
+
+3. Find the number of customers in the banks at New York City.
+P: What is the total number of customers who use banks in New York City?
+
+select sum(no_of_customers)
+from bank
+where city = 'New York City'
+
+4. Find the average number of customers in all banks of Utah state.
+P: What is the average number of customers across banks in the state of Utah?
+
+select avg(no_of_customers)
+from bank
+where state = 'Utah'
+
+
+5. Find the average number of customers cross all banks.
+P: What is the average number of bank customers?
+
+select avg(no_of_customers)
+from bank
+
+6. Find the city and state of the bank branch named morningside.
+P: What city and state is the bank with the name morningside in?
+
+select city, state
+from bank
+where bname = 'morningside'
+
+7. Find the branch names of banks in the New York state.
+P: What are the names of banks in the state of New York?
+
+select bname
+from bank
+where state = 'New York'
+
+8. List the name of all customers sorted by their account balance in ascending order.
+P: What are the names of all customers, ordered by account balance?
+
+select cust_name
+from customer
+order by acc_bal
+
+9. List the name of all different customers who have some loan sorted by their total loan amount.
+P: What are the names of the different customers who have taken out a loan, ordered by the total amount that they have taken?
+
+select T1.cust_name
+from customer as T1 JOIN loan as T2 on T1.cust_id = T2.cust_id
+group by T1.cust_name
+order by sum(T2.amount)
+
+10. Find the state, account type, and credit score of the customer whose number of loan is 0.
+P: What are the states, account types, and credit scores for customers who have 0 loans?
+
+select state, acc_type, credit_score
+from customer
+where no_of_loans = 0
+
+
+11. Find the number of different cities which banks are located at.
+P: In how many different cities are banks located?
+
+select count(distinct city)
+from bank
+
+12. Find the number of different states which banks are located at.
+P: In how many different states are banks located?
+
+select count(distinct state)
+from bank
+
+13. How many distinct types of accounts are there?
+P: Count the number of different account types.
+
+select count(distinct acc_type)
+from customer
+
+14. Find the name and account balance of the customer whose name includes the letter ‘a’.
+P: What are the names and account balances of customers with the letter a in their names?
+
+select cust_name, acc_bal
+from customer
+where cust_name LIKE '%a%'
+
+15. Find the total account balance of each customer from Utah or Texas.
+P: What are the total account balances for each customer from Utah or Texas?
+
+select sum(acc_bal)
+from customer
+where state = 'Utah' or state = 'Texas'
+
+
+16. Find the name of customers who have both saving and checking account types.
+P: What are the names of customers who have both savings and checking accounts?
+
+select cust_name
+from customer
+where acc_type = 'saving'
+intersect
+select cust_name
+from customer
+where acc_type = 'checking'
+
+17. Find the name of customers who do not have an saving account.
+P: What are the names of customers who do not have saving accounts?
+
+select cust_name
+from customer
+except
+select cust_name
+from customer
+where acc_type = 'saving'
+
+18. Find the name of customers who do not have a loan with a type of Mortgages.
+P: What are the names of customers who have not taken a Mortage loan?
+
+select cust_name
+from customer
+except
+select T1.cust_name
+from customer as T1 JOIN loan as T2 on T1.cust_id = T2.cust_id
+where T2.loan_type = 'Mortgages'
+
+19. Find the name of customers who have loans of both Mortgages and Auto.
+P: What are the names of customers who have taken both Mortgage and Auto loans?
+
+select T1.cust_name
+from customer as T1 JOIN loan as T2 on T1.cust_id = T2.cust_id
+where loan_type = 'Mortgages'
+intersect
+select T1.cust_name
+from customer as T1 JOIN loan as T2 on T1.cust_id = T2.cust_id
+where loan_type = 'Auto'
+
+20. Find the name of customers whose credit score is below the average credit scores of all customers.
+P: What are the names of customers with credit score less than the average credit score across customers?
+
+select cust_name
+from customer
+where credit_score < (select avg(credit_score) from customer)
+
+21. Find the branch name of the bank that has the most number of customers.
+P: What is the name of the bank branch with the greatest number of customers?
+
+select bname
+from bank
+order by no_of_customers desc
+limit 1
+
+22. Find the name of customer who has the lowest credit score.
+P: What is the name of the customer with the worst credit score?
+
+select cust_name
+from customer
+order by credit_score
+limit 1
+
+23. Find the name, account type, and account balance of the customer who has the highest credit score.
+P: What is the name, account type, and account balance corresponding to the customer with the highest credit score?
+
+select cust_name, acc_type, acc_bal
+from customer
+order by credit_score desc
+limit 1
+
+24. Find the name of customer who has the highest amount of loans.
+P: What is the name of the customer who has greatest total loan amount?
+
+select T1.cust_name
+from customer as T1 JOIN loan as T2 on T1.cust_id = T2.cust_id
+group by T1.cust_name
+order by sum(T2.amount) desc
+limit 1
+
+25. Find the state which has the most number of customers.
+P: Which state has the greatest total number of bank customers?
+
+select state
+from bank
+group by state
+order by sum(no_of_customers) desc
+limit 1
+
+26. For each account type, find the average account balance of customers with credit score lower than 50.
+P: What is the average account balance of customers with credit score below 50 for the different account types?
+
+select avg(acc_bal), acc_type
+from customer
+where credit_score < 50
+group by acc_type
+
+27. For each state, find the total account balance of customers whose credit score is above 100.
+P: What is the total account balance for customers with a credit score of above 100 for the different states?
+
+select sum(acc_bal), state
+from customer
+where credit_score > 100
+group by state
+
+28. Find the total amount of loans offered by each bank branch.
+P: What are the names of the different bank branches, and what are their total loan amounts?
+
+select sum(amount), T1.bname
+from bank as T1 join loan as T2 on T1.branch_id = T2.branch_id
+group by T1.bname
+
+29. Find the name of customers who have more than one loan.
+P: What are the names of customers who have taken out more than one loan?
+
+select T1.cust_name
+from customer as T1 JOIN loan as T2 on T1.cust_id = T2.cust_id
+group by T1.cust_name
+having count(*) > 1
+
+30. Find the name and account balance of the customers who have loans with a total amount of more than 5000.
+P: What are the names and account balances for customers who have taken a total amount of more than 5000 in loans?
+
+select T1.cust_name, T1.acc_type
+from customer as T1 JOIN loan as T2 on T1.cust_id = T2.cust_id
+group by T1.cust_name
+having sum(T2.amount) > 5000
+
+31. Find the name of bank branch that provided the greatest total amount of loans.
+P: What is the name of the bank branch that has lent the greatest amount?
+
+select T1.bname
+from bank as T1 join loan as T2 on T1.branch_id = T2.branch_id
+group by T1.bname
+order by sum(T2.amount) desc
+limit 1
+
+32. Find the name of bank branch that provided the greatest total amount of loans to customers with credit score is less than 100.
+P: What is the name of the bank branch that has lended the largest total amount in loans, specifically to customers with credit scores below 100?
+
+select T2.bname
+from loan as T1
+     join bank as T2 on T1.branch_id = T2.branch_id
+     join customer as T3 on T1.cust_id = T3.cust_id
+where T3.credit_score < 100
+group by T2.bname
+order by sum(T1.amount) desc
+limit 1
+
+33. Find the name of bank branches that provided some loans.
+P: What are the names of the different banks that have provided loans?
+
+select distinct T1.bname
+from bank as T1 join loan as T2 on T1.branch_id = T2.branch_id
+
+34. Find the name and credit score of the customers who have some loans.
+P: What are the different names and credit scores of customers who have taken a loan?
+
+select distinct T1.cust_name, T1.credit_score
+from customer as T1 join loan as T2 on T1.cust_id = T2.cust_id
+
+35. Find the the name of the customers who have a loan with amount more than 3000.
+P: What are the names of customers who have a loan of more than 3000 in amount?
+
+select T1.cust_name
+from customer as T1 join loan as T2 on T1.cust_id = T2.cust_id
+where amount > 3000
+
+36. Find the city and name of bank branches that provide business loans.
+P: What are the names and cities of bank branches that offer loans for business?
+
+select T1.bname, T1.city
+from bank as T1 join loan as T2 on T1.branch_id = T2.branch_id
+where T2.loan_type = 'Business'
+
+37. Find the names of bank branches that have provided a loan to any customer whose credit score is below 100.
+P: What are the names of banks that have loaned money to customers with credit scores below 100?
+
+select T2.bname
+from loan as T1
+     join bank as T2 on T1.branch_id = T2.branch_id
+     join customer as T3 on T1.cust_id = T3.cust_id
+where T3.credit_score < 100
+
+38. Find the total amount of loans provided by bank branches in the state of New York.
+P: What is the total amount of money loaned by banks in New York state?
+
+select sum(T2.amount)
+from bank as T1 join loan as T2 on T1.branch_id = T2.branch_id
+where T1.state = 'New York'
+
+39. Find the average credit score of the customers who have some loan.
+P: What is the average credit score for customers who have taken a loan?
+
+select avg(credit_score)
+from customer
+where cust_id IN (select cust_id from loan)
+
+40. Find the average credit score of the customers who do not have any loan.
+P: What is the average credit score for customers who have never taken a loan?
+
+select avg(credit_score)
+from customer
+where cust_id NOT IN (select cust_id from loan)
