@@ -1,121 +1,87 @@
-Total = # 40
-
+Total = # 42
 
 1. How many accounts do we have?
-
 
 select count(*)
 from Accounts
 
-
 2. Show all account ids and account details.
-
 
 select account_id, account_details
 from Accounts
 
-
 3. How many statements do we have?
-
 
 select count(*)
 from Statements
 
-
 4. List all statement ids and statement details.
-
 
 select statement_id, statement_details
 from Statements
 
-
-5. Show statement id, statement detail, account detail for account with id 7.
-
+5. Show statement id, statement detail, account detail for accounts.
 
 select T1.statement_id, T2.statement_details, T1.account_details
 from Accounts as T1 join Statements as T2 on T1.statement_id = T2.statement_id
-where T1.account_id = 7
-________________
-
 
 6. Show all statement id and the number of accounts for each statement.
-
 
 select statement_id, count(*)
 from Accounts
 group by statement_id
 
-
 7. Show the statement id and the statement detail for the statement with most number of accounts.
-
 
 select T1.statement_id, T2.statement_details
 from Accounts as T1 join Statements as T2 on T1.statement_id = T2.statement_id
 group by T1.statement_id
 order by count(*) desc
 limit 1
-________________
-
 
 8. Show the number of documents.
-
 
 select count(*)
 from Documents
 
-
-9. List the document type code, document name, and document description for the document with id 121.
-
+9. List the document type code, document name, and document description for the document with name 'Noel CV' or name 'King Book'
 
 select document_type_code, document_name, document_description
 from Documents
-where document_id = 121
+where document_name = 'Noel CV' or document_name = 'King Book'
 
-
-10. Show ids and names of all documents of the project with id 105.
-
+10. Show ids and names of all documents of the projects
 
 select document_id, document_name
 from Documents
-where project_id = 105
-
 
 11. Find names and ids of all documents with document type code BK.
-
 
 select document_name, document_id
 from Documents
 where document_type_code = "BK"
 
-12. How many documents are for project 105 with document type code BK?
+12. How many documents are with document type code BK for each product id?
 
-
-select count(*)
+select count(*), project_id
 from Documents
-where document_type_code = "BK" and project_id = 105
+where document_type_code = "BK"
+group by project_id
 
-
-13. Show the document name and the document date for all documents on project 105 or 134.
-
+13. Show the document name and the document date for all documents on project with detail 'Graph Database project'.
 
 select document_name, document_date
-from Documents
-where project_id = 105 or project_id = 134
-
-
-________________
-
+from Documents as T1 join projects as T2
+on T1.project_id = T2.project_id
+where T2.project_details = 'Graph Database project'
 
 14. Show project ids and the number of documents in each project.
-
 
 select project_id, count(*)
 from Documents
 group by project_id
 
-
 15. What is the id of the project with least number of documents?
-
 
 select project_id 
 from Documents
@@ -123,26 +89,20 @@ group by project_id
 order by count(*) asc
 limit 1
 
-
 16. Show the ids for projects with at least 2 documents.
-
 
 select project_id
 from Documents
 group by project_id
 having count(*) >= 2
 
-
 17. List document type codes and the number of documents in each code.
-
 
 select document_type_code, count(*)
 from Documents
 group by document_type_code
 
-
 18. What is the document type code with most number of documents?
-
 
 select document_type_code
 from Documents
@@ -150,158 +110,114 @@ group by document_type_code
 order by count(*) desc
 limit 1
 
-
 19. Show the document type code with fewer than 3 documents.
-
 
 select document_type_code
 from Documents
 group by document_type_code
 having count(*) < 3
-________________
 
-
-20. Show the statement detail and the corresponding document name for the statement with id 192.
-
+20. Show the statement detail and the corresponding document name for the statement with detail 'Private Project'.
 
 select T1.statement_details, T2.document_name
 from Statements as T1 join Documents as T2 on T1.statement_id = T2.document_id
-where T1.statement_id = 192
-________________
-
+where T1.statement_details = 'Private Project'
 
 21. Show all document type codes, document type names, document type descriptions
-
 
 select document_type_code, document_type_name, document_type_description
 from Ref_document_types
 
-
-22. What is the document type description for document type Film?
-
+22. What is the document type description for document type named Film?
 
 select document_type_description
 from Ref_document_types
 where document_type_name = "Film"
-________________
 
+23. What is the document type name and the document type description and create date for all the documents?
 
-23. What is the document type name and the document type description for document with id 29?
-
-
-select T1.document_type_name, T1.document_type_description
+select T1.document_type_name, T1.document_type_description, T2.Document_date
 from Ref_document_types as T1 join Documents as T2 on T1.document_type_code = T2.document_type_code
-where T2.document_id = 29
-________________
-
 
 24. Show the number of projects.
-
 
 select count(*)
 from Projects
 
-
 25. List ids and details for all projects.
-
 
 select project_id, project_details
 from Projects
 
+26. What is the project id and detail for the project with at least two documents?
 
-26. What is the project detail for the project with id 134?
-
-
-select project_details
-from Projects
-where project_id = 134
-
+select T1.project_id, T1.project_details
+from Projects as T1 join Documents as T2
+on T1.project_id = T2.project_id
+group by T1.project_id
+having count(*) > 2
 
 27. What is the project detail for the project with document "King Book"?
-
 
 select T1.project_details
 from Projects as T1 join Documents as T2 on T1.project_id = T2.project_id
 where T2.document_name = "King Book"
-________________
-
 
 28. How many budget types do we have?
-
 
 select count(*)
 from Ref_budget_codes
 
-
 29. List all budget type codes and descriptions.
-
 
 select budget_type_code, budget_type_description
 from Ref_budget_codes
 
-
 30. What is the description for the budget type with code ORG?
-
 
 select budget_type_description
 from Ref_budget_codes
 where budget_type_code = "ORG"
-________________
 
-
-31. How many documents with expenses?
-
+31. How many documents have expenses?
 
 select count(*)
 from Documents_with_expenses
 
-
-32. What is the budget type code for document with it 300?
-
-
-select budget_type_code
-from Documents_with_expenses
-where document_id = 300
-
-
-33. Show the budget type code and description for the document with id 57.
-
-
-select T2.budget_type_code, T2.budget_type_description
-from Documents_with_expenses as T1 join Ref_budget_codes as T2 on T1.budget_type_code = T2.budget_type_code
-where T1.document_id = 57
-
-
-34. Show ids for all documents with budget type code "GV".
-
+32. What are the document ids for the budget type code 'SF'?
 
 select document_id
 from Documents_with_expenses
-where budget_type_code = "GV"
+where budget_type_code = 'SF'
 
+33. Show the budget type code and description and the corresponding document id.
+
+select T2.budget_type_code, T2.budget_type_description, T1.document_id
+from Documents_with_expenses as T1 join Ref_budget_codes as T2 on T1.budget_type_code = T2.budget_type_code
+
+34. Show ids for all documents with budget type described as 'Government'
+
+select T1.document_id
+from Documents_with_expenses as T1 join Ref_Budget_Codes as T2
+on T1.Budget_Type_code = T2.Budget_Type_code
+where T2.budget_type_Description = "Government"
 
 35. Show budget type codes and the number of documents in each budget type.
-
 
 select budget_type_code, count(*)
 from Documents_with_expenses
 group by budget_type_code
 
-
 36. What is the budget type code with most number of documents.
-
 
 select budget_type_code
 from Documents_with_expenses
 group by budget_type_code
 order by count(*) desc
 limit 1
-________________
-
 
 37. What are the ids of documents which don't have expense budgets?
 
-
 select document_id
 from Documents
 EXCEPT
@@ -309,34 +225,50 @@ select document_id
 from Documents_with_expenses
 
 
-38. Show ids for all documents in project 30 without expense budgets.
-
-
-select document_id
-from Documents
-where project_id = 30
-EXCEPT
-select document_id
-from Documents_with_expenses
-
-
-39. Show ids for all documents in type CV with expense budgets.
+38. Show ids for all documents in type CV without expense budgets.
 
 
 select document_id
 from Documents
 where document_type_code = "CV"
-INTERSECT
+EXCEPT
 select document_id
 from Documents_with_expenses
 
+30. What are the ids of documents with letter 's' in the name with any expense budgets.
 
-40. What are the ids of documents in project 30 with expense budgets.
 
+select T1.document_id
+from Documents as T1 join Documents_with_expenses as T2
+on T1.document_id = T2.document_id
+where T1.document_name like '%s%'
 
-select document_id
+40. How many documents do not have any expense?
+
+select count(*)
 from Documents
-where project_id = 30
-INTERSECT
+where document_id not in (
 select document_id
 from Documents_with_expenses
+)
+
+41. What are the dates for the documents with expenses both as 'GV' type and as 'SF' type?
+
+select T1.document_date
+from Documents as T1 join Documents_with_Expenses as T2
+on T1.document_id = T2.document_id
+where T2.budget_type_code = 'GV'
+intersect
+select T1.document_date
+from Documents as T1 join Documents_with_Expenses as T2
+on T1.document_id = T2.document_id
+where T2.budget_type_code = 'SF'
+
+42. What are the account details with the largest value or with value having char '5' in it?
+
+select max(Account_details)
+from Accounts
+union
+select Account_details
+from Accounts
+where Account_details LIKE "%5%"
