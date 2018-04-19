@@ -1,0 +1,333 @@
+Total = # 40
+
+
+1. List all the author names.
+P: What are the names of all the authors?
+
+select name
+from Author
+
+
+2. Show all Client names and their addresses.
+P: What are the names and addressed of all clients?
+
+select name, address
+from Client
+
+
+3. List all Book titles, ISBNs, and sale prices.
+P: What are the titles, ISBNs, and sale prices for all books?
+
+select title, isbn, SalePrice
+from Book
+
+
+4. How many books do we have?
+P: Count the number of books.
+
+select count(*)
+from Book
+
+
+5. How many authors are there?
+P: Count the number of authors.
+
+select count(*)
+from Author
+
+
+6. How many clients are there?
+P: Return the number of clients.
+
+select count(*)
+from Client
+
+7. List names and addresses of all clients in alphabetical order by their names.
+P: What are the names and addressed of all clients, ordered alphabetically by name?
+
+select name, address
+from Client
+order by name
+
+8. Show all book titles and corresponding author names.
+P: What are the names of all books and their corresponding authors?
+
+select T3.title, T1.name
+from Author as T1 
+     JOIN Author_Book as T2 on T2.Author = T1.idAuthor
+     JOIN Book as T3 on T2.isbn = T3.isbn 
+
+9. Show all order ids and their client names.
+P: What are the ids of all orders and the corresponding client names?
+
+select T1.idOrder, T2.name
+from Orders as T1 join Client as T2 on T1.idClient = T2.idClient
+
+
+10. Show all author names and the numbers of books each has written. 
+P: What are the names of all the authors, and how many books has each written?
+
+select T1.name, count(*)
+from Author as T1 join Author_Book as T2 on T1.idAuthor = T2.Author
+group by T1.idAuthor
+
+11. Show all book isbns and the numbers of orders for each.
+P: What are all isbns for each book, and how many times has each been ordered?
+
+select isbn, count(*)
+from Books_Order
+group by isbn
+
+12. Show all book isbns and the total amount ordered for each.
+P: What are the isbns for all books, and what is the total amount ordered for each?
+
+select isbn, sum(amount)
+from Books_Order
+group by isbn
+
+13. Show the book title corresponding to the book with the most number of orders.
+P: What is the title of the book that has been ordered the greatest number of times?
+
+select T2.title
+from Books_Order as T1 join Book as T2 on T1.isbn = T2.isbn
+group by T1.isbn
+order by count(*) desc
+limit 1
+
+14. Show the book title and purchase price of the book that has had the greatest amount in orders.
+P: What is the title and purchase price of the book that has the highest total order amount?
+
+select T2.title, T2.PurchasePrice
+from Books_Order as T1 join BOOk as T2 on T1.isbn = T2.isbn
+group by T1.isbn
+order by sum(amount) desc
+limit 1
+
+15. Show the titles of books that have been ordered.
+P: What are the different titles of books that have been ordered in the past?
+
+select distinct T1.title
+from book as T1 join books_order as T2 on T1.isbn = T2.isbn
+
+16. Show the names of clients who have ordered at least once.
+P: What are the names of the different clients who have made an order?
+
+select distinct T1.name
+from Client as T1 join Orders as T2 on T1.idClient = T2.idClient
+
+17. Show all client names and the number of orders each has made.
+P: What are the names of all the clients, and how many times has each of them ordered?
+
+select T2.name, count(*)
+from Orders as T1 join Client as T2 on T1.idClient = T2.idClient
+group by T1.idClient
+
+
+18. What is the name of the client with the most number of orders?
+P: Give the name of the client who has made the most orders.
+
+
+select T2.name
+from Orders as T1 join Client as T2 on T1.idClient = T2.idClient
+group by T1.idClient
+order by count(*) desc
+limit 1
+
+19. Show the client names and their total amounts of books ordered.
+P: What are the names of all the clients, and the total amount of books ordered by each?
+
+select T2.name, sum(T3.amount)
+from Orders as T1 
+     JOIN Client as T2 ON T1.idClient = T2.idClient
+     JOIN Books_Order as T3 ON T3.idOrder = T1.idOrder 
+group by T1.idClient
+
+
+20. Show the client name who has the most total amount of books ordered.
+P: What is the name of the client who has ordered the greatest total amount of books?
+
+select T2.name
+from Orders as T1 
+     JOIN Client as T2 ON T1.idClient = T2.idClient
+     JOIN Books_Order as T3 ON T3.idOrder = T1.idOrder 
+group by T1.idClient
+order by sum(T3.amount) desc
+limit 1
+
+
+21. Show all book titles for books that have no orders.
+P: What are the titles of books that have never been ordered?
+
+select title
+from book
+EXCEPT
+select T1.title
+from book as T1 join books_order as T2 on T1.isbn = T2.isbn
+
+
+22. Show all client names for clients who have not made orders.
+P: What are the names of clients who have never made an order?
+
+select name
+from Client
+EXCEPT
+select T1.name
+from Client as T1 join Orders as T2 on T1.idClient = T2.idClient
+
+23. What is the average number of times each book has been ordered?
+P: Return the average number of orders each book has received.
+
+with number_of_order(num) as (select count(*)
+from Books_Order
+group by isbn)
+select avg(num)
+from number_of_order
+
+
+24. What is the average number of orders per client?
+P: Return the average number of orders each client has made.
+
+with number_of_order(num) as (select count(*)
+from Orders as T1 join Client as T2 on T1.idClient = T2.idClient
+group by T1.idClient)
+select avg(num)
+from number_of_order
+
+25. What is the maximum and the minimum sale price?
+P: Give the maximum and minimum sale price of books.
+
+select max(saleprice), min(saleprice)
+from Book
+
+26. What is the average purchase price and the average sale price?
+P: Give the average purchase price and average sale price for books.
+
+select avg(purchaseprice), avg(saleprice)
+from Book
+
+27. What is the maximum difference between the sale price and purchase price?
+P: Return the largest difference in sale price and purchase price.
+
+select max(saleprice-purchaseprice)
+from Book
+
+28. List all book titles which have sale prices higher than the average.
+P: What are the titles of books with sale prices above the average sale price across all books?
+
+select title
+from book
+where saleprice > (select avg(saleprice) from book)
+
+29. List all book titles which have the lowest sale price.
+P: What are the titles of books that have a sale price equal to the lowest sale price across all books?
+
+select title
+from book
+where saleprice = (select min(saleprice) from book)
+
+30. List all book titles which have highest purchase prices.
+P: What are the titles of books that have a purchase price equal to the highest purchase price across all books?
+
+select title
+from book
+where purchaseprice = (select max(purchaseprice) from book)
+
+31. What is the average sale price of books written by George Orwell?
+P: Give the average sale price of books authored by George Orwell.
+
+select avg(saleprice)
+from Book as T1 join Author_book as T2 on T1.isbn = T2.isbn join Author as T3 on T2.Author = T3.idAuthor
+where T3.name = "George Orwell"
+
+
+32. What are sale prices of books written by Plato?
+P: Return the sale prices of books authored by Plato.
+
+select saleprice
+from Book as T1 join Author_book as T2 on T1.isbn = T2.isbn join Author as T3 on T2.Author = T3.idAuthor
+where T3.name = "Plato"
+
+
+33. What is the title of the book written by George Orwell that has the lowest sale price?
+P: Give the title of book by George Orwell that has the lowest saleprice.
+
+select T1.title
+from Book as T1 join Author_book as T2 on T1.isbn = T2.isbn join Author as T3 on T2.Author = T3.idAuthor
+where T3.name = "George Orwell"
+ORDER BY T1.saleprice
+LIMIT 1
+
+34. What is the title of the book written by Plato has price lower than the average sale price of all books?
+P: Give the titles of books authored by Plato that have a sale price lower than the average sale price across all books.
+
+select T1.title
+from Book as T1 join Author_book as T2 on T1.isbn = T2.isbn join Author as T3 on T2.Author = T3.idAuthor
+where T3.name = "Plato" and T1.saleprice < (select avg(saleprice) from Book)
+
+35. Who is the author of the book "Pride and Prejudice"?
+P: Give the name of the author who wrote the book titled Pride and Prejudice.
+
+select T3.name
+from Book as T1 join Author_book as T2 on T1.isbn = T2.isbn join Author as T3 on T2.Author = T3.idAuthor
+where T1.title = "Pride and Prejudice"
+
+36. List titles of all books published by an author whose name contains the string 'Plato'?
+P: What are the titles of all books written by an author with a name that contains Plato?
+
+select T1.title
+from Book as T1 join Author_book as T2 on T1.isbn = T2.isbn join Author as T3 on T2.Author = T3.idAuthor
+where T3.name LIKE "%Plato%"
+
+37. How many orders do we have for "Pride and Prejudice"?
+P: Return the number of orders received for Pride and Prejudice.
+
+select count(*)
+from Book as T1 join Books_Order as T2 on T1.isbn = T2.isbn
+where T1.title = "Pride and Prejudice"
+
+38. Show ids for orders including both "Pride and Prejudice" and "The Little Prince".
+P: What are the order ids for orders that include both Pride and Prejudice and The Little Prince?
+
+select idOrder
+from Book as T1 join Books_Order as T2 on T1.isbn = T2.isbn
+where T1.title = "Pride and Prejudice"
+INTERSECT
+select idOrder
+from Book as T1 join Books_Order as T2 on T1.isbn = T2.isbn
+where T1.title = "The Little Prince"
+
+
+39. Show all book isbns which were ordered by both client Peter Doe and client James Smith.
+P: What are the isbns of books ordered by both clients named Peter Doe and James Smith?
+
+select T2.isbn
+from Orders as T1 join Books_Order as T2 on T1.idOrder = T2.idOrder join Client as T3 on T1.idClient = T3.idClient
+where T3.name = "Peter Doe"
+INTERSECT
+select T2.isbn
+from Orders as T1 join Books_Order as T2 on T1.idOrder = T2.idOrder join Client as T3 on T1.idClient = T3.idClient
+where T3.name = "James Smith"
+
+40. Find the title of books which are ordered by client Peter Doe but not client James Smith.
+P: What are the titles of books that the client Peter Doe ordered, but the client James Smith did not?
+
+select T4.title
+from Orders as T1 
+     join Books_Order as T2 on T1.idOrder = T2.idOrder
+     join Client as T3 on T1.idClient = T3.idClient
+     join book as T4 on T2.ISBN = T4.isbn
+where T3.name = "Peter Doe"
+EXCEPT
+select T4.title
+from Orders as T1 
+     join Books_Order as T2 on T1.idOrder = T2.idOrder
+     join Client as T3 on T1.idClient = T3.idClient
+     join book as T4 on T2.ISBN = T4.isbn
+where T3.name = "James Smith"
+
+41. Show all client names who have orders for "Pride and Prejudice".
+P: What are the names of clients who have ordered Pride and Prejudice?
+
+select T3.name
+from Orders as T1 join Books_Order as T2 on T1.idOrder = T2.idOrder join Client as T3 on T1.idClient = T3.idClient join Book as T4 on T4.isbn = T2.isbn
+where T4.title = "Pride and Prejudice"

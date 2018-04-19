@@ -1,0 +1,323 @@
+Total # = 41
+
+
+1. What is the name of the oldest pilot?
+P: Return the name of the oldest pilot.
+
+SELECT pilot_name
+FROM PilotSkills 
+ORDER BY age DESC
+LIMIT 1
+
+2. What are the names of pilots whose age is below the average age, ordered by age?
+P: Return the names of pilots who are younger than average, ordered by age ascending.
+
+SELECT pilot_name
+FROM PilotSkills 
+WHERE age < (select avg(age) from PilotSkills)
+ORDER BY age
+
+3. Find all information of on pilots whose age is less than 30.
+P: What is all the information about pilors who are younger than 30?
+
+SELECT *
+FROM PilotSkills 
+WHERE age < 30
+
+4. Find the names of all pilots who have a plane named Piper Cub and is under 35.
+P: What are the names of pilots who are younger than 35 and have a plane named Piper Cub?
+
+SELECT pilot_name
+FROM PilotSkills 
+WHERE age < 35 and plane_name = 'Piper Cub'
+
+5. Where is the plane F-14 Fighter located?
+P: Return the location of the hangar in which F-14 Fighter is located.
+
+SELECT location
+FROM hangar 
+WHERE plane_name = 'F-14 Fighter'
+
+6. How many different places have some plane?
+P: Count the number of different locations of hangars.
+
+SELECT count(distinct location)
+FROM hangar
+
+7. Which plane does the pilot Jones with age 32 has?
+P: What are the names of planes that the pilot Jones who is 32 has?
+
+SELECT plane_name
+FROM pilotskills
+WHERE pilot_name = 'Jones'  and age = 32
+
+8. How many pilots who are older than 40? 
+P: Count the number of pilots with age greater than 40. 
+
+SELECT count(*)
+FROM pilotskills
+WHERE age > 40
+
+9. How many plane B-52 Bomber owned by the pilot who is under 35?
+P: Count the number of B-52 Bombers owned by pilots under 35.
+
+SELECT count(*)
+FROM pilotskills
+WHERE age < 35 and plane_name = 'B-52 Bomber'
+
+10. Who is the youngest pilot to fly the plane Piper Cub?
+P: Return the name of the youngest pilot to fly Piper Cub.
+
+SELECT pilot_name
+FROM pilotskills
+WHERE plane_name = 'Piper Cub'
+ORDER BY age
+LIMIT 1
+
+11. What is the name of the most popular plane?
+P: What is the name of the plane that is flown the most often?
+
+SELECT plane_name
+FROM pilotskills
+GROUP BY plane_name
+ORDER BY count(*) desc
+LIMIT 1
+
+12. What is the name of the least popular plane?
+P: What is the name of the plane that is flown the least often?
+
+SELECT plane_name
+FROM pilotskills
+GROUP BY plane_name
+ORDER BY count(*)
+LIMIT 1
+
+13. How many pilots whose planes are in Chicago?
+P: Count the number of pilots who have planes in Chicago.
+
+SELECT 	count(distinct T1.pilot_name)
+FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
+WHERE T2.location = 'Chicago'
+
+14. What are the planes owned by pilot Smith with age 41?
+P: Return the names of planes owned by the pilot whose name is Smith and is 41 years old.
+
+SELECT plane_name
+FROM pilotskills 
+WHERE pilot_name = 'Smith' and age = 41
+
+15. How many distinct planes are owned across all pilots?
+P: Count the number of different plane names across all pilots.
+
+SELECT count(distinct plane_name)
+FROM pilotskills
+
+16. How many planes are owned by the pilot whose name is Smith?
+P: Count the number of planes Smith owns.
+
+SELECT count(plane_name)
+FROM pilotskills
+WHERE pilot_name = 'Smith'
+
+17. How many planes are controlled by the pilots whose age is older than 40?
+P: Count the number of planes flown by pilots older than 40.
+
+SELECT count(plane_name)
+FROM pilotskills
+WHERE age > 40
+
+18. Find the names of all pilots with age between 30 and 40 sorted by their ages in ascending order.
+P: What are the names of pilots between the ages of 30 and 40, ordered by age ascending?
+
+SELECT pilot_name
+FROM pilotskills
+WHERE age between 30 and 40
+ORDER BY age
+
+19. List all pilot names sorted by their ages in the descending order.
+P: What are the names of pilots, ordered by age descending?
+
+SELECT pilot_name
+FROM pilotskills
+ORDER BY age desc
+
+20. Find all locations of planes sorted by the plane name.
+P: What are the locations of the different planes, ordered by plane name?
+
+SELECT location
+FROM hangar
+ORDER BY plane_name
+
+21. List all distinct types of planes owned by all pilots in alphabetic order?
+P: What are the different plane names, ordered alphabetically?
+
+SELECT distinct plane_name
+FROM pilotskills
+ORDER BY plane_name
+
+22. How many pilots who are older than 40 or younger than 30?
+P: Count the number of pilots with age greater than 40 or less than 30. 
+
+SELECT count(pilot_name)
+FROM pilotskills
+ORDER BY age > 40 or age < 30
+
+23. What are the names and ages of pilots who own plane Piper Cub and are older than 35, or have F-14 Fighter and are younger than 30?
+P: Return the names and ages of pilors who have flown Piper Cub and are older than 35, or have flown the F-14 Fighter and are younger than 30. 
+
+SELECT pilot_name, age
+FROM pilotskills
+where plane_name = 'Piper Cub' and age > 35
+UNION
+SELECT pilot_name, age
+FROM pilotskills
+where plane_name = 'F-14 Fighter' and age < 30
+
+24. Find pilots who own plane Piper Cub but not B-52 Bomber.
+P: What are the names of pilots who have flown Piper Cub but not the B-52 Bomber?
+
+SELECT pilot_name
+FROM pilotskills
+where plane_name = 'Piper Cub' 
+EXCEPT
+SELECT pilot_name
+FROM pilotskills
+where plane_name = 'B-52 Bomber'
+
+25. Find pilots who own planes Piper Cub and B-52 Bomber.
+P: What are the names of pilots who own both Piper Cub and the B-52 Bomber?
+
+SELECT pilot_name
+FROM pilotskills
+where plane_name = 'Piper Cub' 
+INTERSECT
+SELECT pilot_name
+FROM pilotskills
+where plane_name = 'B-52 Bomber'
+
+26. What are the average and smallest ages of all pilots?
+P: Return the average and minimum ages across all pilots.
+
+SELECT avg(age), min(age)
+FROM pilotskills
+
+27. What are the names of pilots who have planes in both Austin and Boston?
+P: Give the names of pilots who have planes in Austin and Boston.
+
+SELECT T1.pilot_name
+FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
+WHERE T2.location = "Austin"
+INTERSECT
+SELECT T1.pilot_name
+FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
+WHERE T2. location = "Boston"
+
+28. Find the pilots who have either plane Piper Cub or plane F-14 Fighter.
+P: What are the names of pilots who have either the Piper Cub or the F-14 Fighter?
+
+SELECT pilot_name
+FROM pilotskills
+WHERE plane_name = 'Piper Cub' or plane_name = 'F-14 Fighter'
+
+29. What is the average age of pilots for different types of planes?
+P: Return the average age of pilots for each plane name.
+
+SELECT avg(age), plane_name
+FROM pilotskills
+GROUP BY plane_name
+
+30. Find the number of planes for each type.
+P: Count the number of entries for each plane name.
+
+SELECT count(*), plane_name
+FROM pilotskills
+GROUP BY plane_name
+
+31. Find the name of the oldest pilot for each type of plane, and order the results by plane name.
+P: What are the different plane names, and what are the names of the oldest pilot who has each, ordered by plane name?
+
+SELECT pilot_name, plane_name
+FROM pilotskills
+GROUP BY plane_name
+HAVING age = max(age)
+ORDER BY plane_name
+
+32. What are the names of oldest pilots for each type of plane?
+P: Return the names of the different planes, as well as the names of the oldest pilots who flew each.
+
+SELECT pilot_name, plane_name
+FROM pilotskills
+GROUP BY plane_name
+HAVING age = max(age)
+
+33. Find the max age for each group of pilots with the same name.
+P: What are the different pilot names, and what are the maximum ages of pilots for each?
+
+SELECT max(age), pilot_name
+FROM pilotskills
+GROUP BY pilot_name
+
+34. For each city, find the number and average age of pilots who have a plane.
+P: What are the different hangar locations and how many pilots correspond to each. Also, what are their average ages?
+
+SELECT count(T1.pilot_name), avg(T1.age), T2.location
+FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
+GROUP BY T2.location
+
+35. Find the number of pilots for the plane types with average pilot age below 35.
+P: What are the different plane names of planes with an average pilot age of below 35, and how many pilots have flown each of them?
+
+SELECT count(*), plane_name
+FROM pilotskills
+GROUP BY plane_name
+HAVING avg(age) < 35
+
+36. Find the location of the plane that is owned by the youngest pilot.
+P: What is the location of the plane that was flown by the pilot with the lowest age?
+
+SELECT T2.location
+FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
+WHERE T1.age = (select min(age) from pilotskills)
+
+37. Find the name and age of pilots who have a plane in Austin.
+P: What are the names and ages of pilots who have planes located in Austin?
+
+SELECT T1.pilot_name, T1.age
+FROM pilotskills as T1 JOIN hangar as T2 ON T1.plane_name = T2.plane_name
+WHERE T2.location = "Austin"
+
+38. List in alphabetic order the names of pilots whose age is greater than some pilots having plane Piper Cub.
+P: Return the names of pilots who are older than any pilot who has flown Piper Cub, ordered alphabetically.
+
+SELECT pilot_name
+FROM pilotskills
+WHERE age > (select min(age) from pilotskills where plane_name = 'Piper Cub')
+ORDER BY pilot_name
+
+39. Find the number of pilots whose age is younger than all pilots whose plane is F-14 Fighter.
+P: How many pilots are younger than all pilots who own the F-14 Fighter?
+
+SELECT count(*)
+FROM pilotskills
+WHERE age < (select min(age) from pilotskills where plane_name = 'F-14 Fighter')
+
+40. Find all different planes whose names contain substring 'Bomber'.
+P: What are the different plane names that contain the word Bomber?
+
+SELECT distinct plane_name
+FROM pilotskills
+WHERE plane_name LIKE '%Bomber%'
+
+41. Find the number of all pilots whose age is older than some pilot who has plane Piper Cub.
+P: How many pilots are older than the youngest pilot who has Piper Cub?
+
+SELECT count(pilot_name)
+FROM pilotskills
+WHERE age > (select min(age) from pilotskills where plane_name = 'Piper Cub')
+
+42. Find the names and ages of all distinct pilots who is younger than the oldest pilot.
+P: What are the names and ages of pilots who are not the oldest pilot?
+
+select distinct T1.pilot_name, T1.age
+from pilotskills as T1, pilotskills as T2
+where T1.age < T2.age
