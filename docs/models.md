@@ -1,3 +1,22 @@
+# seq2seq using column attention decoder
+
+## Overview
+
+1. Encoder the question, table names, and column names
+2. For each SQL key word and colum name combinations, use them to compute the question embedding with attention. then initialize the decoder input together with the each column. Use attention decoder to generate the rest of SQL in this branch.
+3. For the branch with nested SQL components, do recusively.
+
+## Pros and Cons
+
+Pros: 
+
+- solve the order problem in seq2seq model
+- simple and clean
+
+# SQLNET complex extension
+
+# Syntax set neural model with SQLNet modules
+
 # SQL Matching Model
 
 ## On a Sidenote
@@ -17,7 +36,7 @@ Pros:
 - simple and efficient
 - direct and intuitive, analogous to the way humans learn and write SQL
 - generalized the matching between question and SQL, based on the comparison of previous work in the field (e.g. Iyers, doing the question-question match which would fail on other databases)
-    - the patterns are universal across all databases
+- the patterns are universal across all databases
 
 Cons:
 
