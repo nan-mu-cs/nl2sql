@@ -1,0 +1,484 @@
+Total = # 42
+
+
+1. Home many documents do we have?
+P: Count the number of documents.
+
+select count(*)
+from Documents
+
+S:
+S:
+S:
+
+2. List document IDs, document names, and document descriptions for all documents.
+P: What are the ids, names, and descriptions for all documents?
+
+select document_id, document_name, document_description
+from Documents
+
+S:
+S:
+S:
+
+3. What is the document name and template id for document with description with the letter 'w' in it?
+P: Return the names and template ids for documents that contain the letter w in their description.
+
+select document_name, template_id
+from Documents
+where Document_Description LIKE "%w%"
+
+S:
+S:
+S:
+
+4. What is the document id, template id and description for document named "Robbin CV"?
+P: Return the document id, template id, and description for the document with the name Robbin CV.
+
+select document_id, template_id, Document_Description
+from Documents
+where document_name = "Robbin CV"
+
+S:
+S:
+S:
+
+5. How many different templates do all document use?
+P: Count the number of different templates used for documents.
+
+select count(distinct template_id)
+from Documents
+
+S:
+S:
+S:
+
+6. How many documents are using the template with type code 'PPT'?
+P: Count the number of documents that use the PPT template type.
+
+select count(*)
+from Documents as T1 JOIN Templates as T2
+on T1.Template_ID = T2.Template_ID
+where T2.Template_Type_Code = 'PPT'
+
+S:
+S:
+S:
+
+7. Show all template ids and number of documents using each template.
+P: What are all different template ids used for documents, and how many times were each of them used?
+
+select template_id, count(*)
+from Documents
+group by template_id
+
+S:
+S:
+S:
+
+8. What is the id and type code for the template used by the most documents?
+P: Return the id and type code of the template that is used for the greatest number of documents.
+
+select T1.template_id, T2.Template_Type_Code
+from Documents as T1 join Templates as T2
+on T1.template_id = T2.template_id
+group by T1.template_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+9. Show ids for all templates that are used by more than one document.
+P: What are the template ids of any templates used in more than a single document?
+
+select template_id
+from Documents
+group by template_id
+having count(*) > 1
+
+S:
+S:
+S:
+
+10. Show ids for all templates not used by any document.
+P: What are the ids for templates that are not used in any documents?
+
+select template_id
+from Templates
+EXCEPT
+select template_id
+from Documents
+
+S:
+S:
+S:
+
+11. How many templates do we have?
+P: Count the number of templates.
+
+select count(*)
+from Templates
+
+S:
+S:
+S:
+
+12. Show template ids, version numbers, and template type codes for all templates.
+P: What are the ids, version numbers, and type codes for each template?
+
+select template_id, version_number, template_type_code
+from Templates
+
+S:
+S:
+S:
+
+13. Show all distinct template type codes for all templates.
+P: What are the different template type codes?
+
+select distinct template_type_code
+from Templates
+
+S:
+S:
+S:
+
+14. What are the ids of templates with template type code PP or PPT?
+P: Return the ids of templates that have the code PP or PPT.
+
+select template_id
+from Templates
+where template_type_code = "PP" or template_type_code = "PPT"
+
+S:
+S:
+S:
+
+15. How many templates have template type code CV?
+P: Count the number of templates of the type CV.
+
+select count(*)
+from Templates
+where template_type_code = "CV"
+
+S:
+S:
+S:
+
+16. What is the version number and template type code for the template with version number later than 5?
+P: Return the version numbers and template type codes of templates with a version number greater than 5.
+
+select version_number, template_type_code
+from Templates
+where version_number > 5
+
+S:
+S:
+S:
+
+17. Show all template type codes and number of templates for each.
+P: What are the different template type codes, and how many templates correspond to each?
+
+select template_type_code, count(*)
+from Templates
+group by template_type_code
+
+S:
+S:
+S:
+
+18. Which template type code has most number of templates?
+P: Return the type code of the template type that the most templates belong to.
+
+select template_type_code
+from Templates
+group by template_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+19. Show all template type codes with less than three templates.
+P: What are the codes of template types that have fewer than 3 templates?
+
+select template_type_code
+from Templates
+group by template_type_code
+having count(*) < 3
+
+S:
+S:
+S:
+
+20. What the smallest version number and its template type code?
+P: Return the lowest version number, along with its corresponding template type code.
+
+select min(Version_Number), template_type_code
+from Templates
+
+S:
+S:
+S:
+
+21. What is the template type code of the template used by document with the name "Data base"?
+P: Return the template type code of the template that is used by a document named Data base.
+
+select T1.template_type_code
+from Templates as T1 join Documents as T2 on T1.template_id = T2.template_id
+where T2.document_name = "Data base"
+
+S:
+S:
+S:
+
+22. Show all document names using templates with template type code BK.
+P: What are the names of documents that use templates with the code BK?
+
+select T2.document_name
+from Templates as T1 join Documents as T2 on T1.template_id = T2.template_id
+where T1.template_type_code = "BK"
+
+S:
+S:
+S:
+
+23. Show all template type codes and the number of documents using each type.
+P: What are the different template type codes, and how many documents use each type?
+
+select T1.template_type_code, count(*)
+from Templates as T1 join Documents as T2 on T1.template_id = T2.template_id
+group by T1.template_type_code
+
+S:
+S:
+S:
+
+24. Which template type code is used by most number of documents?
+P: Return the code of the template type that is most commonly used in documents.
+
+select T1.template_type_code
+from Templates as T1 join Documents as T2 on T1.template_id = T2.template_id
+group by T1.template_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+25. Show all template type codes that are not used by any document.
+P: What are the codes of template types that are not used for any document?
+
+
+select template_type_code
+from Templates
+EXCEPT
+select template_type_code
+from Templates as T1 join Documents as T2 on T1.template_id = T2.template_id
+
+S:
+S:
+S:
+
+26. Show all template type codes and descriptions.
+P: What are the type codes and descriptions for all template types?
+
+select template_type_code, template_type_description
+from Ref_template_types
+
+S:
+S:
+S:
+
+27. What is the template type descriptions for template type code "AD".
+P: Return the template type description of the template type with the code AD.
+
+select template_type_description
+from Ref_template_types
+where template_type_code = "AD"
+
+S:
+S:
+S:
+
+28. What is the template type code for template type description "Book".
+P: Return the type code of the template type with the description "Book".
+
+select template_type_code
+from Ref_template_types
+where template_type_description = "Book"
+
+S:
+S:
+S:
+
+29. What are the distinct template type descriptions for the templates ever used by any document?
+P: Return the different descriptions for templates that have been used in a document.
+
+select distinct T1.template_type_description
+from Ref_template_types as T1 join Templates as T2 on T1.template_type_code =T2.template_type_code
+join Documents as T3
+on T2.Template_ID = T3.template_ID
+
+S:
+S:
+S:
+
+30. What are the template ids with template type description "Presentation".
+P: Return the ids corresponding to templates with the description 'Presentation'.
+
+select T2.template_id
+from Ref_template_types as T1 join Templates as T2 on T1.template_type_code =T2.template_type_code
+where T1.template_type_description = "Presentation"
+
+S:
+S:
+S:
+
+31. How many paragraphs in total?
+P: Count the number of paragraphs.
+
+select count(*)
+from Paragraphs
+
+S:
+S:
+S:
+
+32. How many paragraphs for the document with name 'Summer Show'?
+P: Count the number of paragraphs in the document named 'Summer Show'.
+
+select count(*)
+from Paragraphs as T1 join Documents as T2
+on T1.document_ID = T2.document_ID
+where T2.document_name = 'Summer Show'
+
+S:
+S:
+S:
+
+33. Show paragraph details for paragraph with text 'Korea'.
+P: What are the details for the paragraph that includes the text 'Korea'?
+
+select Other_Details
+from Paragraphs
+where paragraph_text = 'Korea'
+
+S:
+S:
+S:
+
+34. Show all paragraph ids and texts for the document with name 'Welcome to NY'.
+P: What are the ids and texts of paragraphs in the document titled 'Welcome to NY'?
+
+select T1.paragraph_id,  T1.paragraph_text
+from Paragraphs as T1 join Documents as T2
+on T1.document_id = T2.document_id
+where T2.Document_Name = 'Welcome to NY'
+
+S:
+S:
+S:
+
+35. Show all paragraph texts for the document "Customer reviews".
+P: What are the paragraph texts for the document with the name 'Customer reviews'?
+
+select T1.paragraph_text
+from Paragraphs as T1 join Documents as T2 on T1.document_id = T2.document_id
+where T2.document_name = "Customer reviews"
+
+S:
+S:
+S:
+
+36. Show all document ids and the number of paragraphs in each document. Order by document id.
+P: Return the different document ids along with the number of paragraphs corresponding to each, ordered by id.
+
+select document_id, count(*)
+from Paragraphs
+group by document_id
+order by document_id
+
+S:
+S:
+S:
+
+37. Show all document ids, names and the number of paragraphs in each document.
+P: What are the ids and names of each document, as well as the number of paragraphs in each?
+
+select T1.document_id, T2.document_name, count(*)
+from Paragraphs as T1 join Documents as T2 on T1.document_id = T2.document_id
+group by T1.document_id
+
+S:
+S:
+S:
+
+38. List all document ids with at least two paragraphs.
+P: What are the ids of documents that have 2 or more paragraphs?
+
+select document_id
+from Paragraphs
+group by document_id
+having count(*) >= 2
+
+S:
+S:
+S:
+
+39. What is the document id and name with greatest number of paragraphs?
+P: Return the id and name of the document with the most paragraphs.
+
+select T1.document_id, T2.document_name
+from Paragraphs as T1 join Documents as T2 on T1.document_id = T2.document_id
+group by T1.document_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+40. What is the document id with least number of paragraphs?
+P: Return the id of the document with the fewest paragraphs.
+
+select document_id
+from Paragraphs
+group by document_id
+order by count(*) asc
+limit 1
+
+S:
+S:
+S:
+
+41. What is the document id with 1 to 2 paragraphs?
+P: Give the ids of documents that have between one and two paragraphs.
+
+select document_id
+from Paragraphs
+group by document_id
+having count(*) between 1 and 2
+
+S:
+S:
+S:
+
+42. Show the document id with paragraph text 'Brazil' and 'Ireland'.
+P: What are the ids of documents that contain the paragraph text 'Brazil' and 'Ireland'?
+
+select document_id
+from Paragraphs
+where paragraph_text = 'Brazil'
+intersect
+select document_id
+from Paragraphs
+where paragraph_text = 'Ireland'
+
+S:
+S:
+S:

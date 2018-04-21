@@ -1,0 +1,451 @@
+Total = # 40
+
+
+1. How many accounts do we have?
+P: Count the number of accounts.
+
+select count(*)
+from Accounts
+
+S:
+S:
+S:
+
+2. Show ids, customer ids, names for all accounts.
+P: What are the account ids, customer ids, and account names for all the accounts?
+
+select account_id, customer_id, account_name
+from Accounts
+
+S:
+S:
+S:
+
+3. Show other account details for account with name 338.
+P: What are the other account details for the account with the name 338?
+
+select other_account_details
+from Accounts
+where account_name = "338"
+
+S:
+S:
+S:
+
+4. What is the first name, last name, and phone of the customer with account name 162?
+P: Give the full name and phone of the customer who has the account name 162.
+
+select T2.customer_first_name, T2.customer_last_name, T2.customer_phone
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T1.account_name = "162"
+
+S:
+S:
+S:
+
+5. How many accounts does the customer with first name Art and last name Turcotte have?
+P: Return the number of accounts that the customer with the first name Art and last name Turcotte has.
+
+select count(*)
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T2.customer_first_name = "Art" and T2.customer_last_name = "Turcotte"
+
+S:
+S:
+S:
+
+6. Show all customer ids and the number of accounts for each customer.
+P: How many accounts are there for each customer id?
+
+select customer_id, count(*)
+from Accounts
+group by customer_id
+
+S:
+S:
+S:
+
+7. Show the customer id and number of accounts with most accounts.
+P: What is the customer id of the customer with the most accounts, and how many accounts does this person have?
+
+select customer_id, count(*)
+from Accounts
+group by customer_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+8. What is the customer first, last name and id with least number of accounts.
+P: Give the full name and customer id of the customer with the fewest accounts.
+
+select T2.customer_first_name, T2.customer_last_name, T1.customer_id
+from Accounts as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by count(*) asc
+limit 1
+
+S:
+S:
+S:
+
+9. Show the number of all customers without an account.
+P: How many customers do not have an account?
+
+select count(*)
+from Customers
+where customer_id NOT IN (select customer_id from Accounts)
+
+S:
+S:
+S:
+
+10. Show the first names and last names of customers without any account.
+P: What are the full names of customers who do not have any accounts?
+
+select customer_first_name, customer_last_name
+from Customers
+EXCEPT
+select T1.customer_first_name, T1.customer_last_name
+from Customers as T1 JOIN Accounts as T2
+on T1.customer_id = T2.customer_id
+
+S:
+S:
+S:
+
+11. Show distinct first and last names for all customers with an account.
+P: What are the full names of customers who have accounts?
+
+select distinct T1.customer_first_name, T1.customer_last_name
+from Customers as T1 JOIN Accounts as T2
+on T1.customer_id = T2.customer_id
+
+S:
+S:
+S:
+
+12. How many customers have an account?
+P: Count the number of customers who hold an account.
+
+select count(distinct customer_id)
+from Accounts
+
+S:
+S:
+S:
+
+13. How many customers do we have?
+P: Count the number of customers.
+
+select count(*)
+from Customers
+
+S:
+S:
+S:
+
+14. Show ids, first names, last names, and phones for all customers.
+P: What are the ids, full names, and phones of each customer?
+
+select customer_id, customer_first_name, customer_last_name, customer_phone
+from Customers
+
+S:
+S:
+S:
+
+15. What is the phone and email for customer with first name Aniyah and last name Feest?
+P: Return the phone and email of the customer with the first name Aniyah and last name Feest.
+
+select customer_phone, customer_email
+from Customers
+where customer_first_name = "Aniyah" and customer_last_name = "Feest"
+
+S:
+S:
+S:
+
+16. Show the number of customer cards.
+P: How many customer cards are there?
+
+select count(*)
+from Customers_cards
+
+S:
+S:
+S:
+
+17. Show ids, customer ids, card type codes, card numbers for all cards.
+P: What are card ids, customer ids, card types, and card numbers for each customer card?
+
+select card_id, customer_id, card_type_code, card_number
+from Customers_cards
+
+S:
+S:
+S:
+
+18. Show the date valid from and the date valid to for the card with card number '4560596484842'.
+P: What are the valid from and valid to dates for the card with the number 4560596484842?
+
+select date_valid_from, date_valid_to
+from Customers_cards
+where card_number = "4560596484842"
+
+S:
+S:
+S:
+
+19. What is the first name, last name, and phone of the customer with card 4560596484842.
+P: Return the full name and phone of the customer who has card number 4560596484842.
+
+select T2.customer_first_name, T2.customer_last_name, T2.customer_phone
+from Customers_cards as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T1.card_number = "4560596484842"
+
+S:
+S:
+S:
+
+20. How many cards does customer Art Turcotte have?
+P: Count the number of cards the customer with the first name Art and last name Turcotte has.
+
+select count(*)
+from Customers_cards as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T2.customer_first_name = "Art" and T2.customer_last_name = "Turcotte"
+
+S:
+S:
+S:
+
+21. How many debit cards do we have?
+P: Count the number of customer cards of the type Debit.
+
+select count(*)
+from Customers_cards
+where card_type_code = "Debit"
+
+S:
+S:
+S:
+
+22. How many credit cards does customer Blanche Huels have?
+P: Count the number of credit cards that the customer with first name Blanche and last name Huels has.
+
+select count(*)
+from Customers_cards as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T2.customer_first_name = "Blanche" and T2.customer_last_name = "Huels" and T1.card_type_code = "Credit"
+
+S:
+S:
+S:
+
+23. Show all customer ids and the number of cards owned by each customer.
+P: What are the different customer ids, and how many cards does each one hold?
+
+select customer_id, count(*)
+from Customers_cards
+group by customer_id
+
+S:
+S:
+S:
+
+24. What is the customer id with most number of cards, and how many does he have?
+P: Return the id of the customer who has the most cards, as well as the number of cards.
+
+select customer_id, count(*)
+from Customers_cards
+group by customer_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+25. Show id, first and last names for all customers with at least two cards.
+P: What are the ids and full names of customers who hold two or more cards?
+
+select T1.customer_id, T2.customer_first_name, T2.customer_last_name
+from Customers_cards as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+having count(*) >= 2
+
+S:
+S:
+S:
+
+26. What is the customer id, first and last name with least number of accounts.
+P: Return the id and full name of the customer who has the fewest accounts.
+
+select T1.customer_id, T2.customer_first_name, T2.customer_last_name
+from Customers_cards as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by count(*) asc
+limit 1
+
+S:
+S:
+S:
+
+27. Show all card type codes and the number of cards in each type.
+P: What are the different card types, and how many cards are there of each?
+
+select card_type_code, count(*)
+from Customers_cards
+group by card_type_code
+
+S:
+S:
+S:
+
+28. What is the card type code with most number of cards?
+P: Return the code of the card type that is most common.
+
+select card_type_code
+from Customers_cards
+group by card_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+29. Show card type codes with at least 5 cards.
+P: What are the codes of card types that have 5 or more cards?
+
+select card_type_code
+from Customers_cards
+group by card_type_code
+having count(*) >= 5
+
+S:
+S:
+S:
+
+30. Show all card type codes and the number of customers holding cards in each type.
+P: What are the different card type codes, and how many different customers hold each type?
+
+select card_type_code, count(distinct customer_id)
+from Customers_cards
+group by card_type_code
+
+S:
+S:
+S:
+
+31. Show the customer ids and firstname without a credit card.
+P: What are the ids and first names of customers who do not hold a credit card?
+
+select customer_id, customer_first_name
+from Customers
+EXCEPT
+select T1.customer_id, T2.customer_first_name
+from Customers_cards as T1 join Customers as T2
+on T1.customer_id = T2.customer_id
+where card_type_code = "Credit"
+
+S:
+S:
+S:
+
+32. Show all card type codes.
+P: What are the different card type codes?
+
+select distinct card_type_code
+from Customers_Cards
+
+S:
+S:
+S:
+
+33. Show the number of card types.
+P: How many different card types are there?
+
+select count(distinct card_type_code)
+from Customers_Cards
+
+S:
+S:
+S:
+
+34. Show all transaction types.
+P: What are the different types of transactions?
+
+select distinct transaction_type
+from Financial_Transactions
+
+S:
+S:
+S:
+
+35. Show the number of transaction types.
+P: How many different types of transactions are there?
+
+select count(distinct transaction_type)
+from Financial_Transactions
+
+S:
+S:
+S:
+
+36. What is the average and total transaction amount?
+P: Return the average transaction amount, as well as the total amount of all transactions.
+
+select avg(transaction_amount), sum(transaction_amount)
+from Financial_transactions
+
+S:
+S:
+S:
+
+37. Show the card type codes and the number of transactions.
+P: What are the different card types, and how many transactions have been made with each?
+
+select T2.card_type_code, count(*)
+from Financial_transactions as T1 join Customers_cards as T2 on T1.card_id = T2.card_id
+group by T2.card_type_code
+
+S:
+S:
+S:
+
+38. Show the transaction type and the number of transactions.
+P: What are the different transaction types, and how many transactions of each have taken place?
+
+select transaction_type, count(*)
+from Financial_transactions
+group by transaction_type
+
+S:
+S:
+S:
+
+39. What is the transaction type that has processed the greatest total amount in transactions?
+P: Return the type of transaction with the highest total amount.
+
+select transaction_type
+from Financial_transactions
+group by transaction_type
+order by sum(transaction_amount) desc
+limit 1
+
+S:
+S:
+S:
+
+40. Show the account id and the number of transactions for each account
+P: What are the different account ids that have made financial transactions, as well as how many transactions correspond to each?
+
+select account_id, count(*)
+from Financial_transactions
+group by account_id
+
+S:
+S:
+S:
