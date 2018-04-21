@@ -31,11 +31,11 @@ Select sum(share_count)
 from TRANSACTIONS
 
 
-2. Show all transaction id made by investor 6.
+2. Show all transaction id with transaction code 'PUR'.
 
 select transaction_id
 from TRANSACTIONS
-where investor_id = 6
+where transaction_type_code = 'PUR'
 
 Show all dates of transactions where the type code is "SALE".
 
@@ -55,11 +55,11 @@ select transaction_type_description
 from Ref_Transaction_Types
 WHERE transaction_type_code	 = "PUR"
 
-Show the minimum amount of transaction where the type code is "PUR" and the share count is bigger than 100.
+Show the minimum amount of transaction where the type code is "PUR" and the share count is bigger than 50.
 
 select min(amount_of_transaction)
 from TRANSACTIONS
-where transaction_type_code = "PUR" AND share_count > 100
+where transaction_type_code = "PUR" AND share_count > 50
 
 Show the maximum share count of transaction where the amount is smaller than 10000
 
@@ -87,15 +87,15 @@ from  INVESTORS as T1 JOIN TRANSACTIONS as T2 on
 T1.investor_id = T2.investor_id
 where T2.share_count > 100
 
-How many distinct transaction types are there?
+How many distinct transaction types are used in the transactions?
 
 SELECT COUNT(distinct transaction_type_code)
 FROM TRANSACTIONS
 
-Return the lot details of lots that belong to investors 1?
+Return the lot details and investors ids?
 
-Select lot_details from LOTS
-WHERE investor_id = 1
+Select lot_details, investor_id
+from LOTS
 
 Return the lot details of lots that belong to investors with details "l"?
 
@@ -113,7 +113,7 @@ where T2.amount_of_transaction > 10000
 
 What are the sale details and dates of transactions with amount smaller than 3000?
 
-select T1.sales_details
+select T1.sales_details, T2.date_of_transaction
 from SALES as T1 JOIN TRANSACTIONS as T2 on 
 T1.sales_transaction_id = T2.transaction_id
 where T2.amount_of_transaction < 3000
@@ -121,17 +121,20 @@ where T2.amount_of_transaction < 3000
 What are the lot details of lots associated with transactions with share count smaller than 50?
 
 select T1.lot_details
-from LOTS as T1 JOIN TRANSACTIONS as T2 JOIN TRANSACTIONS_LOTS as T3
-on  T1.lot_id = T3.transaction_id AND T2.transaction_id = T3.transaction_id
-where T2.share_count < 50
+from LOTS as T1 JOIN TRANSACTIONS_LOTS as T2
+on T1.lot_id = T2.transaction_id 
+JOIN TRANSACTIONS as T3
+on T2.transaction_id = T3.transaction_id
+where T3.share_count < 50
 
-What are the lot details of lots associated with transactions with share count bigger than 100 
-and type code "PUR"?
+What are the lot details of lots associated with transactions with share count bigger than 100 and type code "PUR"?
 
 select T1.lot_details
-from LOTS as T1 JOIN TRANSACTIONS as T2 JOIN TRANSACTIONS_LOTS as T3
-on  T1.lot_id = T3.transaction_id AND T2.transaction_id = T3.transaction_id
-where T2.share_count > 100 AND T2.transaction_type_code = "PUR"
+from LOTS as T1 JOIN TRANSACTIONS_LOTS as T2
+on  T1.lot_id = T2.transaction_id 
+JOIN TRANSACTIONS as T3 
+on T2.transaction_id = T3.transaction_id
+where T3.share_count > 100 AND T3.transaction_type_code = "PUR"
 
 
 3. Show the average amount of different transaction types.
@@ -184,7 +187,7 @@ Show the number of transactions with transaction type code "SALE" for different 
 
 select investor_id, COUNT(*)
 from TRANSACTIONS
-WHERE 	transaction_type_code = "SALE"
+WHERE transaction_type_code = "SALE"
 group by investor_id
 
 Show the number of transactions for different investors.
@@ -193,14 +196,14 @@ select investor_id, COUNT(*)
 from TRANSACTIONS
 group by investor_id
 
-Show the type of transaction that occurs the fewest number of times.
+Show the transaction type code that occurs the fewest number of times.
 
 select transaction_type_code
 from TRANSACTIONS
 group by transaction_type_code
 ORDER BY COUNT(*) ASC LIMIT 1
 
-Show the type of transaction that occurs the most number of times.
+Show the transaction type code that occurs the most number of times.
 
 select transaction_type_code
 from TRANSACTIONS
@@ -212,60 +215,69 @@ Show the description of type of transaction that occurs the most number of times
 select T1.transaction_type_description
 from Ref_Transaction_Types as T1 JOIN TRANSACTIONS as T2
 on T1.transaction_type_code = T2.transaction_type_code
-group by T2.transaction_type_code
+group by T1.transaction_type_code
 ORDER BY COUNT(*) DESC LIMIT 1
 
-Show the details of the investor that have the biggest number of transactions.
+Show the id and details of the investor that have the biggest number of transactions.
 
-select T1.Investor_details
+select T2.investor_id, T1.Investor_details
 from INVESTORS as T1 JOIN TRANSACTIONS as T2
 on T1.investor_id = T2.investor_id
 group by T2.investor_id
 ORDER BY COUNT(*) DESC LIMIT 1
 
-Show the details of the investor that have the top 3 number of transactions.
+Show the id and details of the investor that have the top 3 number of transactions.
 
-select T1.Investor_details
+select T2.investor_id, T1.Investor_details
 from INVESTORS as T1 JOIN TRANSACTIONS as T2
 on T1.investor_id = T2.investor_id
 group by T2.investor_id
 ORDER BY COUNT(*) DESC LIMIT 3
 
-Show the details of the investor that have at least two transactions.
+Show the id of the investor that have at least two transactions.
 
-select T1.Investor_details
+select T2.investor_id
 from INVESTORS as T1 JOIN TRANSACTIONS as T2
 on T1.investor_id = T2.investor_id
 group by T2.investor_id
 HAVING COUNT(*) >= 2
 
-Show the details of the investor that have at least two transactions with type code "SALE".
+Show the ids and details of the investor that have at least two transactions with type code "SALE".
 
-select T1.Investor_details
+select T2.investor_id, T1.Investor_details
 from INVESTORS as T1 JOIN TRANSACTIONS as T2
 on T1.investor_id = T2.investor_id
 WHERE T2.transaction_type_code = "SALE"
 group by T2.investor_id
 HAVING COUNT(*) >= 2
 
-
 4. What are the dates of transactions with type code "SALE" and at least 100 share count or with type code "PUR" and at least 200 share count?
 
 select date_of_transaction
 From TRANSACTIONS
-WHERE transaction_type_code = "SALE" AND share_count >= 100
-UNION
-select date_of_transaction
-From TRANSACTIONS
-WHERE transaction_type_code = "PUR" AND share_count >= 200
+WHERE (transaction_type_code = "SALE" AND share_count >= 100) or (transaction_type_code = "PUR" AND share_count >= 200)
+
 
 What are the dates of transactions with at least 100 share count and amount bigger than 100 or with at least 200 share count and amount bigger than 50?
 
 select date_of_transaction
 From TRANSACTIONS
-WHERE share_count >= 100 AND amount_of_transaction >= 100
-UNION
-select date_of_transaction
-From TRANSACTIONS
-WHERE share_count >= 200 AND amount_of_transaction >= 50
+WHERE (share_count >= 100 AND amount_of_transaction >= 100) or (share_count >= 200 AND amount_of_transaction >= 50)
 
+
+What are all the details of all sales and purchases?
+
+select sales_details
+from sales
+union 
+select purchase_details
+from purchases
+
+What are the details of lots which are not used in any transactions?
+
+select lot_details
+from Lots
+except
+select T1.lot_details
+from Lots as T1 join transactions_lots as T2
+on T1.lot_id = T2.lot_id
