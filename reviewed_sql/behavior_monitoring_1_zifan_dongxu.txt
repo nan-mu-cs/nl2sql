@@ -26,7 +26,7 @@ Return all distinct detention type code.
 SELECT distinct detention_type_code
 FROM Detention
 
-What are the start and end dates for incidents 	with incident type code "NOISE"?
+What are the start and end dates for incidents with incident type code "NOISE"?
 
 SELECT date_incident_start, date_incident_end
 FROM Behavior_Incident
@@ -77,7 +77,6 @@ FROM Teachers
 WHERE email_address LIKE '%man%'
 
 
-
 2. List all information about assessment notes sorted by date in the ascending order.
 
 SELECT *
@@ -103,37 +102,36 @@ FROM Student_Addresses
 ORDER BY monthly_rental DESC
 
 
-3. Find the first name of the student that has the most number of assessment notes?
+3. Find the id and first name of the student that has the most number of assessment notes?
 
-SELECT T2.first_name
+SELECT T1.student_id, T2.first_name
 FROM Assessment_Notes as T1 JOIN Students as T2
 on T1.student_id = T2.student_id
 GROUP BY T1.student_id
 ORDER BY count(*) desc
 LIMIT 1
 
-Find the first names of the teachers that have the top 3 number of assessment notes?
+Find the id and first names of the teachers that have the top 3 number of assessment notes?
 
-SELECT T2.first_name
+SELECT T1.teacher_id, T2.first_name
 FROM Assessment_Notes as T1 JOIN Teachers as T2
 on T1.teacher_id = T2.teacher_id
 GROUP BY T1.teacher_id
 ORDER BY count(*) desc
 LIMIT 3
 
-Find the last name of the student that has the most number of behavior incident?
+Find the id and last name of the student that has the most number of behavior incident?
 
-SELECT T2.last_name
+SELECT T1.student_id, T2.last_name
 FROM Behavior_Incident as T1 JOIN Students as T2
 on T1.student_id = T2.student_id
 GROUP BY T1.student_id
 ORDER BY count(*) desc
 LIMIT 1
 
-Find the last name of the teacher that has the most number of detention with detention type code 
-"AFTER"?
+Find the id and last name of the teacher that has the most number of detention with detention type code "AFTER"?
 
-SELECT T2.last_name
+SELECT T1.teacher_id, T2.last_name
 FROM Detention as T1 JOIN Teachers as T2
 on T1.teacher_id = T2.teacher_id
 WHERE T1.detention_type_code = "AFTER"
@@ -141,35 +139,35 @@ GROUP BY T1.teacher_id
 ORDER BY count(*) desc
 LIMIT 1
 
-What is the first name of the student with the highest average monthly rental of student addresses.
+What is the id and first name of the student with the highest average monthly rental of student addresses.
 
-SELECT T2.first_name
+SELECT T1.student_id, T2.first_name
 FROM Student_Addresses as T1 JOIN Students as T2
 on T1.student_id = T2.student_id
 GROUP BY T1.student_id
 ORDER BY AVG(monthly_rental) desc
 LIMIT 1
 
-Find the city of the student address with the highest average monthly rental.
+Find the id and city of the student address with the highest average monthly rental.
 
-SELECT T1.city
+SELECT T2.address_id, T1.city
 FROM Addresses as T1 JOIN Student_Addresses as T2
 on T1.address_id = T2.address_id
 GROUP BY T2.address_id
 ORDER BY AVG(monthly_rental) desc
 LIMIT 1
 
-What is the description of the most frequent behavior incident type code?
+What is the code and description of the most frequent behavior incident type?
 
-select T2.incident_type_description
+select T1.incident_type_code, T2.incident_type_description
 from Behavior_Incident as T1 JOIN Ref_Incident_Type as T2
 on T1.incident_type_code = T2.incident_type_code
 Group by T1.incident_type_code 
 order by count(*) desc limit 1
 
-What is the description of the least frequent detention type code?
+What is the code and description of the least frequent detention type ?
 
-select T2.detention_type_description
+select T1.detention_type_code, T2.detention_type_description
 from Detention as T1 JOIN Ref_Detention_Type as T2
 on T1.detention_type_code = T2.detention_type_code
 Group by T1.detention_type_code
@@ -204,9 +202,9 @@ FROM Detention as T1 JOIN Teachers as T2
 on T1.teacher_id = T2.teacher_id
 Where T2.last_name = "Schultz"
 
-What is the zip code of the address with the highest monthly rental?
+What is the id and zip code of the address with the highest monthly rental?
 
-SELECT T1.zip_postcode
+SELECT T2.address_id, T1.zip_postcode
 FROM Addresses as T1 JOIN Student_Addresses as T2
 on T1.address_id = T2.address_id
 ORDER BY monthly_rental desc LIMIT 1
@@ -216,7 +214,7 @@ What is the cell phone number of the student with student address that has the l
 SELECT T2.cell_mobile_number	
 FROM Student_Addresses as T1 JOIN Students as T2
 on T1.student_id = T2.student_id
-ORDER BY monthly_rental ASC LIMIT 1
+ORDER BY T1.monthly_rental ASC LIMIT 1
 
 What are the monthly rentals of student addresses in Texas state?
 
@@ -254,34 +252,32 @@ on T1.address_id = T2.address_id
 WHERE T1.zip_postcode = "918"
 
 
-5. Find the first names of students not involved in any behavior incident.
+5. How many students are not involved in any behavior incident.
 
-SELECT first_name
+SELECT count(*)
 FROM STUDENTS
-WHERE student_id in (
-select student_id from STUDENTS
-Except
+WHERE student_id not in (
 select student_id from Behavior_Incident
 )
 
 
 Find the last names of teachers not involved in any detention.
 
-SELECT last_name
-FROM TEACHERS
-WHERE teacher_id in (
-select teacher_id from STUDENTS
-Except
-select teacher_id from Detention
-)
+select last_name
+from Teachers
+except
+select T1.last_name
+from Teachers as T1 join Detention as T2
+on T1.teacher_id = T2.teacher_id
+
 
 What are the line 1 of addresses shared by students and teachers?
 
 
-SELECT line_1
-FROM Addresses
-WHERE address_id in (
-select address_id from STUDENTS
-Intersect
-select address_id from Teachers
-)
+select T1.line_1
+from Addresses as T1 join Students as T2
+on T1.address_id = T2.address_id
+intersect
+select T1.line_1
+from Addresses as T1 join Teachers as T2
+on T1.address_id = T2.address_id
