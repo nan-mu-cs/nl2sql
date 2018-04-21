@@ -1,4 +1,4 @@
-# count = 40
+# count = 41
 
 1. Which states have both owners and professionals living there?
 P: Find the states where both owners and professionals live.
