@@ -162,24 +162,6 @@ EXCEPT
 select T1.name
 from Client as T1 join Orders as T2 on T1.idClient = T2.idClient
 
-10. What is the average number of orders per pook?
-
-with number_of_order(num) as (select count(*)
-from Books_Order
-group by isbn)
-select avg(num)
-from number_of_order
-
-
-What is the average number of orders per client?
-
-
-with number_of_order(num) as (select count(*)
-from Orders as T1 join Client as T2 on T1.idClient = T2.idClient
-group by T1.idClient)
-select avg(num)
-from number_of_order
-
 
 11. What is the maximum and the minimum sale price?
 
