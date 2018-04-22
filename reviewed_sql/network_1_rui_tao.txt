@@ -114,14 +114,6 @@ from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
 group by T1.student_id
 having count(*) >= 3
 
-What is the average, minimum, maximum number of friends for each high schooler?
-
-with friend_num (num) as (select count(*)
-from Friend
-group by student_id)
-select avg(num), min(num), max(num)
-from friend_num
-
 5. Show the name of all friends of high schooler Kyle.
 
 select T3.name
@@ -200,15 +192,6 @@ from Friend as T1 join Highschooler as T2 on T1.student_id = T2.id
 where T2.grade > 5
 group by T1.student_id
 having count(*) >= 2
-
-What is the average, minimum, maximum number of likes for each high schooler?
-
-
-with like_num (num) as (select count(*)
-from Likes
-group by student_id)
-select avg(num), min(num), max(num)
-from like_num
 
 8. How many likes does high schooler Kyle have.
 
