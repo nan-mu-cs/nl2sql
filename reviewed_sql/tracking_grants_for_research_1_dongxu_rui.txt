@@ -1,7 +1,7 @@
 # count = 40
 
 
-1. (INTERSECT, >, <) What are the distinct grant amount for the grants
+1. What are the distinct grant amount for the grants
  where the documents were sent before '1986-08-26 20:49:27' and grant were ended after '1989-03-16 18:27:16'?
 
 
@@ -12,10 +12,10 @@ where T2.sent_date < '1986-08-26 20:49:27'
 INTERSECT
 select grant_amount
 from grants
-where grant_end_date > '1989-03-16 18:27:16';
+where grant_end_date > '1989-03-16 18:27:16'
 
 
-2. (INTERSECT) List the project details of the project both producing patent and paper as outcomes.
+2. List the project details of the project both producing patent and paper as outcomes.
 
 select T1.project_details
 from Projects as T1 JOIN Project_outcomes as T2
@@ -25,23 +25,23 @@ INTERSECT
 select T1.project_details
 from Projects as T1 JOIN Project_outcomes as T2
 on T1.project_id = T2.project_id
-where T2.outcome_code = 'Patent';
+where T2.outcome_code = 'Patent'
 
 
 
 
-3. (AGGREGATOR) What is the total grant amount of the organisations described as research?
+3. What is the total grant amount of the organisations described as research?
 
 select sum(grant_amount)
 from Grants as T1 JOIN Organisations as T2
 on T1.organisation_id = T2.organisation_id
 JOIN organisation_Types as T3
 on T2.organisation_type = T3.organisation_type
-where T3.organisation_type_description = 'Research';
+where T3.organisation_type_description = 'Research'
 
 
 
-4. (UNION, in) List from which date and to which date these staff work: project staff of the project which hires the most staffs 
+4. List from which date and to which date these staff work: project staff of the project which hires the most staffs 
 and the staff with a leader role.
 
 
@@ -56,11 +56,11 @@ where project_id in(
 UNION
 select date_from, date_to
 from Project_Staff
-where role_code = 'leader';
+where role_code = 'leader'
 
 
 
-5. (EXCEPT) Find the organisation details of the organisations which involve in the projects
+5. Find the organisation details of the organisations which are involved in the projects
 but are not described as 'Sponsor'.
 
 select T1.organisation_details
@@ -70,39 +70,39 @@ EXCEPT
 select T1.organisation_details
 from Organisations as T1 JOIN organisation_Types as T2
 on T1.organisation_type = T2.organisation_type
-where T2.organisation_type_description = 'Sponsor';
+where T2.organisation_type_description = 'Sponsor'
 
 
-6. (GROUP BY, HAVING) Find the organisation ids and details of the organisations which involved in 
+6. Find the organisation ids and details of the organisations which are involved in 
 more than total grant amount of 6000.
 
 select T2.organisation_id, T2.organisation_details
 from Grants as T1 JOIN Organisations as T2
 on T1.organisation_id = T2.organisation_id
 group by T2.organisation_id
-having sum(T1.grant_amount) > 6000;
+having sum(T1.grant_amount) > 6000
 
 
 
-7. (GROUP BY, ORDER) What is the organisation type and id of the organisation which has the most number of research staff?
+7. What is the organisation type and id of the organisation which has the most number of research staff?
 
 select T1.organisation_type, T1.organisation_id
 from Organisations as T1 JOIN Research_Staff as T2
 on T1.organisation_id = T2.employer_organisation_id
 group by T1.organisation_id
-order by count(*) desc limit 1;
+order by count(*) desc limit 1
 
 
-8. (GROUP BY ORDER) Which organisation type hires more research staff, RES or SPON?
+8. Which organisation type hires most research staff?
 
 
 select T1.organisation_type
 from Organisations as T1 JOIN Research_Staff as T2
 on T1.organisation_id = T2.employer_organisation_id
 group by T1.organisation_type
-order by count(*) desc limit 1;
+order by count(*) desc limit 1
 
-9. (JOIN, and, >) Find out the send dates of the documents with the grant amount of more than 5000 were granted by organisation type described 
+9. Find out the send dates of the documents with the grant amount of more than 5000 were granted by organisation type described 
 as 'Research'.
 
 
@@ -113,12 +113,12 @@ JOIN Organisations as T3
 on T2.organisation_id = T3.organisation_id
 JOIN organisation_Types as T4
 on T3.organisation_type = T4.organisation_type
-where T2.grant_amount > 5000 and T4.organisation_type_description = 'Research';
+where T2.grant_amount > 5000 and T4.organisation_type_description = 'Research'
 
 
 
 
-10. (JOIN, or, >) What are the responding dates for the documents described as 'Regular' or granted with more than 100?
+10. What are the response received dates for the documents described as 'Regular' or granted with more than 100?
 
 
 select T1.response_received_date
@@ -126,11 +126,10 @@ from Documents as T1 JOIN Document_Types as T2
 on T1.document_type_code = T2.document_type_code
 JOIN Grants as T3
 on T1.grant_id = T3.grant_id
-where T2.document_description = 'Regular' or T3.grant_amount > 100;
+where T2.document_description = 'Regular' or T3.grant_amount > 100
 
 
-11. (not in) List the project details of the projects 
-which did not hire any staff for a researcher role.
+11. List the project details of the projects which did not hire any staff for a researcher role.
 
 select project_details
 from Projects
@@ -138,10 +137,9 @@ where project_id not in (
 	select project_id
 	from Project_Staff
 	where role_code = 'researcher'
-);
+)
 
-12. (UNION, JOIN, multi)What are the task details, task id and project id for the projects
- which are detailed as 'omnis' or the have more than 2 outcomes?
+12. What are the task details, task id and project id for the projects which are detailed as 'omnis' or the have more than 2 outcomes?
 
 select T1.task_details, T1.task_id, T2.project_id
 from Tasks as T1 JOIN Projects as T2
@@ -154,46 +152,45 @@ on T1.project_id = T2.project_id
 JOIN Project_outcomes as T3
 on T2.project_id = T3.project_id
 group by T2.project_id
-having count(*) > 2;
+having count(*) > 2
 
 
 
-13. (multi) When do all the researcher role staff start to work, and when do they stop working?
+13. When do all the researcher role staff start to work, and when do they stop working?
 
 select date_from, date_to
 from Project_Staff
-where role_code = 'researcher';
+where role_code = 'researcher'
 
-14. (distinct) How many kinds of roles are there for the staff?
+14. How many kinds of roles are there for the staff?
 
 select count(distinct role_code)
-from Project_Staff;
+from Project_Staff
 
 
-15. (AGGREGATOR) What is the total amount of grants given by each organisations? Also list the organisation id.
+15. What is the total amount of grants given by each organisations? Also list the organisation id.
 
 select sum(grant_amount), organisation_id
 from Grants
-group by organisation_id;
+group by organisation_id
 
-16. (LIKE, JOIN) List the project details of the projects 
-with the research outcome described with the substring 'Published'.
+16. List the project details of the projects with the research outcome described with the substring 'Published'.
 
 select T1.project_details
 from Projects as T1 JOIN Project_outcomes as T2
 on T1.project_id = T2.project_id
 JOIN Research_outcomes as T3
 on T2.outcome_code = T3.outcome_code
-where T3.outcome_description LIKE '%Published%';
+where T3.outcome_description LIKE '%Published%'
 
 
-17. (GROUP BY, ORDER BY) How many staff does each project has? List the project id and the number ascending.
+17. How many staff does each project has? List the project id and the number in an ascending order.
 
 select T1.project_id, count(*)
 from Project_Staff as T1 JOIN Projects as T2
 on T1.project_id = T2.project_id
 group by T1.project_id
-order by count(*) asc;
+order by count(*) asc
 
 
 
@@ -202,67 +199,65 @@ order by count(*) asc;
 
 select role_description
 from Staff_Roles
-where role_code = 'researcher'; 
+where role_code = 'researcher'
 
 
 
-19. (order by)When did the first staff for the projects started working?
+19. When did the first staff for the projects started working?
 
 
 select date_from
 from Project_Staff
-order by date_from asc limit 1;
+order by date_from asc limit 1
 
 
-20. (group by) Which projects made the most number of outcomes? List the project details and the project id.
+20. Which project made the most number of outcomes? List the project details and the project id.
 
 select T1.project_details, T1.project_id
 from Projects as T1 JOIN Project_outcomes as T2
 on T1.project_id = T2.project_id
 group by T1.project_id 
-order by count(*) desc limit 1;
+order by count(*) desc limit 1
 
 
 
 
-21. (not in) Which projects are unfruitful? That is to say, which projects has no outcome? 
-List the project details.
+21. Which projects have no outcome? List the project details.
 
 select project_details
 from Projects
 where project_id not in (
 select project_id
 from Project_outcomes
-);
+)
 
 
-22. (group by) Which organisation hired the most number of research staff? List the organisation id, type and detail.
+22. Which organisation hired the most number of research staff? List the organisation id, type and detail.
 
 select T1.organisation_id, T1.organisation_type, T1.organisation_details
 from Organisations as T1 JOIN Research_Staff as T2
 on T1.organisation_id = T2.employer_organisation_id
 group by T1.organisation_id
-order by count(*) desc limit 1;
+order by count(*) desc limit 1
 
-23. (JOIN, GROUP BY, ORDER BY) Show the role description and the id of the project staff involved in most number of project outcomes?
+23. Show the role description and the id of the project staff involved in most number of project outcomes?
 
 select T1.role_description, T2.staff_id
 from Staff_Roles as T1 JOIN Project_Staff as T2
 on T1.role_code = T2.role_code
 JOIN Project_outcomes as T3
 on T2.project_id = T3.project_id
-group by T2.staff_id order by count(*) desc limit 1;
+group by T2.staff_id order by count(*) desc limit 1
 
 
 24. Which document type is described with the prefix 'Initial'?
 
 select document_type_code
 from Document_Types
-where document_description LIKE 'Initial%';
+where document_description LIKE 'Initial%'
 
 
-25. For grants with both documents described as 'Regular' 
-and documents described as 'Initial Application', list its start date.
+25. For grants with both documents described as 'Regular' and documents described as 'Initial Application', list its start date.
 
 select T1.grant_start_date
 from Grants as T1 JOIN Documents as T2
@@ -276,14 +271,14 @@ from Grants as T1 JOIN Documents as T2
 on T1.grant_id = T2.grant_id
 JOIN Document_Types as T3
 on T2.document_type_code = T3.document_type_code
-where T3.document_description = 'Initial Application';
+where T3.document_description = 'Initial Application'
 
-26. How many document can one grant has at most? List the grant id and number.
+26. How many documents can one grant have at most? List the grant id and number.
 
 select grant_id, count(*)
 from Documents
 group by grant_id
-order by count(*) desc limit 1;
+order by count(*) desc limit 1
 
 
 27. Find the organisation type description of the organisation detailed as 'quo'.
@@ -291,30 +286,30 @@ order by count(*) desc limit 1;
 select T1.organisation_type_description
 from organisation_Types as T1 JOIN Organisations as T2
 on T1.organisation_type = T2.organisation_type
-where T2.organisation_details = 'quo';
+where T2.organisation_details = 'quo'
 
 
-28. What are all the details of the organisations described as 'Sponser'? Sort the result ascending.
+28. What are all the details of the organisations described as 'Sponsor'? Sort the result in an ascending order.
 
 select organisation_details
 from Organisations as T1 JOIN organisation_Types as T2
 on T1.organisation_type = T2.organisation_type
 where T2.organisation_type_description = 'Sponsor'
-order by organisation_details;
+order by organisation_details
 
 
 29. How many Patent outcomes are generated from all the projects?
 
 select count(*)
 from Project_outcomes
-where outcome_code = 'Patent';
+where outcome_code = 'Patent'
 
 30. How many project staff worked as leaders or started working before '1989-04-24 23:51:54'?
 
 
 select count(*)
 from Project_Staff
-where role_code = 'leader' or date_from < '1989-04-24 23:51:54';
+where role_code = 'leader' or date_from < '1989-04-24 23:51:54'
 
 
 31. What is the last date of the staff leaving the projects?
@@ -322,7 +317,7 @@ where role_code = 'leader' or date_from < '1989-04-24 23:51:54';
 
 select date_to
 from Project_Staff
-order by date_to desc limit 1;
+order by date_to desc limit 1
 
 
 
@@ -334,17 +329,17 @@ from Research_outcomes as T1 JOIN Project_outcomes as T2
 ON T1.outcome_code = T2.outcome_code
 JOIN Projects as T3
 on T2.project_id = T3.project_id
-where T3.project_details = 'sint';
+where T3.project_details = 'sint'
 
 
 
-33. List the organisation with the maximum outcome count, and the count.
+33. List the organisation id with the maximum outcome count, and the count.
 
 select T1.organisation_id, count(*)
 from Projects as T1 JOIN Project_outcomes as T2
 on T1.project_id = T2.project_id
 group by T1.organisation_id
-order by count(*) desc limit 1;
+order by count(*) desc limit 1
 
 
 
@@ -359,36 +354,36 @@ select organisation_id
 from Projects
 group by organisation_id
 order by count(*) desc limit 1
-);
+)
 
 
-35. List the research staff details, order in ascending order.
+35. List the research staff details, and order in ascending order.
 
 select staff_details
 from Research_Staff
-order by staff_details asc;
+order by staff_details asc
 
 
-36. How many tasks are their in total?
+36. How many tasks are there in total?
 
 select count(*)
-from Tasks;
+from Tasks
 
 
-37. How many tasks does each project has? List the task count and the project detail.
+37. How many tasks does each project have? List the task count and the project detail.
 
 select count(*), T1.project_details
 from Projects as T1 JOIN Tasks as T2
 on T1.project_id = T2.project_id
-group by T1.project_details;
+group by T1.project_id
 
 
-38. What's the staff roles of the staff who
+38. What are the staff roles of the staff who
 worked between '2003-04-19 15:06:20' and '2016-03-15 00:33:18'? 
 
 select role_code
 from Project_Staff
-where date_from > '2003-04-19 15:06:20' and date_to < '2016-03-15 00:33:18';
+where date_from > '2003-04-19 15:06:20' and date_to < '2016-03-15 00:33:18'
 
 
 39. What are the descriptions of all the project outcomes?
@@ -396,13 +391,13 @@ where date_from > '2003-04-19 15:06:20' and date_to < '2016-03-15 00:33:18';
 
 select T1.outcome_description
 from Research_outcomes as T1 JOIN Project_outcomes as T2
-on T1.outcome_code = T2.outcome_code;
+on T1.outcome_code = T2.outcome_code
 
 
 
-40. Which role is more common for the staff, researcher or leader?
+40. Which role is most common for the staff?
 
 select role_code
 from Project_Staff
 group by role_code
-order by count(*) desc limit 1;
+order by count(*) desc limit 1
