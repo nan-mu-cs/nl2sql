@@ -146,18 +146,6 @@ group by T1.author_id
 having count(*) = 1
 
 
-18. List all affiliations who have greater than or equal to 100 papers.
-P: What are the names of affiliations with at least 100 papers?
-
-with Distinct_Paper(paper_id, affiliation_id) as
-         (select distinct paper_id, affiliation_id
-          from Author_list)
-select T1.name
-from Affiliation as T1 join Distinct_Paper as T2 on T1.affiliation_id = T2.affiliation_id
-group by T1.affiliation_id
-having count(*) >= 100
-
-
 19. What is the venue and year with the most number of publications?
 P: What was the venue and year with the most publications?
 
@@ -249,19 +237,6 @@ order by count(*) desc
 limit 1
 
 
-29. Which authors have more citations than "Mckeown, Kathleen"?
-P: What are the names of authors with more citations than Kathleen?
-
-with author_citation (author_name, citation_number) as 
-(select T3.name, count(*)
-from Citation as T1 join Author_list as T2 on T1.cited_paper_id = T2.paper_id join Author as T3 on T2.author_id = T3.author_id
-group by T2.author_id
-order by count(*) desc)
-select author_name
-from author_citation
-where citation_number > (select citation_number from author_citation where author_name like "%Mckeown, Kathleen%")
-
-
 30. What are the venues and years where Mckeown, Kathleen had papers?
 P: Which venues and years did Mckeown, Kathleen have papers?
 
@@ -323,27 +298,6 @@ from Author_list as T1 join Paper as T2 on T1.paper_id = T2.paper_id
 group by T2.paper_id
 order by count(*) desc
 limit 1
-
-37. What is the average number of authors in each paper?
-P: Return the average number of authors for a paper.
-
-with paper_author_number (paper_id, author_number) as 
-(select paper_id, count(*)
-from Author_list
-group by paper_id)
-select avg(author_number)
-from paper_author_number
-
-
-38. What is the average number of papers for an author?
-P: Return the average number of papers published for an author.
-
-with author_paper_number (author_id, paper_number) as 
-(select author_id, count(*)
-from Author_list
-group by author_id)
-select avg(paper_number)
-from author_paper_number
 
 
 39. How many collaborators has Mckeown, Kathleen had?
