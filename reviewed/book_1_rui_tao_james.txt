@@ -174,25 +174,6 @@ EXCEPT
 select T1.name
 from Client as T1 join Orders as T2 on T1.idClient = T2.idClient
 
-23. What is the average number of times each book has been ordered?
-P: Return the average number of orders each book has received.
-
-with number_of_order(num) as (select count(*)
-from Books_Order
-group by isbn)
-select avg(num)
-from number_of_order
-
-
-24. What is the average number of orders per client?
-P: Return the average number of orders each client has made.
-
-with number_of_order(num) as (select count(*)
-from Orders as T1 join Client as T2 on T1.idClient = T2.idClient
-group by T1.idClient)
-select avg(num)
-from number_of_order
-
 25. What is the maximum and the minimum sale price?
 P: Give the maximum and minimum sale price of books.
 
