@@ -32,7 +32,11 @@ def get_schemas_from_json(fpath):
     return schemas, db_names
 
 
-def parse_file_and_sql(filepath):
+def parse_file_and_sql(filepath, schema):
+	'''
+	1. would call get_sql from process_sql (zilin's file) to get processed sql index labels here after parse the reviewed file
+	2. get_sql takes (a single sql_str, table schema) and return the sql index label
+	'''
 	f = open(filepath,"r")
 	ret = []
 	question = ""
@@ -172,7 +176,8 @@ if __name__ == '__main__':
     for f, db_id in fn_map.items():
         raw_file = join(input_dir, f)
         print 'reading labeled file for db: ', db_id
-        data_one = parse_file_and_sql(raw_file)
+	schema = schemas[db_id]
+        data_one = parse_file_and_sql(raw_file, schema)
         data.extend(data_one)
     with open(output_file, 'wt') as out:
         json.dump(data, out, sort_keys=True, indent=4, separators=(',', ': '))
