@@ -183,7 +183,7 @@ From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
 Group by T2.name
 
 26. Select the names of all the products in the store.
-S: What are the names of all products?
+P: What are the names of all products?
 
 select Name
 from Products
