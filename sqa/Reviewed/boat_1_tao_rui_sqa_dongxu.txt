@@ -67,6 +67,7 @@ FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
 WHERE T2.bid = 102
 
 5. Return the unique boat ids (bid) of all reserved boats.
+P: What are the ids of all boats that are reserved by someone?
 
 SELECT DISTINCT bid 
 FROM Reserves
