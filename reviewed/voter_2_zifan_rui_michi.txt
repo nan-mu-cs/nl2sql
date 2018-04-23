@@ -376,9 +376,8 @@ S:
 
 
 31. Report all majors that have less than 3 students.
+P: What are the majors only less than three students are studying?
 
-
-What are the majors only less than three students are studying?
 select Major
 from STUDENT
 group by Major
