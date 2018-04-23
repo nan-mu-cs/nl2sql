@@ -593,9 +593,9 @@ WHERE cName NOT IN
 FROM tryout
 WHERE pPos = "goalie")
 
-P: What are the names of all colleges with students who tried out for the position of goalie?
-P: What is the number of people enrolled in all the other colleges?
-P: How many is that in total?
+S: What are the names of all colleges with students who tried out for the position of goalie?
+S: What is the number of people enrolled in all the other colleges?
+S: How many is that in total?
 
 53. What is the number of states that has some college whose enrollment is larger than the average enrollment?
 P: How many states have a college with more students than average?
