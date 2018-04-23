@@ -50,6 +50,7 @@ S:
 
 
 5. Find the first name of students living in city PHL whose age is between 20 and 25.
+P: What is the first name of the students who are in age 20 to 25 and living in PHL city?
 
 Select fname
 From student
