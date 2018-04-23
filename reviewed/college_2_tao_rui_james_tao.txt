@@ -1,0 +1,1813 @@
+Total # = 86
+
+1. Find the buildings which have rooms with capacity more than 50.
+P: What are the distinct buildings with capacities of greater than 50?
+
+Select distinct building
+From classroom
+Where capacity > 50
+
+S: What are the distinct classroom buildings?
+S: Of those, which have capacity of over 50?
+
+Select distinct building
+From classroom
+
+Select distinct building
+From classroom
+Where capacity > 50
+
+2. Count the number of rooms that are not in the Lamberton building.
+P: How many classrooms are not in Lamberton?
+
+Select count(*)
+From classroom
+Where building != 'Lamberton'
+
+S: Which classrooms are not in Lamberton?
+S: How many are there?
+
+Select *
+From classroom
+Where building != 'Lamberton'
+
+Select count(*)
+From classroom
+Where building != 'Lamberton'
+
+3. What is the name and building of the departments whose budget is more than the average budget?
+P: Give the name and building of the departments with greater than average budget.
+
+Select dept_name, building
+From department
+Where budget > (select avg(budget) from department)
+
+S: What is the average department budget?
+S: Which departments have a budget higher than average?
+S: What are their names and buildings?
+
+select avg(budget)
+from department
+
+Select *
+From department
+Where budget > (select avg(budget) from department)
+
+Select dept_name, building
+From department
+Where budget > (select avg(budget) from department)
+
+4. Find the room number of the rooms which can sit 50 to 100 students and their buildings.
+P: What are the room numbers and corresponding buildings for classrooms which can seat between 50 to 100 students?
+
+Select building, room_number
+From classroom
+Where capacity between 50 and 100
+
+S: Which classrooms have capacity between 50 and 100?
+S: What are their buildings and room numbers?
+
+Select *
+From classroom
+Where capacity between 50 and 100
+
+Select building, room_number
+From classroom
+Where capacity between 50 and 100
+
+5. Find the name and building of the department with the highest budget.
+P: What is the department name and corresponding building for the department with the greatest budget?
+
+Select dept_name, building
+From department
+Order by budget desc
+Limit 1
+
+S: Order the departments by budget in decreasing order.
+S: Which is has the highest budget?
+S: What is its name and building?
+
+Select *
+From department
+Order by budget desc
+
+Select *
+From department
+Order by budget desc
+Limit 1
+
+Select dept_name, building
+From department
+Order by budget desc
+Limit 1
+
+6. What is the name of the student who has the highest total credits in the History department.
+P: Give the name of the student in the History department with the most credits.
+
+Select name
+From student
+Where dept_name = 'History'
+Order by tot_cred desc
+Limit 1
+
+S: What are the names of students in the History department?
+S: Which one has the most credits?
+
+Select name
+From student
+Where dept_name = 'History'
+
+Select name
+From student
+Where dept_name = 'History'
+Order by tot_cred desc
+Limit 1
+
+7. How many rooms does the Lamberton building have?
+P: Count the number of classrooms in Lamberton.
+
+Select count(*)
+From classroom
+where building = 'Lamberton'
+
+S: What are all the classrooms in Lamberton?
+S: How many are there?
+
+Select *
+From classroom
+where building = 'Lamberton'
+
+Select count(*)
+From classroom
+where building = 'Lamberton'
+
+8. How many students have advisors?
+P: Count the number of students who have advisors.
+
+Select count(distinct s_id)
+From advisor
+
+S: What are the student ids of students with advisors?
+S: How many are there?
+
+Select distinct s_id
+From advisor
+
+Select count(distinct s_id)
+From advisor
+
+9. How many departments offer courses?
+P: Count the number of departments which offer courses.
+
+Select count(distinct dept_name)
+From course
+
+S: What are all the department names of departments that offer courses?
+S: How many are there?
+
+Select distinct dept_name
+From course
+
+Select count(distinct dept_name)
+From course
+
+10. How many different courses offered by Physics department?
+P: Count the number of courses in the Physics department.
+
+Select count(distinct course_id)
+From course
+Where dept_name = 'Physics'
+
+S: What are all the courses in the Physics department?
+S: What are their course ids?
+S: How many are there?
+
+Select *
+From course
+Where dept_name = 'Physics'
+
+Select distinct course_id
+From course
+Where dept_name = 'Physics'
+
+Select count(distinct course_id)
+From course
+Where dept_name = 'Physics'
+
+11. Find the title of courses that have two prerequisites?
+P: What are the titles for courses with two prerequisites?
+
+Select T1.title
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
+Group by T2.course_id
+Having count(*) = 2
+
+S: Which courses have some prerequisite?
+S: Which ones have two prerequisites among them?
+S: What are their titles?
+
+Select *
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
+
+Select *
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
+Group by T2.course_id
+Having count(*) = 2
+
+Select T1.title
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
+Group by T2.course_id
+Having count(*) = 2
+
+12. Find the title, credit, and department name of courses that have more than one prerequisites?
+P: What is the title, credit value, and department name for courses with more than one prerequisite?
+
+Select T1.title, T1.credits,T1.dept_name
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
+Group by T2.course_id
+Having count(*) > 1
+
+S: Which courses have more than 1 prerequisite?
+S: What title, credit, and department name correspond to these?
+
+Select *
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
+Group by T2.course_id
+Having count(*) > 1
+
+Select T1.title, T1.credits,T1.dept_name
+From course as T1 join prereq as T2 on T1.course_id = T2.course_id
+Group by T2.course_id
+Having count(*) > 1
+
+13. How many courses that do not have prerequisite?
+P: Count the number of courses without prerequisites.
+
+select count(*)
+From course
+where course_id NOT IN (Select course_id From prereq)
+
+S: What are the ids for courses that have some prerequisites?
+S: How many courses do not in the resulting list?
+
+Select course_id From prereq
+
+select count(*)
+From course
+where course_id NOT IN (Select course_id From prereq)
+
+14. Find the name of the courses that do not have any prerequisite?
+P: What are the titles of courses without prerequisites?
+
+select title
+From course
+where course_id NOT IN (Select course_id From prereq)
+
+S: What are the ids for prerequisites?
+S: Which courses do not have prerequisites?
+S: What are their titles?
+
+Select course_id From prereq
+
+select *
+From course
+where course_id NOT IN (Select course_id From prereq)
+
+select title
+From course
+where course_id NOT IN (Select course_id From prereq)
+
+15. How many different instructors have taught some course?
+P: Count the number of distinct instructors who have taught a course.
+
+select count (distinct id)
+From teaches
+
+S: What are the ids of instructors who have taught a course?
+S: How many are there?
+
+select distinct id
+From teaches
+
+select count (distinct id)
+From teaches
+
+16. Find the total budgets of the Marketing or Finance department.
+P: What is the sum of budgets of the Marketing and Finance departments?
+
+Select sum(budget)
+From department
+Where dept_name = 'Marketing' or dept_name = 'Finance'
+
+S: What are the budgets of the Marketing department?
+S: How about that for the Finance department?
+S: What is their total budget?
+
+Select budget
+From department
+Where dept_name = 'Marketing'
+
+Select budget
+From department
+Where dept_name = 'Finance'
+
+Select sum(budget)
+From department
+Where dept_name = 'Marketing' or dept_name = 'Finance'
+
+17. Find the department name of the instructor whose name contains 'Soisalon'.
+P: What is the name of the department with an instructure who has a name like 'Soisalon'?
+
+Select dept_name
+From instructor
+Where name like '%Soisalon%'
+
+S: What is all the information about an instructor whose name contains 'Soisalon'?
+S: What is their department name?
+
+Select *
+From instructor
+Where name like '%Soisalon%'
+
+Select dept_name
+From instructor
+Where name like '%Soisalon%'
+
+18. How many rooms whose capacity is less than 50 does the Lamberton building have?
+P: Count the number of rooms in Lamberton with capacity lower than 50.
+
+Select count(*)
+From classroom
+Where building = 'Lamberton' and capacity < 50
+
+S: How many rooms are there in Lamberton?
+S: Of those, how many have capacity less than 50?
+
+Select count(*)
+From classroom
+Where building = 'Lamberton'
+
+Select count(*)
+From classroom
+Where building = 'Lamberton' and capacity < 50
+
+19. Find the name and budget of departments whose budgets are more than the average budget.
+P: What are the names and budgets of departments with budgets greater than the average?
+
+Select dept_name, budget
+From department
+Where budget > (select avg(budget) from department)
+
+S: What is the average department budget?
+S: Which departments have a budget higher than that?
+S: What are their names and budgets?
+
+select avg(budget) from department
+
+Select *
+From department
+Where budget > (select avg(budget) from department)
+
+Select dept_name, budget
+From department
+Where budget > (select avg(budget) from department)
+
+20. what is the name of the instructor who is in Statistics department and earns the lowest salary?
+P: Give the name of the lowest earning instructor in the Statistics department.
+
+Select name
+From instructor
+Where dept_name = 'Statistics'
+Order by salary
+Limit 1
+
+S: What are the names of the professors in the Statistics department?
+S: Which one earns the least?
+
+Select name
+From instructor
+Where dept_name = 'Statistics'
+
+Select name
+From instructor
+Where dept_name = 'Statistics'
+Order by salary
+Limit 1
+
+21. Find the title of course that is provided by both Statistics and Psychology departments.
+P: What is the title of a course that is listed in both the Statistics and Psychology departments?
+
+Select title
+From course
+Where dept_name = 'Statistics'
+intersect
+Select title
+From course
+Where dept_name = 'Psychology'
+
+S: What are the titles of Statistics courses?
+S: Of these, which are also listed as Psychology courses?
+
+Select title
+From course
+Where dept_name = 'Statistics'
+
+Select title
+From course
+Where dept_name = 'Statistics'
+intersect
+Select title
+From course
+Where dept_name = 'Psychology'
+
+22. Find the title of course that is provided by Statistics but not Psychology departments.
+P: What are the titles of courses that are in the Statistics department but not the Psychology department?
+
+Select title
+From course
+Where dept_name = 'Statistics'
+Except
+Select title
+From course
+Where dept_name = 'Psychology'
+
+S: What are the titles of Statistics courses?
+S: Of these, which are not provided by the Psychology department?
+
+Select title
+From course
+Where dept_name = 'Statistics'
+
+Select title
+From course
+Where dept_name = 'Statistics'
+Except
+Select title
+From course
+Where dept_name = 'Psychology'
+
+23. Find the id of instructors who taught a class in Fall 2009 but not in Spring 2010.
+P: What are the ids of instructors who taught in the Fall of 2009 but not in the Spring of 2010?
+
+Select id
+From teaches
+Where semester = 'Fall' and year = 2009
+Except
+Select id
+From teaches
+Where semester = 'Spring' and year = 2010
+
+S: What are the ids of instructors who taught in the Fall of 2009?
+S: Of those, which did not teach in the Spring of 2010?
+
+Select id
+From teaches
+Where semester = 'Fall' and year = 2009
+
+Select id
+From teaches
+Where semester = 'Fall' and year = 2009
+Except
+Select id
+From teaches
+Where semester = 'Spring' and year = 2010
+
+24. Find the name of students who took any class in the years of 2009 and 2010.
+P: What are the names of the students who took classes in 2009 or 2010?
+
+select distinct T1.name
+From student as T1 join takes as T2 on T1.id = T2.id
+Where year = 2009 or year = 2010
+
+S: What are the distinct names of all the students?
+S: Of these, which took classes in 2009 or 2010?
+
+select distinct name
+From student 
+
+select distinct T1.name
+From student as T1 join takes as T2 on T1.id = T2.id
+Where year = 2009 or year = 2010
+
+25. Find the names of the top 3 departments that provide the largest amount of courses?
+P: What are the names of the 3 departments with the most courses?
+
+Select dept_name
+From course
+Group by dept_name
+Order by count(*) desc
+Limit 3
+
+S: How many courses does each department have?
+S: Order their names from greatest to least.
+S: What are the top 3?
+
+Select dept_name, count(*)
+From course
+Group by dept_name
+
+Select dept_name
+From course
+Group by dept_name
+Order by count(*) desc
+
+Select dept_name
+From course
+Group by dept_name
+Order by count(*) desc
+Limit 3
+
+26. Find the name of the department that offers the highest total credits?
+P: What is the name of the department with the most credits?
+
+Select dept_name
+From course
+Group by dept_name
+Order by sum(credits) desc
+Limit 1
+
+S: How many credits does each department offer?
+S: What is the name of the department which offers the most?
+
+Select dept_name, sum(credits)
+From course
+Group by dept_name
+
+Select dept_name
+From course
+Group by dept_name
+Order by sum(credits) desc
+Limit 1
+
+27. List the names of all courses ordered by their titles and credits.
+P: Given the titles of all courses, in order of titles and credits.
+
+Select title
+From course
+Order by title, credits
+
+S: What are the titles of all courses?
+S: Order them by titles and credits.
+
+Select title
+From course
+
+Select title
+From course
+Order by title, credits
+
+28. Which department has the lowest budget?
+P: Give the name of the department with the lowest budget.
+
+Select dept_name
+From department
+Order by budget
+Limit 1
+
+S: Order the department names by increasing budget.
+S: Which has the lowest?
+
+Select dept_name
+From department
+Order by budget
+
+Select dept_name
+From department
+Order by budget
+Limit 1
+
+29. List the names and buildings of all departments sorted by the budget from large to small.
+P: What are the names and buildings of the deparments, sorted by budget descending?
+
+Select dept_name, building
+From department
+Order by budget desc
+
+S: Order the departments by decreasing budget.
+S: In the same order, what are their names and buildings?
+
+Select *
+From department
+Order by budget desc
+
+Select dept_name, building
+From department
+Order by budget desc
+
+30. Who is the instructor with the highest salary?
+P: Give the name of the highest paid instructor.
+
+Select name
+From instructor
+order by salary desc
+Limit 1
+
+S: Order the instructor names by salary from greatest to least.
+S: Who is paid the most?
+
+Select name
+From instructor
+order by salary desc
+
+Select name
+From instructor
+order by salary desc
+Limit 1
+
+31. List the information of all instructors ordered by their salary in ascending order.
+P: Give all information regarding instructors, in order of salary from least to greatest.
+
+Select *
+From instructor
+Order by salary
+
+S: What is all the information about instructors?
+S: Order this by increasing salary.
+
+Select *
+From instructor
+
+Select *
+From instructor
+Order by salary
+
+32. Find the name of the students and their department names sorted by their total credits in ascending order.
+P: What are the names of students and their respective departments, ordered by number of credits from least to greatest?
+
+Select name, dept_name
+From student
+Order by tot_cred
+
+S: What are the names and department names for each student?
+S: Order this by total credits ascending.
+
+Select name, dept_name
+From student
+
+Select name, dept_name
+From student
+Order by tot_cred
+
+33. list in alphabetic order all course names and their instructors' names in year 2008.
+P: Show all titles and their instructors' names for courses in 2008, in alphabetical order by title.
+
+Select T1.title, T3.name
+From course as T1
+     Join teaches as T2 on T1.course_id = T2.course_id
+     Join instructor as T3 on T2.id = T3.id
+Where year = 2008
+Order by T1.title
+
+S: What were all the course titles in 2008?
+S: Also, what were the instructors' names?
+S: Order this by title.
+
+Select T1.title
+From course as T1
+     Join teaches as T2 on T1.course_id = T2.course_id
+Where year = 2008
+
+Select T1.title, T3.name
+From course as T1
+     Join teaches as T2 on T1.course_id = T2.course_id
+     Join instructor as T3 on T2.id = T3.id
+Where year = 2008
+
+Select T1.title, T3.name
+From course as T1
+     Join teaches as T2 on T1.course_id = T2.course_id
+     Join instructor as T3 on T2.id = T3.id
+Where year = 2008
+Order by T1.title
+
+34. Find the name of instructors who are advising more than one student.
+P: What are the names of instructors who advise more than one student?
+
+select T1.name
+From instructor as T1 join advisor as T2 on T1.id = T2.i_id
+Group by T2.i_id
+Having count(*) > 1
+
+S: What are the names of all instructors who advise students?
+S: Of those, which advise more than one student?
+
+select T1.name
+From instructor as T1 join advisor as T2 on T1.id = T2.i_id
+
+select T1.name
+From instructor as T1 join advisor as T2 on T1.id = T2.i_id
+Group by T2.i_id
+Having count(*) > 1
+
+35. Find the name of the students who have more than one advisor?
+P: What are the names of students who have more than one advisor?
+
+Select T1.name
+From student as T1 join advisor as T2 on T1.id = T2.s_id
+Group by T2.s_id
+Having count(*) > 1
+
+S: What are the names of students with advisors?
+S: Which ones have more than one advisor?
+
+Select T1.name
+From student as T1 join advisor as T2 on T1.id = T2.s_id
+
+Select T1.name
+From student as T1 join advisor as T2 on T1.id = T2.s_id
+Group by T2.s_id
+Having count(*) > 1
+
+36. Find the number of rooms with more than 50 capacity for each building.
+P: How many rooms in each building have a capacity of over 50?
+
+select count(*), building
+from classroom
+where capacity > 50
+group by building
+
+S: How many classrooms have capacity greater than 50?
+S: Count these by building.
+
+select count(*)
+from classroom
+where capacity > 50
+
+select count(*), building
+from classroom
+where capacity > 50
+group by building
+
+37. Find the maximum and average capacity among rooms in each building.
+P: What are the greatest and average capacity for rooms in each building?
+
+select max(capacity), avg(capacity), building
+from classroom
+group by building
+
+S: What are the maximum and average capacities across all classrooms?
+S: Find these for each building.
+
+select max(capacity), avg(capacity)
+from classroom
+
+select max(capacity), avg(capacity), building
+from classroom
+group by building
+
+38. Find the title of the course that is offered by more than one department.
+P: What are the titles of courses that are offered in more than one department?
+
+select title
+from course
+group by title
+having count(*) > 1
+
+S: What are all the different course titles?
+S: Of those, which are offered in more than one department?
+
+select title
+from course
+
+select title
+from course
+group by title
+having count(*) > 1
+
+39. Find the total credits of courses provided by different department.
+P: How many total credits are offered by each department?
+
+select sum(credits), dept_name
+from course
+group by dept_name
+
+S: How many total credits are offered?
+S: Find the totals by department name.
+
+select sum(credits)
+from course
+
+select sum(credits), dept_name
+from course
+group by dept_name
+
+40. Find the minimum salary for the departments whose average salary is above the average payment of all instructors.
+P: What is the lowest salary in departments with average salary greater than the overall average.
+
+select min(salary), dept_name
+from instructor
+group by dept_name
+having avg(salary) > (select avg(salary) from instructor)
+
+S: What is the average salary of an instructor?
+S: What are the departments with average salary greater than that?
+S: Also, what are their lowest salaries?
+
+select avg(salary) from instructor
+
+select dept_name
+from instructor
+group by dept_name
+having avg(salary) > (select avg(salary) from instructor)
+
+select min(salary), dept_name
+from instructor
+group by dept_name
+having avg(salary) > (select avg(salary) from instructor)
+
+
+41. Find the number of courses provided in each semester and year.
+P: How many courses are provided in each semester and year?
+
+select count(*), semester, year
+from section
+group by semester, year
+
+S: How many courses are offered in each year?
+S: Split these by semester as well.
+
+select count(*), year
+from section
+group by year
+
+select count(*), semester, year
+from section
+group by semester, year
+
+42. Find the year which offers the largest number of courses.
+P: Which year had the greatest number of courses?
+
+select year
+from section
+group by year
+order by count(*) desc
+limit 1
+
+S: How many courses are offered in each year?
+S: Which year had the most?
+
+select year, count(*)
+from section
+group by year
+
+select year
+from section
+group by year
+order by count(*) desc
+limit 1
+
+43. Find the year and semester when offers the largest number of courses.
+P: What is the year and semester with the most courses?
+
+select semester, year
+from section
+group by semester, year
+order by count(*) desc
+limit 1
+
+S: Find the number of courses in each semester and year.
+S: Which had the most?
+
+select semester, year, count(*)
+from section
+group by semester, year
+
+select semester, year
+from section
+group by semester, year
+order by count(*) desc
+limit 1
+
+44. Find the name of department has the highest amount of students?
+P: What is the name of the deparment with the highest enrollment?
+
+select dept_name
+from student
+group by dept_name
+order by count(*) desc
+limit 1
+
+S: How many students are in each department?
+S: What is the name of the department with the most?
+
+select dept_name, count(*)
+from student
+group by dept_name
+
+select dept_name
+from student
+group by dept_name
+order by count(*) desc
+limit 1
+
+45. Find the total number of students in each department.
+P: How many students are in each department?
+
+select count(*), dept_name
+from student
+group by dept_name
+
+S: How many students are there?
+S: Count this by department.
+
+select count(*)
+from student
+
+select count(*), dept_name
+from student
+group by dept_name
+
+46. Find the semester and year which has the least number of student taking any class.
+P: Which semeseter and year had the fewest students?
+
+select semester, year
+from takes
+group by semester, year
+order by count(*)
+limit 1
+
+S: How many students were taking classes in each semester and year?
+S: Which one had the fewest?
+
+select semester, year, count(*)
+from takes
+group by semester, year
+
+select semester, year
+from takes
+group by semester, year
+order by count(*)
+limit 1
+
+47. What is the id of the instructor who advises of all students from History department?
+P: Give id of the instructor who advises students in the History department.
+
+select i_id
+from advisor as T1 join student T2 on T1.s_id = T2.id
+where T2.dept_name = 'History'
+
+S: What are the ids of all instructors who are advisors?
+S: Of these, which advise students in the History department?
+
+select i_id
+from advisor as T1 join student T2 on T1.s_id = T2.id
+
+select i_id
+from advisor as T1 join student T2 on T1.s_id = T2.id
+where T2.dept_name = 'History'
+
+48. Find the name and salary of the instructors who are advisors of any student from History department?
+P: What are the names and salaries of instructors who advises students in the History department?
+
+select T2.name, T2.salary
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+where T3.dept_name = 'History'
+
+S: What are the ids of all instructors who are advisors?
+S: Of these, which advise students in the History department?
+S: What are their names and salaries?
+
+select i_id
+from advisor as T1 join student as T2 on T1.s_id = T2.id
+
+select i_id
+from advisor as T1 join student T2 on T1.s_id = T2.id
+where T2.dept_name = 'History'
+
+select T2.name, T2.salary
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+where T3.dept_name = 'History'
+
+49. Find the id of the courses that do not have any prerequisite?
+P: What are the ids of courses without prerequisites?
+
+select course_id
+from course
+except
+select course_id
+from prereq
+
+S: What are the ids of courses with prerequisites?
+S: What are the ids of all other courses?
+
+select course_id
+from prereq
+
+select course_id
+from course
+except
+select course_id
+from prereq
+
+50. Find the name of the courses that do not have any prerequisite?
+P: What are the names of courses without prerequisites?
+
+select title
+from course
+where course_id NOT IN
+(select course_id
+from prereq)
+
+S: What are the ids of courses with prerequisites?
+S: What are the titles of all other courses?
+
+select course_id
+from prereq
+
+select title
+from course
+where course_id NOT IN
+(select course_id
+from prereq)
+
+51. What is the title of the prerequisite class of International Finance course?
+P: Give the title of the prerequisite to the course International Finance.
+
+select title
+from course
+where course_id IN
+(select T1.prereq_id
+from prereq as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.title = 'International Finance')
+
+S: What are the ids of all prerequisites?
+S: What is the id of the prerequisite for International Finance?
+S: What is its title?
+
+select prereq_id
+from prereq
+
+select T1.prereq_id
+from prereq as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.title = 'International Finance'
+
+select title
+from course
+where course_id IN
+(select T1.prereq_id
+from prereq as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.title = 'International Finance')
+
+52. Find the title of course whose prerequisite is course Differential Geometry.
+P: What is the title of the course with Differential Geometry as a prerequisite?
+
+select title
+from course
+where course_id IN
+(select T1.course_id
+from prereq as T1 join course as T2 on T1.prereq_id = T2.course_id
+where T2.title = 'Differential Geometry')
+
+S: What are the ids of all the prerequisites?
+S: What is the id of the course for which Differential Geometry is a prerequisite?
+S: What is its title?
+
+select course_id
+from prereq 
+
+select T1.course_id
+from prereq as T1 join course as T2 on T1.prereq_id = T2.course_id
+where T2.title = 'Differential Geometry'
+
+select title
+from course
+where course_id IN
+(select T1.course_id
+from prereq as T1 join course as T2 on T1.prereq_id = T2.course_id
+where T2.title = 'Differential Geometry')
+
+53. Find the names of students who have taken any course in the fall semester of year 2003.
+P: What are the names of students who took a course in the Fall of 2003?
+
+select name
+from student
+where id IN
+(select id
+from takes
+where semester = 'Fall' and year = 2003)
+
+S: What are the ids of students who took courses in the Fall of 2003?
+S: What are their names?
+
+select id
+from takes
+where semester = 'Fall' and year = 2003
+
+select name
+from student
+where id IN
+(select id
+from takes
+where semester = 'Fall' and year = 2003)
+
+54. What is the title of the course that was offered at building Chandler during the fall semester in the year of 2010?
+P: Give the title of the course offered in Chandler during the Fall of 2010.
+
+select T1.title
+from course as T1 join section as T2 on T1.course_id = T2.course_id
+where building = 'Chandler' and semester = 'Fall' and year = 2010
+
+S: What are the titles of courses offered in the Fall of 2010?
+S: Of these, which were offered in Chandler building?
+
+select T1.title
+from course as T1 join section as T2 on T1.course_id = T2.course_id
+where semester = 'Fall' and year = 2010
+
+select T1.title
+from course as T1 join section as T2 on T1.course_id = T2.course_id
+where building = 'Chandler' and semester = 'Fall' and year = 2010
+
+55. Find the name of the instructors who taught C Programming course before.
+P: What are the names of instructors who have taught C Programming courses?
+
+select T1.name
+from instructor as T1
+     join teaches as T2 on T1.id = T2.id
+     join course as T3 on T2.course_id = T3.course_id
+where T3.title = 'C Programming'
+
+S: What are the names of all instructors?
+S: Of those, which have taught a C Programming course?
+
+select name
+from instructor 
+
+select T1.name
+from instructor as T1
+     join teaches as T2 on T1.id = T2.id
+     join course as T3 on T2.course_id = T3.course_id
+where T3.title = 'C Programming'
+
+56. Find the name and salary of instructors who are advisors of the students from the Math department.
+P: What are the names and salaries of instructors who advise students in the Math department?
+
+select T2.name, T2.salary
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+where T3.dept_name = 'Math'
+
+S: What are the ids of all advisors?
+S: What are the ids of advisors who advise students in the Math department?
+S: What are their names and salaries?
+
+select i_id
+from advisor 
+
+select T1.i_id
+from advisor as T1
+     join student as T2 on T1.s_id = T2.id
+where T2.dept_name = 'Math'
+
+select T2.name, T2.salary
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+where T3.dept_name = 'Math'
+
+57. Find the name of instructors who are advisors of the students from the Math department, and sort the results by students' total credit.
+P: What are the names of all instructors who advise students in the math depart sorted by total credits of the student. 
+
+select T2.name
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+where T3.dept_name = 'Math'
+order by T3.tot_cred
+
+S: What are the ids of advisors who advise students in the Math department?
+S: What are their names?
+S: Order this by the students' total credits.
+
+select T1.i_id
+from advisor as T1
+     join student as T2 on T1.s_id = T2.id
+where T2.dept_name = 'Math'
+
+select T2.name, T2.salary
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+where T3.dept_name = 'Math'
+
+select T2.name
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+where T3.dept_name = 'Math'
+order by T3.tot_cred
+
+58. What is the course title of the prerequisite of course Mobile Computing? 
+P: What is the title of the course that is a prerequisite for Mobile Computing?
+
+select title
+from course
+where course_id IN
+(select T1.prereq_id
+from prereq as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.title = 'Mobile Computing')
+
+S: What are all the ids of the prerequisite classes?
+S: Of these, which is the prerequisite for Mobile Computing?
+S: What is its title?
+
+select prereq_id
+from prereq 
+
+select T1.prereq_id
+from prereq as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.title = 'Mobile Computing'
+
+select title
+from course
+where course_id IN
+(select T1.prereq_id
+from prereq as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.title = 'Mobile Computing')
+
+59. Find the name of instructor who is the advisor of the student who has the highest number of total credits.
+P: What is the name of the instructor who advises the student with the greatest number of total credits?
+
+select T2.name
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+order by T3.tot_cred desc
+limit 1
+
+S: What are names of instructors who advise students?
+S: Of these, which one instructs the students with the most total credits?
+
+select T2.name
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+
+select T2.name
+from advisor as T1
+     join instructor as T2 on T1.i_id = T2.id
+     join student as T3 on T1.s_id = T3.id
+order by T3.tot_cred desc
+limit 1
+
+60. Find the name of instructors who didn't teach any courses?
+P: What are the names of instructors who didn't teach?
+
+select name
+from instructor
+where id NOT IN
+(select id from teaches)
+
+S: What are the ids of instructors who taught courses?
+S: What are the ids of all other instructors?
+S: What are their names?
+
+select id from teaches
+
+select id
+from instructor
+where id NOT IN
+(select id from teaches)
+
+select name
+from instructor
+where id NOT IN
+(select id from teaches)
+
+61. Find the id of instructors who didn't teach any courses?
+P: What are the ids of instructors who didnt' teach?
+
+select id
+from instructor
+except
+select id
+from teaches
+
+S: What are the ids of instructors who taught courses?
+S: What are the ids of all other instructors?
+
+select id
+from teaches
+
+select id
+from instructor
+except
+select id
+from teaches
+
+62. Find the names of instructors who didn't each any courses in any Spring semester.
+P: What are the names of instructors who didn't teach courses in the Spring?
+
+select name
+from instructor
+where id NOT IN
+(select id from teaches where semester = 'Spring')
+
+S: What are the ids of teachers who taught in the Spring?
+S: What are the ids of all other instructors?
+S: What are the corresponding instructor names?
+
+select id from teaches where semester = 'Spring'
+
+select id
+from instructor
+where id NOT IN
+(select id from teaches where semester = 'Spring')
+
+select name
+from instructor
+where id NOT IN
+(select id from teaches where semester = 'Spring')
+
+63. Find the name of the department which has the highest average salary of professors.
+P: Which department has the highest average instructor salary?
+
+select dept_name
+from instructor
+group by dept_name
+order by avg(salary) desc
+limit 1
+
+S: What are the average instructor salaries for each department?
+S: Which department has the highest?
+
+select dept_name, avg(salary)
+from instructor
+group by dept_name
+
+select dept_name
+from instructor
+group by dept_name
+order by avg(salary) desc
+limit 1
+
+64. Find the number and averaged salary of all instructors who are in the department with the highest budget.
+P: How many instructors are in the department with the highest budget, and what is their average salary?
+
+select avg(T1.salary), count(*)
+from instructor as T1 join department as T2 on T1.dept_name = T2.dept_name
+order by T2.budget desc
+limit 1
+
+S: Order the departments by decreasing budget.
+S: How many instructors are in the department with the highest budget?
+S: Also, what is the average salary of those instructors?
+
+select dept_name
+from department 
+order by budget desc
+
+select count(*)
+from instructor as T1 join department as T2 on T1.dept_name = T2.dept_name
+order by T2.budget desc
+limit 1
+
+select avg(T1.salary), count(*)
+from instructor as T1 join department as T2 on T1.dept_name = T2.dept_name
+order by T2.budget desc
+limit 1
+
+65. What is the title and credits of the course that is taught in the largest classroom (with the highest capacity)?
+P: Give the title and credits for the course that is taught in the classroom with the greatest capacity.
+
+select T3.title, T3.credits
+from classroom as T1
+     join section as T2 on T1.building = T2.building and T1.room_number = T2.room_number
+     join course as T3 on T2.course_id = T3.course_id
+where T1.capacity = (select max(capacity) from classroom)
+
+S: What is the maximum capacity of any classroom?
+S: What is the title of the course which is taught there?
+S: Also, what credits value does that course have?
+
+select max(capacity) from classroom
+
+select T3.title
+from classroom as T1
+     join section as T2 on T1.building = T2.building and T1.room_number = T2.room_number
+     join course as T3 on T2.course_id = T3.course_id
+where T1.capacity = (select max(capacity) from classroom)
+
+select T3.title, T3.credits
+from classroom as T1
+     join section as T2 on T1.building = T2.building and T1.room_number = T2.room_number
+     join course as T3 on T2.course_id = T3.course_id
+where T1.capacity = (select max(capacity) from classroom)
+
+66. Find the name of students who didn't take any course from Biology department.
+P: What are the names of students who haven't taken any Biology courses?
+
+select name
+from student
+where id NOT IN
+(select T1.id
+from takes as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.dept_name = 'Biology')
+
+S: Which students have taken Biology courses?
+S: What are the names of all students who did not take that class?
+
+select *
+from takes as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.dept_name = 'Biology'
+
+select name
+from student
+where id NOT IN
+(select T1.id
+from takes as T1 join course as T2 on T1.course_id = T2.course_id
+where T2.dept_name = 'Biology')
+     
+67. Find the total number of students and total number of instructors for each department.
+P: How many students and instructors are in each department?
+
+select count(distinct T2.id), count(distinct T3.id), T3.dept_name
+from department as T1 
+     join student as T2 on T1.dept_name = T2.dept_name
+     join instructor as T3 on T1.dept_name = T3.dept_name
+group by T3.dept_name
+
+S: Find the total number of students.
+S: Now, find the number by department.
+S: Also, find the number of instructors in each department.
+
+select count(distinct id)
+from student 
+
+select count(distinct T2.id), T1.dept_name
+from department as T1 
+     join student as T2 on T1.dept_name = T2.dept_name
+group by T1.dept_name
+
+select count(distinct T2.id), count(distinct T3.id), T3.dept_name
+from department as T1 
+     join student as T2 on T1.dept_name = T2.dept_name
+     join instructor as T3 on T1.dept_name = T3.dept_name
+group by T3.dept_name
+
+68. Find the name of students who have taken the prerequisite course of the course with title International Finance.
+P: What are the names of students who have taken the prerequisite for the course International Finance?
+
+select T1.name
+from student as T1 join takes as T2 on T1.id = T2.id
+where T2.course_id IN 
+(select T2.prereq_id
+from course as T1 join prereq as T2 on T1.course_id = T2.course_id
+where T1.title = 'International Finance')
+
+S: What is the id of the prerequisite of International Finance?
+S: What are the ids of students who have taken this course?
+S: What are their names?
+
+select T2.prereq_id
+from course as T1 join prereq as T2 on T1.course_id = T2.course_id
+where T1.title = 'International Finance'
+
+select T1.id
+from student as T1 join takes as T2 on T1.id = T2.id
+where T2.course_id IN 
+(select T2.prereq_id
+from course as T1 join prereq as T2 on T1.course_id = T2.course_id
+where T1.title = 'International Finance')
+
+select T1.name
+from student as T1 join takes as T2 on T1.id = T2.id
+where T2.course_id IN 
+(select T2.prereq_id
+from course as T1 join prereq as T2 on T1.course_id = T2.course_id
+where T1.title = 'International Finance')
+
+69. Find the name and salary of instructors whose salary is below the average salary of the instructors in the Physics department.
+P: What are the names and salaries for instructors who earn less than the average salary of instructors in the Physics department?
+
+select name, salary
+from instructor
+where salary <
+(select avg(salary)
+from instructor
+where dept_name = 'Physics')
+
+S: What is the average salary of instructors in the Physics department?
+S: What are the names of the instructors who earn more than that?
+S: Also, what are their salaries?
+
+select avg(salary)
+from instructor
+where dept_name = 'Physics'
+
+select name
+from instructor
+where salary <
+(select avg(salary)
+from instructor
+where dept_name = 'Physics')
+
+select name, salary
+from instructor
+where salary <
+(select avg(salary)
+from instructor
+where dept_name = 'Physics')
+
+70. Find the name of students who took some course offered by Statistics department.
+P: What are the names of students who have taken Statistics courses?
+
+select T3.name
+from course as T1 
+     join takes as T2 on T1.course_id = T2.course_id
+     join student as T3 on T2.id = T3.id
+where T1.dept_name = 'Statistics'
+
+S: What is all the information about the Statistics courses?
+S: What are the names of students who have taken courses in the Statistics department?
+
+select *
+from course 
+where dept_name = 'Statistics'
+
+select T3.name
+from course as T1 
+     join takes as T2 on T1.course_id = T2.course_id
+     join student as T3 on T2.id = T3.id
+where T1.dept_name = 'Statistics'
+
+71. Find the building, room number, semester and year of all courses offered by Psychology department sorted by course titles.
+P: What are the building, room number, semester and year of courses in the Psychology department, sorted using course title?
+
+select T2.building, T2.room_number, T2.semester, T2.year
+from course as T1 join section as T2 on T1.course_id = T2.course_id
+where T1.dept_name = 'Psychology'
+order by T1.title
+
+S: What is all the information about the courses in the Psychology department, ordered by title?
+S: What are the building, room number, semester and year corresponding to these courses?
+
+select *
+from course 
+where dept_name = 'Psychology'
+order by title
+
+select T2.building, T2.room_number, T2.semester, T2.year
+from course as T1 join section as T2 on T1.course_id = T2.course_id
+where T1.dept_name = 'Psychology'
+order by T1.title
+
+72. Find the names of all instructors in computer science department
+P: What are the names of all instructors in the Comp. Sci. department?
+
+select name
+from instructor
+where dept_name = 'Comp. Sci.'
+
+S: What are the names of all the instructors?
+S: Of those, which are in the Comp. Sci. department?
+
+select name
+from instructor
+
+select name
+from instructor
+where dept_name = 'Comp. Sci.'
+
+73. Find the names of all instructors in Comp. Sci. department with salary > 80000.
+P: What are the names of the instructors in the Comp. Sci. department who earn more than 80000?
+
+select name
+from instructor
+where dept_name = 'Comp. Sci.'  and salary > 80000
+
+S: What are the names of all instructors who earn more than 80000?
+S: Of those, which are in the Comp. Sci. department?
+
+select name
+from instructor
+where salary > 80000
+
+select name
+from instructor
+where dept_name = 'Comp. Sci.'  and salary > 80000
+
+74. Find the names of all instructors who have taught some course and the course_id.
+P: What are the names of all instructors who have taught a course, as well as the corresponding course id?
+
+select name, course_id
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
+
+S: What are all the names of teachers who have taught a course?
+S: Also, what were the course ids?
+
+select name
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
+
+select name, course_id
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
+
+75. Find the names of all instructors in the Art department who have taught some course and the course_id.
+P: What are the names of Art instructors who have taught a course, and the corresponding course id?
+
+select name, course_id
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
+where T1.dept_name = 'Art'
+
+S: What are all the names of teachers who have taught a course, and what were the course ids?
+S: Of these, which were in the Art department?
+
+select name, course_id
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
+
+select name, course_id
+from instructor as T1 join teaches as T2 on T1.ID = T2.ID
+where T1.dept_name = 'Art'
+
+76. Find the names of all instructors whose name includes the substring “dar”.
+P: What are the names of all instructors with names that include "dar"?
+
+select name
+from instructor
+where name like '%dar%' 
+
+S: What are the names of all instructors?
+S: Of these, which include the substring "dar"?
+
+select name
+from instructor
+
+select name
+from instructor
+where name like '%dar%'
+
+77. List in alphabetic order the names of all distinct instructors.
+P: List the distinct names of the instructors, ordered by name.
+
+select distinct name
+from  instructor
+order by name
+
+S: What are the distinct names of all instructors?
+S: Sort this in alphabetical order.
+
+select distinct name
+from  instructor
+
+select distinct name
+from  instructor
+order by name
+
+78. Find courses that ran in Fall 2009 or in Spring 2010.
+P: What are the ids for courses in the Fall of 2009 or the Spring of 2010?
+
+select course_id from section where semester = 'Fall' and year = 2009
+union
+select course_id from section where semester = 'Spring' and year = 2010
+
+S: What are the ids for courses offered in the Fall of 2009?
+S: Also include the ids for courses offered in the Spring of 2010.
+
+select course_id from section where semester = 'Fall' and year = 2009
+
+select course_id from section where semester = 'Fall' and year = 2009
+union
+select course_id from section where semester = 'Spring' and year = 2010
+
+79. Find courses that ran in Fall 2009 and in Spring 2010.
+P: What are the ids for courses that were offered in both Fall of 2009 and Spring of 2010?
+
+select course_id from section where semester = 'Fall' and year = 2009
+intersect
+select course_id from section where semester = 'Spring' and year = 2010
+
+S: What are the ids for courses offered in the Fall of 2009?
+S: Of these, which were also offered in the Spring of 2010?
+
+select course_id from section where semester = 'Fall' and year = 2009
+
+select course_id from section where semester = 'Fall' and year = 2009
+intersect
+select course_id from section where semester = 'Spring' and year = 2010
+
+80. Find courses that ran in Fall 2009 but not in Spring 2010.
+P: What are the ids of courses offered in Fall of 2009 but not in Spring of 2010?
+
+select course_id from section where semester = 'Fall' and year = 2009
+except
+select course_id from section where semester = 'Spring' and year = 2010
+
+S: What are the ids of courses offered in the Fall of 2009?
+S: Of these, which were not offered in the Spring of 2010?
+
+select course_id from section where semester = 'Fall' and year = 2009
+
+select course_id from section where semester = 'Fall' and year = 2009
+except
+select course_id from section where semester = 'Spring' and year = 2010
+
+81. Find the salaries of all distinct instructors that are less than the largest salary.
+P: What are the distinct salaries of all instructors who earned less than the maximum salary?
+
+select distinct salary
+from instructor
+where salary < (select max(salary) from instructor)
+
+S: What was the largest salary across instructors?
+S: What were all the other distinct salaries?
+
+select max(salary) from instructor
+
+select distinct salary
+from instructor
+where salary < (select max(salary) from instructor)
+
+82. Find the total number of instructors who teach a course in the Spring 2010 semester.
+P: How many instructors teach a course in the Spring of 2010?
+
+select count (distinct ID)
+from teaches
+where semester = 'Spring' and year = 2010
+
+S: What are the distinct ids of instructors teaching in the Spring of 2010?
+S: How many are there?
+
+select distinct ID
+from teaches
+where semester = 'Spring' and year = 2010
+
+select count (distinct ID)
+from teaches
+where semester = 'Spring' and year = 2010
+
+83. Find the names and average salaries of all departments whose average salary is greater than 42000.
+P: What are the names and average salaries for departments with average salary higher than 42000?
+
+select dept_name, avg (salary)
+from instructor
+group by dept_name
+having avg (salary) > 42000
+
+S: What are the names of departments that have average salaries higher than 42000?
+S: Also, what are their average salaries?
+
+select dept_name
+from instructor
+group by dept_name
+having avg (salary) > 42000
+
+select dept_name, avg (salary)
+from instructor
+group by dept_name
+having avg (salary) > 42000
+
+84. Find names of instructors with salary greater than that of some (at least one) instructor in the Biology department.
+P: What are the names of instructors who earn more than at least one instructor from the Biology department?
+
+select name
+from instructor
+where salary > (select min(salary)
+                from instructor
+                where dept_name = 'Biology')
+                
+S: What is the lowest salary of instructors in the Biology department?
+S: What are the ids of instructors who earn more than that?
+S: What are their names?
+
+select min(salary)
+from instructor
+where dept_name = 'Biology'
+                
+select id
+from instructor
+where salary > (select min(salary)
+                from instructor
+                where dept_name = 'Biology')
+                
+select name
+from instructor
+where salary > (select min(salary)
+                from instructor
+                where dept_name = 'Biology')
+                
+85. Find the names of all instructors whose salary is greater than the salary of all instructors in the Biology department.
+P: What are the names of all instructors with a higher salary than any of the instructors in the Biology department?
+
+select name
+from instructor
+where salary > (select max(salary)
+                from instructor
+                where dept_name = 'Biology')
+                
+S: What is the highest salary of instructors in the Biology department?
+S: What are the names of instructors who earn more than this?
+
+select max(salary)
+from instructor
+where dept_name = 'Biology'      
+                
+select name
+from instructor
+where salary > (select max(salary)
+                from instructor
+                where dept_name = 'Biology')
+                

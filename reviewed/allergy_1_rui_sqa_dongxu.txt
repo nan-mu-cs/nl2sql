@@ -1,0 +1,1044 @@
+Total = #  40
+
+1. How many allergies are there?
+P: How many allergy entries are there?
+
+select count(distinct allergy)
+from Allergy_type
+
+S: What are the different allergies?
+S: How many are there?
+
+select distinct allergy
+from Allergy_type
+
+select count(distinct allergy)
+from Allergy_type
+
+2. How many different allergy types exist?
+P: How many distinct allergies are there?
+
+select count(distinct allergytype)
+from Allergy_type
+
+S: What are the different types of allergies?
+S: How many are there?
+
+select distinct allergytype
+from Allergy_type
+
+select count(distinct allergytype)
+from Allergy_type
+
+3. Show all allergy types.
+P: What are the different allergy types?
+
+select distinct allergytype
+from Allergy_type
+
+S: Show all allergy information. 
+S: What are the different allergy types?
+
+select *
+from Allergy_type
+
+select distinct allergytype
+from Allergy_type
+
+4. Show all allergies and their types.
+P: What are the allergies and their types?
+
+select allergy, allergytype
+from Allergy_type
+
+S: What are the allergies?
+S: What type is each one?
+
+select allergy
+from Allergy_type
+
+select allergy, allergytype
+from Allergy_type
+
+5. Show all allergies with type food.
+P: What are all the different food allergies?
+
+select distinct allergy
+from Allergy_type
+where allergytype = "food"
+
+S: What are all the different allergy names?
+S: Which of those are food-related?
+
+select distinct allergy
+from Allergy_type
+
+select distinct allergy
+from Allergy_type
+where allergytype = "food"
+
+6. What is the type of allergy Cat?
+P: What is allergy type of a cat allergy?
+
+select allergytype
+from Allergy_type
+where allergy = "Cat"
+
+S: What are the different types of allergies?
+S: Which one is a cat allergy?
+
+select distinct allergytype
+from Allergy_type
+
+select allergytype
+from Allergy_type
+where allergy = "Cat"
+
+7. How many allergies have type animal?
+P: How many animal type allergies exist?
+
+select count(*)
+from Allergy_type
+where allergytype = "animal"
+
+S: What are all the allergies?
+S: Which allergies are categorized as type animal?
+S: How many are there in that category?
+
+select allergy
+from Allergy_type
+
+select allergy
+from Allergy_type
+where allergytype = "animal"
+
+select count(*)
+from Allergy_type
+where allergytype = "animal"
+
+8. Show all allergy types and the number of allergies in each type.
+P: What are the allergy types and how many allergies correspond to each one?
+
+select allergytype, count(*)
+from Allergy_type
+group by allergytype
+
+S: What are the different allergy types?
+S: How many are in each category?
+
+select distinct allergytype
+from Allergy_type
+
+select allergytype, count(*)
+from Allergy_type
+group by allergytype
+
+9. Which allergy type has most number of allergies?
+P: Which allergy type is most common?
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) desc
+limit 1
+
+S: What are all the different allergy types?
+S: Order them by number of allergies descendingly.
+S: Which one has the most?
+
+select distinct allergytype
+from Allergy_type
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) desc
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) desc
+limit 1
+
+10. Which allergy type has least number of allergies?
+P: Which allergy type is the least common?
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) asc
+limit 1
+
+S: How many allergies exist for each allergy type?
+S: Which one has the fewest?
+
+select count(*), allergytype
+from Allergy_type
+group by allergytype
+
+select allergytype
+from Allergy_type
+group by allergytype
+order by count(*) asc
+limit 1
+
+11. How many students are there?
+P: What is the total number of students?
+
+select count(*)
+from Student
+
+S: Who are all the students?
+S: How many are there?
+
+select *
+from Student
+
+select count(*)
+from Student
+
+12. Show first name and last name for all students.
+P: What are the full names of all students
+
+select Fname, Lname
+from Student
+
+S: Who are all the students?
+S: What are their first names?
+S: And what about their last names?
+
+select *
+from Student
+
+select Fname
+from Student
+
+select Lname
+from Student
+
+13. How many different advisors are listed?
+P: How many advisors are there?
+
+select count(distinct advisor)
+from Student
+
+S: Who are the students?
+S: Who are the distinct advisors?
+S: How many are there?
+
+select *
+from Student
+
+select distinct advisor
+from Student
+
+select count(distinct advisor)
+from Student
+
+14. Show all majors.
+P: What are the different majors?
+
+select distinct Major
+from Student
+
+S: Who are the students?
+S: What are their distinct majors?
+
+select *
+from Student
+
+select distinct Major
+from Student
+
+15. Show all cities where students live.
+P: What cities do students live in?
+
+select distinct city_code
+from Student
+
+S: Who are the students?
+S: What distinct cities are they from?
+
+select *
+from Student
+
+select distinct city_code
+from Student
+
+16. Show first name, last name, age for all female students. Their sex is F.
+P: What are the full names and ages for all female students whose sex is F?
+
+select Fname, Lname, Age
+from Student
+where Sex = 'F'
+
+S: Who are the female students?
+S: What are their full names?
+S: How old are they?
+
+select *
+from Student
+where Sex = 'F'
+
+select Fname, Lname
+from Student
+where Sex = 'F'
+
+select Age
+from Student
+where Sex = 'F'
+
+17. Show student ids for all male students.
+P: What are the student ids for all male students?
+	
+select StuID
+from Student
+where Sex = 'M'
+
+S: Which students are male?
+S: What are their student id numbers?
+
+select *
+from Student
+where Sex = 'M'
+
+select StuID
+from Student
+where Sex = 'M'
+
+18. How many students are age 18?
+P: How many students are 18 years old?
+	
+select count(*)
+from Student
+where age = 18
+
+S: Which students are 18?
+S: How many are there in total?
+
+select *
+from Student
+where age = 18
+
+select count(*)
+from Student
+where age = 18
+
+19. Show all student ids who are older than 20.
+P: What are the student ids for students over 20 years old?
+
+select StuID
+from Student
+where age > 20
+
+S: Who is older than 20?
+S: What are their student ids?
+
+select *
+from Student
+where age > 20
+
+select StuID
+from Student
+where age > 20
+
+20. Which city does the student whose last name is "Kim" live in?
+P: Give the city that the student whose family name is Kim lives in.
+
+select city_code
+from Student
+where LName = "Kim"
+
+S: Which student has the last name Kim?
+S: Where does she or he live?
+
+select *
+from Student
+where LName = "Kim"
+
+select city_code
+from Student
+where LName = "Kim"
+
+21. Who is the advisor of student with ID 1004?
+P: Who advises student 1004?
+
+select Advisor
+from Student
+where StuID = 1004
+
+S: Who's student id is 1004?
+S: Who is her advisor?
+
+select *
+from Student
+where StuID = 1004
+
+select Advisor
+from Student
+where StuID = 1004
+
+22. How many students live in HKG or CHI?
+P: Give the number of students living in either HKG or CHI.
+
+select count(*)
+from Student
+where city_code = "HKG" or city_code = "CHI"
+
+S: Who lives in HKG or CHI?
+S: How many is that?
+
+select *
+from Student
+where city_code = "HKG" or city_code = "CHI"
+
+select count(*)
+from Student
+where city_code = "HKG" or city_code = "CHI"
+
+23. Show the minimum, average, and maximum age of all students.
+P: What is the minimum, mean, and maximum age across all students?
+
+select min(age), avg(age), max(age)
+from Student
+
+S: How old is the youngest student?
+S: What about the eldest?
+S: What is the average age?
+
+select min(age)
+from Student
+
+select max(age)
+from Student
+
+select avg(age)
+from Student
+
+24. What is the last name of the youngest student?
+P: Provide the last name of the youngest student.
+
+select LName
+from Student
+where age = (select min(age) from Student)
+
+S: What is the minimum age of the students?
+S: Who is the youngest student?
+S: What is his last name?
+
+select min(age)
+from Student
+
+select *
+from Student
+where age = (select min(age) from Student)
+
+select LName
+from Student
+where age = (select min(age) from Student)
+
+25. Show the student id of the oldest student.
+P: What student id corresponds to the oldest student? 
+
+select StuID
+from Student
+where age = (select max(age) from Student)
+
+S: Who is the oldest student?
+S: What is their id?
+
+select *
+from Student
+where age = (select max(age) from Student)
+
+select StuID
+from Student
+where age = (select max(age) from Student)
+
+26. Show all majors and corresponding number of students.
+P: How many students are there for each major?
+
+select major, count(*)
+from Student
+group by major
+
+S: What are the different majors?
+S: How many students are studying each subject?
+		
+select distinct major
+from Student
+
+select major, count(*)
+from Student
+group by major
+
+27. Which major has most number of students?
+P: What is the largest major?
+
+select major
+from Student
+group by major
+order by count(*) desc
+limit 1
+
+S: What are the different majors?
+S: How many students does each major has?
+S: Which one has the most students?
+
+select distinct major
+from Student
+
+select major, count(*)
+from Student
+group by major
+
+select major
+from Student
+group by major
+order by count(*) desc
+limit 1
+
+28. Show all ages and corresponding number of students.
+P: How old is each student and how many students are each age?
+
+select age, count(*)
+from Student
+group by age
+
+S: What are the different student ages?
+S: How many students are each age?
+
+select distinct age
+from Student
+
+select age, count(*)
+from Student
+group by age
+
+29. Show the average age for male and female students.
+P: What are the average ages for male and female students?
+
+select avg(age), sex
+from Student
+group by sex
+
+S: What are the different sex categories for students?
+S: How many are there for each category?
+S: What is the average age for each category?
+
+select distinct sex
+from Student
+
+select count(*), sex
+from Student
+group by sex
+
+select avg(age), sex
+from Student
+group by sex
+
+30. Show all cities and corresponding number of students.
+P: How many students live in each city?
+
+select city_code, count(*)
+from Student
+group by city_code
+
+S: What are the different cities that students live in?
+S: How many students are from each one?
+
+select distinct city_code
+from Student
+
+select city_code, count(*)
+from Student
+group by city_code
+
+31. Show all advisors and corresponding number of students.
+P: How many students does each advisor have?
+
+select advisor, count(*)
+from Student
+group by advisor
+
+S: Who are the different advisors?
+S: How many students does each one have?
+
+select distinct advisor
+from Student
+
+select advisor, count(*)
+from Student
+group by advisor
+
+32. Which advisor has most number of students?
+P: Give the advisor with the most students.
+		
+select advisor
+from Student
+group by advisor
+order by count(*) desc
+limit 1
+
+S: Who are the advisors of the students?
+S: Order the advisors by the number of students they have.
+S: Who has the most?
+
+select advisor
+from Student
+
+select advisor
+from Student
+group by advisor
+order by count(*)
+
+select advisor
+from Student
+group by advisor
+order by count(*) desc
+limit 1
+
+33. How many students have cat allergies?
+P: How many students are affected by cat allergies?
+
+select count(*)
+from Has_allergy
+where Allergy = "Cat"
+
+S: Who have allergies?
+S: Who has a cat allergy?
+S: How many are there?
+
+select *
+from Has_allergy
+
+select *
+from Has_allergy
+where Allergy = "Cat"
+
+select count(*)
+from Has_allergy
+where Allergy = "Cat"
+
+34. Show all student IDs who have at least two allergies.
+P: What are the students ids of students who have more than one allergy?	
+
+select StuID
+from Has_allergy
+group by StuID
+having count(*) >= 2
+
+
+S: Who has at least two allergies?
+S: What are their ids?
+
+select *
+from Has_allergy
+group by StuID
+having count(*) >= 2
+
+select StuID
+from Has_allergy
+group by StuID
+having count(*) >= 2
+
+35. What are the student ids of students who don't have any allergies?
+P: Which students are unaffected by allergies?
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Has_allergy
+
+S: What are all the student ids?
+S: Of these, which students ids correspond to students without allergies?
+
+select StuID
+from Student
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Has_allergy
+
+36. How many female students have milk or egg allergies?
+P: How many students who are female are allergic to milk or eggs?
+		
+select count(*)
+from has_allergy as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.sex = "F" and (T1.allergy = "Milk" or T1.allergy = "Eggs")
+
+S: How many studnets are allergic to milk?
+S: How many are allergic to that or to eggs?
+S: Of those, how many are female?
+
+select count(*)
+from has_allergy as T1 join Student as T2 on T1.StuID = T2.StuID
+where T1.allergy = "Milk" 
+
+select count(*)
+from has_allergy as T1 join Student as T2 on T1.StuID = T2.StuID
+where (T1.allergy = "Milk" or T1.allergy = "Eggs")
+
+select count(*)
+from has_allergy as T1 join Student as T2 on T1.StuID = T2.StuID
+where T2.sex = "F" and (T1.allergy = "Milk" or T1.allergy = "Eggs")
+
+37. How many students have a food allergy?
+P: How many students are affected by food related allergies?
+		
+select count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+where T2.allergytype = "food"
+
+S: How many allergy cases are there?
+S: Of those, for how many is it a food allergy?
+
+select count(*)
+from Has_allergy
+
+select count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+where T2.allergytype = "food"
+
+38. Which allergy has most number of students affected?
+P: Which allergy is the most common?
+		
+select Allergy
+from Has_allergy
+group by Allergy
+order by count(*) desc
+limit 1
+
+S: What are the different allergies?
+S: Which one has the most students affected?
+
+select distinct Allergy
+from Has_allergy
+
+select Allergy
+from Has_allergy
+group by Allergy
+order by count(*) desc
+limit 1
+
+39. Show all allergies with number of students affected.
+P: How many students have each different allergy?
+		
+select Allergy, count(*)
+from Has_allergy
+group by Allergy
+
+S: What are all the different allergies?
+S: How many students does each of them affect?
+
+select distinct Allergy
+from Has_allergy
+
+select Allergy, count(*)
+from Has_allergy
+group by Allergy
+
+40. Show all allergy type with number of students affected.
+P: How many students are affected by each allergy type?
+		
+select T2.allergytype, count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+group by T2.allergytype
+
+S: What are the different allergy types?
+S: For each, how many students does it affect?
+
+select distinct allergytype
+from Allergy_type
+
+select T2.allergytype, count(*)
+from Has_allergy as T1 join Allergy_type as T2 on T1.allergy = T2.allergy
+group by T2.allergytype
+
+41. Find the last name and age of the student who has allergy to both milk and cat.
+P: What are the last names and ages of the students who are allergic to milk and cat?
+
+select lname, age
+from Student
+where StuID IN (select StuID
+                from Has_allergy
+                where Allergy = "Milk"
+                INTERSECT
+                select StuID
+                from Has_allergy
+                where Allergy = "Cat")
+
+S: What are student ids who are allergic to milk?
+S: Of these, who also have allergy to cat?
+S: List their last name and age.
+
+select StuID
+from Has_allergy
+where Allergy = "Milk"
+
+select StuID
+from Has_allergy
+where Allergy = "Milk"
+INTERSECT
+select StuID
+from Has_allergy
+where Allergy = "Cat"
+
+select lname, age
+from Student
+where StuID IN (select StuID
+                from Has_allergy
+                where Allergy = "Milk"
+                INTERSECT
+                select StuID
+                from Has_allergy
+                where Allergy = "Cat")
+		
+42. What are the allergies and their types that the student with first name Lisa has? And order the result by name of allergies.
+P: What are the allergies the girl named Lisa has? And what are the types of them? Order the result by allergy names.
+
+select T1.Allergy, T1.AllergyType
+from Allergy_type as T1 join Has_allergy as T2 on T1.Allergy = T2.Allergy join Student as T3 on T3.StuID = T2.StuID
+where T3.Fname = "Lisa"
+order by T1.Allergy
+
+S: What is the girl with first name Lisa allergic to?
+S: What type is each allergy?
+S: Order them by the name of allergies.
+
+select T1.Allergy
+from Allergy_type as T1 join Has_allergy as T2 on T1.Allergy = T2.Allergy join Student as T3 on T3.StuID = T2.StuID
+where T3.Fname = "Lisa"
+
+select T1.Allergy, T1.AllergyType
+from Allergy_type as T1 join Has_allergy as T2 on T1.Allergy = T2.Allergy join Student as T3 on T3.StuID = T2.StuID
+where T3.Fname = "Lisa"
+
+select T1.Allergy, T1.AllergyType
+from Allergy_type as T1 join Has_allergy as T2 on T1.Allergy = T2.Allergy join Student as T3 on T3.StuID = T2.StuID
+where T3.Fname = "Lisa"
+order by T1.Allergy
+
+43. Find the first name and gender of the student who has allergy to milk but not cat.
+P: What are the first name and gender of the students who have allergy to milk but can put up with cats?
+
+select fname, sex
+from Student
+where StuID IN (select StuID
+                from Has_allergy
+                where Allergy = "Milk"
+                EXCEPT
+                select StuID
+                from Has_allergy
+                where Allergy = "Cat")
+		
+S: Which students are allergic to cats?
+S: Which students are not?
+S: Of these, list the first name and sex of students who are allergic to milk.
+
+select StuID
+from Has_allergy
+where Allergy = "Cat"
+
+select StuID
+from Student
+EXCEPT
+select StuID
+from Has_allergy
+where Allergy = "Cat"
+
+
+select fname, sex
+from Student
+where StuID IN (select StuID
+                from Has_allergy
+                where Allergy = "Milk"
+                EXCEPT
+                select StuID
+                from Has_allergy
+                where Allergy = "Cat")
+		
+44. Find the average age of the students who have allergies with food and animal types.
+P: How old are the students with allergies to food and animal types on average?
+
+select avg(age)
+from Student
+where StuID IN (
+  select T1.StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food"
+  INTERSECT
+  select T1.StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "animal")
+  
+S: Which students have allergies to food type?
+S: Which of them have also have allergies to animal type?
+S: Find the average age of them.
+
+select T1.StuID
+from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+where T2.allergytype = "food"
+
+select T1.StuID
+from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+where T2.allergytype = "food"
+INTERSECT
+select T1.StuID
+from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+where T2.allergytype = "animal"
+
+select avg(age)
+from Student
+where StuID IN (
+  select T1.StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food"
+  INTERSECT
+  select T1.StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "animal")
+
+45. List the first and last name of the students who do not have any food type allergy.
+P: What is the full name of each student who is not allergic to any type of food.
+
+select fname, lname
+from Student
+where StuID NOT IN (select T1.StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food")
+
+S: What are the first and last name of all the students?
+S: Of them, who are allergic to any type of food?
+S: And who are not?
+
+select fname, lname
+from Student
+
+select distinct T3.fname, T3.lname
+from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+JOIN Student as T3 on T1.StuID = T3.StuID
+where T2.allergytype = "food"
+
+select fname, lname
+from Student
+where StuID NOT IN (select T1.StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food")
+
+46. Find the number of male (sex is 'M') students who have some food type allery.
+P: How many male students (sex is 'M') are allergic to any type of food?
+
+select count(*)
+from Student
+where sex = "M" and StuID IN (select StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food")
+  
+S: Who are all the male students?
+S: Of these, who have allergies to food type?
+S: How many are there?
+
+select *
+from Student
+where sex = 'M'
+
+select *
+from Student
+where sex = "M" and StuID IN (select StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food")
+  
+select count(*)
+from Student
+where sex = "M" and StuID IN (select StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food") 
+  
+47. Find the different first names and cities of the students who have allergy to milk or cat.
+P: What are the distinct first names and cities of the students who have allergy either to milk or to cat?
+
+select distinct T1.fname, T1.city_code
+from Student as T1 JOIN Has_Allergy as T2 
+on T1.stuid = T2.stuid
+where T2.Allergy = "Milk" or T2.Allergy = "Cat"
+		 
+S: What are the ids of the students who have any allergy?
+S: Of these, who are allergy to milk or cat?
+S: What are the different first names and city codes of them?
+
+select StuID
+from Has_allergy
+
+select StuID
+from Has_allergy
+where Allergy = "Milk" or Allergy = "Cat"
+
+select distinct T1.fname, T1.city_code
+from Student as T1 JOIN Has_Allergy as T2 
+on T1.stuid = T2.stuid
+where T2.Allergy = "Milk" or T2.Allergy = "Cat"
+
+48. Find the number of students who are older than 18 and do not have allergy to either food or animal.
+P: How many students are over 18 and do not have allergy to food type or animal type?
+
+select count(*)
+from Student
+where age > 18 and StuID NOT IN (
+  select StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food" or T2.allergytype = "animal")
+
+S: Which students are over 18?
+S: Of them, who are not allergic to food or animal?
+S: How many?
+
+Select *
+from Student
+where age > 18
+
+select *
+from Student
+where age > 18 and StuID NOT IN (
+  select StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food" or T2.allergytype = "animal")
+  
+select count(*)
+from Student
+where age > 18 and StuID NOT IN (
+  select StuID
+  from Has_allergy as T1 join Allergy_Type as T2 on T1.Allergy = T2.Allergy
+  where T2.allergytype = "food" or T2.allergytype = "animal")
+  
+49. Find the first name and major of the students who are not allegry to soy.
+P: What are the first name and major of the students who are able to consume soy?
+
+select fname, major
+from Student
+where StuID NOT IN (select StuID
+                    from Has_allergy
+                    where Allergy = "Soy")
+
+S: Who have allergy to soy?
+S: Who have not?
+S: List their first name and major.
+
+select *
+from Has_allergy
+where Allergy = "Soy"
+
+select *
+from Student
+where StuID NOT IN (select StuID
+                    from Has_allergy
+                    where Allergy = "Soy")
+		    
+select fname, major
+from Student
+where StuID NOT IN (select StuID
+                    from Has_allergy
+                    where Allergy = "Soy")

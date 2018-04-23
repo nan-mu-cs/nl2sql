@@ -1,0 +1,1434 @@
+[
+    {
+        "question": "How many video games exist?",
+        "sql": "SELECT count(*) FROM Video_games"
+    },
+    {
+        "question": "How many video games do you have?",
+        "sql": "SELECT count(*) FROM Video_games"
+    },
+    {
+        "question": "How many video game types exist?",
+        "sql": "SELECT count(DISTINCT gtype) FROM Video_games"
+    },
+    {
+        "question": "What is the count of different game types?",
+        "sql": "SELECT count(DISTINCT gtype) FROM Video_games"
+    },
+    {
+        "question": "Show all video game types.",
+        "sql": "SELECT DISTINCT gtype FROM Video_games"
+    },
+    {
+        "question": "What are the different types of video games?",
+        "sql": "SELECT DISTINCT gtype FROM Video_games"
+    },
+    {
+        "question": "Show all video games and their types in the order of their names.",
+        "sql": "SELECT gname ,  gtype FROM Video_games ORDER BY gname"
+    },
+    {
+        "question": "What are the names of all the video games and their types in alphabetical order?",
+        "sql": "SELECT gname ,  gtype FROM Video_games ORDER BY gname"
+    },
+    {
+        "question": "Show all video games with type Collectible card game.",
+        "sql": "SELECT gname FROM Video_games WHERE gtype  =  \"Collectible card game\""
+    },
+    {
+        "question": "What are the names of all video games that are collectible cards?",
+        "sql": "SELECT gname FROM Video_games WHERE gtype  =  \"Collectible card game\""
+    },
+    {
+        "question": "What is the type of video game Call of Destiny.",
+        "sql": "SELECT gtype FROM Video_games WHERE gname  =  \"Call of Destiny\""
+    },
+    {
+        "question": "What type of game is Call of Destiny?",
+        "sql": "SELECT gtype FROM Video_games WHERE gname  =  \"Call of Destiny\""
+    },
+    {
+        "question": "How many video games have type Massively multiplayer online game?",
+        "sql": "SELECT count(*) FROM Video_games WHERE gtype  =  \"Massively multiplayer online game\""
+    },
+    {
+        "question": "Count the number of video games with Massively multiplayer online game type .",
+        "sql": "SELECT count(*) FROM Video_games WHERE gtype  =  \"Massively multiplayer online game\""
+    },
+    {
+        "question": "Show all video game types and the number of video games in each type.",
+        "sql": "SELECT gtype ,  count(*) FROM Video_games GROUP BY gtype"
+    },
+    {
+        "question": "What are the types of video games and how many are in each type?",
+        "sql": "SELECT gtype ,  count(*) FROM Video_games GROUP BY gtype"
+    },
+    {
+        "question": "Which game type has most number of games?",
+        "sql": "SELECT gtype FROM Video_games GROUP BY gtype ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What type has the most games?",
+        "sql": "SELECT gtype FROM Video_games GROUP BY gtype ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "Which game type has least number of games?",
+        "sql": "SELECT gtype FROM Video_games GROUP BY gtype ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "question": "What is the type with the fewest games?",
+        "sql": "SELECT gtype FROM Video_games GROUP BY gtype ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "question": "Show ids for all students who live in CHI.",
+        "sql": "SELECT StuID FROM Student WHERE city_code  =  \"CHI\""
+    },
+    {
+        "question": "What are the ids of all students who live in CHI?",
+        "sql": "SELECT StuID FROM Student WHERE city_code  =  \"CHI\""
+    },
+    {
+        "question": "Show ids for all students who have advisor 1121.",
+        "sql": "SELECT StuID FROM Student WHERE Advisor  =  1121"
+    },
+    {
+        "question": "What are the ids of all students who have advisor number 1121?",
+        "sql": "SELECT StuID FROM Student WHERE Advisor  =  1121"
+    },
+    {
+        "question": "Show first name for all students with major 600.",
+        "sql": "SELECT Fname FROM Student WHERE Major  =  600"
+    },
+    {
+        "question": "What are the first names for all students who are from the major numbered 600?",
+        "sql": "SELECT Fname FROM Student WHERE Major  =  600"
+    },
+    {
+        "question": "Show the average, minimum, and maximum age for different majors.",
+        "sql": "SELECT major ,  avg(age) ,  min(age) ,  max(age) FROM Student GROUP BY major"
+    },
+    {
+        "question": "What are the average, minimum, and max ages for each of the different majors?",
+        "sql": "SELECT major ,  avg(age) ,  min(age) ,  max(age) FROM Student GROUP BY major"
+    },
+    {
+        "question": "Show all advisors who have at least two students.",
+        "sql": "SELECT advisor FROM Student GROUP BY advisor HAVING count(*)  >=  2"
+    },
+    {
+        "question": "What are the advisors",
+        "sql": "SELECT advisor FROM Student GROUP BY advisor HAVING count(*)  >=  2"
+    },
+    {
+        "question": "How many sports do we have?",
+        "sql": "SELECT count(DISTINCT sportname) FROM Sportsinfo"
+    },
+    {
+        "question": "How many different types of sports do we offer?",
+        "sql": "SELECT count(DISTINCT sportname) FROM Sportsinfo"
+    },
+    {
+        "question": "How many students play sports?",
+        "sql": "SELECT count(DISTINCT StuID) FROM Sportsinfo"
+    },
+    {
+        "question": "How many different students are involved in sports?",
+        "sql": "SELECT count(DISTINCT StuID) FROM Sportsinfo"
+    },
+    {
+        "question": "List ids for all student who are on scholarship.",
+        "sql": "SELECT StuID FROM Sportsinfo WHERE onscholarship  =  'Y'"
+    },
+    {
+        "question": "What are the ids for all sporty students who are on scholarship?",
+        "sql": "SELECT StuID FROM Sportsinfo WHERE onscholarship  =  'Y'"
+    },
+    {
+        "question": "Show last names for all student who are on scholarship.",
+        "sql": "SELECT T2.Lname FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T1.onscholarship  =  'Y'"
+    },
+    {
+        "question": "What are the last names for all scholarship students?",
+        "sql": "SELECT T2.Lname FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T1.onscholarship  =  'Y'"
+    },
+    {
+        "question": "How many games are played for all students?",
+        "sql": "SELECT sum(gamesplayed) FROM Sportsinfo"
+    },
+    {
+        "question": "What is the total number of games played?",
+        "sql": "SELECT sum(gamesplayed) FROM Sportsinfo"
+    },
+    {
+        "question": "How many games are played for all football games by students on scholarship?",
+        "sql": "SELECT sum(gamesplayed) FROM Sportsinfo WHERE sportname  =  \"Football\" AND onscholarship  =  'Y'"
+    },
+    {
+        "question": "What is the total number of all football games played by scholarship students?",
+        "sql": "SELECT sum(gamesplayed) FROM Sportsinfo WHERE sportname  =  \"Football\" AND onscholarship  =  'Y'"
+    },
+    {
+        "question": "Show all sport name and the number of students.",
+        "sql": "SELECT sportname ,  count(*) FROM Sportsinfo GROUP BY sportname"
+    },
+    {
+        "question": "How many students play each sport?",
+        "sql": "SELECT sportname ,  count(*) FROM Sportsinfo GROUP BY sportname"
+    },
+    {
+        "question": "Show all student IDs with the number of sports and total number of games played",
+        "sql": "SELECT StuID ,  count(*) ,  sum(gamesplayed) FROM Sportsinfo GROUP BY StuID"
+    },
+    {
+        "question": "What are the ids of all students along with how many sports and games did they play?",
+        "sql": "SELECT StuID ,  count(*) ,  sum(gamesplayed) FROM Sportsinfo GROUP BY StuID"
+    },
+    {
+        "question": "Show all student IDs with more than total 10 hours per week on all sports played.",
+        "sql": "SELECT StuID FROM Sportsinfo GROUP BY StuID HAVING sum(hoursperweek)  >  10"
+    },
+    {
+        "question": "What are the student IDs for everybody who worked for more than 10 hours per week on all sports?",
+        "sql": "SELECT StuID FROM Sportsinfo GROUP BY StuID HAVING sum(hoursperweek)  >  10"
+    },
+    {
+        "question": "What is the first name and last name of the student who have most number of sports?",
+        "sql": "SELECT T2.Fname ,  T2.Lname FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID GROUP BY T1.StuID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What is the first and last name of the student who played the most sports?",
+        "sql": "SELECT T2.Fname ,  T2.Lname FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID GROUP BY T1.StuID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "Which sport has most number of students on scholarship?",
+        "sql": "SELECT sportname FROM Sportsinfo WHERE onscholarship  =  'Y' GROUP BY sportname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What is the sport with the most scholarship students?",
+        "sql": "SELECT sportname FROM Sportsinfo WHERE onscholarship  =  'Y' GROUP BY sportname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "Show student ids who don't have any sports.",
+        "sql": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Sportsinfo"
+    },
+    {
+        "question": "What are the ids of all students who don't play sports?",
+        "sql": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Sportsinfo"
+    },
+    {
+        "question": "Show student ids who are on scholarship and have major 600.",
+        "sql": "SELECT StuID FROM Student WHERE major  =  600 INTERSECT SELECT StuID FROM Sportsinfo WHERE onscholarship  =  'Y'"
+    },
+    {
+        "question": "What are the student ids for those on scholarship in major number 600?",
+        "sql": "SELECT StuID FROM Student WHERE major  =  600 INTERSECT SELECT StuID FROM Sportsinfo WHERE onscholarship  =  'Y'"
+    },
+    {
+        "question": "Show student ids who are female and play football.",
+        "sql": "SELECT StuID FROM Student WHERE sex  =  'F' INTERSECT SELECT StuID FROM Sportsinfo WHERE sportname  =  \"Football\""
+    },
+    {
+        "question": "What are the ids of all female students who play football?",
+        "sql": "SELECT StuID FROM Student WHERE sex  =  'F' INTERSECT SELECT StuID FROM Sportsinfo WHERE sportname  =  \"Football\""
+    },
+    {
+        "question": "Show all male student ids who don't play football.",
+        "sql": "SELECT StuID FROM Student WHERE sex  =  'M' EXCEPT SELECT StuID FROM Sportsinfo WHERE sportname  =  \"Football\""
+    },
+    {
+        "question": "What are the ids of all male students who do not play football?",
+        "sql": "SELECT StuID FROM Student WHERE sex  =  'M' EXCEPT SELECT StuID FROM Sportsinfo WHERE sportname  =  \"Football\""
+    },
+    {
+        "question": "Show total hours per week and number of games played for student David Shieber.",
+        "sql": "SELECT sum(hoursperweek) ,  sum(gamesplayed) FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.Fname  =  \"David\" AND T2.Lname  =  \"Shieber\""
+    },
+    {
+        "question": "What is the total number of hours per work and number of games played by David Shieber?",
+        "sql": "SELECT sum(hoursperweek) ,  sum(gamesplayed) FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.Fname  =  \"David\" AND T2.Lname  =  \"Shieber\""
+    },
+    {
+        "question": "Show total hours per week and number of games played for students under 20.",
+        "sql": "SELECT sum(hoursperweek) ,  sum(gamesplayed) FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.age  <  20"
+    },
+    {
+        "question": "What is the total number of hours per week and number of games played by students under 20?",
+        "sql": "SELECT sum(hoursperweek) ,  sum(gamesplayed) FROM Sportsinfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.age  <  20"
+    },
+    {
+        "question": "How many students play video games?",
+        "sql": "SELECT count(DISTINCT StuID) FROM Plays_games"
+    },
+    {
+        "question": "How many different students play games?",
+        "sql": "SELECT count(DISTINCT StuID) FROM Plays_games"
+    },
+    {
+        "question": "Show ids of students who don't play video game.",
+        "sql": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Plays_games"
+    },
+    {
+        "question": "What are the ids of all students who are not video game players?",
+        "sql": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Plays_games"
+    },
+    {
+        "question": "Show ids of students who play video game and play sports.",
+        "sql": "SELECT StuID FROM Sportsinfo INTERSECT SELECT StuID FROM Plays_games"
+    },
+    {
+        "question": "What are the ids of all students who played video games and sports?",
+        "sql": "SELECT StuID FROM Sportsinfo INTERSECT SELECT StuID FROM Plays_games"
+    },
+    {
+        "question": "Show all game ids and the number of hours played.",
+        "sql": "SELECT gameid ,  sum(hours_played) FROM Plays_games GROUP BY gameid"
+    },
+    {
+        "question": "What are ids and total number of hours played for each game?",
+        "sql": "SELECT gameid ,  sum(hours_played) FROM Plays_games GROUP BY gameid"
+    },
+    {
+        "question": "Show all student ids and the number of hours played.",
+        "sql": "SELECT Stuid ,  sum(hours_played) FROM Plays_games GROUP BY Stuid"
+    },
+    {
+        "question": "What are the ids of all students and number of hours played?",
+        "sql": "SELECT Stuid ,  sum(hours_played) FROM Plays_games GROUP BY Stuid"
+    },
+    {
+        "question": "Show the game name that has most number of hours played.",
+        "sql": "SELECT gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid GROUP BY T1.gameid ORDER BY sum(hours_played) DESC LIMIT 1"
+    },
+    {
+        "question": "What is the name of the game that has been played the most?",
+        "sql": "SELECT gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid GROUP BY T1.gameid ORDER BY sum(hours_played) DESC LIMIT 1"
+    },
+    {
+        "question": "Show all game names played by at least 1000 hours.",
+        "sql": "SELECT gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid GROUP BY T1.gameid HAVING sum(hours_played)  >=  1000"
+    },
+    {
+        "question": "What are the names of all the games that have been played for at least 1000 hours?",
+        "sql": "SELECT gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid GROUP BY T1.gameid HAVING sum(hours_played)  >=  1000"
+    },
+    {
+        "question": "Show all game names played by Linda Smith",
+        "sql": "SELECT Gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid JOIN Student AS T3 ON T3.Stuid  =  T1.Stuid WHERE T3.Lname  =  \"Smith\" AND T3.Fname  =  \"Linda\""
+    },
+    {
+        "question": "What are the names of all games played by Linda Smith?",
+        "sql": "SELECT Gname FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.gameid  =  T2.gameid JOIN Student AS T3 ON T3.Stuid  =  T1.Stuid WHERE T3.Lname  =  \"Smith\" AND T3.Fname  =  \"Linda\""
+    },
+    {
+        "question": "Find the last and first name of students who are playing Football or Lacrosse.",
+        "sql": "SELECT T2.lname ,  T2.fname FROM SportsInfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T1.SportName  =  \"Football\" OR T1.SportName  =  \"Lacrosse\""
+    },
+    {
+        "question": "What is the first and last name of all students who play Football or Lacrosse?",
+        "sql": "SELECT T2.lname ,  T2.fname FROM SportsInfo AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T1.SportName  =  \"Football\" OR T1.SportName  =  \"Lacrosse\""
+    },
+    {
+        "question": "Find the first name and age of the students who are playing both Football and Lacrosse.",
+        "sql": "SELECT fname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Sportsinfo WHERE SportName  =  \"Football\" INTERSECT SELECT StuID FROM Sportsinfo WHERE SportName  =  \"Lacrosse\")"
+    },
+    {
+        "question": "What are the first names and ages of all students who are playing both Football and Lacrosse?",
+        "sql": "SELECT fname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Sportsinfo WHERE SportName  =  \"Football\" INTERSECT SELECT StuID FROM Sportsinfo WHERE SportName  =  \"Lacrosse\")"
+    },
+    {
+        "question": "Find the last name and gender of the students who are playing both Call of Destiny and Works of Widenius games.",
+        "sql": "SELECT lname ,  sex FROM Student WHERE StuID IN (SELECT T1.StuID FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.GameID  =  T2.GameID WHERE T2.Gname  =  \"Call of Destiny\" INTERSECT SELECT T1.StuID FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.GameID  =  T2.GameID WHERE T2.Gname  =  \"Works of Widenius\")"
+    },
+    {
+        "question": "what is the last name and gender of all students who played both Call of Destiny and Works of Widenius?",
+        "sql": "SELECT lname ,  sex FROM Student WHERE StuID IN (SELECT T1.StuID FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.GameID  =  T2.GameID WHERE T2.Gname  =  \"Call of Destiny\" INTERSECT SELECT T1.StuID FROM Plays_games AS T1 JOIN Video_games AS T2 ON T1.GameID  =  T2.GameID WHERE T2.Gname  =  \"Works of Widenius\")"
+    },
+    {
+        "question": "Find the number of professors in accounting department.",
+        "sql": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE DEPT_NAME  =  \"Accounting\""
+    },
+    {
+        "question": "How many professors are in the accounting dept?",
+        "sql": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE DEPT_NAME  =  \"Accounting\""
+    },
+    {
+        "question": "How many professors are teaching class with code ACCT-211?",
+        "sql": "SELECT count(DISTINCT PROF_NUM) FROM CLASS AS T2 WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "question": "How many professors teach a class with the code ACCT-211?",
+        "sql": "SELECT count(DISTINCT PROF_NUM) FROM CLASS AS T2 WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "question": "What is the first and last name of the professor in biology department?",
+        "sql": "SELECT T3.EMP_FNAME ,  T3.EMP_LNAME FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code JOIN employee AS T3 ON T1.EMP_NUM  =  T3.EMP_NUM WHERE DEPT_NAME  =  \"Biology\""
+    },
+    {
+        "question": "What are the first and last name of all biology professors?",
+        "sql": "SELECT T3.EMP_FNAME ,  T3.EMP_LNAME FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code JOIN employee AS T3 ON T1.EMP_NUM  =  T3.EMP_NUM WHERE DEPT_NAME  =  \"Biology\""
+    },
+    {
+        "question": "What are the first names and date of birth of professors teaching course ACCT-211?",
+        "sql": "SELECT DISTINCT T1.EMP_FNAME ,  T1.EMP_DOB FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "question": "What are the first names and birthdates of the professors in charge of ACCT-211?",
+        "sql": "SELECT DISTINCT T1.EMP_FNAME ,  T1.EMP_DOB FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "question": "How many classes are professor whose last name is Graztevski has?",
+        "sql": "SELECT count(*) FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE T1.EMP_LNAME  =  'Graztevski'"
+    },
+    {
+        "question": "How many classes does the professor whose last name is Graztevski teach?",
+        "sql": "SELECT count(*) FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE T1.EMP_LNAME  =  'Graztevski'"
+    },
+    {
+        "question": "What is the code of the school where the accounting department belongs to?",
+        "sql": "SELECT school_code FROM department WHERE dept_name  =  \"Accounting\""
+    },
+    {
+        "question": "What is the school code of the accounting department?",
+        "sql": "SELECT school_code FROM department WHERE dept_name  =  \"Accounting\""
+    },
+    {
+        "question": "How many credits does course CIS-220 have, and what its description?",
+        "sql": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'CIS-220'"
+    },
+    {
+        "question": "What is the description for the CIS-220 and how many credits does it have?",
+        "sql": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'CIS-220'"
+    },
+    {
+        "question": "what is the address of history department?",
+        "sql": "SELECT dept_address FROM department WHERE dept_name  =  'History'"
+    },
+    {
+        "question": "Where is the history department?",
+        "sql": "SELECT dept_address FROM department WHERE dept_name  =  'History'"
+    },
+    {
+        "question": "How many different locations does the school with code BUS has?",
+        "sql": "SELECT count(DISTINCT dept_address) FROM department WHERE school_code  =  'BUS'"
+    },
+    {
+        "question": "What are the different addresses of the school with the code BUS?",
+        "sql": "SELECT count(DISTINCT dept_address) FROM department WHERE school_code  =  'BUS'"
+    },
+    {
+        "question": "How many different locations does each school have?",
+        "sql": "SELECT count(DISTINCT dept_address) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "question": "Count the number of locations for each school.",
+        "sql": "SELECT count(DISTINCT dept_address) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "question": "Find the description and credit for the course QM-261?",
+        "sql": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "question": "What is the course description and number of credits for QM-261?",
+        "sql": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "question": "Find the number of departments in each school.",
+        "sql": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "question": "How many departments are in each school?",
+        "sql": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "question": "Find the number of different departments in each school whose number of different departments is less than 5.",
+        "sql": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code HAVING count(DISTINCT dept_name)  <  5"
+    },
+    {
+        "question": "How many different departments are there in each school that has less than 5 apartments?",
+        "sql": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code HAVING count(DISTINCT dept_name)  <  5"
+    },
+    {
+        "question": "How many sections does each course has?",
+        "sql": "SELECT count(*) ,  crs_code FROM CLASS GROUP BY crs_code"
+    },
+    {
+        "question": "How many sections does each course have?",
+        "sql": "SELECT count(*) ,  crs_code FROM CLASS GROUP BY crs_code"
+    },
+    {
+        "question": "What is the total credit does each department offer?",
+        "sql": "SELECT sum(crs_credit) ,  dept_code FROM course GROUP BY dept_code"
+    },
+    {
+        "question": "How many credits does the department offer?",
+        "sql": "SELECT sum(crs_credit) ,  dept_code FROM course GROUP BY dept_code"
+    },
+    {
+        "question": "Find the number of classes offered for all class rooms that held at least 2 classes.",
+        "sql": "SELECT count(*) ,  class_room FROM CLASS GROUP BY class_room HAVING count(*)  >=  2"
+    },
+    {
+        "question": "For each classroom with at least 2 classes, how many classes are offered?",
+        "sql": "SELECT count(*) ,  class_room FROM CLASS GROUP BY class_room HAVING count(*)  >=  2"
+    },
+    {
+        "question": "Find the number of classes in each department.",
+        "sql": "SELECT count(*) ,  dept_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY dept_code"
+    },
+    {
+        "question": "How many classes are held in each department?",
+        "sql": "SELECT count(*) ,  dept_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY dept_code"
+    },
+    {
+        "question": "Find the number of classes in each school.",
+        "sql": "SELECT count(*) ,  T3.school_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T2.dept_code  =  T3.dept_code GROUP BY T3.school_code"
+    },
+    {
+        "question": "How many classes exist for each school?",
+        "sql": "SELECT count(*) ,  T3.school_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T2.dept_code  =  T3.dept_code GROUP BY T3.school_code"
+    },
+    {
+        "question": "What is the number of professors for different school?",
+        "sql": "SELECT count(*) ,  T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code"
+    },
+    {
+        "question": "How many different professors are there for the different schools?",
+        "sql": "SELECT count(*) ,  T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code"
+    },
+    {
+        "question": "Find the count and code of the job has most employees.",
+        "sql": "SELECT emp_jobcode ,  count(*) FROM employee GROUP BY emp_jobcode ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What is the count and code of the job with the most employee?",
+        "sql": "SELECT emp_jobcode ,  count(*) FROM employee GROUP BY emp_jobcode ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "Which school has the smallest amount of professors?",
+        "sql": "SELECT T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "question": "Which school has the fewest professors?",
+        "sql": "SELECT T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "question": "Find the number of professors with a Ph.D. degree in each department.",
+        "sql": "SELECT count(*) ,  dept_code FROM professor WHERE prof_high_degree  =  'Ph.D.' GROUP BY dept_code"
+    },
+    {
+        "question": "How many professors have a Ph.D. in each department?",
+        "sql": "SELECT count(*) ,  dept_code FROM professor WHERE prof_high_degree  =  'Ph.D.' GROUP BY dept_code"
+    },
+    {
+        "question": "Find the number of students for each department.",
+        "sql": "SELECT count(*) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "question": "How many students are in each department?",
+        "sql": "SELECT count(*) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "question": "Find the total number of hours have done for all students in each department.",
+        "sql": "SELECT sum(stu_hrs) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "question": "How many hours do the students spend studying in each department?",
+        "sql": "SELECT sum(stu_hrs) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "question": "Find the max, average, and minimum gpa of all students in each department.",
+        "sql": "SELECT max(stu_gpa) ,  avg(stu_gpa) ,  min(stu_gpa) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "question": "What is the highest, lowest, and average student GPA for every department?",
+        "sql": "SELECT max(stu_gpa) ,  avg(stu_gpa) ,  min(stu_gpa) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "question": "What is the name and the average gpa of department whose students have the highest average gpa?",
+        "sql": "SELECT T2.dept_name ,  avg(T1.stu_gpa) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY avg(T1.stu_gpa) DESC LIMIT 1"
+    },
+    {
+        "question": "Which department has the highest average student GPA, and what is the highest one?",
+        "sql": "SELECT T2.dept_name ,  avg(T1.stu_gpa) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY avg(T1.stu_gpa) DESC LIMIT 1"
+    },
+    {
+        "question": "how many schools exist in total?",
+        "sql": "SELECT count(DISTINCT school_code) FROM department"
+    },
+    {
+        "question": "How many schools are there in the department?",
+        "sql": "SELECT count(DISTINCT school_code) FROM department"
+    },
+    {
+        "question": "How many different classes are there?",
+        "sql": "SELECT count(DISTINCT class_code) FROM CLASS"
+    },
+    {
+        "question": "How many unique classes are offered?",
+        "sql": "SELECT count(DISTINCT class_code) FROM CLASS"
+    },
+    {
+        "question": "How many courses are offered?",
+        "sql": "SELECT count(DISTINCT crs_code) FROM CLASS"
+    },
+    {
+        "question": "What are the number of different course codes?",
+        "sql": "SELECT count(DISTINCT crs_code) FROM CLASS"
+    },
+    {
+        "question": "How many departments does the college has?",
+        "sql": "SELECT count(DISTINCT dept_name) FROM department"
+    },
+    {
+        "question": "How many different departments are there?",
+        "sql": "SELECT count(DISTINCT dept_name) FROM department"
+    },
+    {
+        "question": "How many courses are offered by the Computer Info. Systems department?",
+        "sql": "SELECT count(*) FROM department AS T1 JOIN course AS T2 ON T1.dept_code  =  T2.dept_code WHERE dept_name  =  \"Computer Info. Systems\""
+    },
+    {
+        "question": "How many courses does the department of Computer Information Systmes offer?",
+        "sql": "SELECT count(*) FROM department AS T1 JOIN course AS T2 ON T1.dept_code  =  T2.dept_code WHERE dept_name  =  \"Computer Info. Systems\""
+    },
+    {
+        "question": "How many sections does course ACCT-211 has?",
+        "sql": "SELECT count(DISTINCT class_section) FROM CLASS WHERE crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "What is the number of different class sections offered in the course ACCT-211?",
+        "sql": "SELECT count(DISTINCT class_section) FROM CLASS WHERE crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "Find the total credits of all classes offered by each department.",
+        "sql": "SELECT sum(T1.crs_credit) ,  T1.dept_code FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY T1.dept_code"
+    },
+    {
+        "question": "What are the total number of credits offered by each department?",
+        "sql": "SELECT sum(T1.crs_credit) ,  T1.dept_code FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY T1.dept_code"
+    },
+    {
+        "question": "Find the name of the department that offers the largest number of credits of all classes.",
+        "sql": "SELECT T3.dept_name FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T1.dept_code  =  T3.dept_code GROUP BY T1.dept_code ORDER BY sum(T1.crs_credit) DESC LIMIT 1"
+    },
+    {
+        "question": "Which department offers the most credits all together?",
+        "sql": "SELECT T3.dept_name FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T1.dept_code  =  T3.dept_code GROUP BY T1.dept_code ORDER BY sum(T1.crs_credit) DESC LIMIT 1"
+    },
+    {
+        "question": "How many students enrolled in class ACCT-211?",
+        "sql": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "What are the total number of students enrolled in ACCT-211?",
+        "sql": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "What is the first name of each student enrolled in class ACCT-211?",
+        "sql": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "What are the first names of all students in ACCT-211?",
+        "sql": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "What is the first name of students enrolled in class ACCT-211 and got grade C?",
+        "sql": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211' AND T2.enroll_grade  =  'C'"
+    },
+    {
+        "question": "What are the first names of all students who took ACCT-211 and received a C?",
+        "sql": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211' AND T2.enroll_grade  =  'C'"
+    },
+    {
+        "question": "Find the total number of employees.",
+        "sql": "SELECT count(*) FROM employee"
+    },
+    {
+        "question": "How many employees are there all together?",
+        "sql": "SELECT count(*) FROM employee"
+    },
+    {
+        "question": "How many professors do have a Ph.D. degree?",
+        "sql": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "question": "What is the total number of professors with a Ph.D. ?",
+        "sql": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "question": "How many students are enrolled in the class taught by professor from the accounting department?",
+        "sql": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "question": "How many students are enrolled in accounting classes?",
+        "sql": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "question": "What is the name of the department that has the largest number of students enrolled?",
+        "sql": "SELECT T4.dept_name FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code GROUP BY T4.dept_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What is the name of the department with the most students enrolled?",
+        "sql": "SELECT T4.dept_name FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code GROUP BY T4.dept_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "list names of all departments ordered by their names.",
+        "sql": "SELECT dept_name FROM department ORDER BY dept_name"
+    },
+    {
+        "question": "What are the names of all departments in alphabetical order?",
+        "sql": "SELECT dept_name FROM department ORDER BY dept_name"
+    },
+    {
+        "question": "List the codes of all courses that take place in room KLR209.",
+        "sql": "SELECT class_code FROM CLASS WHERE class_room  =  'KLR209'"
+    },
+    {
+        "question": "What are the codes of all the courses that are located in room KLR209?",
+        "sql": "SELECT class_code FROM CLASS WHERE class_room  =  'KLR209'"
+    },
+    {
+        "question": "List the first name of all employees with job code PROF ordered by their date of birth.",
+        "sql": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' ORDER BY emp_dob"
+    },
+    {
+        "question": "What are the first names of all employees that are professors ordered by date of birth?",
+        "sql": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' ORDER BY emp_dob"
+    },
+    {
+        "question": "Find the first names and offices of all professors sorted by alphabetical order of their first name.",
+        "sql": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num ORDER BY T2.emp_fname"
+    },
+    {
+        "question": "What are the first names and office locations for all professors sorted alphabetically by first name?",
+        "sql": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num ORDER BY T2.emp_fname"
+    },
+    {
+        "question": "What is the first and last name of the oldest employee?",
+        "sql": "SELECT emp_fname ,  emp_lname FROM employee ORDER BY emp_dob LIMIT 1"
+    },
+    {
+        "question": "What are the first and last names of the employee with the earliest date of birth?",
+        "sql": "SELECT emp_fname ,  emp_lname FROM employee ORDER BY emp_dob LIMIT 1"
+    },
+    {
+        "question": "What is the first, last name, gpa of the youngest one among students whose GPA is above 3?",
+        "sql": "SELECT stu_fname ,  stu_lname ,  stu_gpa FROM student WHERE stu_gpa  >  3 ORDER BY stu_dob DESC LIMIT 1"
+    },
+    {
+        "question": "What is the first and last name of the youngest student with a GPA above 3, and what is their GPA?",
+        "sql": "SELECT stu_fname ,  stu_lname ,  stu_gpa FROM student WHERE stu_gpa  >  3 ORDER BY stu_dob DESC LIMIT 1"
+    },
+    {
+        "question": "What is the first name of students who got grade C in any class?",
+        "sql": "SELECT DISTINCT stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE enroll_grade  =  'C'"
+    },
+    {
+        "question": "What are the first names of all students who got a C in a class?",
+        "sql": "SELECT DISTINCT stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE enroll_grade  =  'C'"
+    },
+    {
+        "question": "What is the name of department where has the smallest number of professors?",
+        "sql": "SELECT T2.dept_name ,  T1.dept_code FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "question": "What is the name of the department with the fewest professors?",
+        "sql": "SELECT T2.dept_name ,  T1.dept_code FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "question": "What is the name of department where has the largest number of professors with a Ph.D. degree?",
+        "sql": "SELECT T2.dept_name ,  T1.dept_code FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.prof_high_degree  =  'Ph.D.' GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "Which department has the most professors with a Ph.D.?",
+        "sql": "SELECT T2.dept_name ,  T1.dept_code FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.prof_high_degree  =  'Ph.D.' GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What is the first names of the professors who do not teach a class.",
+        "sql": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+    },
+    {
+        "question": "What are the first names of all professors not teaching any classes?",
+        "sql": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+    },
+    {
+        "question": "What is the first names of the professors from the history department who do not teach a class.",
+        "sql": "SELECT T1.emp_fname FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+    },
+    {
+        "question": "What are the first names of all history professors who do not teach?",
+        "sql": "SELECT T1.emp_fname FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+    },
+    {
+        "question": "What is the last name and office of the professor from the history department?",
+        "sql": "SELECT T1.emp_lname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History'"
+    },
+    {
+        "question": "What are the last name and office of all history professors?",
+        "sql": "SELECT T1.emp_lname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History'"
+    },
+    {
+        "question": "What is department name and office for the professor whose last name is Heffington?",
+        "sql": "SELECT T3.dept_name  ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T1.emp_lname  =  'Heffington'"
+    },
+    {
+        "question": "What is the name of the department and office location for the professor with the last name of Heffington?",
+        "sql": "SELECT T3.dept_name  ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T1.emp_lname  =  'Heffington'"
+    },
+    {
+        "question": "Find the last name and hire date of the professor who is in office DRE 102.",
+        "sql": "SELECT T1.emp_lname ,  T1.emp_hiredate FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num WHERE T2.prof_office  =  'DRE 102'"
+    },
+    {
+        "question": "What is the last name of the professor whose office is located in DRE 102, and when were they hired?",
+        "sql": "SELECT T1.emp_lname ,  T1.emp_hiredate FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num WHERE T2.prof_office  =  'DRE 102'"
+    },
+    {
+        "question": "What is the code of the course which the student whose last name is Smithson took?",
+        "sql": "SELECT T1.crs_code FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "question": "What are the course codes for every class that the student with the last name Smithson took?",
+        "sql": "SELECT T1.crs_code FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "question": "What are the description and credit of the course which the student whose last name is Smithson took?",
+        "sql": "SELECT T4.crs_description ,  T4.crs_credit FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num JOIN course AS T4 ON T4.crs_code  =  T1.crs_code WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "question": "How many credits is the course that the student with the last name Smithson took, and what is its description?",
+        "sql": "SELECT T4.crs_description ,  T4.crs_credit FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num JOIN course AS T4 ON T4.crs_code  =  T1.crs_code WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "question": "How many professors who has a either Ph.D. or MA degree?",
+        "sql": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.' OR prof_high_degree  =  'MA'"
+    },
+    {
+        "question": "How many professors attained either Ph.D. or Masters degrees?",
+        "sql": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.' OR prof_high_degree  =  'MA'"
+    },
+    {
+        "question": "How many professors who are from either Accounting or Biology department?",
+        "sql": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T2.dept_name  =  'Accounting' OR T2.dept_name  =  'Biology'"
+    },
+    {
+        "question": "What is the number of professors who are in the Accounting or Biology departments?",
+        "sql": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T2.dept_name  =  'Accounting' OR T2.dept_name  =  'Biology'"
+    },
+    {
+        "question": "Find the first name of the professor who is teaching two courses with code CIS-220 and QM-261.",
+        "sql": "SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'CIS-220' INTERSECT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "question": "What is the first name of the professor who is teaching CIS-220 and QM-261?",
+        "sql": "SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'CIS-220' INTERSECT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "question": "Find the first name of student who is taking classes from accounting and Computer Info. Systems departments",
+        "sql": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Accounting' INTERSECT SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "question": "What are the first names of all students taking accoutning and Computer Information Systems classes?",
+        "sql": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Accounting' INTERSECT SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "question": "What is the average gpa of the students enrolled in the course with code ACCT-211?",
+        "sql": "SELECT avg(T2.stu_gpa) FROM enroll AS T1 JOIN student AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T1.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "What is the average GPA of students taking ACCT-211?",
+        "sql": "SELECT avg(T2.stu_gpa) FROM enroll AS T1 JOIN student AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T1.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211'"
+    },
+    {
+        "question": "What is the first name, gpa and phone number of the top 5 students with highest gpa?",
+        "sql": "SELECT stu_gpa ,  stu_phone ,  stu_fname FROM student ORDER BY stu_gpa DESC LIMIT 5"
+    },
+    {
+        "question": "What is the first name, GPA, and phone number of the students with the top 5 GPAs?",
+        "sql": "SELECT stu_gpa ,  stu_phone ,  stu_fname FROM student ORDER BY stu_gpa DESC LIMIT 5"
+    },
+    {
+        "question": "What is the department name of the students with lowest gpa belongs to?",
+        "sql": "SELECT T2.dept_name FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code ORDER BY stu_gpa LIMIT 1"
+    },
+    {
+        "question": "What is the name of the department with the student that has the lowest GPA?",
+        "sql": "SELECT T2.dept_name FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code ORDER BY stu_gpa LIMIT 1"
+    },
+    {
+        "question": "Find the first name and gpa of the students whose gpa is lower than the average gpa of all students.",
+        "sql": "SELECT stu_fname ,  stu_gpa FROM student WHERE stu_gpa  <  (SELECT avg(stu_gpa) FROM student)"
+    },
+    {
+        "question": "What is the first name and GPA of every student that has a GPA lower than average?",
+        "sql": "SELECT stu_fname ,  stu_gpa FROM student WHERE stu_gpa  <  (SELECT avg(stu_gpa) FROM student)"
+    },
+    {
+        "question": "Find the name and address of the department that has the highest number of students.",
+        "sql": "SELECT T2.dept_name ,  T2.dept_address FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What is the name and address of the department with the most students?",
+        "sql": "SELECT T2.dept_name ,  T2.dept_address FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "Find the name, address, number of students in the departments that have the top 3 highest number of students.",
+        "sql": "SELECT T2.dept_name ,  T2.dept_address ,  count(*) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "question": "What is the name, address, and number of students in the departments that have the 3 most students?",
+        "sql": "SELECT T2.dept_name ,  T2.dept_address ,  count(*) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "question": "Find the first name and office of the professor who is in the history department and has a Ph.D. degree.",
+        "sql": "SELECT T1.emp_fname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T3.dept_code  =  T2.dept_code WHERE T3.dept_name  =  'History' AND T2.prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "question": "What are the first names and office of the professors who are in the history department and have a Ph.D?",
+        "sql": "SELECT T1.emp_fname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T3.dept_code  =  T2.dept_code WHERE T3.dept_name  =  'History' AND T2.prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "question": "Find the first names of all instructors who have taught some course and the course code.",
+        "sql": "SELECT T2.emp_fname ,  T1.crs_code FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num"
+    },
+    {
+        "question": "What are the first names of all teachers who have taught a course and the corresponding course codes?",
+        "sql": "SELECT T2.emp_fname ,  T1.crs_code FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num"
+    },
+    {
+        "question": "Find the first names of all instructors who have taught some course and the course description.",
+        "sql": "SELECT T2.emp_fname ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code"
+    },
+    {
+        "question": "What are the first names of all teachers who have taught a course and the corresponding descriptions?",
+        "sql": "SELECT T2.emp_fname ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code"
+    },
+    {
+        "question": "Find the first names and offices of all instructors who have taught some course and also find the course description.",
+        "sql": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num"
+    },
+    {
+        "question": "What are the first names, office locations of all lecturers who have taught some course?",
+        "sql": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num"
+    },
+    {
+        "question": "Find the first names and offices of all instructors who have taught some course and the course description and the department name.",
+        "sql": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description ,  T5.dept_name FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num JOIN department AS T5 ON T4.dept_code  =  T5.dept_code"
+    },
+    {
+        "question": "What are the first names, office locations, and departments of all instructors, and also what are the descriptions of the courses they teach?",
+        "sql": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description ,  T5.dept_name FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num JOIN department AS T5 ON T4.dept_code  =  T5.dept_code"
+    },
+    {
+        "question": "Find names of all students who took some course and the course description.",
+        "sql": "SELECT T1.stu_fname ,  T1.stu_lname ,  T4.crs_description FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code"
+    },
+    {
+        "question": "What are the names of all students who took a class and the corresponding course descriptions?",
+        "sql": "SELECT T1.stu_fname ,  T1.stu_lname ,  T4.crs_description FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code"
+    },
+    {
+        "question": "Find names of all students who took some course and got A or C and the class room.",
+        "sql": "SELECT T1.stu_fname ,  T1.stu_lname ,  T3.class_room FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code WHERE T2.enroll_grade  =  'C' OR T2.enroll_grade  =  'A'"
+    },
+    {
+        "question": "What are the names of all students taking a course who received an A or C, and also what are the classrooms of those courses?",
+        "sql": "SELECT T1.stu_fname ,  T1.stu_lname ,  T3.class_room FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code WHERE T2.enroll_grade  =  'C' OR T2.enroll_grade  =  'A'"
+    },
+    {
+        "question": "Find the first names of all professors in the Accounting department who is teaching some course and the class room.",
+        "sql": "SELECT T2.emp_fname ,  T1.class_room FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "question": "What are the first names of all Accounting professors who teach and what are the classrooms of the courses they teach?",
+        "sql": "SELECT T2.emp_fname ,  T1.class_room FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "question": "Find the first names and degree of all professors who are teaching some class in Computer Info. Systems department.",
+        "sql": "SELECT DISTINCT T2.emp_fname ,  T3.prof_high_degree FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "question": "What are the different first names and highest degree attained for professors teaching in the Computer Information Systems department?",
+        "sql": "SELECT DISTINCT T2.emp_fname ,  T3.prof_high_degree FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "question": "What is the last name of the student who got a grade A in the class with code 10018.",
+        "sql": "SELECT T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'A' AND T2.class_code  =  10018"
+    },
+    {
+        "question": "What is the last name of the student who received an A in the class with the code 10018?",
+        "sql": "SELECT T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'A' AND T2.class_code  =  10018"
+    },
+    {
+        "question": "Find the first name and office of history professor who did not get a Ph.D. degree.",
+        "sql": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T1.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' AND T1.prof_high_degree ! =  'Ph.D.'"
+    },
+    {
+        "question": "What are the first names and offices of history professors who don't have Ph.D.s?",
+        "sql": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T1.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' AND T1.prof_high_degree ! =  'Ph.D.'"
+    },
+    {
+        "question": "Find the first names of professors who are teaching more than one class.",
+        "sql": "SELECT T2.emp_fname FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num GROUP BY T1.prof_num HAVING count(*)  >  1"
+    },
+    {
+        "question": "What are the first names of all professors who teach more than one class?",
+        "sql": "SELECT T2.emp_fname FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num GROUP BY T1.prof_num HAVING count(*)  >  1"
+    },
+    {
+        "question": "Find the first names of students who took exactly one class.",
+        "sql": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num GROUP BY T2.stu_num HAVING count(*)  =  1"
+    },
+    {
+        "question": "What are the first names of student who only took one course?",
+        "sql": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num GROUP BY T2.stu_num HAVING count(*)  =  1"
+    },
+    {
+        "question": "Find the name of department that offers the class whose description has the word \"Statistics\".",
+        "sql": "SELECT T2.dept_name FROM course AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.crs_description LIKE '%Statistics%'"
+    },
+    {
+        "question": "What is the name of the department that offers a course that has a description including the word \"Statistics\"?",
+        "sql": "SELECT T2.dept_name FROM course AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.crs_description LIKE '%Statistics%'"
+    },
+    {
+        "question": "What is the first name of the student whose last name starting with the letter S and is taking ACCT-211 class?",
+        "sql": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211' AND T1.stu_lname LIKE 'S%'"
+    },
+    {
+        "question": "What is the first name of the student whose last name starts with the letter S and is taking ACCT-211?",
+        "sql": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211' AND T1.stu_lname LIKE 'S%'"
+    },
+    {
+        "question": "What is the total enrollment number of all colleges?",
+        "sql": "SELECT sum(enr) FROM College"
+    },
+    {
+        "question": "How many students are enrolled in college?",
+        "sql": "SELECT sum(enr) FROM College"
+    },
+    {
+        "question": "What is the average enrollment number?",
+        "sql": "SELECT avg(enr) FROM College"
+    },
+    {
+        "question": "How many students, on average, does each college have enrolled?",
+        "sql": "SELECT avg(enr) FROM College"
+    },
+    {
+        "question": "How many colleges in total?",
+        "sql": "SELECT count(*) FROM College"
+    },
+    {
+        "question": "How many different colleges are there?",
+        "sql": "SELECT count(*) FROM College"
+    },
+    {
+        "question": "How many players have more than 1000 hours of training?",
+        "sql": "SELECT count(*) FROM Player WHERE HS  >  1000"
+    },
+    {
+        "question": "How many different players trained for more than 1000 hours?",
+        "sql": "SELECT count(*) FROM Player WHERE HS  >  1000"
+    },
+    {
+        "question": "How many colleges has more than 15000 students?",
+        "sql": "SELECT count(*) FROM College WHERE enr  >  15000"
+    },
+    {
+        "question": "What is the number of colleges with a student population greater than 15000?",
+        "sql": "SELECT count(*) FROM College WHERE enr  >  15000"
+    },
+    {
+        "question": "What is the average training hours of all players?",
+        "sql": "SELECT avg(HS) FROM Player"
+    },
+    {
+        "question": "How many hours do the players train on average?",
+        "sql": "SELECT avg(HS) FROM Player"
+    },
+    {
+        "question": "Find the name and training hours of players whose hours are below 1500.",
+        "sql": "SELECT pName ,  HS FROM Player WHERE HS  <  1500"
+    },
+    {
+        "question": "What are the names and number of hours spent training for each player who trains for less than 1500 hours?",
+        "sql": "SELECT pName ,  HS FROM Player WHERE HS  <  1500"
+    },
+    {
+        "question": "How many different colleges do attend the tryout test?",
+        "sql": "SELECT count(DISTINCT cName) FROM tryout"
+    },
+    {
+        "question": "How many different colleges were represented at tryouts?",
+        "sql": "SELECT count(DISTINCT cName) FROM tryout"
+    },
+    {
+        "question": "What are the unique types of player positions in the tryout?",
+        "sql": "SELECT count(DISTINCT pPos) FROM tryout"
+    },
+    {
+        "question": "What are the different types of player positions?",
+        "sql": "SELECT count(DISTINCT pPos) FROM tryout"
+    },
+    {
+        "question": "How many students got accepted after the tryout?",
+        "sql": "SELECT count(*) FROM tryout WHERE decision  =  'yes'"
+    },
+    {
+        "question": "How many students received a yes from tryouts?",
+        "sql": "SELECT count(*) FROM tryout WHERE decision  =  'yes'"
+    },
+    {
+        "question": "How many students whose are playing the role of goalie?",
+        "sql": "SELECT count(*) FROM tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "question": "What is the number of students playing as a goalie?",
+        "sql": "SELECT count(*) FROM tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "question": "Find the max, average and min training hours of all players.",
+        "sql": "SELECT avg(HS) ,  max(HS) ,  min(HS) FROM Player"
+    },
+    {
+        "question": "What is the average, maximum, and minimum for the number of hours spent training?",
+        "sql": "SELECT avg(HS) ,  max(HS) ,  min(HS) FROM Player"
+    },
+    {
+        "question": "What is average enrollment of colleges in the state FL?",
+        "sql": "SELECT avg(enr) FROM College WHERE state  =  'FL'"
+    },
+    {
+        "question": "What is average number of students enrolled in Florida colleges?",
+        "sql": "SELECT avg(enr) FROM College WHERE state  =  'FL'"
+    },
+    {
+        "question": "What are the names of players whose training hours is between 500 and 1500?",
+        "sql": "SELECT pName FROM Player WHERE HS BETWEEN 500 AND 1500"
+    },
+    {
+        "question": "What are the names of players who train between 500 and 1500 hours?",
+        "sql": "SELECT pName FROM Player WHERE HS BETWEEN 500 AND 1500"
+    },
+    {
+        "question": "Find the players whose names contain letter 'a'.",
+        "sql": "SELECT DISTINCT pName FROM Player WHERE pName LIKE '%a%'"
+    },
+    {
+        "question": "Who are the players that have names containing the letter a?",
+        "sql": "SELECT DISTINCT pName FROM Player WHERE pName LIKE '%a%'"
+    },
+    {
+        "question": "Find the name, enrollment of the colleges whose size is bigger than 10000 and location is in state LA.",
+        "sql": "SELECT cName ,  enr FROM College WHERE enr  >  10000 AND state = \"LA\""
+    },
+    {
+        "question": "What are the names and enrollment numbers for colleges that have more than 10000 enrolled and are located in Louisiana?",
+        "sql": "SELECT cName ,  enr FROM College WHERE enr  >  10000 AND state = \"LA\""
+    },
+    {
+        "question": "List all information about college sorted by enrollment number in the ascending order.",
+        "sql": "SELECT * FROM College ORDER BY enr"
+    },
+    {
+        "question": "What information do you have on colleges sorted by increasing enrollment numbers?",
+        "sql": "SELECT * FROM College ORDER BY enr"
+    },
+    {
+        "question": "List the name of the colleges whose enrollment is greater 18000 sorted by the college's name.",
+        "sql": "SELECT cName FROM College WHERE enr  >  18000 ORDER BY cName"
+    },
+    {
+        "question": "What is the name of every college in alphabetical order that has more than 18000 students enrolled?",
+        "sql": "SELECT cName FROM College WHERE enr  >  18000 ORDER BY cName"
+    },
+    {
+        "question": "Find the name of players whose card is yes in the descending order of training hours.",
+        "sql": "SELECT pName FROM Player WHERE yCard  =  'yes' ORDER BY HS DESC"
+    },
+    {
+        "question": "What are the name of the players who received a card in descending order of the hours of training?",
+        "sql": "SELECT pName FROM Player WHERE yCard  =  'yes' ORDER BY HS DESC"
+    },
+    {
+        "question": "Find the name of different colleges involved in the tryout in alphabetical order.",
+        "sql": "SELECT DISTINCT cName FROM tryout ORDER BY cName"
+    },
+    {
+        "question": "What are the different names of the colleges involved in the tryout in alphabetical order?",
+        "sql": "SELECT DISTINCT cName FROM tryout ORDER BY cName"
+    },
+    {
+        "question": "Which position is most popular among players in the tryout?",
+        "sql": "SELECT pPos FROM tryout GROUP BY pPos ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "What was the most popular position at tryouts?",
+        "sql": "SELECT pPos FROM tryout GROUP BY pPos ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "question": "Find the number of students who participate in the tryout for each college ordered by descending count.",
+        "sql": "SELECT count(*) ,  cName FROM tryout GROUP BY cName ORDER BY count(*) DESC"
+    },
+    {
+        "question": "How many students participated in tryouts for each college by descennding count?",
+        "sql": "SELECT count(*) ,  cName FROM tryout GROUP BY cName ORDER BY count(*) DESC"
+    },
+    {
+        "question": "What is minimum hours of the students playing in different position?",
+        "sql": "SELECT min(T2.HS) ,   T1.pPos FROM tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID GROUP BY T1.pPos"
+    },
+    {
+        "question": "For each position, what is the minimum time students spent practicing?",
+        "sql": "SELECT min(T2.HS) ,   T1.pPos FROM tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID GROUP BY T1.pPos"
+    },
+    {
+        "question": "What are the names of schools with the top 3 largest size?",
+        "sql": "SELECT cName FROM college ORDER BY enr DESC LIMIT 3"
+    },
+    {
+        "question": "What are the names of the schools with the top 3 largest class sizes?",
+        "sql": "SELECT cName FROM college ORDER BY enr DESC LIMIT 3"
+    },
+    {
+        "question": "What is the name of school that has the smallest enrollment in each state?",
+        "sql": "SELECT cName ,  state FROM college GROUP BY state HAVING enr  =  min(enr)"
+    },
+    {
+        "question": "What is the name of the school with smallest enrollment size per state?",
+        "sql": "SELECT cName ,  state FROM college GROUP BY state HAVING enr  =  min(enr)"
+    },
+    {
+        "question": "Find the states where have some college students in tryout.",
+        "sql": "SELECT DISTINCT state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName"
+    },
+    {
+        "question": "What are the different states that have students trying out?",
+        "sql": "SELECT DISTINCT state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName"
+    },
+    {
+        "question": "Find the states where have some college students in tryout and their decisions are yes.",
+        "sql": "SELECT DISTINCT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "What are the different states that had students successfully try out?",
+        "sql": "SELECT DISTINCT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "Find the name and college of students whose decisions are yes in the tryout.",
+        "sql": "SELECT T1.pName ,  T2.cName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "What are the names of all the players who received a yes during tryouts, and also what are the names of their colleges?",
+        "sql": "SELECT T1.pName ,  T2.cName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "Find the name of all students who were in the tryout sorted in alphabetic order.",
+        "sql": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID ORDER BY T1.pName"
+    },
+    {
+        "question": "What are the names of all students who tried out in alphabetical order?",
+        "sql": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID ORDER BY T1.pName"
+    },
+    {
+        "question": "Find the name and hours of the students whose tryout decision is yes.",
+        "sql": "SELECT T1.pName ,  T1.HS FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "What are the names and hours spent practicing of every student who received a yes at tryouts?",
+        "sql": "SELECT T1.pName ,  T1.HS FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "Find the states of the colleges that have students in the tryout who played in striker position.",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'striker'"
+    },
+    {
+        "question": "What are the states of the colleges where students who tried out for the striker position attend?",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'striker'"
+    },
+    {
+        "question": "Find the names of the students who are in the position of striker and got a yes tryout decision.",
+        "sql": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes' AND T2.pPos  =  'striker'"
+    },
+    {
+        "question": "What are the names of all students who successfully tried out for the position of striker?",
+        "sql": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes' AND T2.pPos  =  'striker'"
+    },
+    {
+        "question": "Find the state of the college which player Charles is attending.",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName JOIN player AS T3 ON T2.pID  =  T3.pID WHERE T3.pName  =  'Charles'"
+    },
+    {
+        "question": "In which state is the college that Charles attends?",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName JOIN player AS T3 ON T2.pID  =  T3.pID WHERE T3.pName  =  'Charles'"
+    },
+    {
+        "question": "Find the average and maximum hours for the students whose tryout decision is yes.",
+        "sql": "SELECT avg(T1.HS) ,  max(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "What is the average and maximum number of hours students who made the team practiced?",
+        "sql": "SELECT avg(T1.HS) ,  max(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "Find the average hours for the students whose tryout decision is no.",
+        "sql": "SELECT avg(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'no'"
+    },
+    {
+        "question": "What is the average number of hours spent practicing for students who got rejected?",
+        "sql": "SELECT avg(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'no'"
+    },
+    {
+        "question": "What is the maximum training hours for the students whose training hours is greater than 1000 in different positions?",
+        "sql": "SELECT max(T1.HS) ,  pPos FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T1.HS  >  1000 GROUP BY T2.pPos"
+    },
+    {
+        "question": "For each position, what is the maximum number of  hours for students who spent more than 1000 hours training?",
+        "sql": "SELECT max(T1.HS) ,  pPos FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T1.HS  >  1000 GROUP BY T2.pPos"
+    },
+    {
+        "question": "Which colleges do the tryout players whose name starts with letter D go to?",
+        "sql": "SELECT T1.cName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T2.pName LIKE 'D%'"
+    },
+    {
+        "question": "Which colleges does each player with a name that starts with the letter D  who tried out go to?",
+        "sql": "SELECT T1.cName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T2.pName LIKE 'D%'"
+    },
+    {
+        "question": "Which college has any student who is a goalie and succeeded in the tryout.",
+        "sql": "SELECT cName FROM  tryout WHERE decision  =  'yes' AND pPos  =  'goalie'"
+    },
+    {
+        "question": "What college has a student who successfully made the team in the role of a goalie?",
+        "sql": "SELECT cName FROM  tryout WHERE decision  =  'yes' AND pPos  =  'goalie'"
+    },
+    {
+        "question": "Find the name of the tryout players who are from the college with largest size.",
+        "sql": "SELECT T2.pName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T1.cName  =  (SELECT cName FROM college ORDER BY enr DESC LIMIT 1) S: What IS the largest college? S: What ARE the NAMES OF players ARE FROM that college? S: OF those ,  who tried OUT FOR the team?"
+    },
+    {
+        "question": "What are the names of all tryout participants who are from the largest college?",
+        "sql": "SELECT T2.pName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T1.cName  =  (SELECT cName FROM college ORDER BY enr DESC LIMIT 1) S: What IS the largest college? S: What ARE the NAMES OF players ARE FROM that college? S: OF those ,  who tried OUT FOR the team?"
+    },
+    {
+        "question": "What is the state and enrollment of the colleges where have any students who got accepted in the tryout decision.",
+        "sql": "SELECT DISTINCT T1.state ,  T1.enr FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "How many students are enrolled in colleges that have student accepted during tryouts, and in which states are those colleges?",
+        "sql": "SELECT DISTINCT T1.state ,  T1.enr FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "question": "Find the names of all the players who have yCards AND hours less than some other Player.",
+        "sql": "SELECT DISTINCT T1.pName FROM Player AS T1 ,  Player AS T2 WHERE T1.yCard  =  \"yes\" AND T1.HS  <  T2.HS;"
+    },
+    {
+        "question": "What are the names of all the players who have yCards and practiced for less time than some other player?",
+        "sql": "SELECT DISTINCT T1.pName FROM Player AS T1 ,  Player AS T2 WHERE T1.yCard  =  \"yes\" AND T1.HS  <  T2.HS;"
+    },
+    {
+        "question": "Find the names of either colleges in LA with greater than 15000 size or in state AZ with less than 13000 enrollment.",
+        "sql": "SELECT cName FROM College WHERE enr  <  13000 AND state = \"AZ\" UNION SELECT cName FROM College WHERE enr  >  15000 AND state = \"LA\""
+    },
+    {
+        "question": "What are the names of colleges in LA that have more than 15,000 students and of colleges in AZ with less than 13,000 students?",
+        "sql": "SELECT cName FROM College WHERE enr  <  13000 AND state = \"AZ\" UNION SELECT cName FROM College WHERE enr  >  15000 AND state = \"LA\""
+    },
+    {
+        "question": "Find the names of schools that have some students playing in goalie and mid positions.",
+        "sql": "SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid'"
+    },
+    {
+        "question": "What are the names of all schools that have students trying out for the position of goal and 'mid'-field.",
+        "sql": "SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid'"
+    },
+    {
+        "question": "Find the names of states that have some college students playing in goalie and mid positions.",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie' INTERSECT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid'"
+    },
+    {
+        "question": "What are the names of the states that have some college students playing in the positions of goalie and mid-field?",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie' INTERSECT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid'"
+    },
+    {
+        "question": "How many schools have some students playing in goalie and mid positions.",
+        "sql": "SELECT COUNT(*) FROM (SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid')"
+    },
+    {
+        "question": "How many schools have students playing in goalie and mid-field positions?",
+        "sql": "SELECT COUNT(*) FROM (SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid')"
+    },
+    {
+        "question": "Find the names of schools that have some players in the mid position but not in the goalie position.",
+        "sql": "SELECT cName FROM  tryout WHERE pPos  =  'mid' EXCEPT SELECT cName FROM  tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "question": "What are the names of the schools with some players in the mid position but no goalies?",
+        "sql": "SELECT cName FROM  tryout WHERE pPos  =  'mid' EXCEPT SELECT cName FROM  tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "question": "Find the names of states that have some college students playing in the mid position but not in the goalie position.",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie'"
+    },
+    {
+        "question": "What are the names of all the states with college students playing in the mid position but no goalies?",
+        "sql": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie'"
+    },
+    {
+        "question": "How many states that have some college students playing in the mid position but not in the goalie position.",
+        "sql": "SELECT COUNT(*) FROM (SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie')"
+    },
+    {
+        "question": "What is the count of states with college students playing in the mid position but not as goalies?",
+        "sql": "SELECT COUNT(*) FROM (SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie')"
+    },
+    {
+        "question": "Find the states where have the colleges whose enrollments are less than the largest size.",
+        "sql": "SELECT DISTINCT T1.state FROM college AS T1 ,  college AS T2 WHERE T1.enr  <  T2.enr"
+    },
+    {
+        "question": "What are the states with colleges that have enrollments less than the some other college?",
+        "sql": "SELECT DISTINCT T1.state FROM college AS T1 ,  college AS T2 WHERE T1.enr  <  T2.enr"
+    },
+    {
+        "question": "Find names of colleges with enrollment greater than that of some (at least one) college in the FL state.",
+        "sql": "SELECT DISTINCT T1.cName FROM college AS T1 ,  college AS T2 WHERE T1.enr  >  T2.enr AND T2.state  =  'FL'"
+    },
+    {
+        "question": "What are the names of the colleges that are larger than at least one college in Florida?",
+        "sql": "SELECT DISTINCT T1.cName FROM college AS T1 ,  college AS T2 WHERE T1.enr  >  T2.enr AND T2.state  =  'FL'"
+    },
+    {
+        "question": "Find names of all colleges whose enrollment is greater than that of all colleges in the FL state.",
+        "sql": "SELECT cName FROM college WHERE enr  >  (SELECT max(enr) FROM college WHERE state  =  'FL')"
+    },
+    {
+        "question": "What are the names of all colleges with a larger enrollment than the largest college in Florida?",
+        "sql": "SELECT cName FROM college WHERE enr  >  (SELECT max(enr) FROM college WHERE state  =  'FL')"
+    },
+    {
+        "question": "What is the total number of enrollment of schools that do not have any goalie player?",
+        "sql": "SELECT sum(enr) FROM college WHERE cName NOT IN (SELECT cName FROM tryout WHERE pPos  =  \"goalie\")"
+    },
+    {
+        "question": "What is the total number of students enrolled in schools without any goalies?",
+        "sql": "SELECT sum(enr) FROM college WHERE cName NOT IN (SELECT cName FROM tryout WHERE pPos  =  \"goalie\")"
+    },
+    {
+        "question": "What is the number of states that has some college whose enrollment is larger than the average enrollment?",
+        "sql": "SELECT count(DISTINCT state) FROM college WHERE enr  >  (SELECT avg(enr) FROM college)"
+    },
+    {
+        "question": "How many states have a college with more students than average?",
+        "sql": "SELECT count(DISTINCT state) FROM college WHERE enr  >  (SELECT avg(enr) FROM college)"
+    },
+    {
+        "question": "What is the number of states that has some colleges whose enrollment is smaller than the average enrollment?",
+        "sql": "SELECT count(DISTINCT state) FROM college WHERE enr  <  (SELECT avg(enr) FROM college)"
+    },
+    {
+        "question": "How many states have smaller colleges than average?",
+        "sql": "SELECT count(DISTINCT state) FROM college WHERE enr  <  (SELECT avg(enr) FROM college)"
+    }
+]
