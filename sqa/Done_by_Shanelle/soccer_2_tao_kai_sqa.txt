@@ -448,9 +448,9 @@ S: Which of those practiced for less time than another player?
 42. Find the names of either colleges in LA with greater than 15000 size or in state AZ with less than 13000 enrollment.
 P: What are the names of colleges in LA that have more than 15,000 students and of colleges in AZ with less than 13,000 students?
 
-(SELECT cName FROM College WHERE enr < 13000 AND state="AZ")
+SELECT cName FROM College WHERE enr < 13000 AND state="AZ"
 UNION
-(SELECT cName FROM College WHERE enr > 15000 AND state="LA")
+SELECT cName FROM College WHERE enr > 15000 AND state="LA"
 
 S: What are the names of colleges with less than 13,000 students?
 S: Which of those are in AZ?
