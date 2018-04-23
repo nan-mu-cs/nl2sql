@@ -547,7 +547,7 @@ From customers
 Order by LastName
 
 28. Return the ordered list of all good ids.
-S: Order the distinct good ids. 
+P: Order the distinct good ids. 
 
 Select distinct id
 From goods
