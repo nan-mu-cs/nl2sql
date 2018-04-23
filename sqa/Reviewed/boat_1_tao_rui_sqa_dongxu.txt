@@ -756,7 +756,7 @@ SELECT rating FROM Sailors
 SELECT max(rating) FROM Sailors
 
 38. Find the names of sailors who reserved boat with the name Melon.
-What are the names of sailors who reserved a boat with the name Melon?
+P: What are the names of sailors who reserved a boat with the name Melon?
 
 SELECT T1.name
 FROM Sailors as T1 
@@ -777,7 +777,7 @@ WHERE T3.name = 'Melon'
 
 
 39. List the names and ages of all sailors sorted by rating in descending order.
-What are the names and ages of all sailors sorted by decreasing rating?
+P: What are the names and ages of all sailors sorted by decreasing rating?
 
 SELECT name, age
 FROM Sailors
