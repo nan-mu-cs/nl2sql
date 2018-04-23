@@ -349,7 +349,7 @@ ORDER BY count(*) desc
 LIMIT 1
 
 20. Find the name of the department that has no students minored in?
-S: What is the name of the department htat has no students minoring in it?
+P: What is the name of the department htat has no students minoring in it?
 
 SELECT DName FROM DEPARTMENT 
 EXCEPT
