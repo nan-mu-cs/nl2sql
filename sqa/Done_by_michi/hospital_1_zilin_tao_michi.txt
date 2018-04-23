@@ -528,7 +528,7 @@ where T3.name = "Thesisin"
  
 
 23. Find the name and position of physicians who prescribe some medication whose brand is X?
-Which physicians prescribe a medication of brand X? Tell me the name and position of those physicians.
+P: Which physicians prescribe a medication of brand X? Tell me the name and position of those physicians.
 
 SELECT distinct T1.name, T1.position
 FROM physician as T1 join prescribes as T2 on T1.employeeid=T2.physician join medication as T3 on T3.code=T2.medication
