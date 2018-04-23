@@ -108,7 +108,7 @@ S:
 
 
 10.Count the number of packages sent by Ogden Wernstrom and received by Leo Wong.
-How many packages sent by Ogden Wernstrom and received by Leo Wong?
+P: How many packages sent by Ogden Wernstrom and received by Leo Wong?
 
 SELECT T1.PackageNumber
 FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
