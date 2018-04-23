@@ -1,4 +1,4 @@
-Total # = 40
+Total # = 37
 
 1. How many courses are there in total?
 P: Count the number of courses.

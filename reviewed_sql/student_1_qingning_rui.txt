@@ -1,0 +1,254 @@
+# Total number = 37
+
+1. Find the number of students in total.
+
+select count(*)
+from list
+
+2. Find the lastname of students studying in room 111.
+
+select lastname
+from list
+where classroom = 111
+
+Find the firstname of students studying in room 108.
+
+select firstname
+from list
+where classroom = 108
+
+What are the first names of students studying in room 107?
+
+select distinct firstname
+from list
+where classroom = 107
+
+3. For each classroom report the grade that is taught in it. Report just the classroom number and the grade number.
+
+select distinct classroom, grade
+from list
+
+4. Which grade is studying in classroom 103?
+
+select distinct grade
+from list
+where classroom = 103
+
+Find the grade studying in room 105.
+
+select distinct grade
+from list
+where classroom = 105
+
+5. Which classrooms are used by grade 4?
+
+select distinct classroom
+from list
+where grade = 4
+
+Which classrooms are used by grade 5?
+
+select distinct classroom
+from list
+where grade = 5
+
+6. Find the last names of the teachers that teach fifth grade.
+
+select distinct T2.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where grade = 5
+
+Find the first names of the teachers that teach first grade.
+
+select distinct T2.firstname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where grade = 1
+
+7. Find all the first names of teachers that teach in classroom 110.
+
+select firstname
+from teachers
+where classroom = 110
+
+Find the last names of teachers teaching in classroom 109.
+
+select lastname
+from teachers
+where classroom = 109
+
+8. Report the first name and last name of all the teachers.
+
+select distinct firstname, lastname
+from teachers
+
+9. Report the first name and last name of all the students.
+
+select distinct firstname, lastname
+from list
+
+10. Find all students taught by OTHA MOYER. Output first and last names of students.
+
+select T1.firstname, T1.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T2.firstname = "OTHA" and T2.lastname = "MOYER"
+
+Find all students taught by MARROTTE KIRK. Output first and last names of students.
+
+select T1.firstname, T1.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T2.firstname = "MARROTTE" and T2.lastname = "KIRK"
+
+11. Find the first and last name of all the teachers that teaches EVELINA BROMLEY.
+
+select T2.firstname, T2.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T1.firstname = "EVELINA" and T1.lastname = "BROMLEY"
+
+Find the last names of all the teachers that teaches GELL TAMI.
+
+select T2.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T1.firstname = "GELL" and T1.lastname = "TAMI"
+
+12. How many students does LORIA ONDERSMA teaches?
+
+select count(*)
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T2.firstname = "LORIA" and T2.lastname = "ONDERSMA"
+
+How many students does KAWA GORDON teaches?
+
+select count(*)
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T2.firstname = "KAWA" and T2.lastname = "GORDON"
+
+Find the number of students taught by TARRING LEIA.
+
+select count(*)
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T2.firstname = "TARRING" and T2.lastname = "LEIA"
+
+13. How many teachers does CHRISSY NABOZNY have?
+
+select count(*)
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T1.firstname = "CHRISSY" and T1.lastname = "NABOZNY"
+
+How many teachers does the student named MADLOCK RAY have?
+
+select count(*)
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T1.firstname = "MADLOCK" and T1.lastname = "RAY"
+
+14. Find all first-grade students who are NOT taught by OTHA MOYER. Report their first and last names.
+
+select distinct T1.firstname, T1.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T1.grade = 1
+except
+select T1.firstname, T1.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T2.firstname = "OTHA" and T2.lastname = "MOYER"
+
+alternative:
+
+select distinct T1.firstname, T1.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T1.grade = 1 and T2.firstname != "OTHA" and T2.lastname != "MOYER"
+
+Find the last names of students in third grade that are not taught by COVIN JEROME.
+
+select distinct T1.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+where T1.grade = 3 and T2.firstname != "COVIN" and T2.lastname != "JEROME"
+
+15. For each grade, report the number of classrooms in which it is taught and the toal number of students in the grade.
+
+select grade, count(distinct classroom), count(*)
+from list
+group by grade
+
+16. For each classroom, report the number of grades using it.
+
+select classroom, count(distinct grade)
+from list
+group by classroom
+
+17. Which classroom has the most students?
+
+select classroom
+from list
+group by classroom
+order by count(*) desc
+limit 1
+
+18. Report the number of students in each classroom.
+
+select classroom, count(*)
+from list
+group by classroom
+
+19. For each kindergarden classroom, report the total number of students.
+
+select classroom, count(*)
+from list
+where grade = "0"
+group by classroom
+
+Report the total number of students for each fourth-grade classroom.
+
+select classroom, count(*)
+from list
+where grade = "4"
+group by classroom
+
+20. Find the teacher name who teach(es) the largest number of students.
+
+select T2.firstname, T2.lastname
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+group by T2.firstname, T2.lastname
+order by count(*) desc
+limit 1
+
+21. Find the average amount of student in one classroom.
+
+Warning: used subquery!
+
+select avg(cnt) from
+(select count(*) as cnt
+from list
+group by classroom)
+
+22. Report the names of teachers who have between seven and eight students in their classes.
+
+select firstname, lastname from
+(select T2.firstname as firstname, T2.lastname as lastname, count(*) as cnt
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+group by T2.firstname, T2.lastname)
+where cnt >= 7 and cnt <= 8
+
+Find the last names of teachers who have between 3 and 6 students in their classes.
+
+select lastname from
+(select T2.firstname as firstname, T2.lastname as lastname, count(*) as cnt
+from list as T1 join teachers as T2
+on T1.classroom = T2.classroom
+group by T2.firstname, T2.lastname)
+where cnt >= 3 and cnt <= 6

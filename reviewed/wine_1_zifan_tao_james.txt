@@ -1,4 +1,4 @@
-Total # = 40
+Total # = 41
 
 1. What is the name of the highest rated wine?
 P: Give the name of the wine with the highest score.

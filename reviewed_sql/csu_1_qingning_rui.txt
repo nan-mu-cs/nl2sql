@@ -1,0 +1,343 @@
+Total = 50
+
+1. Report the name of all campuses in Los Angeles county.
+
+select campus
+from campuses
+where county = "Los Angeles"
+
+What are the names of all campuses in Chico?
+
+select campus
+from campuses
+where location = "Chico"
+
+Find all the campuses opened in 1958.
+
+select campus
+from campuses
+where year = 1958
+
+2. Find the name of the campuses opened before 1800.
+
+select campus
+from campuses
+where year < 1800
+
+Which campus was opened between 1935 and 1939?
+
+select campus
+from campuses
+where year >= 1935 and year <= 1939
+
+3. Find the name of the campuses that is in Northridge, Los Angeles or in San Francisco, San Francisco.
+
+select campus from campuses where location = "Northridge" and county = "Los Angeles"
+union
+select campus from campuses where location = "San Francisco" and county = "San Francisco"
+
+Or, alternatively:
+
+select campus
+from campuses
+where (location = "Northridge" and county = "Los Angeles") or (location = "San Francisco" and county = "San Francisco") 
+
+4. What is the campus fee of "San Jose State University" in year 1996?
+
+select campusfee
+from campuses as T1 join "csu-fees" as T2
+on T1.id = t2.campus
+where t1.campus = "San Jose State University" and T2.year = 1996
+
+What is the campus fee of "San Francisco State University" in year 1996?
+
+select campusfee
+from campuses as T1 join "csu-fees" as T2
+on T1.id = t2.campus
+where t1.campus = "San Francisco State University" and T2.year = 1996
+
+5. Find the count of universities whose campus fee is greater than the average campus fee in 1996.
+
+select count(*)
+from "csu-fees"
+where campusfee > (select avg(campusfee) from "csu-fees")
+
+Find the count of universities whose campus fee is greater than two times the average campus fee in 1996.
+
+select count(*)
+from "csu-fees"
+where campusfee > 1.1 * (select avg(campusfee) from "csu-fees")
+
+6. Which university is in Los Angeles county and opened after 1950?
+
+select campus
+from campuses
+where county = "Los Angeles" and year > 1950
+
+Or, alternatively:
+
+select campus
+from campuses
+where county = "Los Angeles" 
+intersect
+select campus
+from campuses
+where year > 1950
+
+7. Which year has the most degrees conferred?
+
+select year
+from degrees
+group by year
+order by sum(degrees) desc
+limit 1
+
+Which campus has the most degrees conferred in all times?
+
+select T1.campus
+from degrees as T1 join campuses as T2
+group by campus
+order by sum(degrees) desc
+limit 1
+
+8. Which discipline has the most enrollments?
+
+select T1.name
+from disciplines as T1 join "discipline-enrollments" as T2
+on T2.discipline = T1.id
+group by T1.name
+order by count(*) desc
+limit 1
+
+9. What is the name and number of full-time students are there in the campus that has the most "Computer and Info. Sciences" students enrolled in year 2004.
+
+select T1.campus, T2.FTE_AY
+from campuses as T1 join enrollments as T2
+on T1.id = T2.campus
+join "discipline-enrollments" as T3
+on T3.campus = T1.id
+join disciplines as T4
+on T3.discipline = T4.id
+where t3.year = 2004 and T4.name = "Computer and Info. Sciences"
+group by T3.campus
+order by count(*) desc
+limit 1
+
+What is the name and number of all enrolled students are there in the campus that has the most "Agriculture" students enrolled in year 2004.
+
+select T1.campus, T2.totalenrollment_ay
+from campuses as T1 join enrollments as T2
+on T1.id = T2.campus
+join "discipline-enrollments" as T3
+on T3.campus = T1.id
+join disciplines as T4
+on T3.discipline = T4.id
+where t3.year = 2004 and T4.name = "Agriculture"
+group by T3.campus
+order by count(*) desc
+limit 1
+
+10. Which campus has the most faculties in year 2003?
+
+select T1.campus
+from campuses as T1 join faculty as T2
+on T1.id = T2.campus
+where T2.year = 2003
+order by T2.faculty desc
+limit 1
+
+11. Find the average fee on a CSU campus in 1996
+
+select avg(campusfee)
+from "csu-fees"
+where year = 1996
+
+What is the average fee on a CSU campus in 2005?
+
+select avg(campusfee)
+from "csu-fees"
+where year = 2005
+
+12. For each campus in LA and Orange counties report the total number of degrees granted between 1998 and 2002.
+
+select T1.campus, sum(T2.degrees)
+from campuses as T1 join degrees as T2
+on T1.id = T2.campus
+where (T1.county = "Los Angeles" or T1.county = "Orange") and T2.year >= 1998 and T2.year <= 2002
+group by T1.campus
+
+For each Orange county campus, report the number of degrees granted after 2000.
+
+select T1.campus, sum(T2.degrees)
+from campuses as T1 join degrees as T2
+on T1.id = T2.campus
+where T1.county = "Orange" and T2.year >= 2000
+group by T1.campus
+
+13. Find the names of the campus which has more faculties in 2002 than every campus in Orange county.
+
+select T1.campus
+from campuses as T1 join faculty as T2
+on T1.id = T2.campus
+where T2.year = 2002 and faculty >
+    (select max(faculty)
+    from campuses as T1 join faculty as T2
+    on T1.id = T2.campus
+    where T2.year = 2002 and T1.county = "Orange")
+
+What campus has more faculties in 1998 than all campuses in Los Angeles?
+
+select T1.campus
+from campuses as T1 join faculty as T2
+on T1.id = T2.campus
+where T2.year = 1998 and faculty >
+    (select max(faculty)
+    from campuses as T1 join faculty as T2
+    on T1.id = T2.campus
+    where T2.year = 1998 and T1.county = "Los Angeles")
+
+14. What campus had more than 400 total enrollment but less than 200 full time enrollment in year 1959?
+
+select T1.campus
+from campuses as t1 join enrollments as t2
+on t1.id = t2.campus
+where t2.year = 1956 and totalenrollment_ay > 400
+intersect
+select T1.campus
+from campuses as t1 join enrollments as t2
+on t1.id = t2.campus
+where t2.year = 1956 and FTE_AY > 200
+
+15. What is the total number of students with discipline "Computer and Info. Sciences" in 2004?
+
+select sum(t1.undergraduate) + sum(t1.graduate)
+from "discipline-enrollments" as T1 join disciplines as T2
+on t1.discipline = t2.id
+where t1.year = 2004 and t2.name = "Computer and Info. Sciences"
+
+16. How many campuses are there in Los Angeles county?
+
+select count(*)
+from campuses
+where county = "Los Angeles"
+
+List the campuses in Los Angeles county.
+
+select campus
+from campuses
+where county = "Los Angeles"
+
+17. How many degrees were conferred in "San Jose State University" in 2000?
+
+select degrees
+from campuses as T1 join degrees as T2
+on t1.id = t2.campus
+where t1.campus = "San Jose State University" and t2.year = 2000
+
+Find the number of degrees conferred in "San Francisco State University" in 2001.
+
+select degrees
+from campuses as T1 join degrees as T2
+on t1.id = t2.campus
+where t1.campus = "San Francisco State University" and t2.year = 2001
+
+18. How many faculty is there in total in the year of 2002?
+
+select sum(faculty)
+from faculty
+where year = 2002
+
+19. What is the number of faculty lines in "Long Beach State University" in 2002?
+
+select faculty
+from faculty as T1 join campuses as T2
+on T1.campus = T2.id
+where T1.year = 2002 and T2.campus = "Long Beach State University"
+
+How many faculty lines are there in "San Francisco State University" in year 2004?
+
+select faculty
+from faculty as T1 join campuses as T2
+on T1.campus = T2.id
+where T1.year = 2004 and T2.campus = "San Francisco State University"
+
+20. List the universities that has between 600 and 1000 faculty lines in year 2004.
+
+select T1.campus
+from campuses as t1 join faculty as t2
+on t1.id = t2.campus
+where t2.faculty > 600 and t2.faculty < 1000
+
+21. How many faculty lines are there in the university that conferred the most number of degrees in year 2002?
+
+select T2.faculty
+from campuses as T1 join faculty as T2
+on T1.id = t2.campus
+join degrees as T3
+on T1.id = t3.campus and t2.year = t3.year
+where t2.year = 2002
+order by t3.degrees desc
+limit 1
+
+How many faculty lines are there in the university that conferred the least number of degrees in year 2001?
+
+select T2.faculty
+from campuses as T1 join faculty as T2
+on T1.id = t2.campus
+join degrees as T3
+on T1.id = t3.campus and t2.year = t3.year
+where t2.year = 2001
+order by t3.degrees
+limit 1
+
+22. How many undergraduates are there in "San Jose State University" in year 2004?
+
+select sum(t1.undergraduate)
+from "discipline-enrollments" as t1 join campuses as t2
+on t1.campus = t2.id
+where t1.year = 2004 and t2.campus = "San Jose State University" 
+
+What is the number of graduates in "San Francisco State University" in year 2004?
+
+select sum(t1.graduates)
+from "discipline-enrollments" as t1 join campuses as t2
+on t1.campus = t2.id
+where t1.year = 2004 and t2.campus = "San Francisco State University" 
+
+23. How many students studying "Engineering" are enrolled in 2004?
+
+select sum(t2.undergraduate + t2.graduate)
+from disciplines as T1 join "discipline-enrollments" as T2
+on T1.id = T2.discipline
+where t1.name = "Engineering" and t2.year = 2004
+
+How many students studying "Communications" are enrolled in 2004?
+
+select sum(t2.undergraduate + t2.graduate)
+from disciplines as T1 join "discipline-enrollments" as T2
+on T1.id = T2.discipline
+where t1.name = "Communications" and t2.year = 2004
+
+24. What is the campus fee of "San Francisco State University" in year 2000?
+
+select t1.campusfee
+from "csu-fees" as t1 join campuses as t2
+on t1.campus = t2.id
+where t2.campus = "San Francisco State University" and t1.year = 2000
+
+Find the campus fee of "San Jose State University" in year 2000.
+
+select t1.campusfee
+from "csu-fees" as t1 join campuses as t2
+on t1.campus = t2.id
+where t2.campus = "San Jose State University" and t1.year = 2000
+
+25. How many CSU campuses are there?
+
+select count(*)
+from campuses
+
+How many disciplines are there?
+
+select count(*)
+from disciplines

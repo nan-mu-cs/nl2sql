@@ -1,0 +1,315 @@
+Total = 35
+
+1. How many clubs are there?
+
+select count(*)
+from club
+
+What are the name of all clubs?
+
+select clubname
+from club
+
+How many students are there?
+
+select count(*)
+from student
+
+What are the first names of all the students.
+
+select distinct fname
+from student
+
+2. Find the last names of the members of the club "Bootup Baltimore".
+
+select t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore"
+
+Who are the members of the club named "Hopkins Student Enterprises"?
+
+COMMENT: should be more sepecific about t3.lname.
+         do NOT write sql with where =  one sepecific value
+
+select t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises"
+
+
+3. How many members does the club "Tennis Club" has?
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Tennis Club"
+
+Find the number of members of club "Pen and Paper Gaming".
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Pen and Paper Gaming"
+
+4. How many clubs does "Linda Smith" belong to?
+
+COMMENT: should be more sepecific for t3.fname = "Linda" and t3.lname = "Smith"
+         select count(*) can be more diverse. you asked TOO MANY times! for example, select club name and location etc.
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Linda" and t3.lname = "Smith"
+
+Find the number of clubs where "Tracy Kim" is a member.
+
+COMMENT: again
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Tracy" and t3.lname = "Kim"
+
+5. Find all the female members of club "Bootup Baltimore"
+
+COMMENT: should be more sepecific female members (sex is 'F')
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.sex = "F"
+
+Find all the male members of club "Hopkins Student Enterprises"
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises" and t3.sex = "M"
+
+6. Find all members of "Bootup Baltimore" whose major is "600".
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.major = "600"
+
+7. Which club has the most members majoring in "600"?
+
+COMMENT: as you know, 600 is just a major code and has no other meaningful sense. do not ask where major = ..., it is fine to select major. Here you can ask Which club has the most number of members who are younger than 30?
+
+select t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.major = "600"
+group by t1.clubname
+order by count(*) desc
+limit 1
+
+Find the name of the club that has the most female students.
+
+COMMENT: should be more sepecific female members (sex is 'F')
+
+select t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.sex = "F"
+group by t1.clubname
+order by count(*) desc
+limit 1
+
+8. What is the description of club named "Tennis Club"?
+
+COMMENT: TOO many sql with the same patterns with where = one value
+
+select clubdesc
+from club
+where clubname = "Tennis Club"
+
+Find the description of club "Pen and Paper Gaming".
+
+select clubdesc
+from club
+where clubname = "Pen and Paper Gaming"
+
+9. What is the location of club named "Tennis Club"?
+
+select clublocation
+from club
+where clubname = "Tennis Club"
+
+Find the description of club "Pen and Paper Gaming".
+
+select clublocation
+from club
+where clubname = "Pen and Paper Gaming"
+
+Where is club "Hopkins Student Enterprises" located?
+
+select clublocation
+from club
+where clubname = "Hopkins Student Enterprises"
+
+10. Find the name of all clubs at "AKW".
+
+select clubname
+from club
+where clublocation = "AKW"
+
+11. How many clubs are located at "HHH"?
+
+select count(*)
+from club
+where clublocation = "HHH"
+
+12. What is the name of the president of club "Bootup Baltimore"?
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t2.position = "President"
+
+Who is the "CTO" of "Hopkins Student Enterprises"?
+
+select t3.fname, t3.lname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises" and t2.position = "CTO"
+
+13. How many different roles are there in the club "Bootup Baltimore"?
+
+select distinct t2.position
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+where t1.clubname = "Bootup Baltimore"
+
+14. How many members of "Bootup Baltimore" are older than 18?
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.age > 18
+
+How many members of club "Bootup Baltimore" are younger than 18?
+
+select count(*)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore" and t3.age < 18
+
+15. Find the name of all clubs that have at least a member from city with city code "BAL".
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.city_code = "BAL"
+
+Find the name of all clubs that have at least a member from city with city code "HOU".
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.city_code = "HOU"
+
+16. Which clubs does the student named "Eric Tai" belong to?
+
+COMMENT: should be more sepecific. DO NOT ASK TOO MANY QUESTIONS ANSWERED BY WHERE COL = ONE VALUE!
+
+select count(distinct t1.clubname)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Eric" and t3.lname = "Tai"
+
+List the clubs having "Davis Steven" as a member.
+
+COMMENT: should be more sepecific 
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.fname = "Davis" and t3.lname = "Steven"
+
+17. List the clubs that have at least a member with advisor "1121".
+
+select distinct t1.clubname
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t3.advisor = 1121
+
+18. What is the average age of members of the club "Bootup Baltimore"?
+
+select avg(t3.age)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Bootup Baltimore"
+
+Find the average age of members of the club "Hopkins Student Enterprises".
+
+select avg(t3.age)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Hopkins Student Enterprises"
+
+Retrieve the average age of members of the club "Tennis Club".
+
+select avg(t3.age)
+from club as t1 join member_of_club as t2
+on t1.clubid = t2.clubid
+join student as t3
+on t2.stuid = t3.stuid
+where t1.clubname = "Tennis Club"
+
+
+OVERALL COMMENTS:
+1. should be more sepecific on WHICH columns you are asking.
+2. DO NOT ASK TOO TOO MANY QUESTIONS ANSWERED BY WHERE COL = ONE VALUE (e.g. "Tennis Club")!
+3. SQL patterns could be more diverse. for example, use select count(*) too often.
+   ADD more group by: this data has many ways to GROUP BY for example: how many clubs does each location have?/how many students does each club have? etc. then you can add more condition to these questions. e.g. how many female students does each club have?
+   ADD more sum/avg/max etc. simple and complex
+   ADD OR, != , LIKE
+   ADD INTERSECT, EXCEPT, UNION, IN, NOT IN e.g. find the students who are in club 1 and club 2/who are in club1 but not club2
+   
