@@ -413,12 +413,6 @@ From movies
 Where rating is not NULL
 Group by rating
 
-(20. Find the number of movies for each rating except NULL.
-ISSUE: How is this different than the above?
-P: How many movies are there for each non-NULL rating?
-
-# comment: Good point! Fixed in the original label. We can skip this example.)
-
 20. Find the name of theaters that has at least one movie playing.
 P: What are the names of every theater with at least one movie playing?
 
