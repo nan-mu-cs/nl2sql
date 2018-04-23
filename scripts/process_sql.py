@@ -234,7 +234,7 @@ def parse_value(toks, start_idx, tables_with_alias, schema, default_tables=None)
         idx += 1
 
     if toks[idx] == 'select':
-        idx, val = parse_sql(toks, idx, tables_with_alias)
+        idx, val = parse_sql(toks, idx, tables_with_alias, schema)
     else:
         end_idx = idx
         while end_idx < len_ and toks[end_idx] != ',' and toks[end_idx] != ')'\
@@ -433,7 +433,7 @@ def parse_limit(toks, start_idx):
     return idx, None
 
 
-def parse_sql(toks, start_idx, tables_with_alias):
+def parse_sql(toks, start_idx, tables_with_alias, schema):
     isBlock = False # indicate whether this is a block of sql/sub-sql
     len_ = len(toks)
     idx = start_idx
@@ -476,7 +476,7 @@ def parse_sql(toks, start_idx, tables_with_alias):
     if idx < len_ and toks[idx] in SQL_OPS:
         sql_op = toks[idx]
         idx += 1
-        idx, IUE_sql = parse_sql(toks, idx, tables_with_alias)
+        idx, IUE_sql = parse_sql(toks, idx, tables_with_alias, schema)
         sql[sql_op] = IUE_sql
     return idx, sql
 
@@ -486,24 +486,26 @@ def load_data(fpath):
         data = json.load(f)
     return data
 
+
 def get_sql(schema, query):
+    schema = Schema(schema)
     toks = tokenize(query)
     tables_with_alias = get_tables_with_alias(schema.schema, toks)
-    _, sql = parse_sql(toks, 0, tables_with_alias)
+    _, sql = parse_sql(toks, 0, tables_with_alias, schema)
 
     return sql
 
 if __name__ == '__main__':
-    print get_schema('art_1.sqlite')
-    schema = get_schema_from_json('/Users/zilinzhang/Workspace/Github/nl2sql/Data/Initial/table/art_1_table.json')
-    print schema
-    #schema = Schema(get_schema('art_1.sqlite'))
+    # print get_schema('art_1.sqlite')
+    fpath = '/Users/zilinzhang/Workspace/Github/nl2sql/Data/Initial/table/art_1_table.json'
+    # print schema
+    schema = Schema(get_schema_from_json(fpath))
     data = load_data("/Users/zilinzhang/Workspace/Github/nl2sql/Data/Processed/train/art_1_processed.json")
     for ix, entry in enumerate(data):
         query = entry["query"]
         print ix, query
         toks = tokenize(query)
         tables_with_alias = get_tables_with_alias(schema.schema, toks)
-        _, sql = parse_sql(toks, 0, tables_with_alias)
+        _, sql = parse_sql(toks, 0, tables_with_alias, schema)
         print sql
 
