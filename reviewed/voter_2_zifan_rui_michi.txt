@@ -1,4 +1,4 @@
-# Total number = 40
+# Total number = 37
 
 1. Find the number of students in total.
 P: How many students are there in total?

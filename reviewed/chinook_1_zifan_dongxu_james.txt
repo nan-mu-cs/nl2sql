@@ -1,4 +1,4 @@
-Total = 35
+Total = 42
 
 1. How many albums are there?
 P: Find the number of albums.
