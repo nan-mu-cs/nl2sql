@@ -443,26 +443,13 @@ S:
 S:
 
 
-36. Find the average number of students per advisor.
-P: How many students does each advisor have on average?
+37. Report the distinct advisors who have more than 2 students.
+P: Which advisors are advising more than 2 students?
 
-select avg(cnt) from
-(select count(*) as cnt
+select Advisor
 from STUDENT
-group by Advisor)
-
-S:
-S:
-S:
-
-
-37. Report the distinct advisors who have between one and three students.
-P: Which advisors are advising one to three students?
-
-select distinct Advisor from
-(select Advisor, COUNT(*) as cnt
-from STUDENT group by Advisor)
-where cnt >= 1 and cnt <= 3
+group by Advisor
+having count(*) > 2
 
 S:
 S:

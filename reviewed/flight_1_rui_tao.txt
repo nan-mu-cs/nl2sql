@@ -102,19 +102,6 @@ S:
 S:
 S:
 
-
-10. Show names for all aircrafts with distance at least a quarter of the maximum.
-P: What are the names of all aircrafts that have a distance of at least a quarter of the maximum?
-
-select name
-from Aircraft
-where distance >= (select max(distance)/4 from Aircraft)
-
-
-S:
-S:
-S:
-
 11. How many employees do we have?
 P: What is the number of employees?
 

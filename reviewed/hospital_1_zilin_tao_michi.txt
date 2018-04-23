@@ -1,7 +1,7 @@
 Total = # 40 -> 50
 
 1. Which department has the largest number of employees?
-P: Find the department with the most employees. 
+P: Find the department with the most employees.
 
 SELECT name
 FROM department
@@ -33,7 +33,7 @@ ORDER BY count(departmentID)
 LIMIT 1;
 
 S: How many employees does each department have?
-S: Which department has the least employees? 
+S: Which department has the least employees?
 S: Who is the head of this department? Find the employee id.
 
 SELECT count(departmentID)
@@ -63,7 +63,7 @@ ORDER BY count(departmentID)
 LIMIT 1;
 
 S: How many employees does each department have?
-S: Which department has the smallest number of employees? 
+S: Which department has the smallest number of employees?
 S: Tell me the name and position of the head of this department.
 
 SELECT count(departmentID)
@@ -112,7 +112,7 @@ S: Which patients made more than one appointment?
 S: Tell me the name and phone number of these patients
 
 SELECT count(*)
-FROM appointment 
+FROM appointment
 group by patient
 
 SELECT *
@@ -129,7 +129,7 @@ having count(*) > 1
 6. Find the id of the appointment with the most recent start date?
 P: What is the id of the appointment that started most recently?
 
-SELECT appointmentid 
+SELECT appointmentid
 FROM appointment
 ORDER BY start desc
 LIMIT 1
@@ -138,14 +138,14 @@ S: What is the start date of each appointment?
 S: Sort the appointments by the starting date in descending order.
 S: Which appointment has the most recent starting date? Give me the appointment id.
 
-SELECT start 
+SELECT start
 FROM appointment
 
-SELECT * 
+SELECT *
 FROM appointment
 ORDER BY start desc
 
-SELECT appointmentid 
+SELECT appointmentid
 FROM appointment
 ORDER BY start desc
 LIMIT 1
@@ -154,23 +154,23 @@ LIMIT 1
 7. List the name of physicians who took some appointment.
 P: What are the names of all the physicians who took appointments.
 
-SELECT T2.name 
+SELECT T2.name
 FROM appointment as T1 join physician as T2 on T1.Physician = T2.EmployeeID
 
-S: What are the ids of the physicians who took appointments? 
+S: What are the ids of the physicians who took appointments?
 S: Also tell me their names.
 
 SELECT Physician
 FROM appointment
 
-SELECT T2.name 
+SELECT T2.name
 FROM appointment as T1 join physician as T2 on T1.Physician = T2.EmployeeID
 
 
 8. List the name of physicians who never took any appointment.
 P: Which physicians have never taken any appointment? Find their names.
 
-SELECT name 
+SELECT name
 FROM physician
 except
 SELECT T2.name
@@ -180,13 +180,13 @@ S: List all the physician names.
 S: Find the names of the physicians who took appointments.
 S: Then what are the names of physicians who never took any appointment?
 
-SELECT name 
+SELECT name
 FROM physician
 
-SELECT T2.name 
+SELECT T2.name
 FROM appointment as T1 join physician as T2 on T1.Physician = T2.EmployeeID
 
-SELECT name 
+SELECT name
 FROM physician
 except
 SELECT T2.name
@@ -226,8 +226,7 @@ Where T2.PrimaryAffiliation = 1
 P: Find the name of the patient who made the appointment with the most recent start date.
 
 SELECT T1.name
-FROM patient as T1, appointment as T2
-WHERE T1.ssn=T2.patient 
+FROM patient as T1 join appointment as T2 on T1.ssn=T2.patient
 ORDER BY T2.start desc
 LIMIT 1
 
@@ -245,8 +244,7 @@ ORDER BY start desc
 LIMIT 1
 
 SELECT T1.name
-FROM patient as T1, appointment as T2
-WHERE T1.ssn=T2.patient 
+FROM patient as T1 join appointment as T2 on T1.ssn=T2.patient
 ORDER BY T2.start desc
 LIMIT 1
 
@@ -312,7 +310,7 @@ S: What is the id of the medication used for this patient?
 S: What is the name of the medication?
 
 SELECT patient
-FROM stay 
+FROM stay
 WHERE room = 111
 
 SELECT T3.Medication
@@ -330,7 +328,7 @@ WHERE room = 111
 
 
 14. Find the patient who most recently stayed in room 111.
-P: What is the id of the patient who stayed in room 111 most recently? 
+P: What is the id of the patient who stayed in room 111 most recently?
 
 SELECT patient
 FROM stay
@@ -343,7 +341,7 @@ S: Sort the patients by the stay start date, from recent to past.
 S: Which patient stayed there most recently?
 
 SELECT patient
-FROM stay 
+FROM stay
 WHERE room = 111
 
 SELECT patient
@@ -385,23 +383,23 @@ LIMIT 1
 P: Return the name of each physician and the number of patients he or she treats.
 
 SELECT T1.name, count(*)
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 
 S: Group the patients by the physician treating them.
 S: How many patients is each physician taking care of?
-S: For each physician, return his or her name and the number of patients. 
+S: For each physician, return his or her name and the number of patients.
 
 SELECT *
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 
 SELECT count(*)
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 
 SELECT T1.name, count(*)
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 
 
@@ -409,7 +407,7 @@ GROUP BY T1.employeeid
 P: Which physicians are in charge of more than one patient? Give me their names.
 
 SELECT T1.name
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 Having count(*) > 1
 
@@ -418,16 +416,16 @@ S: Which physicians are in charge of more than one?
 S: What are the name of these physicians?
 
 SELECT count(*)
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 
 SELECT *
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 Having count(*) > 1
 
 SELECT T1.name
-FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP 
+FROM physician as T1 join patient as T2 on T1.employeeid = T2.PCP
 GROUP BY T1.employeeid
 Having count(*) > 1
 
@@ -468,26 +466,26 @@ FROM block as T1 join room as T2 on T1.blockfloor = T2.blockfloor and T1.blockco
 GROUP BY T1.blockcode
 
 
-20. What are the unique block codes that have available rooms? 
+20. What are the unique block codes that have available rooms?
 P: Tell me the distinct block codes where some rooms are available.
 
 SELECT DISTINCT blockcode
-FROM room 
+FROM room
 WHERE unavailable = 0
 
 S: List all the rooms that are available.
 S: What are the distinct block codes that have rooms available?
 
 SELECT *
-FROM room 
+FROM room
 WHERE unavailable = 0
 
 SELECT DISTINCT blockcode
-FROM room 
+FROM room
 WHERE unavailable = 0
 
 
-21. How many different types of rooms are there? 
+21. How many different types of rooms are there?
 P: Find the number of distinct room types available.
 
 SELECT count(DISTINCT roomtype)
@@ -525,7 +523,7 @@ where T2.name = "Thesisin"
 SELECT distinct T1.name
 FROM physician as T1 join prescribes as T2 on T1.employeeid=T2.physician join medication as T3 on T3.code=T2.medication
 where T3.name = "Thesisin"
- 
+
 
 23. Find the name and position of physicians who prescribe some medication whose brand is X?
 P: Which physicians prescribe a medication of brand X? Tell me the name and position of those physicians.
@@ -562,7 +560,7 @@ S: Group all the medications by the brand.
 S: How many medications are prescribed for each brand?
 
 SELECT *
-FROM medication 
+FROM medication
 GROUP BY brand
 
 SELECT count(*), T1.name
@@ -623,7 +621,7 @@ LIMIT 1
 P: What are the names of patients who are staying in room 111 and have an undergoing treatment?
 
 SELECT distinct T2.name
-FROM undergoes as T1 
+FROM undergoes as T1
      join patient as T2 on T1.patient=T2.SSN
      join stay as T3 on T1.Stay = T3.StayID
 Where T3.room = 111
@@ -633,17 +631,17 @@ S: Among them, who are staying in room 111?
 S: What are their names?
 
 SELECT distinct patient
-FROM undergoes as T1 
+FROM undergoes as T1
      join patient as T2 on T1.patient=T2.SSN
 
 SELECT *
-FROM undergoes as T1 
+FROM undergoes as T1
      join patient as T2 on T1.patient=T2.SSN
      join stay as T3 on T1.Stay = T3.StayID
 Where T3.room = 111
 
 SELECT distinct T2.name
-FROM undergoes as T1 
+FROM undergoes as T1
      join patient as T2 on T1.patient=T2.SSN
      join stay as T3 on T1.Stay = T3.StayID
 Where T3.room = 111
@@ -731,7 +729,7 @@ P: What are each physician's employee id and department id primarily affiliated.
 
 SELECT physician, department
 FROM affiliated_with
-WHERE primaryaffiliation
+WHERE primaryaffiliation = 1
 
 S: Return the physicians' affiliation information.
 S: Just tell me the physicians' employee ids and department ids primarily affiliated.
@@ -741,7 +739,7 @@ FROM affiliated_with
 
 SELECT physician, department
 FROM affiliated_with
-WHERE primaryaffiliation
+WHERE primaryaffiliation = 1
 
 
 33. List the names of departments where some physicians are primarily affiliated with.
@@ -814,7 +812,7 @@ S:
 P: Which physicians are trained in procedures that are more expensive than 5000?
 
 SELECT T1.name
-FROM physician as T1 
+FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T3.cost > 5000
@@ -828,7 +826,7 @@ S:
 P: Which physician was trained in the procedure that costs the most.
 
 SELECT T1.name
-FROM physician as T1 
+FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 order by T3.cost desc
@@ -843,7 +841,7 @@ S:
 P: Compute the mean price of procedures physician John Wen was trained in.
 
 SELECT avg(T3.cost)
-FROM physician as T1 
+FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
@@ -857,7 +855,7 @@ S:
 P: What are the names of procedures physician John Wen was trained in?
 
 SELECT T3.name
-FROM physician as T1 
+FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
@@ -875,7 +873,7 @@ FROM procedures
 WHERE cost > 1000
 UNION
 SELECT T3.name
-FROM physician as T1 
+FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
@@ -893,7 +891,7 @@ FROM procedures
 WHERE cost > 1000
 EXCEPT
 SELECT T3.name
-FROM physician as T1 
+FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"
@@ -911,7 +909,7 @@ FROM procedures
 WHERE cost < 5000
 INTERSECT
 SELECT T3.name
-FROM physician as T1 
+FROM physician as T1
      join trained_in as T2 on T1.employeeid = T2.physician
      join procedures as T3 on T3.code = T2.treatment
 where T1.name = "John Wen"

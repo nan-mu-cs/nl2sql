@@ -39,7 +39,7 @@ SELECT DISTINCT bid
 FROM Reserves
 WHERE sid=1
 
-S: Tell me all the information about the reservations. 
+S: Tell me all the information about the reservations.
 S: Which of those reservations were created by a sailor with an id of 1?
 S: What are the different ids of the boats reserved by him?
 
@@ -69,11 +69,11 @@ WHERE T2.bid = 102
 5. Return the unique boat ids (bid) of all reserved boats.
 P: What are the ids of all boats that are reserved by someone?
 
-SELECT DISTINCT bid 
+SELECT DISTINCT bid
 FROM Reserves
 
 S: Return all information about the reserved boats.
-S: What are their different ids? 
+S: What are their different ids?
 
 SELECT * from Reserves
 
@@ -146,7 +146,7 @@ SELECT DISTINCT name, sid FROM Sailors
 SELECT DISTINCT T1.name, T1.sid
 FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
 
-10. Find the id and name of the sailors who reserved more than one boat. 
+10. Find the id and name of the sailors who reserved more than one boat.
 P: What are the different names of sailors who reserved two or more boats?
 
 # comment: fixed original label. I think you can also comment the original file, that will be a great help.
@@ -162,12 +162,12 @@ S: Who reserved more than one?
 
 
 SELECT DISTINCT T1.name, T1.sid
-FROM Sailors 
+FROM Sailors
 
 SELECT DISTINCT t1.name, T1.sid FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
 GROUP BY T2.sid
 
-SELECT DISTINCT T1.name, T1.sid 
+SELECT DISTINCT T1.name, T1.sid
 FROM Sailors AS T1 join Reserves AS T2 ON T1.sid = T2.sid
 GROUP BY T2.sid
 HAVING COUNT(*) > 1
@@ -175,7 +175,7 @@ HAVING COUNT(*) > 1
 11. Find the id of Sailors (sid) that reserved red or blue boat.
 P: What are the sids for sailors who reserved red or blue boats?
 
-SELECT DISTINCT T2.sid 
+SELECT DISTINCT T2.sid
 FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
 WHERE T1.color = 'red' OR T1.color = "blue"
 
@@ -189,7 +189,7 @@ SELECT bid FROM boats WHERE color = 'red'
 
 SELECT bid FROM boats WHERE color ='red' or color = 'blue'
 
-SELECT DISTINCT T2.sid 
+SELECT DISTINCT T2.sid
 FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
 WHERE T1.color = 'red' OR T1.color = "blue"
 
@@ -197,7 +197,7 @@ WHERE T1.color = 'red' OR T1.color = "blue"
 P: What are the names and ids of sailors who reserved red or blue boats?
 
 SELECT DISTINCT T2.sid, T3.name
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = 'red' OR T1.color = "blue"
@@ -213,7 +213,7 @@ SELECT bid FROM boats WHERE color = 'red'
 SELECT bid FROM boats WHERE color ='red' or color = 'blue'
 
 SELECT DISTINCT T2.sid, T3.name
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = 'red' OR T1.color = "blue"
@@ -222,11 +222,11 @@ WHERE T1.color = 'red' OR T1.color = "blue"
 P: What are the ids of sailors who reserved red and blue boats?
 
 
-SELECT DISTINCT T2.sid 
+SELECT DISTINCT T2.sid
 FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
 WHERE T1.color = 'red'
 INTERSECT
-SELECT DISTINCT T2.sid 
+SELECT DISTINCT T2.sid
 FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
 WHERE T1.color = "blue"
 
@@ -237,15 +237,15 @@ S: What are the ids of the sailors who also reserved red boats?
 
 SELECT DISTINCT bid from RESERVES where color = 'blue'
 
-SELECT T2.sid 
+SELECT T2.sid
 FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
-WHERE T1.color = 'red' 
+WHERE T1.color = 'red'
 
-SELECT DISTINCT T2.sid 
+SELECT DISTINCT T2.sid
 FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
 WHERE T1.color = 'red'
 INTERSECT
-SELECT DISTINCT T2.sid 
+SELECT DISTINCT T2.sid
 FROM Boats AS T1 JOIN Reserves AS T2 ON  T1.bid = T2.bid
 WHERE T1.color = "blue"
 
@@ -255,13 +255,13 @@ P: What are the names and ids of sailors who reserved red and blue boats?
 
 
 SELECT DISTINCT T2.sid, T3.name
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = 'red'
 INTERSECT
 SELECT DISTINCT T2.sid, T3.name
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = "blue"
@@ -273,26 +273,26 @@ S: What are the different ids and names of the sailors who reserved one of each?
 # comment: you seem to forget to add the SQL...
 
 SELECT DISTINCT T2.sid
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = "blue"
 
 SELECT DISTINCT T2.sid
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = "red"
 
 
 SELECT DISTINCT T2.sid, T3.name
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = 'red'
 INTERSECT
 SELECT DISTINCT T2.sid, T3.name
-FROM Boats AS T1 
+FROM Boats AS T1
             JOIN Reserves AS T2 ON  T1.bid = T2.bid
             JOIN Sailors AS T3 ON T2.sid = T3.sid
 WHERE T1.color = "blue"
@@ -302,7 +302,7 @@ WHERE T1.color = "blue"
 15. What is the ids of sailors that haven’t reserved a boat?
 P: What are the ids of sailors who have not reserved a boat?
 
-SELECT sid 
+SELECT sid
 FROM Sailors
 EXCEPT
 SELECT sid
@@ -316,7 +316,7 @@ SELECT sid FROM Sailors
 
 SELECT sid FROM Reserves
 
-SELECT sid 
+SELECT sid
 FROM Sailors
 EXCEPT
 SELECT sid
@@ -333,7 +333,7 @@ FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
 
 S: What are the all the sailor ids and names?
 S: Which of those are listed as having boat reservations?
-S: Tell me all the other ones. 
+S: Tell me all the other ones.
 
 SELECT sid, name from Sailors
 
@@ -346,13 +346,13 @@ EXCEPT
 SELECT T1.sid, T1.name
 FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
 
-17. Find all information for the sailors who do not have a reservation of a boat?
-P: What is all the information about sailors who do not have boat reservations?
+17. Find id for the sailors who do not have a reservation of a boat?
+P: What is id about sailors who do not have boat reservations?
 
-SELECT *
+SELECT sid
 FROM Sailors
 EXCEPT
-SELECT T1.*
+SELECT T1.sid
 FROM Sailors AS T1 JOIN Reserves AS T2 ON T1.sid = T2.sid
 
 S: Which sailors have boat reservations?
@@ -593,9 +593,9 @@ HAVING count(*) > 1
 
 
 30. Find the number of reservations by sailors with id greater than 1 for each boat.
-P: How many reservations for each boat did the sailors with an id greater than 1 make? 
+P: How many reservations for each boat did the sailors with an id greater than 1 make?
 
-SELECT bid, count(*) 
+SELECT bid, count(*)
 FROM Reserves
 WHERE sid > 1
 GROUP BY bid
@@ -614,7 +614,7 @@ SELECT bid, count(*) FROM Reserves WHERE sid > 1 GROUP BY bid
 P: What are the rating and average age for sailors who reserved red boats for each rating?
 
 SELECT T1.rating, avg(T1.age)
-FROM Sailors as T1 
+FROM Sailors as T1
             JOIN Reserves as T2 ON T1.sid = T2.sid
             JOIN Boats as T3 ON T3.bid = T2.bid
 WHERE T3.color = 'red'
@@ -640,20 +640,20 @@ SELECT avg(T1.age), T1.rating FROM Sailors as T1
             JOIN Boats as T3 ON T3.bid = T2.bid
 WHERE T3.color = 'red'
 GROUP BY T1.rating
-  
+
 
 32. Find the name, rating and age of all sailors ordered by rating and age.
 P: What is the name, rating, and age for every sailor? And order them by rating and age.
 
 # comment: the paraphrase did not say how to order.
 
-SELECT name, rating, age 
+SELECT name, rating, age
 FROM Sailors
 ORDER BY rating, age
 
 S: What are the ratings and age of every sailor?
 S: Also what are their names?
-S: Sort them by rating, then by age for tiebreakers. 
+S: Sort them by rating, then by age for tiebreakers.
 
 SELECT rating, age FROM Sailors
 
@@ -699,7 +699,7 @@ SELECT count(*) FROM Boats WHERE color = 'red'
 P: What are the names of the boats booked by people between age 20 and 30?
 
 SELECT T3.name
-FROM Sailors as T1 
+FROM Sailors as T1
      JOIN Reserves as T2 ON T1.sid = T2.sid
      JOIN Boats as T3 ON T3.bid = T2.bid
 WHERE T1.age between 20 and 30
@@ -710,7 +710,7 @@ S: Which boats are reserved by the corresponding sailors?
 SELECT name FROM Sailors WHERE age between 20 and 30
 
 SELECT T3.name
-FROM Sailors as T1 
+FROM Sailors as T1
      JOIN Reserves as T2 ON T1.sid = T2.sid
      JOIN Boats as T3 ON T3.bid = T2.bid
 WHERE T1.age between 20 and 30
@@ -719,9 +719,9 @@ WHERE T1.age between 20 and 30
 P: What are the names of the sailors whose rating is larger than the rating of all sailors who booked a red boat?
 
 SELECT name
-FROM Sailors 
-WHERE rating > (SELECT max(T1.rating) 
-                   FROM Sailors as T1 
+FROM Sailors
+WHERE rating > (SELECT max(T1.rating)
+                   FROM Sailors as T1
                    JOIN Reserves as T2 ON T1.sid = T2.sid
                    JOIN Boats as T3 ON T3.bid = T2.bid
                    WHERE T3.color = 'red')
@@ -759,7 +759,7 @@ SELECT max(rating) FROM Sailors
 P: What are the names of sailors who reserved a boat with the name Melon?
 
 SELECT T1.name
-FROM Sailors as T1 
+FROM Sailors as T1
      JOIN Reserves as T2 ON T1.sid = T2.sid
      JOIN Boats as T3 ON T3.bid = T2.bid
 WHERE T3.name = 'Melon'
@@ -770,7 +770,7 @@ S: What are the sailors' names who reserved them?
 SELECT T1.bid FROM Reserves as T1 JOIN Boats as T2 on T1.bid = T2.bid WHERE T2.name = 'Melon'
 
 SELECT T1.name
-FROM Sailors as T1 
+FROM Sailors as T1
      JOIN Reserves as T2 ON T1.sid = T2.sid
      JOIN Boats as T3 ON T3.bid = T2.bid
 WHERE T3.name = 'Melon'

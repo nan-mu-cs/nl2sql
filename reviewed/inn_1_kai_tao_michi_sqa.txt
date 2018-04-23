@@ -280,9 +280,9 @@ SELECT bedType, avg(basePrice)
 FROM Rooms
 GROUP BY bedType;
 
-S: Group all the rooms by the bed type. 
+S: Group all the rooms by the bed type.
 S: For each bed type, find the average base price of different bed type.
- 
+
 SELECT *
 FROM Rooms
 GROUP BY bedType;
@@ -311,7 +311,7 @@ FROM Rooms
 WHERE decor = 'modern';
 
 
-15.What kind of decor has the least number of reservations? 
+15.What kind of decor has the least number of reservations?
 P: What is the least popular kind of decor?
 
 SELECT T2.decor
@@ -350,10 +350,10 @@ S: What is the number of people who actually stayed for each room reservation? T
 S: How many times the number reached the maximum capacity?
 
 SELECT maxOccupancy
-FROM Rooms 
+FROM Rooms
 
 SELECT T1.Adults + T1.Kids
-FROM Reservations 
+FROM Reservations
 
 SELECT count(*)
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
@@ -363,7 +363,7 @@ WHERE T2.maxOccupancy = T1.Adults + T1.Kids;
 17. Find the first and last names of people who payed more than the rooms' base prices.
 P: What are the first and last names of people who payed more than the rooms' base prices?
 
-SELECT T2.firstname, T2.lastname
+SELECT T1.firstname, T1.lastname
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
 Where T1.Rate - T2.basePrice > 0
 
@@ -371,14 +371,14 @@ S: For each reservation, find the base price and the actual rate payed.
 S: How many times did the actual price exceeded the base price?
 S: What are the first and last names of people who payed more than the rooms' base prices?
 
-SELECT T1.Rate, T2.basePrice 
+SELECT T1.Rate, T2.basePrice
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
 
 SELECT count(*)
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
 Where T1.Rate - T2.basePrice > 0
 
-SELECT T2.firstname, T2.lastname
+SELECT T1.firstname, T1.lastname
 FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
 Where T1.Rate - T2.basePrice > 0
 
@@ -512,7 +512,7 @@ WHERE decor="traditional";
 
 24.Find the number of rooms with king bed for each decor type.
 P: How many rooms have king beds? Report the number for each decor type.
- 
+
 SELECT decor, count(*)
 FROM Rooms
 WHERE bedType="King"
@@ -635,7 +635,7 @@ S: Return the names of rooms that have either of them.
 
 SELECT *
 FROM Rooms
-WHERE bedType = "King" 
+WHERE bedType = "King"
 
 SELECT *
 FROM Rooms
@@ -721,7 +721,7 @@ WHERE basePrice > (
 );
 
 
-33. Find the number of rooms that do not have any reservation. 
+33. Find the number of rooms that do not have any reservation.
 P: How many rooms have not had any reservation yet?
 
 select count(*)

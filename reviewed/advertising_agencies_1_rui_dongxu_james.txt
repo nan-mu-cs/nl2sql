@@ -172,7 +172,7 @@ P: What are all payment ids and payment details for invoices with status Working
 
 select T1.payment_id, T1.payment_details
 from Payments as T1 JOIN Invoices as T2
-ont T1.invoice_id = T2.invoice_id
+on T1.invoice_id = T2.invoice_id
 where T2.invoice_status = 'Working'
 
 
@@ -284,7 +284,7 @@ P: What is the staff id of the staff who attended the least meetings but attende
 select staff_id, count(*)
 from Staff_in_meetings
 group by staff_id
-order by count(*) asc 
+order by count(*) asc
 limit 1;
 
 40. How many staff have attended a meeting?

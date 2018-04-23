@@ -53,9 +53,9 @@ order by name
 P: What are the names of all books and their corresponding authors?
 
 select T3.title, T1.name
-from Author as T1 
+from Author as T1
      JOIN Author_Book as T2 on T2.Author = T1.idAuthor
-     JOIN Book as T3 on T2.isbn = T3.isbn 
+     JOIN Book as T3 on T2.isbn = T3.isbn
 
 9. Show all order ids and their client names.
 P: What are the ids of all orders and the corresponding client names?
@@ -64,7 +64,7 @@ select T1.idOrder, T2.name
 from Orders as T1 join Client as T2 on T1.idClient = T2.idClient
 
 
-10. Show all author names and the numbers of books each has written. 
+10. Show all author names and the numbers of books each has written.
 P: What are the names of all the authors, and how many books has each written?
 
 select T1.name, count(*)
@@ -137,9 +137,9 @@ limit 1
 P: What are the names of all the clients, and the total amount of books ordered by each?
 
 select T2.name, sum(T3.amount)
-from Orders as T1 
+from Orders as T1
      JOIN Client as T2 ON T1.idClient = T2.idClient
-     JOIN Books_Order as T3 ON T3.idOrder = T1.idOrder 
+     JOIN Books_Order as T3 ON T3.idOrder = T1.idOrder
 group by T1.idClient
 
 
@@ -147,9 +147,9 @@ group by T1.idClient
 P: What is the name of the client who has ordered the greatest total amount of books?
 
 select T2.name
-from Orders as T1 
+from Orders as T1
      JOIN Client as T2 ON T1.idClient = T2.idClient
-     JOIN Books_Order as T3 ON T3.idOrder = T1.idOrder 
+     JOIN Books_Order as T3 ON T3.idOrder = T1.idOrder
 group by T1.idClient
 order by sum(T3.amount) desc
 limit 1
@@ -189,7 +189,7 @@ from Book
 27. What is the maximum difference between the sale price and purchase price?
 P: Return the largest difference in sale price and purchase price.
 
-select max(saleprice-purchaseprice)
+select max(saleprice - purchaseprice)
 from Book
 
 28. List all book titles which have sale prices higher than the average.
@@ -293,14 +293,14 @@ where T3.name = "James Smith"
 P: What are the titles of books that the client Peter Doe ordered, but the client James Smith did not?
 
 select T4.title
-from Orders as T1 
+from Orders as T1
      join Books_Order as T2 on T1.idOrder = T2.idOrder
      join Client as T3 on T1.idClient = T3.idClient
      join book as T4 on T2.ISBN = T4.isbn
 where T3.name = "Peter Doe"
 EXCEPT
 select T4.title
-from Orders as T1 
+from Orders as T1
      join Books_Order as T2 on T1.idOrder = T2.idOrder
      join Client as T3 on T1.idClient = T3.idClient
      join book as T4 on T2.ISBN = T4.isbn

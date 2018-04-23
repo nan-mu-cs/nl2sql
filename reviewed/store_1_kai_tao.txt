@@ -70,7 +70,7 @@ S:
 P: What are the top 10 customers' first and last names with the highest gross sales, and also what are the sales?
 
 SELECT T1.first_name, T1.last_name, SUM(T2.total)
-FROM customers AS T1 JOIN invoices AS T2 ON T1.customer_id = T2.id
+FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id = T1.id
 GROUP BY T1.id
 ORDER BY SUM(T2.total) DESC
 LIMIT 10;
@@ -120,12 +120,12 @@ S:
 S:
 S:
 
-13. List the customers first and last name of 10 least expensive invoices. 
+13. List the customers first and last name of 10 least expensive invoices.
 P: What are the first and last names of the customers with the 10 cheapest invoices?
 
 SELECT T1.first_name, T1.last_name
 FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id = T1.id
-ORDER BY total 
+ORDER BY total
 LIMIT 10;
 
 
@@ -215,7 +215,7 @@ S:
 21. Eduardo Martins is a customer at which company?
 P: What is the company where Eduardo Martins is a customer?
 
-SELECT company 
+SELECT company
 FROM customers
 WHERE first_name="Eduardo" and last_name="Martins";
 
@@ -264,7 +264,7 @@ S:
 26. What country does Roberto Almeida live?
 P: In which country does Roberto Almeida?
 
-SELECT country 
+SELECT country
 FROM customers
 WHERE first_name="Roberto" and last_name="Almeida";
 
@@ -326,7 +326,7 @@ S:
 31. What is the address of employee Nancy Edwards?
 P: What is Nancy Edwards's address?
 
-SELECT address 
+SELECT address
 FROM employees
 WHERE first_name="Nancy" and last_name="Edwards";
 
@@ -368,7 +368,7 @@ S:
 34. What is employee Nancy Edwards's phone number?
 P: What is the the phone number of Nancy Edwards?
 
-SELECT phone 
+SELECT phone
 FROM employees
 WHERE first_name="Nancy" and last_name="Edwards";
 
@@ -383,7 +383,7 @@ P: What si the youngest employee's first and last name?
 
 SELECT first_name,last_name
 FROM employees
-ORDER BY Date(birth_date) DESC
+ORDER BY birth_date DESC
 LIMIT 1;
 
 
@@ -397,7 +397,7 @@ P: What are the first and last names of the top 10 longest-serving employees?
 
 SELECT first_name,last_name
 FROM employees
-ORDER BY Date(hire_date) ASC
+ORDER BY hire_date ASC
 LIMIT 10;
 
 
@@ -451,9 +451,9 @@ S:
 40. What is the total amount of money spent by Lucas Mancini?
 P: How much money did Lucas Mancini spend?
 
-SELECT sum(T2.total) 
+SELECT sum(T2.total)
 FROM customers AS T1 JOIN invoices AS T2 ON T1.id=T2.customer_id
-WHERE T1.first_name="Lucas" and T2.last_name="Mancini";
+WHERE T1.first_name="Lucas" and T1.last_name="Mancini";
 
 
 S:
@@ -575,7 +575,7 @@ S:
 S:
 
 
-51. List the name of tracks belongs to genre Rock or media type is MPEG audio file. 
+51. List the name of tracks belongs to genre Rock or media type is MPEG audio file.
 P: What are the names of all tracks that belong to the Rock genre and whose media type is MPEG?
 
 SELECT T2.name

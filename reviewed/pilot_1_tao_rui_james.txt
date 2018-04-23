@@ -5,7 +5,7 @@ Total # = 41
 P: Return the name of the oldest pilot.
 
 SELECT pilot_name
-FROM PilotSkills 
+FROM PilotSkills
 ORDER BY age DESC
 LIMIT 1
 
@@ -13,7 +13,7 @@ LIMIT 1
 P: Return the names of pilots who are younger than average, ordered by age ascending.
 
 SELECT pilot_name
-FROM PilotSkills 
+FROM PilotSkills
 WHERE age < (select avg(age) from PilotSkills)
 ORDER BY age
 
@@ -21,21 +21,21 @@ ORDER BY age
 P: What is all the information about pilors who are younger than 30?
 
 SELECT *
-FROM PilotSkills 
+FROM PilotSkills
 WHERE age < 30
 
 4. Find the names of all pilots who have a plane named Piper Cub and is under 35.
 P: What are the names of pilots who are younger than 35 and have a plane named Piper Cub?
 
 SELECT pilot_name
-FROM PilotSkills 
+FROM PilotSkills
 WHERE age < 35 and plane_name = 'Piper Cub'
 
 5. Where is the plane F-14 Fighter located?
 P: Return the location of the hangar in which F-14 Fighter is located.
 
 SELECT location
-FROM hangar 
+FROM hangar
 WHERE plane_name = 'F-14 Fighter'
 
 6. How many different places have some plane?
@@ -51,8 +51,8 @@ SELECT plane_name
 FROM pilotskills
 WHERE pilot_name = 'Jones'  and age = 32
 
-8. How many pilots who are older than 40? 
-P: Count the number of pilots with age greater than 40. 
+8. How many pilots who are older than 40?
+P: Count the number of pilots with age greater than 40.
 
 SELECT count(*)
 FROM pilotskills
@@ -103,7 +103,7 @@ WHERE T2.location = 'Chicago'
 P: Return the names of planes owned by the pilot whose name is Smith and is 41 years old.
 
 SELECT plane_name
-FROM pilotskills 
+FROM pilotskills
 WHERE pilot_name = 'Smith' and age = 41
 
 15. How many distinct planes are owned across all pilots?
@@ -156,14 +156,14 @@ FROM pilotskills
 ORDER BY plane_name
 
 22. How many pilots who are older than 40 or younger than 30?
-P: Count the number of pilots with age greater than 40 or less than 30. 
+P: Count the number of pilots with age greater than 40 or less than 30.
 
 SELECT count(pilot_name)
 FROM pilotskills
 ORDER BY age > 40 or age < 30
 
 23. What are the names and ages of pilots who own plane Piper Cub and are older than 35, or have F-14 Fighter and are younger than 30?
-P: Return the names and ages of pilors who have flown Piper Cub and are older than 35, or have flown the F-14 Fighter and are younger than 30. 
+P: Return the names and ages of pilors who have flown Piper Cub and are older than 35, or have flown the F-14 Fighter and are younger than 30.
 
 SELECT pilot_name, age
 FROM pilotskills
@@ -178,7 +178,7 @@ P: What are the names of pilots who have flown Piper Cub but not the B-52 Bomber
 
 SELECT pilot_name
 FROM pilotskills
-where plane_name = 'Piper Cub' 
+where plane_name = 'Piper Cub'
 EXCEPT
 SELECT pilot_name
 FROM pilotskills
@@ -189,7 +189,7 @@ P: What are the names of pilots who own both Piper Cub and the B-52 Bomber?
 
 SELECT pilot_name
 FROM pilotskills
-where plane_name = 'Piper Cub' 
+where plane_name = 'Piper Cub'
 INTERSECT
 SELECT pilot_name
 FROM pilotskills
@@ -315,9 +315,3 @@ SELECT count(pilot_name)
 FROM pilotskills
 WHERE age > (select min(age) from pilotskills where plane_name = 'Piper Cub')
 
-42. Find the names and ages of all distinct pilots who is younger than the oldest pilot.
-P: What are the names and ages of pilots who are not the oldest pilot?
-
-select distinct T1.pilot_name, T1.age
-from pilotskills as T1, pilotskills as T2
-where T1.age < T2.age

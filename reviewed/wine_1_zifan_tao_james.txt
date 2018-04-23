@@ -52,7 +52,7 @@ Where Year < 2010
 8. List the names of all distinct wines that have scores higher than 90.
 P: What are the names of wines with scores higher than 90?
 
-select Name 
+select Name
 from WINE
 Where score > 90
 
@@ -149,9 +149,9 @@ group by Year
 21.  Find the distinct names of all wines that have prices higher than some wines from John Anthony winery.
 P: What are the distinct names of wines with prices higher than any wine from John Anthony winery.
 
-Select distinct T1.Name
-From WINE as T1, WINE as T2
-where T1.Price > T2.Price and T2.Winery = "John Anthony"
+Select distinct Name
+From WINE
+where Price > (select min(Price) from wine where Winery = "John Anthony")
 
 
 22. List the names of all distinct wines in alphabetical order.
@@ -303,7 +303,7 @@ P: What is the average price for wines not produced in Sonoma county?
 Select avg(price)
 from wine
 where Appelation NOT IN
-(Select T1.Appelation 
+(Select T1.Appelation
 From APPELLATIONS as T1 JOIN WINE as T2 on T1.Appelation = T2.Appelation
 where T1.County = 'Sonoma')
 

@@ -8,8 +8,8 @@ select count(*)
 from CONTINENTS;
 
 S:
-S: 
-S: 
+S:
+S:
 
 2. How many countries does each continent have? List the continent id, continent name and the number of countries.
 P: For each continent, list its id, name, and how many countries it has?
@@ -19,8 +19,8 @@ from CONTINENTS as T1 JOIN COUNTRIES as T2 on T1.ContId = T2.Continent
 group by T1.ContId;
 
 S:
-S: 
-S: 
+S:
+S:
 
 3. How many countries are listed?
 P: How many countries exist?
@@ -29,19 +29,19 @@ select count(*)
 from COUNTRIES;
 
 S:
-S: 
-S: 
+S:
+S:
 
 4. How many models does each car maker produce? List maker full name, id and the number.
-P: What is the full name of each car maker, along with its id and how many models it produces? 
+P: What is the full name of each car maker, along with its id and how many models it produces?
 
 select T1.FullName, T1.Id, count(*)
 from CAR_MAKERS as T1 JOIN MODEL_LIST as T2 on T1.Id = T2.Maker
 group by T1.Id;
 
 S:
-S: 
-S: 
+S:
+S:
 
 5. Which model of the car has the minimum horsepower?
 P: What is the model of the car with the smallest amount of horsepower?
@@ -51,8 +51,8 @@ from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 order by T2.horsepower ASC LIMIT 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 6. Find the model of the car whose weight is below the average weight.
 P: What is the model for the car with a weight smaller than the average?
@@ -62,8 +62,8 @@ from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 where T2.Weight < (select avg(Weight) from CARS_DATA)
 
 S:
-S: 
-S: 
+S:
+S:
 
 7. Find the name of the makers that produced some cars in the year of 1970?
 P: What is the name of the different car makers who produced a car in 1970?
@@ -76,11 +76,11 @@ on T3.MakeId = T4.id
 where T4.year = '1970';
 
 S:
-S: 
-S: 
+S:
+S:
 
 8. Find the make and production time of the cars that were produced in the earliest year?
-P: What is the maker of the carr produced in the earliest year and what year was it? 
+P: What is the maker of the carr produced in the earliest year and what year was it?
 
 select T2.Make, T1.Year
 from CARS_DATA as T1 join CAR_NAMES as T2
@@ -89,8 +89,8 @@ where T1.Year = (select min(Year)
 from CARS_DATA);
 
 S:
-S: 
-S: 
+S:
+S:
 
 9. Which distinct car models are the produced after 1980?
 P: What are the different models for the cards produced after 1980?
@@ -102,8 +102,8 @@ on T2.MakeId = T3.id
 where T3.year > 1980;
 
 S:
-S: 
-S: 
+S:
+S:
 
 10. How many car makers are there in each continents? List the continent name and the count.
 P: What is the name of each continent and how many car makers are there in each one?
@@ -115,8 +115,8 @@ on T2.CountryId = T3.Country
 group by T1.Continent;
 
 S:
-S: 
-S: 
+S:
+S:
 
 11. Which of the countries has the most car makers? List the country name.
 P: What is the name of the country with the most car makers?
@@ -127,8 +127,8 @@ group by T1.Country
 order by Count(*) DESC LIMIT 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 12. How many car models are produced by each maker? List the count and the maker full name.
 P: What is the number of car models that are produced by each maker and what is the id and full name of each maker?
@@ -138,8 +138,8 @@ P: What is the number of car models that are produced by each maker and what is 
  group by T2.id;
 
 S:
-S: 
-S: 
+S:
+S:
 
 13. What is the accelerate of the car make amc hornet sportabout (sw)?
 P: How much does the car accelerate that makes amc hornet sportabout (sw)?
@@ -149,8 +149,8 @@ from CARS_DATA as T1 JOIN CAR_NAMES as T2 on T1.Id = T2.MakeId
 where T2.Make = 'amc hornet sportabout (sw)';
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 14. How many car makers are there in france?
@@ -161,8 +161,8 @@ from CAR_MAKERS as T1 JOIN COUNTRIES as T2 on T1.Country = T2.CountryId
 where T2.CountryName = 'france';
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 15. How many car models are produced in the usa?
@@ -174,8 +174,8 @@ JOIN COUNTRIES as T3 on T2.Country = T3.CountryId
 where T3.CountryName = 'usa';
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 16. What is the average miles per gallon(mpg) of the cars with 4 cylinders?
@@ -186,13 +186,13 @@ from CARS_DATA
 where Cylinders = 4;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 
 17. What is the smallest weight of the car produced with 8 cylinders on 1974?
-P: What is the minimu weight of the car with 8 cylinders produced in 1974? 
+P: What is the minimu weight of the car with 8 cylinders produced in 1974?
 
 select Weight
 from CARS_DATA
@@ -200,8 +200,8 @@ where Cylinders = 4 and Year = 1974
 order by Weight asc Limit 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 18. What are all the makers and models?
@@ -211,8 +211,8 @@ select Maker, Model
 from MODEL_LIST;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 19. What are the countries having at least one car maker? List name and id.
@@ -224,8 +224,8 @@ group by T1.CountryId
 having count(*) >= 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 20. What is the number of the cars with horsepower more than 150?
@@ -236,8 +236,8 @@ from CARS_DATA
 where horsepower > 150;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 21. What is the average weight of cars each year?
@@ -248,8 +248,8 @@ from CARS_DATA
 group by Year;
 
 S:
-S: 
-S: 
+S:
+S:
 
 22. Which countries in europe have at least 3 car manufacturers?
 P: What are the names of all European countries with at least 3 manufacturers?
@@ -264,8 +264,8 @@ group by T1.CountryName
 having count(*) >= 3;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 23. What is the maximum horsepower and the make of the car models with 3 cylinders?
@@ -277,8 +277,8 @@ where T2.cylinders = 3
 order by T2.horsepower DESC LIMIT 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 24. Which model saves the most gasoline? That is to say, have the maximum miles per gallon.
@@ -289,8 +289,8 @@ from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 order by T2.mpg DESC LIMIT 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 25. What is the average horsepower of the cars before 1980?
@@ -301,8 +301,8 @@ from CARS_DATA
 where Year < 1980;
 
 S:
-S: 
-S: 
+S:
+S:
 
 26. What is the average edispl of the cars of model volvo?
 P: What is the average edispl for all volvos?
@@ -312,8 +312,8 @@ from CAR_NAMES as T1 JOIN CARS_DATA as T2 on T1.MakeId = T2.Id
 where T1.Model = 'volvo';
 
 S:
-S: 
-S: 
+S:
+S:
 
 27. What is the maximum accelerate for different number of cylinders?
 P: What is the maximum accelerate for all the different cylinders?
@@ -323,8 +323,8 @@ from CARS_DATA
 group by Cylinders;
 
 S:
-S: 
-S: 
+S:
+S:
 
 28. Which model has the most version(make) of cars?
 P: What model has the most different versions?
@@ -335,8 +335,8 @@ group by Model
 order by count(*) DESC LIMIT 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 29. How many cars have more than 4 cylinders?
 P: What is the number of cars with more than 4 cylinders?
@@ -346,8 +346,8 @@ from CARS_DATA
 where Cylinders > 4;
 
 S:
-S: 
-S: 
+S:
+S:
 
 30. how many cars were produced in 1980?
 P: In 1980, how many cars were made?
@@ -357,8 +357,8 @@ from CARS_DATA
 where Year = 1980;
 
 S:
-S: 
-S: 
+S:
+S:
 
 31. How many car models were produced by the maker with full name American Motor Company?
 P: What is the number of car models created by the car maker American Motor Company?
@@ -368,8 +368,8 @@ from CAR_MAKERS as T1 JOIN MODEL_LIST as T2 on T1.Id = T2.Maker
 where T1.FullName = 'American Motor Company';
 
 S:
-S: 
-S: 
+S:
+S:
 
 32. Which makers designed more than 3 car models? List full name and the id.
 P: What are the names and ids of all makers with more than 3 models?
@@ -380,8 +380,8 @@ group by T1.Id
 having count(*) > 3;
 
 S:
-S: 
-S: 
+S:
+S:
 
 33. Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?
 P: What are the different models created by either the car maker General Motors or weighed more than 3500?
@@ -395,8 +395,8 @@ on T1.MakeId = T4.Id
 where T3.FullName = 'General Motors' or T4.weight > 3500;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 34. In which years cars were produced weighing no less than 3000 and no more than 4000?
@@ -407,8 +407,8 @@ from CARS_DATA as T1
 where T1.Weight > 3000 and T1.weight < 4000;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 35. What is the horsepower of the car with the largest accelerate?
@@ -419,8 +419,8 @@ from CARS_DATA as T1
 order by T1.accelerate DESC LIMIT 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 36. For model volvo, how many cylinders does the car with the least accelerate have?
 P: For a volvo model, how many cylinders does the version with least accelerate have?
@@ -432,8 +432,8 @@ where T2.Model = 'volvo'
 order by T1.accelerate asc limit 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 37. How many cars have a larger accelerate than the car with the largest horsepower?
 P: What is the number of cars with a greater accelerate than the one with the most horsepower?
@@ -447,8 +447,8 @@ where Accelerate > (
 );
 
 S:
-S: 
-S: 
+S:
+S:
 
 38. How many countries has more than 2 car makers?
 P: What is the number of countries with more than 2 car makers?
@@ -456,15 +456,14 @@ P: What is the number of countries with more than 2 car makers?
 select COUNT(*)
 from (
  select T1.CountryId, COUNT(*)
- from COUNTRIES as T1, CAR_MAKERS as T2
- where T1.CountryId = T2.Country
+ from COUNTRIES as T1 join CAR_MAKERS as T2 on T1.CountryId = T2.Country
  group by T1.CountryId
  having count(*) > 2
 );
 
 S:
-S: 
-S: 
+S:
+S:
 
 39. How many cars has over 6 cylinders?
 P: What is the number of carsw ith over 6 cylinders?
@@ -474,8 +473,8 @@ from CARS_DATA
 where Cylinders > 6;
 
 S:
-S: 
-S: 
+S:
+S:
 
 40. For the cars with 4 cylinders, which model has the largest horsepower?
 P: For all of the 4 cylinder cars, which model has the most horsepower?
@@ -486,8 +485,8 @@ where T2.Cylinders = 4
 order by T2.horsepower DESC LIMIT 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 41. Among the cars with more than lowest horsepower, which ones do not have more than 3 cylinders? List the car makeid and make name.
 P: Among the cars that do not have the minimum horsepower, what are the make ids and names of al those with less than 4 cylinders?
@@ -499,8 +498,8 @@ where T1.Horsepower > (select min(Horsepower) from CARS_DATA) and T1.Cylinders <
 
 
 S:
-S: 
-S: 
+S:
+S:
 
 42. What is the maximum miles per gallon of the car with 8 cylinders or produced before 1980?
 P: What is the maximum mpg of the cars that had 8 cylinders or that were produced before 1980?
@@ -511,8 +510,8 @@ where Cylinders = 8 or Year < 1980
 order by mpg desc Limit 1;
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 43. Which models are lighter than 3500 but not built by the 'Ford Motor Company'?
@@ -527,8 +526,8 @@ on T1.Maker = T4.Id
 where T3.weight < 3500 and T4.FullName != 'Ford Motor Company';
 
 S:
-S: 
-S: 
+S:
+S:
 
 
 44. What are the name of the countries where there is not a single car maker?
@@ -542,8 +541,8 @@ from countries as T1 JOIN CAR_MAKERS as T2
 on T1.countryId = T2.Country;
 
 S:
-S: 
-S: 
+S:
+S:
 
 45. Which are the car makers which produce at least 2 models and more than 3 car makes? List the id and the maker.
 P: What are the ids and makers of all car makers that produce at least 2 models and make more than 3 cars?
@@ -564,8 +563,8 @@ group by T1.Id
 having count(*) > 3;
 
 S:
-S: 
-S: 
+S:
+S:
 
 46. What are the id and names of the countries which have more than 3 car makers or produce the 'fiat' model?
 P: What are the ids and names of all countries that either have more than 3 car makers or produce fiats?
@@ -584,6 +583,6 @@ on T2.Id = T3.Maker
 where T3.Model = 'fiat';
 
 S:
-S: 
-S: 
+S:
+S:
 

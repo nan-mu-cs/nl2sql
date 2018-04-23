@@ -177,7 +177,7 @@ on T1.owner_id = T2.owner_id
 JOIN Treatments as T3
 on T2.dog_id = T3.dog_id
 group by T1.owner_id
-order by sum(cost_of_treatment) desc limit 1
+order by sum(T3.cost_of_treatment) desc limit 1
 
 S:
 S:

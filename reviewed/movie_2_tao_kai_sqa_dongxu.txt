@@ -198,7 +198,7 @@ S: What are the titles that correspond to those codes?
 
 Select T1.code
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
-Where T2.name = 'Odeon' 
+Where T2.name = 'Odeon'
 
 Select T1.code
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
@@ -213,8 +213,8 @@ P: What movie is playing at both the Odeon and Imperial theater?
 
 Select T1.title
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
-Where T2.name = 'Odeon' 
-Intersect 
+Where T2.name = 'Odeon'
+Intersect
 Select T1.title
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
 Where T2.name = 'Imperial'
@@ -225,20 +225,20 @@ S: What are their titles?
 
 Select T1.code
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
-Where T2.name = 'Odeon' 
+Where T2.name = 'Odeon'
 
 Select T1.code
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
-Where T2.name = 'Odeon' 
-Intersect 
+Where T2.name = 'Odeon'
+Intersect
 Select T1.code
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
 Where T2.name = 'Imperial'
 
 Select T1.title
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
-Where T2.name = 'Odeon' 
-Intersect 
+Where T2.name = 'Odeon'
+Intersect
 Select T1.title
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
 Where T2.name = 'Imperial'
@@ -259,7 +259,7 @@ S: What are the corresponding names?
 
 Select T1.code
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
-Where T2.name = 'Odeon' 
+Where T2.name = 'Odeon'
 
 Select code
 From movies
@@ -276,7 +276,7 @@ From movies as T1 join movietheaters as T2 on T1.code = T2.movie
 Where T2.name = 'Odeon'
 
 14. List in alphabetical order the titles of all movies.
-P: 	What are the movie names in alphabetical order? 
+P: 	What are the movie names in alphabetical order?
 
 Select title
 From movies
@@ -421,7 +421,7 @@ From movietheaters
 Group by name
 Having count(*) >= 1
 
-# comment: can decompose further 
+# comment: can decompose further
 
 S: Which theaters have film on?
 S: Which one have at least 1 film on?
@@ -459,7 +459,7 @@ where Movie is NULL
 
 
 22. Find the name of the movie theaters that are playing the movies whose rating is ‘G’.
-P: What are the names of theaters playing 'G' rated movies? 
+P: What are the names of theaters playing 'G' rated movies?
 
 Select T2.name
 From movies as T1 join movietheaters as T2 on T1.code = T2.movie
@@ -487,17 +487,17 @@ Where T1.rating = 'G'
 P: What are all of the movie names?
 
 select title
-from movie
+from movies
 
 S: What are all the movies?
 S: What are the titles?
 
 select *
-from movie
+from movies
 
 select title
-from movie
- 
+from movies
+
 25. Show all the distinct ratings in the database.
 P: What are the different movie ratings?
 
@@ -516,7 +516,7 @@ from movies
 
 select distinct rating
 from movies
- 
+
 26. Show all information of all unrated movies.
 P: What is all the information about the unrated movies?
 

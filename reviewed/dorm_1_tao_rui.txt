@@ -27,7 +27,7 @@ S:
 P: How many girl students who are younger than 25?
 
 Select count(*)
-From student 
+From student
 Where sex = 'F' and age < 25
 
 
@@ -153,7 +153,7 @@ P: What are the names of all the dorms that don't have any amenities?
 
 Select dorm_name
 From dorm
-Where dormid NOT IN 
+Where dormid NOT IN
 (Select dormid from has_amenity)
 
 S:
@@ -236,7 +236,7 @@ From dorm as T1
      Join has_amenity as T2 on T1.dormid = T2.dormid
      Join dorm_amenity as T3 on T2.amenid = T3.amenid
 Where T3.amenity_name = 'TV Lounge'
-Except 
+Except
 Select T1.dorm_name
 From dorm as T1
      Join has_amenity as T2 on T1.dormid = T2.dormid
@@ -251,7 +251,7 @@ S:
 
 
 20. Find the last name of students who is either female (sex is F) and living in the city of code BAL or male (sex is M) and in age of below 20.
-P: What is the last name of every student who is either female or living in a city with the code BAL or male and under 20? 
+P: What is the last name of every student who is either female or living in a city with the code BAL or male and under 20?
 
 Select lname
 From student
@@ -404,7 +404,7 @@ S:
 
 
 32. Find the number of students for the cities where have more than one student.
-P: How many students are from each city, and which cities have more than one cities? 
+P: How many students are from each city, and which cities have more than one cities?
 
 Select count(*), city_code
 From student
@@ -417,11 +417,11 @@ S:
 
 
 33. Find the first and last name of students who are not in the largest major.
-P: What is the first and last name of the students who are not in the largest major? 
+P: What is the first and last name of the students who are not in the largest major?
 
 Select fname, lname
 From student
-Where major != (select major 
+Where major != (select major
                 from student
                 group by major
                 order by count(*) desc
@@ -479,7 +479,7 @@ From student as T1
      Join lives_in as T2 on T1.stuid = T2.stuid
      Join dorm as T3 on T3.dormid = T2.dormid
 Where T1.age > 20
-Group by T3.dorm_name 
+Group by T3.dorm_name
 
 S:
 S:
@@ -585,10 +585,10 @@ From student as T1
      Join lives_in as T2 on T1.stuid = T2.stuid
 Where T2.dormid IN
 (Select T2.dormid
-From dorm as T1
-     Join has_amenity as T2 on T1.dormid = T2.dormid
-     Join dorm_amenity as T3 on T2.amenid = T3.amenid
-Group by T2.dormid
+From dorm as T3
+     Join has_amenity as T4 on T3.dormid = T4.dormid
+     Join dorm_amenity as T5 on T4.amenid = T5.amenid
+Group by T3.dormid
 Order by count(*) desc
 Limit 1)
 
@@ -612,7 +612,7 @@ S:
 S:
 
 47. Find the name of dorms that do not have amenity TV Lounge.
-P: What are the names of the dorm that does not have a TV Lounge? 
+P: What are the names of the dorm that does not have a TV Lounge?
 
 Select dorm_name
 From dorm
@@ -628,15 +628,15 @@ S:
 S:
 
 48. Find the first and last name of students who are living in the dorms that have amenity TV Lounge.
-P: What are the first and last names of all students who are living in a dorm with a TV Lounge? 
+P: What are the first and last names of all students who are living in a dorm with a TV Lounge?
 
 
 Select T1.fname, T1.lname
 From student as T1 join lives_in as T2 on T1.stuid = T2.stuid
 Where T2.dormid IN
-(Select T1.dormid
-From has_amenity as T1 join dorm_amenity as T2 on T1.amenid = T2.amenid
-Where T2.amenity_name = 'TV Lounge')
+(Select T3.dormid
+From has_amenity as T3 join dorm_amenity as T4 on T3.amenid = T4.amenid
+Where T4.amenity_name = 'TV Lounge')
 
 
 S:
@@ -650,9 +650,9 @@ P: What is the first name and age of every student who lives in a dorm with a TV
 Select T1.fname, T1.age
 From student as T1 join lives_in as T2 on T1.stuid = T2.stuid
 Where T2.dormid NOT IN
-(Select T1.dormid
-From has_amenity as T1 join dorm_amenity as T2 on T1.amenid = T2.amenid
-Where T2.amenity_name = 'TV Lounge')
+(Select T3.dormid
+From has_amenity as T3 join dorm_amenity as T4 on T3.amenid = T4.amenid
+Where T4.amenity_name = 'TV Lounge')
 
 
 S:

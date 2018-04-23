@@ -290,7 +290,7 @@ S: How many are there?
 
 select *
 from FLIGHTS as T1 join AIRPORTS as T2 T1.SourceAirport = T2.AirportCode
-where T2.City = "Aberdeen" 
+where T2.City = "Aberdeen"
 
 select *
 from FLIGHTS as T1 join AIRPORTS as T2 on T1.DestAirport = T2.AirportCode join AIRPORTS as T3 on T1.SourceAirport = T3.AirportCode
@@ -366,7 +366,7 @@ where T1.Airline = "United Airlines" and T2.SourceAirport = "AHD"
 
 21. How many United Airlines flights go to City 'Aberdeen'?
 P: Count the number of United Airlines flights that arrive in Aberdeen.
-    
+
 select count(*)
 from FLIGHTS as T1 join AIRPORTS as T2 on T1.DestAirport = T2.AirportCode join AIRLINES as T3 on T3.uid = T1.Airline
 where T2.City = "Aberdeen" and T3.Airline = "United Airlines"
@@ -420,7 +420,7 @@ limit 1
 
 S: Name all cities that have source airports.
 S: Order them by number of departing flights.
-S: Which one has the most? 
+S: Which one has the most?
 
 select T1.City
 from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.SourceAirport
@@ -475,7 +475,7 @@ S: Also include codes of airports with departure flights.
 S: Which one has the least number of flights?
 
 select T1.AirportCode
-from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.DestAirport 
+from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.DestAirport
 
 select T1.AirportCode
 from AIRPORTS as T1 join FLIGHTS as T2 on T1.AirportCode = T2.DestAirport or T1.AirportCode = T2.SourceAirport
@@ -510,7 +510,7 @@ limit 1
 
 27. Find the abbreviation and country of the airline that has fewest number of flights?
 P: What is the abbreviation of the airilne has the fewest flights and what country is it in?
-        
+
 select T1.Abbreviation, T1.Country
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
 group by T1.Airline
@@ -522,7 +522,7 @@ S: Order them by the number of flights that they have.
 S: Which one has the fewest?
 
 select Abbreviation, Country
-from AIRLINES 
+from AIRLINES
 
 select T1.Abbreviation, T1.Country
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
@@ -546,7 +546,7 @@ S: Which flights leave from AHD?
 S: What are their airlines?
 
 select *
-from FLIGHTS 
+from FLIGHTS
 where SourceAirport = "AHD"
 
 select T1.Airline
@@ -564,7 +564,7 @@ S: Which flights arrive in AHD?
 S: What are their airlines?
 
 select *
-from FLIGHTS 
+from FLIGHTS
 where DestAirport = "AHD"
 
 select T1.Airline
@@ -635,7 +635,7 @@ S: What are all the airlines?
 S: Which ones have more than 10 flights?
 
 select distinct Airline
-from AIRLINES 
+from AIRLINES
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
@@ -654,71 +654,12 @@ S: What are all the airlines?
 S: Which ones have less than 200 flights?
 
 select distinct Airline
-from AIRLINES 
+from AIRLINES
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
 group by T1.Airline
 having count(*) < 200
-
-34. Find all airlines which have departure flights in all airports.
-P: Which airlines have departing flights from all airports?
-
-select distinct AIRLINES.Airline
-from AIRLINES
-where not exists (
-select distinct AIRPORTS.AirportCode
-from AIRPORTS
-except
-select distinct FLIGHTS.SourceAirport
-from FLIGHTS
-where AIRLINES.uid = FLIGHTS.Airline)
-
-S: What are all the airport codes?
-S: Of these, which have departure flights in all airports?
-
-
-select distinct AIRPORTS.AirportCode
-from AIRPORTS
-
-select distinct AIRLINES.Airline
-from AIRLINES
-where not exists (
-select distinct AIRPORTS.AirportCode
-from AIRPORTS
-except
-select distinct FLIGHTS.SourceAirport
-from FLIGHTS
-where AIRLINES.uid = FLIGHTS.Airline)
-
-35. Find all airlines which have arriving flights in all airports.
-P: Which airlines have arriving flights in all airports?
-
-select distinct AIRLINES.Airline
-from AIRLINES
-where not exists (
-select distinct AIRPORTS.AirportCode
-from AIRPORTS
-except
-select distinct FLIGHTS.DestAirport
-from FLIGHTS
-where AIRLINES.uid = FLIGHTS.Airline)
-
-S: What are all the airport codes?
-S: Of these, which have arrival flights in all airports?
-
-select distinct AIRPORTS.AirportCode
-from AIRPORTS
-
-select distinct AIRLINES.Airline
-from AIRLINES
-where not exists (
-select distinct AIRPORTS.AirportCode
-from AIRPORTS
-except
-select distinct FLIGHTS.DestAirport
-from FLIGHTS
-where AIRLINES.uid = FLIGHTS.Airline)
 
 36. What are flight numbers of Airline "United Airlines"?
 P: Which flight numbers correspond to United Airlines flights?
@@ -783,7 +724,7 @@ S: Of these, which are departure flights?
 S: Which leave from Aberdeen?
 
 select FlightNo
-from FLIGHTS 
+from FLIGHTS
 
 select T1.FlightNo
 from FLIGHTS as T1 join AIRPORTS as T2 on T1.SourceAirport  = T2.AirportCode
@@ -801,10 +742,10 @@ where T2.City = "Aberdeen"
 
 S: What are all the flight numbers?
 S: Of these, which are arrival flights?
-S: Which land in Aberdeen? 
+S: Which land in Aberdeen?
 
 select FlightNo
-from FLIGHTS 
+from FLIGHTS
 
 select T1.FlightNo
 from FLIGHTS as T1 join AIRPORTS as T2 on T1.DestAirport  = T2.AirportCode
@@ -846,20 +787,20 @@ where AirportCode NOT IN (select SourceAirport
                           UNION
                           select DestAirport
                           from Flights)
-                          
+
 S: What are the source airports?
 S: Also include the destination airports.
 S: Which airports are not included?
 
 select SourceAirport
 from Flights
-                          
+
 select SourceAirport
 from Flights
 UNION
 select DestAirport
 from Flights
-                          
+
 select AirportName
 from Airports
 where AirportCode NOT IN (select SourceAirport

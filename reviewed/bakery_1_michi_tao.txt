@@ -94,7 +94,7 @@ Where price < 3
 P: What are the distinct ids of customers who bought lemon flavored cake?
 
 Select DISTINCT T3.CustomerId
-From goods as T1 JOIN items as T2 ON T1.Id = T2.Item 
+From goods as T1 JOIN items as T2 ON T1.Id = T2.Item
      JOIN receipts as T3 ON T2.Receipt = T3.ReceiptNumber
 Where T1.Flavor = "Lemon" and T1.Food = "Cake"
 
@@ -102,11 +102,11 @@ S: What are the ids of lemon flavor cakes?
 S: What are the distinct customer ids of customers who bought these?
 
 Select id
-From goods 
+From goods
 Where Flavor = "Lemon" and Food = "Cake"
 
 Select DISTINCT T3.CustomerId
-From goods as T1 JOIN items as T2 ON T1.Id = T2.Item 
+From goods as T1 JOIN items as T2 ON T1.Id = T2.Item
      JOIN receipts as T3 ON T2.Receipt = T3.ReceiptNumber
 Where T1.Flavor = "Lemon" and T1.Food = "Cake"
 
@@ -114,7 +114,7 @@ Where T1.Flavor = "Lemon" and T1.Food = "Cake"
 P: How many customers have bought each food?
 
 Select T1.food, count(distinct T3.CustomerId)
-From goods as T1 JOIN items as T2 ON T1.Id = T2.Item 
+From goods as T1 JOIN items as T2 ON T1.Id = T2.Item
      JOIN receipts as T3 ON T2.Receipt = T3.ReceiptNumber
 Group by T1.food
 
@@ -122,11 +122,11 @@ S: What are the different foods?
 S: How many customers have bought each of them?
 
 Select food
-From goods 
+From goods
 Group by food
 
 Select T1.food, count(distinct T3.CustomerId)
-From goods as T1 JOIN items as T2 ON T1.Id = T2.Item 
+From goods as T1 JOIN items as T2 ON T1.Id = T2.Item
      JOIN receipts as T3 ON T2.Receipt = T3.ReceiptNumber
 Group by T1.food
 
@@ -162,7 +162,7 @@ S: What are the customer ids of customers who have shopped at the bakery more th
 S: What are their last names?
 
 Select CustomerId
-From receipts 
+From receipts
 Group by CustomerId
 having count(*) > 10
 
@@ -210,17 +210,17 @@ where food = "Croissant"
 P: What are all the distinct items bought by customer 15?
 
 Select distinct T1.item
-from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber 
+from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber
 Where T2.CustomerId = 15
 
 S: What are the distinct items bought by any customer?
 S: Of those, which were bought by customer number 15?
 
 Select distinct T1.item
-from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber 
+from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber
 
 Select distinct T1.item
-from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber 
+from items as T1 JOIN receipts as T2 ON T1.receipt = T2.ReceiptNumber
 Where T2.CustomerId = 15
 
 12. For each type of food, what are the average, maximum and minimum price?
@@ -284,7 +284,7 @@ Select T1.ReceiptNumber
 From receipts as T1
      Join items as T2 on T1.ReceiptNumber = T2.receipt
      Join goods as T3 on T2.item = T3.id
-Where T3.food = "Croissant" 
+Where T3.food = "Croissant"
 
 Select T1.ReceiptNumber
 From receipts as T1
@@ -294,7 +294,7 @@ From receipts as T1
 Where T3.food = "Croissant" and T4.LastName = 'LOGAN'
 
 15. What is the receipt number and date of the receipt in which the most expensive item was bought?
-P: What is the receipt number and date corresponding to the receipt for which the most expensive item was purchased? 
+P: What is the receipt number and date corresponding to the receipt for which the most expensive item was purchased?
 
 Select T1.ReceiptNumber, T1.Date
 From receipts as T1 JOIN items as T2 ON T1.ReceiptNumber = T2.receipt JOIN goods as T3 ON T2.item = T3.id
@@ -415,7 +415,7 @@ S: Of these, which cost more than 10 dollars?
 
 Select flavor
 From goods
-where food = "Cake" 
+where food = "Cake"
 
 Select flavor
 From goods
@@ -432,7 +432,7 @@ S: What is the average price of any good?
 S: What is all the information on goods that cost less than this?
 S: What are their distinct ids and prices?
 
-Select avg(price) 
+Select avg(price)
 From goods)
 
 Select *
@@ -453,8 +453,8 @@ where price < (select max(price) From goods Where food = "Tart")
 S: What is the price of the most expensive Tart?
 S: What are the distinct ids for goods that cost less than this?
 
-select max(price) 
-From goods 
+select max(price)
+From goods
 Where food = "Tart"
 
 Select distinct id
@@ -472,7 +472,7 @@ S: What are the distinct receipt numbers?
 S: Of these, which were for instances in which a purchase of over 13 dollars was made?
 
 Select distinct ReceiptNumber
-from receipts 
+from receipts
 
 Select distinct T1.ReceiptNumber
 from receipts as T1 JOIN items as T2 ON T1.ReceiptNumber = T2.receipt JOIN goods as T3 ON T2.item = T3.id
@@ -489,7 +489,7 @@ S: On what different dates did customers purchase something?
 S: Of these, which correspond to when a customer purchased a good costing over 15 dollars?
 
 Select distinct date
-from receipts 
+from receipts
 
 Select distinct T1.date
 from receipts as T1 JOIN items as T2 ON T1.ReceiptNumber = T2.receipt JOIN goods as T3 ON T2.item = T3.id
@@ -547,14 +547,14 @@ From customers
 Order by LastName
 
 28. Return the ordered list of all good ids.
-P: Order the distinct good ids. 
+P: Order the distinct good ids.
 
 Select distinct id
 From goods
 Order by id
 
 S: What are the distinct good ids?
-S: Order them. 
+S: Order them.
 
 Select distinct id
 From goods
@@ -604,9 +604,9 @@ where date = (Select date From receipts Order by date Desc LIMIT 1)
 S: What is the latest date for a receipt?
 S: Also, what is the receipt number corresponding to that?
 
-Select date 
-From receipts 
-Order by date Desc 
+Select date
+From receipts
+Order by date Desc
 LIMIT 1
 
 Select ReceiptNumber, date
@@ -628,9 +628,9 @@ S: What is the earliest date for a receipt?
 S: What is the receipt number corresponding to that?
 S: What are the receipt numbers that are either included in those or are for receipts for goods that cost more than 10 dollars?
 
-Select date 
-From receipts 
-Order by date 
+Select date
+From receipts
+Order by date
 LIMIT 1
 
 Select ReceiptNumber
@@ -650,18 +650,18 @@ P: Give the ids of Cookies or Cakes that cost between 3 and 7 dollars.
 
 Select id
 From goods
-where (food = "Cookie" or food = "Cake") and price between 3 and 7 
+where food = "Cookie" or food = "Cake" and price between 3 and 7
 
 S: What are the ids of goods that have prices between 3 and 7?
 S: Of those, which are for cookies or cakes?
 
 Select id
 From goods
-where price between 3 and 7 
+where price between 3 and 7
 
 Select id
 From goods
-where (food = "Cookie" or food = "Cake") and price between 3 and 7 
+where food = "Cookie" or food = "Cake" and price between 3 and 7
 
 33. Find the first name and last name of a customer who visited on the earliest date.
 P: What is the full name of the customer who visited on the earliest date?
@@ -676,7 +676,7 @@ S: Sort them by the dates that they came to the bakery.
 S: Which corresponds to the earliest date?
 
 Select FirstName, LastName
-From customers 
+From customers
 
 Select T1.FirstName, T1.LastName
 From customers as T1 JOIN receipts as T2 ON T1.id = T2.CustomerId
@@ -855,7 +855,7 @@ S: What are the full names of all customers?
 S: What are the full names of customers who bought apple flavored Tarts?
 
 Select distinct FirstName, LastName
-from customers 
+from customers
 
 Select distinct T4.FirstName, T4.LastName
 from goods as T1 JOIN items as T2 ON T1.id = T2.item JOIN receipts as T3 ON T2.receipt = T3.ReceiptNumber JOIN customers as T4 ON T3.CustomerId = T4.id
@@ -871,8 +871,8 @@ where food = "Cookie" and price < (select min(price) from goods where food = 'Cr
 S: What is the price of the cheapest croissant?
 S: What are the ids of cookies that are cheaper?
 
-select min(price) 
-from goods 
+select min(price)
+from goods
 where food = 'Croissant'
 
 Select id
@@ -887,7 +887,7 @@ From goods
 where food = "Cake" and price >= 3 * (select avg(price)
                              from goods
                              where food = "Tart")
-                             
+
 S: What is the price of the average tart?
 S: What are the ids of goods that are at least three times as expensive?
 S: Of those, which are cakes?
@@ -895,13 +895,13 @@ S: Of those, which are cakes?
 select avg(price)
 from goods
 where food = "Tart"
-                             
+
 Select id
 From goods
 where price >= 3 * (select avg(price)
                              from goods
                              where food = "Tart")
-                             
+
 Select id
 From goods
 where food = "Cake" and price >= 3 * (select avg(price)
@@ -918,7 +918,7 @@ where price > 2 * (select avg(price) from goods)
 S: What is the average price of a good?
 S: What are the ids of goods that are more than twice as expensive?
 
-select avg(price) 
+select avg(price)
 from goods
 
 Select id
@@ -962,7 +962,7 @@ From goods
 where food = "Cake"
 order by flavor
 
-47. Find all the items that have chocolate flavor but were not bought more than 10 times. 
+47. Find all the items that have chocolate flavor but were not bought more than 10 times.
 P: What are the items with chocolate flavor that were purchased at most 10 times.
 
 Select distinct T1.item
@@ -975,7 +975,7 @@ S: What are the distinct items that have been purchased at most 10 times?
 S: Of these, which have chocolate flavor?
 
 Select distinct item
-From items 
+From items
 Group by item
 having count(*) <= 10
 
@@ -984,14 +984,14 @@ From items as T1 JOIN goods as T2 ON T1.item = T2.id
 Where T2.flavor = "Chocolate"
 Group by item
 having count(*) <= 10
-          
+
 48. What are the flavors available for Cake but not for Tart?
 P: Give the flavors of Cakes that are not available for Tart.
 
 Select distinct flavor
 From goods
 where food = "Cake"
-EXCEPT 
+EXCEPT
 Select distinct flavor
 From goods
 where food = "Tart"
@@ -1006,7 +1006,7 @@ where food = "Cake"
 Select distinct flavor
 From goods
 where food = "Cake"
-EXCEPT 
+EXCEPT
 Select distinct flavor
 From goods
 where food = "Tart"
@@ -1046,7 +1046,7 @@ S: What are the different customer ids?
 S: Of those, who spent over 150 dollars in total?
 
 Select CustomerId
-From receipts 
+From receipts
 Group by CustomerId
 
 Select T3.CustomerId
@@ -1066,7 +1066,7 @@ S: What are the different customer ids?
 S: Of those, who spends over 5 dollars on average for each good?
 
 Select CustomerId
-From receipts 
+From receipts
 Group by CustomerId
 
 Select T3.CustomerId
@@ -1086,7 +1086,7 @@ S: What are all the different dates on receipts?
 S: Of these, which dates did the bakery sell more than 100 dollars of goods?
 
 Select date
-From receipts 
+From receipts
 Group by date
 
 Select T3.date

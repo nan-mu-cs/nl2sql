@@ -72,8 +72,8 @@ P: What are the balances of checking accounts belonging to people with savings b
 
 Select T2.balance
 From accounts as T1
-     Join checking as T2 on T1.custid = T2.custid  
-Where T1.name IN (Select T1.name 
+     Join checking as T2 on T1.custid = T2.custid
+Where T1.name IN (Select T1.name
                   From accounts as T1 Join savings as T2 ON T1.custid = T2.custid
                   Where T2.balance > (select avg(balance) from savings))
 
@@ -104,12 +104,6 @@ From accounts as T1
      Join checking as T2 on T1.custid = T2.custid
      Join savings as T3 ON T1.custid = T3.custid
 Where T3.balance > (select avg(balance) from savings)
-
-14. What is the sum of total saving and checking balances in the bank?
-P: What is the sum of all savings and checking balances together?
-
-Select sum(T1.balance) + sum(T2.balance)
-From checking as T1, savings as T2
 
 15. Find the name and checking balance of the account with the lowest savings balance.
 P: What are the names and balances of checking accounts belonging to the customer with the lowest savings balance?

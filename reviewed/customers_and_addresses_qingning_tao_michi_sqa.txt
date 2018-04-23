@@ -665,7 +665,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 
-select sum(t3.order_quantity) 
+select sum(t3.order_quantity)
 from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 join order_items as t3
@@ -698,7 +698,7 @@ S: What is the total quantity ordered by each customer?
 S: Return the customer who ordered the least quantity in total.
 S: What is that customer's payment method?
 
-select sum(t3.order_quantity) 
+select sum(t3.order_quantity)
 from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 join order_items as t3
@@ -727,7 +727,7 @@ limit 1
 30. How many types of products have Rodrick Heaney bought in total?
 P: Find the number of distinct products Rodrick Heaney has bought so far.
 
-select count(distinct product_id)
+select count(distinct t3.product_id)
 from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 join order_items as t3
@@ -737,18 +737,18 @@ where t1.customer_name = "Rodrick Heaney"
 S: Find the id of the product ordered in each order.
 S: What are the ids of products ordered by the customer named Rodrick Heaney?
 S: How many distinct products has he bought?
- 
-select product_id
-from order_items 
 
 select product_id
+from order_items
+
+select t3.product_id
 from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 where t1.customer_name = "Rodrick Heaney"
 
-select count(distinct product_id)
+select count(distinct t3.product_id)
 from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 join order_items as t3
@@ -771,9 +771,9 @@ S: What are the ids of products ordered by the customer named Rodrick Heaney?
 S: What is the total quantity of products bought by him?
 
 select product_id
-from order_items 
+from order_items
 
-select product_id
+select t3.product_id
 from customers as t1 join customer_orders as t2
 on t1.customer_id = t2.customer_id
 join order_items as t3
@@ -792,7 +792,7 @@ where t1.customer_name = "Rodrick Heaney"
 P: Return the number of customers who have at least one order with "Cancelled" status.
 
 select count(distinct customer_id)
-from customer_orders 
+from customer_orders
 where order_status = "Cancelled"
 
 S: Which customer order have cancelled status?
@@ -803,7 +803,7 @@ from customer_orders
 where order_status = "Cancelled"
 
 select count(distinct customer_id)
-from customer_orders 
+from customer_orders
 where order_status = "Cancelled"
 
 
@@ -860,7 +860,7 @@ S: Find the order quantity for these orders.
 S: Find the total quantity of products associated with those orders.
 
 select *
-from customer_orders 
+from customer_orders
 where t1.order_status = "Cancelled"
 
 select t2.order_quantity
@@ -886,7 +886,7 @@ S: Find all the customer orders that made before 2018-03-17 07:13:53.
 S: Compute the total quantity of items purchased in this order.
 
 select *
-from customer_orders 
+from customer_orders
 where t1.order_date < 2018-03-17 07:13:53
 
 select sum(t2.order_quantity)
@@ -939,11 +939,11 @@ S: What is the most frequently ordered product?
 S: Tell me the detail of the product.
 
 select count(*)
-from order_items 
+from order_items
 group by product_id
 
 select *
-from order_items 
+from order_items
 group by product_id
 order by count(*) desc
 limit 1
@@ -1055,7 +1055,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Latte'
+where t4.product_details = 'Latte'
 
 S: Find the names of all the customers.
 S: What are the names of customers who bought the product "Latte" before?
@@ -1070,7 +1070,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Latte'
+where t4.product_details = 'Latte'
 
 select customer_name
 from customers
@@ -1081,7 +1081,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Latte'
+where t4.product_details = 'Latte'
 
 
 43. Find the names of customers who never placed an order.
@@ -1122,7 +1122,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Latte'
+where t4.product_details = 'Latte'
 INTERSECT
 select t1.customer_name
 from customers as t1 join customer_orders as t2
@@ -1130,7 +1130,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Americano'
+where t4.product_details = 'Americano'
 
 S: List the names of customers who have purchased Latte.
 S: Give me the names of customers who have purchased Americano.
@@ -1142,7 +1142,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Latte'
+where t4.product_details = 'Latte'
 
 
 select t1.customer_name
@@ -1151,7 +1151,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Americano'
+where t4.product_details = 'Americano'
 
 select t1.customer_name
 from customers as t1 join customer_orders as t2
@@ -1159,7 +1159,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Latte'
+where t4.product_details = 'Latte'
 INTERSECT
 select t1.customer_name
 from customers as t1 join customer_orders as t2
@@ -1167,7 +1167,7 @@ on t1.customer_id = t2.customer_id
 join order_items as t3
 on t2.order_id = t3.order_id
 join products as t4 on t3.product_id = t4.product_id
-where product_details = 'Americano'
+where t4.product_details = 'Americano'
 
 
 
