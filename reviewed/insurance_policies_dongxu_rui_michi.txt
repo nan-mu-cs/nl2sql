@@ -30,8 +30,8 @@ UNION
 select T1.Date_Claim_Made, T1.Claim_id
 from Claims as T1 JOIN Settlements as T2
 on T1.Claim_id = T2.Claim_id
-where T1.Amount_Claimled = (
-select max(Amount_Claimled)
+where T1.Amount_Claimed = (
+select max(Amount_Claimed)
 from Claims
 )
 
@@ -75,9 +75,9 @@ S:
 5. Among all the claims, what is the settlement amount of the claim with the largest claim amount? List both the settlement amount and claim amount.
 P: Find the settlement amount of the claim with the largest claim amount. Show both the settlement amount and claim amount.
 
-select Amount_Settled, Amount_Claimled
+select Amount_Settled, Amount_Claimed
 from Claims
-order by Amount_Claimled desc limit 1
+order by Amount_Claimed desc limit 1
 
 S:
 S:
@@ -87,7 +87,7 @@ S:
 6. Among all the claims, what is the amount claimed in the claim with the least amount settled? List both the settlement amount and claim amount.
 P: Find the claimed amount in the claim with the least amount settled. Show both the settlement amount and claim amount.
 
-select Amount_Settled, Amount_Claimled
+select Amount_Settled, Amount_Claimed
 from Claims
 order by Amount_Settled asc limit 1
 
@@ -101,9 +101,9 @@ P: Give me the claim date, settlement date for all the claims whose claimed amou
 
 select Date_Claim_Made, Date_Claim_Settled
 from Claims
-where Amount_Claimled >
+where Amount_Claimed >
 (
-select avg(Amount_Claimled)
+select avg(Amount_Claimed)
 from Claims
 )
 

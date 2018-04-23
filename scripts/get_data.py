@@ -133,17 +133,7 @@ def parse_file_and_sql(filepath, schema, db_id):
                 q_toks = word_tokenize(q)
                 query_toks = word_tokenize(sql)
                 sql_label = None
-                try:
-                    sql_label = get_sql(schema, sql)
-                except:
-                    print "db_id: ", db_id
-                    print 'question: ', q
-                    print "sql: ", sql
-                    print 'exception: ', traceback.print_exc(file=sys.stdout), '\n'
-                    pass
-		#print '\n---------------------------------'
-                #print sql
-                #print sql_label
+                sql_label = get_sql(schema, sql)
                 ret.append({'question': q,
                             'question_toks': q_toks,
                             'query': sql,

@@ -8,10 +8,10 @@
 # col_unit: (agg_id, col_id, isDistinct(bool))
 # val_unit: (unit_op, col_unit1, col_unit2)
 # table_unit: (table_type, col_unit/sql)
-# cond_unit: (not_op, op_id, col_unit, val1, val2)
+# cond_unit: (not_op, op_id, val_unit, val1, val2)
 # condition: [cond_unit1, 'and'/'or', cond_unit2, ...]
 # sql {
-#   'select': (isDistinct(bool), [val_unit1, val_unit2, ...])
+#   'select': (isDistinct(bool), [(agg_id, val_unit), (agg_id, val_unit), ...])
 #   'from': {'table_units': [table_unit1, table_unit2, ...], 'conds': condition}
 #   'where': condition
 #   'groupBy': [col_unit1, col_unit2, ...]
@@ -31,7 +31,7 @@ from nltk import word_tokenize
 CLAUSE_KEYWORDS = ('select', 'from', 'where', 'group', 'order', 'limit', 'intersect', 'union', 'except')
 JOIN_KEYWORDS = ('join', 'on', 'as')
 
-WHERE_OPS = ('not', 'between', '=', '>', '<', '>=', '<=', '!=', 'in', 'like', 'is')
+WHERE_OPS = ('not', 'between', '=', '>', '<', '>=', '<=', '!=', 'in', 'like', 'is', 'exists')
 UNIT_OPS = ('none', '-', '+', "*", '/')
 AGG_OPS = ('none', 'max', 'min', 'count', 'sum', 'avg')
 TABLE_TYPE = {
@@ -212,6 +212,9 @@ def parse_col_unit(toks, start_idx, tables_with_alias, schema, default_tables=No
         idx += 1
         return idx, (agg_id, col_id, isDistinct)
 
+    if toks[idx] == "distinct":
+        idx += 1
+        isDistinct = True
     agg_id = AGG_OPS.index("none")
     idx, col_id = parse_col(toks, idx, tables_with_alias, schema, default_tables)
 
@@ -307,7 +310,7 @@ def parse_condition(toks, start_idx, tables_with_alias, schema, default_tables=N
     conds = []
 
     while idx < len_:
-        idx, col_unit = parse_col_unit(toks, idx, tables_with_alias, schema, default_tables)
+        idx, val_unit = parse_val_unit(toks, idx, tables_with_alias, schema, default_tables)
         not_op = False
         if toks[idx] == 'not':
             not_op = True
@@ -326,9 +329,9 @@ def parse_condition(toks, start_idx, tables_with_alias, schema, default_tables=N
             idx, val1 = parse_value(toks, idx, tables_with_alias, schema, default_tables)
             val2 = None
 
-        conds.append((not_op, op_id, col_unit, val1, val2))
+        conds.append((not_op, op_id, val_unit, val1, val2))
 
-        if idx < len_ and (toks[idx] in CLAUSE_KEYWORDS or toks[idx] == ')'):
+        if idx < len_ and (toks[idx] in CLAUSE_KEYWORDS or toks[idx] in (")", ";")):
             break
 
         if idx < len_ and toks[idx] in COND_OPS:
@@ -351,8 +354,12 @@ def parse_select(toks, start_idx, tables_with_alias, schema, default_tables=None
     val_units = []
 
     while idx < len_ and toks[idx] not in CLAUSE_KEYWORDS:
+        agg_id = AGG_OPS.index("none")
+        if toks[idx] in AGG_OPS:
+            agg_id = AGG_OPS.index(toks[idx])
+            idx += 1
         idx, val_unit = parse_val_unit(toks, idx, tables_with_alias, schema, default_tables)
-        val_units.append(val_unit)
+        val_units.append((agg_id, val_unit))
         if idx < len_ and toks[idx] == ',':
             idx += 1  # skip ','
 
@@ -394,7 +401,7 @@ def parse_from(toks, start_idx, tables_with_alias, schema):
         if isBlock:
             assert toks[idx] == ')'
             idx += 1
-        if idx < len_ and (toks[idx] in CLAUSE_KEYWORDS or toks[idx]==')'):
+        if idx < len_ and (toks[idx] in CLAUSE_KEYWORDS or toks[idx] in (")", ";")):
             break
 
     return idx, table_units, conds, default_tables
@@ -424,7 +431,7 @@ def parse_group_by(toks, start_idx, tables_with_alias, schema, default_tables):
     assert toks[idx] == 'by'
     idx += 1
 
-    while idx < len_ and not (toks[idx] in CLAUSE_KEYWORDS or toks[idx] == ')'):
+    while idx < len_ and not (toks[idx] in CLAUSE_KEYWORDS or toks[idx] in (")", ";")):
         idx, col_unit = parse_col_unit(toks, idx, tables_with_alias, schema, default_tables)
         col_units.append(col_unit)
         if idx < len_ and toks[idx] == ',':
@@ -448,7 +455,7 @@ def parse_order_by(toks, start_idx, tables_with_alias, schema, default_tables):
     assert toks[idx] == 'by'
     idx += 1
 
-    while idx < len_ and not (toks[idx] in CLAUSE_KEYWORDS or toks[idx] == ')'):
+    while idx < len_ and not (toks[idx] in CLAUSE_KEYWORDS or toks[idx] in (")", ";")):
         idx, val_unit = parse_val_unit(toks, idx, tables_with_alias, schema, default_tables)
         val_units.append(val_unit)
         if idx < len_ and toks[idx] in ORDER_OPS:
@@ -489,8 +496,7 @@ def parse_sql(toks, start_idx, tables_with_alias, schema):
     isBlock = False # indicate whether this is a block of sql/sub-sql
     len_ = len(toks)
     idx = start_idx
-    #print start_idx, toks
-    #print tables_with_alias
+
     sql = {}
     if toks[idx] == '(':
         isBlock = True
@@ -551,14 +557,16 @@ if __name__ == '__main__':
     # print get_schema('art_1.sqlite')
     # fpath = '/Users/zilinzhang/Workspace/Github/nl2sql/Data/Initial/table/art_1_table.json'
     # print schema
-    schema = Schema(get_schema('art_1.sqlite'))
+    schema = {"country": ["code", "indepyear"], "countrylanguage": ["language", "countrycode", "isofficial"]}
+    # schema = Schema(get_schema('art_1.sqlite'))
+    schema = Schema(schema)
     data = load_data("/Users/zilinzhang/Workspace/Github/nl2sql/Data/Processed/train/art_1_processed.json")
     for ix, entry in enumerate(data):
         query = entry["query"]
-        # query = "Select count(distinct T1.name), T2.Headquarter From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code Group by T2.Headquarter"
+        query = 'SELECT count(DISTINCT T2.Language) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code  =  T2.CountryCode WHERE  IndepYear  <  1930 AND T2.IsOfficial  =  "T"'
         print ix, query
         toks = tokenize(query)
         tables_with_alias = get_tables_with_alias(schema.schema, toks)
         _, sql = parse_sql(toks, 0, tables_with_alias, schema)
         print sql
-        # break
+        break
