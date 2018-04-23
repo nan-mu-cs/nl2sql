@@ -816,9 +816,9 @@ from Plays_games as T1 join Video_games as T2 on T1.gameid = T2.gameid
 group by T1.gameid
 having sum(hours_played) >= 1000
 
-P: What are the names of all games?
-P: What are the names for each id?
-P: Out of those, which have been played for a total of at least 1000 hours?
+S: What are the names of all games?
+S: What are the names for each id?
+S: Out of those, which have been played for a total of at least 1000 hours?
 
 
 40. Show all game names played by Linda Smith
