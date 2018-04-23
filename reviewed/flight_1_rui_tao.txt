@@ -63,6 +63,7 @@ S:
 
 
 6. What is the minimum, average, and maximum distance of all aircrafts.
+P: Return the minimum, average and maximum distances traveled across all aircrafts.
 
 select min(distance), avg(distance), max(distance)
 from Aircraft
