@@ -515,7 +515,7 @@ where t1.customer_name = "Tillman Ernser"
 
 
 23. What is the "active to date" of the latest contact channel used by "Tillman Ernser"?
-Return the the "active to date" of the latest contact channel used by the customer named "Tillman Ernser".
+P: Return the the "active to date" of the latest contact channel used by the customer named "Tillman Ernser".
 
 select max(t2.active_to_date)
 from customers as t1 join customer_contact_channels as t2
