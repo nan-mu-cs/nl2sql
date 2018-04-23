@@ -83,6 +83,7 @@ S:
 S:
 
 8. Show the name of aircrafts with top three lowest distances.
+P: What are the aircrafts with top 3 shortest lengthes? List their names.
 
 select name
 from Aircraft
