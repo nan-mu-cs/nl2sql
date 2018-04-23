@@ -26,13 +26,13 @@ def dump_db_json_schema(db, f):
     for i, item in enumerate(cursor.fetchall()):
         table_name = item[0]
         data['table_names_original'].append(table_name)
-        data['table_names'].append(table_name.lower())
+        data['table_names'].append(table_name.lower().replace("_", ' '))
         fks = conn.execute("PRAGMA foreign_key_list('{}') ".format(table_name)).fetchall()
         data['foreign_keys'].extend([[(table_name, fk[3]), (fk[2], fk[4])] for fk in fks])
         cur = conn.execute("PRAGMA table_info('{}') ".format(table_name))
         for j, col in enumerate(cur.fetchall()):
             data['column_names_original'].append((i, col[1]))
-            data['column_names'].append((i, col[1].lower()))
+            data['column_names'].append((i, col[1].lower().replace("_", " ")))
             #varchar, '' -> text, int, numeric -> integer,
             col_type = col[2].lower()
             if 'char' in col_type or col_type == '' or 'text' in col_type or 'var' in col_type:
@@ -67,4 +67,4 @@ if __name__ == '__main__':
         table = dump_db_json_schema(db, df)
         tables.append(table)
     with open(output_file, 'wt') as out:
-        json.dump(tables, out, sort_keys=True, indent=4, separators=(',', ': '))
+        json.dump(tables, out, sort_keys=True, indent=2, separators=(',', ': '))

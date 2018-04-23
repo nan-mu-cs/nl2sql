@@ -5,15 +5,17 @@
 #   3. only one intersect/union/except
 #
 # val: number(float)/string(str)/sql(dict)
-# col_unit: (agg_id, col_id)
+# col_unit: (agg_id, col_id, isDistinct(bool))
+# val_unit: (unit_op, col_unit1, col_unit2)
+# table_unit: (table_type, col_unit/sql)
 # cond_unit: (not_op, op_id, col_unit, val1, val2)
 # condition: [cond_unit1, 'and'/'or', cond_unit2, ...]
 # sql {
-#   'select': (isDistinct(bool), [cond_unit1, cond_unit2, ...])
-#   'from': {'table_units': [table_id1, table_id2, ...], 'conds': condition}
+#   'select': (isDistinct(bool), [val_unit1, val_unit2, ...])
+#   'from': {'table_units': [table_unit1, table_unit2, ...], 'conds': condition}
 #   'where': condition
 #   'groupBy': [col_unit1, col_unit2, ...]
-#   'orderBy': ('asc'/'desc', [col_unit1, col_unit2, ...])
+#   'orderBy': ('asc'/'desc', [val_unit1, val_unit2, ...])
 #   'having': condition
 #   'limit': None/limit value
 #   'intersect': None/sql
@@ -28,11 +30,19 @@ from nltk import word_tokenize
 
 CLAUSE_KEYWORDS = ('select', 'from', 'where', 'group', 'order', 'limit', 'intersect', 'union', 'except')
 JOIN_KEYWORDS = ('join', 'on', 'as')
+
 WHERE_OPS = ('not', 'between', '=', '>', '<', '>=', '<=', '!=', 'in', 'like', 'is')
+UNIT_OPS = ('none', '-', '+', "*", '/')
 AGG_OPS = ('none', 'max', 'min', 'count', 'sum', 'avg')
+TABLE_TYPE = {
+    'sql': "sql",
+    'table_unit': "table_unit",
+}
+
 COND_OPS = ('and', 'or')
 SQL_OPS = ('intersect', 'union', 'except')
 ORDER_OPS = ('desc', 'asc')
+
 
 
 class Schema:
@@ -184,6 +194,7 @@ def parse_col_unit(toks, start_idx, tables_with_alias, schema, default_tables=No
     idx = start_idx
     len_ = len(toks)
     isBlock = False
+    isDistinct = False
     if toks[idx] == '(':
         isBlock = True
         idx += 1
@@ -193,10 +204,13 @@ def parse_col_unit(toks, start_idx, tables_with_alias, schema, default_tables=No
         idx += 1
         assert idx < len_ and toks[idx] == '('
         idx += 1
+        if toks[idx] == "distinct":
+            idx += 1
+            isDistinct = True
         idx, col_id = parse_col(toks, idx, tables_with_alias, schema, default_tables)
         assert idx < len_ and toks[idx] == ')'
         idx += 1
-        return idx, (agg_id, col_id)
+        return idx, (agg_id, col_id, isDistinct)
 
     agg_id = AGG_OPS.index("none")
     idx, col_id = parse_col(toks, idx, tables_with_alias, schema, default_tables)
@@ -205,7 +219,32 @@ def parse_col_unit(toks, start_idx, tables_with_alias, schema, default_tables=No
         assert toks[idx] == ')'
         idx += 1  # skip ')'
 
-    return idx, (agg_id, col_id)
+    return idx, (agg_id, col_id, isDistinct)
+
+
+def parse_val_unit(toks, start_idx, tables_with_alias, schema, default_tables=None):
+    idx = start_idx
+    len_ = len(toks)
+    isBlock = False
+    if toks[idx] == '(':
+        isBlock = True
+        idx += 1
+
+    col_unit1 = None
+    col_unit2 = None
+    unit_op = UNIT_OPS.index('none')
+
+    idx, col_unit1 = parse_col_unit(toks, idx, tables_with_alias, schema, default_tables)
+    if idx < len_ and toks[idx] in UNIT_OPS:
+        unit_op = UNIT_OPS.index(toks[idx])
+        idx += 1
+        idx, col_unit2 = parse_col_unit(toks, idx, tables_with_alias, schema, default_tables)
+
+    if isBlock:
+        assert toks[idx] == ')'
+        idx += 1  # skip ')'
+
+    return idx, (unit_op, col_unit1, col_unit2)
 
 
 def parse_table_unit(toks, start_idx, tables_with_alias, schema):
@@ -309,15 +348,15 @@ def parse_select(toks, start_idx, tables_with_alias, schema, default_tables=None
     if idx < len_ and toks[idx] == 'distinct':
         idx += 1
         isDistinct = True
-    col_units = []
+    val_units = []
 
     while idx < len_ and toks[idx] not in CLAUSE_KEYWORDS:
-        idx, col_unit = parse_col_unit(toks, idx, tables_with_alias, schema, default_tables)
-        col_units.append(col_unit)
+        idx, val_unit = parse_val_unit(toks, idx, tables_with_alias, schema, default_tables)
+        val_units.append(val_unit)
         if idx < len_ and toks[idx] == ',':
             idx += 1  # skip ','
 
-    return idx, (isDistinct, col_units)
+    return idx, (isDistinct, val_units)
 
 
 def parse_from(toks, start_idx, tables_with_alias, schema):
@@ -333,15 +372,28 @@ def parse_from(toks, start_idx, tables_with_alias, schema):
     conds = []
 
     while idx < len_:
-        idx, table_unit, table_name = parse_table_unit(toks, idx, tables_with_alias, schema)
-        table_units.append(table_unit)
-        default_tables.append(table_name)
+        isBlock = False
+        if toks[idx] == '(':
+            isBlock = True
+            idx += 1
+
+        if toks[idx] == 'select':
+            idx, sql = parse_sql(toks, idx, tables_with_alias, schema)
+            table_units.append((TABLE_TYPE['sql'], sql))
+        else:
+            idx, table_unit, table_name = parse_table_unit(toks, idx, tables_with_alias, schema)
+            table_units.append((TABLE_TYPE['table_unit'],table_unit))
+            default_tables.append(table_name)
         if idx < len_ and toks[idx] == 'join':
             idx += 1  # skip join
         if idx < len_ and toks[idx] == "on":
             idx += 1  # skip on
             idx, this_conds = parse_condition(toks, idx, tables_with_alias, schema, default_tables)
             conds.extend(this_conds)
+
+        if isBlock:
+            assert toks[idx] == ')'
+            idx += 1
         if idx < len_ and (toks[idx] in CLAUSE_KEYWORDS or toks[idx]==')'):
             break
 
@@ -386,19 +438,19 @@ def parse_group_by(toks, start_idx, tables_with_alias, schema, default_tables):
 def parse_order_by(toks, start_idx, tables_with_alias, schema, default_tables):
     idx = start_idx
     len_ = len(toks)
-    col_units = []
+    val_units = []
     order_type = 'asc' # default type is 'asc'
 
     if idx >= len_ or toks[idx] != 'order':
-        return idx, col_units
+        return idx, val_units
 
     idx += 1
     assert toks[idx] == 'by'
     idx += 1
 
     while idx < len_ and not (toks[idx] in CLAUSE_KEYWORDS or toks[idx] == ')'):
-        idx, col_unit = parse_col_unit(toks, idx, tables_with_alias, schema, default_tables)
-        col_units.append(col_unit)
+        idx, val_unit = parse_val_unit(toks, idx, tables_with_alias, schema, default_tables)
+        val_units.append(val_unit)
         if idx < len_ and toks[idx] in ORDER_OPS:
             order_type = toks[idx]
             idx += 1
@@ -407,7 +459,7 @@ def parse_order_by(toks, start_idx, tables_with_alias, schema, default_tables):
         else:
             break
 
-    return idx, (order_type, col_units)
+    return idx, (order_type, val_units)
 
 
 def parse_having(toks, start_idx, tables_with_alias, schema, default_tables):
@@ -437,7 +489,8 @@ def parse_sql(toks, start_idx, tables_with_alias, schema):
     isBlock = False # indicate whether this is a block of sql/sub-sql
     len_ = len(toks)
     idx = start_idx
-
+    #print start_idx, toks
+    #print tables_with_alias
     sql = {}
     if toks[idx] == '(':
         isBlock = True
@@ -488,7 +541,6 @@ def load_data(fpath):
 
 
 def get_sql(schema, query):
-    schema = Schema(schema)
     toks = tokenize(query)
     tables_with_alias = get_tables_with_alias(schema.schema, toks)
     _, sql = parse_sql(toks, 0, tables_with_alias, schema)
@@ -497,15 +549,16 @@ def get_sql(schema, query):
 
 if __name__ == '__main__':
     # print get_schema('art_1.sqlite')
-    fpath = '/Users/zilinzhang/Workspace/Github/nl2sql/Data/Initial/table/art_1_table.json'
+    # fpath = '/Users/zilinzhang/Workspace/Github/nl2sql/Data/Initial/table/art_1_table.json'
     # print schema
-    schema = Schema(get_schema_from_json(fpath))
+    schema = Schema(get_schema('art_1.sqlite'))
     data = load_data("/Users/zilinzhang/Workspace/Github/nl2sql/Data/Processed/train/art_1_processed.json")
     for ix, entry in enumerate(data):
         query = entry["query"]
+        # query = "Select count(distinct T1.name), T2.Headquarter From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code Group by T2.Headquarter"
         print ix, query
         toks = tokenize(query)
         tables_with_alias = get_tables_with_alias(schema.schema, toks)
         _, sql = parse_sql(toks, 0, tables_with_alias, schema)
         print sql
-
+        # break

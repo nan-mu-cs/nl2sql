@@ -167,7 +167,7 @@ on T1.customer_id = T2.customer_id
 group by T1.gender_code
 
 12. List the customers' first name, middle initial, last name and payment methods.
-P: What are the first names, middle initials, last names, and payment methods of all customers? 
+P: What are the first names, middle initials, last names, and payment methods of all customers?
 
 S:
 S:
@@ -233,7 +233,7 @@ JOIN Shipments as T4
 on T3.shipment_id = T4.shipment_id
 
 17. List all the distinct product names, price and descriptions which are bought by female customers.
-P: What are the different names, prices, and descriptions for all products bought by female customers? 
+P: What are the different names, prices, and descriptions for all products bought by female customers?
 
 S:
 S:
@@ -248,7 +248,7 @@ JOIN Customers as T4
 on T3.customer_id = T4.customer_id
 where T4.gender_code = 'Female'
 
-18. What are invoices status of all the orders which have not been shipped? 
+18. What are invoices status of all the orders which have not been shipped?
 P: What are the invoice statuses for all orderes that have not been shipped out yet?
 
 S:
@@ -279,12 +279,13 @@ group by T1.order_id
 20. How many customers have placed any order?
 P: How many different customers have ordered things?
 
+select count(distinct customer_id)
+from Orders
+
 S:
 S:
 S:
 
-select count(distinct (customer_id))
-from Orders
 
 21. How many item states are there in the orders?
 P: How many different item status codes are there listed in ordered items?
@@ -338,7 +339,7 @@ S:
 
 select product_price, product_size
 from Products
-where product_price > 
+where product_price >
 (
 	select avg(product_price)
 	from Products
@@ -373,7 +374,7 @@ not in (
 	from Customer_Payment_Methods
 )
 
-28. What are all the order status and all the dates of orders? 
+28. What are all the order status and all the dates of orders?
 P: What are the status codes and dates placed for all of the orders?
 
 S:
@@ -395,7 +396,7 @@ from Customers
 where Country = 'USA'
 
 30. List all the pairs of buyer first names and product names.
-P: What are the first names of all buyers and what products did they buy? List them in pairs. 
+P: What are the first names of all buyers and what products did they buy? List them in pairs.
 
 S:
 S:

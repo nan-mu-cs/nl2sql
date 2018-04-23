@@ -43,7 +43,7 @@ where Region = "Caribbean"
 
 S: What are the countries in the Carribean region?
 S: What is the surface area of each of those countries?
-S: Find the total surface area of the above. 
+S: Find the total surface area of the above.
 
 select *
 from country
@@ -85,7 +85,7 @@ S: What are the names of all the regions?
 S: Which of those is the city Kabul located in?
 
 SELECT Region
-FROM country 
+FROM country
 
 SELECT Region
 FROM country as T1 JOIN city as T2 ON T1.Code = T2.CountryCode
@@ -107,7 +107,7 @@ S: Which one is the most popular?
 
 SELECT Language
 from countrylanguage
-	
+
 SELECT T2.Language
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T1.Name = "Aruba"
@@ -289,7 +289,7 @@ WHERE GovernmentForm = "US Territory"
 
 S: What are all the nations?
 S: Which of those have a government that is a US territory?
-S: For those, what is the average GNP and total population? 
+S: For those, what is the average GNP and total population?
 
 SELECT *
 FROM country
@@ -370,7 +370,7 @@ S: Of those, how many are the official languages?
 
 SELECT T2.Language
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
-WHERE T1.Name = "Afghanistan" 
+WHERE T1.Name = "Afghanistan"
 
 SELECT COUNT(*)
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
@@ -380,7 +380,7 @@ WHERE T1.Name = "Afghanistan" and IsOfficial = "T"
 P: Give the name of the nation that uses the greatest amount of languages.
 
 SELECT T1.Name
-FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 GROUP BY T1.Name
 ORDER BY COUNT(*) DESC
 LIMIT 1
@@ -389,11 +389,11 @@ S: How many languages are spoken in each country?
 S: Which country speaks the most?
 
 SELECT count(*), T1.Name
-FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 GROUP BY T1.Name
 
 SELECT T1.Name
-FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 GROUP BY T1.Name
 ORDER BY COUNT(*) DESC
 LIMIT 1
@@ -402,7 +402,7 @@ LIMIT 1
 P: Which continent speaks the most languages?
 
 SELECT T1.Continent
-FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 GROUP BY T1.Continent
 ORDER BY COUNT(*) DESC
 LIMIT 1
@@ -411,11 +411,11 @@ S: How many languages are spoken on each continent?
 S: Which one speaks the most languages?
 
 SELECT COUNT(*), T1.Continent
-FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 GROUP BY T1.Continent
 
 SELECT T1.Continent
-FROM "country" as T1 JOIN "countrylanguage" as T2 ON T1.Code = T2.CountryCode
+FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 GROUP BY T1.Continent
 ORDER BY COUNT(*) DESC
 LIMIT 1
@@ -550,7 +550,7 @@ S: What are all the different regions?
 S: Which of those speak Dutch or English?
 
 SELECT DISTINCT Region
-FROM country 
+FROM country
 
 SELECT DISTINCT T1.Region
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
@@ -583,7 +583,7 @@ FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T2.Language = "Dutch" and IsOfficial = "T"
 
 28. Which language is the most popular on the Asian continent?
-P: What is the language that is used by the largest number of Asian nations?		
+P: What is the language that is used by the largest number of Asian nations?
 
 SELECT T2.Language
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
@@ -619,7 +619,7 @@ S: Which countries have republics as their form of government?
 S: Which language is spoken by only one of those countries?
 
 SELECT *
-FROM country 
+FROM country
 WHERE GovernmentForm = "Republic"
 
 SELECT T2.Language
@@ -743,13 +743,13 @@ S: Which country has a head of state named Beatrix?
 S: What languages are spoken in that country?
 S: Which of those languages is the official one?
 
-SELECT * 
+SELECT *
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
-WHERE T1.HeadOfState = "Beatrix" 
+WHERE T1.HeadOfState = "Beatrix"
 
 SELECT T2.Language
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
-WHERE T1.HeadOfState = "Beatrix" 
+WHERE T1.HeadOfState = "Beatrix"
 
 SELECT T2.Language
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
@@ -767,11 +767,11 @@ S: What are the names of those countries that were founded after 1930?
 S: For those countries, how many unique official languages are spoken in total?
 
 SELECT T1.Name
-FROM country 
+FROM country
 
 SELECT T1.Name
-FROM country 
-WHERE  IndepYear < 1930 
+FROM country
+WHERE  IndepYear < 1930
 
 SELECT count(distinct T2.Language)
 FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
@@ -789,11 +789,11 @@ S: Of those countries, What is the minimum surface area?
 S: What are the countries that have a greater surface area than that?
 
 SELECT *
-FROM country 
+FROM country
 WHERE Continent = "Europe"
 
-SELECT min(SurfaceArea) 
-FROM country 
+SELECT min(SurfaceArea)
+FROM country
 WHERE Continent = "Europe"
 
 SELECT Name
@@ -810,8 +810,8 @@ WHERE Continent = "Africa"  and population < (SELECT max(population) FROM countr
 S: What is the maximum population of a country in Asia?
 S: Which countries in Africa have a population smaller than that?
 
-SELECT min(population) 
-FROM country 
+SELECT min(population)
+FROM country
 WHERE Continent = "Asia"
 
 SELECT Name
@@ -829,8 +829,8 @@ WHERE Continent = "Asia"  and population > (SELECT min(population) FROM country 
 S: What is the smallest population of a country in Africa?
 S: Which Asian countries have a greater population than that?
 
-SELECT min(population) 
-FROM country 
+SELECT min(population)
+FROM country
 WHERE Continent = "Africa"
 
 SELECT Name
@@ -887,8 +887,8 @@ SELECT CountryCode FROM countrylanguage WHERE Language = "English"
 S: What are the country codes for countries which are not republics?
 S: Of those, which do not speak English?
 
-SELECT Code 
-FROM country 
+SELECT Code
+FROM country
 WHERE GovernmentForm != "Republic"
 
 SELECT Code FROM country WHERE GovernmentForm != "Republic"
@@ -901,9 +901,9 @@ P: What are the names of cities in Europe for which English is not the official 
 SELECT DISTINCT T2.Name
 FROM country as T1 JOIN city as T2 on T2.CountryCode = T1.Code
 WHERE T1.Continent = 'Europe' and T1.Name NOT IN
-(SELECT T1.Name
-FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
-WHERE T2.IsOfficial = 'T' and T2.Language = 'English')
+(SELECT T3.Name
+FROM country as T3 JOIN countrylanguage as T4 ON T3.Code = T4.CountryCode
+WHERE T4.IsOfficial = 'T' and T4.Language = 'English')
 
 S: What are the names of the countries where English is the official language?
 S: What are the names of the countries in Europe that are not one of those?
@@ -914,26 +914,26 @@ FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T2.IsOfficial = 'T' and T2.Language = 'English'
 
 SELECT Name
-FROM country 
+FROM country
 WHERE Continent = 'Europe' and Name NOT IN
-(SELECT T1.Name
-FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
-WHERE T2.IsOfficial = 'T' and T2.Language = 'English')
+(SELECT T3.Name
+ FROM country as T3 JOIN countrylanguage as T4 ON T3.Code = T4.CountryCode
+ WHERE T4.IsOfficial = 'T' and T4.Language = 'English')
 
 SELECT DISTINCT T2.Name
 FROM country as T1 JOIN city as T2 on T2.CountryCode = T1.Code
 WHERE T1.Continent = 'Europe' and T1.Name NOT IN
-(SELECT T1.Name
-FROM country as T1 JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
-WHERE T2.IsOfficial = 'T' and T2.Language = 'English')
+(SELECT T3.Name
+ FROM country as T3 JOIN countrylanguage as T4 ON T3.Code = T4.CountryCode
+ WHERE T4.IsOfficial = 'T' and T4.Language = 'English')
 
-43. Which unique cities are in  Asian countries where Chinese is the official language?
+43. Whic`h unique cities are in  Asian countries where Chinese is the official language?
 P: Return the different names of cities that are in Asia and for which Chinese is the official language.
 
 SELECT distinct T3.Name
-FROM country T1
-JOIN countrylanguage T2 ON T1.Code = T2.CountryCode
-JOIN city T3 on T1.Code = T3.CountryCode
+FROM country as T1
+JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+JOIN city as T3 on T1.Code = T3.CountryCode
 WHERE T2.IsOfficial = 'T' and T2.Language = 'Chinese' and T1.Continent = "Asia"
 
 S: What are the countries in Asia where Chinese is spoken?
@@ -941,19 +941,19 @@ S: Of those, which have Chinese as the official language?
 S: What are the different cities in those countries?
 
 SELECT *
-FROM country T1
-JOIN countrylanguage T2 ON T1.Code = T2.CountryCode
+FROM country as T1
+JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T2.Language = 'Chinese' and T1.Continent = "Asia"
 
 SELECT *
-FROM country T1
-JOIN countrylanguage T2 ON T1.Code = T2.CountryCode
+FROM country as T1
+JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
 WHERE T2.IsOfficial = 'T' and T2.Language = 'Chinese' and T1.Continent = "Asia"
 
 SELECT distinct T3.Name
-FROM country T1
-JOIN countrylanguage T2 ON T1.Code = T2.CountryCode
-JOIN city T3 on T1.Code = T3.CountryCode
+FROM country as T1
+JOIN countrylanguage as T2 ON T1.Code = T2.CountryCode
+JOIN city as T3 on T1.Code = T3.CountryCode
 WHERE T2.IsOfficial = 'T' and T2.Language = 'Chinese' and T1.Continent = "Asia"
 
 44. What are the name, independence year, and surface area of the country with the smallest population?
@@ -1008,7 +1008,7 @@ HAVING COUNT(*) > 2
 
 S: What are the names of the countries?
 S: Which of them speak at least three languages?
-S: Also, how many languages are spoken in each of those countries? 
+S: Also, how many languages are spoken in each of those countries?
 
 select Name
 from country
@@ -1112,7 +1112,7 @@ FROM country
 ORDER BY Population DESC
 LIMIT 3
 
-S: Order the countries by descending population size. 
+S: Order the countries by descending population size.
 S: Give the names of the 3 countries which have the most.
 
 SELECT *
@@ -1167,14 +1167,14 @@ P: Give the names of countries that are in Europe and have a population equal to
 
 SELECT Name
 FROM country
-where where continent = "Europe" and Population = "80000"
+where continent = "Europe" and Population = "80000"
 
 S: Which countries are in the continent of Europe?
 S: Of those, what are the names of those that have a population of 80000?
 
 SELECT *
 FROM country
-where continent = "Europe" 
+where continent = "Europe"
 
 SELECT Name
 FROM country
@@ -1193,7 +1193,7 @@ S: What is the total population and average surface area of those countries?
 
 SELECT *
 from country
-where Continent = "North America" 
+where Continent = "North America"
 
 SELECT *
 from country
@@ -1268,8 +1268,9 @@ P: Count the number of countries for which Spanish is the predominantly spoken l
 select count(*)
 from (SELECT CountryCode
 from countrylanguage
+where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage) and Language = "Spanish")
+having Percentage = max(Percentage))
 
 S: What are the country codes for countries where Spanish is spoken?
 S: Of those countries, which have Spanish as the dominant language?
@@ -1282,14 +1283,16 @@ where Language = "Spanish"
 
 SELECT CountryCode
 from countrylanguage
+where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage) and Language = "Spanish"
+having Percentage = max(Percentage)
 
 select count(*)
 from (SELECT CountryCode
 from countrylanguage
+where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage) and Language = "Spanish")
+having Percentage = max(Percentage))
 
 60.  What are the codes of countries where Spanish is spoken by the largest percentage of people?
 P: Return the codes of countries for which Spanish is the predominantly spoken language.

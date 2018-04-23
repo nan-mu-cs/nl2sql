@@ -163,7 +163,7 @@ P: How many products are not made by Sony?
 
 Select count(distinct name)
 From products
-Where name NOT IN (select T1.name From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code where T2.name = 'Sony') 
+Where name NOT IN (select T1.name From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code where T2.name = 'Sony')
 
 24. Find the name of companies that do not make DVD drive.
 P: What are the names of companies that do not make DVD drives?
@@ -187,47 +187,47 @@ P: What are the names of all products?
 
 select Name
 from Products
- 
+
 27. Select the names and the prices of all the products in the store.
 P: What are the names and prices of all products in the store?
 
 select name, price
 from products
- 
+
 28. Select the name of the products with a price less than or equal to $200.
 P: What are the names of products with price at most 200?
 
 select name
 from products
 where price <= 200
- 
+
 29. Find all information of all the products with a price between $60 and $120.
 P: What is all the information of all the products that have a price between 60 and 120?
 
-select * 
-from products 
+select *
+from products
 where price between 60 and 120
-  
+
 30. Compute the average price of all the products.
 P: What is the average price across all products?
 
 select avg(price)
 from products
- 
+
 31. Compute the average price of all products with manufacturer code equal to 2.
 P: What is the average price of products with manufacturer codes equal to 2?
 
 select avg(price)
 from products
 where Manufacturer = 2
- 
+
 32. Compute the number of products with a price larger than or equal to $180.
 P: How many products have prices of at least 180?
 
 select count(*)
 from products
 where price>=180
- 
+
 33. Select the name and price of all products with a price larger than or equal to $180, and sort first by price (in descending order), and then by name  (in ascending order).
 P: What are the names and prices of products that cost at least 180, sorted by price decreasing and name ascending?
 
@@ -235,13 +235,13 @@ select name, price
 from products
 where price >= 180
 order by price desc, name asc
- 
-34. Select all the data from the products, including the name for each product's manufacturer.
-P: What is all the product data, as well as the names of each product's manufacturer?
 
-select T1.*, T2.name
+34. Select all the data from the products and each product's manufacturer.
+P: What is all the product data, as well as  each product's manufacturer?
+
+select *
 from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
-  
+
 35. Select the average price of each manufacturer's products, showing only the manufacturer's code.
 P: What are the average prices of products, grouped by manufacturer code?
 
@@ -255,7 +255,7 @@ P: What are the average prices of products, grouped by manufacturer name?
 select avg(T1.Price), T2.name
 from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
 group by T2.name
- 
+
 37. Select the names of manufacturer whose products have an average price higher than or equal to $150.
 P: What are the names and average prices of products for manufacturers whose products cost on average 150 or more?
 
@@ -263,16 +263,16 @@ select avg(T1.Price), T2.name
 from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
 group by T2.name
 having avg(T1.price)>=150
- 
+
 38. Select the name and price of the cheapest product.
 P: What is the name and price of the cheapest product?
 
 SELECT name, price
 FROM Products
 ORDER BY price ASC
-LIMIT 1 
+LIMIT 1
 
-39. Select the name of each manufacturer along with the name and price of its most expensive product.   
+39. Select the name of each manufacturer along with the name and price of its most expensive product.
 P: For each manufacturer name, what are the names and prices of their most expensive product?
 
 select T1.Name, max(T1.Price), T2.name

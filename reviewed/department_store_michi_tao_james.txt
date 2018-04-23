@@ -43,7 +43,7 @@ Select payment_method_code, count(*)
 From customers
 Group by payment_method_code
 
-7. What is the id of the product that was ordered the most often? 
+7. What is the id of the product that was ordered the most often?
 P: Give the product id for the product that was ordered most frequently.
 
 Select product_id
@@ -52,7 +52,7 @@ Group by product_id
 Order by count(*) Desc
 LIMIT 1
 
-8. What are the name, phone number and email address of the customer who made the largest number of orders? 
+8. What are the name, phone number and email address of the customer who made the largest number of orders?
 P: Return the name, phone number and email address for the customer with the most orders.
 
 Select T1.customer_name, T1.customer_phone, T1.customer_email
@@ -86,7 +86,7 @@ LIMIT 1
 12. Give me the product type, name and price for all the products supplied by supplier id 3.
 P: Return the product type, name, and price for products supplied by supplier 3.
 
-Select T2.product_type, T2.product_name, T2.product_price
+Select T2.product_type_code, T2.product_name, T2.product_price
 From product_suppliers as T1 JOIN products as T2 ON T1.product_id = T2.product_id
 Where T1.supplier_id = 3
 
@@ -135,7 +135,7 @@ P: Return the ids of the two department store chains with the most department st
 Select dept_store_chain_id
 From department_stores
 Group by dept_store_chain_id
-Order by count(*) Desc 
+Order by count(*) Desc
 LIMIT 2
 
 18. What is the id of the department with the least number of staff?
@@ -144,7 +144,7 @@ P: Return the id of the department with the fewest staff assignments.
 Select department_id
 From staff_department_assignments
 Group by department_id
-Order by count(*) 
+Order by count(*)
 LIMIT 1
 
 
@@ -153,7 +153,7 @@ P: What are the maximum and minimum product prices for each product type?
 
 Select product_type_code, max(product_price), min(product_price)
 From products
-Group by product_type_code 
+Group by product_type_code
 
 
 20. Find the product type whose average price is higher than the average price of all products.
@@ -167,7 +167,7 @@ Having avg(product_price) > (Select avg(product_price) From products)
 
 21. Find the id and name of the staff who has been assigned for the shortest period.
 P: What is the id and name of the staff who has been assigned for the least amount of time?
- 
+
 Select T1.staff_id, T1.staff_name
 from staff as T1 JOIN Staff_Department_Assignments as T2 ON T1.staff_id = T2.staff_id
 Order by date_assigned_to - date_assigned_from
@@ -177,25 +177,25 @@ LIMIT 1
 P: What are the names and ids of products costing between 600 and 700?
 
 Select product_name, product_id
-From products 
+From products
 Where product_price between 600 and 700
 
 23.  Find the ids of all distinct customers who made order after some orders that were Cancelled.
 P: What are the distinct ids of customers who made an order after any order that was Cancelled?
- 
-Select distinct T1.customer_id 
-From Customer_Orders as T1, Customer_Orders as T2
-Where T1.order_date > T2.order_date and T2.order_status_code = "Cancelled"
+
+Select distinct customer_id
+From Customer_Orders
+Where order_date > (select min(order_date) from Customer_Orders where order_status_code = "Cancelled")
 
 
 24. What is id of the staff who had a Staff Department Assignment earlier than any Clerical Staff?
 P: Return the id of the staff whose Staff Department Assignment was earlier than that of any Clerical Staff.
 
-Select T1.staff_id
+Select staff_id
 From Staff_Department_Assignments
-Where T1.date_assigned_to < (select max(date_assigned_to) from Staff_Department_Assignments where job_title_code = 'Clerical Staff')
+Where date_assigned_to < (select max(date_assigned_to) from Staff_Department_Assignments where job_title_code = 'Clerical Staff')
 
-25. What are the names and ids of customers whose address contains TN? 
+25. What are the names and ids of customers whose address contains TN?
 P: Return the names and ids of customers who have TN in their address.
 
 Select customer_name, customer_id
@@ -234,14 +234,14 @@ Select supplier_phone
 From suppliers
 
 
-30. Return the ids of all products that were ordered more than three times or supplied more than 80000. 
+30. Return the ids of all products that were ordered more than three times or supplied more than 80000.
 P: What are the ids of all products that were either ordered more than 3 times or have a cumulative amount purchased of above 80000?
 
 Select product_id
 From Order_Items
 Group by product_id
 Having count(*) > 3
-UNION 
+UNION
 Select product_id
 From Product_Suppliers
 Group by product_id
@@ -259,8 +259,8 @@ where product_price < 600 or product_price > 900
 32. Find the id of suppliers whose average amount purchased for each product is above 50000 or below 30000.
 P: What are the ids of suppliers which have an average amount purchased of above 50000 or below 30000?
 
-Select supplier_id 
-From Product_Suppliers 
+Select supplier_id
+From Product_Suppliers
 Group by supplier_id
 Having avg(total_amount_purchased) > 50000 or avg(total_amount_purchased) < 30000
 
@@ -277,7 +277,7 @@ Where supplier_id = (Select supplier_id From Product_Suppliers Group by supplier
 P: Return the maximum and minimum customer codes.
 
 Select max(customer_code), min(customer_code)
-From Customers 
+From Customers
 
 
 35. List the names of all the distinct customers who bought a keyboard.
@@ -326,7 +326,7 @@ Having count (distinct T1.customer_id) >= 2
 P: What are the distinct names of customers who have purchased at least three different products?
 
 Select Distinct T1.customer_name
-From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id JOIN order_items as T3 ON T2.order_id = T3.order_id 
+From customers as T1 JOIN customer_orders as T2 ON T1.customer_id = T2.customer_id JOIN order_items as T3 ON T2.order_id = T3.order_id
 Group by T1.customer_id
 Having count (distinct T3.product_id) >= 3
 
