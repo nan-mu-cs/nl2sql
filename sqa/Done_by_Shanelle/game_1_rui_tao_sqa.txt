@@ -103,6 +103,7 @@ SELECT * from Video_games WHERE gname = "Call of Destiny"
 SELECT gtype from Video_games WHERE gname = "Call of Destiny"
 
 7. How many video games have type Massively multiplayer online game?
+P: Count the number of video games with Massively multiplayer online game type .
 
 select count(*)
 from Video_games
