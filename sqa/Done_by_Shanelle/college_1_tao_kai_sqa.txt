@@ -89,7 +89,7 @@ S: What can you tell me about the history department?
 S: What is its address?
 
 9. How many different locations does the school with code BUS has?
-P: What are the different locations of the school with the code BUS?
+P: What are the different addresses of the school with the code BUS?
 
 select count(distinct dept_address)
 from department
@@ -100,7 +100,7 @@ S: What are the addresses of the different departments?
 S: How many of them are there?
 
 10. How many different locations does each school have?
-P:
+P: Count the number of locations for each school.
 
 select count(distinct dept_address), school_code
 from department
