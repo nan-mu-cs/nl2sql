@@ -2,7 +2,7 @@
 
 - SQL Hardness criteria
 - Exact matching without values
-- 
+- Partial Matching without Values
 
 
 ### SQL Hardness criteria
