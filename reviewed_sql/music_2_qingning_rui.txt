@@ -28,15 +28,15 @@ where Firstname = "Solveig"
 5. How many songs are there?
 
 SELECT count(*)
-FROM "Songs"
+FROM Songs
 
 6. Find all the songs performed by artist with last name "Heilo"
 
 SELECT Title
-FROM Performance join Band
-on Performance.bandmate = Band.id
-join Songs
-on Songs.SongId = Performance.SongId
+FROM Performance as T1 join Band as T2
+on T1.bandmate = T2.id
+join Songs as T3
+on T3.SongId = T1.SongId
 where Lastname = "Heilo"
 
 7. Hom many musicians performed in the song "Flash"?
@@ -57,7 +57,7 @@ join Songs as T3
 on T3.SongId = T1.SongId
 where T2.firstname = "Marianne"
 
-9. Who performed the song named "Badlands"?
+9. Who performed the song named "Badlands"? Show the first name and the last name.
 
 SELECT T2.firstname, T2.lastname
 FROM Performance as T1 join Band as T2
@@ -66,7 +66,7 @@ join Songs as T3
 on T3.SongId = T1.SongId
 where T3.Title = "Badlands"
 
-10. Who is performing in the back for the song "Badlands"?
+10. Who is performing in the back stage position for the song "Badlands"? Show the first name and the last name.
 
 SELECT T2.firstname, T2.lastname
 FROM Performance as T1 join Band as T2
@@ -75,7 +75,7 @@ join Songs as T3
 on T3.SongId = T1.SongId
 where T3.Title = "Badlands" and T1.StagePosition = "back"
 
-11. How many unique labels are there?
+11. How many unique labels are there for albums?
 
 select count(distinct label)
 from albums
@@ -88,7 +88,7 @@ group by label
 order by count(*) desc
 limit 1
 
-13. What is the last name of the musician that have produced the most songs?
+13. What is the last name of the musician that have produced the most number of songs?
 
 select T2.lastname
 from Performance as T1 join Band as T2
@@ -139,7 +139,7 @@ group by instrument
 order by count(*) desc
 limit 1
 
-19. How many songs has used the instrument "drums"?
+19. How many songs have used the instrument "drums"?
 
 select count(*)
 from instruments
@@ -230,7 +230,7 @@ join band as T3
 on T1.bandmate = T3.id
 where firstname = "Solveig" and title = "A Bar In Amsterdam"
 
-31. Find all the songs that does not have a lead vocal.
+31. Find all the songs that do not have a lead vocal.
 
 select distinct title
 from vocals as t1 join songs as t2
@@ -261,7 +261,7 @@ join Songs as T3
 on T3.SongId = T1.SongId
 where T3.Title = "Le Pop"
 
-35. What is the first name of the musician that have produced the most songs?
+35. What is the last name of the musician that have produced the most songs?
 
 select T2.lastname
 from Performance as T1 join Band as T2
@@ -272,7 +272,7 @@ group by lastname
 order by count(*) desc
 limit 1
 
-36. What instrument did the musician with first name "Heilo" use in the song "Badlands"
+36. What instrument did the musician with last name "Heilo" use in the song "Badlands"
 
 select T4.instrument
 from Performance as T1 join Band as T2
@@ -304,14 +304,14 @@ from vocals as T1 join songs as T2
 on T1.songid = T2.songid
 where title = "Le Pop"
 
-40. How many songs has a shared vocal?
+40. How many songs have a shared vocal?
 
 select count(distinct title)
 from vocals as T1 join songs as T2
 on T1.songid = T2.songid
 where type = "shared"
 
-41. Find all the songs that does not have a back vocal.
+41. Find all the songs that do not have a back vocal.
 
 select distinct title
 from vocals as t1 join songs as t2
@@ -341,7 +341,7 @@ join band as T3
 on T1.bandmate = T3.id
 where lastname = "Heilo" and title = "Der Kapitan"
 
-44. Find the first name of the band mate that have performed in most songs.
+44. Find the first name of the band mate that has performed in most songs.
 
 select t2.firstname
 from Performance as t1 join Band as t2
@@ -362,7 +362,7 @@ group by type
 order by count(*) desc
 limit 1
 
-46. Who is performing in the back for the song "Der Kapitan"?
+46. Who is performing in the back stage position for the song "Der Kapitan"? Show the first name and last name.
 
 SELECT T2.firstname, T2.lastname
 FROM Performance as T1 join Band as T2
@@ -387,9 +387,9 @@ where type = "back"
 select T3.title
 from albums as T1 join tracklists as T2 on T1.aid = T2.albumid
 join songs as T3 on T2.songid = T3.songid
-where t1.title = "A Kiss Before You Go: Live in Hamburg"
+where T1.title = "A Kiss Before You Go: Live in Hamburg"
 
-49. What are all the songs under label "Universal Music Group"?
+49. What are all the songs in albums under label "Universal Music Group"?
 
 select T3.title
 from albums as T1 join tracklists as T2 on T1.aid = T2.albumid
