@@ -880,19 +880,19 @@ P: What is the total amount of products purchased before 2018-03-17 07:13:53?
 select sum(t2.order_quantity)
 from customer_orders as t1 join order_items as t2
 on t1.order_id = t2.order_id
-where t1.order_date < 2018-03-17 07:13:53
+where t1.order_date < "2018-03-17 07:13:53"
 
 S: Find all the customer orders that made before 2018-03-17 07:13:53.
 S: Compute the total quantity of items purchased in this order.
 
 select *
 from customer_orders
-where t1.order_date < 2018-03-17 07:13:53
+where t1.order_date < "2018-03-17 07:13:53"
 
 select sum(t2.order_quantity)
 from customer_orders as t1 join order_items as t2
 on t1.order_id = t2.order_id
-where t1.order_date < 2018-03-17 07:13:53
+where t1.order_date < "2018-03-17 07:13:53"
 
 
 37. Who made the latest order?
