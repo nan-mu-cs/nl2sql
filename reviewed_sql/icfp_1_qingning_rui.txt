@@ -60,7 +60,7 @@ join inst as t3
 on t2.instid = t3.instid
 where t1.fname = "Katsuhiro" and t1.lname = "Ueno"
 
-4. Who belongs to the institution "University of Oxford"?
+4. Who belongs to the institution "University of Oxford"? Show first name and last name.
 
 select distinct t1.fname, t1.lname
 from authors as t1 join authorship as t2
@@ -69,7 +69,7 @@ join inst as t3
 on t2.instid = t3.instid
 where t3.name = "University of Oxford"
 
-How many authors belong to the institution "Google"?
+Which authors belong to the institution "Google"? Show first name and last name.
 
 select distinct t1.fname, t1.lname
 from authors as t1 join authorship as t2
@@ -87,7 +87,7 @@ join papers as t3
 on t2.paperid = t3.paperid
 where t3.title = "Binders Unbound"
 
-Find the name of the author(s) who wrote the paper "Nameless, Painless".
+Find the first and last name of the author(s) who wrote the paper "Nameless, Painless".
 
 select t1.fname, t1.lname
 from authors as t1 join authorship as t2
@@ -159,7 +159,7 @@ on t1.paperid = t2.paperid
 group by t1.title)
 where author_count > 1
 
-9. Find the papers which have "Olin Shivers" as the first author.
+9. Find the papers which have "Olin Shivers" as an author.
 
 select t3.title
 from authors as t1 join authorship as t2
@@ -168,7 +168,7 @@ join papers as t3
 on t2.paperid = t3.paperid
 where t1.fname = "Olin" and t1.lname = "Shivers"
 
-Which papers have "Stephanie Weirich" as the second author?
+Which papers have "Stephanie Weirich" as an author?
 
 select t3.title
 from authors as t1 join authorship as t2
@@ -283,28 +283,28 @@ limit 1
 17. Find the titles of papers with authors from more than one institution.
 
 select title
-from (select title, count(*) as institution_count
+from (select title, count(t2.instid) as institution_count
 from papers as t1 join authorship as t2
 on t1.paperid = t2.paperid
-group by t2.instid)
-where institution_count = 2
+group by title)
+where institution_count > 1
 
 Find the titles of papers with authors from one single institution.
 
 select title
-from (select title, count(*) as institution_count
+from (select title, count(t2.instid) as institution_count
 from papers as t1 join authorship as t2
 on t1.paperid = t2.paperid
-group by t2.instid)
+group by title)
 where institution_count = 1
 
-18. What is the last name of the author with last name "Ueno"?
+18. What is the first name of the author with last name "Ueno"?
 
 select fname
 from authors
 where lname = "Ueno"
 
-Find the first name of the author with first name "Amal".
+Find the last name of the author with first name "Amal".
 
 select lname
 from authors
