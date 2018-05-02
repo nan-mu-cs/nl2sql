@@ -195,7 +195,7 @@ from party
 group by Comptroller
 order by COUNT(*) DESC limit 1
 
-4. What are the names of parties that do no have delegates in election?
+4. What are the names of parties that do not have delegates in election?
 
 select Party
 from party
