@@ -23,7 +23,7 @@ from county
 Show all distinct district of all elections.
 
 select distinct District
-from elections
+from election
 
 Show the zip code of county with name "Howard".
 
@@ -61,7 +61,8 @@ Where Governor = "Eliot Spitzer"
 
 Show all information about election.
 
-select * from election
+select *
+from election
 
 
 2. Show the delegates and the names of county they belong to.
@@ -192,7 +193,7 @@ Show the people that have been comptroller the most number of times and the corr
 select Comptroller, COUNT(*)
 from party
 group by Comptroller
-order by COUNT(*) DESC 1
+order by COUNT(*) DESC limit 1
 
 4. What are the names of parties that do no have delegates in election?
 
