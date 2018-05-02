@@ -10,7 +10,7 @@ Show the country name and capital of all countries.
 select Country_name, Capital
 from country
 
-Show all official native languages of countries that contain the world "English".
+Show all official native languages that contain the world "English".
 
 select Official_native_language
 from country
@@ -33,11 +33,11 @@ select distinct Position
 from match_season
 Where College = "UCLA" OR College = "Duke"
 
-Show the draft picks and draft classes of players whose positions are defenders.
+Show the draft pick numbers and draft classes of players whose positions are defenders.
 
 select Draft_Pick_Number, Draft_Class
 from match_season
-Where College = "Defender"
+Where Position = "Defender"
 
 How many distinct teams are involved in match seasons?
 
@@ -69,7 +69,7 @@ where T1.Country_name = "Indonesia"
 
 What are the distinct positions of the players from a country whose capital is Dublin?
 
-select T2.Position
+select distinct T2.Position
 from country as T1 JOIN match_season as T2 
 on T1.Country_id = T2.Country
 where T1.Capital = "Dublin"
@@ -81,14 +81,14 @@ from country as T1 JOIN match_season as T2
 on T1.Country_id = T2.Country
 where T2.College = "Maryland" or T2.College = "Duke"
 
-How many distinct official languages are there among countries of players whose position are defenders.
+How many distinct official languages are there among countries of players whose positions are defenders.
 
 select count(distinct T1.Official_native_language)
 from country as T1 JOIN match_season as T2 
 on T1.Country_id = T2.Country
 where T2.Position = "Defender"
 
-Show the season, the player, and the name of the team that player belongs to.
+Show the season, the player, and the name of the team that players belong to.
 
 select T1.Season, T1.Player, T2.Name
 from match_season as T1 JOIN team as T2
@@ -101,14 +101,14 @@ from match_season as T1 JOIN team as T2
 on T1.Team = T2.Team_id
 where T2.Name = "Ryley Goldner"
 
-How many distinct college are associated with players from the team with name "Columbus Crew".
+How many distinct colleges are associated with players from the team with name "Columbus Crew".
 
 select count(distinct T1.College)
 from match_season as T1 JOIN team as T2
 on T1.Team = T2.Team_id
 where T2.Name = "Columbus Crew"
 
-Show the players and years played for players from "Columbus Crew".
+Show the players and years played for players from team "Columbus Crew".
 
 select T1.Player,T1.Years_Played
 from player as T1 JOIN team as T2
@@ -142,7 +142,7 @@ from match_season
 group by Position
 order by count(*) DESC limit 1
 
-Show the top 3 most common college of players in match seasons.
+Show the top 3 most common colleges of players in match seasons.
 
 select College
 from match_season
