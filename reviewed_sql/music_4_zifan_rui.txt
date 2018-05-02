@@ -5,7 +5,7 @@ Total = 30
 SELECT count(*)
 FROM artist
 
-2. List the age of all music genres.
+2. List the age of all music artists.
 
 SELECT Age
 FROM artist
