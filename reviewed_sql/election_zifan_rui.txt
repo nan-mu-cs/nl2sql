@@ -1,0 +1,226 @@
+Total * = 35
+
+1. How many counties are there in total?
+
+select count(*)
+from county
+
+Show the county name and population of all counties.
+
+select County_name, Population
+from county
+
+Show the average population of all counties.
+
+select avg(Population)
+from county
+
+Return the maximum and minimum population of all counties.
+
+select max(Population), min(Population)
+from county
+
+Show all distinct district of all elections.
+
+select distinct District
+from elections
+
+Show the zip code of county with name "Howard".
+
+select Zip_code
+from county
+Where County_name = "Howard"
+
+Show the delegate from district 1 in election.
+
+select Delegate
+from election
+Where District = 1
+
+Show the delegate and committee information of elections.
+
+select Delegate, Committee
+from election
+
+How many distinct governors are there?
+
+select count(distinct Governor)
+from party
+
+Show the lieutenant governor and comptroller from the democratic party.
+
+select Lieutenant_Governor, Comptroller
+from party
+Where Party = "Democratic"
+
+In which distinct years the governor is "Eliot Spitzer"?
+
+select distinct Year
+from party
+Where Governor = "Eliot Spitzer"
+
+Show all information about election.
+
+select * from election
+
+
+2. Show the delegates and the names of county they belong to.
+
+select T2.Delegate, T1.County_name
+from county as T1 JOIN election as T2 
+on T1.County_id = T2.District
+
+Which delegates are from counties with population smaller than 100000?
+
+select T2.Delegate
+from county as T1 JOIN election as T2 
+on T1.County_id = T2.District
+Where T1.Population < 100000
+
+How many distinct delegates are from counties with population larger than 50000?
+
+select count(distinct T2.Delegate)
+from county as T1 JOIN election as T2 
+on T1.County_id = T2.District
+Where T1.Population > 50000
+
+What are the names of the county that delegates on "Appropriations" committee belong to?
+
+select T1.County_name
+from county as T1 JOIN election as T2 
+on T1.County_id = T2.District
+Where T2.Committee = "Appropriations"
+
+Show the delegates and the names of party they belong to.
+
+select T1.Delegate, T2.Party
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+
+Who were the governors of the parties associated with delegates from district 1?
+
+select T2.Governor
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+Where T1.District = 1
+
+Who were the comptrollers of the parties associated with delegates from district 1 or district 2?
+
+select T2.Comptroller
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+Where T1.District = 1 or T1.District = 2
+
+Return all the committees that have delegates from Democratic party.
+
+select T1.Committee
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+Where T2.Party = "Democratic"
+
+
+3. Show the name of counties and the corresponding number of delegates from that county.
+
+select T1.County_name, COUNT(*)
+from county as T1 JOIN election as T2 
+on T1.County_id = T2.District
+group by T1.County_id
+
+Show the name of parties and the corresponding number of delegates from that party.
+
+select T2.Party, COUNT(*)
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+group by T1.Party
+
+Return all names of counties sorted by population in ascending order.
+
+select County_name
+from county
+order by Population ASC
+
+Return all names of counties sorted by county name in descending alphabetical order.
+
+select County_name
+from county
+order by County_name DESC
+
+Show the name of the county with biggest population
+
+select County_name
+from county
+order by Population DESC limit 1
+
+Show the top 3 county with the smallest population
+
+select County_name
+from county
+order by Population ASC limit 3
+
+Show the name of counties that have at least two delegates
+
+select T1.County_name
+from county as T1 JOIN election as T2 
+on T1.County_id = T2.District
+group by T1.County_id
+Having COUNT(*) >= 2
+
+Show the name of party that have at least two records.
+
+select Party
+from party
+group by Party
+Having COUNT(*) >= 2
+
+Show the name of the party that have the most number of delegates.
+
+select T2.Party
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+group by T1.Party
+order by COUNT(*) DESC limit 1
+
+Show the people that have been governor the most number of times.
+
+select Governor
+from party
+group by Governor
+order by COUNT(*) DESC limit 1
+
+Show the people that have been comptroller the most number of times and the corresponding number of times.
+
+select Comptroller, COUNT(*)
+from party
+group by Comptroller
+order by COUNT(*) DESC 1
+
+4. What are the names of parties that do no have delegates in election?
+
+select Party
+from party
+Where Party_ID not in (select Party from election)
+
+What are the names of party that have both delegates on "Appropriations" committee and 
+delegates on "Economic Matters" committee.
+
+select T2.Party
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+Where T1.Committee = "Appropriations"
+intersect
+select T2.Party
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+Where T1.Committee = "Economic Matters"
+
+Which committee have delegates from both democratic party and liberal party?
+
+select T1.Committee
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+Where T2.Party = "Democratic"
+intersect
+select T1.Committee
+from election as T1 JOIN party as T2 
+on T1.Party = T2.Party_ID
+Where T2.Party = "Liberal"
