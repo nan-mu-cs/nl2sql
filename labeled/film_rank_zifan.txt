@@ -1,0 +1,128 @@
+Total = 20
+
+1. How many film are there?
+
+SELECT count(*)
+FROM film
+
+2. List the distinct director of all films.
+
+SELECT distinct Director
+FROM film
+
+3. What is the average ticket sales gross in dollars of films?
+
+SELECT avg(Gross_in_dollar)
+FROM film
+
+4. What are the low and high estimates of film markets?
+
+SELECT Low_Estimate, High_Estimate
+FROM film_market_estimation
+
+5. What are the types of film market estimations in year 1995?
+
+SELECT Type
+FROM film_market_estimation
+WHERE year = 1995
+
+6. What are the maximum and minimum number of cities in all markets.
+
+SELECT max(Number_cities), min(Number_cities)
+FROM market
+
+7. How many markets have number of cities smaller than 300?
+
+SELECT count(*)
+FROM market
+where Number_cities < 300
+
+8. List all countries of markets in ascending alphabetical order.
+
+SELECT Country
+FROM market
+order by Country ASC
+
+9. List all countries of markets in descending order of number of cities.
+
+SELECT Country
+FROM market
+order by Number_cities DESC
+
+10. Please show the titles of films and the types of market estimations.
+
+SELECT T1.Title, T2.Type
+FROM film as T1 join film_market_estimation as T2 
+on T1.Film_ID = T2.Film_ID
+
+11. Show the distinct director of films with market estimation in 1995.
+
+SELECT distinct T1.Director
+FROM film as T1 join film_market_estimation as T2 
+on T1.Film_ID = T2.Film_ID
+Where T2.Year = 1995
+
+12. What is the average number of cities of markets with low film market estimate bigger than 1000?
+
+SELECT avg(T2.Number_cities)
+FROM film_market_estimation as T1 join market as T2
+on T1.Market_ID = T2.Market_ID
+Where T1.Low_Estimate > 10000
+
+13. Please list the countries and years of film market estimations.
+
+SELECT T2.Country, T1.Year
+FROM film_market_estimation as T1 join market as T2
+on T1.Market_ID = T2.Market_ID
+
+14. Please list the years of film market estimations when the market is in country "Japan" in descending order
+
+SELECT T1.Year
+FROM film_market_estimation as T1 join market as T2
+on T1.Market_ID = T2.Market_ID
+Where T2.Country = "Japan"
+order by T1.Year DESC
+ 
+15. List the studios of each film and the number of films produced by that studio.
+
+SELECT Studio, COUNT(*)
+FROM film
+group by Studio
+
+15. List the name of film studio that have the most number of films.
+
+SELECT Studio
+FROM film
+group by Studio
+order by COUNT(*) DESC limit 1
+
+17. List the names of studios that have at least two films.
+
+SELECT Studio
+FROM film
+group by Studio
+Having COUNT(*) >= 2
+
+18. List the title of films that do not have any market estimation.
+
+SELECT Title
+from film
+where Film_ID not in (SELECT Film_ID FROM film_market_estimation)
+
+19. Show the studios that have produced films with director "Nicholas Meyer" and "Walter Hill"
+
+SELECT 	Studio
+FROM film
+Where Director = "Nicholas Meyer"
+Intersect 
+SELECT 	Studio
+FROM film
+Where Director = "Walter Hill"
+
+20. Show all distinct film studios that contained the word "Universal".
+
+select distinct Studio
+from film
+Where Studio LIKE "%Universal%"
+
+
