@@ -1,0 +1,142 @@
+Total = 20
+
+1. How many games are there?
+
+SELECT count(*)
+FROM game
+
+2. List the Title of all games.
+
+SELECT Title
+FROM game
+
+3. What is the average number of units sold in millions?
+
+SELECT avg(Units_sold_Millions)
+FROM game
+
+4. What are the names and market districts of platforms?
+
+SELECT Platform_name, Market_district
+FROM platform
+
+5. What are the names of platforms with download rank equals 1?
+
+SELECT Platform_name
+FROM platform
+WHERE Download_rank = 1
+
+6. What are the maximum and minimum rank of the year of players.
+
+SELECT max(Rank_of_the_year), min(Rank_of_the_year)
+FROM player
+
+7. How many players have rank of the year smaller than 3?
+
+SELECT count(*)
+FROM player
+where Rank_of_the_year <= 3
+
+8. List all player names in ascending alphabetical order.
+
+SELECT Player_name
+FROM player
+order by Player_name ASC
+
+9. List names and colleges of all players in descending order of rank of the year.
+
+SELECT Player_name, College
+FROM player
+order by Rank_of_the_year DESC
+
+10. Please show the names of players that have played the game titled "Super Mario World".
+
+SELECT T3.Player_name
+FROM game as T1 join game_player as T2 
+on T1.Game_ID = T2.Game_ID
+join player as T3
+on T2.Player_ID = T3.Player_ID
+Where T1.Title = "Super Mario World"
+
+11. Show the distinct developer of games played by players that go to college "Auburn".
+
+SELECT distinct T1.Developers
+FROM game as T1 join game_player as T2 
+on T1.Game_ID = T2.Game_ID
+join player as T3
+on T2.Player_ID = T3.Player_ID
+Where T3.College = "Auburn"
+
+12. What is the average number of units sold in millions of games played by players with 
+position "Guard"?
+
+SELECT avg(Units_sold_Millions)
+FROM game as T1 join game_player as T2 
+on T1.Game_ID = T2.Game_ID
+join player as T3
+on T2.Player_ID = T3.Player_ID
+Where T3.Position = "Guard"
+
+13. Please list the title and platform name of games.
+
+SELECT T1.Title, T2.Platform_name
+FROM game as T1 join platform as T2 
+on T1.Platform_ID = T2.Platform_ID
+
+14. Please list the title of games with platforms that have market district in Asia
+or USA.
+
+SELECT T1.Title
+FROM game as T1 join platform as T2 
+on T1.Platform_ID = T2.Platform_ID
+Where T2.Market_district = "Asia" or T2.Market_district = "USA"
+ 
+15. List the name of each franchise and the number of games belonging to that franchise.
+
+SELECT Franchise, COUNT(*)
+FROM game
+group by Franchise
+
+15. List the name of franchise that have the most number of games.
+
+SELECT Franchise
+FROM game
+group by Franchise
+order by COUNT(*) DESC limit 1
+
+17. List the names of franchises that have at least two games.
+
+SELECT Franchise
+FROM game
+group by Franchise
+Having COUNT(*) >= 2
+
+18. List the name of players that do not play any game
+
+SELECT Player_name
+from player
+where Player_ID not in (SELECT Player_ID FROM game_player)
+
+19. Show the title of games that are played by both players from college "Oklahoma"
+and players from college "Auburn".
+
+SELECT T1.Title
+FROM game as T1 join game_player as T2 
+on T1.Game_ID = T2.Game_ID
+join player as T3
+on T2.Player_ID = T3.Player_ID
+Where T3.College = "Oklahoma"
+Intersect 
+SELECT T1.Title
+FROM game as T1 join game_player as T2 
+on T1.Game_ID = T2.Game_ID
+join player as T3
+on T2.Player_ID = T3.Player_ID
+Where T3.College = "Auburn"
+
+20. Show all distinct franchises of games.
+
+select distinct Franchise
+from game
+
+

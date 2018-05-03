@@ -1,0 +1,711 @@
+Total # = 50
+
+1. What is the name of the song that was released in the most recent year?
+P: What is the name of the song that was released most recently?
+
+S:
+S:
+S:
+
+comment: releasedate is a string...
+
+select song_name, releasedate
+from song
+order by releasedate desc
+limit 1
+
+2. What is the f_id of the longest song?
+P: Find the f_id of the song that lasts the longest.
+
+S:
+S:
+S:
+
+
+select f_id
+from files
+order by duration desc
+limit 1
+
+3. Find the names of all English songs.
+P: What are the names of all songs in English?
+
+Select song_name
+From song
+Where languages = "english"
+
+
+S:
+S:
+S:
+
+
+
+4. What are the f_id of songs whose format is mp3.
+P: What are the f_id of all the files in mp3 format?
+
+Select f_id
+From files
+Where formats = "mp3"
+
+
+S:
+S:
+S:
+
+
+
+5. List the name and country of origin for all singers who have produced songs with rating above 9.
+P: What are the different names and countries of origins for all artists whose song ratings are above 9?
+
+Select DISTINCT T1.artist_name, T1.country
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+Where T2.rating > 9
+
+
+S:
+S:
+S:
+
+
+6. List the file size and format for all songs that have resolution lower than 800.
+P: What are the file sizes and formats for all songs with a resolution lower than 800?
+
+Select DISTINCT T1.file_size, T1.formats
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+Where T2.resolution < 800
+
+
+S:
+S:
+S:
+
+
+7. What is the name of the artist who produced the shortest song?
+P: What are the names of the artists who sang the shortest song?
+
+Select T1.artist_name
+From song as T1 JOIN files as T2 ON T1.f_id = T2.f_id
+Order by T2.duration
+LIMIT 1
+
+
+S:
+S:
+S:
+
+8. What are the names and countries of origin for the artists who produced the top three highly rated songs.
+P: What are the names of the singers who sang the top 3 most highly rated songs and what countries do they hail from?
+
+Select T1.artist_name, T1.country
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+Order by T2.rating DESC
+LIMIT 3
+
+S:
+S:
+S:
+
+
+
+9. How many songs have 4 minute duration?
+P: What is the count of the songs that last approximately 4 minutes?
+
+Select count(*)
+From files
+where duration LIKE "4:%"
+
+S:
+S:
+S:
+
+
+10. How many artists are from Bangladesh?
+P: How many Bangladeshi artists are listed?
+
+Select count(*)
+From artist
+where country = "Bangladesh"
+
+
+S:
+S:
+S:
+
+
+
+11. What is the average rating of songs produced by female artists?
+P: How many songs, on average, are sung by a female artist?
+
+Select avg(T2.rating)
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+where T1.gender = "Female"
+
+
+S:
+S:
+S:
+
+
+12. What is the most popular file format?
+P: Find the file format that is used by the most files.
+
+Select formats
+from files
+group by formats
+order by count (*) DESC
+LIMIT 1
+
+S:
+S:
+S:
+
+
+
+13. Find the names of the artists who are from UK and have produced English songs.
+P: What are the names of the artists that are from the UK and sang songs in English?
+
+Select artist_name
+From artist
+where country = "UK"
+INTERSECT
+Select artist_name
+From song
+where languages = "english"
+
+
+S:
+S:
+S:
+
+
+14. Find the f_id of songs that are available in mp4 format and have resolution lower than 1000.
+P: What is the f_id of the files that are available in the format of mp4 and a resolution smaller than 1000?
+
+Select f_id
+From files
+where formats = "mp4"
+INTERSECT
+Select f_id
+From song
+where resolution < 1000
+
+
+S:
+S:
+S:
+
+
+15. What is the country of origin of the artist who is female and produced a song in Bangla?
+P: What countries are the female artists who sung in the language Bangla from?
+
+Select T1.country
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+where T1.gender = "Female" and T2.languages = "bangla"
+
+S:
+S:
+S:
+
+
+16. What is the average duration of songs that have mp3 format and resolution below 800?
+P: What is the average song duration for the songs that are in mp3 format and whose resolution below 800?
+
+Select avg(T1.duration)
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+where T1.formats = "mp3" and T2.resolution  < 800
+
+
+S:
+S:
+S:
+
+
+17. What is the number of artists for each gender?
+P: How many artists are male and how many are female?
+
+Select count(*), gender
+From artist
+group by gender
+
+
+S:
+S:
+S:
+
+18. What is the average rating of songs for each language?
+P: What is the average song rating for each language?
+
+Select avg(rating), languages
+From song
+group by languages
+
+S:
+S:
+S:
+
+
+
+19. Return the gender and name of artist who produced the song with the lowest resolution.
+P: What is the gender and name of the artist who sang the song with the smallest resolution?
+
+Select T1.gender, T1.artist_name
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+Order by T2.resolution
+LIMIT 1
+
+S:
+S:
+S:
+
+
+20. For each file format, return the number of artists who released songs in that format.
+P: How many songs were released for each format?
+
+Select count(*), formats
+From files
+Group by formats
+
+
+S:
+S:
+S:
+
+21.  Find the distinct names of all songs that have a higher resolution than some songs in English.
+P: What are the different names for all songs that have a higher resolution than English songs?
+
+Select distinct song_name
+From song
+where resolution > (select min(resolution) from song where languages = "english")
+
+
+S:
+S:
+S:
+
+22. What are the names of all songs that have a lower rating than some song of blues genre?
+P: What are the names of the songs that have a lower rating than at least one blues song?
+
+Select song_name
+From song
+where rating < (select max(rating) from song where genre_is = "blues")
+
+
+S:
+S:
+S:
+
+
+22. What is the name and country of origin of the artist who released a song that has "love" in its title?
+P: What are the names of the artists who released a song that has the word love in its title, and where are the artists from?
+
+Select T1.artist_name, T1.country
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+Where T2.song_name LIKE "%love%"
+
+
+S:
+S:
+S:
+
+
+23. List the name and gender for all artists who released songs in March.
+P: What are the names and genders of all artists who released songs in the month of March?
+
+Select T1.artist_name, T1.gender
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+Where T2.releasedate LIKE "%Mar%"
+
+
+S:
+S:
+S:
+
+24. List the names of all genres in alphabetical oder, together with its ratings.
+P: What are the names of all genres in alphabetical order, combined with its ratings?
+
+Select g_name, rating
+From genre
+Order by g_name
+
+
+S:
+S:
+S:
+
+
+25. Give me a list of the names of all songs ordered by their resolution.
+P: What are the names of all songs that are ordered by their resolution numbers?
+
+Select song_name
+From song
+Order by resolution
+
+
+S:
+S:
+S:
+
+26. What are the f_ids of songs that are available in either mp4 format or have resolution above 720?
+P: What are the f_ids of all songs that are available on mp4 or have a higher resolution than 720?
+
+Select f_id
+From files
+where formats = "mp4"
+UNION
+Select f_id
+From song
+where resolution > 720
+
+S:
+S:
+S:
+
+
+27. List the names of all songs that have 4 minute duration or are in English.
+P: What are the names of all songs that are approximately 4 minutes long or are in English?
+
+Select T2.song_name
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+where T1.duration LIKE "4:%"
+UNION
+Select song_name
+From song
+where languages = "english"
+
+
+S:
+S:
+S:
+
+
+28. What is the language used most often in the songs?
+P: What are the languages that are used most often in songs?
+
+Select languages
+From song
+Group by languages
+Order by count(*) DESC
+LIMIT 1
+
+
+S:
+S:
+S:
+
+
+29. What is the language that was used most often in songs with resolution above 500?
+P: What is the name of the artist, for each language, that has the most songs with a higher resolution than 500?
+
+Select artist_name
+From song
+where resolution > 500
+Group by languages
+Order by count(*) DESC
+LIMIT 1
+
+
+S:
+S:
+S:
+
+
+30. What are the names of artists who are Male and are from UK?
+P: What are the names of all male British artists?
+
+Select artist_name
+From artist
+Where country = "UK" and gender = "Male"
+
+
+S:
+S:
+S:
+
+
+31. Find the names of songs whose genre is modern or language is English.
+P: What are the names of the songs that are modern or sung in English?
+
+Select song_name
+From song
+Where genre_is = "modern" or languages = "english"
+
+
+S:
+S:
+S:
+
+
+32. Return the names of songs for which format is mp3 and resolution is below 1000.
+P: What are the names of all songs that are in mp3 format and have a resolution lower than 1000?
+
+Select T2.song_name
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+Where T1.formats = "mp3"
+INTERSECT
+Select song_name
+From song
+Where resolution < 1000
+
+
+S:
+S:
+S:
+
+33. Return the names of singers who are from UK and released an English song.
+P: What are the names of all singers that are from the UK and released a song in English?
+
+Select artist_name
+From artist
+Where country = "UK"
+INTERSECT
+Select T1.artist_name
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+Where T2.languages = "english"
+
+
+S:
+S:
+S:
+
+
+
+34. What are the average rating and resolution of songs that are in Bangla?
+P: What is the average rating and resolution of all bangla songs?
+
+Select avg(rating), avg(resolution)
+From song
+where languages = "bangla"
+
+
+S:
+S:
+S:
+
+35. What are the maximum and minimum resolution of songs whose duration is 3 minutes?
+P: What is the maximum and minimum resolution of all songs that are approximately 3 minutes long?
+
+Select max(T2.resolution), min(T2.resolution)
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+where T1.duration LIKE "3:%"
+
+
+S:
+S:
+S:
+
+
+36. What are the maximum duration and resolution of songs grouped and ordered by languages?
+P: What are the maximum duration and resolution of all songs, for each language, ordered alphabetically by language?
+
+Select max(T1.duration), max(T2.resolution), T2.languages
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+group by T2.languages
+order by T2.languages
+
+
+S:
+S:
+S:
+
+
+37. What are the shortest duration and lowest rating of songs grouped by genre and ordered by genre?
+P: What is the shortest and most poorly rated song for each genre, ordered alphabetically by genre?
+
+Select min(T1.duration), min(T2.rating), T2.genre_is
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+group by T2.genre_is
+order by T2.genre_is
+
+
+S:
+S:
+S:
+
+
+38. Find the names and number of works of all artists who have at least one English songs.
+P: What are the names and number of works for all artists who have sung at least one song in English?
+
+Select T1.artist_name, count(*)
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+where T2.languages = "english"
+group by T2.artist_name
+having count(*) >= 1
+
+
+S:
+S:
+S:
+
+
+
+39. Find the name and country of origin for all artists who have release at least one song of resolution above 900.
+P: What is the name and country of origin for each artist who has released a song with a resolution higher than 900?
+
+Select T1.artist_name, T1.country
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+where T2.resolution > 900
+group by T2.artist_name
+having count(*) >= 1
+
+
+S:
+S:
+S:
+
+
+40. Find the names and number of works of the three artists who have produced the most songs.
+P: What are the names of the three artists who have produced the most songs, and how many works did they produce?
+
+Select T1.artist_name, count(*)
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+group by T2.artist_name
+Order by count(*) DESC
+LIMIT 3
+
+
+S:
+S:
+S:
+
+
+
+41. Find the country of origin for the artist who made the least number of songs?
+P: What country is the artist who made the fewest songs from?
+
+Select T1.country
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+group by T2.artist_name
+Order by count(*)
+LIMIT 1
+
+
+S:
+S:
+S:
+
+
+42. What are the names of the songs whose rating is below the rating of all songs in English?
+P: What are the song names for every song whose rating is less than the minimum rating for English songs?
+
+Select song_name
+From song
+where rating <  (select min(rating)
+                             from song
+                             where languages = 'english')
+
+
+S:
+S:
+S:
+
+
+
+43. What is f_ids of the songs whose resolution is higher than the resolution of any songs with rating lower than 8?
+P: What is the f_id of every song that has a resolution higher than that of a song with a rating below 8?
+
+Select f_id
+From song
+where resolution > (select max(resolution)
+                                      from song
+                                       where rating < 8)
+
+
+S:
+S:
+S:
+
+
+
+44. What is f_ids of the songs whose resolution is twice higher than the average resolution of songs in modern genre?
+P: What are the f_ids of all songs that have twice the resolution of the average resolution in the modern genre?
+
+Select f_id
+From song
+where resolution > 2 * (select avg(resolution)
+                                      from song
+                                       where genre_is = "modern")
+
+
+
+S:
+S:
+S:
+
+
+45. Find the top 3 artists who have the largest number of songs works whose language is Bangla.
+P: What are the top 3 artists with the largest number of songs in the language Bangla?
+
+Select T1.artist_name
+From artist as T1 JOIN song as T2 ON T1.artist_name = T2.artist_name
+where T2.languages = "bangla"
+group by T2.artist_name
+order by count(*) DESC
+LIMIT 3
+
+
+S:
+S:
+S:
+
+
+46. List the f_id, genre and artist name of English songs ordered by rating.
+P: What is the f_id, genre, and name of the artist for every English song ordered by ascending rating?
+
+Select f_id, genre_is, artist_name
+From song
+where languages =  "english"
+order by rating
+
+
+S:
+S:
+S:
+
+
+
+47. List the duration, file size and format of songs whose genre is pop, ordered by title?
+P: What is the duration, file size, and song format for every pop song, ordered by title alphabetically?
+
+Select T1.duration, T1.file_size, T1.formats
+From files as T1 JOIN song as T2 ON T1.f_id = T2.f_id
+where T2.genre_is = "pop"
+order by T2.song_name
+
+
+S:
+S:
+S:
+
+
+
+48. Find the names of the artists who have produced English songs but have never received rating higher than 8.
+P: What are the names of the different artists that have produced a song in English but have never receieved a rating higher than 8?
+
+Select distinct artist_name
+From song
+where languages = "english"
+EXCEPT
+Select distinct artist_name
+From song
+where rating > 8
+
+S:
+S:
+S:
+
+
+49. Find the names of the artists who are from Bangladesh and have never received rating higher than 7.
+P: What are the names of the different artists from Bangladesh who never received a rating higher than a 7?
+
+Select distinct artist_name
+From artist
+where country = "Bangladesh"
+EXCEPT
+Select distinct artist_name
+From song
+where rating > 7
+
+S:
+S:
+S:
