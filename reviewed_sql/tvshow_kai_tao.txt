@@ -195,7 +195,7 @@ WHERE directed_by = 'Ben Jones'
 
 29. find the package option and series name of the tv channel that do not have any cartoon directed by Ben Jones.
 
-SELECT id
+SELECT package_option
 from TV_Channel
 where id NOT IN (SELECT channel
                   FROM cartoon
