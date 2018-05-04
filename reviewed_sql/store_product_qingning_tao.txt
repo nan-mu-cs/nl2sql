@@ -37,17 +37,20 @@ from district
 order by city_area asc
 limit 1
 
-7. Find the total population in record.
+7. Find the total population of the top 3 districts with the largest area.
 
 select sum(city_population)
 from district
+order by city_area desc
+limit 3
 
-8. Find the name of all stores.
+8. Find all types of store and number of them.
 
-select distinct store_name
+select type, count(*)
 from store
+group by type
 
-9. Find all the stores in Khanewal District.
+9. Find the names of all stores in Khanewal District.
 
 select t1.store_name
 from store as t1 join store_district as t2
@@ -58,16 +61,14 @@ where t3.district_name = "Khanewal District"
 
 10. Find all the stores in the district with the most population.
 
-select store_name
-from store as t1 join store_district as t2
-on t1.store_id = t2.store_id
-join district as t3
-on t2.district_id = (select district_name
+select t1.store_name
+from store as t1 join store_district as t2 on t1.store_id = t2.store_id
+where district_id = (select district_id
 from district
 order by city_population desc
 limit 1)
 
-11. Which city is the store named "Blackville" in?
+11. Which city is the headquarter of the store named "Blackville" in?
 
 select t3.headquartered_city
 from store as t1 join store_district as t2
@@ -78,7 +79,7 @@ where t1.store_name = "Blackville"
 
 12. Find the number of stores in each city.
 
-select t3.headquartered_city, count(t1.store_id)
+select t3.headquartered_city, count(*)
 from store as t1 join store_district as t2
 on t1.store_id = t2.store_id
 join district as t3
@@ -93,7 +94,7 @@ on t1.store_id = t2.store_id
 join district as t3
 on t2.district_id = t3.district_id
 group by t3.headquartered_city
-order by count(t1.store_id) desc
+order by count(*) desc
 limit 1
 
 14. What is the average pages per minute color?
@@ -114,21 +115,13 @@ where t3.store_name = "Miramichi"
 
 select product
 from product
-where max_page_size = "A4"
-intersect
-select product
-from product
-where pages_per_minute_color < 5
+where max_page_size = "A4" and pages_per_minute_color < 5
 
 17. Find products with max page size as "A4" or pages per minute color smaller than 5.
 
 select product
 from product
-where max_page_size = "A4"
-union
-select product
-from product
-where pages_per_minute_color < 5
+where max_page_size = "A4" or pages_per_minute_color < 5
 
 18. Find all the product whose name contains the word "Scanner".
 
@@ -153,3 +146,25 @@ from product
 group by max_page_size
 order by count(*) desc
 limit 1)
+
+21. Find the total population of the districts where the area is bigger than the average city area.
+
+select sum(city_population)
+from district
+where city_area > (select avg(city_area) from district)
+
+22. Find the names of districts where have both city mall and village store type stores.
+
+select t3.District_name
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+where t1.Type = "City Mall"
+intersect
+select t3.District_name
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+where t1.Type = "Village Store"
