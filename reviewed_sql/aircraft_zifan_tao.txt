@@ -1,0 +1,143 @@
+Total = 20
+
+1. How many aircrafts are there?
+
+SELECT count(*)
+FROM aircraft
+
+2. List the description of all aircrafts.
+
+SELECT Description
+FROM aircraft
+
+3. What is the average number of international passengers of all airports?
+
+SELECT avg(International_Passengers)
+FROM airport
+
+4. What are the number of international and domestic passengers of the airport named London "Heathrow"?
+
+SELECT International_Passengers, Domestic_Passengers
+FROM airport
+WHERE Airport_Name	= "London Heathrow"
+
+5. What are the names of airports that contain the word "London".
+
+SELECT Airport_Name
+FROM airport
+WHERE Airport_Name LIKE "%London%"
+
+6. What are the maximum and minimum number of transit passengers of all aiports.
+
+SELECT max(Transit_Passengers), min(Transit_Passengers)
+FROM airport
+
+7. What are the name of pilots aged 25 or older?
+
+SELECT Name
+FROM pilot
+where Age >= 25
+
+8. List all pilot names in ascending alphabetical order.
+
+SELECT Name
+FROM pilot
+order by Name ASC
+
+9. List names of all pilot aged 30 or younger in descending alphabetical order.
+
+SELECT Name
+FROM pilot
+Where Age <= 30
+order by Name DESC
+
+10. Please show the names of aircrafts associated with airport with name "London Gatwick".
+
+SELECT T1.Aircraft
+FROM aircraft as T1 join airport_aircraft as T2 
+on T1.Aircraft_ID = T2.Aircraft_ID
+join airport as T3
+on T2.Airport_ID = T3.Airport_ID
+Where T3.Airport_Name = "London Gatwick"
+
+11. Please show the names and descriptions of aircrafts associated with airports that have total passenger bigger than 10000000.
+
+SELECT T1.Aircraft, T1.Description
+FROM aircraft as T1 join airport_aircraft as T2 
+on T1.Aircraft_ID = T2.Aircraft_ID
+join airport as T3
+on T2.Airport_ID = T3.Airport_ID
+Where T3.Total_Passengers > 10000000
+
+12. What is the average total number of passengers of airports that are associated with aircraft "Robinson R-22"?
+
+SELECT avg(T3.Total_Passengers)
+FROM aircraft as T1 join airport_aircraft as T2 
+on T1.Aircraft_ID = T2.Aircraft_ID
+join airport as T3
+on T2.Airport_ID = T3.Airport_ID
+Where T1.Aircraft = "Robinson R-22"
+
+13. Please list the location and the winning aircraft name.
+
+SELECT T2.Location, T1.Aircraft
+FROM aircraft as T1 join match as T2 
+on T1.Aircraft_ID = T2.Winning_Aircraft
+
+14. List the name of the aircraft that has been winning aircraft most number of times.
+
+SELECT T1.Aircraft
+FROM aircraft as T1 join match as T2 
+on T1.Aircraft_ID = T2.Winning_Aircraft
+group by T2.Winning_Aircraft
+order by COUNT(*) DESC limit 1
+ 
+15. List the names of aircrafts and the number of times it won matches.
+
+SELECT T1.Aircraft, COUNT(*)
+FROM aircraft as T1 join match as T2 
+on T1.Aircraft_ID = T2.Winning_Aircraft
+group by T2.Winning_Aircraft
+
+16. List names of all pilot in descending order of age.
+
+SELECT Name
+FROM pilot
+order by Age DESC
+
+17. List the names of aircrafts and that won matches at least twice.
+
+SELECT T1.Aircraft
+FROM aircraft as T1 join match as T2 
+on T1.Aircraft_ID = T2.Winning_Aircraft
+group by T2.Winning_Aircraft
+Having COUNT(*) >= 2
+
+18. List the names of aircrafts and that did not win any match.
+
+SELECT Aircraft
+from aircraft
+where Aircraft_ID not in (SELECT Winning_Aircraft FROM match)
+
+19. Show the names of aircrafts that are associated with both airport named "London Heathrow"
+and airport named "London Gatwick"
+
+SELECT T1.Aircraft
+FROM aircraft as T1 join airport_aircraft as T2 
+on T1.Aircraft_ID = T2.Aircraft_ID
+join airport as T3
+on T2.Airport_ID = T3.Airport_ID
+Where T3.Airport_Name = "London Heathrow"
+Intersect 
+SELECT T1.Aircraft
+FROM aircraft as T1 join airport_aircraft as T2 
+on T1.Aircraft_ID = T2.Aircraft_ID
+join airport as T3
+on T2.Airport_ID = T3.Airport_ID
+Where T3.Airport_Name = "London Gatwick"
+
+20. Show all information on airports
+
+select * from airport
+
+
