@@ -5,24 +5,26 @@ Total = 20
 SELECT count(*)
 FROM game
 
-2. List the Title of all games.
+2. List the Title and Developers of all games ordered by units sold from large to small.
 
-SELECT Title
+SELECT Title, Developers
 FROM game
+order by Units_sold_Millions desc
 
-3. What is the average number of units sold in millions?
+3. What is the average units sold in millions of the games that are not developed by Nintendo?
 
 SELECT avg(Units_sold_Millions)
 FROM game
+where developers != 'Nintendo'
 
-4. What are the names and market districts of platforms?
+4. What are the names and market districts of all platforms?
 
 SELECT Platform_name, Market_district
 FROM platform
 
-5. What are the names of platforms with download rank equals 1?
+5. What are the names and id of platforms whose download rank is 1?
 
-SELECT Platform_name
+SELECT Platform_name, id
 FROM platform
 WHERE Download_rank = 1
 
@@ -49,13 +51,12 @@ SELECT Player_name, College
 FROM player
 order by Rank_of_the_year DESC
 
-10. Please show the names of players that have played the game titled "Super Mario World".
+10. Please show the names and rank of players that have played the game titled "Super Mario World".
 
-SELECT T3.Player_name
-FROM game as T1 join game_player as T2 
-on T1.Game_ID = T2.Game_ID
-join player as T3
-on T2.Player_ID = T3.Player_ID
+SELECT T3.Player_name, T3.rank_of_the_year
+FROM game as T1
+     join game_player as T2 on T1.Game_ID = T2.Game_ID
+     join player as T3 on T2.Player_ID = T3.Player_ID
 Where T1.Title = "Super Mario World"
 
 11. Show the distinct developer of games played by players that go to college "Auburn".
@@ -140,3 +141,14 @@ select distinct Franchise
 from game
 
 
+21. Show the title of games that are not played by any player who is in the Guard position.
+
+SELECT Title
+FROM game
+except 
+SELECT T1.Title
+FROM game as T1 join game_player as T2 
+on T1.Game_ID = T2.Game_ID
+join player as T3
+on T2.Player_ID = T3.Player_ID
+Where T3.	Position = "Guard"
