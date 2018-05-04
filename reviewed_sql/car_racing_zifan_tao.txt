@@ -5,20 +5,43 @@ Total = 20
 SELECT count(*)
 FROM driver
 
-2. List the distinct make of drivers.
+Find the number of drivers whose points are greater than 150 for each make.
 
-SELECT distinct Make
+select make, count(*)
 FROM driver
+where points > 150
+group by make
 
-3. What is the average laps of all drivers?
+2. find the average of drivers for different make.
+
+SELECT avg(age) Make
+FROM driver
+group by make
+
+3. What is the average laps of all drivers who are younger than 20?
 
 SELECT avg(Laps)
 FROM driver
+where age < 20
 
-4. What are the managers and sponsors of teams?
+4. What are the managers and sponsors of teams? sort the results by Car Owners.
 
 SELECT Manager, Sponsor
 FROM team
+order Car_Owner
+
+how many teams for each make?
+
+select make, count(*)
+from team
+group by team
+
+Find the make that has more than one team.
+
+select make
+from team
+group by team
+having count(*) > 1
 
 5. What are the makes of team with car owner "Buddy Arrington"?
 
@@ -55,16 +78,16 @@ SELECT T2.Driver, T1.Country
 FROM country as T1 join driver as T2 
 on T1.Country_ID = T2.Country
 
-11. Show the points of drivers from countries with capital "Dublin"
+11. Show the maximum points of drivers from countries with capital "Dublin"
 
-SELECT T2.Points
+SELECT max(T2.Points)
 FROM country as T1 join driver as T2 
 on T1.Country_ID = T2.Country
 Where T1.Capital = "Dublin"
 
-12. What is the average laps of drivers from countries with official native language "English"
+12. What is the average age of drivers from countries with official native language "English"
 
-SELECT avg(T2.Laps)
+SELECT avg(T2.age)
 FROM country as T1 join driver as T2 
 on T1.Country_ID = T2.Country
 Where T1.Official_native_language = "English"
@@ -109,19 +132,38 @@ SELECT Team
 from team
 where Team_ID not in (SELECT Team_ID FROM team_driver)
 
-19. What are the common ages of drivers with make "Dodge" and drivers with make "Chevrolet"
+19. which country has drivers who are driving cars with both make "Dodge" and make "Chevrolet"
 
-SELECT Age
-FROM driver
-Where Make = "Dodge"
+SELECT t2.country
+FROM driver as t1 join country as t2 on t1.country = t2.country_id
+Where t1.Make = "Dodge"
 Intersect 
-SELECT Age
-FROM driver
-Where Make = "Chevrolet"
+SELECT t2.country
+FROM driver as t1 join country as t2 on t1.country = t2.country_id
+Where t1.Make = "Chevrolet"
 
-20. Show total points of all drivers.
+20. Show total and average points of all drivers.
 
-select sum(Points)
+select sum(Points), avg(Points)
 from driver
 
+21. find the countries where no driver come from.
 
+select country
+from country
+where country_id not in (select country from driver)
+
+22. what is the manager and sponsor of the team that has most number of drivers?
+
+select t1.manager, t1.sponsor
+from team as t1 join team_driver as t2 on t1.team_id = t2.team_id
+group by t2.team_id
+order by count(*) desc
+limit 1
+
+23. what is the manager and car owner of the team that has at least 2 drivers?
+
+select t1.manager, t1.car_owner
+from team as t1 join team_driver as t2 on t1.team_id = t2.team_id
+group by t2.team_id
+having count(*) >= 2
