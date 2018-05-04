@@ -21,9 +21,9 @@ SELECT International_Passengers, Domestic_Passengers
 FROM airport
 WHERE Airport_Name	= "London Heathrow"
 
-5. What are the names of airports that contain the word "London".
+5. What are the total number of Domestic Passengers of airports that contain the word "London".
 
-SELECT Airport_Name
+SELECT sum(Domestic_Passengers)
 FROM airport
 WHERE Airport_Name LIKE "%London%"
 
@@ -90,7 +90,8 @@ SELECT T1.Aircraft
 FROM aircraft as T1 join match as T2 
 on T1.Aircraft_ID = T2.Winning_Aircraft
 group by T2.Winning_Aircraft
-order by COUNT(*) DESC limit 1
+order by COUNT(*) DESC
+limit 1
  
 15. List the names of aircrafts and the number of times it won matches.
 
@@ -119,8 +120,7 @@ SELECT Aircraft
 from aircraft
 where Aircraft_ID not in (SELECT Winning_Aircraft FROM match)
 
-19. Show the names of aircrafts that are associated with both airport named "London Heathrow"
-and airport named "London Gatwick"
+19. Show the names of aircrafts that are associated with both airport named "London Heathrow" and airport named "London Gatwick"
 
 SELECT T1.Aircraft
 FROM aircraft as T1 join airport_aircraft as T2 
@@ -136,8 +136,31 @@ join airport as T3
 on T2.Airport_ID = T3.Airport_ID
 Where T3.Airport_Name = "London Gatwick"
 
-20. Show all information on airports
+20. Show all information on the airport that has the largest number of international passengers.
 
-select * from airport
+select * 
+from airport
+order by International_Passengers desc
+limit 1
 
+21. find the name and age of the pilot who has won the most number of times among the pilots who are younger than 30.
 
+select t1.name, t1.age
+from pilot as t1 join match as t2 on t1.pilot_id = t2.winning_pilot
+where t1.age < 30
+group by t2.winning_pilot
+order by count(*) desc
+limit 1
+
+22. what is the name and age of the youngest winning pilot?
+
+select t1.name, t1.age
+from pilot as t1 join match as t2 on t1.pilot_id = t2.winning_pilot
+order by t1.age 
+limit 1
+
+23. find the name of pilots who did not win the matches held in the country of Australia.
+
+select name
+from pilot
+where pilot_id not in (select Winning_Pilot  from match where country = 'Australia')
