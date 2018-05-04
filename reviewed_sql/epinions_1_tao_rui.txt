@@ -59,7 +59,7 @@ Select T1.title
 From item as T1 join review as T2 on T1.i_id = T2.i_id
 Where T2.rating = 10
 
-12. Find the title of items whose average rating is higher than the average review rating of all items. 
+12. Find the title of items whose rating is higher than the average review rating of all items. 
 
 Select T1.title
 From item as T1 join review as T2 on T1.i_id = T2.i_id
@@ -69,7 +69,7 @@ Where T2.rating > (select avg(rating) from review)
 
 Select T1.title
 From item as T1 join review as T2 on T1.i_id = T2.i_id
-Where T2.rating > 5
+Where T2.rating < 5
 
 14. Find the title of items that received both some rating higher than 8 and some below 5.
 
