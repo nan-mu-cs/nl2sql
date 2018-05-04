@@ -53,11 +53,11 @@ From user_profiles
 Where email LIKE '%superstar%' or email LIKE '%edu%'
 
 
-10. Return the text of tweets that are talking about the topic like ‘intern’.
+10. Return the text of tweets about the topic ‘intern’.
 
 Select text
 From tweets
-Where text LIKE '% intern%'
+Where text LIKE '%intern%'
 
 11. Find the name and email of the users who have more than 1000 followers.
 
@@ -65,7 +65,7 @@ Select name, email
 From user_profiles
 where followers > 1000
 
-12. Find the name of the users whose number of followers is higher than user Tyler Swift.
+12. Find the name of the users whose number of followers is higher than that of user Tyler Swift.
 
 Select T1.name
 From user_profiles as T1 join follows as T2 on T1.uid = T2.f1
@@ -74,7 +74,7 @@ having count(*) > (Select count(*)
 From user_profiles as T1 join follows as T2 on T1.uid = T2.f1
 Where T1.name = 'Tyler Swift')
 
-13. Find the name and email of the users who did not tweet.
+13. Find the name and email of the users who have more than one follower.
 
 Select T1.name, T1.email
 From user_profiles as T1 join follows as T2 on T1.uid = T2.f1
@@ -127,7 +127,7 @@ Select name, followers
 From user_profiles
 order by followers desc
 
-20. List the name of top 5 users followed by the most of other users.
+20. List the name of top 5 users followed by the most number of other users.
 
 Select name
 From user_profiles
