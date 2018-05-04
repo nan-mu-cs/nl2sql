@@ -34,22 +34,24 @@ from available_policies
 group by policy_type_code
 having count(*) > 4
 
-6. Find the total amount of settlements.
+6. Find the total and average amount of settlements.
 
-select sum(settlement_amount)
+select sum(settlement_amount), avg(settlement_amount)
 from settlements
 
-7. Find the average amount of settlement.
+7. Find the name of services that have been used for more than 2 times in first notification of loss.
 
-select avg(settlement_amount)
-from settlements
+select t2.service_name
+from first_notification_of_loss as t1 join services as t2 on t1.service_id = t2.service_id
+group by t1.service_id
+having count(*) > 2
 
-8. What is the ID of the FNOL that corresponds to the largest amount of total settlement?
+8. What is the effective date of the claim that corresponds to the largest amount of total settlement?
 
-select t1.fnol_id
+select t1.Effective_Date
 from claims as t1 join settlements as t2
 on t1.claim_id = t2.claim_id
-group by t1.fnol_id
+group by t1.claim_id
 order by sum(t2.settlement_amount) desc
 limit 1
 
@@ -92,17 +94,18 @@ group by t1.customer_name
 order by count(*) desc
 limit 1)
 
-12. List all the serivces.
+12. List all the serivces in the alphabetical order.
 
 select service_name
 from services
+order by service_name
 
 13. How many services are there?
 
 select count(*)
 from services
 
-14. Find the name of users who do not have a FNOL record.
+14. Find the name of users who do not have a first notification of loss record.
 
 select customer_name
 from customers
@@ -118,14 +121,7 @@ from customers as t1 join first_notification_of_loss as t2
 on t1.customer_id = t2.customer_id
 join services as t3
 on t2.service_id = t3.service_id
-where t3.service_name = "Close a policy"
-union
-select t1.customer_name
-from customers as t1 join first_notification_of_loss as t2
-on t1.customer_id = t2.customer_id
-join services as t3
-on t2.service_id = t3.service_id
-where t3.service_name = "Upgrade a policy"
+where t3.service_name = "Close a policy" or t3.service_name = "Upgrade a policy"
 
 16. Find the name of customers who both have used service "Close a policy" and the service "New policy application".
 
