@@ -43,7 +43,7 @@ Limit 1
 
 Select t1.Primary_conference
 From university as t1 join basketball_match as t2 on t1.school_id = t2.school_id
-Order by acc_percent
+Order by t2.acc_percent
 Limit 1
 
 8. What is the team name and acc regular season score of the school that was founded for the longest time?
@@ -95,7 +95,7 @@ Where school_id not in (select school_id from basketball_match)
 
 Select school
 From university
-Where founded > 1850 or affiliation > 'Public'
+Where founded > 1850 or affiliation = 'Public'
 
 16. Find how many different affiliation types.
 
