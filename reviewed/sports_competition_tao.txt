@@ -32,7 +32,7 @@ WHERE Competition_type != "Tournament"
 SELECT max(Silver), min(Silver)
 FROM club_rank
 
-7. How many clubs have total medals less than 10?
+7. How many clubs have total medals smaller than 10?
 
 SELECT count(*)
 FROM club_rank
@@ -40,25 +40,25 @@ where Total < 10
 
 8. List all club names in ascending order of start year.
 
-SELECT name
+SELECT Club_name
 FROM club
 order by Start_year ASC
 
 9. List all club names in descending alphabetical order.
 
-SELECT name
+SELECT Club_name
 FROM club
-order by name DESC
+order by Club_name DESC
 
 10. Please show the names and the players of clubs.
 
-SELECT T1.name, T2.Player
+SELECT T1.Club_name, T2.Player
 FROM club as T1 join player as T2 
 on T1.Club_ID = T2.Club_ID
 
 11. Show the names of clubs that have players with position "Right Wing".
 
-SELECT T1.name
+SELECT T1.Club_name
 FROM club as T1 join player as T2 
 on T1.Club_ID = T2.Club_ID
 Where T2.Position = "Right Wing"
@@ -68,19 +68,19 @@ Where T2.Position = "Right Wing"
 SELECT avg(T2.Points)
 FROM club as T1 join player as T2 
 on T1.Club_ID = T2.Club_ID
-Where T1.name = "AIB"
+Where T1.Club_name = "AIB"
 
 13.  List the position of players and the average number of points of players of each position.
 
 SELECT Position, avg(Points)
 FROM player
-group by name
+group by player
 
 14. List the position of players with average number of points scored by players of that position bigger than 20.
 
 SELECT Position
 FROM player
-group by name
+group by player
 Having avg(Points) >= 20
  
 15. List the types of competition and the number of competitions of each type.
@@ -105,7 +105,7 @@ Having COUNT(*) <= 5
 
 18. List the names of clubs that do not have any players.
 
-SELECT name
+SELECT Club_name
 from CLub
 where Club_ID not in (SELECT Club_ID FROM player)
 
@@ -123,49 +123,3 @@ Where Points < 10
 
 select sum(Points)
 from player
-
-21. how many different poistions are there?
-
-select count(distinct position)
-from player
-
-22. what are the name of players who get more than the average points.
-
-select name
-from player
-where points > (select avg(points) from player)
-
-23. find the number of players whose points are lower than 30 in each position.
-
-select count(*), position
-from player
-where points < 30
-group by position
-
-24. which country did participated in the most number of Tournament competitions?
-
-select country
-from competition
-where competition_type = 'Tournament'
-group by country
-order by count(*) desc
-limit 1
-
-25. which countries did participated in both Friendly and Tournament type competitions.
-
-select country
-from competition
-where competition_type = 'Friendly'
-intersect
-select country
-from competition
-where competition_type = 'Tournament'
-
-26. Find the countries that have never participated in any competition with Friendly type.
-
-select country
-from competition
-except
-select country
-from competition
-where competition_type = 'Friendly'
