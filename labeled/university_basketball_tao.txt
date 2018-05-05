@@ -1,4 +1,4 @@
-
+total # = 23
 
 1. List all schools and their nicknames in the order of founded year.
 
