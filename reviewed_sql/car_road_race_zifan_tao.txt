@@ -135,3 +135,32 @@ Intersect
 SELECT Engine
 FROM driver
 Where Age > 29
+
+21. find the teams that won more than once.
+
+select Winning_team
+FROM race
+group by Winning_team
+having count(*) > 1
+
+22. find the name of drivers who were in both "James Hinchcliffe" and "Carl Skerlong" pole positions before.
+
+SELECT T1.Driver_Name
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+where Pole_Position = "Carl Skerlong"
+intersect
+SELECT T1.Driver_Name
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+where Pole_Position = "James Hinchcliffe"
+
+22. find the name of drivers who were never in "James Hinchcliffe" pole position before.
+
+SELECT Driver_Name
+FROM driver
+except
+SELECT T1.Driver_Name
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+where Pole_Position = "James Hinchcliffe"
