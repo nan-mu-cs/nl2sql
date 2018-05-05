@@ -8,13 +8,13 @@ From event
 
 2. List all the event names by year from most recent to the past.
 
-Select event_name
+Select name
 From event
 Order by year desc
 
 3. What is the name of event that happened in the most recent year?
 
-Select event_name
+Select name
 From event
 Order by year desc
 Limit 1
@@ -52,7 +52,7 @@ From stadium
 Group by country
 Having count(*) <= 3
 
-9. Which country has stadiums with capacity both greater than 60000 but also less than 50000.
+9. Which country has stadiums with capacity both greater than 60000 and less than 50000.
 
 Select country
 From stadium
@@ -62,7 +62,7 @@ Select country
 From stadium
 Where capacity < 50000
 
-10. How many cities do have a stadium before the year of 2006?
+10. How many cities have a stadium that was opened before the year of 2006?
 
 Select count(distinct city)
 From stadium
@@ -100,26 +100,26 @@ Order by meter_100
 Select count(distinct nationality)
 From swimmer
 
-16. How many countries that have more one swimmer?
+16. List countries that have more than one swimmer.
 
 Select nationality, count(*)
 From swimmer
 Group by nationality
 Having count(*) > 1
 
-17. Find all 200 meter and 400 meter results of swimmers from Australia.
+17. Find all 200 meter and 300 meter results of swimmers from Australia.
 
 Select meter_200, meter_300
 From swimmer
 where nationality = 'Australia'
 
-18. Find the name of swimmers whose results are win.
+18. Find the name of swimmers whose results have a win.
 
 Select t1.name
 From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
 Where result = 'Win'
 
-19. What is the name of the stadium where held most number of events.
+19. What is the name of the stadium which held most number of events.
 
 Select t1.name
 From stadium as t1 join event as t2 on t1.id = t2.stadium_id
@@ -133,7 +133,7 @@ Select t1.name, t1.capacity
 From stadium as t1 join event as t2 on t1.id = t2.stadium_id
 Where t2.name = 'World Junior'
 
-21. Find the name of stadiums where have never had any event.
+21. Find the name of stadiums which never have had any event.
 
 Select name
 From stadium
@@ -156,13 +156,13 @@ Having count(*) >= 2
 
 24. Find the name and nationality of the swimmer who has won (result is win) more than 1 time.
 
-Select t1.name
+Select t1.name, t1.nationality
 From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
 Where result = 'Win'
 Group by t2.swimmer_id
 Having count(*) > 1
 
-25. Find the name of the swimmers who have no any record.
+25. Find the name of the swimmers who have no record.
 
 Select name
 From swimmer
