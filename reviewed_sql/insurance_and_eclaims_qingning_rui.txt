@@ -33,7 +33,7 @@ from claim_headers
 
 6. Find the total amount claimed in the most recently created document.
 
-select sum(amount_claimed)
+select sum(t1.amount_claimed)
 from claim_headers as t1 join claims_documents as t2
 on t1.claim_header_id = t2.claim_id
 where t2.created_date = (select created_date
@@ -43,7 +43,7 @@ limit 1)
 
 7. What is the name of the customer who has made the largest amount of claim in a single claim?
 
-select customer_details
+select t3.customer_details
 from claim_headers as t1 join policies as t2
 on t1.policy_id = t2.policy_id
 join customers as t3
@@ -53,7 +53,7 @@ from claim_headers)
 
 8. What is the name of the customer who has made the minimum amount of payment in one claim?
 
-select customer_details
+select t3.customer_details
 from claim_headers as t1 join policies as t2
 on t1.policy_id = t2.policy_id
 join customers as t3
@@ -118,7 +118,7 @@ select policy_type_code, count(*)
 from policies
 group by policy_type_code
 
-17. Find the customer that has been involved in the most policies.
+17. Find the customer name that has been involved in the most policies.
 
 select t2.customer_details
 from policies as t1 join customers as t2
