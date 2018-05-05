@@ -1,0 +1,202 @@
+Total # = 30
+
+1.List the title of all cartoon in alphabetical order.
+
+SELECT Title
+FROM Cartoon
+order by title
+
+2. List all cartoon directed by "Ben Jones".
+
+SELECT Title
+FROM Cartoon
+WHERE Directed_by="Ben Jones";
+
+3. How many cartoons were written by "Joseph Kuhr"?
+
+SELECT count(*)
+FROM Cartoon
+WHERE Written_by="Joseph Kuhr";
+
+4. list all cartoon titles and their directors ordered by their air date
+
+SELECT title, Directed_by
+FROM Cartoon
+order by Original_air_date
+
+5. List the title of all cartoon directed by "Ben Jones" or "Brandon Vietti".
+
+SELECT Title
+FROM Cartoon
+WHERE Directed_by="Ben Jones" or Directed_by="Brandon Vietti";
+
+6. Which country has the most of TV Channels? List the country and number of TV Channels it has.
+
+SELECT Country, count(*)
+FROM TV_Channel
+GROUP BY Country
+ORDER BY count(*) DESC
+LIMIT 1;
+
+7. List the number of different series names and contents in the TV Channel table.
+
+SELECT count(distinct series_name), count(distinct content)
+FROM TV_Channel;
+
+8. What is the content of TV Channel with serial name "Sky Radio"?
+
+SELECT Content
+FROM TV_Channel
+WHERE series_name="Sky Radio";
+
+9. What is the Package Option of TV Channel with serial name "Sky Radio"?
+
+SELECT Package_Option
+FROM TV_Channel
+WHERE series_name="Sky Radio";
+
+10. How many TV Channel using language English?
+SELECT count(*)
+FROM TV_Channel
+WHERE Language="English";
+
+11. List the language used least number of TV Channel. List language and number of TV Channel.
+
+SELECT Language, count(*)
+FROM TV_Channel
+GROUP BY Language
+ORDER BY count(*) asc
+LIMIT 1;
+
+11.5 List each language and the number of TV Channels using it.
+
+SELECT Language, count(*)
+FROM TV_Channel
+GROUP BY Language
+
+12. What is the TV Channel shows cartoon "The Rise of the Blue Beetle!"? List the TV Channel's series name.
+
+SELECT T1.series_name
+FROM TV_Channel AS T1 JOIN Cartoon AS T2 ON T1.id=T2.Channel
+WHERE T2.Title="The Rise of the Blue Beetle!";
+
+13.List the title of all  Cartoons showed on TV Channel with series name "Sky Radio".
+
+SELECT T2.Title
+FROM TV_Channel AS T1 JOIN Cartoon AS T2 ON T1.id=T2.Channel
+WHERE T1.series_name="Sky Radio";
+
+14. List the Episode of all TV series sorted by rating.
+
+SELECT Episode
+FROM TV_series
+order by rating
+
+15. List top 3 highest Rating  TV series. List the TV series's Episode and Rating.
+
+SELECT Episode, Rating
+FROM TV_series
+ORDER BY Rating DESC
+LIMIT 3;
+
+16. What is minimum and maximum share of TV series?
+
+SELECT max(Share),min(Share)
+FROM TV_series;
+
+17. What is the air date of TV series with Episode "A Love of a Lifetime"?
+
+SELECT Air_Date
+FROM TV_series
+WHERE Episode="A Love of a Lifetime";
+
+18. What is Weekly Rank of TV series with Episode "A Love of a Lifetime"?
+
+SELECT Weekly_Rank
+FROM TV_series
+WHERE Episode="A Love of a Lifetime";
+
+19. What is the TV Channel of TV series with Episode "A Love of a Lifetime"? List the TV Channel's series name.
+
+SELECT T1.series_name
+FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id=T2.Channel
+WHERE T2.Episode="A Love of a Lifetime";
+
+20. List the Episode of all  TV series showed on TV Channel with series name "Sky Radio".
+
+SELECT T2.Episode
+FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id=T2.Channel
+WHERE T1.series_name="Sky Radio";
+
+21. Find the number of cartoons directed by each of them.
+
+select count(*), Directed_by
+from cartoon
+group by Directed_by
+
+22. Find the production code and channel of the most recent air cartoon.
+
+select production_code, channel
+from cartoon
+order by original_air_date
+
+23. Find the package choice and series name of the TV channel that has hight definition TV.
+
+SELECT package_option, series_name
+FROM TV_Channel
+where hight_definition_TV = "yes"
+
+24. which countries' tv channels are playing some cartoon written by Todd Casey?
+
+SELECT T1.country
+FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id=T2.Channel
+WHERE T2.written_by = 'Todd Casey'
+
+25. which countries' tv channels are not playing any cartoon written by Todd Casey?
+
+SELECT country
+from TV_Channel
+EXCEPT
+SELECT T1.country
+FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id=T2.Channel
+WHERE T2.written_by = 'Todd Casey'
+
+26. Find the series name and country of the tv channel that is playing some cartoons directed by Ben Jones and Michael Chang?
+
+SELECT T1.series_name, T1.country
+FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id=T2.Channel
+WHERE T2.directed_by = 'Michael Chang'
+INTERSECT
+SELECT T1.series_name, T1.country
+FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id=T2.Channel
+WHERE T2.directed_by = 'Ben Jones'
+
+27. find the pixel aspect ratio and nation of the tv channels that do not use English.
+
+select Pixel_aspect_ratio_PAR, country
+from tv_channel
+where language != 'English'
+
+27. find id of the tv channels that from the countries where have more than two tv channels.
+
+select id
+from tv_channel
+group by country
+having count(*) > 2
+
+28. find the id of tv channels that do not play any cartoon directed by Ben Jones.
+
+SELECT id
+from TV_Channel
+EXCEPT
+SELECT channel
+FROM cartoon
+WHERE directed_by = 'Ben Jones'
+
+29. find the package option and series name of the tv channel that do not have any cartoon directed by Ben Jones.
+
+SELECT package_option
+from TV_Channel
+where id NOT IN (SELECT channel
+                  FROM cartoon
+                  WHERE directed_by = 'Ben Jones')

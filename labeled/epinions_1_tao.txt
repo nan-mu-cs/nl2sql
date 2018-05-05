@@ -1,0 +1,200 @@
+
+1. find the id of the item whose title is orange.
+
+Select i_id
+From item
+Where title = "orange"
+
+
+2. List all info in the item table.
+
+Select *
+From item
+
+3. Find the number of reviews.
+
+Select count(*)
+From review
+
+4. How many users are there?
+
+Select count(*)
+From useracct
+
+5. Find the average and maximum rating of all reviews.
+
+Select avg(rating), max(rating)
+From review
+
+6. Find the highest rank of all reviews.
+
+Select min(rank)
+From review
+
+7. How many different users did write some reviews?
+
+Select count(distinct u_id)
+From review
+
+8. How many different items were reviewed by some users?
+
+Select count(distinct i_id)
+From review
+
+9. Find the number of items did not receive any review.
+
+Select count(*)
+From item
+Where i_id NOT IN (select i_id from review)
+
+10. Find the name of users who did not leave any review.
+
+Select name
+From useracct
+Where u_id NOT IN (select u_id from review)
+
+11. Find the name of goods that receive some rating = 10.
+
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Where T2.rating = 10
+
+12. Find the title of items whose average rating is higher than the average review rating of all items. 
+
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Where T2.rating > (select avg(rating) from review)
+
+13. Find the title of items that received any rating below 5.
+
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Where T2.rating > 5
+
+14. Find the title of items that received both some rating higher than 8 and some below 5.
+
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Where T2.rating > 8
+INTERSECT
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Where T2.rating < 5
+
+15. Find the name of items whose rank is higher than 3 and average rating is above 5.
+
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Where T2.rank > 3
+INTERSECT
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Group by T2.i_id
+HAVING avg(T2.rating) > 5
+
+16. Find the name of the item with the lowest average rating.
+
+Select T1.title
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Group by T2.i_id
+Order by avg(T2.rating) 
+Limit 1
+
+17. List in alphabetic order titles of all items.
+
+Select title
+From item
+Order by title 
+
+18. Find the name of users how gives the most number of reviews.
+
+Select T1.name
+From useracct as T1 join review as T2 on T1.u_id = T2.u_id
+Group by T2.u_id
+Order by count(*) desc 
+Limit 1
+
+19. Find the name and id of the item with the highest average rating.
+
+Select T1.title, T1.i_id
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Group by T2.i_id
+Order by avg(T2.rating) desc
+Limit 1
+
+20. find the name and id of the good with the highest average rank.
+
+Select T1.title, T1.i_id
+From item as T1 join review as T2 on T1.i_id = T2.i_id
+Group by T2.i_id
+Order by avg(T2.rank) desc
+Limit 1
+
+21. Return name of users and the average rating of all reviews given by each of them.
+
+Select T1.name, avg(T2.rating)
+From useracct as T1 join review as T2 on T1.u_id = T2.u_id
+Group by T2.u_id
+
+22. Find the name of users and number of reviews wrote by each of them.
+
+Select T1.name, count(*)
+From useracct as T1 join review as T2 on T1.u_id = T2.u_id
+Group by T2.u_id
+
+23. Find the name of user who gave the highest rating.
+
+Select T1.name
+From useracct as T1 join review as T2 on T1.u_id = T2.u_id
+Order by T2.rating desc
+Limit 1
+
+24. Find the name of source user with the highest average trust score.
+
+Select T1.name
+From useracct as T1 join trust as T2 on T1.u_id = T2.source_u_id
+Group by T2.source_u_id
+order by avg(trust) desc
+Limit 1
+
+25. Find the name of target users and the average trust score for each of them.
+
+Select T1.name, avg(trust)
+From useracct as T1 join trust as T2 on T1.u_id = T2.target_u_id
+Group by T2.target_u_id
+
+26. Find the name of target user with the lowest trust score.
+
+Select T1.name
+From useracct as T1 join trust as T2 on T1.u_id = T2.target_u_id
+Order by trust
+Limit 1
+
+27. Find the name of the items that do not receive any review.
+
+Select title
+From item
+Where i_id NOT IN (select i_id from review)
+
+28. Find the name of users who did not leave any review.
+
+Select name
+From useracct
+Where u_id NOT IN (select u_id from review)
+
+29. Find the number of users who did not write any review.
+
+Select count(*)
+From useracct
+Where u_id NOT IN (select u_id from review)
+
+30. Find the number of items without any review.
+
+Select count(*)
+From item
+Where i_id NOT IN (select i_id from review)
+
+
+
+
+

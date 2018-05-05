@@ -68422,6 +68422,56 @@
       ],
       [
         0,
+        "user id"
+      ],
+      [
+        0,
+        "follower id"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "user id"
+      ],
+      [
+        1,
+        "text"
+      ],
+      [
+        1,
+        "create date"
+      ],
+      [
+        2,
+        "uid"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "email"
+      ],
+      [
+        2,
+        "partition id"
+      ],
+      [
+        2,
+        "followers"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "f1"
       ],
       [
@@ -68459,56 +68509,6 @@
       [
         2,
         "partitionid"
-      ],
-      [
-        2,
-        "followers"
-      ]
-    ],
-    "column_names_original": [
-      [
-        -1,
-        "*"
-      ],
-      [
-        0,
-        "follow"
-      ],
-      [
-        0,
-        "followed"
-      ],
-      [
-        1,
-        "id"
-      ],
-      [
-        1,
-        "user id"
-      ],
-      [
-        1,
-        "text"
-      ],
-      [
-        1,
-        "create date"
-      ],
-      [
-        2,
-        "user id"
-      ],
-      [
-        2,
-        "name"
-      ],
-      [
-        2,
-        "email"
-      ],
-      [
-        2,
-        "partition id"
       ],
       [
         2,

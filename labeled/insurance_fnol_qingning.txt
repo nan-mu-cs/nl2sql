@@ -1,0 +1,168 @@
+1. Find all the phone numbers.
+
+select customer_phone
+from available_policies
+
+2. What are the customer phone numbers under the policy "Life Insurance"?
+
+select customer_phone
+from available_policies
+where policy_type_code = "Life Insurance"
+
+3. Which policy type has the most records in the database?
+
+select policy_type_code
+from available_policies
+group by policy_type_code
+order by count(*) desc
+limit 1
+
+4. What are all the customer phone numbers under the most popular policy type?
+
+select customer_phone
+from available_policies
+where policy_type_code = (select policy_type_code
+from available_policies
+group by policy_type_code
+order by count(*) desc
+limit 1)
+
+5. Find the policy type used by more than 4 customers.
+
+select policy_type_code
+from available_policies
+group by policy_type_code
+having count(*) > 4
+
+6. Find the total amount of settlements.
+
+select sum(settlement_amount)
+from settlements
+
+7. Find the average amount of settlement.
+
+select avg(settlement_amount)
+from settlements
+
+8. What is the ID of the FNOL that corresponds to the largest amount of total settlement?
+
+select t1.fnol_id
+from claims as t1 join settlements as t2
+on t1.claim_id = t2.claim_id
+group by t1.fnol_id
+order by sum(t2.settlement_amount) desc
+limit 1
+
+9. How many policies are listed for the customer named "Dayana Robel"?
+
+select count(*)
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Dayana Robel"
+
+9. What is the name of the customer that has the most policies listed?
+
+select t1.customer_name
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+group by t1.customer_name
+order by count(*) desc
+limit 1
+
+10. What are all the policy types of the customer named "Dayana Robel"?
+
+select distinct t3.policy_type_code
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+join available_policies as t3
+on t2.policy_id = t3.policy_id
+where t1.customer_name = "Dayana Robel"
+
+11. What are all the policy types of the customer that has the most policies listed?
+
+select distinct t3.policy_type_code
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+join available_policies as t3
+on t2.policy_id = t3.policy_id
+where t1.customer_name = (select t1.customer_name
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+group by t1.customer_name
+order by count(*) desc
+limit 1)
+
+12. List all the serivces.
+
+select service_name
+from services
+
+13. How many services are there?
+
+select count(*)
+from services
+
+14. Find the name of users who do not have a FNOL record.
+
+select customer_name
+from customers
+except
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+
+15. Find the name of customers who either have used service "Close a policy" or the service "Upgrade a policy".
+
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t3.service_name = "Close a policy"
+union
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t3.service_name = "Upgrade a policy"
+
+16. Find the name of customers who both have used service "Close a policy" and the service "New policy application".
+
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t3.service_name = "Close a policy"
+intersect
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t3.service_name = "New policy application"
+
+17. Find the IDs of customers whose name contains "Diana"
+
+select customer_id
+from customers
+where customer_name like "%Diana%"
+
+18. What is the maximum and minimum settlement amount on record?
+
+select max(settlement_amount), min(settlement_amount)
+from settlements
+
+19. List all the customers in increasing order of IDs.
+
+select customer_id, customer_name
+from customers
+order by customer_id asc
+
+20. Retrieve all the open and close date of all policies related to customer with name contains "Diana"
+
+select t2.date_opened, t2.date_closed
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name like "%Diana%"
