@@ -2,6 +2,7 @@
 
 select individual_first_name, individual_middle_name, individual_last_name
 from individuals
+order by individual_last_name
 
 2. List all the types of forms.
 
@@ -10,10 +11,10 @@ from forms
 
 3. Find the name of the most popular party form.
 
-select t1.form_type_code
+select t1.form_name
 from forms as t1 join party_forms as t2
 on t1.form_id = t2.form_id
-group by t1.form_type_code
+group by t2.form_id
 order by count(*) desc
 limit 1
 
@@ -23,14 +24,14 @@ select payment_method_code, party_phone
 from parties
 where party_email = "enrico09@example.com"
 
-5. Find the phone numbers of parties with the most popular party form.
+5. Find the email of parties with the most popular party form.
 
-select distinct party_email
+select t1.party_email
 from parties as t1 join party_forms as t2
 on t1.party_id = t2.party_id
-where t1.party_id = (select party_id
+where t2.form_id = (select form_id
 from party_forms
-group by party_id
+group by form_id
 order by count(*) desc
 limit 1)
 
@@ -97,14 +98,14 @@ select count(*)
 from addresses
 where state_province_county = "Colorado"
 
-14. Find the payment method code sued by more than 3 parties.
+14. Find the payment method code used by more than 3 parties.
 
 select payment_method_code
 from parties
 group by payment_method_code
 having count(*) > 3
 
-15. Find all the name of organizations where their name contains the "Party"
+15. Find the name of organizations whose names contain "Party".
 
 select organization_name
 from organizations
@@ -124,13 +125,13 @@ group by t1.party_email
 order by count(*) desc
 limit 1
 
-18. Which states can address "6862 Kaitlyn Knolls" possibly be in?
+18. Which state can address "6862 Kaitlyn Knolls" possibly be in?
 
 select state_province_county
 from addresses
 where line_1_number_building like "%6862 Kaitlyn Knolls%"
 
-19. Which organization has the most number of contact individuals in history?
+19. What is the name of organization that has the most number of contact individuals?
 
 select t1.organization_name
 from organizations as t1 join organization_contact_individuals as t2
@@ -139,7 +140,7 @@ group by t1.organization_name
 order by count(*) desc
 limit 1
 
-20. Find the last name of the individuals that has been a contact individuals of an organization at least once.
+20. Find the last name of the individuals that have been contact individuals of an organization.
 
 select distinct t1.individual_last_name
 from individuals as t1 join organization_contact_individuals as t2
