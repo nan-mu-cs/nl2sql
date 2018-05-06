@@ -1,0 +1,125 @@
+1. How many regions do we have?
+
+select count(*)
+from region
+
+2. Show all distinct region names
+
+select distinct region_name
+from region
+
+3. How many party do we have?
+
+select count(distinct party_name)
+from party
+
+4. Show Minister and his time taking office and leaving office.
+
+select minister, took_office, left_office
+from party
+
+5. Show minister taking office after 1961 or before 1959
+
+select minister
+from party
+where took_office > 1961 or took_office < 1959
+
+6. Show all ministers who do not belong to Progress Party.
+
+select minister
+from party
+where party_name != 'Progress Party'
+
+7. Show all ministers with his party name in descending order of time of taking office.
+
+select minister, party_name
+from party
+order by took_office desc
+
+8. What is the minister leaving office latest?
+
+select minister
+from party
+order by left_office desc 
+limit 1
+
+9. List member names and their party names.
+
+select T1.member_name, T2.party_name
+from Member as T1 join party as T2 on T1.party_id = T2.party_id
+
+10. Show all party names and the number of members in each party.
+
+select T2.party_name, count(*)
+from Member as T1 join party as T2 on T1.party_id = T2.party_id
+group by T1.party_id
+
+11. What is the name of party with most number of members?
+
+select T2.party_name
+from Member as T1 join party as T2 on T1.party_id = T2.party_id
+group by T1.party_id
+order by count(*) desc
+limit 1
+
+12. Show all party names and their region names.
+
+select T1.party_name, T2.region_name
+from party as T1 join region as T2 on T1.region_id = T2.region_id
+
+13. Show names of party which does not have any member.
+
+select party_name
+from party
+where party_id NOT IN (select party_id from Member)
+
+14. Show member names in both party with id 3 and party with id 1.
+
+select member_name
+from member
+where party_id = 3
+INTERSECT
+select member_name
+from member
+where party_id = 1
+
+15. Show member names who are not in party with id 2.
+
+select member_name
+from member
+where party_id != 2
+
+
+16. How many party events do we have?
+
+select count(*)
+from party_events
+
+17. Show party names and the number of events for each party.
+
+select T2.party_name, count(*)
+from party_events as T1 join party as T2 on T1.party_id = T2.party_id
+group by T1.party_id
+
+18. Show all member names who are not in charge of any event.
+
+select member_name
+from member
+EXCEPT
+select T1.member_name
+from member as T1 join party_events as T2 on T1.member_id = T2.member_in_charge_id
+
+19. What is the name of parties with at least 2 events?
+
+select T2.party_name
+from party_events as T1 join party as T2 on T1.party_id = T2.party_id
+group by T1.party_id
+having count(*) >= 2
+
+20. What is the name of member in charge of most number of events?
+
+select T1.member_name
+from member as T1 join party_events as T2 on T1.member_id = T2.member_in_charge_id
+group by T2.member_in_charge_id
+order by count(*) desc
+limit 1
