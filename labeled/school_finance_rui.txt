@@ -1,0 +1,134 @@
+1. How many schools?
+
+select count(*)
+from school
+
+2. Show all school names in an alphabetical order.
+
+select school_name
+from school
+order by school_name
+
+3. List name, location, mascot for all schools.
+
+select school_name, location, mascot
+from school
+
+4. What is the total and average enrollment of all schools?
+
+select sum(enrollment), avg(enrollment)
+from school
+
+5. What are the mascots for schools with enrollments above the average?
+
+select mascot
+from school
+where enrollment > (select avg(enrollment) from school)
+
+6. List the school name with smallest enrollment.
+
+select school_name
+from school
+order by enrollment
+limit 1
+
+7. Show average, maximum, minimum enrollment of all schools.
+
+select avg(enrollment), max(enrollment), min(enrollment)
+from school
+
+8. Show all county and the number of school and total enrollment in each county.
+
+select county, count(*), sum(enrollment)
+from school
+group by county
+
+8. How many donors have endowment for school Glenn?
+
+select count(distinct T1.donator_name)
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = "Glenn"
+
+9. List all donator names and the amount of endowment in descending order of the amount of endowment
+
+select donator_name, sum(amount)
+from endowment
+group by donator_name
+order by sum(amount) desc
+
+10. List all school names without any endowment.
+
+select school_name
+from school
+where school_id NOT IN (select school_id from endowment)
+
+11. List all school names with an endowment amount smaller than or equal to 10.
+
+select T2.school_name
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+group by T1.school_id
+having sum(T1.amount) <= 10
+
+
+12. Show all donor names with donation to both school Glenn and Triton.
+
+select T1.donator_name
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = 'Glenn'
+INTERSECT
+select T1.donator_name
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = 'Triton'
+
+13. Show all donor names except those having an donation amount less than 9.
+
+select donator_name
+from endowment
+except
+select donator_name
+from endowment
+where amount < 9
+
+14. List the amount and donor name for the largest amount of dontation
+
+select amount, donator_name
+from endowment
+order by amount desc
+limit 1
+
+15. How many budget are above 3000 in year 2001 or before?
+
+select count(*)
+from budget
+where budgeted > 3000 AND year <= 2001
+
+16. Show all school names, budgeted amount, and invested amount in year 2002 or after.
+
+select T2.school_name, T1.budgeted, T1.invested
+from budget as T1 join school as T2 on T1.school_id = T2.school_id
+where T1.year >= 2002
+
+
+17. Show all donor names.
+
+select distinct donator_name
+from endowment
+
+18. How many budget record has a budget amount smaller than the invested amount.
+
+select count(*)
+from budget
+where budgeted < invested
+
+19. What is the total budget amount for school Glenn in all years.
+
+select sum(T1.budgeted)
+from budget as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = 'Glenn'
+
+20. Show all school names with a total budget amount greater than 100 or a total endowment greater than 10.
+
+select T2.school_name
+from budget as T1 join school as T2 on T1.school_id = T2.school_id join endowment as T3 on T2.school_id = T3.school_id
+group by T2.school_name
+having sum(T1.budgeted) > 100 OR sum(T3.amount) > 10
