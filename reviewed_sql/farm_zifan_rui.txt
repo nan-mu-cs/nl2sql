@@ -65,7 +65,7 @@ ON T1.City_ID = T2.Host_city_ID
 group by T2.Host_city_ID
 Having COUNT(*) > 1
 
-12. Show the status of the city that have host the most number of competitions.
+12. Show the status of the city that has hosted the most number of competitions.
 
 SELECT T1.Status
 FROM city as T1 join farm_competition as T2 
