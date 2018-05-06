@@ -1,0 +1,147 @@
+1. List every individual's first name, middle name and last name in alphabetical order of the last name.
+
+select individual_first_name, individual_middle_name, individual_last_name
+from individuals
+order by individual_last_name
+
+2. List all the types of forms.
+
+select distinct form_type_code
+from forms
+
+3. Find the name of the most popular party form.
+
+select t1.form_name
+from forms as t1 join party_forms as t2
+on t1.form_id = t2.form_id
+group by t2.form_id
+order by count(*) desc
+limit 1
+
+4. Find the payment method and phone of the party with email "enrico09@example.com"
+
+select payment_method_code, party_phone
+from parties
+where party_email = "enrico09@example.com"
+
+5. Find the email of parties with the most popular party form.
+
+select t1.party_email
+from parties as t1 join party_forms as t2
+on t1.party_id = t2.party_id
+where t2.form_id = (select form_id
+from party_forms
+group by form_id
+order by count(*) desc
+limit 1)
+
+6. List all the name of organizations in order of the date formed.
+
+select organization_name
+from organizations
+order by date_formed asc
+
+7. Find the name of the youngest organization.
+
+select organization_name
+from organizations
+order by date_formed desc
+limit 1
+
+8. Find the last name of the latest contact individual of the organization "Labour Party".
+
+select t3.individual_last_name
+from organizations as t1 join organization_contact_individuals as t2
+on t1.organization_id = t2.organization_id
+join individuals as t3
+on t2.individual_id = t3.individual_id
+where t1.organization_name = "Labour Party"
+order by t2.date_contact_to desc
+limit 1
+
+9. Find the last name of the first ever contact person of the organization with the highest UK Vat number.
+
+select t3.individual_last_name
+from organizations as t1 join organization_contact_individuals as t2
+on t1.organization_id = t2.organization_id
+join individuals as t3
+on t2.individual_id = t3.individual_id
+where t1.uk_vat_number = (select max(uk_vat_number) from organizations)
+order by t2.date_contact_to asc
+limit 1
+
+10. How many services are there?
+
+select count(*)
+from services
+
+11. Find name of the services that has never been used.
+
+select service_name
+from services
+except
+select t1.service_name
+from services as t1 join party_services as t2
+on t1.service_id = t2.service_id
+
+12. Find the name of all the cities and states.
+
+select town_city
+from addresses
+union
+select state_province_county
+from addresses
+
+13. How many cities are there in state "Colorado"?
+
+select count(*)
+from addresses
+where state_province_county = "Colorado"
+
+14. Find the payment method code used by more than 3 parties.
+
+select payment_method_code
+from parties
+group by payment_method_code
+having count(*) > 3
+
+15. Find the name of organizations whose names contain "Party".
+
+select organization_name
+from organizations
+where organization_name like "%Party%"
+
+16. How many distinct payment methods are used by parties?
+
+select count(distinct payment_method_code)
+from parties
+
+17. Which is the email of the party that has used the services the most number of times?
+
+select t1.party_email
+from parties as t1 join party_services as t2
+on t1.party_id = t2.customer_id
+group by t1.party_email
+order by count(*) desc
+limit 1
+
+18. Which state can address "6862 Kaitlyn Knolls" possibly be in?
+
+select state_province_county
+from addresses
+where line_1_number_building like "%6862 Kaitlyn Knolls%"
+
+19. What is the name of organization that has the most number of contact individuals?
+
+select t1.organization_name
+from organizations as t1 join organization_contact_individuals as t2
+on t1.organization_id = t2.organization_id
+group by t1.organization_name
+order by count(*) desc
+limit 1
+
+20. Find the last name of the individuals that have been contact individuals of an organization.
+
+select distinct t1.individual_last_name
+from individuals as t1 join organization_contact_individuals as t2
+on t1.individual_id = t2.individual_id

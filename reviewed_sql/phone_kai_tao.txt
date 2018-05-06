@@ -1,0 +1,182 @@
+Total # = 27
+
+1.List model name that launched between 2002 and 2004.
+
+SELECT Model_name
+FROM chip_model
+WHERE Launch_year between 2002 and 2004;
+
+2. Which Model has least amount of RAM? List the Model name and the amount of RAM.
+
+SELECT Model_name, RAM_MiB
+FROM chip_model
+ORDER BY RAM_MiB ASC
+LIMIT 1;
+
+3. What is the chip model and screen mode of phone with hardware model name "LG-P760"?
+
+SELECT chip_model, screen_mode
+FROM phone
+WHERE Hardware_Model_name="LG-P760";
+
+4. How many phone hardware model produced by company name "Nokia Corporation"?
+
+SELECT count(*)
+FROM phone
+WHERE Company_name="Nokia Corporation";
+
+5. What is maximum and minimum RAM size of phone produced by company named "Nokia Corporation"?
+
+SELECT max(T1.RAM_MiB), min(T1.RAM_MiB)
+FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name = T2.chip_model
+WHERE T2.Company_name="Nokia Corporation";
+
+6. What is average ROM size of phone produced by company named "Nokia Corporation"?
+
+SELECT avg(T1.ROM_MiB)
+FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name = T2.chip_model
+WHERE T2.Company_name="Nokia Corporation";
+
+7. List the hardware model name and company name of all phone launch at 2002 or has RAM size greater than 32.
+
+SELECT T2.Hardware_Model_name, T2.Company_name
+FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name = T2.chip_model
+WHERE T1.Launch_year=2002 OR T1.RAM_MiB > 32;
+
+8. List all phones that have word 'Full' in their accreditation types. List Hardware Model name and Company name.
+
+SELECT Hardware_Model_name, Company_name
+FROM phone
+WHERE Accreditation_type LIKE 'Full';
+
+
+9. What is the Char cells, Pixels and Hardware colours of the screen of the phone with hardware model named "LG-P760"?
+
+SELECT T1.Char_cells, T1.Pixels, T1.Hardware_colours
+FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode=T2.screen_mode
+WHERE T2.Hardware_Model_name="LG-P760";
+
+10. List the hardware model name and company name of phone with screen mode type is Graphics.
+
+SELECT T2.Hardware_Model_name, T2.Company_name
+FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode=T2.screen_mode
+WHERE T1.Type = "Graphics";
+
+11.List the company name and has least number of phone models. List the company name and the number of phone model produced by that company.
+
+SELECT Company_name, count(*)
+FROM phone
+GROUP BY Company_name
+ORDER BY count(*) ASC
+LIMIT 1;
+
+12. List the company name that produced more than one phone model.
+
+SELECT Company_name
+FROM phone
+GROUP BY Company_name
+HAVING count(*) > 1;
+
+13. List the maximum, minimum and average number of used kb in screen mode.
+
+SELECT max(used_kb),min(used_kb),avg(used_kb)
+FROM screen_mode;
+
+14. List the phone model name which launched at 2002 and with highest RAM size.
+
+SELECT T2.Hardware_Model_name
+FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name = T2.chip_model
+WHERE T1.Launch_year=2002
+ORDER BY T1.RAM_MiB DESC
+LIMIT 1;
+
+15. What is the wifi and screen mode type of hardware model named "LG-P760"?
+
+SELECT T1.WiFi,T3.Type
+FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name = T2.chip_model JOIN screen_mode AS T3 ON T2.screen_mode=T3.Graphics_mode
+WHERE T2.Hardware_Model_name="LG-P760";
+
+16. List all phone's hardware model name, where the phone has screen mode type Text or RAM size greater than 32.
+
+SELECT T2.Hardware_Model_name
+FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name = T2.chip_model JOIN screen_mode AS T3 ON T2.screen_mode=T3.Graphics_mode
+WHERE T3.Type="Text" or T1.RAM_MiB > 32;
+
+17. List all phone's hardware model name where the phone was produced by "Nokia Corporation" or the phone's screen mode type is Graphics.
+
+SELECT DISTINCT T2.Hardware_Model_name
+FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode=T2.screen_mode
+WHERE T1.Type = "Graphics" or t2.Company_name = "Nokia Corporation"
+
+18. List all phone's hardware model name where the phone was produced by "Nokia Corporation" and the phone's screen mode type is Graphics.
+
+SELECT DISTINCT T2.Hardware_Model_name
+FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode=T2.screen_mode
+WHERE T1.Type = "Graphics" and T2.Company_name = "Nokia Corporation";
+
+19. List all phone's hardware model name where the phone was produced by "Nokia Corporation" except the phone's screen mode type is Text.
+
+SELECT DISTINCT T2.Hardware_Model_name
+FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode=T2.screen_mode
+WHERE t2.Company_name = "Nokia Corporation" and T1.Type != "Text";
+
+20. List the phone hardware model and company name where the phone's screen used size is between 10 and 15.
+
+SELECT DISTINCT T2.Hardware_Model_name,T2.Company_name
+FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode=T2.screen_mode
+WHERE T1.used_kb BETWEEN 10 AND 15;
+
+21. find the number of phones in each accreditation type.
+
+select Accreditation_type, count(*)
+from phone
+group by Accreditation_type
+
+22. find the accreditation level which more than 3 phones use.
+
+select Accreditation_level
+from phone
+group by Accreditation_level
+having count(*) > 3
+
+23. find all details of all chip models.
+
+select *
+from chip_model
+
+24. how many models do not have the wifi function?
+
+select count(*)
+from chip_model
+where wifi = 'No'
+
+25. list all model names sorted by their lanuch year.
+
+select model_name
+from chip_model
+order by launch_year
+
+26. find the average ram mib size of the chip models that are never used by any phone.
+
+select avg(RAM_MiB)
+from chip_model
+where model_name not in (select chip_model from phone)
+
+27. find the name of the chip models that are not used by any phone with full accreditation type.
+
+select model_name
+from chip_model
+except
+select chip_model
+from phone
+where Accreditation_type = 'Full'
+
+27. find the pixels of the screen modes that are used by both phones with full and with Provisional accreditation types.
+
+select t1.pixels
+from screen_mode as t1 join phone as t2 on t1.Graphics_mode = t2.screen_mode
+where t2.Accreditation_type = 'Provisional'
+intersect
+select t1.pixels
+from screen_mode as t1 join phone as t2 on t1.Graphics_mode = t2.screen_mode
+where t2.Accreditation_type = 'Full'

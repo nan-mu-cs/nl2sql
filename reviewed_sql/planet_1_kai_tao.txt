@@ -1,0 +1,470 @@
+Total = #36
+
+1.Who receieved the heaviest package?
+P: What is the name of the client who received the heaviest package?
+
+SELECT T2.Name 
+FROM Package AS T1 JOIN Client AS T2 ON T1.Recipient = T2.AccountNumber
+ORDER BY T1.Weight desc
+limit 1
+
+S:
+S:
+S:
+
+2.What is the total weight of all the packages that customer Leo Wong sent?
+P: What is the total weight for all packages that Leo Wong sent?
+
+SELECT sum(T1.Weight)
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
+WHERE T2.Name = "Leo Wong";
+
+S:
+S:
+S:
+
+
+3.What is the position of Amy Wong?
+P: What position does Amy Wong have?
+
+SELECT Position
+FROM Employee
+WHERE Name = "Amy Wong";
+
+S:
+S:
+S:
+
+
+4.What is Turanga Leela's salary and position?
+P: What is the salary and position of the employee named Turanga Leela?
+
+SELECT Salary, Position
+FROM Employee
+WHERE Name = "Turanga Leela";
+
+S:
+S:
+S:
+
+
+5. What is the average salary of all intern jobs?
+P: What is the average salary of an intern?
+
+SELECT avg(Salary)
+FROM Employee
+WHERE Position = "Intern";
+
+S:
+S:
+S:
+
+6. What level is Physician?
+P: What is the clearance level of a physician?
+
+SELECT T1.Level
+FROM Has_Clearance AS T1 JOIN Employee AS T2 ON T1.Employee=T2.EmployeeID
+WHERE T2.position = "Physician";
+
+S:
+S:
+S:
+
+
+7.List Package Number of all package sent by Leo Wong?
+P: What is the number of all packages that Leo Wong sent?
+
+SELECT T1.PackageNumber
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
+WHERE T2.Name = "Leo Wong";
+
+S:
+S:
+S:
+
+
+8.List all package received by Leo Wong?
+P: What are all of the package numbers received by Leo Wong?
+
+SELECT T1.PackageNumber
+FROM Package AS T1 JOIN Client AS T2 ON T1.Recipient = T2.AccountNumber
+WHERE T2.Name="Leo Wong";
+
+S:
+S:
+S:
+
+
+9. List all package sent or received by Leo Wong.
+P: What are all the different package numbers that Leo Wong sent or received?
+
+SELECT Distinct T1.PackageNumber
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber or T1.Recipient = T2.AccountNumber
+WHERE T2.Name="Leo Wong"
+
+S:
+S:
+S:
+
+
+10.Count the number of packages sent by Ogden Wernstrom and received by Leo Wong.
+P: How many packages sent by Ogden Wernstrom and received by Leo Wong?
+
+SELECT T1.PackageNumber
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
+WHERE T2.Name="Ogden Wernstrom"
+INTERSECT
+SELECT T1.PackageNumber
+FROM Package AS T1 JOIN Client AS T2 ON T1.Recipient = T2.AccountNumber
+WHERE T2.Name="Leo Wong"
+
+11. What are the contents of package sent by John Zoidfarb?
+P: What are the package contents of all those sent by John Zoidfarb?
+
+SELECT T1.Contents
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
+WHERE T2.Name = "John Zoidfarb";
+
+S:
+S:
+S:
+
+
+12. What is the heaviest package sent by the clients which 'John' is part of their name? List package number and weight.
+P: What is the package number and weight of the heaviest package that was sent by a client named John or something similar?
+
+SELECT T1.PackageNumber, max(T1.Weight)
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
+WHERE T2.Name LIKE "John";
+
+S:
+S:
+S:
+
+
+13. List package number and weight of top 3 lightest packages.
+P: What is the package number and weight of the 3 lightest packages?
+
+SELECT PackageNumber, Weight
+FROM Package
+ORDER BY Weight ASC
+Limit 3;
+
+S:
+S:
+S:
+
+
+14.Who sent most number of packages? List client name and number of packages sent by that client.
+P: What is the name of the client who sent the most packages and how many were there?
+
+SELECT T2.Name, count(*)
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
+GROUP BY T1.Sender
+ORDER BY count(*) desc
+Limit 1;
+
+S:
+S:
+S:
+
+
+15. Who received least number of packages? List client name and number of packages received by that client.
+P: What is the smallest number of packages received and by whom? 
+
+SELECT T2.Name, count(*)
+FROM Package AS T1 JOIN Client AS T2 ON T1.Recipient = T2.AccountNumber
+GROUP BY T1.Sender
+ORDER BY count(*)
+Limit 1;
+
+S:
+S:
+S:
+
+
+16. Who sent more than one packages? List the client's name.
+P: What is the name of all clients who sent more than one package?
+
+SELECT T2.Name, count(*)
+FROM Package AS T1 JOIN Client AS T2 ON T1.Sender = T2.AccountNumber
+GROUP BY T1.Sender
+HAVING count(*) > 1;
+
+S:
+S:
+S:
+
+
+17. What are the Coordinates of planet Mars?
+P: What are the coordinates of the planet named Mars?
+
+SELECT Coordinates
+FROM Planet
+WHERE Name = "Mars"; 
+
+S:
+S:
+S:
+
+
+18. List all Planets' names and coordinates in alphabetical order of name.
+P: What are the names and coordinates of all planets in alphabetical order by name?
+
+SELECT Name, Coordinates
+FROM Planet
+ORDER BY Name
+
+S:
+S:
+S:
+
+
+19. List all shipment id under Phillip J. Fry's management.
+P: What are the shipment IDs of every delivery managed by Phillip J Fry?
+
+SELECT T1.ShipmentID
+FROM Shipment AS T1 JOIN Employee AS T2 ON T1.Manager=T2.EmployeeID
+WHERE T2.Name="Phillip J. Fry";
+
+S:
+S:
+S:
+
+
+20. List the dates of all shipments.
+P: What are the dates of every shipment in the database?
+
+
+SELECT Date
+FROM Shipment;
+
+S:
+S:
+S:
+
+
+21. List all shipment ids for the planet Mars. 
+P: What are the shipment ids for the planet Mars?
+
+SELECT T1.ShipmentID
+FROM Shipment AS T1 JOIN Planet AS T2 ON T1.Planet=T2.PlanetID
+WHERE T2.Name = "Mars";
+
+S:
+S:
+S:
+
+
+22. List all shipment ids for the planet Mars and under the management of Turanga Leela.
+P: What are the ids of all shipments on the planet Mars that are managed by Turanga Leela?
+
+SELECT T1.ShipmentID
+FROM Shipment AS T1 JOIN Planet AS T2 ON T1.Planet=T2.PlanetID JOIN Employee as T3 on T3.EmployeeID=T1.Manager
+WHERE T2.Name="Mars" AND T3.Name="Turanga Leela";
+
+S:
+S:
+S:
+
+
+23. List all shipment ids on the planet Mars or under the management of Turanga Leela.
+P: What are the ids for all shipments on the planet Mars that Turanga Leela manages?
+
+SELECT T1.ShipmentID
+FROM Shipment AS T1 JOIN Planet AS T2 ON T1.Planet=T2.PlanetID JOIN Employee as T3 on T3.EmployeeID=T1.Manager
+WHERE T2.Name="Mars" OR T3.Name="Turanga Leela";
+
+S:
+S:
+S:
+
+
+24. What is the total shipments in each planet? List the planet name and total shipments.
+P: How many shipments take place on each planet?
+
+SELECT T2.Name, count(*)
+FROM Shipment AS T1 JOIN Planet AS T2 ON T1.Planet=T2.PlanetID
+GROUP BY T1.Planet;
+
+S:
+S:
+S:
+
+
+25. Which planet has most shipments? List the planet name.
+P: What is the name of the planet with the most shipments?
+
+SELECT T2.Name
+FROM Shipment AS T1 JOIN Planet AS T2 ON T1.Planet=T2.PlanetID
+GROUP BY T1.Planet
+ORDER BY count(*) DESC
+LIMIT 1;
+
+
+S:
+S:
+S:
+
+26. List the manger's name and number of shipments under his management.
+P: What are the number of shipments managed and names of each manager?
+
+SELECT T2.Name, count(*)
+FROM Shipment AS T1 JOIN Employee AS T2 ON T1.Manager=T2.EmployeeID
+GROUP BY T1.Manager;
+
+S:
+S:
+S:
+
+
+27. Calculate total weight of package shipped on Mars.
+P: what is the total weight of all packages shipped on Mars?
+
+SELECT sum(T1.Weight)
+FROM Package AS T1 JOIN Shipment AS T2 ON T1.Shipment=T2.ShipmentID JOIN Planet AS T3 ON T2.Planet=T3.PlanetID
+WHERE T3.Name="Mars";
+
+S:
+S:
+S:
+
+
+28.Calculate total weight of package shipped in each planet.
+P: what is the total package weight for each planet?
+
+SELECT T3.Name, sum(T1.Weight)
+FROM Package AS T1 JOIN Shipment AS T2 ON T1.Shipment=T2.ShipmentID JOIN Planet AS T3 ON T2.Planet=T3.PlanetID
+GROUP BY T2.Planet;
+
+S:
+S:
+S: 
+
+29. Which planet has total weight of shipment greater than 30? List planet name.
+P: What are the names of all planets tjat have a total shipment weight greater than 30?
+
+SELECT T3.Name
+FROM Package AS T1 JOIN Shipment AS T2 ON T1.Shipment=T2.ShipmentID JOIN Planet AS T3 ON T2.Planet=T3.PlanetID
+GROUP BY T2.Planet
+HAVING sum(T1.Weight) > 30;
+
+S:
+S:
+S: 
+
+30. List package number of package shipped in planet Omicron Persei 8 and sent by Zapp Brannigan.
+P: What are the number of packages sent by Zapp Brannigan and shipped on the Omicron Persei 8?
+
+SELECT T1.PackageNumber
+FROM Package AS T1 JOIN Client AS T2 ON  T1.Sender=T2.AccountNumber JOIN Shipment AS T3 ON T1.Shipment=T3.ShipmentID JOIN Planet AS T4 ON T3.Planet=T4.PlanetID
+WHERE T2.Name="Zapp Brannigan" AND T4.Name="Omicron Persei 8";
+
+S:
+S:
+S: 
+
+31. List package number of packages shipped in Omicron Persei 8 planet or sent by Zapp Brannigan.
+P: What are the number of packages shipped on Omicron Persei 8 planet or sent by Zapp Brannigan?
+
+SELECT T1.PackageNumber
+FROM Package AS T1 JOIN Client AS T2 ON  T1.Sender=T2.AccountNumber JOIN Shipment AS T3 ON T1.Shipment=T3.ShipmentID JOIN Planet AS T4 ON T3.Planet=T4.PlanetID
+WHERE T2.Name = "Zapp Brannigan" OR T4.Name = "Omicron Persei 8";
+
+S:
+S:
+S: 
+
+32. Which packages have weight between 10 and 30? List the package number and weight.
+P: What are the package numbers and weights that are between 10 and 30?
+
+SELECT PackageNumber, Weight
+FROM Package
+WHERE Weight between 10 and 30;
+
+S:
+S:
+S: 
+
+
+33.Which employees do not have clearance in Mars? List employee's name.
+P: What are the names of all employees who don't have clearance on Mars?
+
+SELECT Name
+FROM Employee
+EXCEPT
+SELECT T2.Name
+FROM Has_Clearance AS T1 JOIN Employee AS T2 ON T1.Employee=T2.EmployeeID JOIN Planet AS T3 ON T1.Planet=T3.PlanetID
+WHERE T3.Name="Mars";
+
+
+S:
+S:
+S: 
+
+
+34. Which employees have clearance in Omega III? List employees' name.
+P: What are the names of all employees with clearance on Omega III?
+
+SELECT T2.Name
+FROM Has_Clearance AS T1 JOIN Employee AS T2 ON T1.Employee=T2.EmployeeID JOIN Planet AS T3 ON T1.Planet=T3.PlanetID
+WHERE T3.Name = "Omega III";
+
+S:
+S:
+S: 
+
+35. Which planets that have exact one employee has clearance? List planets' name.
+P: What are the names of all planets with one employee that has clearance?
+
+SELECT T3.Name
+FROM Has_Clearance AS T1 JOIN Employee AS T2 ON T1.Employee=T2.EmployeeID JOIN Planet AS T3 ON T1.Planet=T3.PlanetID
+GROUP BY T1.Planet
+HAVING count(*) = 1;
+
+S:
+S:
+S: 
+
+
+36.Which employees have salaries between 5000 and 10000? List employees' name.
+P: What are the employees's names for those that have salaries between 5000 and 10000?
+
+SELECT Name
+FROM Employee
+WHERE Salary between 5000 and 10000
+
+S:
+S:
+S: 
+
+
+37. Find the name of employees whose salary is above the average salary or more than 5000.
+P: What are the names of all employees who have a salary greater than average or more than 5000?
+
+SELECT Name
+FROM Employee
+WHERE Salary > 5000 or Salary > (select avg(salary) from employee)
+
+
+S:
+S:
+S: 
+
+
+38. Find the number of employees who do not have clearance in Mars.
+P: What is the number of employees that do not have clearance on Mars?
+
+SELECT count(*)
+FROM Employee
+WHERE Name not in (
+SELECT T2.Name
+FROM Has_Clearance AS T1 JOIN Employee AS T2 ON T1.Employee=T2.EmployeeID JOIN Planet AS T3 ON T1.Planet=T3.PlanetID
+WHERE T3.Name="Mars"
+);
+
+
+S:
+S:
+S: 
+
