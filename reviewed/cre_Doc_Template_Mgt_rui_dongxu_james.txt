@@ -1,7 +1,7 @@
 Total = # 42
 
 
-1. Home many documents do we have?
+1. How many documents do we have?
 P: Count the number of documents.
 
 select count(*)
