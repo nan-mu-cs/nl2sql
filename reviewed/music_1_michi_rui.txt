@@ -14,8 +14,8 @@ from song
 order by releasedate desc
 limit 1
 
-2. What is the f_id of the longest song?
-P: Find the f_id of the song that lasts the longest.
+2. What is the id of the longest song?
+P: Find the id of the song that lasts the longest.
 
 S:
 S:
@@ -41,8 +41,8 @@ S:
 
 
 
-4. What are the f_id of songs whose format is mp3.
-P: What are the f_id of all the files in mp3 format?
+4. What are the id of songs whose format is mp3.
+P: What are the id of all the files in mp3 format?
 
 Select f_id
 From files
@@ -179,8 +179,8 @@ S:
 S:
 
 
-14. Find the f_id of songs that are available in mp4 format and have resolution lower than 1000.
-P: What is the f_id of the files that are available in the format of mp4 and a resolution smaller than 1000?
+14. Find the id of songs that are available in mp4 format and have resolution lower than 1000.
+P: What is the id of the files that are available in the format of mp4 and a resolution smaller than 1000?
 
 Select f_id
 From files
@@ -346,8 +346,8 @@ S:
 S:
 S:
 
-26. What are the f_ids of songs that are available in either mp4 format or have resolution above 720?
-P: What are the f_ids of all songs that are available on mp4 or have a higher resolution than 720?
+26. What are the ids of songs that are available in either mp4 format or have resolution above 720?
+P: What are the ids of all songs that are available on mp4 or have a higher resolution than 720?
 
 Select f_id
 From files
@@ -601,8 +601,8 @@ S:
 
 
 
-43. What is f_ids of the songs whose resolution is higher than the resolution of any songs with rating lower than 8?
-P: What is the f_id of every song that has a resolution higher than that of a song with a rating below 8?
+43. What is ids of the songs whose resolution is higher than the resolution of any songs with rating lower than 8?
+P: What is the id of every song that has a resolution higher than that of a song with a rating below 8?
 
 Select f_id
 From song
@@ -617,8 +617,8 @@ S:
 
 
 
-44. What is f_ids of the songs whose resolution is twice higher than the average resolution of songs in modern genre?
-P: What are the f_ids of all songs that have twice the resolution of the average resolution in the modern genre?
+44. What is ids of the songs whose resolution is twice higher than the average resolution of songs in modern genre?
+P: What are the ids of all songs that have twice the resolution of the average resolution in the modern genre?
 
 Select f_id
 From song
@@ -649,8 +649,8 @@ S:
 S:
 
 
-46. List the f_id, genre and artist name of English songs ordered by rating.
-P: What is the f_id, genre, and name of the artist for every English song ordered by ascending rating?
+46. List the id, genre and artist name of English songs ordered by rating.
+P: What is the id, genre, and name of the artist for every English song ordered by ascending rating?
 
 Select f_id, genre_is, artist_name
 From song
