@@ -1,0 +1,181 @@
+1. Find the name and access counts of all documents, in alphabetic order of the document name.
+
+select document_name, access_count
+from documents
+order by document_name
+
+2. Find the name of the documents that has been accessed the most number of times.
+
+select document_name, access_count
+from documents
+where access_count = (select max(access_count)
+from documents)
+
+3. Find the type of documents with more than 4 documents.
+
+select document_type_code
+from documents
+group by document_type_code
+having count(*) > 4
+
+4. Find the total access count of all documents in the most popular document type.
+
+select sum(access_count)
+from documents
+where document_type_code = (select document_type_code
+from documents
+group by document_type_code
+order by count(*) desc
+limit 1)
+
+5. What is the average access count of documents?
+
+select avg(access_count)
+from documents
+
+6. What is the structure of the document with the least number of accesses?
+
+select t2.document_structure_description
+from documents as t1 join document_structures as t2
+on t1.document_structure_code = t2.document_structure_code
+group by t1.document_structure_code
+order by count(*) desc
+limit 1
+
+7. What is the type of the document named "David CV"
+
+select document_type_code
+from documents
+where document_name = "David CV"
+
+8. Find the list of documents that are both in the most popular type and have the most popular structure.
+
+select document_name
+from documents
+where document_type_code = (select document_type_code
+from documents
+group by document_type_code
+order by count(*) desc
+limit 1)
+intersect
+select document_name
+from documents
+where document_structure_code = (select document_structure_code
+from documents
+group by document_structure_code
+order by count(*) desc
+limit 1)
+
+9. Find the list of documents that are either in the most popular type or have the most popular structure.
+
+select document_name
+from documents
+where document_type_code = (select document_type_code
+from documents
+group by document_type_code
+order by count(*) desc
+limit 1)
+union
+select document_name
+from documents
+where document_structure_code = (select document_structure_code
+from documents
+group by document_structure_code
+order by count(*) desc
+limit 1)
+
+10. What are all the section titles of the document named "David CV"
+
+select t2.section_title
+from documents as t1 join document_sections as t2
+on t1.document_code = t2.document_code
+where t1.document_name = "David CV"
+
+11. Find all the name of documents without any sections.
+
+select document_name
+from documents
+except
+select t1.document_name
+from documents as t1 join document_sections as t2
+on t1.document_code = t2.document_code
+
+12. List all the username and passwords of users with the most popular role.
+
+select user_name, password
+from users
+where role_code = (select role_code
+from users
+group by role_code
+order by count(*) desc
+limit 1)
+
+13. Find the average access count of documents with functional area "Acknowledgement".
+
+select avg(t1.access_count)
+from documents as t1
+join document_functional_areas as t2
+on t1.document_code = t2.document_code
+join functional_areas as t3
+on t2.functional_area_code = t3.functional_area_code
+where t3.functional_area_description = "Acknowledgement"
+
+14. Find name of the document without any images.
+
+select document_name
+from documents
+except
+select t1.document_name
+from documents as t1 join document_sections as t2
+on t1.document_code = t2.document_code
+join document_sections_images as t3
+on t2.section_id = t3.section_id
+
+15. What is the name of the document with the most number of sections?
+
+select document_name
+from documents
+where document_code = (select t1.document_code
+from documents as t1 join document_sections as t2
+on t1.document_code = t2.document_code
+group by t1.document_code
+order by count(*) desc
+limit 1)
+
+16. List all the document names which contains "CV".
+
+select document_name
+from documents
+where document_name like "%CV%"
+
+17. How many users are logged in?
+
+select count(*)
+from users
+where user_login == 1
+
+18. Find the description of the most popular role among the users that have logged in.
+
+select role_description
+from roles
+where role_code = (select role_code
+from users
+where user_login = 1
+group by role_code
+order by count(*) desc
+limit 1)
+
+19. Find the average access count of documents with the least popular structure.
+
+select avg(access_count)
+from documents
+where document_structure_code = (select document_structure_code
+from documents
+group by document_structure_code
+order by count(*) asc
+limit 1)
+
+20. List all the image name and URLs.
+
+select image_name, image_url
+from images
