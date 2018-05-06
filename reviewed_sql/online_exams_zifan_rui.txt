@@ -41,7 +41,7 @@ Where Comments = "Normal"
 SELECT count(distinct Comments)
 FROM Student_Answers
 
-8. List all student answer texts in descending order of count
+8. List all student answer texts in descending order of count.
 
 SELECT Student_Answer_Text
 FROM Student_Answers
@@ -68,7 +68,7 @@ FROM Student_Assessments
 group by Assessment
 order by COUNT(*) ASC limit 1
 
-12. Please show the first names of student that have at least two answer records.
+12. Please show the first names of students that have at least two answer records.
 
 SELECT T2.First_Name
 FROM Student_Answers as T1 join Students as T2 
@@ -101,7 +101,7 @@ SELECT Last_Name
 FROM Students
 Where Gender_MFU = "F" or Gender_MFU = "M"
 
-17. List the first names of students that do not have any answers.
+17. List the first names of students who do not have any answers.
 
 SELECT First_Name
 from Students
