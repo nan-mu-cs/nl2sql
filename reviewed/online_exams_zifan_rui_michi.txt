@@ -1,0 +1,248 @@
+1. How many exams are there?
+P: Count the number of exams.
+
+SELECT count(*)
+FROM Exams
+
+S:
+S:
+S:
+
+
+2. List the distinct subject code of exams in ascending alphabetical order.
+P: Give me an alphabetically ordered list of the distinct subject code for exams.
+
+SELECT distinct Subject_Code
+FROM Exams
+order by Subject_Code
+
+S:
+S:
+S:
+
+
+3. What are the names and dates of the exams with subject code that is not "Database"?
+P: Find the exams whose subject code is not "Database". What are the exam dates and exam names?
+
+SELECT Exam_Date, Exam_Name
+FROM Exams
+where Subject_Code != 'Database'
+
+S:
+S:
+S:
+
+
+4. List the dates of the exams with subject code containing the word "data", in descending order of dates.
+P: What are the dates of the exams whose subject code contains the substring "data"? Return them in descending order of dates.
+
+SELECT Exam_Date
+FROM Exams
+Where Subject_Code LIKE '%data%'
+order by Exam_Date DESC
+
+S:
+S:
+S:
+
+
+5. What are the type of questions and their counts?
+P: For each question type, return its type code and its count of occurrence.
+
+SELECT Type_of_Question_Code, COUNT(*)
+FROM Questions
+group by Type_of_Question_Code
+
+S:
+S:
+S:
+
+
+6. What are the distinct student answer texts that received comments "Normal"?
+P: List all the distinct student answer texts to which comments "Normal" were given?
+
+SELECT distinct Student_Answer_Text
+FROM Student_Answers
+Where Comments = "Normal"
+
+S:
+S:
+S:
+
+
+7. How many different comments are there for student answers?
+P: Count the number of different comments for student answers.
+
+SELECT count(distinct Comments)
+FROM Student_Answers
+
+S:
+S:
+S:
+
+
+8. List all the student answer texts in descending order of count.
+P: Sort the student answer texts in descending order of their frequency of occurrence.
+
+SELECT Student_Answer_Text
+FROM Student_Answers
+group by Student_Answer_Text
+order by COUNT(*) DESC
+
+S:
+S:
+S:
+
+
+9. Please show the first names of students and the dates of their answers.
+P: For each student answer, find the first name of the student and the date of the answer.
+
+SELECT T2.First_Name, T1.Date_of_Answer
+FROM Student_Answers as T1 join Students as T2
+ON T1.Student_ID = T2.Student_ID
+
+S:
+S:
+S:
+
+
+10. Please show the email addresses of students and the dates of their answers in descending order of dates.
+P: For each student answer, find the email address of the student and the date of the answer. Sort them in descending order of dates.
+
+SELECT T2.Email_Adress, T1.Date_of_Answer
+FROM Student_Answers as T1 join Students as T2
+ON T1.Student_ID = T2.Student_ID
+order by T1.Date_of_Answer DESC
+
+S:
+S:
+S:
+
+
+11. Please show the least common assessment for students.
+P: Which assessment has the smallest frequency count?
+
+SELECT Assessment
+FROM Student_Assessments
+group by Assessment
+order by COUNT(*) ASC limit 1
+
+S:
+S:
+S:
+
+
+12. Please show the first names of the students that have at least two answer records.
+P: Which students have 2 or more answer records? Give me their first names.
+
+SELECT T2.First_Name
+FROM Student_Answers as T1 join Students as T2
+ON T1.Student_ID = T2.Student_ID
+group by T1.Student_ID
+Having COUNT(*) >= 2
+
+S:
+S:
+S:
+
+
+13. What is the most common valid answer text?
+P: Find the valid answer text that appeared most frequently.
+
+SELECT Valid_Answer_Text
+FROM Valid_Answers
+group by Valid_Answer_Text
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+14. List the last names of the students whose gender is not "M".
+P: What are the last names of the students with gender other than "M"?
+
+SELECT Last_Name
+FROM Students
+Where Gender_MFU != "M"
+
+S:
+S:
+S:
+
+
+15. List each gender and the corresponding number of students.
+P: For each gender, return the gender code and the number of students who identify as that gender.
+
+SELECT Gender_MFU, COUNT(*)
+FROM Students
+group by Gender_MFU
+
+S:
+S:
+S:
+
+
+16. List the last names of the students whose gender is "F" or "M".
+P: Which students identify their gender as "F" or "M"? Give me their last names.
+
+SELECT Last_Name
+FROM Students
+Where Gender_MFU = "F" or Gender_MFU = "M"
+
+S:
+S:
+S:
+
+
+17. List the first names of the students who do not have any answers.
+P: Which students do not have any answers? Find their first names.
+
+SELECT First_Name
+from Students
+where Student_ID not in (SELECT Student_ID FROM Student_Answers)
+
+S:
+S:
+S:
+
+
+18. Show the student answer texts that received both "Normal" and "Absent" as comments.
+P: Which student answer texts were given both "Normal" and "Absent" as comments?
+
+SELECT Student_Answer_Text
+FROM Student_Answers
+Where Comments = "Normal"
+Intersect
+SELECT Student_Answer_Text
+FROM Student_Answers
+Where Comments = "Absent"
+
+S:
+S:
+S:
+
+
+19. Show the types of questions that have at least three questions.
+P: Which types of questions have 3 or more questions? Return the questions type code.
+
+SELECT Type_of_Question_Code
+FROM Questions
+group by Type_of_Question_Code
+Having count(*) >= 3
+
+S:
+S:
+S:
+
+
+20. Show all information on students.
+P: What is al the available information of each student?
+
+SELECT * from Students
+
+S:
+S:
+S:
+
+
