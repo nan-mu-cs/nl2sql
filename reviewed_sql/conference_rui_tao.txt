@@ -1,0 +1,144 @@
+Total # = 20
+
+1. How many conferences are there?
+
+select count(*)
+from conference
+
+2. List all distinct conference name.
+
+select distinct conference_name
+from conference
+
+3. List all conference name, year, and location.
+
+select conference_name, year, location
+from conference
+
+4. Show all conference names and the number of times each conference has.
+
+select conference_name, count(*)
+from conference
+group by conference_name
+
+5. show all years and the number of conferences in each year.
+
+select year, count(*)
+from conference
+group by year
+
+6. which year has least number of conferences?
+
+select year
+from conference
+group by year
+order by count(*)
+limit 1
+
+7. Show all locations where at least two conferences are located.
+
+select location
+from conference
+group by location
+having count(*) >= 2
+
+8. Show the institution name, location and founded year of all institutions.
+
+select institution_name, location, founded
+from institution
+
+9. How many institution are founded between 1850 and 1900?
+
+select count(*)
+from institution
+where founded between 1850 and 1900
+
+10. Show the institution name and location of institution that is most recently founded.
+
+select institution_name, location
+from institution
+order by founded desc
+limit 1
+
+11. Show the institution name and the number of staff for each institution founded after 1800.
+
+select T1.institution_name, count(*)
+from institution as T1 join staff as T2 on T1.institution_id = T2.institution_id
+where T1.founded > 1800
+group by T2.institution_id
+
+12. Show institution name which there is no staff in our record.
+
+select institution_name
+from institution
+where institution_id NOT IN (select institution_id from staff)
+
+13. Show all staff name who are above the average age.
+
+select name
+from staff
+where age > (select avg(age) from staff)
+
+14. What is the maximum and minimum age of all staff from the United States?
+
+select max(age), min(age)
+from staff
+
+15. Show all conference names which the staff from Canada attends.
+
+select T1.conference_name
+from conference as T1 join conference_participation as T2 on T1.conference_id=T2.conference_id join staff as T3 on T2.staff_id = T3.staff_id
+where T3.nationality = "Canada"
+
+17. Show all staff names who have been both speaker and sponsor in some conference.
+
+select T1.name
+from staff as T1 join conference_participation as T2 ON T1.staff_id = T2.staff_id
+where T2.role = 'Speaker'
+INTERSECT
+select T1.name
+from staff as T1 join conference_participation as T2 ON T1.staff_id = T2.staff_id
+where T2.role = 'Sponsor'
+
+18. Show all names who have been in both ACL and Naccl.
+
+select T1.name
+from staff as T1 join conference_participation as T2 join Conference as T3 ON T1.staff_id = T2.staff_id and T2.conference_id = T3.conference_id
+where T3.Conference_name = 'ACL'
+INTERSECT
+select T1.name
+from staff as T1 join conference_participation as T2 join conference as T3 ON T1.staff_id = T2.staff_id and T2.conference_id = T3.conference_id
+where T3.Conference_name = 'Naccl'
+
+19. Show all staff names who attend a conference in 2003 or 2004.
+
+select distinct T1.name
+from staff as T1 join conference_participation as T2 join Conference as T3 ON T1.staff_id = T2.staff_id and T2.conference_id = T3.conference_id 
+where T3.year = 2003 or T3.year = 2004
+
+20. Show the conference name and year and the number of participants for each conference.
+
+select T1.conference_name, T1.year, count(*)
+from Conference as T1 JOIN Conference_participation as T2 ON T1.conference_id = T2.conference_id
+group by T2.conference_id
+
+21. Find the name of the conferences that have the top 2 most number of attendants.
+
+select T1.conference_name
+from Conference as T1 JOIN Conference_participation as T2 ON T1.conference_id = T2.conference_id
+group by T2.conference_id
+order by count(*) desc
+limit 2
+
+22. Find the name and nationality of the people who did not participate in any ACL conference.
+
+select name, nationality
+from staff
+where staff_id not in (select T2.staff_id from Conference as T1 JOIN Conference_participation as T2 ON T1.conference_id = T2.conference_id where T1.Conference_Name = "ACL")
+
+23. Find the name and location of the universities that did not have any staff participated in any conference in 2004.
+
+select T1.Institution_Name, T1.location
+from institution as T1 join staff as T2 on T1.institution_id = T2.institution_id
+where T2.staff_id not in (select T2.staff_id from Conference as T1 JOIN Conference_participation as T2 ON T1.conference_id = T2.conference_id where T1.year = 2004)
+
