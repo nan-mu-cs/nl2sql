@@ -1,3 +1,4 @@
+
 1. Show name, city, and state for all universities in an alphabetical order of university name.
 
 select university_name, city, state
@@ -26,7 +27,6 @@ where enrollment > (select avg(enrollment) from University)
 select distinct home_conference
 from University
 
-
 6. Show all home conferences and the number of universities in each conference.
 
 select home_conference, count(*)
@@ -55,12 +55,13 @@ from University
 group by home_conference
 order by sum(enrollment) 
 limit 1
-
-10. List all major name and major code
+
+10. List all major name and major code in the order of their code
 
 select major_name, major_code
 from Major
-
+order by major_code
+
 11. Show all majors and major ranks for the university with name Augustana College.
 
 select T1.rank, T3.major_name
@@ -81,7 +82,7 @@ where T1.rank = 1
 group by T2.university_name
 order by count(*) desc
 limit 1
-
+
 14. Show all university names without a major with rank 1?
 
 select university_name
@@ -101,7 +102,6 @@ select T2.university_name
 from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
 where T3.major_name = 'Urban Education'
 
-
 16. What is the name and overall ranking of universities in Wisconsin state?
 
 select T1.university_name, T2.rank
@@ -120,15 +120,30 @@ limit 1
 select T1.university_name
 from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
 order by T2.reputation_point
-
+
 19. What is the name of university with major Accounting ranked 3 or above?
 
 select T2.university_name
 from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
 where T1.rank <= 3 and T3.major_name = "Accounting"
 
-20. What is the total enrollment of universities with a rank 5 or below?
+20. What is the total enrollment of universities with a overall rank 5 or below?
 
 select sum(enrollment)
 from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
 where T2.rank >= 5
+
+21. Find the name and Citation point of the universities whose reputation points are top 3 and above.
+
+select T1.University_Name, T2.Citation_point
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+order by T2.Reputation_point desc
+limit 3
+
+22. which states do have more than two universities with enrollment smaller than 3000?
+
+select state
+from university
+where enrollment < 3000
+group by state
+having count(*) > 2
