@@ -59,25 +59,22 @@ join languages as T3 on T2.language_id = T3.id
 
 11. Show the official languages and the number of countries speaking each language.
 
-SELECT T3.name, COUNT(*)
-FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
-join languages as T3 on T2.language_id = T3.id
-group by T3.name
+SELECT T2.name, COUNT(*)
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.name
 
 12. Show the official language spoken by the most number of countries.
 
-SELECT T3.name
-FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
-join languages as T3 on T2.language_id = T3.id
-group by T3.id
+SELECT T2.name
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.id
 order by COUNT(*) DESC limit 1
 
 13. Show the official languages spoken by at least two countries.
 
-SELECT T3.name
-FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
-join languages as T3 on T2.language_id = T3.id
-group by T3.id
+SELECT T2.name
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.id
 Having COUNT(*) >= 2
 
 14. Show the average overall scores of countries whose official language is "English"
@@ -89,13 +86,12 @@ Where T3.name = "English"
  
 15. Show the official language spoken by the top 3 number of countries.
 
-SELECT T3.name
-FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
-join languages as T3 on T2.language_id = T3.id
-group by T3.id
+SELECT T2.name
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.id
 order by COUNT(*) DESC limit 3
 
-16. Show the official languages sorted by the average overall scores among countries speaking them.
+16. Show the official languages sorted in descending order by the average overall scores among countries speaking them.
 
 SELECT T3.name
 FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
@@ -107,7 +103,6 @@ order by avg(T1.overall_score) DESC limit 1
 
 SELECT T1.Name
 FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
-join languages as T3 on T2.language_id = T3.id
 group by T1.id
 order by COUNT(*) DESC limit 1
 
