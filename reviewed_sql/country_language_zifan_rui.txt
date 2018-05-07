@@ -1,0 +1,138 @@
+Total = 20
+
+1. How many languages are there?
+
+SELECT count(*)
+FROM languages
+
+2. List the name of languages in ascending alphabetical order.
+
+SELECT name
+FROM languages
+order by name ASC
+
+3. What are the names of languages that contain the word "ish"?
+
+SELECT name
+FROM languages
+where name LIKE "%ish%"
+
+4. Show the names of countries in descending order of overall scores.
+
+SELECT name
+FROM countries
+order by overall_score DESC
+
+5. What are the average justice scores among countries?
+
+SELECT avg(justice_score)
+FROM countries
+
+6. What are the maximum and minimum health score among countries that are not "Norway".
+
+SELECT max(health_score), min(health_score)
+FROM countries
+Where name != "Norway"
+
+7. How many different official languages are there?
+
+SELECT count(distinct language_id)
+FROM official_languages
+
+8. List names of countries in descending order of education_score.
+
+SELECT name
+FROM countries
+order by education_score DESC
+
+9. List the name of the country with the biggest score in politics.
+
+SELECT name
+FROM countries
+order by politics_score DESC limit 1
+
+10. Show the names of countries and their official languages.
+
+SELECT T1.name, T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+
+11. Show the official languages and the number of countries speaking each language.
+
+SELECT T3.name, COUNT(*)
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+group by T3.name
+
+12. Show the official language spoken by the most number of countries.
+
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+group by T3.id
+order by COUNT(*) DESC limit 1
+
+13. Show the official languages spoken by at least two countries.
+
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+group by T3.id
+Having COUNT(*) >= 2
+
+14. Show the average overall scores of countries whose official language is "English"
+
+SELECT avg(T1.overall_score)
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+Where T3.name = "English"
+ 
+15. Show the official language spoken by the top 3 number of countries.
+
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+group by T3.id
+order by COUNT(*) DESC limit 3
+
+16. Show the official languages sorted by the average overall scores among countries speaking them.
+
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+group by T3.id
+order by avg(T1.overall_score) DESC limit 1
+
+17. Show the name of the country that has the most number of official languages.
+
+SELECT T1.Name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+group by T1.id
+order by COUNT(*) DESC limit 1
+
+18. List the names of languages that are not official language of any countries.
+
+SELECT name
+from languages
+where id not in (SELECT language_id FROM official_languages)
+
+19. List the names of countries that do not have any official language.
+
+SELECT name
+from countries
+where id not in (SELECT country_id FROM official_languages)
+
+
+20. Show the names of languages that are official language for both countries with overall score greater than 95 and countries with overall score smaller than 90.
+
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+Where T1.overall_score > 95
+Intersect 
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+Where T1.overall_score < 90
+
