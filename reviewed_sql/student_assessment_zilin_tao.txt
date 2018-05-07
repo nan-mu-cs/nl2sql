@@ -1,0 +1,222 @@
+Total = # 30
+
+1.
+which course has most number of registered students?
+
+SELECT T1.course_name
+FROM courses as T1 JOIN student_course_registrations as T2 ON T1.course_id=T2.course_Id
+GROUP BY T1.course_id
+ORDER BY count(*) desc
+LIMIT 1
+
+what is id of students who registered some courses but the least number of courses in these students?
+
+SELECT student_id
+FROM student_course_registrations
+GROUP BY student_id
+ORDER BY count(*)
+LIMIT 1
+
+2.
+what are the first name and last name of all candidates?
+
+SELECT T2.first_name, T2.last_name
+FROM candidates as T1 JOIN people as T2 ON T1.candidate_id=T2.person_id
+
+what are the details of students who attended more than one class?
+
+SELECT T2.student_details
+FROM student_course_attendance as T1 JOIN students as T2 ON T1.student_id=T2.student_id
+GROUP BY T1.student_id
+HAVING count(*) > 1
+
+
+3.
+List the id of students who never attends courses?
+
+SELECT student_id
+FROM students
+where student_id not in (SELECT student_id FROM student_course_attendance)
+
+List the id of students who attended some courses?
+
+SELECT student_id
+FROM student_course_attendance
+
+4.
+Find the id of students who registered courses and the courses' names.
+
+SELECT T1.student_id, T2.course_name
+FROM student_course_registrations as T1 JOIN courses as T2 ON T1.course_id=T2.course_id
+
+What is detail of the student who most recently registered course?
+
+SELECT T2.student_details
+FROM student_course_registrations as T1 JOIN students as T2 ON T1.student_id=T2.student_id
+ORDER BY T1.registration_date desc
+LIMIT 1
+
+
+5.
+How many students attend course English?
+
+SELECT count(*)
+FROM courses as T1 JOIN student_course_attendance as T2 ON T1.course_id=T2.course_id
+WHERE T1.course_name="English"
+
+How many courses do the student whose id is 171 attend?
+
+SELECT count(*)
+FROM courses as T1 JOIN student_course_attendance as T2 ON T1.course_id=T2.course_id
+WHERE T2.student_id=171
+
+
+6.
+Find id of the candidate whose email is stanley.monahan@example.org?
+
+SELECT T2.candidate_id
+FROM people as T1 JOIN candidates as T2 ON T1.person_id=T2.candidate_id
+WHERE T1.email_address="stanley.monahan@example.org"
+
+Find id of the candidate who most recently accesses the course?
+
+SELECT candidate_id
+FROM candidate_assessments
+ORDER BY assessment_date desc
+LIMIT 1
+
+
+7.
+What is detail of the student who registered the most number of courses?
+
+SELECT T1.student_details
+FROM students as T1 JOIN student_course_registrations as T2 ON T1.student_id=T2.student_id
+GROUP BY T1.student_id
+ORDER BY count(*) desc
+LIMIT 1
+
+List the id of students who registered some courses and the number of their registered courses?
+
+SELECT T1.student_id, count(*) 
+FROM students as T1 JOIN student_course_registrations as T2 ON T1.student_id=T2.student_id
+GROUP BY T1.student_id
+
+
+8.
+How many registed students do each course have? List course name and the number of their registered students?
+
+SELECT T3.course_name, count(*) 
+FROM students as T1 JOIN student_course_registrations as T2 ON T1.student_id=T2.student_id JOIN courses as T3 ON T2.course_id=T3.course_id
+GROUP BY T2.course_id
+
+Find the details of stduents who registered at least two course?
+
+SELECT T1.student_details 
+FROM students as T1 JOIN student_course_registrations as T2 ON T1.student_id=T2.student_id
+GROUP BY T1.student_id
+HAVING count(*) >= 2
+
+9.
+Find id of candidates whose assessment code is "Pass"?
+
+SELECT candidate_id
+FROM candidate_assessments
+WHERE asessment_outcome_code="Pass"
+
+Find the cell mobile number of the candidates whose assessment code is "Fail"?
+
+SELECT T3.cell_mobile_number
+FROM candidates as T1 JOIN candidate_assessments as T2 ON T1.candidate_id=T2.candidate_id JOIN people as T3 ON T1.candidate_id=T3.person_id
+WHERE T2.asessment_outcome_code="Fail"
+
+10.
+What are the id of students who registered course 301?
+
+SELECT student_id
+FROM student_course_attendance
+WHERE course_id = 301
+
+What is the id of the student who most recently registered course 301?
+
+SELECT student_id
+FROM student_course_attendance
+WHERE course_id=301
+ORDER BY date_of_attendance desc
+LIMIT 1
+
+11.
+Find distinct cities of addresses of people?
+
+SELECT distinct T1.city
+FROM addresses as T1 JOIN people_addresses as T2 ON T1.address_id=T2.address_id
+
+Find distinct cities of address of students?
+
+SELECT distinct T1.city
+FROM addresses as T1 JOIN people_addresses as T2 ON T1.address_id=T2.address_id JOIN students as T3 ON T2.person_id=T3.student_id
+
+
+12.
+List the names of courses in alphabetical order?
+
+SELECT course_name
+FROM courses
+ORDER BY course_name
+
+List the first names of people in alphabetical order?
+
+SELECT first_name
+FROM people
+ORDER BY first_name
+
+
+13.
+What are the id of students who registered courses or attended courses?
+
+SELECT student_id
+FROM student_course_registrations
+UNION
+SELECT student_id
+FROM student_course_attendance
+
+Find the id of courses which are registered or attended by student whose id is 121?
+
+SELECT course_id
+FROM student_course_registrations
+WHERE student_id=121
+UNION
+SELECT course_id
+FROM student_course_attendance
+WHERE student_id=121
+
+
+14.
+What are the details of students who registered courses but not attended courses?
+
+SELECT student_details
+FROM student_course_registrations
+where student_id not in (SELECT student_id FROM student_course_attendance)
+
+What are the id of students who attended courses and also registered courses?
+
+SELECT student_id
+FROM student_course_attendance 
+INTERSECT
+SELECT student_id
+FROM student_course_registrations
+
+
+15.
+List the id of students who registered course statistics in the order of registration date.
+
+SELECT T2.student_id
+FROM courses as T1 JOIN student_course_registrations as T2 ON T1.course_id=T2.course_id
+WHERE T1.course_name="statistics"
+ORDER BY T2.registration_date
+
+List the id of students who attended course statistics in the order of attendance date.
+
+SELECT T2.student_id
+FROM courses as T1 JOIN student_course_attendance as T2 ON T1.course_id=T2.course_id
+WHERE T1.course_name="statistics"
+ORDER BY T2.date_of_attendance
