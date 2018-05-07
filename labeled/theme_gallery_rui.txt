@@ -1,0 +1,129 @@
+1. How many artists do we have?
+
+select count(*)
+from artist
+
+2. Show all artist name, age, and country.
+
+select name, age, country
+from artist
+
+3. What are all distinct country for artists?
+
+select distinct country
+from artist
+
+4. Show all artist names and the year joined who are not from United States.
+
+select name, year_join
+from artist
+where country != 'United States'
+
+5. How many artists are above age 46 and joined after 1990?
+
+select count(*)
+from artist
+where age > 46 and year_join > 1990
+
+6. What is the average, minimum, and maximum age of all artists from United States.
+
+select avg(age), min(age), max(age)
+from artist
+where country = 'United States'
+
+7. What is the name of the artist joining latest?
+
+select name
+from artist
+order by year_join desc
+limit 1
+
+8. How many exhibition are there in year 2005 or after?
+
+select count(*)
+from exhibition
+where year >= 2005
+
+9. Show theme and year for all exhibitions with ticket prices lower than 15.
+
+select theme, year
+from exhibition
+where ticket_price < 15
+
+10. Show all artist names and the number of exhibitions for each artist.
+
+select T2.name, count(*)
+from exhibition as T1 join artist as T2 on T1.artist_id = T2.artist_id
+group by T1.artist_id
+
+11. What is the name and country for the artist with most number of exhibitions?
+
+select T2.name,T2.country
+from exhibition as T1 join artist as T2 on T1.artist_id = T2.artist_id
+group by T1.artist_id
+order by count(*) desc
+limit 1
+
+
+12. Show names for artists without any exhibition.
+
+select name
+from artist
+where artist_id NOT IN (select artist_id from exhibition)
+
+13. What is the theme and artist name for the exhibition with a ticket price higher than the average?
+
+select T1.theme, T2.name
+from exhibition as T1 join artist as T2 on T1.artist_id = T2.artist_id
+where T1.ticket_price > (select avg(ticket_price) from exhibition)
+
+14. Show the average, minimum, and maximum ticket prices for exhibitions for all years before 2009.
+
+select avg(ticket_price), min(ticket_price), max(ticket_price)
+from exhibition
+where year < 2009
+
+15.Show theme and year for all exhibitions in an descending order of ticket price.
+
+select theme, year
+from exhibition
+order by ticket_price desc
+
+
+16. What is the theme, date, and attendance for the exhibition in year 2004? 
+
+select T2.theme, T1.date, T1.attendance
+from exhibition_record as T1 join exhibition as T2 on T1.exhibition_id = T2.exhibition_id
+where T2.year = 2004
+
+17. Show all artist names who don't have an exhibition in 2004.
+
+select name
+from artist
+except
+select T2.name
+from exhibition as T1 join artist as T2 on T1.artist_id = T2.artist_id
+where T1.year = 2004
+
+18. Show the theme for exhibitions with both records of an attendance below 100 and above 500
+
+select T2.theme
+from exhibition_record as T1 join exhibition as T2 on T1.exhibition_id = T2.exhibition_id
+where T1.attendance < 100
+intersect
+select T2.theme
+from exhibition_record as T1 join exhibition as T2 on T1.exhibition_id = T2.exhibition_id
+where T1.attendance > 500
+
+19. How many exhibitions have a attendance more than 100 or have a ticket price below 10?
+
+select count(*)
+from exhibition_record as T1 join exhibition as T2 on T1.exhibition_id = T2.exhibition_id
+where T1.attendance > 100 or T2.ticket_price < 10 
+
+20. Show all artist names with an average exhibition attendance over 200.
+
+select T3.name
+from exhibition_record as T1 join exhibition as T2 on T1.exhibition_id = T2.exhibition_id join artist as T3 on T3.artist_id = T2.artist_id
+group by T3.artist_id
+having avg(T1.attendance) > 200
