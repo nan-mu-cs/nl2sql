@@ -4,6 +4,11 @@
 - Exact matching without values
 - Partial Matching without Values
 
+# Predicted SQL Parsing
+
+- what if the predicted SQL is not syntactically correct? use what to be used to parse different components?
+- use AST tree or our own preprocessing structure?
+
 
 ### SQL Hardness criteria
 
