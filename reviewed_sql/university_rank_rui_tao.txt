@@ -1,0 +1,134 @@
+1. Show name, city, and state for all universities in an alphabetical order of university name.
+
+select university_name, city, state
+from University
+order by university_name
+
+2. How many universities are in Illinois or Ohio?
+
+select count(*)
+from University
+where state = 'Illinois' OR state = 'Ohio'
+
+3. What is the maximum, average, and minimum enrollment for universities?
+
+select max(enrollment), avg(enrollment), min(enrollment)
+from University
+
+4. List team name for all universities with enrollments above the average.
+
+select team_name
+from University
+where enrollment > (select avg(enrollment) from University)
+
+5. Show all home conferences.
+
+select distinct home_conference
+from University
+
+
+6. Show all home conferences and the number of universities in each conference.
+
+select home_conference, count(*)
+from University 
+group by home_conference
+
+7. Which state has most number of universities?
+
+select state
+from University 
+group by state
+order by count(*) desc
+limit 1
+
+8. Show all home conferences with average enrollment of universities above 2000.
+
+select home_conference
+from University
+group by home_conference
+having avg(enrollment) > 2000
+
+9. Which conference has the least number of total enrollment?
+
+select home_conference
+from University
+group by home_conference
+order by sum(enrollment) 
+limit 1
+
+10. List all major name and major code
+
+select major_name, major_code
+from Major
+
+11. Show all majors and major ranks for the university with name Augustana College.
+
+select T1.rank, T3.major_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T2.university_name = 'Augustana College'
+
+12. What is the name, city, state of the university with a rank 1 on Accounting major?
+
+select T2.university_name, T2.city, T2.state
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T1.rank = 1 and T3.major_name = 'Accounting'
+
+13. What is the name of the university that has most number of majors with rank 1?
+
+select T2.university_name
+from Major_Ranking as T1 join University as T2 on T1.university_id = T2.university_id
+where T1.rank = 1
+group by T2.university_name
+order by count(*) desc
+limit 1
+
+14. Show all university names without a major with rank 1?
+
+select university_name
+from University
+EXCEPT
+select T2.university_name
+from Major_Ranking as T1 join University as T2 on T1.university_id = T2.university_id
+where T1.rank = 1
+
+15. Show all university names with both major Accounting and major Urban Education.
+
+select T2.university_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T3.major_name = 'Accounting'
+INTERSECT
+select T2.university_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T3.major_name = 'Urban Education'
+
+
+16. What is the name and overall ranking of universities in Wisconsin state?
+
+select T1.university_name, T2.rank
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+where T1.state = 'Wisconsin'
+
+17. What is the university name with highest research point?
+
+select T1.university_name
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+order by T2.research_point desc
+limit 1
+
+18. List all university names in ascending order of their reputation points.
+
+select T1.university_name
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+order by T2.reputation_point
+
+19. What is the name of university with major Accounting ranked 3 or above?
+
+select T2.university_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T1.rank <= 3 and T3.major_name = "Accounting"
+
+20. What is the total enrollment of universities with a rank 5 or below?
+
+select sum(enrollment)
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+where T2.rank >= 5
