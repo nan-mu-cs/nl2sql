@@ -1,0 +1,268 @@
+1. List the names of all the customers in alphabetical order.
+P: Sort the customer names in alphabetical order.
+
+select customer_details
+from customers
+order by customer_details
+
+S:
+S:
+S:
+
+
+2. Find all the policy type codes associated with the customer "Dayana Robel"
+P: What are the type codes of the policies used by the customer "Dayana Robel"?
+
+select policy_type_code
+from policies as t1 join customers as t2
+on t1.customer_id = t2.customer_id
+where t2.customer_details = "Dayana Robel"
+
+S:
+S:
+S:
+
+
+3. Which type of policy is most frequently used? Give me the policy type code.
+P: Find the type code of the most frequently used policy.
+
+select policy_type_code
+from policies
+group by policy_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+4. Find all the policy types that are used by more than 2 customers.
+P: Which types of policy are chosen by more than 2 customers? Give me the policy type codes.
+
+select policy_type_code
+from policies
+group by policy_type_code
+having count(*) > 2
+
+S:
+S:
+S:
+
+
+5. Find the total and average amount paid in claim headers.
+P: What are the total amount and average amount paid in claim headers?
+
+select sum(amount_piad), avg(amount_piad)
+from claim_headers
+
+S:
+S:
+S:
+
+
+6. Find the total amount claimed in the most recently created document.
+P: How much amount in total were claimed in the most recently created document?
+
+select sum(t1.amount_claimed)
+from claim_headers as t1 join claims_documents as t2
+on t1.claim_header_id = t2.claim_id
+where t2.created_date = (select created_date
+from claims_documents
+order by created_date
+limit 1)
+
+S:
+S:
+S:
+
+
+7. What is the name of the customer who has made the largest amount of claim in a single claim?
+P: Which customer made the largest amount of claim in a single claim? Return the customer details.
+
+select t3.customer_details
+from claim_headers as t1 join policies as t2
+on t1.policy_id = t2.policy_id
+join customers as t3
+on t2.customer_id = t3.customer_id
+where t1.amount_claimed = (select max(amount_claimed)
+from claim_headers)
+
+S:
+S:
+S:
+
+
+8. What is the name of the customer who has made the minimum amount of payment in one claim?
+P: Which customer made the smallest amount of claim in one claim? Return the customer details.
+
+select t3.customer_details
+from claim_headers as t1 join policies as t2
+on t1.policy_id = t2.policy_id
+join customers as t3
+on t2.customer_id = t3.customer_id
+where t1.amount_piad = (select min(amount_piad)
+from claim_headers)
+
+S:
+S:
+S:
+
+
+9. Find the names of customers who have no policies associated.
+P: What are the names of customers who do not have any policies?
+
+select customer_details
+from customers
+except
+select t2.customer_details
+from policies as t1 join customers as t2
+on t1.customer_id = t2.customer_id
+
+S:
+S:
+S:
+
+
+10. How many claim processing stages are there in total?
+P: Find the number of distinct stages in claim processing.
+
+select count(*)
+from claims_processing_stages
+
+S:
+S:
+S:
+
+
+11. What is the name of the claim processing stage that most of the claims are on?
+P: Which claim processing stage has the most claims? Show the claim status name.
+
+select t2.claim_status_name
+from claims_processing as t1 join claims_processing_stages as t2
+on t1.claim_stage_id = t2.claim_stage_id
+group by t1.claim_stage_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+12. Find the names of customers whose name contains "Diana".
+P: Which customers have the substring "Diana" in their names? Return the customer details.
+
+select customer_details
+from customers
+where customer_details like "%Diana%"
+
+S:
+S:
+S:
+
+
+13. Find the names of the customers who have an deputy policy.
+P: Which customers have an insurance policy with the type code "Deputy"? Give me the customer details.
+
+select distinct t2.customer_details
+from policies as t1 join customers as t2
+on t1.customer_id = t2.customer_id
+where t1.policy_type_code = "Deputy"
+
+S:
+S:
+S:
+
+
+14. Find the names of customers who either have an deputy policy or uniformed policy.
+P: Which customers have an insurance policy with the type code "Deputy" or "Uniform"? Return the customer details.
+
+select distinct t2.customer_details
+from policies as t1 join customers as t2
+on t1.customer_id = t2.customer_id
+where t1.policy_type_code = "Deputy" or t1.policy_type_code = "Uniform"
+
+S:
+S:
+S:
+
+
+15. Find the names of all the customers and staff members.
+P: What are the names of the customers and staff members?
+
+select customer_details
+from customers
+union
+select staff_details
+from staff
+
+S:
+S:
+S:
+
+
+16. Find the number of records of each policy type and its type code.
+P: For each policy type, return its type code and its count in the record.
+
+select policy_type_code, count(*)
+from policies
+group by policy_type_code
+
+S:
+S:
+S:
+
+
+17. Find the name of the customer that has been involved in the most policies.
+P: Which customer have the most policies? Give me the customer details.
+
+select t2.customer_details
+from policies as t1 join customers as t2
+on t1.customer_id = t2.customer_id
+group by t2.customer_details
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+18. What is the description of the claim status "Open"?
+P: Find the description of the claim status "Open".
+
+select claim_status_description
+from claims_processing_stages
+where claim_status_name = "Open"
+
+S:
+S:
+S:
+
+
+19. How many distinct claim outcome codes are there?
+P: Count the number of distinct claim outcome codes.
+
+select count(distinct claim_outcome_code)
+from claims_processing
+
+S:
+S:
+S:
+
+
+20. Which customer is associated with the latest policy?
+P: Find the customer who started a policy most recently.
+
+select t2.customer_details
+from policies as t1 join customers as t2
+on t1.customer_id = t2.customer_id
+where t1.start_date = (select max(start_date)
+from policies)
+
+S:
+S:
+S:
+
+
