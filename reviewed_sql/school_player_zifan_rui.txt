@@ -65,13 +65,12 @@ ON T1.School_ID = T2.School_ID
 group by T1.School_ID
 Having COUNT(*) > 1
 
-12. Show the denomination of the school that have the most number of players.
+12. Show the denomination of the school that has the most number of players.
 
 SELECT T2.Denomination
 FROM player as T1 join school as T2 
 ON T1.School_ID = T2.School_ID
 group by T1.School_ID
-Having COUNT(*) > 1
 order by COUNT(*) DESC limit 1
 
 13. Show locations and nicknames of schools.
@@ -86,7 +85,7 @@ SELECT Denomination, COUNT(*)
 FROM school
 group by Denomination
  
-15. Please show the software platforms of devices in descending order of the count.
+15. Please show different denominations and the corresponding number of schools in descending order.
 
 SELECT Denomination, COUNT(*)
 FROM school
@@ -99,7 +98,7 @@ SELECT School_Colors
 FROM school
 order by Enrollment DESC limit 1
 
-17. List the location of schools that do not have any player
+17. List the location of schools that do not have any player.
 
 SELECT Location
 from school
