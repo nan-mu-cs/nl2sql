@@ -9,7 +9,7 @@ FROM device
 
 SELECT Carrier
 FROM device
-order by Carrier DESC
+order by Carrier ASC
 
 3. What are the carriers of devices whose software platforms are not "Android"?
 
@@ -61,31 +61,25 @@ on T1.Shop_ID = T3.Shop_ID
 
 11. Show names of shops that have more than one kind of device in stock.
 
-SELECT T3.Shop_Name
-FROM stock as T1 join device as T2 
-ON T1.Device_ID = T2.Device_ID
-join shop as T3
-on T1.Shop_ID = T3.Shop_ID
+SELECT T2.Shop_Name
+FROM stock as T1 join shop as T2
+on T1.Shop_ID = T2.Shop_ID
 group by T1.Shop_ID
 Having COUNT(*) > 1
 
-12. Show the name of the shop that have the most kind of devices in stock.
+12. Show the name of the shop that has the most kind of devices in stock.
 
-SELECT T3.Shop_Name
-FROM stock as T1 join device as T2 
-ON T1.Device_ID = T2.Device_ID
-join shop as T3
-on T1.Shop_ID = T3.Shop_ID
+SELECT T2.Shop_Name
+FROM stock as T1 join shop as T2
+on T1.Shop_ID = T2.Shop_ID
 group by T1.Shop_ID
 order by COUNT(*) DESC limit 1
 
 13. Show the name of the shop that have the largest quantity of devices in stock.
 
-SELECT T3.Shop_Name
-FROM stock as T1 join device as T2 
-ON T1.Device_ID = T2.Device_ID
-join shop as T3
-on T1.Shop_ID = T3.Shop_ID
+SELECT T2.Shop_Name
+FROM stock as T1 join shop as T2
+on T1.Shop_ID = T2.Shop_ID
 group by T1.Shop_ID
 order by SUM(T1.quantity) DESC limit 1
 
@@ -125,7 +119,7 @@ SELECT Location
 FROM shop
 Where Open_Year < 2008
 
-19. List the carriers of shops that have no device in stock.
+19. List the carriers of devices that have no device in stock.
 
 SELECT Carrier
 from device
@@ -136,8 +130,5 @@ where Device_ID not in (SELECT Device_ID FROM stock)
 SELECT T2.Carrier
 FROM stock as T1 join device as T2 
 ON T1.Device_ID = T2.Device_ID
-join shop as T3
-on T1.Shop_ID = T3.Shop_ID
 group by T1.Device_ID
 Having COUNT(*) > 1
-
