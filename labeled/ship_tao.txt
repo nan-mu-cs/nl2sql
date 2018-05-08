@@ -1,0 +1,173 @@
+
+Total # = 24
+
+1. How many different caption ranks are there?
+
+Select count(distinct rank)
+From captain
+
+2. How many captions are in each rank?
+
+Select count(*), rank
+From captain
+Group by rank
+
+3. How many captions with younger than 50 are in each rank?
+
+Select count(*), rank
+From captain
+Where age < 50
+Group by rank
+
+4. Sort all caption names by their ages from old to young.
+
+Select name
+From captain
+Order by age desc
+
+5. Find the name, class and rank of all captains
+
+Select name, class, rank
+From captain
+
+6. Which rank is the most common among captains?
+
+Select rank
+From captain
+Group by rank
+Order by count(*) desc
+Limit 1
+
+7. Which classes have more than two captains?
+
+Select class
+From captain
+Group by class
+Having count(*) > 2
+
+8. Find the name of captains whose rank are either Midshipman or Lieutenant.
+
+Select name
+From captain
+Where rank = 'Midshipman' or rank = 'Lieutenant'
+
+9. What are the average and minimum age of captains in different class?
+
+Select avg(age), min(age), class
+from captain
+Group by class
+
+10. Find the captain rank that has some captains in both Cutter and Armed schooner classes.
+
+Select rank
+From captain
+Where class = 'Cutter'
+Intersect
+Select rank
+From captain
+Where class = 'Armed schooner'
+
+11. Find the captain rank that has no captain in Third-rate ship of the line class.
+
+Select rank
+From captain
+Except
+Select rank
+From captain
+Where class = 'Third-rate ship of the line'
+
+12. What is the name of the youngest captain?
+
+Select name
+From captain
+order by age
+Limit 1
+
+13. how many ships are there?
+
+Select count(*)
+From ship
+
+14. Find the name, type, and flag of the ship that is built in the oldest year.
+
+Select name, type, flag
+From ship
+Order by built_year desc
+Limit 1
+
+15. Group by ships by flag, return number of ship in each flag.
+
+Select count(*), flag
+From ship
+Group by flag
+
+16. Which flag is most widely used among all ships?
+
+Select flag
+From ship
+Group by flag
+Order by count(*) desc
+Limit 1
+
+17. List all ship names in the order of built year and class.
+
+Select name
+From ship
+Order by built_year, class
+
+18. Find the ship type that are used by both ships with Panama and Malta flags.
+
+Select type
+From ship
+Where flag = 'Panama'
+Intersect
+Select type
+From ship
+Where flag = 'Malta'
+
+19. in which year were most of ships built?
+
+Select built_year
+From ship
+group by built_year
+Order by count(*) desc
+Limit 1
+
+20. Find the name of the ships that have more than one captain.
+
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Group by t2.ship_id
+having count(*) > 1
+
+21. what are the names and classes of the ships that do not have any captain yet?
+
+Select name, class
+From ship
+Where ship_id not in (select ship_id from captain)
+
+22. Find the name of the ship that is steered by the youngest captain.
+
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Order by t2.age
+Limit 1
+
+23. Find the name and flag of the ships that are not steered by any captain with Midshipman rank.
+
+Select name, flag
+From ship
+Where ship_id not in (select ship_id from captain where rank = 'Midshipman')
+
+
+24. Find the name of the ships that are owned by any captain with Midshipman rank and captain with Lieutenant rank.
+
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Where t2.rank = 'Midshipman'
+Intersect
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Where t2.rank = 'Lieutenant'
+
+
