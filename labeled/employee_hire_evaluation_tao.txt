@@ -1,0 +1,124 @@
+
+1. How many employees are there?
+
+Select count(*)
+From employee
+
+2. Sort employee names by their age in the ascending order.
+
+Select name
+From employee
+Order by age
+
+3. What is the number of employees from each city?
+
+Select count(*), city
+From employee
+Group by city
+
+4. Which cities do more than one employee under age 30 come from.
+
+Select city
+From employee
+Where age < 30
+Group by city
+Having count(*) > 1
+
+5. Find the number of shops in each location.
+
+Select count(*), location
+From shop
+Group by location
+
+6. Find the manager name and district of the shop that sells the most number of products.
+
+Select manager_name, district
+From shop
+Order by number_products desc
+Limit 1
+
+7. find the minimum and maximum number of products in all stores.
+
+Select min(Number_products), max(Number_products)
+From shop
+
+8. Return the name, location and district of all shops in the descending order of number of products.
+
+Select name, location, district
+From shop
+Order by number_products desc
+
+10. Find the name of stores whose selling product amounts are more than the average number of products.
+
+Select name
+From shop
+Where number_products > (select avg(number_products) from shop)
+
+11. find the name of employee who was awarded the most of times in the evaluation.
+
+Select t1.name
+From employee as t1 join evaluation as t2 on t1.Employee_ID = t2.Employee_ID
+Group by t2.Employee_ID
+Order by count(*) desc
+Limit 1
+
+12. Find the name of the employee who won the highest one time bonus.
+
+Select t1.name
+From employee as t1 join evaluation as t2 on t1.Employee_ID = t2.Employee_ID
+order by t2.bonus desc
+Limit 1
+
+13. Find the name of employees who never won any award in the evaluation.
+
+Select name
+From employee
+Where Employee_ID not in (select Employee_ID from evaluation)
+
+14. What is the name of the shop that are hiring the most number of employees?
+
+Select t2.name
+From hiring as t1 join shop as t2 on t1.shop_id = t2.shop_id
+Group by t1.shop_id
+Order by count(*) desc
+Limit 1
+
+15. Find the name of the shops that do not hire any employee.
+
+Select name
+From shop
+Where shop_id not in(select shop_id from hiring)
+
+16. Find the number of employees hired in each shop, show the shop name as well.
+
+Select count(*), t2.name
+From hiring as t1 join shop as t2 on t1.shop_id = t2.shop_id
+Group by t2.name
+
+17. What is total bonuses gave in all evaluations?
+
+Select sum(bonus)
+From evaluation
+
+18. Give me the all details about the hiring info.
+
+Select *
+From hiring
+
+19. Which district has both the stores with less 3000 and more than 10000 products.
+
+
+Select district
+From shop
+Where Number_products < 3000
+Intersect
+Select district
+From shop
+Where Number_products > 10000
+
+20. How many different store locations are there?
+
+Select count(distinct location)
+From shop
+
+
