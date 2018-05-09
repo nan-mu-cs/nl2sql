@@ -1,0 +1,249 @@
+# Total = 20
+
+1. How many schools are there?
+P: Count the number of schools.
+
+SELECT count(*)
+FROM school
+
+S:
+S:
+S:
+
+
+2. List the locations of schools in ascending order of enrollment.
+P: What is the list of school locations sorted in ascending order of school enrollment?
+
+SELECT Location
+FROM school
+order by Enrollment ASC
+
+S:
+S:
+S:
+
+
+3. List the locations of schools in descending order of founded year.
+P: What is the list of school locations sorted in descending order of school foundation year?
+
+SELECT Location
+FROM school
+order by Founded DESC
+
+S:
+S:
+S:
+
+
+4. What are the enrollments of schools whose denomination is not "Catholic"?
+P: List the enrollment for each school that does not have "Catholic" as denomination.
+
+SELECT Enrollment
+FROM school
+Where Denomination != "Catholic"
+
+S:
+S:
+S:
+
+
+5. What is the average enrollment of schools?
+P: Take the average of the school enrollment.
+
+SELECT avg(Enrollment)
+FROM school
+
+S:
+S:
+S:
+
+
+6. What are the teams of the players, sorted in ascending alphabetical order?
+P: Find the team of each player and sort them in ascending alphabetical order.
+
+SELECT Team
+FROM player
+order by Team ASC
+
+S:
+S:
+S:
+
+
+7. How many different positions of players are there?
+P: Count the number of distinct player positions.
+
+SELECT count(distinct Position)
+FROM player
+
+S:
+S:
+S:
+
+
+8. Find the team of the player of the highest age.
+P: Which team has the oldest player?
+
+SELECT Team
+FROM player
+order by Age DESC limit 1
+
+S:
+S:
+S:
+
+
+9. List the teams of the players with the top 5 largest ages.
+P: What are the teams that have the 5 oldest players?
+
+SELECT Team
+FROM player
+order by Age DESC limit 5
+
+S:
+S:
+S:
+
+
+10. For each player, show the team and the location of school they belong to.
+P: What are the team and the location of school each player belongs to?
+
+SELECT T1.Team, T2.Location
+FROM player as T1 join school as T2
+ON T1.School_ID = T2.School_ID
+
+S:
+S:
+S:
+
+
+11. Show the locations of schools that have more than 1 player.
+P: Which schools have more than 1 player? Give me the school locations.
+
+SELECT T2.Location
+FROM player as T1 join school as T2
+ON T1.School_ID = T2.School_ID
+group by T1.School_ID
+Having COUNT(*) > 1
+
+S:
+S:
+S:
+
+
+12. Show the denomination of the school that has the most players.
+P: What is the denomination of the school the most players belong to?
+
+SELECT T2.Denomination
+FROM player as T1 join school as T2
+ON T1.School_ID = T2.School_ID
+group by T1.School_ID
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+13. Show locations and nicknames of schools.
+P: What are the location and nickname of each school?
+
+SELECT T1.Location, T2.Nickname
+FROM school as T1 join school_details as T2
+ON T1.School_ID = T2.School_ID
+
+S:
+S:
+S:
+
+
+14. Please show different denominations and the corresponding number of schools.
+P: For each denomination, return the denomination and the count of schools with that denomination.
+
+SELECT Denomination, COUNT(*)
+FROM school
+group by Denomination
+
+S:
+S:
+S:
+
+
+15. Please show different denominations and the corresponding number of schools in descending order.
+P: Order denominations in descending order of the count of schools with the denomination. Return each denomination with the count of schools.
+
+SELECT Denomination, COUNT(*)
+FROM school
+group by Denomination
+order by COUNT(*) DESC
+
+S:
+S:
+S:
+
+
+16. List the school color of the school that has the largest enrollment.
+P: What is the school color of the school with the largest enrollment?
+
+SELECT School_Colors
+FROM school
+order by Enrollment DESC limit 1
+
+S:
+S:
+S:
+
+
+17. List the locations of schools that do not have any player.
+P: Which schools do not have any player? Give me the school locations.
+
+SELECT Location
+from school
+where School_ID not in (SELECT School_ID FROM Player)
+
+S:
+S:
+S:
+
+
+18. Show the denomination shared by schools founded before 1890 and schools founded after 1900
+P: What are the denominations used by both schools founded before 1890 and schools founded  after 1900?
+
+SELECT Denomination
+FROM school
+Where Founded < 1890
+Intersect
+SELECT Denomination
+FROM school
+Where Founded > 1900
+
+S:
+S:
+S:
+
+
+19. Show the nicknames of schools that are not in division 1.
+P: What are the nicknames of schools whose division is not 1?
+
+SELECT Nickname
+from school_details
+where Division != "Division 1"
+
+S:
+S:
+S:
+
+
+20. Show the denomination shared by more than one school.
+P: What are the denomination more than one school have?
+
+SELECT Denomination
+from school
+group by Denomination
+having COUNT(*) > 1
+
+S:
+S:
+S:
+
+
