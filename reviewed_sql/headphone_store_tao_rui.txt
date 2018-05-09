@@ -29,7 +29,7 @@ From headphone
 Group by class
 Having count(*) > 2
 
-5. Find the number of headphones with higher than 200 price for each class.
+5. Find the number of headphones with a price higher than 200 for each class.
 
 Select count(*), class
 From headphone
@@ -93,7 +93,7 @@ Select name
 From store
 Order by date_opened
 
-14. List name and parking info for the stores in the Tarzana neighborhood
+14. List name and parking info for the stores in the Tarzana neighborhood.
 
 Select name, parking
 From store
@@ -110,7 +110,7 @@ Select count(*), neighborhood
 From store
 Group by neighborhood
 
-17. Find the name of the store where has the most number of headphones in stock. List the number of headphones as well.
+17. Find the name of the store which has the most number of headphones in stock. List the number of headphones as well.
 
 Select t1.name, sum(t2.quantity)
 From store as t1 join stock as t2 on t1.store_id = t2.store_id
@@ -118,7 +118,7 @@ Group by t2.store_id
 Order by sum(t2.quantity) desc
 Limit 1
 
-18. Find the name of stores where have no any headphone in stock.
+18. Find the name of stores which have no any headphone in stock.
 
 Select name
 From store
@@ -130,11 +130,11 @@ Select model
 From headphone
 Where headphone_id not in (select headphone_id from stock)
 
-20. Which headphone model has most number of stock in cross all stores?
+20. Which headphone model has most number of stock in all stores?
 
 Select t1.model
 From headphone as t1 join stock as t2 on t1.headphone_id = t2.headphone_id
-Group by t2.headphone_id
+Group by t1.model
 Order by sum(t2.quantity) desc
 Limit 1
 
