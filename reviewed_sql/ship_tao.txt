@@ -1,25 +1,25 @@
 
 Total # = 24
 
-1. How many different caption ranks are there?
+1. How many different captain ranks are there?
 
 Select count(distinct rank)
 From captain
 
-2. How many captions are in each rank?
+2. How many captains are in each rank?
 
 Select count(*), rank
 From captain
 Group by rank
 
-3. How many captions with younger than 50 are in each rank?
+3. How many captains with younger than 50 are in each rank?
 
 Select count(*), rank
 From captain
 Where age < 50
 Group by rank
 
-4. Sort all caption names by their ages from old to young.
+4. Sort all captain names by their ages from old to young.
 
 Select name
 From captain
@@ -88,7 +88,7 @@ Limit 1
 Select count(*)
 From ship
 
-14. Find the name, type, and flag of the ship that is built in the oldest year.
+14. Find the name, type, and flag of the ship that is built in the most recent year.
 
 Select name, type, flag
 From ship
@@ -160,7 +160,7 @@ From ship
 Where ship_id not in (select ship_id from captain where rank = 'Midshipman')
 
 
-24. Find the name of the ships that are owned by any captain with Midshipman rank and captain with Lieutenant rank.
+24. Find the name of the ships that are owned by both a captain with Midshipman rank and a captain with Lieutenant rank.
 
 Select t1.name
 From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
