@@ -1,0 +1,162 @@
+
+1. list all press names in the descending order of the profit of the year.
+
+select name
+from press
+order by Year_Profits_billion desc
+
+2. What are the names of the publishers that made more than 15 billion profits each year or 1 billion each month?
+
+select name
+from press
+where Year_Profits_billion > 15 or Month_Profits_billion > 1
+
+3. what is the average and maximum profit in year for all presses? 
+
+select avg(Year_Profits_billion), max(Year_Profits_billion)
+from press
+
+4. Find the name of the publisher whose monthly profit is the highest.
+
+select name
+from press
+order by Month_Profits_billion desc
+limit 1
+
+5. Find the name of the publisher whose monthly profit is the highest or the lowest.
+
+select name
+from press
+order by Month_Profits_billion desc
+limit 1
+union
+select name
+from press
+order by Month_Profits_billion
+limit 1
+
+6. how many authors are under age 30?
+
+select count(*)
+from author
+where age < 30
+
+7. find the average age of authors with different sex.
+
+select avg(age), gender
+from author
+group by gender
+
+8. find the number of authors who is older than 30 for each gender.
+
+select count(*), gender
+from author
+where age > 30
+group by gender
+
+9. List all book titles in the order of their releasing date from most recent to the past.
+
+select title
+from book
+order by release_date desc
+
+10. Find the number of books for each series.
+
+select count(*), book_series
+from book
+group by book_series
+
+11. Find the titles and publish date of the top 5 best sale books.
+
+select title, release_date
+from book
+order by sale_amount desc
+limit 5
+
+12. Find the series that has some book not only sell more than 1000 but also less 500.
+
+select book_series
+from book
+where sale_amount > 1000
+intersect
+select book_series
+from book
+where sale_amount < 500
+
+13. Find the name of authors who publish their books in both "MM" and "LT" series.
+
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+where t2.book_series = 'MM'
+intersect
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+where t2.book_series = 'LT'
+
+14. Find the name and age of the authors who do not any book in our record.
+
+select name
+from author
+where author_id not in (select author_id from book)
+
+15. Find the name of author who have more than one book in our database.
+
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+group by t2.author_id
+having count(*) > 1
+
+16. Find the title, author name, and publisher name of the top 3 best sales books.
+
+select t1.name, t2.title, t3.name
+from author as t1 
+     join book as t2 on t1.author_id = t2.author_id
+     join press as t3 on t2.press_id = t3.press_id
+order by t2.sale_amount desc
+limit 3
+
+17. Find the name and total book sale number of each press.
+
+select sum(t1.sale_amount), t2.name
+from book as t1 join press as t2 on t1.press_id = t2.press_id
+group by t1.press_id
+
+18. find the number of books that are sell more than 1000 for each publisher, list the press name as well.
+
+select count(*), t2.name
+from book as t1 join press as t2 on t1.press_id = t2.press_id
+where sale_amount > 1000
+group by t2.name
+
+19. What is the name of the author of best selling book?
+
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+order by t2.sale_amount desc
+limit 1
+
+20. find the name and gender of the author who published most number of books.
+
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+group by t2.author_id
+order by count(*) desc 
+limit 1
+
+21. Find the name of the authors who did not have any book with the Accor press.
+
+select name
+from author
+except
+select t1.name
+from author as t1 
+     join book as t2 on t1.author_id = t2.author_id
+     join press as t3 on t2.press_id = t3.press_id
+where t3.name = 'Accor'
+
+22. Find the name and yearly profit in billions of presses that published more than two books.
+
+select t2.name, t2.Year_Profits_billion
+from book as t1 join press as t2 on t1.press_id = t2.press_id
+group by t2.press_id
+having count(*) > 2
