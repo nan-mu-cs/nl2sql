@@ -1,0 +1,130 @@
+1. How many regions do we have?
+
+select count(*)
+from region
+
+2. Show all region code and region name.
+
+select region_code, region_name
+from region
+
+3. List all region name in alphabetical order.
+
+select region_name
+from region
+order by region_name
+
+4. Show names for all regions except for Denmark.
+
+select region_name
+from region
+where region_name != 'Denmark'
+
+5. How many storm records do we have?
+
+select count(*)
+from storm
+
+6. List name, dates active, and number of deaths for all storms with at least 1 death.
+
+select name, dates_active, number_deaths
+from storm
+where number_deaths >= 1
+
+7. Show the average, maximum, minimum damage for all storms with max speed higher than 1000.
+
+select avg(damage_millions_USD), max(damage_millions_USD), min(damage_millions_USD)
+from storm
+where max_speed > 1000
+
+8. What is the total number of deaths and damage for all storms with a max speed greater than the average?
+
+select sum(number_deaths), sum(damage_millions_USD)
+from storm
+where max_speed > (select avg(max_speed) from storm)
+
+9. List name and damage for all storms in a descending order of max speed.
+
+select name, damage_millions_USD
+from storm
+order by max_speed desc
+
+
+10. How many regions are affected?
+
+select count(distinct region_id)
+from affected_region
+
+11. Show the name for regions not affected.
+
+select region_name
+from region
+where region_id not in (select region_id from affected_region)
+
+12. Show the name for regions and the number of storms for each region.
+
+select T1.region_name, count(*) 
+from region as T1 join affected_region as T2 on T1.region_id=T2.region_id
+group by T1.region_id
+
+13. List the name for storms and the number of affected regions for each storm.
+
+select T1.name, count(*)
+from storm as T1 join affected_region as T2 on T1.storm_id = T2.storm_id
+group by T1.storm_id
+
+14. What is the storm name and max speed affecting most number of regions?
+
+select T1.name, T1.max_speed
+from storm as T1 join affected_region as T2 on T1.storm_id = T2.storm_id
+group by T1.storm_id
+order by count(*) desc
+limit 1
+
+15. Show the name of storms which don't have affected region in record.
+
+select name
+from storm
+where storm_id not in (select storm_id from affected_region)
+
+16. Show storm name with at least two regions and 10 cities affected. 
+
+select T1.name
+from storm as T1 join affected_region as T2 on T1.storm_id = T2.storm_id
+group by T1.storm_id
+having count(*) >= 2
+intersect
+select T1.name
+from storm as T1 join affected_region as T2 on T1.storm_id = T2.storm_id
+group by T1.storm_id
+having sum(number_city_affected) >= 10
+
+17. Show all storm names except for those with at least two affected regions.
+
+select name
+from storm
+EXCEPT
+select T1.name
+from storm as T1 join affected_region as T2 on T1.storm_id = T2.storm_id
+group by T1.storm_id
+having count(*) >= 2
+
+
+18. What are the regions names affected by the storm with number of deaths at least 10.
+
+select T2.region_name
+from affected_region as T1 join region as T2 on T1.region_id = T2.region_id join storm as T3 on T1.storm_id = T3.storm_id
+where T3.number_deaths >= 10
+
+19. Show all storm names affecting region "Denmark".
+
+select T3.name
+from affected_region as T1 join region as T2 on T1.region_id = T2.region_id join storm as T3 on T1.storm_id = T3.storm_id
+where T2.region_name = 'Denmark'
+
+20. Show the region name with at least two storms.
+
+select T1.region_name
+from region as T1 join affected_region as T2 on T1.region_id=T2.region_id
+group by T1.region_id
+having count(*) >= 2
