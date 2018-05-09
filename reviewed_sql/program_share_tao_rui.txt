@@ -1,0 +1,135 @@
+Total # = 20
+
+1. Find the name of channels that are not owned by CCTV.
+
+select name
+from channel
+where owner != 'CCTV'
+
+2. list all channel names ordered by their rating in percent from big to small.
+
+select name
+from channel
+order by rating_in_percent desc
+
+3. What is the owner of the channel that has the highest rating ratio?
+
+select owner
+from channel
+order by rating_in_percent desc
+limit 1
+
+4. how many programs are there?
+
+select count(*)
+from program
+
+5. list all program names order by launch time.
+
+select name
+from program
+order by launch
+
+6. List name, origin and owner of each program.
+
+select name, origin, owner
+from program
+
+7. find the name of the program that was lanuched most recent.
+
+select name
+from program
+order by launch desc
+limit 1
+
+8. find the total percentage share of all channels owned by CCTV.
+
+select sum(Share_in_percent)
+from channel
+where owner = 'CCTV'
+
+9. Find the name of channels that are broadcasted in the morning.
+
+select t1.name
+from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
+where time_of_day = 'Morning'
+
+10. what are the names of the channels that broadcast in both morning and night?
+
+select t1.name
+from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
+where time_of_day = 'Morning'
+intersect
+select t1.name
+from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
+where time_of_day = 'Night'
+
+11. how many programs are broadcasted in each time section of the day?
+
+select count(*), time_of_day
+from broadcast
+group by time_of_day
+
+12. find the number of different programs that are broadcasted during night time.
+
+select count(distinct program_id)
+from broadcast
+where time_of_day = 'Night'
+
+13. Find the name of programs that are never broadcasted in the morning.
+
+select name
+from program
+except
+select t1.name
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+where 	Time_of_day = "Morning"
+
+14. find the program owners that have some programs in both morning and night time.
+
+select t1.owner
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+where Time_of_day = "Morning"
+intersect
+select t1.owner
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+where Time_of_day = "Night"
+
+15. List all program origin in the alphabetical order.
+
+select origin
+from program
+order by origin
+
+16. what is the number of different channel owners?
+
+select count(distinct owner)
+from channel
+
+17. find the name of programs whose origin is not in Beijing.
+
+select name
+from programselect name
+from program
+where origin != 'Beijing'
+
+18. What are the names of channels owned by CCTV or HBS?
+
+select name
+from channel
+where owner = 'CCTV' or owner = 'HBS'
+where origin != Beijing
+
+19. Find the total rating ratio for each channel owner.
+
+select sum(Rating_in_percent), owner
+from channel
+group by owner
+
+20. Find the name of the program that is broadcasted most frequently.
+
+select t1.name
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+group by t2.program_id
+order by count(*) desc
+limit 1
