@@ -35,7 +35,7 @@ order by launch
 select name, origin, owner
 from program
 
-7. find the name of the program that was lanuched most recent.
+7. find the name of the program that was lanuched most recently.
 
 select name
 from program
@@ -52,17 +52,17 @@ where owner = 'CCTV'
 
 select t1.name
 from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
-where time_of_day = 'Morning'
+where t2.time_of_day = 'Morning'
 
 10. what are the names of the channels that broadcast in both morning and night?
 
 select t1.name
 from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
-where time_of_day = 'Morning'
+where t2.time_of_day = 'Morning'
 intersect
 select t1.name
 from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
-where time_of_day = 'Night'
+where t2.time_of_day = 'Night'
 
 11. how many programs are broadcasted in each time section of the day?
 
@@ -83,19 +83,19 @@ from program
 except
 select t1.name
 from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
-where 	Time_of_day = "Morning"
+where t2.Time_of_day = "Morning"
 
 14. find the program owners that have some programs in both morning and night time.
 
 select t1.owner
 from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
-where Time_of_day = "Morning"
+where t2.Time_of_day = "Morning"
 intersect
 select t1.owner
 from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
-where Time_of_day = "Night"
+where t2.Time_of_day = "Night"
 
-15. List all program origin in the alphabetical order.
+15. List all program origins in the alphabetical order.
 
 select origin
 from program
@@ -109,7 +109,6 @@ from channel
 17. find the name of programs whose origin is not in Beijing.
 
 select name
-from programselect name
 from program
 where origin != 'Beijing'
 
@@ -118,7 +117,6 @@ where origin != 'Beijing'
 select name
 from channel
 where owner = 'CCTV' or owner = 'HBS'
-where origin != Beijing
 
 19. Find the total rating ratio for each channel owner.
 
