@@ -10,7 +10,7 @@ S:
 S:
 S:
 
-2. List the total number of horses of farms in ascending order.
+2. List the total number of horses on farms in ascending order.
 P: What is the total horses record for each farm, sorted ascending?
 
 SELECT Total_Horses
@@ -32,7 +32,7 @@ S:
 S:
 S:
 
-4. Who are the themes of farm competitions sorted by year in ascending order?
+4. What are the themes of farm competitions sorted by year in ascending order?
 P: Return the themes of farm competitions, sorted by year ascending.
 
 SELECT Theme
@@ -43,7 +43,7 @@ S:
 S:
 S:
 
-5. What are the average number of working horses of farms with more than 5000 total number of horses?
+5. What is the average number of working horses of farms with more than 5000 total number of horses?
 P: Give the average number of working horses on farms with more than 5000 total horses.
 
 SELECT avg(Working_Horses)
@@ -54,7 +54,7 @@ S:
 S:
 S:
 
-6. What are the maximum and minimum number of cows of all farms.
+6. What are the maximum and minimum number of cows across all farms.
 P: Return the maximum and minimum number of cows across all farms.
 
 SELECT max(Cows), min(Cows)
@@ -64,7 +64,7 @@ S:
 S:
 S:
 
-7. How many different status do cities have?
+7. How many different statuses do cities have?
 P: Count the number of different statuses.
 
 SELECT count(distinct Status)
@@ -133,7 +133,7 @@ S:
 S:
 S:
 
-13. Please show the themes of competitions with host cities having population larger than 1000.
+13. Please show the themes of competitions with host cities having populations larger than 1000.
 P: What are the themes of competitions that have corresponding host cities with more than 1000 residents?
 
 SELECT T2.Theme
@@ -145,7 +145,7 @@ S:
 S:
 S:
 
-14. Please show different status of cities and the average population of cities with each status.
+14. Please show the different statuses of cities and the average population of cities with each status.
 P: What are the statuses and average populations of each city?
 
 SELECT Status, avg(Population)
@@ -156,7 +156,7 @@ S:
 S:
 S:
 
-15. Please show the status of cities in ascending order of count.
+15. Please show the different statuses, ordered by the number of cities that have each.
 P: Return the different statuses of cities, ascending by frequency.
 
 SELECT Status
@@ -168,7 +168,7 @@ S:
 S:
 S:
 
-16. List the most common type of Status of cities.
+16. List the most common type of Status across cities.
 P: What is the most common status across all cities?
 
 SELECT Status
@@ -206,7 +206,7 @@ S:
 S:
 S:
 
-19. Find the official name of cities with population bigger than 1500 and smaller than 500.
+19. Find the official names of cities with population bigger than 1500 or smaller than 500.
 P: What are the official names of cities that have population over 1500 or less than 500?
 
 SELECT Official_Name
