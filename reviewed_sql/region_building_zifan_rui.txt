@@ -68,7 +68,7 @@ Having COUNT(*) > 1
 
 12. Show the capital of the region that have the most number of buildings.
 
-SELECT T2.Name
+SELECT T2.capital
 FROM building as T1 join region as T2 
 ON T1.Region_ID = T2.Region_ID
 group by T1.Region_ID
@@ -87,7 +87,7 @@ FROM building as T1 join region as T2
 ON T1.Region_ID = T2.Region_ID
 Where T2.Name = "Abruzzo"
  
-15. Please show the years in and the number of buildings completed within each year.
+15. Please show the years and the number of buildings completed in each year.
 
 SELECT Completed_Year, COUNT(*)
 FROM building 
