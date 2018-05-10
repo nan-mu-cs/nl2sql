@@ -16,7 +16,7 @@ Select count(*), city
 From employee
 Group by city
 
-4. Which cities do more than one employee under age 30 come from.
+4. Which cities do more than one employee under age 30 come from?
 
 Select city
 From employee
@@ -87,7 +87,7 @@ Limit 1
 
 Select name
 From shop
-Where shop_id not in(select shop_id from hiring)
+Where shop_id not in (select shop_id from hiring)
 
 16. Find the number of employees hired in each shop, show the shop name as well.
 
@@ -95,7 +95,7 @@ Select count(*), t2.name
 From hiring as t1 join shop as t2 on t1.shop_id = t2.shop_id
 Group by t2.name
 
-17. What is total bonuses gave in all evaluations?
+17. What is total bonuses given in all evaluations?
 
 Select sum(bonus)
 From evaluation
@@ -106,7 +106,6 @@ Select *
 From hiring
 
 19. Which district has both the stores with less 3000 and more than 10000 products.
-
 
 Select district
 From shop
@@ -120,5 +119,3 @@ Where Number_products > 10000
 
 Select count(distinct location)
 From shop
-
-
