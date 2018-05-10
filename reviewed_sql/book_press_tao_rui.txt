@@ -27,13 +27,8 @@ limit 1
 
 select name
 from press
-order by Month_Profits_billion desc
-limit 1
-union
-select name
-from press
-order by Month_Profits_billion
-limit 1
+where Month_Profits_billion = (select min(Month_Profits_billion) from press) OR
+      Month_Profits_billion = (select max(Month_Profits_billion) from press)
 
 6. how many authors are under age 30?
 
@@ -41,7 +36,7 @@ select count(*)
 from author
 where age < 30
 
-7. find the average age of authors with different sex.
+7. find the average age of authors for each sex.
 
 select avg(age), gender
 from author
@@ -73,7 +68,7 @@ from book
 order by sale_amount desc
 limit 5
 
-12. Find the series that has some book not only sell more than 1000 but also less 500.
+12. Find the book series that have some book selling more than 1000 and some book less 500.
 
 select book_series
 from book
@@ -93,9 +88,9 @@ select t1.name
 from author as t1 join book as t2 on t1.author_id = t2.author_id
 where t2.book_series = 'LT'
 
-14. Find the name and age of the authors who do not any book in our record.
+14. Find the name and age of the authors who do not have any book in our record.
 
-select name
+select name, age
 from author
 where author_id not in (select author_id from book)
 
@@ -121,7 +116,7 @@ select sum(t1.sale_amount), t2.name
 from book as t1 join press as t2 on t1.press_id = t2.press_id
 group by t1.press_id
 
-18. find the number of books that are sell more than 1000 for each publisher, list the press name as well.
+18. find the number of books that are sold more than 1000 for each publisher, list the press name as well.
 
 select count(*), t2.name
 from book as t1 join press as t2 on t1.press_id = t2.press_id
@@ -137,7 +132,7 @@ limit 1
 
 20. find the name and gender of the author who published most number of books.
 
-select t1.name
+select t1.name, t1.gender
 from author as t1 join book as t2 on t1.author_id = t2.author_id
 group by t2.author_id
 order by count(*) desc 
