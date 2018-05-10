@@ -1,0 +1,230 @@
+Total = 20
+
+1. How many farms are there?
+P: Count the number of farms.
+
+SELECT count(*)
+FROM farm
+
+S:
+S:
+S:
+
+2. List the total number of horses of farms in ascending order.
+P: What is the total horses record for each farm, sorted ascending?
+
+SELECT Total_Horses
+FROM farm
+order by Total_Horses ASC
+
+S:
+S:
+S:
+
+3. What are the hosts of competitions whose theme is not "Aliens"?
+P: Return the hosts of competitions for which the theme is not Aliens?
+
+SELECT Hosts
+FROM farm_competition
+where Theme != 'Aliens'
+
+S:
+S:
+S:
+
+4. Who are the themes of farm competitions sorted by year in ascending order?
+P: Return the themes of farm competitions, sorted by year ascending.
+
+SELECT Theme
+FROM farm_competition
+order by Year ASC
+
+S:
+S:
+S:
+
+5. What are the average number of working horses of farms with more than 5000 total number of horses?
+P: Give the average number of working horses on farms with more than 5000 total horses.
+
+SELECT avg(Working_Horses)
+FROM farm
+WHERE Total_Horses > 5000
+
+S:
+S:
+S:
+
+6. What are the maximum and minimum number of cows of all farms.
+P: Return the maximum and minimum number of cows across all farms.
+
+SELECT max(Cows), min(Cows)
+FROM farm
+
+S:
+S:
+S:
+
+7. How many different status do cities have?
+P: Count the number of different statuses.
+
+SELECT count(distinct Status)
+FROM city
+
+S:
+S:
+S:
+
+8. List official names of cities in descending order of population.
+P: What are the official names of cities, ordered descending by population?
+
+SELECT Official_Name
+FROM city
+order by Population DESC
+
+S:
+S:
+S:
+
+9. List the official name and status of the city with the largest population.
+P: What is the official name and status of the city with the most residents?
+
+SELECT Official_Name, Status
+FROM city
+order by Population DESC limit 1
+
+S:
+S:
+S:
+
+10. Show the years and the official names of the host cities of competitions.
+P: Give the years and official names of the cities of each competition.
+
+SELECT T2.Year, T1.Official_Name
+FROM city as T1 join farm_competition as T2 
+ON T1.City_ID = T2.Host_city_ID
+
+S:
+S:
+S:
+
+11. Show the official names of the cities that have hosted more than one competition. 
+P: What are the official names of cities that have hosted more than one competition?
+
+SELECT T1.Official_Name
+FROM city as T1 join farm_competition as T2 
+ON T1.City_ID = T2.Host_city_ID
+group by T2.Host_city_ID
+Having COUNT(*) > 1
+
+S:
+S:
+S:
+
+12. Show the status of the city that has hosted the greatest number of competitions.
+P: What is the status of the city that has hosted the most competitions?
+
+SELECT T1.Status
+FROM city as T1 join farm_competition as T2 
+ON T1.City_ID = T2.Host_city_ID
+group by T2.Host_city_ID
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+13. Please show the themes of competitions with host cities having population larger than 1000.
+P: What are the themes of competitions that have corresponding host cities with more than 1000 residents?
+
+SELECT T2.Theme
+FROM city as T1 join farm_competition as T2 
+ON T1.City_ID = T2.Host_city_ID
+Where T1.Population > 1000
+
+S:
+S:
+S:
+
+14. Please show different status of cities and the average population of cities with each status.
+P: What are the statuses and average populations of each city?
+
+SELECT Status, avg(Population)
+FROM city
+group by Status
+ 
+S:
+S:
+S:
+
+15. Please show the status of cities in ascending order of count.
+P: Return the different statuses of cities, ascending by frequency.
+
+SELECT Status
+FROM city
+group by Status
+order by COUNT(*) ASC
+
+S:
+S:
+S:
+
+16. List the most common type of Status of cities.
+P: What is the most common status across all cities?
+
+SELECT Status
+FROM city
+group by Status
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+17. List the official names of cities that have not held any competition.
+P: What are the official names of cities that have not hosted a farm competition?
+
+SELECT Official_Name
+from city
+where City_ID not in (SELECT Host_city_ID FROM farm_competition)
+
+S:
+S:
+S:
+
+18. Show the status shared by cities with population bigger than 1500 and smaller than 500.
+P: Which statuses correspond to both cities that have a population over 1500 and cities that have a population lower than 500?
+
+SELECT Status
+FROM city
+Where Population > 1500
+Intersect 
+SELECT Status
+FROM city
+Where Population < 500
+
+S:
+S:
+S:
+
+19. Find the official name of cities with population bigger than 1500 and smaller than 500.
+P: What are the official names of cities that have population over 1500 or less than 500?
+
+SELECT Official_Name
+FROM city
+Where Population > 1500 OR Population < 500
+
+S:
+S:
+S:
+
+20. Show the census ranking of cities whose status are not "Village".
+P: What are the census rankings of cities that do not have the status "Village"?
+
+SELECT Census_Ranking
+FROM city
+Where Status != "Village"
+
+S:
+S:
+S:
+
