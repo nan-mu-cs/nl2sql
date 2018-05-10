@@ -40,7 +40,7 @@ from candidate
 order by oppose_rate desc
 limit 1
 
-7. list all people's names in the order of their date of birth from old to young.
+7. list all people names in the order of their date of birth from old to young.
 
 select name
 from people
@@ -86,7 +86,7 @@ group by t1.sex
 order by avg(t2.unsure_rate) desc
 limit 1
 
-14. what are the names of people who are not participate in the candidate election.
+14. what are the names of people who do not participate in the candidate election.
 
 select name
 from people
@@ -110,7 +110,7 @@ group by sex
 select max(support_rate), min(consider_rate), min(oppose_rate)
 from candidate
 
-18. list all female (sex is F) candidates' names in the alphabetical order.
+18. list all female (sex is F) candidate names in the alphabetical order.
 
 select t1.name
 from people as t1 join candidate as t2 on t1.people_id = t2.people_id
