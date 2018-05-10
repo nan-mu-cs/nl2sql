@@ -1,0 +1,129 @@
+Total = 20
+
+1. How many buildings are there?
+
+SELECT count(*)
+FROM building
+
+2. List the names of buildings in ascending order of number of stories.
+
+SELECT Name
+FROM building
+order by Number_of_Stories ASC
+
+3. List the addresses of buildings in descending order of completed year.
+
+SELECT Address
+FROM building
+order by Completed_Year DESC
+
+4. What are the maximum number of stories of buildings not completed in 1980?
+
+SELECT max(Number_of_Stories)
+FROM building
+Where Completed_Year != "1980"
+
+5. What is the average population for all regions?
+
+SELECT avg(Population)
+FROM region
+
+6. What are the names of regions in ascending alphabetical order?
+
+SELECT Name
+FROM region
+order by Name ASC
+
+7. What are the capitals of regions with area bigger than 10000?
+
+SELECT Capital
+FROM region
+Where Area > 10000
+
+8. List the capital of the region with the largest population.
+
+SELECT Capital
+FROM region
+order by Population DESC limit 1
+
+9. List the names of the regions with the top 5 largest area.
+
+SELECT Name
+FROM region
+order by Area DESC limit 5
+
+10. Show names of buildings and the names of regions they are in.
+
+SELECT T1.Name, T2.Name
+FROM building as T1 join region as T2 
+ON T1.Region_ID = T2.Region_ID
+
+11. Show names of regions that have more than one building.
+
+SELECT T2.Name
+FROM building as T1 join region as T2 
+ON T1.Region_ID = T2.Region_ID
+group by T1.Region_ID
+Having COUNT(*) > 1
+
+12. Show the capital of the region that have the most number of buildings.
+
+SELECT T2.Name
+FROM building as T1 join region as T2 
+ON T1.Region_ID = T2.Region_ID
+group by T1.Region_ID
+order by COUNT(*) DESC limit 1
+
+13. Show addresses of buildings and the capitals of regions they are in.
+
+SELECT T1.Address, T2.Capital
+FROM building as T1 join region as T2 
+ON T1.Region_ID = T2.Region_ID
+
+14. Show the number of stories of buildings in region with name "Abruzzo".
+
+SELECT T1.Number_of_Stories
+FROM building as T1 join region as T2 
+ON T1.Region_ID = T2.Region_ID
+Where T2.Name = "Abruzzo"
+ 
+15. Please show the years in and the number of buildings completed within each year.
+
+SELECT Completed_Year, COUNT(*)
+FROM building 
+group by Completed_Year
+
+16. List the year in which the most number of buildings are completed.
+
+SELECT Completed_Year
+FROM building 
+group by Completed_Year
+order by COUNT(*) DESC limit 1
+
+17. List the names of regions that do not have any buildings.
+
+SELECT Name
+from region
+where Region_ID not in (SELECT Region_ID FROM building)
+
+18. Show the completed years shared by buildings with more than 20 stories and less than 15 stories.
+
+SELECT Completed_Year
+FROM building
+Where Number_of_Stories > 20
+Intersect 
+SELECT Completed_Year
+FROM building
+Where Number_of_Stories < 15
+
+19. Show the distinct addresses of buildings.
+
+SELECT distinct Address
+FROM building
+
+20. Show the completed years of buildings in descending order of the number of stories..
+
+SELECT Completed_Year
+from building
+order by Number_of_Stories DESC
+
