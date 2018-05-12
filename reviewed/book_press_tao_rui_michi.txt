@@ -1,0 +1,289 @@
+1. list all the names of press in descending order of the profit of the year.
+P: Sorted all the press by year profits in descending order, and return press names.
+
+select name
+from press
+order by Year_Profits_billion desc
+
+S:
+S:
+S:
+
+
+2. What are the names of the publishers that made more than 15 billion profits each year or 1 billion each month?
+P: Find the press whose yearly profit is more than 15 billion or whose monthly profit is more than 1 billion. Return the press names.
+
+select name
+from press
+where Year_Profits_billion > 15 or Month_Profits_billion > 1
+
+S:
+S:
+S:
+
+
+3. what are the average and maximum profit of a year for all presses?
+P: Find the average and maximum yearly profit for each press.
+
+select avg(Year_Profits_billion), max(Year_Profits_billion)
+from press
+
+S:
+S:
+S:
+
+
+4. Find the name of the publisher whose monthly profit is the highest.
+P: Which press has the largest monthly profit? Give me the press name.
+
+select name
+from press
+order by Month_Profits_billion desc
+limit 1
+
+S:
+S:
+S:
+
+
+5. Find the name of the publisher whose monthly profit is the highest or the lowest.
+P: What are the names of the press that makes the highest monthly profit or the lowest monthly profit?
+
+select name
+from press
+where Month_Profits_billion = (select min(Month_Profits_billion) from press) OR
+Month_Profits_billion = (select max(Month_Profits_billion) from press)
+
+S:
+S:
+S:
+
+
+6. how many authors are under age 30?
+P: Count the number of authors of age below 30.
+
+select count(*)
+from author
+where age < 30
+
+S:
+S:
+S:
+
+
+7. find the average age of authors for each gender.
+P: For each gender, return gender and the average age of authors.
+
+select avg(age), gender
+from author
+group by gender
+
+S:
+S:
+S:
+
+
+8. find the number of authors who are older than 30 for each gender.
+P: How many authors are of age above 30 for each gender?
+
+select count(*), gender
+from author
+where age > 30
+group by gender
+
+S:
+S:
+S:
+
+
+9. List all book titles in the order of their release date from the most recent to the past.
+P: Sort all the books in descending order of release date, and return the book titles.
+
+select title
+from book
+order by release_date desc
+
+S:
+S:
+S:
+
+
+10. Find the number of books for each series.
+P: How many books does each book series have? Return the counts and book series.
+
+select count(*), book_series
+from book
+group by book_series
+
+S:
+S:
+S:
+
+
+11. Find the titles and publish dates of the top 5 best sale books.
+P: What are the 5 best books in terms of sale amount? Give me their titles and release dates.
+
+select title, release_date
+from book
+order by sale_amount desc
+limit 5
+
+S:
+S:
+S:
+
+
+12. Find the book series that have some book selling more than 1000 and some book less 500.
+P: Which book series contain both books with sale amount above 1000 and books with sale amount below 500?
+
+select book_series
+from book
+where sale_amount > 1000
+intersect
+select book_series
+from book
+where sale_amount < 500
+
+S:
+S:
+S:
+
+
+13. Find the name of authors who publish their books in both "MM" and "LT" series.
+P: Which authors publish books in both "MM" and "LT" series? Give me the author names.
+
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+where t2.book_series = 'MM'
+intersect
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+where t2.book_series = 'LT'
+
+S:
+S:
+S:
+
+
+14. Find the name and age of the authors who do not have any book in the record.
+P: Which authors in the record have not published any books? Give me their names.
+
+select name, age
+from author
+where author_id not in (select author_id from book)
+
+S:
+S:
+S:
+
+
+15. Find the names of authors who have more than one book in the database.
+P: Which authors have published more than 1 book according to the database? Give me their names.
+
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+group by t2.author_id
+having count(*) > 1
+
+S:
+S:
+S:
+
+
+16. Find the title, author name, and publisher name for the top 3 best sales books.
+P: What are the 3 best selling books? Show their titles, author names, and press names.
+
+select t1.name, t2.title, t3.name
+from author as t1
+join book as t2 on t1.author_id = t2.author_id
+join press as t3 on t2.press_id = t3.press_id
+order by t2.sale_amount desc
+limit 3
+
+S:
+S:
+S:
+
+
+17. Find the name and total book sale amount of each press.
+P: What are the name and total book sale amount of each press?
+
+select sum(t1.sale_amount), t2.name
+from book as t1 join press as t2 on t1.press_id = t2.press_id
+group by t1.press_id
+
+S:
+S:
+S:
+
+
+18. Find the number of books that are sold more than 1000 for each publisher. List the press name as well.
+P: For each press, return its name and the number of books that have sale amount above 1000.
+
+select count(*), t2.name
+from book as t1 join press as t2 on t1.press_id = t2.press_id
+where sale_amount > 1000
+group by t2.name
+
+S:
+S:
+S:
+
+
+19. What is the name of the author of best selling book?
+P: Who wrote the best selling book? Give me the author name.
+
+select t1.name
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+order by t2.sale_amount desc
+limit 1
+
+S:
+S:
+S:
+
+
+20. find the name and gender of the author who published the most books.
+P: Who wrote the largest number of books? Give me the author name and gender.
+
+select t1.name, t1.gender
+from author as t1 join book as t2 on t1.author_id = t2.author_id
+group by t2.author_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+21. Find the names of the authors who did not have any book with the "Accor" press.
+P: Which authors have never published under the "Accor" press? Give me their names.
+
+select name
+from author
+except
+select t1.name
+from author as t1
+join book as t2 on t1.author_id = t2.author_id
+join press as t3 on t2.press_id = t3.press_id
+where t3.name = 'Accor'
+
+S:
+S:
+S:
+
+
+22. Find the name and the yearly profit in billion for press that published more than two books.
+P: Find the press that published more than two books, and return its name and yearly profit in billion.
+
+select t2.name, t2.Year_Profits_billion
+from book as t1 join press as t2 on t1.press_id = t2.press_id
+group by t2.press_id
+having count(*) > 2
+
+S:
+S:
+S:
+
+
