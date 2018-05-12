@@ -36,12 +36,12 @@ FROM Songs
 6. Find all the songs performed by artist with last name "Heilo"
 P: What are the names of the songs by the artist whose last name is "Heilo"?
 
-SELECT Title
+SELECT T3.Title
 FROM Performance as T1 join Band as T2
 on T1.bandmate = T2.id
 join Songs as T3
 on T3.SongId = T1.SongId
-where Lastname = "Heilo"
+where T2.Lastname = "Heilo"
 
 7. Hom many musicians performed in the song "Flash"?
 P: How many musicians play in the song "Flash"?
@@ -146,7 +146,7 @@ join Songs as T3
 on T3.SongId = T1.SongId
 join Instruments as T4
 on T4.songid = T3.songid and T4.bandmateid = T2.id
-where lastname = "Heilo" and title = "Le Pop"
+where T2.lastname = "Heilo" and T3.title = "Le Pop"
 
 18. What is the most used instrument?
 P: What instrument is used the most?
@@ -258,7 +258,7 @@ from vocals as T1 join songs as T2
 on T1.songid = T2.songid
 join band as T3
 on T1.bandmate = T3.id
-where firstname = "Solveig" and title = "A Bar In Amsterdam"
+where T3.firstname = "Solveig" and T2.title = "A Bar In Amsterdam"
 
 31. Find all the songs that do not have a lead vocal.
 P: What are the names of the songs without a lead vocal?
@@ -317,7 +317,7 @@ join Songs as T3
 on T3.SongId = T1.SongId
 join Instruments as T4
 on T4.songid = T3.songid and T4.bandmateid = T2.id
-where lastname = "Heilo" and title = "Badlands"
+where T2.lastname = "Heilo" and T3.title = "Badlands"
 
 37. How many instruments does the song "Badlands" use?
 P: How many different instruments are used in the song "Badlands"?
@@ -382,7 +382,7 @@ from vocals as T1 join songs as T2
 on T1.songid = T2.songid
 join band as T3
 on T1.bandmate = T3.id
-where lastname = "Heilo" and title = "Der Kapitan"
+where T3.lastname = "Heilo" and T2.title = "Der Kapitan"
 
 44. Find the first name of the band mate that has performed in most songs.
 P: What is the first name of the band mate who perfomed in the most songs? 
