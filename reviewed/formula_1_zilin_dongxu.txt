@@ -197,8 +197,8 @@ WHERE T2.country="Spain" and T1.year>2017
 P: What are the names of all races held after 2000 in Spain?
 
 SELECT distinct T1.name
-FROM races as T1, circuits as T2
-WHERE T1.circuitid=T2.circuitid and T2.country="Spain" and T1.year>2000
+FROM races as T1, circuits as T2 on T1.circuitid=T2.circuitid
+WHERE T2.country="Spain" and T1.year>2000
 
 
 22. Find the distinct driver id and the stop number of all drivers that have a shorter pit stop duration than some drivers in the race with id 841.
@@ -238,13 +238,13 @@ SELECT distinct name
 FROM races
 ORDER BY name desc
 
-26. What are the names of races held between 2009 and 2011 or between 2014 and 2017?
-P: What are the names of all races held between 2009 and 2011 or between 2014 or 2017?
+26. What are the names of races held between 2009 and 2011?
+P: What are the names of all races held between 2009 and 2011?
 
 
 SELECT name
 FROM races
-WHERE year between 2009 and 2011 or year between 2014 and 2017
+WHERE year between 2009 and 2011
 
 
 27. What are the names of races held after 12:00:00 or before 09:00:00?
