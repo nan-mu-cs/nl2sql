@@ -424,43 +424,12 @@ S:
 S:
 
 
-34. Find the average number of students in one classroom.
-P: How many students does one classroom have on average?
+34. Find the number of students in one classroom.
+P: How many students does one classroom have?
 
-select avg(cnt) from
-(select count(*) as cnt
+select count(*), classroom
 from list
-group by classroom)
-
-S:
-S:
-S:
-
-
-35. Report the first and last names of the teachers who have between seven and eight students in their classes.
-P: Which teachers have 7 to 8 students in their classes? Show their first and last names.
-
-select firstname, lastname
-from (select T2.firstname as firstname, T2.lastname as lastname, count(*) as cnt
-from list as T1 join teachers as T2
-on T1.classroom = T2.classroom
-group by T2.firstname, T2.lastname)
-where cnt >= 7 and cnt <= 8
-
-S:
-S:
-S:
-
-
-36. Find the last names of the teachers who have between 3 and 6 students in their classes.
-P: Which teachers have 3 to 6 students in their classes? Tell me their last names.
-
-select lastname
-from (select T2.firstname as firstname, T2.lastname as lastname, count(*) as cnt
-from list as T1 join teachers as T2
-on T1.classroom = T2.classroom
-group by T2.firstname, T2.lastname)
-where cnt >= 3 and cnt <= 6
+group by classroom
 
 S:
 S:
