@@ -228,51 +228,6 @@ S:
 S:
 
 
-17. Find the title of papers that only have one author.
-P: Which papers have just one author? Find their titles.
-
-select title
-from (select T1.title, count(distinct T2.authid) as author_count
-from papers as T1 join authorship as T2
-on t1.paperid = t2.paperid
-group by t1.title)
-where author_count = 1
-
-S:
-S:
-S:
-
-
-18. Find the title of papers that have two authors.
-P: Which papers are written by two authors? Give me their titles.
-
-select title
-from (select T1.title, count(distinct T2.authid) as author_count
-from papers as T1 join authorship as T2
-on t1.paperid = t2.paperid
-group by t1.title)
-where author_count = 2
-
-S:
-S:
-S:
-
-
-19. Which paper(s) have more than one authors?
-P: Find the titles of the papers that were written by more than one authors.
-
-select title
-from (select T1.title, count(distinct T2.authid) as author_count
-from papers as T1 join authorship as T2
-on t1.paperid = t2.paperid
-group by t1.title)
-where author_count > 1
-
-S:
-S:
-S:
-
-
 20. Find the papers which have "Olin Shivers" as an author.
 P: Which papers did the author "Olin Shivers" write? Give me the paper titles.
 
@@ -450,50 +405,6 @@ from authorship as t1 join papers as t2
 on t1.paperid = t2.paperid
 where t1.authorder = (select max(authorder)
 from authorship)
-
-Or, even better (more generic):
-
-select title
-from (select title, count(*) as author_count
-from papers as t1 join authorship as t2
-on t1.paperid = t2.paperid
-group by title)
-order by author_count desc
-limit 1
-
-S:
-S:
-S:
-
-
-32. Find the titles of the papers with authors from more than one institution.
-P: Which papers have authors from multiple institutions? Give me the paper titles.
-
-select title
-from (select title, count(t2.instid) as institution_count
-from papers as t1 join authorship as t2
-on t1.paperid = t2.paperid
-group by title)
-where institution_count > 1
-
-S:
-S:
-S:
-
-
-33. Find the titles of the papers with authors from one single institution.
-P: What are the titles of the papers that have authors from just one institution?
-
-select title
-from (select title, count(t2.instid) as institution_count
-from papers as t1 join authorship as t2
-on t1.paperid = t2.paperid
-group by title)
-where institution_count = 1
-
-S:
-S:
-S:
 
 
 34. What is the first name of the author with last name "Ueno"?
