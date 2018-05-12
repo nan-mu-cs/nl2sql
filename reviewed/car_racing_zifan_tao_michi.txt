@@ -53,7 +53,7 @@ P: Find the manager and sponsor for each team and order them by the car owner.
 
 SELECT Manager, Sponsor
 FROM team
-order Car_Owner
+order by Car_Owner
 
 S:
 S:
