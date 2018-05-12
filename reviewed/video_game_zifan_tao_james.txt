@@ -45,7 +45,7 @@ S:
 5. What are the names and id of platforms whose download rank is 1?
 P: Return the names and ids of all platforms with the download rank of 1.
 
-SELECT Platform_name, id
+SELECT Platform_name, Platform_ID
 FROM platform
 WHERE Download_rank = 1
 
