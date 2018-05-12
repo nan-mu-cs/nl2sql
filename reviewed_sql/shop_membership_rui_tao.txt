@@ -1,0 +1,146 @@
+1. How many branches where have more than average number of memberships are there?
+
+select count(*)
+from branch
+where membership_amount > (select avg(membership_amount) from branch)
+
+2. Show name, address road, and city for all branches sorted by open year.
+
+select name, address_road, city
+from branch
+order by open_year
+
+3. What are names for top three branches with most number of membership?
+
+select name
+from branch
+order by membership_amount desc
+limit 3
+
+4. Show all distinct city where branches with at least 100 memberships are located.
+
+select distinct city
+from branch
+where membership_amount >= 100
+
+5. List all open years when at least two shops are opened.
+
+select open_year
+from branch
+group by open_year
+having count(*) >= 2
+
+6.  Show minimum and maximum amount of memberships for all branches opened in 2011 or located at city London.
+
+select min(membership_amount), max(membership_amount)
+from branch
+where open_year = 2011 or city = 'London'
+
+7. Show the city and the number of branches opened before 2010 for each city.
+
+select city, count(*)
+from branch
+where open_year < 2010
+group by city
+
+8. How many different levels do members have?
+
+select count(distinct level)
+from member
+
+9. Show card number, name, and hometown for all members in a descending order of level.
+
+select card_number, name, hometown
+from member
+order by level desc
+
+10. Show the membership level with most number of members.
+
+select level
+from member
+group by level
+order by count(*) desc
+limit 1
+
+11. Show all member names and registered branch names sorted by register year.
+
+select T3.name, T2.name
+from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id join member as T3 on T1.member_id = T3.member_id
+order by T1.register_year
+
+12. Show all branch names with the number of members in each branch registered after 2015.
+
+select T2.name, count(*)
+from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id
+where T1.register_year > 2015
+group by T2.branch_id
+
+13. Show member names without any registered branch.
+
+select name
+from member
+where member_id not in (select member_id from membership_register_branch)
+
+14. List the branch name and city without any registered member.
+
+select name, city
+from branch
+where branch_id not in (select branch_id from membership_register_branch)
+
+15. What is the name and open year for the branch with most number of memberships registered in 2016?
+
+select T2.name, T2.open_year
+from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id
+where T1.register_year = 2016
+group by T2.branch_id
+order by count(*) desc
+limit 1
+
+16. Show the member name and hometown who registered a branch in 2016.
+
+select T2.name, T2.hometown
+from membership_register_branch as T1 join member as T2 on T1.member_id = T2.member_id
+where T1.register_year = 2016
+
+17. Show all city with a branch opened in 2001 and a branch with more than 100 membership.
+
+select city
+from branch
+where open_year = 2001 and membership_amount > 100
+
+18. Show all cities without a branch having more than 100 membership.
+
+select city
+from branch
+EXCEPT
+select city
+from branch
+where membership_amount > 100
+
+19. What is the sum of total pounds of purchase in year 2018 for all branches in London?
+
+select sum(total_pounds)
+from purchase as T1 join branch as T2 on T1.branch_id = T2.branch_id
+where T2.city = 'London' and T1.year = 2018
+
+20. What is the total number of purchases for members with level 6?
+
+select count(*)
+from purchase as T1 join member as T2 on T1.member_id = T2.member_id
+where T2.level = 6
+
+21. Find the name of branches where have some members whose hometown is in Louisville, Kentucky and some in Hiram, Georgia.
+
+select T2.name
+from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id join member as T3 on T1.member_id = T3.member_id
+where T3.Hometown = 'Louisville, Kentucky'
+intersect
+select T2.name
+from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id join member as T3 on T1.member_id = T3.member_id
+where T3.Hometown = 'Hiram, Georgia'
+
+22. list the card number of all members whose hometown address includes word "Kentucky".
+
+select card_number
+from member
+where Hometown LIKE "%Kentucky%"
