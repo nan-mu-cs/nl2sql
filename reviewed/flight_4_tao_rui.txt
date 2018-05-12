@@ -300,15 +300,6 @@ from routes
 where dst_apid IN (select apid from airports where country = 'United States') 
       and src_apid IN (select apid from airports where country = 'United States')
 
-39. Find the number of routes whose source and destination airports are in different countries.
-P: How many routes have source and destination airports in different countries?
-
-COMMENT: sql not correct?
-
-select count(*)
-from routes
-where (select country from airports where apid = dst_apid) != (select country from airports where apid = src_apid)
-
 
 40. Find the name of airline which runs the most number of routes.
 P: What is the name of the airline with the most routes?
