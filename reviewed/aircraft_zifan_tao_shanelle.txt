@@ -23,7 +23,7 @@ P: How many international and domestic passengers are there in the airport Londo
 
 SELECT International_Passengers, Domestic_Passengers
 FROM airport
-WHERE Airport_Name	= "London Heathrow"
+WHERE Airport_Name = "London Heathrow"
 
 5. What are the total number of Domestic Passengers of airports that contain the word "London".
 P: What are the total number of domestic passengers at all London airports?
