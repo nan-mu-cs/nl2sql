@@ -132,7 +132,7 @@ P: What are the first, middle, and last names for everybody enrolled in a Bachel
 
 select distinct T1.first_name, T1.middle_name, T1.last_name
 from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id JOIN Degree_Programs as T3 on T2.degree_program_id = T3.degree_program_id
-where degree_summary_name = 'Bachelor'
+where T3.degree_summary_name = 'Bachelor'
 
 
 
@@ -205,8 +205,8 @@ select T1.last_name
 from Students as T1 JOIN Addresses as T2 on T1.current_address_id = T2.address_id
 where T2.state_province_county = 'NorthCarolina'
 EXCEPT
-select distinct T1.last_name
-from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id
+select distinct T3.last_name
+from Students as T3 JOIN Student_Enrolment as T4 on T3.student_id = T4.student_id
 
 
 
@@ -346,13 +346,6 @@ P: What other details can you tell me about students in reverse alphabetical ord
 select other_student_details
 from Students
 order by other_student_details desc
-
-39. For how many years has the school been providing transcripts?
-P: for how many years has the school been creating transcripts?
-
-
-select max(transcript_date) - min(transcript_date)
-from Transcripts
 
 40. Describe the section h.
 P: What is the description for the section named h?
