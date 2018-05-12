@@ -13,6 +13,7 @@ SELECT distinct label
 FROM Albums
 
 3. Find all the albums in 2012.
+P: return all columns of the albums created in the year of 2012.
 
 SELECT *
 FROM Albums
