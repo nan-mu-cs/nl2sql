@@ -38,7 +38,7 @@ S:
 4. Find all the services that has been used by the customer with details "Hardy Kutch".
 P: Which services were used by the customer with details "Hardy Kutch"? Give me the service details.
 
-select service_details
+select t3.service_details
 from customers as t1 join customers_and_services as t2
 on t1.customer_id = t2.customer_id
 join services as t3
