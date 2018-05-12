@@ -227,7 +227,7 @@ S:
 P: Count the number of distinct store locations.
 
 Select count(distinct location)
-From shops
+From shop
 
 S:
 S:
