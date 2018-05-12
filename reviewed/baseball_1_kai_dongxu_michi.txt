@@ -52,22 +52,6 @@ S:
 S:
 
 
-5.  What are the id and name of the team appearing at any game with the most all star players?
-P: Find the id and name of the team that had the most all star players.
-
-select T2.team_id, T1.name
-from team as T1 JOIN appearances as T2
-ON T1.team_id = T2.team_id
-JOIN all_star as T3 ON T2.player_id = T3.player_id
-group by T2.team_id
-order by count(*) desc
-limit 1;
-
-S:
-S:
-S:
-
-
 6. How many players enter hall of fame each year?
 P: Count the number of players who enter hall of fame for each year.
 
@@ -190,7 +174,7 @@ S:
 P: Find the average height of the players who belong to the college called 'Yale University'.
 
 SELECT avg(T1.height)
-FROM player as T1 JOIN player_college T2 on T1.player_id = T2.player_id
+FROM player as T1 JOIN player_college as T2 on T1.player_id = T2.player_id
 JOIN college T3 on T3.college_id = T2.college_id
 WHERE T3.name_full = 'Yale University';
 
