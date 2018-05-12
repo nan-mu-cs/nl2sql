@@ -175,7 +175,7 @@ P: Find the average height of the players who belong to the college called 'Yale
 
 SELECT avg(T1.height)
 FROM player as T1 JOIN player_college as T2 on T1.player_id = T2.player_id
-JOIN college T3 on T3.college_id = T2.college_id
+JOIN college as T3 on T3.college_id = T2.college_id
 WHERE T3.name_full = 'Yale University';
 
 S:
