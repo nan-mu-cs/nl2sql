@@ -422,6 +422,6 @@ P: What are the names of all of Alice's friends of friends?
 SELECT distinct T4.name
 FROM PersonFriend as T1 
      JOIN Person as T2 ON T1.name = T2.name
-     JOIN PersonFriend T3 ON T1.friend = T3.name
-     JOIN PersonFriend T4 ON T3.friend = T4.name
+     JOIN PersonFriend as T3 ON T1.friend = T3.name
+     JOIN PersonFriend as T4 ON T3.friend = T4.name
  WHERE T2.name = 'Alice' AND T4.name != 'Alice'
