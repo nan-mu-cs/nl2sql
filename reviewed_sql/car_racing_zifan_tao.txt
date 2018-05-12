@@ -28,7 +28,7 @@ where age < 20
 
 SELECT Manager, Sponsor
 FROM team
-order Car_Owner
+order by Car_Owner
 
 how many teams for each make?
 
