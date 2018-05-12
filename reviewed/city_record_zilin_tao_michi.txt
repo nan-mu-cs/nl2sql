@@ -145,8 +145,8 @@ SELECT T1.city
 FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
 WHERE T2.Mar < T2.Jul
 INTERSECT
-SELECT T1.city
-FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+SELECT T3.city
+FROM city as T3 JOIN hosting_city as T4 ON T3.city_id = T4.host_city
 
 S:
 S:
@@ -160,8 +160,8 @@ SELECT T1.city
 FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
 WHERE T2.Mar < T2.Dec
 Except
-SELECT T1.city
-FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+SELECT T3.city
+FROM city as T3 JOIN hosting_city as T4 ON T3.city_id = T4.host_city
 
 S:
 S:
@@ -175,8 +175,8 @@ SELECT T1.city
 FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
 WHERE T2.Feb > T2.Jun
 union
-SELECT T1.city
-FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+SELECT T3.city
+FROM city as T3 JOIN hosting_city as T4 ON T3.city_id = T4.host_city
 
 S:
 S:
