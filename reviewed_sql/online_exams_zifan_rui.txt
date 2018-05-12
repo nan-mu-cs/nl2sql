@@ -1,0 +1,129 @@
+Total = 20
+
+1. How many exams are there?
+
+SELECT count(*)
+FROM Exams
+
+2. List the distinct subject code of exams in ascending alphabetical order.
+
+SELECT distinct Subject_Code
+FROM Exams
+order by Subject_Code
+
+3. What are the names and dates of exams with subject code that is not "Database"?
+
+SELECT Exam_Date, Exam_Name
+FROM Exams
+where Subject_Code != 'Database'
+
+4. List the dates of exams with subject code containing the word "data" in descending order of dates.
+
+SELECT Exam_Date
+FROM Exams
+Where Subject_Code LIKE '%data%'
+order by Exam_Date DESC
+
+5. What are the type of questions and the counts?
+
+SELECT Type_of_Question_Code, COUNT(*)
+FROM Questions
+group by Type_of_Question_Code
+
+6. What are the distinct student answer texts with comments "Normal"?
+
+SELECT distinct Student_Answer_Text
+FROM Student_Answers
+Where Comments = "Normal"
+
+7. How many different comments are there for student answers?
+
+SELECT count(distinct Comments)
+FROM Student_Answers
+
+8. List all student answer texts in descending order of count.
+
+SELECT Student_Answer_Text
+FROM Student_Answers
+group by Student_Answer_Text
+order by COUNT(*) DESC
+
+9. Please show the first names of students and the dates of their answers.
+
+SELECT T2.First_Name, T1.Date_of_Answer
+FROM Student_Answers as T1 join Students as T2 
+ON T1.Student_ID = T2.Student_ID
+
+10. Please show the email addresses of students and the dates of their answers in descending order of dates.
+
+SELECT T2.Email_Adress, T1.Date_of_Answer
+FROM Student_Answers as T1 join Students as T2 
+ON T1.Student_ID = T2.Student_ID
+order by T1.Date_of_Answer DESC
+
+11. Please show the least common assessment for students.
+
+SELECT Assessment
+FROM Student_Assessments
+group by Assessment
+order by COUNT(*) ASC limit 1
+
+12. Please show the first names of students that have at least two answer records.
+
+SELECT T2.First_Name
+FROM Student_Answers as T1 join Students as T2 
+ON T1.Student_ID = T2.Student_ID
+group by T1.Student_ID
+Having COUNT(*) >= 2
+
+13. What is the most common valid answer text?
+
+SELECT Valid_Answer_Text
+FROM Valid_Answers
+group by Valid_Answer_Text
+order by COUNT(*) DESC limit 1
+
+14. List the last name of students whose gender is not "M".
+
+SELECT Last_Name
+FROM Students
+Where Gender_MFU != "M"
+ 
+15. List different genders and the corresponding number of students.
+
+SELECT Gender_MFU, COUNT(*)
+FROM Students
+group by Gender_MFU
+
+16. List the last names of students whose gender is "F" or "M".
+
+SELECT Last_Name
+FROM Students
+Where Gender_MFU = "F" or Gender_MFU = "M"
+
+17. List the first names of students who do not have any answers.
+
+SELECT First_Name
+from Students
+where Student_ID not in (SELECT Student_ID FROM Student_Answers)
+
+18. Show the student answer texts with both comments "Normal" and "Absent".
+
+SELECT Student_Answer_Text
+FROM Student_Answers
+Where Comments = "Normal"
+Intersect 
+SELECT Student_Answer_Text
+FROM Student_Answers
+Where Comments = "Absent"
+
+19. Show the types of question that have at least three questions.
+
+SELECT Type_of_Question_Code
+FROM Questions
+group by Type_of_Question_Code
+Having count(*) >= 3
+
+20. Show all information on students.
+
+SELECT * from Students

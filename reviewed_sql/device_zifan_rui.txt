@@ -1,0 +1,134 @@
+Total = 20
+
+1. How many devices are there?
+
+SELECT count(*)
+FROM device
+
+2. List the carriers of devices in ascending alphabetical order.
+
+SELECT Carrier
+FROM device
+order by Carrier ASC
+
+3. What are the carriers of devices whose software platforms are not "Android"?
+
+SELECT Carrier
+FROM device
+where Software_Platform != 'Android'
+
+4. What are the names of shops in ascending order of open year?
+
+SELECT Shop_Name
+FROM shop
+order by Open_Year ASC
+
+5. What is the average quantity of stocks?
+
+SELECT avg(Quantity)
+FROM stock
+
+6. What are the names and location of the shops in ascending alphabetical order of name.
+
+SELECT Shop_Name, Location
+FROM shop
+order by Shop_Name ASC
+
+7. How many different software platforms are there for devices?
+
+SELECT count(distinct Software_Platform)
+FROM device
+
+8. List the open date of open year of the shop named "Apple".
+
+SELECT Open_Date, Open_Year 
+FROM shop
+Where Shop_Name = "Apple"
+
+9. List the name of the shop with the latest open year.
+
+SELECT Shop_Name
+FROM shop
+order by Open_Year DESC limit 1
+
+10. Show names of shops and the carries of devices they have in stock.
+
+SELECT T3.Shop_Name, T2.Carrier
+FROM stock as T1 join device as T2 
+ON T1.Device_ID = T2.Device_ID
+join shop as T3
+on T1.Shop_ID = T3.Shop_ID
+
+11. Show names of shops that have more than one kind of device in stock.
+
+SELECT T2.Shop_Name
+FROM stock as T1 join shop as T2
+on T1.Shop_ID = T2.Shop_ID
+group by T1.Shop_ID
+Having COUNT(*) > 1
+
+12. Show the name of the shop that has the most kind of devices in stock.
+
+SELECT T2.Shop_Name
+FROM stock as T1 join shop as T2
+on T1.Shop_ID = T2.Shop_ID
+group by T1.Shop_ID
+order by COUNT(*) DESC limit 1
+
+13. Show the name of the shop that have the largest quantity of devices in stock.
+
+SELECT T2.Shop_Name
+FROM stock as T1 join shop as T2
+on T1.Shop_ID = T2.Shop_ID
+group by T1.Shop_ID
+order by SUM(T1.quantity) DESC limit 1
+
+14. Please show different software platforms and the corresponding number of devices using each.
+
+SELECT Software_Platform, COUNT(*)
+FROM device
+group by Software_Platform
+ 
+15. Please show the software platforms of devices in descending order of the count.
+
+SELECT Software_Platform
+FROM device
+group by Software_Platform
+order by COUNT(*) DESC
+
+16. List the software platform shared by the most number of devices.
+
+SELECT Software_Platform
+FROM device
+group by Software_Platform
+order by COUNT(*) DESC limit 1
+
+17. List the names of shops that have no device in stock.
+
+SELECT Shop_Name
+from shop
+where Shop_ID not in (SELECT Shop_ID FROM stock)
+
+18. Show the locations shared by shops with open year later than 2012 and shops with open year before 2008.
+
+SELECT Location
+FROM shop
+Where Open_Year > 2012
+Intersect 
+SELECT Location
+FROM shop
+Where Open_Year < 2008
+
+19. List the carriers of devices that have no device in stock.
+
+SELECT Carrier
+from device
+where Device_ID not in (SELECT Device_ID FROM stock)
+
+20. Show the carriers of devices in stock at more than one shops.
+
+SELECT T2.Carrier
+FROM stock as T1 join device as T2 
+ON T1.Device_ID = T2.Device_ID
+group by T1.Device_ID
+Having COUNT(*) > 1

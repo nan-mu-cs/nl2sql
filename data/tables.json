@@ -1640,7 +1640,7 @@
       ],
       [
         1,
-        "dept name"
+        "department name"
       ],
       [
         1,
@@ -1660,7 +1660,7 @@
       ],
       [
         2,
-        "dept name"
+        "department name"
       ],
       [
         2,
@@ -1676,7 +1676,7 @@
       ],
       [
         3,
-        "dept name"
+        "department name"
       ],
       [
         3,
@@ -1688,7 +1688,7 @@
       ],
       [
         4,
-        "sec id"
+        "section id"
       ],
       [
         4,
@@ -1720,7 +1720,7 @@
       ],
       [
         5,
-        "sec id"
+        "section id"
       ],
       [
         5,
@@ -1740,11 +1740,11 @@
       ],
       [
         6,
-        "dept name"
+        "department name"
       ],
       [
         6,
-        "tot cred"
+        "total credits"
       ],
       [
         7,
@@ -1756,7 +1756,7 @@
       ],
       [
         7,
-        "sec id"
+        "section id"
       ],
       [
         7,
@@ -1772,11 +1772,11 @@
       ],
       [
         8,
-        "s id"
+        "student id"
       ],
       [
         8,
-        "i id"
+        "instructor id"
       ],
       [
         9,
@@ -1788,19 +1788,19 @@
       ],
       [
         9,
-        "start hr"
+        "start hour"
       ],
       [
         9,
-        "start min"
+        "start minute"
       ],
       [
         9,
-        "end hr"
+        "end hour"
       ],
       [
         9,
-        "end min"
+        "end minute"
       ],
       [
         10,
@@ -1808,7 +1808,7 @@
       ],
       [
         10,
-        "prereq id"
+        "prerequisite id"
       ]
     ],
     "column_names_original": [
@@ -2274,10 +2274,10 @@
       "section",
       "teaches",
       "student",
-      "takes",
+      "takes classes",
       "advisor",
       "time slot",
-      "prereq"
+      "prerequisite"
     ],
     "table_names_original": [
       "classroom",
@@ -2301,7 +2301,7 @@
       ],
       [
         0,
-        "instid"
+        "institution id"
       ],
       [
         0,
@@ -2313,19 +2313,19 @@
       ],
       [
         1,
-        "authid"
+        "author id"
       ],
       [
         1,
-        "lname"
+        "last name"
       ],
       [
         1,
-        "fname"
+        "first name"
       ],
       [
         2,
-        "paperid"
+        "paper id"
       ],
       [
         2,
@@ -2333,19 +2333,19 @@
       ],
       [
         3,
-        "authid"
+        "author id"
       ],
       [
         3,
-        "instid"
+        "institution id"
       ],
       [
         3,
-        "paperid"
+        "paper id"
       ],
       [
         3,
-        "authorder"
+        "author count"
       ]
     ],
     "column_names_original": [
@@ -2457,10 +2457,10 @@
       9
     ],
     "table_names": [
-      "inst",
+      "institution",
       "authors",
       "papers",
-      "authorship"
+      "authorship count"
     ],
     "table_names_original": [
       "Inst",
@@ -2509,11 +2509,11 @@
       ],
       [
         3,
-        "dept store chain id"
+        "department store chain id"
       ],
       [
         3,
-        "dept store chain name"
+        "department store chain name"
       ],
       [
         4,
@@ -2609,11 +2609,11 @@
       ],
       [
         9,
-        "dept store id"
+        "department store id"
       ],
       [
         9,
-        "dept store chain id"
+        "department store chain id"
       ],
       [
         9,
@@ -2637,7 +2637,7 @@
       ],
       [
         10,
-        "dept store id"
+        "department store id"
       ],
       [
         10,
@@ -5116,10 +5116,10 @@
       53
     ],
     "table_names": [
-      "ref age categories",
-      "ref property types",
-      "ref room types",
-      "ref user categories",
+      "reference age categories",
+      "reference property types",
+      "reference room types",
+      "reference user categories",
       "features",
       "users",
       "property features",
@@ -6459,15 +6459,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -6491,31 +6491,31 @@
       ],
       [
         1,
-        "wholikes"
+        "who likes"
       ],
       [
         1,
-        "whoisliked"
+        "who is liked"
       ],
       [
         2,
-        "wholoves"
+        "who loves"
       ],
       [
         2,
-        "whoisloved"
+        "who is loved"
       ],
       [
         3,
-        "stuid"
+        "student id"
       ],
       [
         3,
-        "sleephabits"
+        "sleep habits"
       ],
       [
         3,
-        "musictype"
+        "music type"
       ],
       [
         3,
@@ -6772,7 +6772,7 @@
       ],
       [
         5,
-        "abandoned yn"
+        "abandoned yes or no"
       ],
       [
         5,
@@ -7249,7 +7249,7 @@
       ],
       [
         0,
-        "g name"
+        "genre name"
       ],
       [
         0,
@@ -7277,7 +7277,7 @@
       ],
       [
         2,
-        "f id"
+        "song id"
       ],
       [
         2,
@@ -7309,7 +7309,7 @@
       ],
       [
         3,
-        "f id"
+        "song id"
       ],
       [
         3,
@@ -7976,11 +7976,11 @@
       ],
       [
         0,
-        "uid"
+        "airline id"
       ],
       [
         0,
-        "airline"
+        "airline name"
       ],
       [
         0,
@@ -7996,11 +7996,11 @@
       ],
       [
         1,
-        "airportcode"
+        "airport code"
       ],
       [
         1,
-        "airportname"
+        "airport name"
       ],
       [
         1,
@@ -8008,7 +8008,7 @@
       ],
       [
         1,
-        "countryabbrev"
+        "country abbrev"
       ],
       [
         2,
@@ -8016,15 +8016,15 @@
       ],
       [
         2,
-        "flightno"
+        "flight number"
       ],
       [
         2,
-        "sourceairport"
+        "source airport"
       ],
       [
         2,
-        "destairport"
+        "destination airport"
       ]
     ],
     "column_names_original": [
@@ -8859,7 +8859,7 @@
     ],
     "table_names": [
       "person",
-      "personfriend"
+      "person friend"
     ],
     "table_names_original": [
       "Person",
@@ -9638,7 +9638,7 @@
     "table_names": [
       "scientists",
       "projects",
-      "assignedto"
+      "assigned to"
     ],
     "table_names_original": [
       "Scientists",
@@ -9735,7 +9735,7 @@
     ],
     "table_names": [
       "movies",
-      "movietheaters"
+      "movie theaters"
     ],
     "table_names_original": [
       "Movies",
@@ -10970,11 +10970,11 @@
       ],
       [
         0,
-        "allergy"
+        "allergy name"
       ],
       [
         0,
-        "allergytype"
+        "allergy type"
       ],
       [
         1,
@@ -10990,11 +10990,11 @@
       ],
       [
         2,
-        "lname"
+        "last name"
       ],
       [
         2,
-        "fname"
+        "first name"
       ],
       [
         2,
@@ -11432,7 +11432,7 @@
       ],
       [
         1,
-        "gender mf"
+        "gender"
       ],
       [
         1,
@@ -11456,7 +11456,7 @@
       ],
       [
         2,
-        "returned damaged yn"
+        "returned damaged yes or no"
       ],
       [
         2,
@@ -11548,11 +11548,11 @@
       ],
       [
         5,
-        "returned yn"
+        "returned yes or no"
       ],
       [
         5,
-        "returned late yn"
+        "returned late yes or no"
       ],
       [
         5,
@@ -11576,7 +11576,7 @@
       ],
       [
         6,
-        "available yn"
+        "available yes or no"
       ]
     ],
     "column_names_original": [
@@ -11932,7 +11932,7 @@
       ],
       [
         0,
-        "albumid"
+        "album id"
       ],
       [
         0,
@@ -11940,11 +11940,11 @@
       ],
       [
         0,
-        "artistid"
+        "artist id"
       ],
       [
         1,
-        "artistid"
+        "artist id"
       ],
       [
         1,
@@ -11952,15 +11952,15 @@
       ],
       [
         2,
-        "customerid"
+        "customer id"
       ],
       [
         2,
-        "firstname"
+        "first name"
       ],
       [
         2,
-        "lastname"
+        "last name"
       ],
       [
         2,
@@ -11984,7 +11984,7 @@
       ],
       [
         2,
-        "postalcode"
+        "postal code"
       ],
       [
         2,
@@ -12000,19 +12000,19 @@
       ],
       [
         2,
-        "supportrepid"
+        "support representative id"
       ],
       [
         3,
-        "employeeid"
+        "employee id"
       ],
       [
         3,
-        "lastname"
+        "last name"
       ],
       [
         3,
-        "firstname"
+        "first name"
       ],
       [
         3,
@@ -12020,15 +12020,15 @@
       ],
       [
         3,
-        "reportsto"
+        "reports to"
       ],
       [
         3,
-        "birthdate"
+        "birth date"
       ],
       [
         3,
-        "hiredate"
+        "hire date"
       ],
       [
         3,
@@ -12048,7 +12048,7 @@
       ],
       [
         3,
-        "postalcode"
+        "postal code"
       ],
       [
         3,
@@ -12064,7 +12064,7 @@
       ],
       [
         4,
-        "genreid"
+        "genre id"
       ],
       [
         4,
@@ -12072,35 +12072,35 @@
       ],
       [
         5,
-        "invoiceid"
+        "invoice id"
       ],
       [
         5,
-        "customerid"
+        "customer id"
       ],
       [
         5,
-        "invoicedate"
+        "invoice date"
       ],
       [
         5,
-        "billingaddress"
+        "billing address"
       ],
       [
         5,
-        "billingcity"
+        "billing city"
       ],
       [
         5,
-        "billingstate"
+        "billing state"
       ],
       [
         5,
-        "billingcountry"
+        "billing country"
       ],
       [
         5,
-        "billingpostalcode"
+        "billing postal code"
       ],
       [
         5,
@@ -12108,19 +12108,19 @@
       ],
       [
         6,
-        "invoicelineid"
+        "invoice line id"
       ],
       [
         6,
-        "invoiceid"
+        "invoice id"
       ],
       [
         6,
-        "trackid"
+        "track id"
       ],
       [
         6,
-        "unitprice"
+        "unit price"
       ],
       [
         6,
@@ -12128,7 +12128,7 @@
       ],
       [
         7,
-        "mediatypeid"
+        "media type id"
       ],
       [
         7,
@@ -12136,7 +12136,7 @@
       ],
       [
         8,
-        "playlistid"
+        "play list id"
       ],
       [
         8,
@@ -12144,15 +12144,15 @@
       ],
       [
         9,
-        "playlistid"
+        "play list id"
       ],
       [
         9,
-        "trackid"
+        "track id"
       ],
       [
         10,
-        "trackid"
+        "track id"
       ],
       [
         10,
@@ -12160,15 +12160,15 @@
       ],
       [
         10,
-        "albumid"
+        "album id"
       ],
       [
         10,
-        "mediatypeid"
+        "media type id"
       ],
       [
         10,
-        "genreid"
+        "genre id"
       ],
       [
         10,
@@ -12184,7 +12184,7 @@
       ],
       [
         10,
-        "unitprice"
+        "unit price"
       ]
     ],
     "column_names_original": [
@@ -12649,10 +12649,10 @@
       "employee",
       "genre",
       "invoice",
-      "invoiceline",
-      "mediatype",
+      "invoice line",
+      "media type",
       "playlist",
-      "playlisttrack",
+      "playlist track",
       "track"
     ],
     "table_names_original": [
@@ -12677,27 +12677,27 @@
       ],
       [
         0,
-        "rid"
+        "route id"
       ],
       [
         0,
-        "dst apid"
+        "destination airport id"
       ],
       [
         0,
-        "dst ap"
+        "destination airport"
       ],
       [
         0,
-        "src apid"
+        "source airport id"
       ],
       [
         0,
-        "src ap"
+        "source airport"
       ],
       [
         0,
-        "alid"
+        "airline id"
       ],
       [
         0,
@@ -12705,11 +12705,11 @@
       ],
       [
         0,
-        "codeshare"
+        "code share"
       ],
       [
         1,
-        "apid"
+        "airport id"
       ],
       [
         1,
@@ -12745,7 +12745,7 @@
       ],
       [
         2,
-        "alid"
+        "airline id"
       ],
       [
         2,
@@ -12761,7 +12761,7 @@
       ],
       [
         2,
-        "callsign"
+        "call sign"
       ],
       [
         2,
@@ -14581,15 +14581,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -14613,19 +14613,19 @@
       ],
       [
         1,
-        "stuid"
+        "student id"
       ],
       [
         1,
-        "petid"
+        "pet id"
       ],
       [
         2,
-        "petid"
+        "pet id"
       ],
       [
         2,
-        "pettype"
+        "pet type"
       ],
       [
         2,
@@ -14761,15 +14761,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -14793,7 +14793,7 @@
       ],
       [
         1,
-        "dormid"
+        "dorm id"
       ],
       [
         1,
@@ -14809,7 +14809,7 @@
       ],
       [
         2,
-        "amenid"
+        "amenity id"
       ],
       [
         2,
@@ -14817,19 +14817,19 @@
       ],
       [
         3,
-        "dormid"
+        "dorm id"
       ],
       [
         3,
-        "amenid"
+        "amenity id"
       ],
       [
         4,
-        "stuid"
+        "student id"
       ],
       [
         4,
-        "dormid"
+        "dorm id"
       ],
       [
         4,
@@ -14968,7 +14968,7 @@
       ],
       [
         0,
-        "flno"
+        "flight number"
       ],
       [
         0,
@@ -14996,11 +14996,11 @@
       ],
       [
         0,
-        "aid"
+        "airline id"
       ],
       [
         1,
-        "aid"
+        "airline id"
       ],
       [
         1,
@@ -15012,7 +15012,7 @@
       ],
       [
         2,
-        "eid"
+        "employee id"
       ],
       [
         2,
@@ -15024,11 +15024,11 @@
       ],
       [
         3,
-        "eid"
+        "employee id"
       ],
       [
         3,
-        "aid"
+        "airline id"
       ]
     ],
     "column_names_original": [
@@ -16240,7 +16240,7 @@
       4
     ],
     "table_names": [
-      "pilotskills",
+      "pilot skills",
       "hangar"
     ],
     "table_names_original": [
@@ -16256,7 +16256,7 @@
       ],
       [
         0,
-        "airportcode"
+        "airport code"
       ],
       [
         0,
@@ -16272,15 +16272,15 @@
       ],
       [
         1,
-        "flightnumber"
+        "flight number"
       ],
       [
         1,
-        "src"
+        "source "
       ],
       [
         1,
-        "dst"
+        "destination"
       ]
     ],
     "column_names_original": [
@@ -16835,7 +16835,7 @@
       ],
       [
         0,
-        "songid"
+        "song id"
       ],
       [
         0,
@@ -16867,19 +16867,19 @@
       ],
       [
         2,
-        "firstname"
+        "first name"
       ],
       [
         2,
-        "lastname"
+        "last name"
       ],
       [
         3,
-        "songid"
+        "song id"
       ],
       [
         3,
-        "bandmateid"
+        "bandmate id"
       ],
       [
         3,
@@ -16887,7 +16887,7 @@
       ],
       [
         4,
-        "songid"
+        "song id"
       ],
       [
         4,
@@ -16895,11 +16895,11 @@
       ],
       [
         4,
-        "stageposition"
+        "stage position"
       ],
       [
         5,
-        "albumid"
+        "album id"
       ],
       [
         5,
@@ -16907,11 +16907,11 @@
       ],
       [
         5,
-        "songid"
+        "song id"
       ],
       [
         6,
-        "songid"
+        "song id"
       ],
       [
         6,
@@ -17139,7 +17139,7 @@
       "band",
       "instruments",
       "performance",
-      "tracklists",
+      "track lists",
       "vocals"
     ],
     "table_names_original": [
@@ -17160,11 +17160,11 @@
       ],
       [
         0,
-        "roomid"
+        "room id"
       ],
       [
         0,
-        "roomname"
+        "room name"
       ],
       [
         0,
@@ -17172,15 +17172,15 @@
       ],
       [
         0,
-        "bedtype"
+        "bed type"
       ],
       [
         0,
-        "maxoccupancy"
+        "max occupancy"
       ],
       [
         0,
-        "baseprice"
+        "base price"
       ],
       [
         0,
@@ -17196,11 +17196,11 @@
       ],
       [
         1,
-        "checkin"
+        "check in"
       ],
       [
         1,
-        "checkout"
+        "check out"
       ],
       [
         1,
@@ -17208,11 +17208,11 @@
       ],
       [
         1,
-        "lastname"
+        "last name"
       ],
       [
         1,
-        "firstname"
+        "first name"
       ],
       [
         1,
@@ -18005,7 +18005,7 @@
     ],
     "table_names": [
       "staff",
-      "ref staff roles",
+      "reference staff roles",
       "process outcomes",
       "process status",
       "authors",
@@ -18042,7 +18042,7 @@
       ],
       [
         0,
-        "game num"
+        "game number"
       ],
       [
         0,
@@ -18130,11 +18130,11 @@
       ],
       [
         4,
-        "yearid"
+        "year id"
       ],
       [
         4,
-        "votedby"
+        "voted by"
       ],
       [
         4,
@@ -18214,7 +18214,7 @@
       ],
       [
         6,
-        "inseason"
+        "in season"
       ],
       [
         6,
@@ -19516,7 +19516,7 @@
       "park",
       "salary",
       "college",
-      "postseason",
+      "post season",
       "team",
       "team franchise"
     ],
@@ -19573,7 +19573,7 @@
       ],
       [
         1,
-        "campusfee"
+        "campus fee"
       ],
       [
         2,
@@ -19629,7 +19629,7 @@
       ],
       [
         5,
-        "totalenrollment ay"
+        "total enrollment"
       ],
       [
         5,
@@ -19861,8 +19861,8 @@
     ],
     "table_names": [
       "campuses",
-      "csu-fees",
-      "discipline-enrollments",
+      "csu fees",
+      "discipline enrollments",
       "faculty",
       "degrees",
       "enrollments",
@@ -21221,10 +21221,10 @@
       "transcripts",
       "behaviour monitoring",
       "addresses",
-      "ref event types",
-      "ref achievement type",
-      "ref address types",
-      "ref detention type",
+      "reference event types",
+      "reference achievement type",
+      "reference address types",
+      "reference detention type",
       "student events",
       "teachers",
       "student loans",
@@ -21854,7 +21854,7 @@
       ],
       [
         0,
-        "sid"
+        "sailor id"
       ],
       [
         0,
@@ -21870,7 +21870,7 @@
       ],
       [
         1,
-        "bid"
+        "boat id"
       ],
       [
         1,
@@ -21882,11 +21882,11 @@
       ],
       [
         2,
-        "sid"
+        "sailor id"
       ],
       [
         2,
-        "bid"
+        "boat id"
       ],
       [
         2,
@@ -24375,7 +24375,7 @@
       ],
       [
         0,
-        "employeeid"
+        "employee id"
       ],
       [
         0,
@@ -24411,7 +24411,7 @@
       ],
       [
         2,
-        "primaryaffiliation"
+        "primary affiliation"
       ],
       [
         3,
@@ -24435,11 +24435,11 @@
       ],
       [
         4,
-        "certificationdate"
+        "certification date"
       ],
       [
         4,
-        "certificationexpires"
+        "certification expires"
       ],
       [
         5,
@@ -24459,7 +24459,7 @@
       ],
       [
         5,
-        "insuranceid"
+        "insurance id"
       ],
       [
         5,
@@ -24467,7 +24467,7 @@
       ],
       [
         6,
-        "employeeid"
+        "employee id"
       ],
       [
         6,
@@ -24487,7 +24487,7 @@
       ],
       [
         7,
-        "appointmentid"
+        "appointment id"
       ],
       [
         7,
@@ -24495,7 +24495,7 @@
       ],
       [
         7,
-        "prepnurse"
+        "prep nurse"
       ],
       [
         7,
@@ -24511,7 +24511,7 @@
       ],
       [
         7,
-        "examinationroom"
+        "examination room"
       ],
       [
         8,
@@ -24555,11 +24555,11 @@
       ],
       [
         10,
-        "blockfloor"
+        "block floor"
       ],
       [
         10,
-        "blockcode"
+        "block code"
       ],
       [
         11,
@@ -24567,15 +24567,15 @@
       ],
       [
         11,
-        "roomtype"
+        "room type"
       ],
       [
         11,
-        "blockfloor"
+        "block floor"
       ],
       [
         11,
-        "blockcode"
+        "block code"
       ],
       [
         11,
@@ -24587,23 +24587,23 @@
       ],
       [
         12,
-        "blockfloor"
+        "block floor"
       ],
       [
         12,
-        "blockcode"
+        "block code"
       ],
       [
         12,
-        "oncallstart"
+        "oncall start"
       ],
       [
         12,
-        "oncallend"
+        "oncall end"
       ],
       [
         13,
-        "stayid"
+        "stay id"
       ],
       [
         13,
@@ -24615,11 +24615,11 @@
       ],
       [
         13,
-        "staystart"
+        "stay start"
       ],
       [
         13,
-        "stayend"
+        "stay end"
       ],
       [
         14,
@@ -24635,7 +24635,7 @@
       ],
       [
         14,
-        "dateundergoes"
+        "date undergoes"
       ],
       [
         14,
@@ -24643,7 +24643,7 @@
       ],
       [
         14,
-        "assistingnurse"
+        "assisting nurse"
       ]
     ],
     "column_names_original": [
@@ -25803,7 +25803,7 @@
       ],
       [
         0,
-        "employeeid"
+        "employee id"
       ],
       [
         0,
@@ -25823,7 +25823,7 @@
       ],
       [
         1,
-        "planetid"
+        "planet id"
       ],
       [
         1,
@@ -25835,7 +25835,7 @@
       ],
       [
         2,
-        "shipmentid"
+        "shipment id"
       ],
       [
         2,
@@ -25863,7 +25863,7 @@
       ],
       [
         4,
-        "accountnumber"
+        "account number"
       ],
       [
         4,
@@ -25875,7 +25875,7 @@
       ],
       [
         5,
-        "packagenumber"
+        "package number"
       ],
       [
         5,
@@ -26594,11 +26594,11 @@
       33
     ],
     "table_names": [
-      "ref document types",
+      "reference document types",
       "roles",
       "addresses",
-      "ref document status",
-      "ref shipping agents",
+      "reference document status",
+      "reference shipping agents",
       "documents",
       "employees",
       "document drafts",
@@ -26890,7 +26890,7 @@
     "table_names": [
       "investors",
       "lots",
-      "ref transaction types",
+      "reference transaction types",
       "sales",
       "purchases",
       "transactions lots",
@@ -26942,7 +26942,7 @@
       ],
       [
         1,
-        "apt id"
+        "apartment id"
       ],
       [
         1,
@@ -26950,11 +26950,11 @@
       ],
       [
         1,
-        "apt type code"
+        "apartment type code"
       ],
       [
         1,
-        "apt number"
+        "apartment number"
       ],
       [
         1,
@@ -26970,7 +26970,7 @@
       ],
       [
         2,
-        "apt id"
+        "apartment id"
       ],
       [
         2,
@@ -26998,11 +26998,11 @@
       ],
       [
         4,
-        "apt booking id"
+        "apartment booking id"
       ],
       [
         4,
-        "apt id"
+        "apartment id"
       ],
       [
         4,
@@ -27022,11 +27022,11 @@
       ],
       [
         5,
-        "apt id"
+        "apartment id"
       ],
       [
         5,
-        "apt booking id"
+        "apartment booking id"
       ],
       [
         5,
@@ -27034,7 +27034,7 @@
       ],
       [
         5,
-        "available yn"
+        "available yes or no"
       ]
     ],
     "column_names_original": [
@@ -28248,8 +28248,8 @@
       20
     ],
     "table_names": [
-      "ref document types",
-      "ref budget codes",
+      "reference document types",
+      "reference budget codes",
       "projects",
       "documents",
       "statements",
@@ -28916,9 +28916,9 @@
       13
     ],
     "table_names": [
-      "ref characteristic types",
-      "ref colors",
-      "ref product categories",
+      "reference characteristic types",
+      "reference colors",
+      "reference product categories",
       "characteristics",
       "products",
       "product characteristics"
@@ -29278,11 +29278,11 @@
       ],
       [
         0,
-        "lastname"
+        "last name"
       ],
       [
         0,
-        "firstname"
+        "first name"
       ],
       [
         1,
@@ -29314,7 +29314,7 @@
       ],
       [
         3,
-        "receiptnumber"
+        "receipt number"
       ],
       [
         3,
@@ -29322,7 +29322,7 @@
       ],
       [
         3,
-        "customerid"
+        "customer id"
       ]
     ],
     "column_names_original": [
@@ -29749,15 +29749,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -29781,27 +29781,27 @@
       ],
       [
         1,
-        "clubid"
+        "club id"
       ],
       [
         1,
-        "clubname"
+        "club name"
       ],
       [
         1,
-        "clubdesc"
+        "club description"
       ],
       [
         1,
-        "clublocation"
+        "club location"
       ],
       [
         2,
-        "stuid"
+        "student id"
       ],
       [
         2,
-        "clubid"
+        "club id"
       ],
       [
         2,
@@ -30812,7 +30812,7 @@
       14
     ],
     "table_names": [
-      "ref template types",
+      "reference template types",
       "templates",
       "documents",
       "paragraphs"
@@ -30832,7 +30832,7 @@
       ],
       [
         0,
-        "idclient"
+        "client id"
       ],
       [
         0,
@@ -30848,23 +30848,23 @@
       ],
       [
         1,
-        "idorder"
+        "order id"
       ],
       [
         1,
-        "idclient"
+        "client id"
       ],
       [
         1,
-        "dateorder"
+        "order date"
       ],
       [
         1,
-        "dateexped"
+        "date expired"
       ],
       [
         2,
-        "idauthor"
+        "author id"
       ],
       [
         2,
@@ -30884,11 +30884,11 @@
       ],
       [
         3,
-        "purchaseprice"
+        "purchase price"
       ],
       [
         3,
-        "saleprice"
+        "sale price"
       ],
       [
         4,
@@ -30904,7 +30904,7 @@
       ],
       [
         5,
-        "idorder"
+        "order id"
       ],
       [
         5,
@@ -31114,7 +31114,7 @@
       ],
       [
         0,
-        "countrycode"
+        "country code"
       ],
       [
         0,
@@ -31150,11 +31150,11 @@
       ],
       [
         2,
-        "surfacearea"
+        "surface area"
       ],
       [
         2,
-        "indepyear"
+        "indepdent year"
       ],
       [
         2,
@@ -31162,7 +31162,7 @@
       ],
       [
         2,
-        "lifeexpectancy"
+        "life expectancy"
       ],
       [
         2,
@@ -31170,19 +31170,19 @@
       ],
       [
         2,
-        "gnpold"
+        "gnp old"
       ],
       [
         2,
-        "localname"
+        "local name"
       ],
       [
         2,
-        "governmentform"
+        "government form"
       ],
       [
         2,
-        "headofstate"
+        "head of state"
       ],
       [
         2,
@@ -31202,7 +31202,7 @@
       ],
       [
         3,
-        "isofficial"
+        "is official"
       ],
       [
         3,
@@ -32078,7 +32078,7 @@
       ],
       [
         4,
-        "groupid"
+        "group id"
       ],
       [
         4,
@@ -32696,7 +32696,7 @@
       ],
       [
         0,
-        "mid"
+        "movie id"
       ],
       [
         0,
@@ -32712,7 +32712,7 @@
       ],
       [
         1,
-        "rid"
+        "reviewer id"
       ],
       [
         1,
@@ -32720,19 +32720,19 @@
       ],
       [
         2,
-        "rid"
+        "reviewer id"
       ],
       [
         2,
-        "mid"
+        "movie id"
       ],
       [
         2,
-        "stars"
+        "rating stars"
       ],
       [
         2,
-        "ratingdate"
+        "rating date"
       ]
     ],
     "column_names_original": [
@@ -32960,7 +32960,7 @@
       6
     ],
     "table_names": [
-      "highschooler",
+      "high schooler",
       "friend",
       "likes"
     ],
@@ -32978,15 +32978,15 @@
       ],
       [
         0,
-        "addressid"
+        "address id"
       ],
       [
         0,
-        "addressline1"
+        "address line1"
       ],
       [
         0,
-        "addressline2"
+        "address line2"
       ],
       [
         0,
@@ -32994,11 +32994,11 @@
       ],
       [
         0,
-        "stateprovinceid"
+        "state province id"
       ],
       [
         0,
-        "postalcode"
+        "postal code"
       ],
       [
         0,
@@ -33006,7 +33006,7 @@
       ],
       [
         0,
-        "modifieddate"
+        "modified date"
       ],
       [
         1,
@@ -33018,7 +33018,7 @@
       ],
       [
         2,
-        "addresstypeid"
+        "address type id"
       ],
       [
         2,
@@ -33030,11 +33030,11 @@
       ],
       [
         2,
-        "modifieddate"
+        "modified date"
       ],
       [
         3,
-        "systeminformationid"
+        "system information id"
       ],
       [
         3,
@@ -33042,55 +33042,55 @@
       ],
       [
         3,
-        "versiondate"
+        "version date"
       ],
       [
         3,
-        "modifieddate"
+        "modified date"
       ],
       [
         4,
-        "billofmaterialsid"
+        "bill of materials id"
       ],
       [
         4,
-        "productassemblyid"
+        "product assembly id"
       ],
       [
         4,
-        "componentid"
+        "component id"
       ],
       [
         4,
-        "startdate"
+        "start date"
       ],
       [
         4,
-        "enddate"
+        "end date"
       ],
       [
         4,
-        "unitmeasurecode"
+        "unit measure code"
       ],
       [
         4,
-        "bomlevel"
+        "bom level"
       ],
       [
         4,
-        "perassemblyqty"
+        "per assembly qty"
       ],
       [
         4,
-        "modifieddate"
+        "modified date"
       ],
       [
         5,
-        "contactid"
+        "contact id"
       ],
       [
         5,
-        "namestyle"
+        "name style"
       ],
       [
         5,
@@ -33098,7 +33098,7 @@
       ],
       [
         5,
-        "firstname"
+        "first name"
       ],
       [
         5,
@@ -37884,35 +37884,35 @@
       ],
       [
         1,
-        "customerid"
+        "customer id"
       ],
       [
         1,
-        "customertypeid"
+        "customer type id"
       ],
       [
         2,
-        "customertypeid"
+        "customer type id"
       ],
       [
         2,
-        "customerdesc"
+        "customer description"
       ],
       [
         3,
-        "customerid"
+        "customer id"
       ],
       [
         3,
-        "companyname"
+        "company name"
       ],
       [
         3,
-        "contactname"
+        "contact name"
       ],
       [
         3,
-        "contacttitle"
+        "contact title"
       ],
       [
         3,
@@ -37928,7 +37928,7 @@
       ],
       [
         3,
-        "postalcode"
+        "postal code"
       ],
       [
         3,
@@ -37944,23 +37944,23 @@
       ],
       [
         4,
-        "employeeid"
+        "employee id"
       ],
       [
         4,
-        "territoryid"
+        "territory id"
       ],
       [
         5,
-        "employeeid"
+        "employee id"
       ],
       [
         5,
-        "lastname"
+        "last name"
       ],
       [
         5,
-        "firstname"
+        "first name"
       ],
       [
         5,
@@ -37968,15 +37968,15 @@
       ],
       [
         5,
-        "titleofcourtesy"
+        "title of courtesy"
       ],
       [
         5,
-        "birthdate"
+        "birth date"
       ],
       [
         5,
-        "hiredate"
+        "hire date"
       ],
       [
         5,
@@ -37992,7 +37992,7 @@
       ],
       [
         5,
-        "postalcode"
+        "postal code"
       ],
       [
         5,
@@ -38000,7 +38000,7 @@
       ],
       [
         5,
-        "homephone"
+        "home phone"
       ],
       [
         5,
@@ -38016,11 +38016,11 @@
       ],
       [
         5,
-        "reportsto"
+        "reports to"
       ],
       [
         5,
-        "photopath"
+        "photo path"
       ],
       [
         5,
@@ -38028,15 +38028,15 @@
       ],
       [
         6,
-        "orderid"
+        "order id"
       ],
       [
         6,
-        "productid"
+        "product id"
       ],
       [
         6,
-        "unitprice"
+        "unit price"
       ],
       [
         6,
@@ -38048,31 +38048,31 @@
       ],
       [
         7,
-        "orderid"
+        "order id"
       ],
       [
         7,
-        "customerid"
+        "customer id"
       ],
       [
         7,
-        "employeeid"
+        "employee id"
       ],
       [
         7,
-        "orderdate"
+        "order date"
       ],
       [
         7,
-        "requireddate"
+        "required date"
       ],
       [
         7,
-        "shippeddate"
+        "shipped date"
       ],
       [
         7,
-        "shipvia"
+        "ship via"
       ],
       [
         7,
@@ -38080,63 +38080,63 @@
       ],
       [
         7,
-        "shipname"
+        "ship name"
       ],
       [
         7,
-        "shipaddress"
+        "ship address"
       ],
       [
         7,
-        "shipcity"
+        "ship city"
       ],
       [
         7,
-        "shipregion"
+        "ship region"
       ],
       [
         7,
-        "shippostalcode"
+        "ship postal code"
       ],
       [
         7,
-        "shipcountry"
+        "ship country"
       ],
       [
         8,
-        "productid"
+        "product id"
       ],
       [
         8,
-        "productname"
+        "product name"
       ],
       [
         8,
-        "supplierid"
+        "supplier id"
       ],
       [
         8,
-        "categoryid"
+        "category id"
       ],
       [
         8,
-        "quantityperunit"
+        "quantity per unit"
       ],
       [
         8,
-        "unitprice"
+        "unit price"
       ],
       [
         8,
-        "unitsinstock"
+        "units in stock"
       ],
       [
         8,
-        "unitsonorder"
+        "units on order"
       ],
       [
         8,
-        "reorderlevel"
+        "reorder level"
       ],
       [
         8,
@@ -38144,19 +38144,19 @@
       ],
       [
         9,
-        "regionid"
+        "region id"
       ],
       [
         9,
-        "regiondescription"
+        "region description"
       ],
       [
         10,
-        "shipperid"
+        "shipper id"
       ],
       [
         10,
-        "companyname"
+        "company name"
       ],
       [
         10,
@@ -38164,19 +38164,19 @@
       ],
       [
         11,
-        "supplierid"
+        "supplier id"
       ],
       [
         11,
-        "companyname"
+        "company name"
       ],
       [
         11,
-        "contactname"
+        "contact name"
       ],
       [
         11,
-        "contacttitle"
+        "contact title"
       ],
       [
         11,
@@ -38192,7 +38192,7 @@
       ],
       [
         11,
-        "postalcode"
+        "postal code"
       ],
       [
         11,
@@ -38212,23 +38212,23 @@
       ],
       [
         12,
-        "territoryid"
+        "territory id"
       ],
       [
         12,
-        "territorydescription"
+        "territory description"
       ],
       [
         12,
-        "regionid"
+        "region id"
       ],
       [
         13,
-        "categoryid"
+        "category id"
       ],
       [
         13,
-        "categoryname"
+        "category name"
       ],
       [
         13,
@@ -38236,15 +38236,15 @@
       ],
       [
         14,
-        "employeeid"
+        "employee id"
       ],
       [
         14,
-        "lastname"
+        "last name"
       ],
       [
         14,
-        "firstname"
+        "first name"
       ],
       [
         14,
@@ -38252,15 +38252,15 @@
       ],
       [
         14,
-        "titleofcourtesy"
+        "title of courtesy"
       ],
       [
         14,
-        "birthdate"
+        "birth date"
       ],
       [
         14,
-        "hiredate"
+        "hire date"
       ],
       [
         14,
@@ -38276,7 +38276,7 @@
       ],
       [
         14,
-        "postalcode"
+        "postal code"
       ],
       [
         14,
@@ -38284,7 +38284,7 @@
       ],
       [
         14,
-        "homephone"
+        "home phone"
       ],
       [
         14,
@@ -38296,11 +38296,11 @@
       ],
       [
         14,
-        "reportsto"
+        "reports to"
       ],
       [
         14,
-        "photopath"
+        "photo path"
       ],
       [
         14,
@@ -39017,10 +39017,10 @@
     ],
     "table_names": [
       "sqlite sequence",
-      "customercustomerdemo",
-      "customerdemographics",
+      "customer customer demo",
+      "customer demographics",
       "customers",
-      "employeeterritories",
+      "employee territories",
       "employees",
       "order details",
       "orders",
@@ -39030,7 +39030,7 @@
       "suppliers",
       "territories",
       "categories",
-      "employees  tmp  "
+      "employees  tmp"
     ],
     "table_names_original": [
       "sqlite_sequence",
@@ -39058,15 +39058,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -39090,11 +39090,11 @@
       ],
       [
         1,
-        "resid"
+        "restaurant id"
       ],
       [
         1,
-        "resname"
+        "restaurant name"
       ],
       [
         1,
@@ -39106,31 +39106,31 @@
       ],
       [
         2,
-        "resid"
+        "restaurant id"
       ],
       [
         2,
-        "restypeid"
+        "restaurant type id"
       ],
       [
         3,
-        "restypeid"
+        "restaurant type id"
       ],
       [
         3,
-        "restypename"
+        "restaurant type name"
       ],
       [
         3,
-        "restypedescription"
+        "restaurant type description"
       ],
       [
         4,
-        "stuid"
+        "student id"
       ],
       [
         4,
-        "resid"
+        "restaurant id"
       ],
       [
         4,
@@ -39995,7 +39995,7 @@
       ],
       [
         0,
-        "crs code"
+        "course code"
       ],
       [
         0,
@@ -40011,31 +40011,31 @@
       ],
       [
         0,
-        "prof num"
+        "professor employee number"
       ],
       [
         1,
-        "crs code"
+        "course code"
       ],
       [
         1,
-        "dept code"
+        "department code"
       ],
       [
         1,
-        "crs description"
+        "course description"
       ],
       [
         1,
-        "crs credit"
+        "course credit"
       ],
       [
         2,
-        "dept code"
+        "department code"
       ],
       [
         2,
-        "dept name"
+        "department name"
       ],
       [
         2,
@@ -40043,43 +40043,43 @@
       ],
       [
         2,
-        "emp num"
+        "employee number"
       ],
       [
         2,
-        "dept address"
+        "department address"
       ],
       [
         2,
-        "dept extension"
+        "department extension"
       ],
       [
         3,
-        "emp num"
+        "employee number"
       ],
       [
         3,
-        "emp lname"
+        "employee last name"
       ],
       [
         3,
-        "emp fname"
+        "employee first name"
       ],
       [
         3,
-        "emp initial"
+        "employee initial"
       ],
       [
         3,
-        "emp jobcode"
+        "employee job code"
       ],
       [
         3,
-        "emp hiredate"
+        "employee hire date"
       ],
       [
         3,
-        "emp dob"
+        "employee date of birth"
       ],
       [
         4,
@@ -40087,7 +40087,7 @@
       ],
       [
         4,
-        "stu num"
+        "student number"
       ],
       [
         4,
@@ -40095,71 +40095,71 @@
       ],
       [
         5,
-        "emp num"
+        "employee number"
       ],
       [
         5,
-        "dept code"
+        "department code"
       ],
       [
         5,
-        "prof office"
+        "professor office"
       ],
       [
         5,
-        "prof extension"
+        "professor extension"
       ],
       [
         5,
-        "prof high degree"
+        "professor high degree"
       ],
       [
         6,
-        "stu num"
+        "student num"
       ],
       [
         6,
-        "stu lname"
+        "student last name"
       ],
       [
         6,
-        "stu fname"
+        "student first name"
       ],
       [
         6,
-        "stu init"
+        "student init"
       ],
       [
         6,
-        "stu dob"
+        "student date of birth"
       ],
       [
         6,
-        "stu hrs"
+        "student class hours took"
       ],
       [
         6,
-        "stu class"
+        "student class"
       ],
       [
         6,
-        "stu gpa"
+        "student gpa"
       ],
       [
         6,
-        "stu transfer"
+        "student transfer"
       ],
       [
         6,
-        "dept code"
+        "department code"
       ],
       [
         6,
-        "stu phone"
+        "student phone"
       ],
       [
         6,
-        "prof num"
+        "professor number"
       ]
     ],
     "column_names_original": [
@@ -40521,7 +40521,7 @@
       ],
       [
         1,
-        "cmi cross ref id"
+        "cmi cross reference id"
       ],
       [
         1,
@@ -40537,7 +40537,7 @@
       ],
       [
         2,
-        "cmi cross ref id"
+        "cmi cross reference id"
       ],
       [
         3,
@@ -40545,7 +40545,7 @@
       ],
       [
         3,
-        "cmi cross ref id"
+        "cmi cross reference id"
       ],
       [
         4,
@@ -40561,7 +40561,7 @@
       ],
       [
         5,
-        "cmi cross ref id"
+        "cmi cross reference id"
       ],
       [
         6,
@@ -40569,7 +40569,7 @@
       ],
       [
         6,
-        "cmi cross ref id"
+        "cmi cross reference id"
       ],
       [
         7,
@@ -40577,7 +40577,7 @@
       ],
       [
         7,
-        "cmi cross ref id"
+        "cmi cross reference id"
       ]
     ],
     "column_names_original": [
@@ -41938,87 +41938,87 @@
       ],
       [
         7,
-        "buildupplayspeed"
+        "build up play speed"
       ],
       [
         7,
-        "buildupplayspeedclass"
+        "build up play speed class"
       ],
       [
         7,
-        "buildupplaydribbling"
+        "build up play dribbling"
       ],
       [
         7,
-        "buildupplaydribblingclass"
+        "build up play dribbling class"
       ],
       [
         7,
-        "buildupplaypassing"
+        "build up play passing"
       ],
       [
         7,
-        "buildupplaypassingclass"
+        "build up play passing class"
       ],
       [
         7,
-        "buildupplaypositioningclass"
+        "build up play positioning class"
       ],
       [
         7,
-        "chancecreationpassing"
+        "chance creation passing"
       ],
       [
         7,
-        "chancecreationpassingclass"
+        "chance creation passing class"
       ],
       [
         7,
-        "chancecreationcrossing"
+        "chance creation crossing"
       ],
       [
         7,
-        "chancecreationcrossingclass"
+        "chance creation crossing class"
       ],
       [
         7,
-        "chancecreationshooting"
+        "chance creation shooting"
       ],
       [
         7,
-        "chancecreationshootingclass"
+        "chance creation shooting class"
       ],
       [
         7,
-        "chancecreationpositioningclass"
+        "chance creation positioning class"
       ],
       [
         7,
-        "defencepressure"
+        "defence pressure"
       ],
       [
         7,
-        "defencepressureclass"
+        "defence pressure class"
       ],
       [
         7,
-        "defenceaggression"
+        "defence aggression"
       ],
       [
         7,
-        "defenceaggressionclass"
+        "defence aggression class"
       ],
       [
         7,
-        "defenceteamwidth"
+        "defence team width"
       ],
       [
         7,
-        "defenceteamwidthclass"
+        "defence team width class"
       ],
       [
         7,
-        "defencedefenderlineclass"
+        "defence defender line class"
       ]
     ],
     "column_names_original": [
@@ -44862,8 +44862,8 @@
       9
     ],
     "table_names": [
-      "ref feature types",
-      "ref property types",
+      "reference feature types",
+      "reference property types",
       "other available features",
       "properties",
       "other property features"
@@ -44884,7 +44884,7 @@
       ],
       [
         0,
-        "reviewid"
+        "review id"
       ],
       [
         0,
@@ -44916,27 +44916,27 @@
       ],
       [
         0,
-        "pub date"
+        "publish date"
       ],
       [
         0,
-        "pub weekday"
+        "publish weekday"
       ],
       [
         0,
-        "pub day"
+        "publish day"
       ],
       [
         0,
-        "pub month"
+        "publish month"
       ],
       [
         0,
-        "pub year"
+        "publish year"
       ],
       [
         1,
-        "reviewid"
+        "review id"
       ],
       [
         1,
@@ -44944,7 +44944,7 @@
       ],
       [
         2,
-        "reviewid"
+        "review id"
       ],
       [
         2,
@@ -44952,7 +44952,7 @@
       ],
       [
         3,
-        "reviewid"
+        "review id"
       ],
       [
         3,
@@ -44960,7 +44960,7 @@
       ],
       [
         4,
-        "reviewid"
+        "review id"
       ],
       [
         4,
@@ -44968,7 +44968,7 @@
       ],
       [
         5,
-        "reviewid"
+        "review id"
       ],
       [
         5,
@@ -45127,15 +45127,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -45159,15 +45159,15 @@
       ],
       [
         1,
-        "facid"
+        "faculty id"
       ],
       [
         1,
-        "lname"
+        "last name"
       ],
       [
         1,
-        "fname"
+        "first name"
       ],
       [
         1,
@@ -45191,7 +45191,7 @@
       ],
       [
         2,
-        "dno"
+        "department number"
       ],
       [
         2,
@@ -45199,7 +45199,7 @@
       ],
       [
         2,
-        "dname"
+        "department name"
       ],
       [
         2,
@@ -45211,15 +45211,15 @@
       ],
       [
         2,
-        "dphone"
+        "department phone"
       ],
       [
         3,
-        "facid"
+        "faculty id"
       ],
       [
         3,
-        "dno"
+        "department number"
       ],
       [
         3,
@@ -45227,11 +45227,11 @@
       ],
       [
         4,
-        "cid"
+        "course id"
       ],
       [
         4,
-        "cname"
+        "course name"
       ],
       [
         4,
@@ -45251,23 +45251,23 @@
       ],
       [
         4,
-        "dno"
+        "department number"
       ],
       [
         5,
-        "stuid"
+        "student id"
       ],
       [
         5,
-        "dno"
+        "department number"
       ],
       [
         6,
-        "stuid"
+        "student id"
       ],
       [
         6,
-        "cid"
+        "course id"
       ],
       [
         6,
@@ -45275,11 +45275,11 @@
       ],
       [
         7,
-        "lettergrade"
+        "letter grade"
       ],
       [
         7,
-        "gradepoint"
+        "grade point"
       ]
     ],
     "column_names_original": [
@@ -45594,7 +45594,7 @@
       "course",
       "minor in",
       "enrolled in",
-      "gradeconversion"
+      "grade conversion"
     ],
     "table_names_original": [
       "Student",
@@ -50207,47 +50207,47 @@
       ],
       [
         0,
-        "authorid"
+        "author id"
       ],
       [
         0,
-        "authorname"
+        "author name"
       ],
       [
         1,
-        "citingpaperid"
+        "citing paper id"
       ],
       [
         1,
-        "citedpaperid"
+        "cited paper id"
       ],
       [
         2,
-        "datasetid"
+        "dataset id"
       ],
       [
         2,
-        "datasetname"
+        "dataset name"
       ],
       [
         3,
-        "journalid"
+        "journal id"
       ],
       [
         3,
-        "journalname"
+        "journal name"
       ],
       [
         4,
-        "keyphraseid"
+        "key phrase id"
       ],
       [
         4,
-        "keyphrasename"
+        "key phrase name"
       ],
       [
         5,
-        "paperid"
+        "paper id"
       ],
       [
         5,
@@ -50255,7 +50255,7 @@
       ],
       [
         5,
-        "venueid"
+        "venue id"
       ],
       [
         5,
@@ -50263,47 +50263,47 @@
       ],
       [
         5,
-        "numciting"
+        "number of citing"
       ],
       [
         5,
-        "numcitedby"
+        "number cited by"
       ],
       [
         5,
-        "journalid"
+        "journal id"
       ],
       [
         6,
-        "paperid"
+        "paper id"
       ],
       [
         6,
-        "datasetid"
+        "dataset id"
       ],
       [
         7,
-        "paperid"
+        "paper id"
       ],
       [
         7,
-        "keyphraseid"
+        "key phrase id"
       ],
       [
         8,
-        "venueid"
+        "venue id"
       ],
       [
         8,
-        "venuename"
+        "venue name"
       ],
       [
         9,
-        "paperid"
+        "paper id"
       ],
       [
         9,
-        "authorid"
+        "author id"
       ]
     ],
     "column_names_original": [
@@ -50455,10 +50455,10 @@
       "cite",
       "dataset",
       "journal",
-      "keyphrase",
+      "key phrase",
       "paper",
-      "paperdataset",
-      "paperkeyphrase",
+      "paper dataset",
+      "paper key phrase",
       "venue",
       "writes"
     ],
@@ -51483,7 +51483,7 @@
       ],
       [
         0,
-        "official native language(s)"
+        "official native language"
       ],
       [
         1,
@@ -51515,7 +51515,7 @@
       ],
       [
         2,
-        "draft pick #"
+        "draft pick number"
       ],
       [
         2,
@@ -51573,7 +51573,7 @@
       ],
       [
         0,
-        "Official_native_language(s)"
+        "Official_native_language"
       ],
       [
         1,
@@ -51605,7 +51605,7 @@
       ],
       [
         2,
-        "Draft_Pick_#"
+        "Draft_Pick_Number"
       ],
       [
         2,
@@ -51728,7 +51728,7 @@
       ],
       [
         0,
-        "custid"
+        "customer id"
       ],
       [
         0,
@@ -51736,7 +51736,7 @@
       ],
       [
         1,
-        "custid"
+        "customer id"
       ],
       [
         1,
@@ -51744,7 +51744,7 @@
       ],
       [
         2,
-        "custid"
+        "customer id"
       ],
       [
         2,
@@ -59650,27 +59650,27 @@
       ],
       [
         0,
-        "artistid"
+        "artist id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
-        "birthyear"
+        "birth year"
       ],
       [
         0,
-        "deathyear"
+        "death year"
       ],
       [
         1,
-        "paintingid"
+        "painting id"
       ],
       [
         1,
@@ -59694,7 +59694,7 @@
       ],
       [
         1,
-        "mediumon"
+        "medium on"
       ],
       [
         1,
@@ -59702,11 +59702,11 @@
       ],
       [
         1,
-        "painterid"
+        "painter id"
       ],
       [
         2,
-        "sculptureid"
+        "sculpture id"
       ],
       [
         2,
@@ -59726,7 +59726,7 @@
       ],
       [
         2,
-        "sculptorid"
+        "sculptor id"
       ]
     ],
     "column_names_original": [
@@ -59885,11 +59885,11 @@
       ],
       [
         0,
-        "lastname"
+        "last name"
       ],
       [
         0,
-        "firstname"
+        "first name"
       ],
       [
         0,
@@ -59897,19 +59897,19 @@
       ],
       [
         0,
-        "classroom"
+        "class room"
       ],
       [
         1,
-        "lastname"
+        "last name"
       ],
       [
         1,
-        "firstname"
+        "first name"
       ],
       [
         1,
-        "classroom"
+        "class room"
       ]
     ],
     "column_names_original": [
@@ -59979,15 +59979,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -61362,7 +61362,7 @@
       ],
       [
         0,
-        "raceid"
+        "race id"
       ],
       [
         0,
@@ -61374,7 +61374,7 @@
       ],
       [
         0,
-        "circuitid"
+        "circuit id"
       ],
       [
         0,
@@ -61394,11 +61394,11 @@
       ],
       [
         1,
-        "driverid"
+        "driver id"
       ],
       [
         1,
-        "driverref"
+        "driver reference"
       ],
       [
         1,
@@ -61430,7 +61430,7 @@
       ],
       [
         2,
-        "statusid"
+        "status id"
       ],
       [
         2,
@@ -61446,11 +61446,11 @@
       ],
       [
         4,
-        "constructorid"
+        "constructor id"
       ],
       [
         4,
-        "constructorref"
+        "constructor reference"
       ],
       [
         4,
@@ -61466,15 +61466,15 @@
       ],
       [
         5,
-        "constructorstandingsid"
+        "constructor standings id"
       ],
       [
         5,
-        "raceid"
+        "race id"
       ],
       [
         5,
-        "constructorid"
+        "constructor id"
       ],
       [
         5,
@@ -61486,7 +61486,7 @@
       ],
       [
         5,
-        "positiontext"
+        "position text"
       ],
       [
         5,
@@ -61494,19 +61494,19 @@
       ],
       [
         6,
-        "resultid"
+        "result id"
       ],
       [
         6,
-        "raceid"
+        "race id"
       ],
       [
         6,
-        "driverid"
+        "driver id"
       ],
       [
         6,
-        "constructorid"
+        "constructor id"
       ],
       [
         6,
@@ -61522,11 +61522,11 @@
       ],
       [
         6,
-        "positiontext"
+        "position text"
       ],
       [
         6,
-        "positionorder"
+        "position order"
       ],
       [
         6,
@@ -61546,7 +61546,7 @@
       ],
       [
         6,
-        "fastestlap"
+        "fastest lap"
       ],
       [
         6,
@@ -61554,27 +61554,27 @@
       ],
       [
         6,
-        "fastestlaptime"
+        "fastest lap time"
       ],
       [
         6,
-        "fastestlapspeed"
+        "fastest lap speed"
       ],
       [
         6,
-        "statusid"
+        "status id"
       ],
       [
         7,
-        "driverstandingsid"
+        "driver standings id"
       ],
       [
         7,
-        "raceid"
+        "race id"
       ],
       [
         7,
-        "driverid"
+        "driver id"
       ],
       [
         7,
@@ -61586,7 +61586,7 @@
       ],
       [
         7,
-        "positiontext"
+        "position text"
       ],
       [
         7,
@@ -61594,15 +61594,15 @@
       ],
       [
         8,
-        "constructorresultsid"
+        "constructor results id"
       ],
       [
         8,
-        "raceid"
+        "race id"
       ],
       [
         8,
-        "constructorid"
+        "constructor id"
       ],
       [
         8,
@@ -61614,19 +61614,19 @@
       ],
       [
         9,
-        "qualifyid"
+        "qualify id"
       ],
       [
         9,
-        "raceid"
+        "race id"
       ],
       [
         9,
-        "driverid"
+        "driver id"
       ],
       [
         9,
-        "constructorid"
+        "constructor id"
       ],
       [
         9,
@@ -61650,11 +61650,11 @@
       ],
       [
         10,
-        "circuitid"
+        "circuit id"
       ],
       [
         10,
-        "circuitref"
+        "circuit reference"
       ],
       [
         10,
@@ -61670,15 +61670,15 @@
       ],
       [
         10,
-        "lat"
+        "latitude"
       ],
       [
         10,
-        "lng"
+        "longitude"
       ],
       [
         10,
-        "alt"
+        "altitude"
       ],
       [
         10,
@@ -61686,11 +61686,11 @@
       ],
       [
         11,
-        "raceid"
+        "race id"
       ],
       [
         11,
-        "driverid"
+        "driver id"
       ],
       [
         11,
@@ -61714,11 +61714,11 @@
       ],
       [
         12,
-        "raceid"
+        "race id"
       ],
       [
         12,
-        "driverid"
+        "driver id"
       ],
       [
         12,
@@ -62410,10 +62410,10 @@
       "status",
       "seasons",
       "constructors",
-      "constructorstandings",
+      "constructor standings",
       "results",
-      "driverstandings",
-      "constructorresults",
+      "driver standings",
+      "constructor results",
       "qualifying",
       "circuits",
       "pitstops",
@@ -62443,15 +62443,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -62475,23 +62475,23 @@
       ],
       [
         1,
-        "gameid"
+        "game id"
       ],
       [
         1,
-        "gname"
+        "game name"
       ],
       [
         1,
-        "gtype"
+        "game type"
       ],
       [
         2,
-        "stuid"
+        "student id"
       ],
       [
         2,
-        "gameid"
+        "game id"
       ],
       [
         2,
@@ -62499,23 +62499,23 @@
       ],
       [
         3,
-        "stuid"
+        "student id"
       ],
       [
         3,
-        "sportname"
+        "sport name"
       ],
       [
         3,
-        "hoursperweek"
+        "hours per week"
       ],
       [
         3,
-        "gamesplayed"
+        "games played"
       ],
       [
         3,
-        "onscholarship"
+        "on scholarship"
       ]
     ],
     "column_names_original": [
@@ -62663,7 +62663,7 @@
       "student",
       "video games",
       "plays games",
-      "sportsinfo"
+      "sports info"
     ],
     "table_names_original": [
       "Student",
@@ -62700,23 +62700,23 @@
       ],
       [
         1,
-        "cust id"
+        "customer id"
       ],
       [
         1,
-        "cust name"
+        "customer name"
       ],
       [
         1,
-        "acc type"
+        "account type"
       ],
       [
         1,
-        "acc bal"
+        "account balance"
       ],
       [
         1,
-        "no of loans"
+        "number of loans"
       ],
       [
         1,
@@ -62740,7 +62740,7 @@
       ],
       [
         2,
-        "cust id"
+        "customer id"
       ],
       [
         2,
@@ -62915,11 +62915,11 @@
       ],
       [
         0,
-        "lat"
+        "latitude"
       ],
       [
         0,
-        "long"
+        "longitude"
       ],
       [
         0,
@@ -64540,8 +64540,8 @@
       93
     ],
     "table_names": [
-      "ref payment methods",
-      "ref service types",
+      "reference payment methods",
+      "reference service types",
       "addresses",
       "products",
       "marketing regions",
@@ -64588,7 +64588,7 @@
       ],
       [
         0,
-        "contid"
+        "continent id"
       ],
       [
         0,
@@ -64596,11 +64596,11 @@
       ],
       [
         1,
-        "countryid"
+        "country id"
       ],
       [
         1,
-        "countryname"
+        "country name"
       ],
       [
         1,
@@ -64616,7 +64616,7 @@
       ],
       [
         2,
-        "fullname"
+        "full name"
       ],
       [
         2,
@@ -64624,7 +64624,7 @@
       ],
       [
         3,
-        "modelid"
+        "model id"
       ],
       [
         3,
@@ -64636,7 +64636,7 @@
       ],
       [
         4,
-        "makeid"
+        "make id"
       ],
       [
         4,
@@ -65173,7 +65173,7 @@
     "table_names": [
       "border info",
       "city",
-      "highlow",
+      "high low",
       "lake",
       "mountain",
       "river",
@@ -65925,9 +65925,9 @@
       49
     ],
     "table_names": [
-      "ref address types",
-      "ref detention type",
-      "ref incident type",
+      "reference address types",
+      "reference detention type",
+      "reference incident type",
       "addresses",
       "students",
       "teachers",
@@ -66398,9 +66398,9 @@
       28
     ],
     "table_names": [
-      "ref document types",
-      "ref calendar",
-      "ref locations",
+      "reference document types",
+      "reference calendar",
+      "reference locations",
       "roles",
       "all documents",
       "employees",
@@ -66426,7 +66426,7 @@
       ],
       [
         0,
-        "cname"
+        "college name"
       ],
       [
         0,
@@ -66434,35 +66434,35 @@
       ],
       [
         0,
-        "enr"
+        "enrollment"
       ],
       [
         1,
-        "pid"
+        "player id"
       ],
       [
         1,
-        "pname"
+        "player name"
       ],
       [
         1,
-        "ycard"
+        "yes card"
       ],
       [
         1,
-        "hs"
+        "training hours"
       ],
       [
         2,
-        "pid"
+        "player id"
       ],
       [
         2,
-        "cname"
+        "college name"
       ],
       [
         2,
-        "ppos"
+        "player position"
       ],
       [
         2,
@@ -66580,7 +66580,7 @@
       ],
       [
         0,
-        "actid"
+        "activity id"
       ],
       [
         0,
@@ -66588,31 +66588,31 @@
       ],
       [
         1,
-        "stuid"
+        "student id"
       ],
       [
         1,
-        "actid"
+        "activity id"
       ],
       [
         2,
-        "facid"
+        "faculty id"
       ],
       [
         2,
-        "actid"
+        "activity id"
       ],
       [
         3,
-        "stuid"
+        "student id"
       ],
       [
         3,
-        "lname"
+        "last name"
       ],
       [
         3,
-        "fname"
+        "first name"
       ],
       [
         3,
@@ -66636,15 +66636,15 @@
       ],
       [
         4,
-        "facid"
+        "faculty id"
       ],
       [
         4,
-        "lname"
+        "last name"
       ],
       [
         4,
-        "fname"
+        "first name"
       ],
       [
         4,
@@ -66905,31 +66905,31 @@
       ],
       [
         0,
-        "largestkillingspree"
+        "largest killing spree"
       ],
       [
         0,
-        "largestmultikill"
+        "largest multi kill"
       ],
       [
         0,
-        "killingsprees"
+        "killing sprees"
       ],
       [
         0,
-        "longesttimespentliving"
+        "longest time spent living"
       ],
       [
         0,
-        "doublekills"
+        "double kills"
       ],
       [
         0,
-        "triplekills"
+        "triple kills"
       ],
       [
         0,
-        "quadrakills"
+        "quadra kills"
       ],
       [
         0,
@@ -68378,9 +68378,9 @@
       45
     ],
     "table_names": [
-      "ref hotel star ratings",
+      "reference hotel star ratings",
       "locations",
-      "ref attraction types",
+      "reference attraction types",
       "visitors",
       "features",
       "hotels",
@@ -68422,11 +68422,11 @@
       ],
       [
         0,
-        "f1"
+        "user id"
       ],
       [
         0,
-        "f2"
+        "follower id"
       ],
       [
         1,
@@ -68434,7 +68434,7 @@
       ],
       [
         1,
-        "uid"
+        "user id"
       ],
       [
         1,
@@ -68442,7 +68442,7 @@
       ],
       [
         1,
-        "createdate"
+        "create date"
       ],
       [
         2,
@@ -68458,7 +68458,7 @@
       ],
       [
         2,
-        "partitionid"
+        "partition id"
       ],
       [
         2,
@@ -68586,15 +68586,15 @@
       ],
       [
         0,
-        "stuid"
+        "student id"
       ],
       [
         0,
-        "lname"
+        "last name"
       ],
       [
         0,
-        "fname"
+        "first name"
       ],
       [
         0,
@@ -68618,7 +68618,7 @@
       ],
       [
         1,
-        "stuid"
+        "student id"
       ],
       [
         1,
@@ -70016,11 +70016,11 @@
       ],
       [
         0,
-        "essn"
+        "employee ssn"
       ],
       [
         0,
-        "pno"
+        "project number"
       ],
       [
         0,
@@ -70028,7 +70028,7 @@
       ],
       [
         1,
-        "fname"
+        "first name"
       ],
       [
         1,
@@ -70036,7 +70036,7 @@
       ],
       [
         1,
-        "lname"
+        "last name"
       ],
       [
         1,
@@ -70044,7 +70044,7 @@
       ],
       [
         1,
-        "bdate"
+        "birth date"
       ],
       [
         1,
@@ -70064,43 +70064,43 @@
       ],
       [
         1,
-        "dno"
+        "department no"
       ],
       [
         2,
-        "dname"
+        "department name"
       ],
       [
         2,
-        "dnumber"
+        "department number"
       ],
       [
         2,
-        "mgr ssn"
+        "manager ssn"
       ],
       [
         2,
-        "mgr start date"
+        "manager start date"
       ],
       [
         3,
-        "pname"
+        "dependent name"
       ],
       [
         3,
-        "pnumber"
+        "dependent number"
       ],
       [
         3,
-        "plocation"
+        "dependent location"
       ],
       [
         3,
-        "dnum"
+        "department number"
       ],
       [
         4,
-        "essn"
+        "employee ssn"
       ],
       [
         4,
@@ -70112,7 +70112,7 @@
       ],
       [
         4,
-        "bdate"
+        "birth date"
       ],
       [
         4,
@@ -70120,11 +70120,11 @@
       ],
       [
         5,
-        "dnumber"
+        "department number"
       ],
       [
         5,
-        "dlocation"
+        "department location"
       ]
     ],
     "column_names_original": [
@@ -70292,7 +70292,7 @@
       "department",
       "project",
       "dependent",
-      "dept locations"
+      "department locations"
     ],
     "table_names_original": [
       "works_on",
@@ -70311,7 +70311,7 @@
       ],
       [
         0,
-        "i id"
+        "item id"
       ],
       [
         0,
@@ -70323,11 +70323,11 @@
       ],
       [
         1,
-        "u id"
+        "user id"
       ],
       [
         1,
-        "i id"
+        "item id"
       ],
       [
         1,
@@ -70339,7 +70339,7 @@
       ],
       [
         2,
-        "u id"
+        "user id"
       ],
       [
         2,
@@ -70347,11 +70347,11 @@
       ],
       [
         3,
-        "source u id"
+        "source user id"
       ],
       [
         3,
-        "target u id"
+        "target user id"
       ],
       [
         3,
@@ -70512,7 +70512,7 @@
       ],
       [
         0,
-        "eventtype"
+        "event type"
       ],
       [
         0,
@@ -70520,11 +70520,11 @@
       ],
       [
         0,
-        "composername"
+        "composer name"
       ],
       [
         0,
-        "conductorname"
+        "conductor name"
       ],
       [
         0,
@@ -70536,19 +70536,19 @@
       ],
       [
         0,
-        "worktitle"
+        "work title"
       ],
       [
         0,
-        "soloistinstrument"
+        "soloist instrument"
       ],
       [
         0,
-        "soloistname"
+        "soloist name"
       ],
       [
         0,
-        "soloistroles"
+        "soloist roles"
       ],
       [
         0,
@@ -70556,7 +70556,7 @@
       ],
       [
         0,
-        "programid"
+        "program id"
       ],
       [
         0,
@@ -70568,11 +70568,11 @@
       ],
       [
         1,
-        "composername"
+        "composer name"
       ],
       [
         1,
-        "conductorname"
+        "conductor name"
       ],
       [
         1,
@@ -70588,7 +70588,7 @@
       ],
       [
         1,
-        "worktitle"
+        "work title"
       ],
       [
         1,
@@ -70596,7 +70596,7 @@
       ],
       [
         1,
-        "programid"
+        "program id"
       ],
       [
         1,
@@ -70608,15 +70608,15 @@
       ],
       [
         2,
-        "soloistinstrument"
+        "soloist instrument"
       ],
       [
         2,
-        "soloistname"
+        "soloist name"
       ],
       [
         2,
-        "soloistroles"
+        "soloist roles"
       ],
       [
         2,
@@ -70624,7 +70624,7 @@
       ],
       [
         2,
-        "programid"
+        "program id"
       ],
       [
         2,
@@ -70660,7 +70660,7 @@
       ],
       [
         3,
-        "programid"
+        "program id"
       ],
       [
         3,
@@ -70904,7 +70904,7 @@
     "foreign_keys": [],
     "primary_keys": [],
     "table_names": [
-      "ny phil",
+      "new york phil",
       "works",
       "soloists",
       "concerts"

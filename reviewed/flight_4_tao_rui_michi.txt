@@ -61,7 +61,7 @@ P: What are the names of the airports located in Cuba or Argentina?
 
 select name
 from airports
-where country = 'Cuba' or country = 'Argentina
+where country = 'Cuba' or country = 'Argentina'
 
 S:
 S:

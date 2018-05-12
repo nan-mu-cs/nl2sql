@@ -1,0 +1,236 @@
+1. How many employees are there?
+P: Count the number of employees
+
+Count the number of employees.
+Select count(*)
+From employee
+
+S:
+S:
+S:
+
+
+2. Sort employee names by their age in ascending order.
+P: List the names of employees and sort in ascending order of age.
+
+Select name
+From employee
+Order by age
+
+S:
+S:
+S:
+
+
+3. What is the number of employees from each city?
+P: Count the number of employees for each city.
+
+Select count(*), city
+From employee
+Group by city
+
+S:
+S:
+S:
+
+
+4. Which cities do more than one employee under age 30 come from?
+P: Find the cities that have more than one employee under age 30.
+
+Select city
+From employee
+Where age < 30
+Group by city
+Having count(*) > 1
+
+S:
+S:
+S:
+
+
+5. Find the number of shops in each location.
+P: How many shops are there in each location?
+
+Select count(*), location
+From shop
+Group by location
+
+S:
+S:
+S:
+
+
+6. Find the manager name and district of the shop whose number of products is the largest.
+P: What are the manager name and district of the shop that sells the largest number of products?
+
+Select manager_name, district
+From shop
+Order by number_products desc
+Limit 1
+
+S:
+S:
+S:
+
+
+7. find the minimum and maximum number of products of all stores.
+P: What are the minimum and maximum number of products across all the shops?
+
+Select min(Number_products), max(Number_products)
+From shop
+
+S:
+S:
+S:
+
+
+8. Return the name, location and district of all shops in descending order of number of products.
+P: Sort all the shops by number products in descending order, and return the name, location and district of each shop.
+
+Select name, location, district
+From shop
+Order by number_products desc
+
+S:
+S:
+S:
+
+
+9. Find the names of stores whose number products is more than the average number of products.
+P: Which shops' number products is above the average? Give me the shop names.
+
+Select name
+From shop
+Where number_products > (select avg(number_products) from shop)
+
+S:
+S:
+S:
+
+
+10. find the name of employee who was awarded the most times in the evaluation.
+P: Which employee received the most awards in evaluations? Give me the employee name.
+
+Select t1.name
+From employee as t1 join evaluation as t2 on t1.Employee_ID = t2.Employee_ID
+Group by t2.Employee_ID
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+11. Find the name of the employee who got the highest one time bonus.
+P: Which employee received the biggest bonus? Give me the employee name.
+
+Select t1.name
+From employee as t1 join evaluation as t2 on t1.Employee_ID = t2.Employee_ID
+order by t2.bonus desc
+Limit 1
+
+S:
+S:
+S:
+
+
+12. Find the names of employees who never won any award in the evaluation.
+P: What are the names of the employees who never received any evaluation?
+
+Select name
+From employee
+Where Employee_ID not in (select Employee_ID from evaluation)
+
+S:
+S:
+S:
+
+
+13. What is the name of the shop that is hiring the largest number of employees?
+P: Which shop has the most employees? Give me the shop name.
+
+Select t2.name
+From hiring as t1 join shop as t2 on t1.shop_id = t2.shop_id
+Group by t1.shop_id
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+14. Find the name of the shops that do not hire any employee.
+P: Which shops run with no employees? Find the shop names
+
+Select name
+From shop
+Where shop_id not in (select shop_id from hiring)
+
+S:
+S:
+S:
+
+
+15. Find the number of employees hired in each shop; show the shop name as well.
+P: For each shop, return the number of employees working there and the name of the shop.
+
+Select count(*), t2.name
+From hiring as t1 join shop as t2 on t1.shop_id = t2.shop_id
+Group by t2.name
+
+S:
+S:
+S:
+
+
+16. What is total bonus given in all evaluations?
+P: Find the total amount of bonus given in all the evaluations.
+
+Select sum(bonus)
+From evaluation
+
+S:
+S:
+S:
+
+
+17. Give me all the information about hiring.
+P: What is all the information about hiring?
+
+Select *
+From hiring
+
+S:
+S:
+S:
+
+
+18. Which district has both stores with less than 3000 products and stores with more than 10000 products?
+P: Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products.
+
+Select district
+From shop
+Where Number_products < 3000
+Intersect
+Select district
+From shop
+Where Number_products > 10000
+
+S:
+S:
+S:
+
+
+19. How many different store locations are there?
+P: Count the number of distinct store locations.
+
+Select count(distinct location)
+From shops
+
+S:
+S:
+S:
+
+

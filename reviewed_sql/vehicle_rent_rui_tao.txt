@@ -1,0 +1,141 @@
+1. How many vehicles do we have?
+
+select count(*)
+from vehicles
+
+2. Show names for all vehicles in descending order of model year.
+
+select name
+from vehicles
+order by model_year desc
+
+3. List all distinct types of powertrain of vehicles.
+
+select distinct type_of_powertrain
+from vehicles
+
+4. Show name, type of powertrain, and annual fuel cost for all vehicles with model year 2013 or 2014.
+
+select name, type_of_powertrain, annual_fuel_cost
+from vehicles
+where model_year = 2013 or model_year = 2014
+
+5. Show types of powertrain with vehicles both from 2014 and 2013.
+
+select type_of_powertrain
+from vehicles
+where model_year = 2014
+INTERSECT
+select type_of_powertrain
+from vehicles
+where model_year = 2013
+
+6. Show all types of powertrain and the number of vehicles in each type.
+
+select type_of_powertrain, count(*)
+from vehicles
+group by type_of_powertrain
+
+7. What is the type of powertrain with most number of vehicles.
+
+select type_of_powertrain
+from vehicles
+group by type_of_powertrain
+order by count(*) desc
+limit 1
+
+8. Show minimum, maximum, and average annual fuel cost for all vehicles.
+
+select min(annual_fuel_cost), max(annual_fuel_cost), avg(annual_fuel_cost)
+from vehicles
+
+9. Show name and model year for vehicles with city fuel economy rate less than or equal to highway fuel economy rate.
+
+select name, model_year
+from vehicles
+where city_fuel_economy_rate <= highway_fuel_economy_rate
+
+10. Show the type of powertrain with at least two vehicles, and the average annual fuel cost for vehicles in each such type.
+
+select type_of_powertrain, avg(annual_fuel_cost) 
+from vehicles
+group by type_of_powertrain
+having count(*) >= 2
+
+11.  Show the name, age, membership credit for all customers?
+
+select name, age, membership_credit
+from customers
+
+12. Show the name and age of the customer with maximum membership credit.
+
+select name, age
+from customers
+order by membership_credit desc
+limit 1
+
+13. What is the average age for customers with a membership credit above the average?
+
+select avg(age)
+from customers
+where membership_credit > (select avg(membership_credit) from customers)
+
+14. Show all information for all discounts.
+
+select *
+from discount
+
+15. Show the name and total hours of renting for each vehicle.
+
+select T2.name, sum(T1.total_hours)
+from renting_history as T1 join vehicles as T2 on T1.vehicles_id = T2.id
+group by T2.id
+
+16. Show the name of vehicles with no renting history.
+
+select name
+from vehicles
+where id not in (select vehicles_id from renting_history)
+
+17. Show the name of customer with at least two renting history records.
+
+select T2.name
+from renting_history as T1 join customers as T2 on T1.customer_id = T2.id
+group by T2.id
+having count(*) >= 2
+
+18. Show the name and model year of the vehicle with most number of renting history records.
+
+select T2.name, T2.model_year
+from renting_history as T1 join vehicles as T2 on T1.vehicles_id = T2.id
+group by T2.id
+order by count(*) desc
+limit 1
+
+19. Show the vehicle name with a descending order of total hours of renting.
+
+select T2.name
+from renting_history as T1 join vehicles as T2 on T1.vehicles_id = T2.id
+group by T2.id
+order by sum(T1.total_hours) desc
+
+20.  What is the discount name with most number of renting history records?
+
+select T2.name
+from renting_history as T1 join discount as T2 on T1.discount_id = T2.id
+group by T2.id
+order by count(*) desc
+limit 1
+
+21. Find the name and power type of the cars that rented for more than 30 total hours.
+
+select T2.name, T2.Type_of_powertrain
+from renting_history as T1 join vehicles as T2 on T1.vehicles_id = T2.id
+group by T1.vehicles_id
+having sum(T1.total_hours) > 30
+
+22. Find the average city and highway fuel rates for cars with different power types.
+
+select avg(City_fuel_economy_rate), avg(Highway_fuel_economy_rate),Type_of_powertrain
+from vehicles
+group by Type_of_powertrain

@@ -1,0 +1,179 @@
+
+Total # = 27
+
+1. Find the email for user Mary.
+
+Select email
+From user_profiles
+Where name = 'Mary'
+
+2. What is the partition id of user Iron Man.
+
+Select partitionid
+From user_profiles
+Where name = 'Iron Man'
+
+3. How many users are there?
+
+Select count(*)
+From user_profiles
+
+4. How many followers do all users have?
+
+Select count(*)
+From follows
+
+5. Find the number of followers for each user.
+
+Select count(*)
+From follows
+Group by f1
+
+6. Find the number of tweets are there.
+
+Select count(*)
+From tweets
+
+7. Find the number of users who posted some tweets.
+
+Select count(distinct uid)
+From tweets
+
+
+8. Find the name and email of the user whose name contains the word ‘Swift’.
+
+Select name, email
+From user_profiles
+Where name LIKE '%Swift%'
+
+9. Find the name of users whose emails contain ‘superstar’ or ‘edu’.
+
+Select name
+From user_profiles
+Where email LIKE '%superstar%' or email LIKE '%edu%'
+
+
+10. Return the text of tweets about the topic ‘intern’.
+
+Select text
+From tweets
+Where text LIKE '%intern%'
+
+11. Find the name and email of the users who have more than 1000 followers.
+
+Select name, email
+From user_profiles
+where followers > 1000
+
+12. Find the name of the users whose number of followers is higher than that of user Tyler Swift.
+
+Select T1.name
+From user_profiles as T1 join follows as T2 on T1.uid = T2.f1
+group by T2.f1
+having count(*) > (Select count(*)
+From user_profiles as T1 join follows as T2 on T1.uid = T2.f1
+Where T1.name = 'Tyler Swift')
+
+13. Find the name and email of the users who have more than one follower.
+
+Select T1.name, T1.email
+From user_profiles as T1 join follows as T2 on T1.uid = T2.f1
+group by T2.f1
+having count(*) > 1
+
+14. Find the name of users who have more than one tweet.
+
+Select T1.name
+From user_profiles as T1 join tweets as T2 on T1.uid = T2.uid
+group by T2.uid
+having count(*) > 1
+
+15. Find the id of users who are followed by Mary and Susan.
+
+Select T2.f1
+From user_profiles as T1
+     join follows as T2 on T1.uid = T2.f2
+Where T1.name = "Mary"
+INTERSECT
+Select T2.f1
+From user_profiles as T1
+     join follows as T2 on T1.uid = T2.f2
+Where T1.name = "Susan"
+
+16. Find the id of users who are followed by Mary or Susan.
+
+Select T2.f1
+From user_profiles as T1
+     join follows as T2 on T1.uid = T2.f2
+Where T1.name = "Mary" or T1.name = "Susan"
+
+17. Find the name of the user who has the most number of followers.
+
+Select name
+From user_profiles
+order by followers desc
+Limit 1
+
+18. Find the name and email of the user followed by the least number of people.
+
+Select name, email
+From user_profiles
+order by followers
+Limit 1
+
+19. List the name and number of followers for each user, and sort the results by the number of followers in a descending order.
+
+Select name, followers
+From user_profiles
+order by followers desc
+
+20. List the name of top 5 users followed by the most number of other users.
+
+Select name
+From user_profiles
+order by followers desc
+Limit 5
+
+21. List the text of all tweets in the order of date.
+
+Select text
+From tweets
+Order by createdate
+
+22. Find the name of each user and number of tweets tweeted by each of them.
+
+Select T1.name, count(*)
+From user_profiles as T1 join tweets as T2 on T1.uid = T2.uid
+group by T2.uid
+
+23. Find the name and partition id of users who tweeted less than twice.
+
+Select T1.name, T1.partitionid
+From user_profiles as T1 join tweets as T2 on T1.uid = T2.uid
+group by T2.uid
+Having count(*) < 2
+
+24. Find the name of the user who tweeted more than once, and number of tweets tweeted by each of them.
+
+Select T1.name, count(*)
+From user_profiles as T1 join tweets as T2 on T1.uid = T2.uid
+group by T2.uid
+Having count(*) > 1
+
+25. Find the average number of followers for the users who do not have any tweet.
+
+Select avg(followers)
+From user_profiles
+Where uid NOT IN (select uid from tweets)
+
+26. Find the average number of followers for the users who had some tweets.
+
+Select avg(followers)
+From user_profiles
+Where uid IN (select uid from tweets)
+
+27. Find the maximum and total number of followers of all users.
+
+Select max(followers), sum(followers)
+from user_profiles
+

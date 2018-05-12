@@ -1,0 +1,229 @@
+Total # = 20
+
+1. How many candidates are there?
+P: Count the number of candidates.
+
+select count(*)
+from candidate
+
+S:
+S:
+S:
+
+2. Which poll resource provided the most number of candidate information?
+P: Return the poll resource associated with the most candidates.
+
+select poll_source
+from candidate
+group by poll_source
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+3. what are the top 3 highest support rates?
+P: Return the top 3 greatest support rates.
+
+select support_rate
+from candidate
+order by support_rate desc
+limit 3
+
+S:
+S:
+S:
+
+4. Find the id of the candidate who got the lowest oppose rate.
+P: What is the id of the candidate with the lowest oppose rate?
+
+select Candidate_ID
+from candidate
+order by oppose_rate
+limit 1
+
+S:
+S:
+S:
+
+5. Please list support, consider, and oppose rates for each candidate in ascending order by unsure rate.
+P: What are the support, consider, and oppose rates of each candidate, ordered ascending by their unsure rate?
+
+select Support_rate, Consider_rate, Oppose_rate
+from candidate
+order by unsure_rate
+
+S:
+S:
+S:
+
+6. which poll source does the highest oppose rate come from?
+P: Return the poll source corresponding to the candidate who has the oppose rate.
+
+select poll_source
+from candidate
+order by oppose_rate desc
+limit 1
+
+S:
+S:
+S:
+
+7. List all people names in the order of their date of birth from old to young.
+P: What are the names of all people, ordered by their date of birth?
+
+select name
+from people
+order by date_of_birth
+
+S:
+S:
+S:
+
+8. Find the average height and weight for all males (sex is M).
+P: What are the average height and weight across males (sex is M)?
+
+select avg(height), avg(weight)
+from people
+where sex = 'M'
+
+S:
+S:
+S:
+
+9. find the names of people who are taller than 200 or lower than 190.
+P: What are the names of people who have a height greater than 200 or less than 190?
+
+select name
+from people
+where height > 200 or height < 190
+
+S:
+S:
+S:
+
+10. Find the average and minimum weight for each gender.
+P: What are the average and minimum weights for people of each sex?
+
+select avg(weight), min(weight), sex
+from people
+group by sex
+
+S:
+S:
+S:
+
+11. Find the name and gender of the candidate who got the highest support rate.
+P: What is the name and sex of the candidate with the highest support rate?
+
+select t1.name, t1.sex
+from people as t1 join candidate as t2 on t1.people_id = t2.people_id
+order by t2.support_rate desc
+limit 1
+
+S:
+S:
+S:
+
+12. Find the name of the candidates whose oppose percentage is the lowest for each sex.
+P: For each sex, what is the name and sex of the candidate with the oppose rate for their sex?
+
+select t1.name, t1.sex
+from people as t1 join candidate as t2 on t1.people_id = t2.people_id
+group by t1.sex
+having oppose_rate = min(oppose_rate)
+
+S:
+S:
+S:
+
+13. which gender got the highest average uncertain ratio.
+P: What is the sex of the candidate who had the highest unsure rate?
+
+select t1.sex
+from people as t1 join candidate as t2 on t1.people_id = t2.people_id
+group by t1.sex
+order by avg(t2.unsure_rate) desc
+limit 1
+
+S:
+S:
+S:
+
+14. what are the names of people who did not participate in the candidate election.
+P: Give the names of people who did not participate in the candidate election.
+
+select name
+from people
+where people_id not in (select people_id from candidate)
+
+S:
+S:
+S:
+
+15. Find the names of the candidates whose support percentage is lower than their oppose rate.
+P: What are the names of candidates who have a lower support rate than oppose rate?
+
+select t1.name
+from people as t1 join candidate as t2 on t1.people_id = t2.people_id
+where t2.support_rate < t2.oppose_rate
+
+S:
+S:
+S:
+
+16. how many people are there whose weight is higher than 85 for each gender?
+P: Count the number of people of each sex who have a weight higher than 85.
+
+select count(*), sex
+from people
+where weight > 85
+group by sex
+
+S:
+S:
+S:
+
+17. find the highest support percentage, lowest consider rate and oppose rate of all candidates.
+P: Return the maximum support rate, minimum consider rate, and minimum oppose rate across all candidates?
+
+select max(support_rate), min(consider_rate), min(oppose_rate)
+from candidate
+
+S:
+S:
+S:
+
+18. list all female (sex is F) candidate names in the alphabetical order.
+P: What are the names of all female candidates in alphabetical order (sex is F)?
+
+select t1.name
+from people as t1 join candidate as t2 on t1.people_id = t2.people_id
+where t1.sex = 'F'
+order by t1.name
+
+S:
+S:
+S:
+
+19. find the name of people whose height is lower than the average.
+P: What are the names of people who are shorter than average?
+
+select name
+from people
+where height < (select avg(height) from people)
+
+S:
+S:
+S:
+
+20. List all info about all people.
+P: What is all the information about all people?
+
+select *
+from people
+
+S:
+S:
+S:

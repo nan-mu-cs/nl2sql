@@ -457,21 +457,12 @@ P: Which workshop groups have bookings with status code "stop"? Give me the name
 
 select T2.Store_Name
 from Bookings as T1 join Drama_Workshop_Groups as T2 on
-
-S:
-S:
-S:
-
-
 T1.Workshop_Group_ID = T2.Workshop_Group_ID
-
-
 where T1.Status_Code = "stop"
 
 S:
 S:
 S:
-
 
 38. Show the names of all the clients with no booking.
 P: What are the names of the clients who do not have any booking?

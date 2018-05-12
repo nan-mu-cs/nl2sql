@@ -1,0 +1,138 @@
+Total = 20
+
+1. How many companies are there?
+
+SELECT count(*)
+FROM Companies
+
+2. List the name of companies in descending order market value.
+
+SELECT name
+FROM Companies
+order by Market_Value_billion DESC
+
+3. What are the names of companies whose headquarters are not "USA"?
+
+SELECT name
+FROM Companies
+where Headquarters != 'USA'
+
+4. Who are the names and assets of companies in ascending order of name?
+
+SELECT name, Assets_billion
+FROM Companies
+order by name ASC
+
+5. What are the average profits of companies?
+
+SELECT avg(Profits_billion)
+FROM Companies
+
+6. What are the maximum and minimum sales of companies whose industries are not "Banking".
+
+SELECT max(Sales_billion), min(Sales_billion)
+FROM Companies
+Where Industry != "Banking"
+
+7. How many different industries are the companies in?
+
+SELECT count(distinct Industry)
+FROM Companies
+
+8. List names of buildings in descending order of height.
+
+SELECT name
+FROM buildings
+order by Height DESC
+
+9. List the stories of the building with the largest height.
+
+SELECT Stories
+FROM buildings
+order by Height DESC limit 1
+
+10. Show the names of buildings and the companies whose offices are in the building.
+
+SELECT T3.name, T2.name
+FROM Office_locations as T1 join buildings as T2 
+ON T1.building_id = T2.id
+join Companies as T3
+on T1.company_id = T3.id
+
+
+11. Show the names of the buildings that have more than one company offices.
+
+SELECT T2.name
+FROM Office_locations as T1 join buildings as T2 
+ON T1.building_id = T2.id
+join Companies as T3
+on T1.company_id = T3.id
+group by T1.building_id
+Having COUNT(*) > 1
+
+12. Show the name of the building that has the most number of company offices.
+
+SELECT T2.name
+FROM Office_locations as T1 join buildings as T2 
+ON T1.building_id = T2.id
+join Companies as T3
+on T1.company_id = T3.id
+group by T1.building_id
+order by COUNT(*) DESC limit 1
+
+13. Please show the name of the buildings whose status is "on-hold" in ascending order of stories.
+
+SELECT name
+FROM buildings
+Where Status = "on-hold"
+order by Stories ASC
+
+14. Please show different industries and the corresponding number of companies in each industry.
+
+SELECT Industry, COUNT(*)
+FROM Companies
+group by Industry
+ 
+15. Please show the industries of companies in descending order of the number of companies.
+
+SELECT Industry
+FROM Companies
+group by Industry
+order by COUNT(*) DESC
+
+16. List the industry shared by the most number of companies.
+
+SELECT Industry
+FROM Companies
+group by Industry
+order by COUNT(*) DESC limit 1
+
+17. List the names of buildings that have no company office.
+
+SELECT name
+from buildings
+where id not in (SELECT building_id FROM Office_locations)
+
+18. Show the industries shared by companies whose headquarters are "USA" and companies whose headquarters are "China".
+
+SELECT Industry
+FROM Companies
+Where Headquarters = "USA"
+Intersect 
+SELECT Industry
+FROM Companies
+Where Headquarters = "China"
+
+19. Find the number of companies whose industry is "Banking" or "Conglomerate",
+
+SELECT count(*)
+FROM Companies
+Where Industry = "Banking" or Industry = "Conglomerate"
+
+20. Show the headquarters shared by more than two companies.
+
+SELECT Headquarters
+FROM Companies
+group by Headquarters
+Having COUNT(*) > 2
+

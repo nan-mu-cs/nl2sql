@@ -1,0 +1,153 @@
+
+Total # = 22
+
+1. Find the model of the most expensive headphone.
+
+Select model
+From headphone
+Order by price desc
+Limit 1
+
+2. List all different headphone models in the alphabetical order.
+
+Select distinct model
+From headphone
+Order by model
+
+3. Which headphone class is the most common one?
+
+Select class
+From headphone
+Group by class
+Order by count(*) desc
+Limit 1
+
+4. Which headphone class does have more than two headphones?
+
+Select class
+From headphone
+Group by class
+Having count(*) > 2
+
+5. Find the number of headphones with a price higher than 200 for each class.
+
+Select count(*), class
+From headphone
+Where price > 200
+Group by class
+
+6. how many different earpads are there?
+
+select count(distinct earpads)
+From headphone
+
+7. Find the top 2 earpads that are mostly used.
+
+Select earpads
+From headphone
+Group by earpads
+Order by count(*) desc
+Limit 2
+
+8. What are the model, class, and construction of the cheapest headphone?
+
+Select model, class, construction
+From headphone
+Order by price
+Limit 1
+
+9. Find the average price for each headphone construction.
+
+Select construction, avg(price)
+From headphone
+Group by construction
+
+10. Which headphone classes do have both Bowls and Comfort Pads earpads?
+
+Select class
+From headphone
+Where earpads = 'Bowls'
+Intersect
+Select class
+From headphone
+Where earpads = 'Comfort Pads'
+
+11. Which earpads do never use plastic construction?
+
+Select earpads
+From headphone
+Except
+Select earpads
+From headphone
+Where construction = 'Plastic'
+
+12. Find the headphone models whose price is below the average price.
+
+Select model
+From headphone
+Where price < (select avg(price) from headphone)
+
+13. Sort all store names by open date
+
+Select name
+From store
+Order by date_opened
+
+14. List name and parking info for the stores in the Tarzana neighborhood.
+
+Select name, parking
+From store
+Where neighborhood = 'Tarzana'
+
+15. How many different neighborhood are there for all stores?
+
+Select count(distinct neighborhood)
+From store
+
+16. find the number of stores in each neighborhood.
+
+Select count(*), neighborhood
+From store
+Group by neighborhood
+
+17. Find the name of the store which has the most number of headphones in stock. List the number of headphones as well.
+
+Select t1.name, sum(t2.quantity)
+From store as t1 join stock as t2 on t1.store_id = t2.store_id
+Group by t2.store_id
+Order by sum(t2.quantity) desc
+Limit 1
+
+18. Find the name of stores which have no any headphone in stock.
+
+Select name
+From store
+Where store_id not in (select store_id from stock)
+
+19. Which headphone models do not have any stock in any store?
+
+Select model
+From headphone
+Where headphone_id not in (select headphone_id from stock)
+
+20. Which headphone model has most number of stock in all stores?
+
+Select t1.model
+From headphone as t1 join stock as t2 on t1.headphone_id = t2.headphone_id
+Group by t1.model
+Order by sum(t2.quantity) desc
+Limit 1
+
+21. How many headphones are stored in the Woodman store?
+
+Select sum(t2.quantity)
+From store as t1 join stock as t2 on t1.store_id = t2.store_id
+Where t1.name = 'Woodman'
+
+22. Which neighborhood does not have any headphone in stock?
+
+Select Neighborhood
+From store
+Except
+Select t1.Neighborhood
+From store as t1 join stock as t2 on t1.store_id = t2.store_id

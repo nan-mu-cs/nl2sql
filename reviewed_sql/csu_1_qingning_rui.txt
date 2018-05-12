@@ -6,7 +6,7 @@ select campus
 from campuses
 where county = "Los Angeles"
 
-What are the names of all campuses in Chico?
+What are the names of all campuses located at Chico?
 
 select campus
 from campuses
@@ -56,33 +56,23 @@ from campuses as T1 join "csu-fees" as T2
 on T1.id = t2.campus
 where t1.campus = "San Francisco State University" and T2.year = 1996
 
-5. Find the count of universities whose campus fee is greater than the average campus fee in 1996.
+5. Find the count of universities whose campus fee is greater than the average campus fee.
 
 select count(*)
 from "csu-fees"
 where campusfee > (select avg(campusfee) from "csu-fees")
 
-Find the count of universities whose campus fee is greater than two times the average campus fee in 1996.
+Find the count of universities whose campus fee is greater than two times the average campus fee.
 
 select count(*)
 from "csu-fees"
-where campusfee > 1.1 * (select avg(campusfee) from "csu-fees")
+where campusfee > 2 * (select avg(campusfee) from "csu-fees")
 
 6. Which university is in Los Angeles county and opened after 1950?
 
 select campus
 from campuses
 where county = "Los Angeles" and year > 1950
-
-Or, alternatively:
-
-select campus
-from campuses
-where county = "Los Angeles" 
-intersect
-select campus
-from campuses
-where year > 1950
 
 7. Which year has the most degrees conferred?
 
@@ -92,24 +82,24 @@ group by year
 order by sum(degrees) desc
 limit 1
 
-Which campus has the most degrees conferred in all times?
+Which campus has the most degrees conferred in all times? Show the id
 
-select T1.campus
-from degrees as T1 join campuses as T2
+select campus
+from degrees
 group by campus
 order by sum(degrees) desc
 limit 1
 
-8. Which discipline has the most enrollments?
+8. Which discipline has the most enrollments? Show the name.
 
 select T1.name
 from disciplines as T1 join "discipline-enrollments" as T2
 on T2.discipline = T1.id
-group by T1.name
+group by T1.id
 order by count(*) desc
 limit 1
 
-9. What is the name and number of full-time students are there in the campus that has the most "Computer and Info. Sciences" students enrolled in year 2004.
+9. What is the name and number of full-time students of the campus that has the most "Computer and Info. Sciences" students enrolled in year 2004.
 
 select T1.campus, T2.FTE_AY
 from campuses as T1 join enrollments as T2
@@ -123,7 +113,7 @@ group by T3.campus
 order by count(*) desc
 limit 1
 
-What is the name and number of all enrolled students are there in the campus that has the most "Agriculture" students enrolled in year 2004.
+What is the name and number of all enrolled students of the campus that has the most "Agriculture" students enrolled in year 2004.
 
 select T1.campus, T2.totalenrollment_ay
 from campuses as T1 join enrollments as T2
@@ -158,7 +148,7 @@ select avg(campusfee)
 from "csu-fees"
 where year = 2005
 
-12. For each campus in LA and Orange counties report the total number of degrees granted between 1998 and 2002.
+12. For each campus in Los Angeles or Orange counties report the total number of degrees granted between 1998 and 2002.
 
 select T1.campus, sum(T2.degrees)
 from campuses as T1 join degrees as T2
@@ -196,19 +186,14 @@ where T2.year = 1998 and faculty >
     on T1.id = T2.campus
     where T2.year = 1998 and T1.county = "Los Angeles")
 
-14. What campus had more than 400 total enrollment but less than 200 full time enrollment in year 1959?
+14. What campus had more than 400 total enrollment but less than 200 full time enrollment in year 1956?
 
 select T1.campus
 from campuses as t1 join enrollments as t2
 on t1.id = t2.campus
-where t2.year = 1956 and totalenrollment_ay > 400
-intersect
-select T1.campus
-from campuses as t1 join enrollments as t2
-on t1.id = t2.campus
-where t2.year = 1956 and FTE_AY > 200
+where t2.year = 1956 and totalenrollment_ay > 400 and FTE_AY > 200
 
-15. What is the total number of students with discipline "Computer and Info. Sciences" in 2004?
+15. What is the total number of undergraduate and graduate students with discipline "Computer and Info. Sciences" in 2004?
 
 select sum(t1.undergraduate) + sum(t1.graduate)
 from "discipline-enrollments" as T1 join disciplines as T2
@@ -247,7 +232,7 @@ select sum(faculty)
 from faculty
 where year = 2002
 
-19. What is the number of faculty lines in "Long Beach State University" in 2002?
+19. What is the number of faculty lines in campus "Long Beach State University" in 2002?
 
 select faculty
 from faculty as T1 join campuses as T2
@@ -261,12 +246,12 @@ from faculty as T1 join campuses as T2
 on T1.campus = T2.id
 where T1.year = 2004 and T2.campus = "San Francisco State University"
 
-20. List the universities that has between 600 and 1000 faculty lines in year 2004.
+20. List the campus that have between 600 and 1000 faculty lines in year 2004.
 
 select T1.campus
 from campuses as t1 join faculty as t2
 on t1.id = t2.campus
-where t2.faculty > 600 and t2.faculty < 1000
+where t2.faculty >= 600 and t2.faculty <= 1000 and T1.year = 2004
 
 21. How many faculty lines are there in the university that conferred the most number of degrees in year 2002?
 
@@ -299,7 +284,7 @@ where t1.year = 2004 and t2.campus = "San Jose State University"
 
 What is the number of graduates in "San Francisco State University" in year 2004?
 
-select sum(t1.graduates)
+select sum(t1.graduate)
 from "discipline-enrollments" as t1 join campuses as t2
 on t1.campus = t2.id
 where t1.year = 2004 and t2.campus = "San Francisco State University" 

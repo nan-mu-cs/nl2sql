@@ -1,0 +1,133 @@
+1. How many gas companies are there?
+
+select count(*)
+from company
+
+2. List the company name and rank for all companies.
+
+select company, rank
+from company
+
+3. Show the company name and the main industry for all companies whose headquarters are not from USA.
+
+select company, main_industry
+from company
+where headquarters != 'USA'
+
+4. Show all company names and headquarters in the descending order of market value.
+
+select company, headquarters
+from company
+order by market_value desc
+
+5. Show minimum, maximum, and average market value for all companies.
+
+select min(market_value), max(market_value), avg(market_value)
+from company
+
+6. Show all main industry for all companies.
+
+select distinct main_industry
+from company
+
+
+7. List all headquarters and the number of companies in each headquarter. 
+
+select headquarters, count(*)
+from company 
+group by headquarters
+
+8. Show all main industry and total market value in each industry.
+
+select main_industry, sum(market_value)
+from company
+group by main_industry
+
+9. List the main industry with most market value and its number of companies.
+
+select main_industry, count(*)
+from company
+group by main_industry
+order by sum(market_value) desc
+limit 1
+
+10. Show headquarters with at least two companies in Banking industry.
+
+select headquarters
+from company
+where main_industry = 'Banking'
+group by headquarters
+having count(*) >= 2
+
+
+11. Show gas station id, location, and manager_name for all gas stations ordered by open year.
+
+select station_id, location, manager_name
+from gas_station
+order by open_year
+
+12. How many gas station are opened between 2000 and 2005?
+
+select count(*)
+from gas_station
+where open_year >= 2000 and open_year <= 2005
+
+13. Show all locations and the number of gas stations in each location ordered by the count.
+
+select location, count(*)
+from gas_station
+group by location
+order by count(*)
+
+14. Show all headquarters with both a company in banking industry and a company in Oil and gas.
+
+select headquarters
+from company
+where main_industry = 'Banking'
+INTERSECT
+select headquarters
+from company
+where main_industry = 'Oil and gas'
+
+15. Show all headquarters without a company in banking industry.
+
+select headquarters
+from company
+EXCEPT
+select headquarters
+from company
+where main_industry = 'Banking'
+
+
+16. Show  the company name with the number of gas station.
+
+select T2.company, count(*)
+from station_company as T1 join company as T2 on T1.company_id = T2.company_id
+group by T1.company_id
+
+17. Show company name and main industry without a gas station.
+
+select company, main_industry
+from company
+where company_id not in (select company_id from station_company)
+
+18. Show the manager name for gas stations belonging to company ExxonMobil.
+
+select T3.manager_name
+from station_company as T1 join company as T2 on T1.company_id = T2.company_id join gas_station as T3 on T1.station_id = T3.station_id
+where T2.company = 'ExxonMobil'
+
+19. Show all locations where a gas station for company with market value greater than 100 is located.
+
+select T3.location
+from station_company as T1 join company as T2 on T1.company_id = T2.company_id join gas_station as T3 on T1.station_id = T3.station_id
+where T2.market_value > 100
+
+20. Show the manager name with most number of gas stations opened after 2000.
+
+select manager_name
+from gas_station
+where open_year > 2000
+group by manager_name
+order by count(*) desc
+limit 1

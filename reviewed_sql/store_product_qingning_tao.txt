@@ -1,0 +1,170 @@
+1. Find all the distinct district names odered by city area in descending.
+
+select distinct District_name
+from district
+order by city_area desc
+
+2. Find the list of page size which have more than 3 product listed
+
+select max_page_size
+from product
+group by max_page_size
+having count(*) > 3
+
+3. Find the name and population of district with population between 200000 and 2000000
+
+select District_name, City_Population
+from district
+where City_Population between 200000 and 2000000
+
+4. Find the name all districts with city area greater than 10 or population larger than 100000.
+
+select district_name
+from district
+where city_area > 10 or City_Population > 100000
+
+5. Which district has the largest population?
+
+select district_name
+from district
+order by city_population desc
+limit 1
+
+6. Which district has the least area?
+
+select district_name
+from district
+order by city_area asc
+limit 1
+
+7. Find the total population of the top 3 districts with the largest area.
+
+select sum(city_population)
+from district
+order by city_area desc
+limit 3
+
+8. Find all types of store and number of them.
+
+select type, count(*)
+from store
+group by type
+
+9. Find the names of all stores in Khanewal District.
+
+select t1.store_name
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+where t3.district_name = "Khanewal District"
+
+10. Find all the stores in the district with the most population.
+
+select t1.store_name
+from store as t1 join store_district as t2 on t1.store_id = t2.store_id
+where district_id = (select district_id
+from district
+order by city_population desc
+limit 1)
+
+11. Which city is the headquarter of the store named "Blackville" in?
+
+select t3.headquartered_city
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+where t1.store_name = "Blackville"
+
+12. Find the number of stores in each city.
+
+select t3.headquartered_city, count(*)
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+group by t3.headquartered_city
+
+13. Find the city with the most number of stores.
+
+select t3.headquartered_city
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+group by t3.headquartered_city
+order by count(*) desc
+limit 1
+
+14. What is the average pages per minute color?
+
+select avg(pages_per_minute_color)
+from product
+
+15. What products are available at store named "Miramichi"?
+
+select t1.product
+from product as t1 join store_product as t2
+on t1.product_id = t2.product_id
+join store as t3
+on t2.store_id = t3.store_id
+where t3.store_name = "Miramichi"
+
+16. Find products with max page size as "A4" and pages per minute color smaller than 5.
+
+select product
+from product
+where max_page_size = "A4" and pages_per_minute_color < 5
+
+17. Find products with max page size as "A4" or pages per minute color smaller than 5.
+
+select product
+from product
+where max_page_size = "A4" or pages_per_minute_color < 5
+
+18. Find all the product whose name contains the word "Scanner".
+
+select product
+from product
+where product like "%Scanner%"
+
+19. Find the most prominent max page size among all the products.
+
+select max_page_size
+from product
+group by max_page_size
+order by count(*) desc
+limit 1
+
+20. Find the name of the products that are not using the most frequently-used max page size.
+
+select product
+from product
+where product != (select max_page_size
+from product
+group by max_page_size
+order by count(*) desc
+limit 1)
+
+21. Find the total population of the districts where the area is bigger than the average city area.
+
+select sum(city_population)
+from district
+where city_area > (select avg(city_area) from district)
+
+22. Find the names of districts where have both city mall and village store type stores.
+
+select t3.District_name
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+where t1.Type = "City Mall"
+intersect
+select t3.District_name
+from store as t1 join store_district as t2
+on t1.store_id = t2.store_id
+join district as t3
+on t2.district_id = t3.district_id
+where t1.Type = "Village Store"

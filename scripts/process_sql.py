@@ -557,16 +557,16 @@ if __name__ == '__main__':
     # print get_schema('art_1.sqlite')
     # fpath = '/Users/zilinzhang/Workspace/Github/nl2sql/Data/Initial/table/art_1_table.json'
     # print schema
-    schema = {"country": ["code", "indepyear"], "countrylanguage": ["language", "countrycode", "isofficial"]}
-    # schema = Schema(get_schema('art_1.sqlite'))
-    schema = Schema(schema)
-    data = load_data("/Users/zilinzhang/Workspace/Github/nl2sql/Data/Processed/train/art_1_processed.json")
+    #schema = {"country": ["code", "indepyear"], "countrylanguage": ["language", "countrycode", "isofficial"]}
+    schema = Schema(get_schema('/data/projects/nl2sql/database/art_1/art_1.sqlite'))
+    #schema = Schema(schema)
+    data = load_data('art_1.json')
+    print len(data)
     for ix, entry in enumerate(data):
         query = entry["query"]
-        query = 'SELECT count(DISTINCT T2.Language) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code  =  T2.CountryCode WHERE  IndepYear  <  1930 AND T2.IsOfficial  =  "T"'
-        print ix, query
+        print '\n-----------------------------------------'
+        print query
         toks = tokenize(query)
         tables_with_alias = get_tables_with_alias(schema.schema, toks)
         _, sql = parse_sql(toks, 0, tables_with_alias, schema)
         print sql
-        break

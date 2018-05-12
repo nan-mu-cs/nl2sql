@@ -1,0 +1,171 @@
+Total = 26
+
+1. How many clubs are there?
+
+SELECT count(*)
+FROM club
+
+2. List the distinct region of clubs in ascending alphabetical order.
+
+SELECT distinct Region
+FROM club
+order by Region ASC
+
+3. What is the average number of gold medals for clubs?
+
+SELECT avg(Gold)
+FROM club_rank
+
+4. What are the types and countries of competitions?
+
+SELECT Competition_type, Country
+FROM competition
+
+5. What are the distinct years in which the competitions type is not "Tournament"?
+
+SELECT distinct Year
+FROM competition
+WHERE Competition_type != "Tournament"
+
+6. What are the maximum and minimum number of silver medals for clubs.
+
+SELECT max(Silver), min(Silver)
+FROM club_rank
+
+7. How many clubs have total medals less than 10?
+
+SELECT count(*)
+FROM club_rank
+where Total < 10
+
+8. List all club names in ascending order of start year.
+
+SELECT name
+FROM club
+order by Start_year ASC
+
+9. List all club names in descending alphabetical order.
+
+SELECT name
+FROM club
+order by name DESC
+
+10. Please show the names and the players of clubs.
+
+SELECT T1.name, T2.Player
+FROM club as T1 join player as T2 
+on T1.Club_ID = T2.Club_ID
+
+11. Show the names of clubs that have players with position "Right Wing".
+
+SELECT T1.name
+FROM club as T1 join player as T2 
+on T1.Club_ID = T2.Club_ID
+Where T2.Position = "Right Wing"
+
+12. What is the average points of players from club with name "AIB".
+
+SELECT avg(T2.Points)
+FROM club as T1 join player as T2 
+on T1.Club_ID = T2.Club_ID
+Where T1.name = "AIB"
+
+13.  List the position of players and the average number of points of players of each position.
+
+SELECT Position, avg(Points)
+FROM player
+group by name
+
+14. List the position of players with average number of points scored by players of that position bigger than 20.
+
+SELECT Position
+FROM player
+group by name
+Having avg(Points) >= 20
+ 
+15. List the types of competition and the number of competitions of each type.
+
+SELECT Competition_type, COUNT(*)
+FROM competition
+group by Competition_type
+
+15. List the most common type of competition.
+
+SELECT Competition_type
+FROM competition
+group by Competition_type
+order by COUNT(*) DESC limit 1
+
+17. List the types of competition that have at most five competitions of that type.
+
+SELECT Competition_type
+FROM competition
+group by Competition_type
+Having COUNT(*) <= 5
+
+18. List the names of clubs that do not have any players.
+
+SELECT name
+from CLub
+where Club_ID not in (SELECT Club_ID FROM player)
+
+19. What are the positions with both players having more than 20 points and less than 10 points.
+
+SELECT Position
+FROM player
+Where Points > 20
+Intersect 
+SELECT Position
+FROM player
+Where Points < 10
+
+20. Show total points of all players.
+
+select sum(Points)
+from player
+
+21. how many different poistions are there?
+
+select count(distinct position)
+from player
+
+22. what are the name of players who get more than the average points.
+
+select name
+from player
+where points > (select avg(points) from player)
+
+23. find the number of players whose points are lower than 30 in each position.
+
+select count(*), position
+from player
+where points < 30
+group by position
+
+24. which country did participated in the most number of Tournament competitions?
+
+select country
+from competition
+where competition_type = 'Tournament'
+group by country
+order by count(*) desc
+limit 1
+
+25. which countries did participated in both Friendly and Tournament type competitions.
+
+select country
+from competition
+where competition_type = 'Friendly'
+intersect
+select country
+from competition
+where competition_type = 'Tournament'
+
+26. Find the countries that have never participated in any competition with Friendly type.
+
+select country
+from competition
+except
+select country
+from competition
+where competition_type = 'Friendly'

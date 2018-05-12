@@ -1,0 +1,320 @@
+# Total =
+
+1. What is the id of the problem log that is created most recently?
+P: Which problem log was created most recently? Give me the log id.
+
+SELECT problem_log_id
+FROM problem_log
+ORDER BY log_entry_date DESC
+LIMIT 1
+
+S:
+S:
+S:
+
+
+2. What is the oldest log id and its corresponding problem id?
+P: Find the oldest log id and its corresponding problem id.
+
+SELECT problem_log_id, problem_id
+FROM problem_log
+ORDER BY log_entry_date
+LIMIT 1
+
+S:
+S:
+S:
+
+
+3. Find all the ids and dates of the logs for the problem whose id is 10.
+P: For the problem with id 10, return the ids and dates of its problem logs.
+
+SELECT problem_log_id, log_entry_date
+FROM problem_log
+WHERE problem_id=10
+
+S:
+S:
+S:
+
+
+4. List all the log ids and their descriptions from the problem logs.
+P: What are the log id and entry description of each problem?
+
+SELECT problem_log_id, log_entry_description
+FROM problem_log
+
+S:
+S:
+S:
+
+
+5. List the first and last names of all distinct staff members who are assigned to the problem whose id is 1.
+P: Which staff members are assigned to the problem with id 1? Give me their first and last names.
+
+SELECT DISTINCT staff_first_name, staff_last_name
+FROM staff as T1 JOIN problem_log as T2 ON T1.staff_id=T2.assigned_to_staff_id
+WHERE T2.problem_id=1
+
+S:
+S:
+S:
+
+
+6. List the problem id and log id which are assigned to the staff named Rylan Homenick.
+P: Which problem id and log id are assigned to the staff named Rylan Homenick?
+
+SELECT DISTINCT T2.problem_id, T2.problem_log_id
+FROM staff as T1 JOIN problem_log as T2 ON T1.staff_id=T2.assigned_to_staff_id
+WHERE T1.staff_first_name="Rylan" and T1.staff_last_name="Homenick"
+
+S:
+S:
+S:
+
+
+7. How many problems are there for product voluptatem?
+P: How many problems did the product called "voluptatem" have in record?
+
+SELECT count(*)
+FROM product as T1 JOIN problems as T2 ON T1.product_id=T2.product_id
+WHERE T1.product_name="voluptatem"
+
+S:
+S:
+S:
+
+
+8. How many problems does the product with the most problems have? List the number of the problems and product name.
+P: Which product has the most problems? Give me the number of problems and the product name.
+
+SELECT count(*), T1.product_name
+FROM product as T1 JOIN problems as T2 ON T1.product_id=T2.product_id
+GROUP BY T1.product_name
+ORDER BY count(*) DESC
+LIMIT 1
+
+S:
+S:
+S:
+
+
+9. Give me a list of descriptions of the problems that are reported by the staff whose first name is Christop.
+P: Which problems are reported by the staff with first name "Christop"? Show the descriptions of the problems.
+
+SELECT T1.problem_description
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Christop"
+
+S:
+S:
+S:
+
+
+10. Find the ids of the problems that are reported by the staff whose last name is Bosco.
+P: Which problems are reported by the staff with last name "Bosco"? Show the ids of the problems.
+
+SELECT T1.problem_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_last_name="Bosco"
+
+S:
+S:
+S:
+
+
+11. What are the ids of the problems which are reported after 1978-06-26?
+P: Find the ids of the problems reported after 1978-06-26.
+
+SELECT problem_id
+FROM problems
+WHERE date_problem_reported>datetime("1978-06-26")
+
+S:
+S:
+S:
+
+
+12. What are the ids of the problems which are reported before 1978-06-26?
+P: Which problems are reported before 1978-06-26? Give me the ids of the problems.
+
+SELECT problem_id
+FROM problems
+WHERE date_problem_reported<datetime("1978-06-26")
+
+S:
+S:
+S:
+
+
+13. For each product which has problems, what are the number of problems and the product id?
+P: For each product with some problems, list the count of problems and the product id.
+
+SELECT count(*), T2.product_id
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+GROUP BY T2.product_id
+
+S:
+S:
+S:
+
+
+14. For each product that has problems, find the number of problems reported after 1986-11-13 and the product id?
+P: What are the products that have problems reported after 1986-11-13? Give me the product id and the count of problems reported after 1986-11-13.
+
+SELECT count(*), T2.product_id
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+WHERE T1.date_problem_reported>datetime("1986-11-13")
+GROUP BY T2.product_id
+
+S:
+S:
+S:
+
+
+15. List the names of all the distinct product names in alphabetical order?
+P: Sort all the distinct product names in alphabetical order.
+
+SELECT distinct product_name
+FROM product
+ORDER BY product_name
+
+S:
+S:
+S:
+
+
+16. List all the distinct product names ordered by product id?
+P: What is the list of distinct product names sorted by product id?
+
+SELECT distinct product_name
+FROM product
+ORDER BY product_id
+
+S:
+S:
+S:
+
+
+17. What are the id of problems reported by the staff named Dameon Frami or Jolie Weber?
+P: Which problems were reported by the staff named Dameon Frami or Jolie Weber? Give me the ids of the problems.
+
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Dameon" and T2.staff_last_name="Frami"
+UNION
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Jolie" and T2.staff_last_name="Weber"
+
+S:
+S:
+S:
+
+
+18. What are the product ids for the problems reported by Christop Berge with closure authorised by Ashley Medhurst?
+P: For which product was there a problem reported by Christop Berge, with closure authorised by Ashley Medhurst? Return the product ids.
+
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Christop" and T2.staff_last_name="Berge"
+INTERSECT
+SELECT product_id
+FROM problems as T1 JOIN staff as T2 ON T1.closure_authorised_by_staff_id=T2.staff_id
+WHERE T2.staff_first_name="Ashley" and T2.staff_last_name="Medhurst"
+
+S:
+S:
+S:
+
+
+19. What are the ids of the problems reported before the date of any problem reported by Lysanne Turcotte?
+P: Which problems were reported before the date of any problem reported by the staff Lysanne Turcotte? Give me the ids of the problems.
+
+SELECT T1.problem_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE date_problem_reported < (
+SELECT min(date_problem_reported)
+FROM problems as T3 JOIN staff as T4 ON T3.reported_by_staff_id=T4.staff_id
+WHERE T4.staff_first_name="Lysanne" and T4.staff_last_name="Turcotte"
+)
+
+S:
+S:
+S:
+
+
+20. What are the ids of the problems reported after the date of any problems reported by Rylan Homenick?
+P: Find the ids of the problems reported after the date of any problems reported by the staff Rylan Homenick.
+
+SELECT T1.problem_id
+FROM problems as T1 JOIN staff as T2 ON T1.reported_by_staff_id=T2.staff_id
+WHERE date_problem_reported > (
+SELECT max(date_problem_reported)
+FROM problems as T3 JOIN staff as T4 ON T3.reported_by_staff_id=T4.staff_id
+WHERE T4.staff_first_name="Rylan" and T4.staff_last_name="Homenick"
+)
+
+S:
+S:
+S:
+
+
+21. Find the top 3 products which have the largest number of problems?
+P: What are the three products that have the most problems?s
+
+SELECT T2.product_name
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+GROUP BY T2.product_name
+ORDER BY count(*) desc
+LIMIT 3
+
+S:
+S:
+S:
+
+
+22. List the ids of the problems from the product "voluptatem" that are reported after 1995?
+P: What are the ids of the problems that are from the product "voluptatem" and are reported after 1995?
+
+SELECT T1.problem_id
+FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
+WHERE T2.product_name="voluptatem" and T1.date_problem_reported>datetime("1995")
+
+S:
+S:
+S:
+
+
+23. Find the first and last name of the staff members who reported problems from the product "rem" but not "aut"?
+P: Which staff members who reported problems from the product "rem" but not "aut"? Give me their first and last names.
+
+SELECT T3.staff_first_name, T3.staff_last_name
+FROM problems as T1 join product as T2 join staff as T3 ON T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id
+WHERE T2.product_name="rem"
+EXCEPT
+SELECT T3.staff_first_name, T3.staff_last_name
+FROM problems as T1 join product as T2 join staff as T3 ON T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id
+WHERE T2.product_name="aut"
+
+S:
+S:
+S:
+
+
+24. Find the products which have problems reported by both Lacey Bosco and Kenton Champlin?
+P: Which products have problems reported by both the staff named Lacey Bosco and the staff named Kenton Champlin?
+
+SELECT T2.product_name
+FROM problems as T1 join product as T2 join staff as T3 ON T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id
+WHERE T3.staff_first_name="Lacey" and T3.staff_last_name="Bosco"
+INTERSECT
+SELECT T2.product_name
+FROM problems as T1 join product as T2 join staff as T3 ON T1.product_id=T2.product_id and T1.reported_by_staff_id=T3.staff_id
+WHERE T3.staff_first_name="Kenton" and T3.staff_last_name="Champlin"
+
+S:
+S:
+S:
+
+

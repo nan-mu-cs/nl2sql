@@ -1,0 +1,285 @@
+# Total = 22
+
+1. Find the model of the most expensive headphone.
+P: Which headphone model has the highest price?
+
+Select model
+From headphone
+Order by price desc
+Limit 1
+
+S:
+S:
+S:
+
+
+2. List all different headphone models in the alphabetical order.
+P: Return the list of distinct headphone models ordered alphabetically.
+
+Select distinct model
+From headphone
+Order by model
+
+S:
+S:
+S:
+
+
+3. Which headphone class is the most common one?
+P: Which headphone class contains the most headphones?
+
+Select class
+From headphone
+Group by class
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+4. Which headphone class does have more than two headphones?
+P: Find the headphone class that does not contain more than two headphones.
+
+Select class
+From headphone
+Group by class
+Having count(*) > 2
+
+S:
+S:
+S:
+
+
+5. Find the number of headphones with a price higher than 200 for each class.
+P: How many headphones cost more than 200 for each headphone class?
+
+Select count(*), class
+From headphone
+Where price > 200
+Group by class
+
+S:
+S:
+S:
+
+
+6. how many different earpads are there?
+P: Count the number of different earpads.
+
+select count(distinct earpads)
+From headphone
+
+S:
+S:
+S:
+
+
+7. Find the top 2 earpads that are mostly used.
+P: What are the top 2 earpads in terms of the number of headphones using them?
+
+Select earpads
+From headphone
+Group by earpads
+Order by count(*) desc
+Limit 2
+
+S:
+S:
+S:
+
+
+8. What are the model, class, and construction of the cheapest headphone?
+P: Find the model, class, and construction of the headphone with the lowest price.
+
+Select model, class, construction
+From headphone
+Order by price
+Limit 1
+
+S:
+S:
+S:
+
+
+9. Find the average price for each headphone construction.
+P: How much does headphones cost on average for each headphone construction?
+
+Select construction, avg(price)
+From headphone
+Group by construction
+
+S:
+S:
+S:
+
+
+10. Which headphone classes have both headphones with "Bowls" and headphones with "Comfort Pads" earpads?
+P: Find the headphone classes that contain both headphones using "Bowls" earpads and headphones using "Comfort Pads" earpads.
+
+Select class
+From headphone
+Where earpads = 'Bowls'
+Intersect
+Select class
+From headphone
+Where earpads = 'Comfort Pads'
+
+S:
+S:
+S:
+
+
+11. Which earpads never use plastic construction?
+P: Find all earpads that do not use plastic construction.
+
+Select earpads
+From headphone
+Except
+Select earpads
+From headphone
+Where construction = 'Plastic'
+
+S:
+S:
+S:
+
+
+12. Find the headphone models whose price is below the average price.
+P: What are the headphone models that cost less than the average price?
+
+Select model
+From headphone
+Where price < (select avg(price) from headphone)
+
+S:
+S:
+S:
+
+
+13. Sort all store names by store open date.
+P: Give me a list of store names, sorted by store open date.
+
+Select name
+From store
+Order by date_opened
+
+S:
+S:
+S:
+
+
+14. List name and parking info for the stores in the Tarzana neighborhood.
+P: Which stores are located in the "Tarzana" neighborhood? Return their names and parking information.
+
+Select name, parking
+From store
+Where neighborhood = 'Tarzana'
+
+S:
+S:
+S:
+
+
+15. How many different neighborhoods are there for all stores?
+P: Count the number of distinct neighborhoods stores are located.
+
+Select count(distinct neighborhood)
+From store
+
+S:
+S:
+S:
+
+
+16. find the number of stores in each neighborhood.
+P: How many stores are there in each neighborhood?
+
+Select count(*), neighborhood
+From store
+Group by neighborhood
+
+S:
+S:
+S:
+
+
+17. Find the name of the store which has the most headphones in stock. List the number of headphones as well.
+P: Which store has the headphones in stock? Give me the store name and the total quantity.
+
+Select t1.name, sum(t2.quantity)
+From store as t1 join stock as t2 on t1.store_id = t2.store_id
+Group by t2.store_id
+Order by sum(t2.quantity) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+18. Find the name of stores which have no headphone in stock.
+P: Which stores do not have any headphones in stock? Give me the store names.
+
+Select name
+From store
+Where store_id not in (select store_id from stock)
+
+S:
+S:
+S:
+
+
+19. Which headphone models do not have any stock in any store?
+P: Find the headphone models that are not in stock in any store.
+
+Select model
+From headphone
+Where headphone_id not in (select headphone_id from stock)
+
+S:
+S:
+S:
+
+
+20. Which headphone model has the largest quantity of stock across all the stores?
+P: Find the headphone model whose total quantity in stock is the largest.
+
+Select t1.model
+From headphone as t1 join stock as t2 on t1.headphone_id = t2.headphone_id
+Group by t1.model
+Order by sum(t2.quantity) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+21. How many headphones are stored in the Woodman store?
+P: Find the total quantity of headphones stored in the Woodman store.
+
+Select sum(t2.quantity)
+From store as t1 join stock as t2 on t1.store_id = t2.store_id
+Where t1.name = 'Woodman'
+
+S:
+S:
+S:
+
+
+22. Which neighborhood does not have any headphone in stock?
+P: Find the neighborhood where no headphones are in stock.
+
+Select Neighborhood
+From store
+Except
+Select t1.Neighborhood
+From store as t1 join stock as t2 on t1.store_id = t2.store_id
+
+S:
+S:
+S:
+
+

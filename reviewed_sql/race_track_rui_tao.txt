@@ -1,0 +1,132 @@
+1. How many tracks do we have?
+
+select count(*)
+from track
+
+2. Show the name and location for all tracks.
+
+select name, location
+from track
+
+3. Show name and seating ordered by seating for all tracks opened after 2000.
+
+select name, seating
+from track
+where year_opened > 2000
+order by seating
+
+4. What is the name, location and seating for the most recently opened track?
+
+select name, location, seating
+from track
+order by year_opened desc
+limit 1
+
+5. What is the minimum, maximum, and average seating for all tracks.
+
+select min(seating), max(seating), avg(seating)
+from track
+
+6. Show the name, location, open year for all tracks with a seating higher than the average.
+
+select name, location, year_opened
+from track
+where seating > (select avg(seating) from track)
+
+7. What are distinct locations where tracks are located?
+
+select distinct location
+from track
+
+8. How many races are there?
+
+select count(*)
+from race
+
+9. What are the distinct classes that races can have?
+
+select distinct class
+from race
+
+10. Show name, class, and date for all races.
+
+select name, class, date
+from race
+
+11. Show the race class and number of races in each class.
+
+select class, count(*)
+from race
+group by class
+
+12. What is the race class with most number of races.
+
+select class
+from race
+group by class
+order by count(*) desc
+limit 1
+
+13. List the race class with at least two races.
+
+select class
+from race
+group by class
+having count(*) >= 2
+
+14. What are the names for tracks without a race in class 'GT'.
+
+select name
+from track
+EXCEPT
+select T2.name
+from race as T1 join track as T2 on T1.track_id = T2.track_id
+where T1.class = 'GT'
+
+15. Show all track name with no race.
+
+select name
+from track
+where track_id not in (select track_id from race)
+
+16. Show year where a track with a seating at least 5000 opened and a track with seating no more than 4000 opened.
+
+select year_opened
+from track
+where seating between 4000 and 5000
+
+17. Show the name of track and the number of races in each track.
+
+select T2.name, count(*)
+from race as T1 join track as T2 on T1.track_id = T2.track_id
+group by T1.track_id
+
+18. Show the name of track with most number of races.
+
+select T2.name
+from race as T1 join track as T2 on T1.track_id = T2.track_id
+group by T1.track_id
+order by count(*) desc
+limit 1
+
+19. Show the name and date for each race and its track name.
+
+select T1.name, T1.date, T2.name
+from race as T1 join track as T2 on T1.track_id = T2.track_id
+
+20. Show the name and location of track with 1 race.
+
+select T2.name, T2.location
+from race as T1 join track as T2 on T1.track_id = T2.track_id
+group by T1.track_id
+having count(*) = 1
+
+21. Find the locations where have both tracks with more than 90000 seats and tracks with less than 70000 seats.
+
+select location
+from track
+where seating > 90000
+intersect
+select location
+from track
+where seating < 70000

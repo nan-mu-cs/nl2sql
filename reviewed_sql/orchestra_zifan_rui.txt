@@ -1,0 +1,132 @@
+Total = 20
+
+1. How many conductors are there?
+
+SELECT count(*)
+FROM conductor
+
+2. List the name of conductors in ascending order of age.
+
+SELECT Name
+FROM conductor
+order by Age ASC
+
+3. What are the names of conductors whose nationality are not "USA"?
+
+SELECT Name
+FROM conductor
+where Nationality != 'USA'
+
+4. Who are the record company of orchestras in descending order of years in which they are founded?
+
+SELECT Record_Company
+FROM orchestra
+order by Year_of_Founded desc
+
+5. What are the average attendance of shows?
+
+SELECT avg(Attendance)
+FROM show
+
+6. What are the maximum and minimum share of performances whose type is not "Live final".
+
+SELECT max(Share), min(Share)
+FROM performance
+Where Type != "Live final"
+
+7. How many different nationalities do conductors have?
+
+SELECT count(distinct Nationality)
+FROM conductor
+
+8. List names of conductors in descending order of years of work.
+
+SELECT Name
+FROM conductor
+order by Year_of_Work DESC
+
+9. List the name of the conductor with the largest years of work.
+
+SELECT Name
+FROM conductor
+order by Year_of_Work DESC limit 1
+
+10. Show the names of conductors and the orchestras they have conducted.
+
+SELECT T1.Name, T2.Orchestra
+FROM conductor as T1 join orchestra as T2 
+ON T1.Conductor_ID = T2.Conductor_ID
+
+11. Show the names of the conductors that have conducted more than one orchestras.
+
+SELECT T1.Name
+FROM conductor as T1 join orchestra as T2 
+ON T1.Conductor_ID = T2.Conductor_ID
+group by T2.Conductor_ID
+Having COUNT(*) > 1
+
+12. Show the name of the conductor that have conducted the most number of orchestras.
+
+SELECT T1.Name
+FROM conductor as T1 join orchestra as T2 
+ON T1.Conductor_ID = T2.Conductor_ID
+group by T2.Conductor_ID
+order by COUNT(*) DESC limit 1
+
+13. Please show the name of the conductor that have conducted orchestras founded after 2008.
+
+SELECT T1.Name
+FROM conductor as T1 join orchestra as T2 
+ON T1.Conductor_ID = T2.Conductor_ID
+Where Year_of_Founded > 2008
+
+14. Please show different record companies of orchestra and the corresponding number of orchestras.
+
+SELECT Record_Company, COUNT(*)
+FROM orchestra
+group by Record_Company
+ 
+15. Please show the record formats of orchestras in ascending order of the count.
+
+SELECT Major_Record_Format
+FROM orchestra
+group by Major_Record_Format
+order by COUNT(*) ASC
+
+16. List the record company shared by the most number of orchestras.
+
+SELECT Record_Company
+FROM orchestra
+group by Record_Company
+order by COUNT(*) DESC limit 1
+
+17. List the names of orchestras that have no performance.
+
+SELECT Orchestra
+from orchestra
+where Orchestra_ID not in (SELECT Orchestra_ID FROM performance)
+
+18. Show the record companies shared by orchestras founded before 2003 and after 2003.
+
+SELECT Record_Company
+FROM orchestra
+Where Year_of_Founded < 2003
+Intersect 
+SELECT Record_Company
+FROM orchestra
+Where Year_of_Founded > 2003
+
+19. Find the number of orchestras whose record format is "CD" or "DVD",
+
+SELECT COUNT(*)
+FROM orchestra
+Where Major_Record_Format = "CD" or Major_Record_Format = "DVD"
+
+20. Show the years in which orchestras that have given more than one performance are founded.
+
+SELECT Year_of_Founded
+FROM orchestra as T1 join performance as T2 
+ON T1.Orchestra_ID = T2.Orchestra_ID
+group by T2.Orchestra_ID
+Having COUNT(*) > 1
+

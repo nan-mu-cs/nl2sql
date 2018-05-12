@@ -1,0 +1,209 @@
+
+total # = 30
+
+1. How many events are there?
+
+Select count(*)
+From event
+
+2. List all the event names by year from most recent to the past.
+
+Select name
+From event
+Order by year desc
+
+3. What is the name of event that happened in the most recent year?
+
+Select name
+From event
+Order by year desc
+Limit 1
+
+4. How many stadiums are there?
+
+Select count(*)
+From stadium
+
+5. Find the name of stadiums that has the maximum capacity.
+
+Select name
+From stadium
+Order by capacity desc
+Limit 1
+
+6. Find the name of stadiums whose capacity is smaller than the average capacity.
+
+Select name
+From stadium
+Where capacity < (select avg(capacity) from stadium)
+
+7. Find the country where has the most number of stadiums.
+
+Select country
+From stadium
+Group by country
+Order by count(*) desc
+Limit 1
+
+8. Which country has at most 3 stadiums listed?
+
+Select country
+From stadium
+Group by country
+Having count(*) <= 3
+
+9. Which country has stadiums with capacity both greater than 60000 and less than 50000.
+
+Select country
+From stadium
+Where capacity > 60000
+Intersect
+Select country
+From stadium
+Where capacity < 50000
+
+10. How many cities have a stadium that was opened before the year of 2006?
+
+Select count(distinct city)
+From stadium
+Where opening_year < 2006
+
+11. How many stadiums does each country has?
+
+Select country, count(*)
+From stadium
+Group by country
+
+12. Which countries do not have a stadium that was opened after 2006?
+
+Select country
+From stadium
+Except
+Select country
+From stadium
+Where opening_year > 2006
+
+13. How many stadiums are not in Russia?
+
+Select count(*)
+From stadium
+Where country != 'Russia'
+
+14. Find the names of all swimmers sorted by their 100 meter scores in ascending order.
+
+Select name
+From swimmer
+Order by meter_100
+
+15. How many different countries are all swimmers from?
+
+Select count(distinct nationality)
+From swimmer
+
+16. List countries that have more than one swimmer.
+
+Select nationality, count(*)
+From swimmer
+Group by nationality
+Having count(*) > 1
+
+17. Find all 200 meter and 300 meter results of swimmers from Australia.
+
+Select meter_200, meter_300
+From swimmer
+where nationality = 'Australia'
+
+18. Find the name of swimmers whose results have a win.
+
+Select t1.name
+From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
+Where result = 'Win'
+
+19. What is the name of the stadium which held most number of events.
+
+Select t1.name
+From stadium as t1 join event as t2 on t1.id = t2.stadium_id
+group by t2.stadium_id
+order by count(*) desc
+Limit 1
+
+20. Find the name and capacity of the stadium where World Junior event happened.
+
+Select t1.name, t1.capacity
+From stadium as t1 join event as t2 on t1.id = t2.stadium_id
+Where t2.name = 'World Junior'
+
+21. Find the name of stadiums which never have had any event.
+
+Select name
+From stadium
+Where id not in (select stadium_id from event)
+
+22. Find the name of the swimmer who has the most number of records.
+
+Select t1.name
+From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
+Group by t2.swimmer_id
+Order by count(*) desc
+Limit 1
+
+23. Find the name of the swimmer who has at least 2 records.
+
+Select t1.name
+From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
+Group by t2.swimmer_id
+Having count(*) >= 2
+
+24. Find the name and nationality of the swimmer who has won (result is win) more than 1 time.
+
+Select t1.name, t1.nationality
+From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
+Where result = 'Win'
+Group by t2.swimmer_id
+Having count(*) > 1
+
+25. Find the name of the swimmers who have no record.
+
+Select name
+From swimmer
+Where id not in (select swimmer_id from record)
+
+26. Find the name of the swimmers who have both win and loss results in the record.
+
+Select t1.name
+From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
+Where result = 'Win'
+Intersect
+Select t1.name
+From swimmer as t1 join record as t2 on t1.id = t2.swimmer_id
+Where result = 'Loss'
+
+27. Find the name of stadiums where some Australia swimmers have been to.
+
+Select t4.name
+From swimmer as t1 
+     join record as t2 on t1.id = t2.swimmer_id
+     Join event as t3 on t2.event_id = t3.id
+     Join stadium as t4 on t4.id = t3.stadium_id
+Where t1.nationality = 'Australia'
+
+28. Find the name of stadiums where most number of swimmers have been to.
+
+Select t3.name
+From record as t1
+     Join event as t2 on t1.event_id = t2.id
+     Join stadium as t3 on t3.id = t2.stadium_id
+Group by t2.stadium_id
+Order by count(*) desc
+Limit 1
+
+29. Find all details of all swimmers.
+
+Select *
+From swimmer
+
+30. what is the average capacity of the stadiums that were opened in 2005.
+
+Select avg(capacity)
+From stadium
+Where opening_year = 2005

@@ -1,0 +1,128 @@
+1. How many train stations do we have?
+
+select count(*)
+from station
+
+2. Show name, location, and number of platforms for all train stations.
+
+select name, location, number_of_platforms
+from station
+
+3. What are all locations of train stations?
+
+select distinct location
+from station
+
+4. Show name and total passengers for all train stations not in London.
+
+select name, total_passengers
+from station
+where location != 'London'
+
+5. Show name and main services for train stations with top three total number of passengers.
+
+select name, main_services
+from station
+order by total_passengers desc
+limit 3
+
+6. What is average and maximum number total passengers for train stations in London or Glasgow?
+
+select avg(total_passengers), max(total_passengers)
+from station
+where location = 'London' or location = 'Glasgow'
+
+7. Show all locations and the total number of platforms and passengers for all train stations in each location.
+
+select location, sum(number_of_platforms), sum(total_passengers)
+from station
+group by location
+
+8. Show all locations having train stations with at least 15 number of platforms and train stations with more than 25 total number of passengers.
+
+select location
+from station
+where number_of_platforms >= 15
+INTERSECT
+select location
+from station
+where total_passengers > 25
+
+9. Show all locations which don't have a train station with at least 15 number of platforms.
+
+select location
+from station
+EXCEPT
+select location
+from station
+where number_of_platforms >= 15
+
+10. Show the location with most number of train stations.
+
+select location
+from station
+group by location
+order by count(*) desc
+limit 1
+
+11. Show name, time, and service for all train.
+
+select name, time, service
+from train
+
+12. Show the number of trains
+
+select count(*)
+from train
+
+13. Show name and service for trains in order by time.
+
+select name, service
+from train
+order by time
+
+14. Show the station name and number of trains in each station.
+
+select T2.name, count(*)
+from train_station as T1 join station as T2 on T1.station_id = T2.station_id
+group by T1.station_id
+
+15. show the train name and station name for each train.
+
+select T2.name, T3.name
+from train_station as T1 join station as T2 on T1.station_id = T2.station_id join train as T3 on T3.train_id = T1.train_id
+
+16. Show all train name and time in stations in London in descending order by train time.
+
+select T3.name, T3.time
+from train_station as T1 join station as T2 on T1.station_id = T2.station_id join train as T3 on T3.train_id = T1.train_id
+where T2.location = 'London'
+order by T3.time desc
+
+17. Show the station name with most number of trains.
+
+select T2.name
+from train_station as T1 join station as T2 on T1.station_id = T2.station_id
+group by T1.station_id
+order by count(*) desc
+limit 1
+
+18. Show the station name with at least two trains.
+
+select T2.name
+from train_station as T1 join station as T2 on T1.station_id = T2.station_id
+group by T1.station_id
+having count(*) >= 2
+
+19. Show all locations with only 1 station.
+
+select location
+from station
+group by location
+having count(*) = 1
+
+20. Show station names without any train.
+
+select name
+from station
+where station_id not in (select station_id from train_station)

@@ -1,0 +1,254 @@
+# Total = 20
+
+1. Find the names of channels that are not owned by CCTV.
+P: Which channels are not owned by CCTV? Give me the channel names.
+
+select name
+from channel
+where owner != 'CCTV'
+
+S:
+S:
+S:
+
+
+2. List all channel names ordered by their rating in percent from big to small.
+P: Give me a list of all the channel names sorted by the channel rating in descending order.
+
+select name
+from channel
+order by rating_in_percent desc
+
+S:
+S:
+S:
+
+
+3. What is the owner of the channel that has the highest rating ratio?
+P: Show me the owner of the channel with the highest rating.
+
+select owner
+from channel
+order by rating_in_percent desc
+limit 1
+
+S:
+S:
+S:
+
+
+4. how many programs are there?
+P: Count the number of programs.
+
+select count(*)
+from program
+
+S:
+S:
+S:
+
+
+5. list all the names of programs, ordering by launch time.
+P: What is the list of program names, sorted by the order of launch date?
+
+select name
+from program
+order by launch
+
+S:
+S:
+S:
+
+
+6. List the name, origin and owner of each program.
+P: What are the name, origin and owner of each program?
+
+select name, origin, owner
+from program
+
+S:
+S:
+S:
+
+
+7. find the name of the program that was launched most recently.
+P: Which program was launched most recently? Return the program name.
+
+select name
+from program
+order by launch desc
+limit 1
+
+S:
+S:
+S:
+
+
+8. find the total percentage share of all channels owned by CCTV.
+P: What is the total share (in percent) of all the channels owned by CCTV?
+
+select sum(Share_in_percent)
+from channel
+where owner = 'CCTV'
+
+S:
+S:
+S:
+
+
+9. Find the names of the channels that are broadcast in the morning.
+P: Which channels are broadcast in the morning? Give me the channel names.
+
+select t1.name
+from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
+where t2.time_of_day = 'Morning'
+
+S:
+S:
+S:
+
+
+10. what are the names of the channels that broadcast in both morning and night?
+P: Which channels broadcast both in the morning and at night? Give me the channel names.
+
+select t1.name
+from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
+where t2.time_of_day = 'Morning'
+intersect
+select t1.name
+from channel as t1 join broadcast as t2 on t1.channel_id = t2.channel_id
+where t2.time_of_day = 'Night'
+
+S:
+S:
+S:
+
+
+11. how many programs are broadcast in each time section of the day?
+P: Count the number of programs broadcast for each time section of a day.
+
+select count(*), time_of_day
+from broadcast
+group by time_of_day
+
+S:
+S:
+S:
+
+
+12. find the number of different programs that are broadcast during night time.
+P: How many distinct programs are broadcast at "Night" time?
+
+select count(distinct program_id)
+from broadcast
+where time_of_day = 'Night'
+
+S:
+S:
+S:
+
+
+13. Find the names of programs that are never broadcasted in the morning.
+P: Which programs are never broadcasted in the morning? Give me the names of the programs.
+
+select name
+from program
+except
+select t1.name
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+where t2.Time_of_day = "Morning"
+
+S:
+S:
+S:
+
+
+14. find the program owners that have some programs in both morning and night time.
+P: Who are the owners of the programs that broadcast both in the morning and at night?
+
+select t1.owner
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+where t2.Time_of_day = "Morning"
+intersect
+select t1.owner
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+where t2.Time_of_day = "Night"
+
+S:
+S:
+S:
+
+
+15. List all program origins in the alphabetical order.
+P: What is the list of program origins ordered alphabetically?
+
+select origin
+from program
+order by origin
+
+S:
+S:
+S:
+
+
+16. what is the number of different channel owners?
+P: Count the number of distinct channel owners.
+
+select count(distinct owner)
+from channel
+
+S:
+S:
+S:
+
+
+17. find the names of programs whose origin is not in Beijing.
+P: Which programs' origins are not "Beijing"? Give me the program names.
+
+select name
+from program
+where origin != 'Beijing'
+
+S:
+S:
+S:
+
+
+18. What are the names of the channels owned by CCTV or HBS?
+P: List the names of all the channels owned by either CCTV or HBS
+
+select name
+from channel
+where owner = 'CCTV' or owner = 'HBS'
+
+S:
+S:
+S:
+
+
+19. Find the total rating ratio for each channel owner.
+P: What is the total rating of channel for each channel owner?
+
+select sum(Rating_in_percent), owner
+from channel
+group by owner
+
+S:
+S:
+S:
+
+
+20. Find the name of the program that is broadcast most frequently.
+P: Which program is broadcast most frequently? Give me the program name.
+
+select t1.name
+from program as t1 join broadcast as t2 on t1.program_id = t2.program_id
+group by t2.program_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+

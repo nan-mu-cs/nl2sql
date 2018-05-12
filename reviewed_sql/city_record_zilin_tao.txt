@@ -1,0 +1,146 @@
+Total # = 16
+
+1. What is id of the city that hosted events in the most recent year?
+
+SELECT host_city
+FROM hosting_city
+ORDER BY year desc
+LIMIT 1
+
+
+2. Find the match id of the cities that hosted competition "1994 FIFA World Cup qualification"?
+
+SELECT match_id
+FROM match
+WHERE competition="1994 FIFA World Cup qualification"
+
+
+3. Find the cities which was once the host city after 2010?
+
+SELECT T1.city
+FROM city as T1 JOIN hosting_city as T2 ON T1.city_id=T2.host_city
+WHERE T2.year > 2010
+
+4. Which city has hosted the most events?
+
+SELECT T1.city
+FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+GROUP BY T2.host_city
+ORDER BY count(*) desc
+LIMIT 1
+
+5. What is the venue of competition "1994 FIFA World Cup qualification" hosted by "Nanjing ( Jiangsu )"?
+
+SELECT T3.venue
+FROM city as T1 JOIN hosting_city as T2 ON T1.city_id=T2.host_city JOIN match as T3 ON T2.match_id=T3.match_id
+WHERE T1.city="Nanjing ( Jiangsu )" and T3.competition="1994 FIFA World Cup qualification"
+
+6. Give me the temperature of Shanghai in January?
+
+SELECT T2.Jan
+FROM city as T1 JOIN temperature as T2 ON T1.city_id=T2.city_id
+WHERE T1.city="Shanghai"
+
+7. What is the host year of city "Taizhou ( Zhejiang )"?
+
+SELECT T2.year
+FROM city as T1 JOIN hosting_city as T2 on T1.city_id = T2.host_city
+WHERE T1.city = "Taizhou ( Zhejiang )"
+
+8. Which three cities has the most regional population?
+
+SELECT city
+FROM city
+ORDER BY regional_population desc
+LIMIT 3
+
+9. which city has the lowest GDP? Please list the city name and its GDP.
+
+SELECT city, GDP 
+FROM city 
+ORDER BY GDP
+LIMIT 1
+
+10. Which city has the highest temperature in Feburary?
+
+SELECT T1.city
+FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
+ORDER BY T2.Feb desc
+LIMIT 1
+
+11. Give me a list of cities whose tempareture in March is lower than that in July or higher than that in Oct?
+
+SELECT T1.city
+FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
+WHERE T2.Mar < T2.Jul or T2.Mar > T2.Oct
+
+12. Give me a list of cities whose temperature in Mar is lower than that in July and who also were once host cities?
+
+SELECT T1.city
+FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
+WHERE T2.Mar < T2.Jul 
+INTERSECT
+SELECT T1.city
+FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+
+13. Give me a list of cities whose temperature in Mar is lower than that in Dec and who also were not host cities ever?
+
+SELECT T1.city
+FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
+WHERE T2.Mar < T2.Dec
+Except
+SELECT T1.city
+FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+
+14. Give me a list of cities whose temperature in Feb is higher than that in Jun or who also were once host cities?
+
+SELECT T1.city
+FROM city as T1 JOIN temperature as T2 ON T1.city_id = T2.city_id
+WHERE T2.Feb > T2.Jun
+union
+SELECT T1.city
+FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+
+
+15. Please give me a list of cities whose regional population is over 10000000?
+
+SELECT city
+FROM city 
+WHERE regional_population > 10000000
+
+
+16. Please give me a list of cities whose regional population is over 8000000 or under 5000000?
+
+SELECT city
+FROM city 
+WHERE regional_population > 10000000
+UNION
+SELECT city
+FROM city 
+WHERE regional_population < 5000000
+
+17. Find the number of matchs in different Competition.
+
+select count(*), Competition
+from match
+group by Competition
+
+18. list venues of all matches in the order of their dates starting from the most recent one.
+
+select venue
+from match
+order by date desc
+
+19. what is the GDP of the city with the largest population.
+
+select gdp
+from city
+order by Regional_Population desc
+limit 1
+
+20. what is the gdp and population of the city where already hosted more than once?
+
+select t1.gdp, t1.Regional_Population
+FROM city as T1 JOIN hosting_city as T2 ON T1.city_id = T2.host_city
+group by t2.Host_City
+having count(*) > 1

@@ -1,0 +1,155 @@
+1. How many customers are there?
+
+select count(*)
+from customers
+
+2. Find the emails of all the customers in alphabetical order.
+
+select email_address
+from customers
+order by email_address
+
+3. Which state has the most customers?
+
+select state
+from customers
+group by state
+order by count(*)
+limit 1
+
+4. List the name of all products along with the number of complaints that they have received.
+
+select t1.product_name, count(*)
+from products as t1 join complaints as t2
+on t1.product_id = t2.product_id
+group by t1.product_name
+
+5. Find the emails of customers who has filed a complaints of the product with the most complaints.
+
+select t1.email_address
+from customers as t1 join complaints as t2
+on t1.customer_id = t2.customer_id
+group by t1.email_address
+order by count(*)
+limit 1
+
+6. Which products has been complained by the customer who has filed least amount of complaints.
+
+select distinct t1.product_name
+from products as t1 join complaints as t2
+on t1.product_id = t2.product_id
+join customers as t3
+where t3.email_address = (select t1.email_address
+from customers as t1 join complaints as t2
+on t1.customer_id = t2.customer_id
+group by t1.email_address
+order by count(*)
+limit 1)
+
+7. What is the phone numbers of the customer who has filed the most recent complaint?
+
+select t1.phone_number
+from customers as t1 join complaints as t2
+on t1.customer_id = t2.customer_id
+where t2.date_complaint_raised = (select max(date_complaint_raised)
+from complaints
+limit 1)
+
+8. Find the email and phone number of the customers who has never filed a complaint before.
+
+select email_address, phone_number
+from customers
+except
+select t1.email_address, t1.phone_number
+from customers as t1 join complaints as t2
+on t1.customer_id = t2.customer_id
+
+9. Find the phone number of all the customers and staffs.
+
+select phone_number
+from customers
+union
+select phone_number
+from staff
+
+10. What is the description of the product named "Chocolate"?
+
+select product_description
+from products
+where product_name = "Chocolate"
+
+11. Find the name and category of the most expensive product.
+
+select product_name, product_category_code
+from products
+where product_price = (select max(product_price)
+from products
+limit 1)
+
+12. Find the prices of products which has never received a single complaint.
+
+select product_price
+from products
+except
+select t1.product_price
+from products as t1 join complaints as t2
+on t1.product_id = t2.product_id
+
+13. What is the average price of the product?
+
+select avg(product_price)
+from products
+
+14. Find the last names of staffs who has processed the complaint of the cheapest product.
+
+ERROR: table complaint should have a foreign key to staff
+
+select t1.last_name
+from staff as t1 join complaints as t2
+on t1.staff_id = t2.staff_id
+join products as t3
+on t2.product_id = t3.product_id
+where t3.product_price = (select min(product_price)
+from products)
+
+15. Which complaint status has more than 3 records on file?
+
+select complaint_status_code
+from complaints
+group by complaint_status_code
+having count(*) > 3
+
+16. Find the last name of the staff whose email address contains "wrau".
+
+select last_name
+from staff
+where email_address like "%wrau%"
+
+17. How many customers are there in the customer type with the most customers?
+
+select count(*)
+from customers
+group by customer_type_code
+order by count(*) desc
+limit 1
+
+18. What is the name of the staff who has handled the first ever complaint?
+
+ERROR: see 14
+
+select t1.last_name
+from staff as t1 join complaints as t2
+on t1.staff_id = t2.staff_id
+where t2.date_complaint_raised = (select min(date_complaint_raised)
+from complaints)
+
+19. How many distinct complaint type codes are there in the database?
+
+select count(distinct complaint_type_code)
+from complaints
+
+20. Find the address line 1 and 2 of the customer with email "vbogisich@example.org"
+
+select address_line_1, address_line_2
+from customers
+where email_address = "vbogisich@example.org"

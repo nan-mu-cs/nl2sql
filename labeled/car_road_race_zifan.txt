@@ -1,0 +1,137 @@
+Total = 20
+
+1. How many races are there?
+
+SELECT count(*)
+FROM race
+
+2. List the winning drivers and winning teams of races in ascending alphabetical order of winning team.
+
+SELECT Winning_driver, Winning_team
+FROM race
+order by Winning_team ASC
+
+3. Which winning drivers of races has pole position that is not "Junior Strous"?
+
+SELECT Winning_driver
+FROM race
+where Pole_Position != 'Junior Strous'
+
+4. Who are the constructors of drivers sorted by drivers' age in ascending order?
+
+SELECT distinct Constructor
+FROM driver
+order by Age ASC
+
+5. What are the distinct entrant types of drivers aged 20 or older?
+
+SELECT distinct Entrant
+FROM driver
+WHERE Age >= 20
+
+6. What are the maximum and minimum age of driver.
+
+SELECT max(Age), min(Age)
+FROM driver
+
+7. How many different engines are used by drivers with age bigger than 30 or younger than 20?
+
+SELECT count(distinct Engine)
+FROM driver
+where Age > 30 OR Age < 20
+
+8. List all names of drivers in descending alphabetical order.
+
+SELECT Driver_Name
+FROM driver
+order by Driver_Name DESC
+
+9. Please show the names of drivers and the names of races they participate in.
+
+SELECT T1.Driver_Name, T2.Race_Name
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+
+10. Please show the names of drivers and the number of races they participate in.
+
+SELECT T1.Driver_Name, COUNT(*)
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+group by T1.Driver_ID
+
+11. Please show the age of the driver who participates in the most number of races.
+
+SELECT T1.Age
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+group by T1.Driver_ID
+order by COUNT(*) DESC limit 1
+
+12. Please show the names and ages of the drivers who participates in at least two races.
+
+SELECT T1.Driver_Name, T1.Age
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+group by T1.Driver_ID
+Having COUNT(*) >= 2
+
+13. Please list the names of races with drivers aged 26 or older participating.
+
+SELECT T2.Race_Name
+FROM driver as T1 join race as T2 
+ON T1.Driver_ID = T2.Driver_ID
+Where T1.Age >= 26
+
+14. List the names of drivers whose constructor is not "Bugatti".
+
+SELECT Driver_Name
+FROM driver
+Where Constructor != "Bugatti"
+ 
+15. List different constructors and the number of drivers that use each constructor.
+
+SELECT Constructor, COUNT(*)
+FROM driver
+group by Constructor
+
+15. List the most common type of engine used by drivers.
+
+SELECT Engine
+FROM driver
+group by Engine
+order by COUNT(*) DESC limit 1
+
+17. List the types of engines that are used by at least two drivers.
+
+SELECT Engine
+FROM driver
+group by Engine
+Having COUNT(*) >= 2
+
+18. List the names of drivers that do not participate in any race.
+
+SELECT Driver_Name
+from driver
+where Driver_ID not in (SELECT Driver_ID FROM race)
+
+19. Show the constructors that are used both by drivers with age smaller than 20 and
+drivers with age bigger than 30.
+
+SELECT Constructor
+FROM driver
+Where Age < 20
+Intersect 
+SELECT Constructor
+FROM driver
+Where Age > 30
+
+20. 19. Show the engines that are used both by drivers with age smaller than 21 and
+drivers with age bigger than 29.
+
+SELECT Engine
+FROM driver
+Where Age < 21
+Intersect 
+SELECT Engine
+FROM driver
+Where Age > 29
