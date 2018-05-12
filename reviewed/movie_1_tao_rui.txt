@@ -294,21 +294,6 @@ union
 select title
 from Movie
 
-26. Return all reviewer names and movie names together in a single list and sort them by name
-P: What are the names of all reviewers and movies sorted alphabetically by name?
-
-
-S:
-S:
-S:
-
-select name
-from (select name
-from Reviewer
-union
-select title
-from Movie)
-order by name
  
 27. Find the titles of all movies not reviewed by Chris Jackson.
 P: What are the titles of all movies that were not reviewed by Chris Jackson?
@@ -335,10 +320,10 @@ S:
 S:
 
 
- select T1.title, T1.director
- from Movie T1, Movie T2
- where T1.director = T2.director and T1.title != T2.title
- order by T1.director, T1.title
+  select T1.title, T1.director
+  from Movie as T1 join Movie as T2 on T1.director = T2.director
+  where T1.title != T2.title
+  order by T1.director, T1.title
 
 29. For directors who had more than one movie, return the titles and produced years of all movies directed by them.
 P: For each director who directed more than one movie, what are the titles and dates of release for all those movies?
@@ -347,9 +332,9 @@ S:
 S:
 S:
 
-select T1.title, T1.year
- from Movie T1, Movie T2
- where T1.director = T2.director and T1.title != T2.title
+ select T1.title, T1.year
+ from Movie as T1 join Movie as T2 on T1.director = T2.director
+ where T1.title != T2.title
 
 30. What are the names of the directors who made exactly one movie?
 P: What are the names of all directors who made one movie?
