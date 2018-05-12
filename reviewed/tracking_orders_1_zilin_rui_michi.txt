@@ -361,8 +361,9 @@ P: What are the names of the customers who bought product "food" at least once?
 
 SELECT T1.customer_name
 FROM customers as T1 JOIN orders as T2 JOIN order_items as T3 JOIN products as T4 ON T1.customer_id=T2.customer_id and T2.order_id=T3.order_id and T3.product_id=T4.product_id
+where T4.product_name="food"
 GROUP BY T1.customer_id
-HAVING count(T4.product_name="food") >= 1
+HAVING count(*) >= 1
 
 S:
 S:
@@ -374,9 +375,9 @@ P: Which customers have ever canceled the purchase of the product "food" (the it
 
 SELECT T1.customer_name
 FROM customers as T1 JOIN orders as T2 JOIN order_items as T3 JOIN products as T4 ON T1.customer_id=T2.customer_id and T2.order_id=T3.order_id and T3.product_id=T4.product_id
-WHERE T3.order_item_status="Cancel"
+WHERE T3.order_item_status="Cancel" and T4.product_name="food"
 GROUP BY T1.customer_id
-HAVING count(T4.product_name="food") >= 1
+HAVING count(*) >= 1
 
 S:
 S:
