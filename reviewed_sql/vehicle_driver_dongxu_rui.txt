@@ -1,9 +1,9 @@
-1. What is the model of the vehicle with maximum speed whose power is higher than 6000 ?
+1. What is the model of the vehicle with maximum top speed whose power is higher than 6000 ?
 
 select model 
 from vehicle
 where power > 6000
-order by top_speed desc limit 1;
+order by top_speed desc limit 1
 
 
 2. What are the names of the drivers who are citizens of the 'United States'?
@@ -74,13 +74,13 @@ join vehicle as T3
 on T2.vehicle_id = T3.vehicle_id
 where T3.power > 5000
 
-12. Which car models has total production larger than 100 or top speed higher than 150?
+12. Which car models have total production larger than 100 or top speed higher than 150?
 
 select model
 from vehicle
 where total_production > 100 or top_speed > 150
 
-13. What are the model names and built year of the cars with 'DJ' in its name?
+13. What are the model names and built year of the cars with 'DJ' in its model name?
 
 select model, build_year
 from vehicle
@@ -96,17 +96,15 @@ select T1.model
 from vehicle as T1 join vehicle_driver as T2
 on T1.vehicle_id = T2.vehicle_id
 
+15. What are the vehicle ids and models of the vehicle which have been driven by two drivers or been manufactured by 'Ziyang'.
 
-15. What are the vehicle id and models of the vehicle which have been driven by two drivers or been manufactured by 'Ziyang'.
-
- 
 select T1.vehicle_id, T1.model
 from vehicle as T1 join vehicle_driver as T2
 on T1.vehicle_id = T2.vehicle_id
 group by T2.vehicle_id
 having count(*) = 2 or T1.builder = 'Ziyang'
 
-16. What are the vehicle models which have been driven by at least 2 drivers or been driven by driver named 'Jeff Gordon'?
+16. What are the vehicle ids and models which have been driven by at least 2 drivers or been driven by the driver named 'Jeff Gordon'?
 
 select T1.vehicle_id, T1.model
 from vehicle as T1 join vehicle_driver as T2
@@ -121,27 +119,25 @@ on T1.vehicle_id = T2.vehicle_id
 group by T2.vehicle_id
 having count(*) > 2
 
+17. How many vehicles have maximum top speed?
 
-
-
-17. select count(*)
+select count(*)
 from vehicle
 where top_speed = (select max(top_speed) from vehicle)
 
+18. Show all driver names in the alphabetical order.
 
 select name
 from driver
 order by name
 
-
-18. How many drivers have been racing in each racing series?
+19. How many drivers have been racing in each racing series?
 
 select count(*), racing_series
 from driver
 group by racing_series
 
-
-19. What are the name and citizenship of the drivers who have driven the vehicle model 'DJ1'?
+20. What are the name and citizenship of the drivers who have driven the vehicle model 'DJ1'?
 
 select T1.name, T1.citizenship
 from driver as T1 join vehicle_driver as T2
@@ -151,7 +147,7 @@ on T2.vehicle_id = T3.vehicle_id
 where T3.model = 'DJ1'
 
 
-20. How many drivers have not driven any cars?
+21. How many drivers have not driven any cars?
 
 select count(*)
 from driver
