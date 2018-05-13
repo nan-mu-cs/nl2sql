@@ -54,23 +54,22 @@ Final accuracy score = # of right SQL examples / total # of SQL examples
 
 In order to know model's performance on different SQL components, it is important to know the detailed scores on each part.
 
-First, do the steps 1 as above. Then, for each SQL, compute accuracy (actually you already computed the accuracy in Exact Matching step 3), recall, precision and F1 scores for all following components:
+First, replace gold and predicted sql values because we do not predict values in our task definition. BUT DO NOT replace VALUES if they are nested queries! Also, no evaluation on distinct key word for now.
+
+Then, for each SQL, compute accuracy and [F1 scores](https://en.wikipedia.org/wiki/F1_score) for all following components:
 
 1. SELECT COLUMN: e.g. gold: ([select, col1, none], [select, col2, max]) and predicted: ([select, col1, none], [select, col3, min]) compute accuracy, recall, precision and F1 scores.
 2. SELECT COLUMN WITHOUT AGG: e.g. gold: ([select, col1], [select, col2]) and predicted: ([select, col1], [select, col3]) compute accuracy, recall, precision and F1 scores.
-3. ALL AGG: ([select, col1, max], [orderby, *, count], [groupby, col2, having col1, count])
-4. WHERE COLUMN: ([where, col1, >=, novalue], [where, col2, =, novalue], [where, col4, NOT IN, nested])
-5. WHERE COLUMN WITHOUT OP:  ([where, col1], [where, col4])
-6. GROUP BY: ([groupby, col2], [groupby, col5])
-7. GROUP BY HAVING: ([groupby, col2, having col1, count, >=])
-8. ORDER BY: ([orderby, col1, no agg, desc, no limit], [orderby, *, count, asc, 3])
-9. AND/OR: ([where, col1, col2, and], [where, col3, col2, or])
-10. EXCEPT, UNION, INTERSECT: 1 if predicted these key words right. 
-11. SQL KEY WORDS: for gold and predicted sql, create a set of SQL key words if they are in [where, group by, having, desc, asc, order by, limit, except, union, intersect, not in, in, or, like]
+3. WHERE COLUMN: ([where, col4, NOT IN, NESTED SQL], [where, col1, >=, novalue], [where, col2, =, novalue])
+4. WHERE COLUMN WITHOUT OP:  ([where, col1], [where, col4])
+5. GROUP BY: ([groupby, col2], [groupby, col5])
+6. GROUP BY HAVING: ([groupby, col2, having col1, count, >=])
+7. ORDER BY: ([orderby, col1, no agg, desc, no limit], [orderby, *, count, asc, 3])
+8. AND/OR: ([where, col1, col2, and], [where, col3, col2, or])
+9. EXCEPT, UNION, INTERSECT, NESTED SQL: get the except/union/intersect/nested part in all SQLs containing except/union/intersect/nested, check if predicted except/union/intersect/nested part equals to the gold except/union/intersect/nested part.
+10. SQL KEY WORDS: for gold and predicted sql, create a set of SQL key words if they are in [where, group by, having, desc, asc, order by, limit, except, union, intersect, not in, in, or, like]
 
-Final accuracy, recall, precision and F1 scores = averaged score over all SQL examples
-For 10. EXCEPT, UNION, INTERSECT:: only accuracy is computed # of right SQL examples / total # of SQL examples
+Final accuracy and F1 scores = averaged score over all SQL examples
 
-
-#### At the end, you should have (# of SQL Hardness level + all SQL together) * (1 Exact Matching score + 11 Partial Matching scores * 4 different evaluation matrices#acc, F, P, R#).
+#### At the end, you should have (# of SQL Hardness level + all SQL together) * (1 Exact Matching score + 10 Partial Matching scores * 2 different evaluation matrices# acc and F).
 
