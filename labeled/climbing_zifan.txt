@@ -1,0 +1,129 @@
+Total = 20
+
+1. How many climbers are there?
+
+SELECT count(*)
+FROM climber
+
+2. List the names of buildings in descending order of points.
+
+SELECT Name
+FROM climber
+order by Points ASC
+
+3. List the names of climbers whose country is not Switzerland. 
+
+SELECT Name
+FROM climber
+Where Country != "Switzerland"
+
+4. What is the maximum point for players whose country is United Kingdom?
+
+SELECT max(Points)
+FROM climber
+Where Country = "United Kingdom"
+
+5. How many distinct countries are the climbers from?
+
+SELECT COUNT(distinct Country)
+from climber
+
+6. What are the names of mountains in ascending alphabetical order?
+
+SELECT Name
+FROM mountain
+order by Name ASC
+
+7. What are the countries of mountains with height bigger than 5000?
+
+SELECT Country
+FROM mountain
+Where Height > 5000
+
+8. What is the name of the highest mountain.
+
+SELECT Name
+FROM mountain
+order by Height DESC limit 1
+
+9. List the distinct ranges of the mountains with the top 3 prominence.
+
+SELECT distinct Range
+FROM mountain
+order by Prominence DESC limit 3
+
+10. Show names of climbers and the names of mountains they climb.
+
+SELECT T1.Name, T2.Name
+FROM climber as T1 join mountain as T2 
+ON T1.Mountain_ID = T2.Mountain_ID
+
+11. Show the names of climbers and the heights of mountains they climb.
+
+SELECT T1.Name, T2.Height
+FROM climber as T1 join mountain as T2 
+ON T1.Mountain_ID = T2.Mountain_ID
+
+12. Show the name of the mountain climbed by the climber with the maximum points.
+
+SELECT T2.Height
+FROM climber as T1 join mountain as T2 
+ON T1.Mountain_ID = T2.Mountain_ID
+order by T1.Points DESC limit 1
+
+13. Show the distinct names of mountains climbed by climbers from country "West Germany".
+
+SELECT distinct T2.Name
+FROM climber as T1 join mountain as T2 
+ON T1.Mountain_ID = T2.Mountain_ID
+Where T1.Country = "West Germany"
+
+14. Show the times used by climbers to climb mountains in Country Uganda.
+
+SELECT T1.Time
+FROM climber as T1 join mountain as T2 
+ON T1.Mountain_ID = T2.Mountain_ID
+Where T2.Country = "Uganda"
+ 
+15. Please show the countries and the number of climbers from each country.
+
+SELECT Country, COUNT(*)
+FROM climber
+group by Country
+
+16. List the countries that have more than one mountain.
+
+SELECT Country
+FROM mountain
+group by Country
+Having COUNT(*) > 1
+
+17. List the names of mountains that do not have any climber.
+
+SELECT Name
+from mountain
+where Mountain_ID not in (SELECT Mountain_ID FROM climber)
+
+18. Show the countries that have mountains with height more than 5600 stories and mountains with height less than 5200.
+
+SELECT Country
+FROM mountain
+Where Height > 5600
+Intersect 
+SELECT Country
+FROM mountain
+Where Height > 5200
+
+19. Show the range that has the most number of mountains.
+
+SELECT Range
+FROM mountain
+group by Range
+order by COUNT(*) DESC limit 1
+
+20. Show the names of mountains with height more than 5000 or prominence more than 1000.
+
+SELECT Name
+from mountain
+Where Height > 5000 or Prominence > 1000
+
