@@ -43,7 +43,7 @@ set matching for each component and then see if predicted SQL get all SQL parts 
 SQL parts right, then the score of Exact Matching without Values for this predicted example is 1, otherwise 0.
 
 For each SQL example:
-1. replace gold and predicted sql values (also no evaluation on distinct key word for now, BUT DO NOT replace them if they are nested queries!) in the AST with the same sepecial tok e.g. _VALUE_. (because we do not predict values)
+1. replace gold and predicted sql values because we do not predict values in our task definition. BUT DO NOT replace VALUES if they are nested queries! Also, no evaluation on distinct key word for now.
 2. get seperate parts for SELECT, WHERE, GROUP BY, ORDER BY, EXCEPT, UNION, INTERSECT etc. For example, for SELECT: set([(col, agg), (col, agg)]), WHERE: set([col, op, nested], [col, op], [AND, OR])
 3. compute if each predicted SQL part is the same as the gold SQL part. For example, for SELECT: if gold set([(col, agg), (col, agg)]) = predict set([(col, agg), (col, agg)]).
 4. see if predicted SQL gets all parts right, if so, then score is 1, otherwise, 0.
