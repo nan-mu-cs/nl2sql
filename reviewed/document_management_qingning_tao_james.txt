@@ -1,0 +1,279 @@
+1. Find the name and access counts of all documents, in alphabetic order of the document name.
+P: What are the names of all the documents, as well as the access counts of each, ordered alphabetically?
+
+select document_name, access_count
+from documents
+order by document_name
+
+S:
+S:
+S:
+
+2. Find the name of the document that has been accessed the greatest number of times, as well as the count of how many times it has been accessed?
+P: What is the name of the document which has been accessed the most times, as well as the number of times it has been accessed?
+
+select document_name, access_count
+from documents
+order by access_count desc
+limit 1
+
+S:
+S:
+S:
+
+3. Find the types of documents with more than 4 documents.
+P: What are the codes of types of documents of which there are for or more?
+
+select document_type_code
+from documents
+group by document_type_code
+having count(*) > 4
+
+S:
+S:
+S:
+
+4. Find the total access count of all documents in the most popular document type.
+P: What is the total access count of documents that are of the most common document type?
+
+select sum(access_count)
+from documents
+group by document_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+5. What is the average access count of documents?
+P: Find the average access count across all documents?
+
+select avg(access_count)
+from documents
+
+S:
+S:
+S:
+
+6. What is the structure of the document with the least number of accesses?
+P: Return the structure description of the document that has been accessed the fewest number of times.
+
+select t2.document_structure_description
+from documents as t1 join document_structures as t2
+on t1.document_structure_code = t2.document_structure_code
+group by t1.document_structure_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+7. What is the type of the document named "David CV"?
+P: Return the type code of the document named "David CV".
+
+select document_type_code
+from documents
+where document_name = "David CV"
+
+S:
+S:
+S:
+
+8. Find the list of documents that are both in the most three popular type and have the most three popular structure.
+P: What are the names of documents that have both one of the three most common types and one of three most common structures?
+
+select document_name
+from documents
+group by document_type_code
+order by count(*) desc
+limit 3
+intersect
+select document_name
+from documents
+group by document_structure_code
+order by count(*) desc
+limit 3
+
+S:
+S:
+S:
+
+9. What document types do have more than 10000 total access number.
+P: Return the codes of the document types that do not have a total access count of over 10000.
+
+select document_type_code
+from documents
+group by document_type_code
+having sum(access_count) > 10000
+
+S:
+S:
+S:
+
+10. What are all the section titles of the document named "David CV"?
+P: Give the section titles of the document with the name "David CV".
+
+select t2.section_title
+from documents as t1 join document_sections as t2
+on t1.document_code = t2.document_code
+where t1.document_name = "David CV"
+
+S:
+S:
+S:
+
+11. Find all the name of documents without any sections.
+P: What are the names of documents that do not have any sections?
+
+select document_name
+from documents
+where document_code not in (select document_code from document_sections)
+
+S:
+S:
+S:
+
+12. List all the username and passwords of users with the most popular role.
+P: What are the usernames and passwords of users that have the most common role?
+
+select user_name, password
+from users
+group by role_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+13. Find the average access counts of documents with functional area "Acknowledgement".
+P: What are the average access counts of documents that have the functional area description "Acknowledgement"?
+
+select avg(t1.access_count)
+from documents as t1
+join document_functional_areas as t2
+on t1.document_code = t2.document_code
+join functional_areas as t3
+on t2.functional_area_code = t3.functional_area_code
+where t3.functional_area_description = "Acknowledgement"
+
+S:
+S:
+S:
+
+14. Find names of the document without any images.
+P: What are the names of documents that do not have any images?
+
+select document_name
+from documents 
+except
+select t1.document_name
+from documents as t1 join document_sections as t2
+on t1.document_code = t2.document_code
+join document_sections_images as t3
+on t2.section_id = t3.section_id
+
+S:
+S:
+S:
+
+15. What is the name of the document with the most number of sections?
+P: Return the name of the document that has the most sections.
+
+select t1.document_name
+from documents as t1 join document_sections as t2
+on t1.document_code = t2.document_code
+group by t1.document_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+16. List all the document names which contains "CV".
+P: What are the names of documents that contain the substring "CV"?
+
+select document_name
+from documents
+where document_name like "%CV%"
+
+S:
+S:
+S:
+
+17. How many users are logged in?
+P: Count the number of users that are logged in.
+
+select count(*)
+from users
+where user_login == 1
+
+S:
+S:
+S:
+
+18. Find the description of the most popular role among the users that have logged in.
+P: What is the description of the most popular role among users that have logged in?
+
+select role_description
+from roles
+where role_code = (select role_code
+from users
+where user_login = 1
+group by role_code
+order by count(*) desc
+limit 1)
+
+S:
+S:
+S:
+
+19. Find the average access count of documents with the least popular structure.
+P: What is the average access count of documents that have the least common structure?
+
+select avg(access_count)
+from documents
+group by document_structure_code
+order by count(*) asc
+limit 1
+
+S:
+S:
+S:
+
+20. List all the image name and URLs in the order of their names.
+P: What are the names and urls of images, sorted alphabetically?
+
+select image_name, image_url
+from images
+order by image_name
+
+S:
+S:
+S:
+
+21. Find the number of users in each role.
+P: What are the different role codes for users, and how many users have each?
+
+select count(*), role_code
+from users
+group by role_code
+
+S:
+S:
+S:
+
+22. What document types have more than 2 corresponding documents?
+P: Give the codes of document types that have more than 2 corresponding documents.
+
+select document_type_code
+from documents
+group by document_type_code
+having count(*) > 2
+
+S:
+S:
+S:
