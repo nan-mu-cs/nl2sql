@@ -5,11 +5,11 @@ Total = 20
 SELECT count(*)
 FROM climber
 
-2. List the names of buildings in descending order of points.
+2. List the names of climbers in descending order of points.
 
 SELECT Name
 FROM climber
-order by Points ASC
+order by Points DESC
 
 3. List the names of climbers whose country is not Switzerland. 
 
@@ -17,7 +17,7 @@ SELECT Name
 FROM climber
 Where Country != "Switzerland"
 
-4. What is the maximum point for players whose country is United Kingdom?
+4. What is the maximum point for climbers whose country is United Kingdom?
 
 SELECT max(Points)
 FROM climber
@@ -64,7 +64,7 @@ SELECT T1.Name, T2.Height
 FROM climber as T1 join mountain as T2 
 ON T1.Mountain_ID = T2.Mountain_ID
 
-12. Show the name of the mountain climbed by the climber with the maximum points.
+12. Show the height of the mountain climbed by the climber with the maximum points.
 
 SELECT T2.Height
 FROM climber as T1 join mountain as T2 
@@ -112,7 +112,7 @@ Where Height > 5600
 Intersect 
 SELECT Country
 FROM mountain
-Where Height > 5200
+Where Height < 5200
 
 19. Show the range that has the most number of mountains.
 
