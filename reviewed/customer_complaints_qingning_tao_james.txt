@@ -1,0 +1,280 @@
+1. How many customers are there?
+P: Count the number of customers.
+
+select count(*)
+from customers
+
+S:
+S:
+S:
+
+2. Find the emails and phone numbers of all the customers, ordered by email address and phone number.
+P: What are the emails and phone numbers of all customers, sorted by email address and phone number?
+
+select email_address, phone_number
+from customers
+order by email_address, phone_number
+
+S:
+S:
+S:
+
+3. Which city has the least number of customers whose type code is "Good Credit Rating"?
+P: Return the city with the customer type code "Good Credit Rating" that had the fewest customers.
+
+select town_city
+from customers
+where customer_type_code = "Good Credit Rating"
+group by town_city
+order by count(*)
+limit 1
+
+S:
+S:
+S:
+
+4. List the name of all products along with the number of complaints that they have received.
+P: What are all the different product names, and how many complains has each received?
+
+select t1.product_name, count(*)
+from products as t1 join complaints as t2
+on t1.product_id = t2.product_id
+group by t1.product_name
+
+S:
+S:
+S:
+
+5. Find the emails of customers who has filed a complaints of the product with the most complaints.
+P: What are the emails of customers who have filed complaints on the product which has had the greatest number of complaints?
+
+select t1.email_address
+from customers as t1 join complaints as t2
+on t1.customer_id = t2.customer_id
+group by t1.customer_id
+order by count(*)
+limit 1
+
+S:
+S:
+S:
+
+6. Which products has been complained by the customer who has filed least amount of complaints?
+P: Return the names of products that have had complaints filed by the customer who has filed the fewest complaints.
+
+select distinct t1.product_name
+from products as t1 join complaints as t2
+on t1.product_id = t2.product_id
+join customers as t3
+group by t3.customer_id
+order by count(*)
+limit 1
+
+S:
+S:
+S:
+
+7. What is the phone number of the customer who has filed the most recent complaint?
+P: Return the phone number of the customer who filed the complaint that was raised most recently.
+
+select t1.phone_number
+from customers as t1 join complaints as t2
+on t1.customer_id = t2.customer_id
+order by t2.date_complaint_raised desc
+limit 1
+
+S:
+S:
+S:
+
+8. Find the email and phone number of the customers who have never filed a complaint before.
+P: What are the emails and phone numbers of custoemrs who have never filed a complaint?
+
+select email_address, phone_number
+from customers
+where customer_id not in (select customer_id from complaints)
+
+S:
+S:
+S:
+
+9. Find the phone number of all the customers and staff.
+P: What are the phone numbers of all customers and all staff members?
+
+select phone_number
+from customers
+union
+select phone_number
+from staff
+
+S:
+S:
+S:
+
+10. What is the description of the product named "Chocolate"?
+P: Return the description of the product called "Chocolate".
+
+select product_description
+from products
+where product_name = "Chocolate"
+
+S:
+S:
+S:
+
+11. Find the name and category of the most expensive product.
+P: What is the name and category code of the product with the highest price?
+
+select product_name, product_category_code
+from products
+order by product_price desc
+limit 1
+
+S:
+S:
+S:
+
+12. Find the prices of products which has never received a single complaint.
+P: What are the prices of products that have never gotten a complaint?
+
+select product_price
+from products
+where product_id not in (select product_id from complaints)
+
+S:
+S:
+S:
+
+13. What is the average price of the products for each category?
+P: Return the average price of products that have each category code.
+
+select avg(product_price), product_category_code
+from products
+group by product_category_code
+
+S:
+S:
+S:
+
+14. Find the last name of the staff member who processed the complaint of the cheapest product.
+P: What is the last name of the staff member in charge of the complaint on the product with the lowest price?
+
+select t1.last_name
+from staff as t1 join complaints as t2
+on t1.staff_id = t2.staff_id
+join products as t3
+on t2.product_id = t3.product_id
+order by t3.product_price
+limit 1
+
+S:
+S:
+S:
+
+15. Which complaint status has more than 3 records on file?
+P: Return complaint status codes have more than 3 corresponding complaints?
+
+select complaint_status_code
+from complaints
+group by complaint_status_code
+having count(*) > 3
+
+S:
+S:
+S:
+
+16. Find the last name of the staff whose email address contains "wrau".
+P: What are the last names of staff with email addressed containing the substring "wrau"?
+
+select last_name
+from staff
+where email_address like "%wrau%"
+
+S:
+S:
+S:
+
+17. How many customers are there in the customer type with the most customers?
+P: Count the number of customers that have the customer type that is most common.
+
+select count(*)
+from customers
+group by customer_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+18. What is the last name of the staff who has handled the first ever complaint?
+P: Return the last name of the staff member who handled the complaint with the earliest date raised.
+
+select t1.last_name
+from staff as t1 join complaints as t2
+on t1.staff_id = t2.staff_id
+order by t2.date_complaint_raised
+limit 1
+
+S:
+S:
+S:
+
+19. How many distinct complaint type codes are there in the database?
+P: Count the number of different complaint type codes.
+
+select count(distinct complaint_type_code)
+from complaints
+
+S:
+S:
+S:
+
+20. Find the address line 1 and 2 of the customer with email "vbogisich@example.org".
+P: What are lines 1 and 2 of the addressed of the customer with the email "vbogisich@example.org"?
+
+select address_line_1, address_line_2
+from customers
+where email_address = "vbogisich@example.org"
+
+S:
+S:
+S:
+
+21. Find the number of complaints with Product Failure type for each complaint status.
+P: Of complaints with the type code "Product Failure", how many had each different status code?
+
+select complaint_status_code, count(*)
+from complaints
+where complaint_type_code = "Product Failure"
+group by complaint_status_code
+
+S:
+S:
+S:
+
+22. What is first names of the top 5 staff who have handled the greatest number of complaints?
+P: Return the first names of the 5 staff members who have handled the most complaints.
+
+select t1.first_name
+from staff as t1 join complaints as t2 on t1.staff_id = t2.staff_id
+group by t2.staff_id
+order by count(*)
+limit 5
+
+S:
+S:
+S:
+
+23. Which state has the most customers?
+P: Give the state that has the most customers.
+
+select state
+from customers
+group by state
+order by count(*)
+limit 1
+
+S:
+S:
+S:
