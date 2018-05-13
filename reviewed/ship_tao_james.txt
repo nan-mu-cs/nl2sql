@@ -1,0 +1,290 @@
+
+Total # = 24
+
+1. How many different captain ranks are there?
+P: Count the number of different ranks of captain.
+
+Select count(distinct rank)
+From captain
+
+S:
+S:
+S:
+
+2. How many captains are in each rank?
+P: Count the number of captains that have each rank.
+
+Select count(*), rank
+From captain
+Group by rank
+
+S:
+S:
+S:
+
+3. How many captains with younger than 50 are in each rank?
+P: Count the number of captains younger than 50 of each rank.
+
+Select count(*), rank
+From captain
+Where age < 50
+Group by rank
+
+S:
+S:
+S:
+
+4. Sort all captain names by their ages from old to young.
+P: What are the names of captains, sorted by age descending?
+
+Select name
+From captain
+Order by age desc
+
+S:
+S:
+S:
+
+5. Find the name, class and rank of all captains.
+P: What are the names, classes, and ranks of all captains?
+
+Select name, class, rank
+From captain
+
+S:
+S:
+S:
+
+6. Which rank is the most common among captains?
+P: Return the rank for which there are the fewest captains.
+
+Select rank
+From captain
+Group by rank
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+7. Which classes have more than two captains?
+P: Give the classes that have more than two captains.
+
+Select class
+From captain
+Group by class
+Having count(*) > 2
+
+S:
+S:
+S:
+
+8. Find the name of captains whose rank are either Midshipman or Lieutenant.
+P: What are the names of captains that have either the rank Midshipman or Lieutenant?
+
+Select name
+From captain
+Where rank = 'Midshipman' or rank = 'Lieutenant'
+
+S:
+S:
+S:
+
+9. What are the average and minimum age of captains in different class?
+P: Return the average and minimum age of captains in each class.
+
+Select avg(age), min(age), class
+from captain
+Group by class
+
+S:
+S:
+S:
+
+10. Find the captain rank that has some captains in both Cutter and Armed schooner classes.
+P: What are the ranks of captains that are both in the Cutter and Armed schooner classes?
+
+Select rank
+From captain
+Where class = 'Cutter'
+Intersect
+Select rank
+From captain
+Where class = 'Armed schooner'
+
+S:
+S:
+S:
+
+11. Find the captain rank that has no captain in Third-rate ship of the line class.
+P: What are the ranks of captains that have no captain that are in the Third-rate ship of the line class?
+
+Select rank
+From captain
+Except
+Select rank
+From captain
+Where class = 'Third-rate ship of the line'
+
+S:
+S:
+S:
+
+12. What is the name of the youngest captain?
+P: Return the name of the youngest captain.
+
+Select name
+From captain
+order by age
+Limit 1
+
+S:
+S:
+S:
+
+13. how many ships are there?
+P: Count the number of ships.
+
+Select count(*)
+From ship
+
+S:
+S:
+S:
+
+14. Find the name, type, and flag of the ship that is built in the most recent year.
+P: What is the name, type, and flag of the ship that was built in the most recent year?
+
+Select name, type, flag
+From ship
+Order by built_year desc
+Limit 1
+
+S:
+S:
+S:
+
+15. Group by ships by flag, and return number of ships that have each flag.
+P: What are the different ship flags, and how many ships have each?
+
+Select count(*), flag
+From ship
+Group by flag
+
+S:
+S:
+S:
+
+16. Which flag is most widely used among all ships?
+P: Return the flag that is most common among all ships.
+
+Select flag
+From ship
+Group by flag
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+17. List all ship names in the order of built year and class.
+P: What are the names of ships, ordered by year they were built and their class?
+
+Select name
+From ship
+Order by built_year, class
+
+S:
+S:
+S:
+
+18. Find the ship type that are used by both ships with Panama and Malta flags.
+P: What types of ships have both ships that have Panama Flags and Malta flags? 
+
+Select type
+From ship
+Where flag = 'Panama'
+Intersect
+Select type
+From ship
+Where flag = 'Malta'
+
+S:
+S:
+S:
+
+19. In which year were most of ships built?
+P: What is the year in which most ships were built?
+
+Select built_year
+From ship
+group by built_year
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+20. Find the name of the ships that have more than one captain.
+P: What are the names of ships that have more than one captain?
+
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Group by t2.ship_id
+having count(*) > 1
+
+S:
+S:
+S:
+
+21. what are the names and classes of the ships that do not have any captain yet?
+P: Return the names and classes of ships that do not have a captain?
+
+Select name, class
+From ship
+Where ship_id not in (select ship_id from captain)
+
+S:
+S:
+S:
+
+22. Find the name of the ship that is steered by the youngest captain.
+P: What is the name of the ship that is commanded by the youngest captain?
+
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Order by t2.age
+Limit 1
+
+S:
+S:
+S:
+
+23. Find the name and flag of ships that are not steered by any captain with Midshipman rank.
+P: What are the names and flags of ships that do not have a captain with the rank of Midshipman?
+
+Select name, flag
+From ship
+Where ship_id not in (select ship_id from captain where rank = 'Midshipman')
+
+S:
+S:
+S:
+
+24. Find the name of the ships that are steered by both a captain with Midshipman rank and a captain with Lieutenant rank.
+P: What are the names of ships that are commanded by both captains with the rank of Midshipman and captains with the rank of Lieutenant?
+
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Where t2.rank = 'Midshipman'
+Intersect
+Select t1.name
+From ship as t1 join captain as t2 on t1.ship_id = t2.ship_id
+Where t2.rank = 'Lieutenant'
+
+S:
+S:
+S:
