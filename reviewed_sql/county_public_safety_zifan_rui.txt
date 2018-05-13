@@ -1,0 +1,132 @@
+Total = 20
+
+1. How many counties are there?
+
+SELECT count(*)
+FROM county_public_safety
+
+2. List the names of counties in decending order of population.
+
+SELECT Name
+FROM county_public_safety
+order by Population DESC
+
+3. List the distinct police forces of counties whose location is not on east side.
+
+SELECT distinct Police_force
+FROM county_public_safety
+Where Location != "East"
+
+4. What are the minimum and maximum crime rate of counties?
+
+SELECT min(Crime_rate), max(Crime_rate)
+FROM county_public_safety
+
+5. Show the crime rates of counties in ascending order of number of police officers.
+
+SELECT Crime_rate
+FROM county_public_safety
+order by Police_officers DESC
+
+6. What are the names of cities in ascending alphabetical order?
+
+SELECT Name
+FROM city
+order by Name ASC
+
+7. What are the percentage of hispanics in cities with blacks percentage bigger than 10?
+
+SELECT Hispanic
+FROM city
+Where Black > 10
+
+8. List the name of the county with the largest population.
+
+SELECT Name
+FROM county_public_safety
+order by Population DESC limit 1
+
+9. List the names of the city with the top 5 white percentages.
+
+SELECT Name
+FROM city
+order by White DESC limit 5
+
+10. Show names of cities and names of counties they are in.
+
+SELECT T1.Name, T2.Name
+FROM city as T1 join county_public_safety as T2 
+ON T1.County_ID = T2.County_ID
+
+11. Show white percentages of cities and the crime rates of counties they are in.
+
+SELECT T1.White, T2.Crime_rate
+FROM city as T1 join county_public_safety as T2 
+ON T1.County_ID = T2.County_ID
+
+12. Show the names of cities in counties that have the largest average number of police officers.
+
+SELECT T1.Name
+FROM city as T1 join county_public_safety as T2 
+ON T1.County_ID = T2.County_ID
+group by T1.County_ID
+order by avg(Police_officers) DESC limit 1
+
+13. Show the names of cities in counties that have average population more than 20000.
+
+SELECT T1.Name
+FROM city as T1 join county_public_safety as T2 
+ON T1.County_ID = T2.County_ID
+group by T1.County_ID
+Having avg(Population) > 20000
+
+14. Show the crime rate of counties with cities having white percentage more than 90.
+
+SELECT T2.Crime_rate
+FROM city as T1 join county_public_safety as T2 
+ON T1.County_ID = T2.County_ID
+Where T1.White > 90
+ 
+15. Please show the police forces and the number of counties with each police force.
+
+SELECT Police_force, COUNT(*)
+FROM county_public_safety
+group by Police_force
+
+16. What is the location shared by most counties.
+
+SELECT Location
+FROM county_public_safety
+group by Location
+order by COUNT(*) DESC limit 1
+
+17. List the names of counties that do not have any cities.
+
+SELECT Name
+from county_public_safety
+where County_ID not in (SELECT County_ID FROM city)
+
+18. Show the police force shared by counties with location on the east and west.
+
+SELECT Police_force	
+FROM county_public_safety
+Where Location = "East"
+Intersect 
+SELECT Police_force	
+FROM county_public_safety
+Where Location = "West"
+
+19. Show the names of cities in counties that have maximum crime rate less than 100.
+
+SELECT T1.Name
+FROM city as T1 join county_public_safety as T2 
+ON T1.County_ID = T2.County_ID
+group by T1.County_ID
+Having max(Crime_rate) < 100
+
+20. Show the case burden of counties in descending order of population.
+
+SELECT Case_burden
+from county_public_safety
+order by Population DESC
+
