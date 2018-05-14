@@ -1628,6 +1628,408 @@
       ],
       [
         0,
+        "city id"
+      ],
+      [
+        0,
+        "country"
+      ],
+      [
+        0,
+        "city"
+      ],
+      [
+        0,
+        "max team number"
+      ],
+      [
+        1,
+        "agent id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "years of experiencing"
+      ],
+      [
+        2,
+        "customer id"
+      ],
+      [
+        2,
+        "player"
+      ],
+      [
+        2,
+        "country"
+      ],
+      [
+        2,
+        "age"
+      ],
+      [
+        3,
+        "city id"
+      ],
+      [
+        3,
+        "agent id"
+      ],
+      [
+        3,
+        "year"
+      ],
+      [
+        3,
+        "number team"
+      ],
+      [
+        4,
+        "city id"
+      ],
+      [
+        4,
+        "customer id"
+      ],
+      [
+        4,
+        "customer rating"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "City_ID"
+      ],
+      [
+        0,
+        "Country"
+      ],
+      [
+        0,
+        "City"
+      ],
+      [
+        0,
+        "Max_team_number"
+      ],
+      [
+        1,
+        "Agent_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Years_of_experiencing"
+      ],
+      [
+        2,
+        "Customer_ID"
+      ],
+      [
+        2,
+        "Player"
+      ],
+      [
+        2,
+        "Country"
+      ],
+      [
+        2,
+        "Age"
+      ],
+      [
+        3,
+        "City_ID"
+      ],
+      [
+        3,
+        "Agent_ID"
+      ],
+      [
+        3,
+        "Year"
+      ],
+      [
+        3,
+        "Number_team"
+      ],
+      [
+        4,
+        "City_ID"
+      ],
+      [
+        4,
+        "Customer_ID"
+      ],
+      [
+        4,
+        "Customer_rating"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "travel_agent",
+    "foreign_keys": [
+      [
+        [
+          "city_agent",
+          "Agent_ID"
+        ],
+        [
+          "agent",
+          "Agent_ID"
+        ]
+      ],
+      [
+        [
+          "city_agent",
+          "City_ID"
+        ],
+        [
+          "city",
+          "City_ID"
+        ]
+      ],
+      [
+        [
+          "city_customer",
+          "Customer_ID"
+        ],
+        [
+          "customer",
+          "Customer_ID"
+        ]
+      ],
+      [
+        [
+          "city_customer",
+          "City_ID"
+        ],
+        [
+          "city",
+          "City_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      8,
+      12,
+      16
+    ],
+    "table_names": [
+      "city",
+      "agent",
+      "customer",
+      "city agent",
+      "city customer"
+    ],
+    "table_names_original": [
+      "city",
+      "agent",
+      "customer",
+      "city_agent",
+      "city_customer"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "perpetrator id"
+      ],
+      [
+        0,
+        "people id"
+      ],
+      [
+        0,
+        "date"
+      ],
+      [
+        0,
+        "year"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        0,
+        "country"
+      ],
+      [
+        0,
+        "killed"
+      ],
+      [
+        0,
+        "injured"
+      ],
+      [
+        1,
+        "people id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "height"
+      ],
+      [
+        1,
+        "weight"
+      ],
+      [
+        1,
+        "home town"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Perpetrator_ID"
+      ],
+      [
+        0,
+        "People_ID"
+      ],
+      [
+        0,
+        "Date"
+      ],
+      [
+        0,
+        "Year"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        0,
+        "Country"
+      ],
+      [
+        0,
+        "Killed"
+      ],
+      [
+        0,
+        "Injured"
+      ],
+      [
+        1,
+        "People_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Height"
+      ],
+      [
+        1,
+        "Weight"
+      ],
+      [
+        1,
+        "Home Town"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "perpetrator",
+    "foreign_keys": [
+      [
+        [
+          "perpetrator",
+          "People_ID"
+        ],
+        [
+          "people",
+          "People_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      9
+    ],
+    "table_names": [
+      "perpetrator",
+      "people"
+    ],
+    "table_names_original": [
+      "perpetrator",
+      "people"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "building"
       ],
       [
@@ -2467,6 +2869,527 @@
       "Authors",
       "Papers",
       "Authorship"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "storm id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "dates active"
+      ],
+      [
+        0,
+        "max speed"
+      ],
+      [
+        0,
+        "damage millions usd"
+      ],
+      [
+        0,
+        "number deaths"
+      ],
+      [
+        1,
+        "region id"
+      ],
+      [
+        1,
+        "region code"
+      ],
+      [
+        1,
+        "region name"
+      ],
+      [
+        2,
+        "region id"
+      ],
+      [
+        2,
+        "storm id"
+      ],
+      [
+        2,
+        "number city affected"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Storm_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Dates_active"
+      ],
+      [
+        0,
+        "Max_speed"
+      ],
+      [
+        0,
+        "Damage_millions_USD"
+      ],
+      [
+        0,
+        "Number_Deaths"
+      ],
+      [
+        1,
+        "Region_id"
+      ],
+      [
+        1,
+        "Region_code"
+      ],
+      [
+        1,
+        "Region_name"
+      ],
+      [
+        2,
+        "Region_id"
+      ],
+      [
+        2,
+        "Storm_ID"
+      ],
+      [
+        2,
+        "Number_city_affected"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "storm_record",
+    "foreign_keys": [
+      [
+        [
+          "affected_region",
+          "Storm_ID"
+        ],
+        [
+          "storm",
+          "Storm_ID"
+        ]
+      ],
+      [
+        [
+          "affected_region",
+          "Region_id"
+        ],
+        [
+          "region",
+          "Region_id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      10
+    ],
+    "table_names": [
+      "storm",
+      "region",
+      "affected region"
+    ],
+    "table_names_original": [
+      "storm",
+      "region",
+      "affected_region"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "aircraft id"
+      ],
+      [
+        0,
+        "order year"
+      ],
+      [
+        0,
+        "manufacturer"
+      ],
+      [
+        0,
+        "model"
+      ],
+      [
+        0,
+        "fleet series"
+      ],
+      [
+        0,
+        "powertrain"
+      ],
+      [
+        0,
+        "fuel propulsion"
+      ],
+      [
+        1,
+        "pilot id"
+      ],
+      [
+        1,
+        "pilot name"
+      ],
+      [
+        1,
+        "rank"
+      ],
+      [
+        1,
+        "age"
+      ],
+      [
+        1,
+        "nationality"
+      ],
+      [
+        1,
+        "position"
+      ],
+      [
+        1,
+        "join year"
+      ],
+      [
+        1,
+        "team"
+      ],
+      [
+        2,
+        "record id"
+      ],
+      [
+        2,
+        "pilot id"
+      ],
+      [
+        2,
+        "aircraft id"
+      ],
+      [
+        2,
+        "date"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Aircraft_ID"
+      ],
+      [
+        0,
+        "Order_Year"
+      ],
+      [
+        0,
+        "Manufacturer"
+      ],
+      [
+        0,
+        "Model"
+      ],
+      [
+        0,
+        "Fleet_Series"
+      ],
+      [
+        0,
+        "Powertrain"
+      ],
+      [
+        0,
+        "Fuel_Propulsion"
+      ],
+      [
+        1,
+        "Pilot_ID"
+      ],
+      [
+        1,
+        "Pilot_name"
+      ],
+      [
+        1,
+        "Rank"
+      ],
+      [
+        1,
+        "Age"
+      ],
+      [
+        1,
+        "Nationality"
+      ],
+      [
+        1,
+        "Position"
+      ],
+      [
+        1,
+        "Join_Year"
+      ],
+      [
+        1,
+        "Team"
+      ],
+      [
+        2,
+        "Record_ID"
+      ],
+      [
+        2,
+        "Pilot_ID"
+      ],
+      [
+        2,
+        "Aircraft_ID"
+      ],
+      [
+        2,
+        "Date"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "pilot_record",
+    "foreign_keys": [
+      [
+        [
+          "pilot_record",
+          "Aircraft_ID"
+        ],
+        [
+          "aircraft",
+          "Aircraft_ID"
+        ]
+      ],
+      [
+        [
+          "pilot_record",
+          "Pilot_ID"
+        ],
+        [
+          "pilot",
+          "Pilot_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      17
+    ],
+    "table_names": [
+      "aircraft",
+      "pilot",
+      "pilot record"
+    ],
+    "table_names_original": [
+      "aircraft",
+      "pilot",
+      "pilot_record"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "race id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "class"
+      ],
+      [
+        0,
+        "date"
+      ],
+      [
+        0,
+        "track id"
+      ],
+      [
+        1,
+        "track id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        1,
+        "seating"
+      ],
+      [
+        1,
+        "year opened"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Race_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Class"
+      ],
+      [
+        0,
+        "Date"
+      ],
+      [
+        0,
+        "Track_ID"
+      ],
+      [
+        1,
+        "Track_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        1,
+        "Seating"
+      ],
+      [
+        1,
+        "Year_Opened"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "race_track",
+    "foreign_keys": [
+      [
+        [
+          "race",
+          "Track_ID"
+        ],
+        [
+          "track",
+          "Track_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6
+    ],
+    "table_names": [
+      "race",
+      "track"
+    ],
+    "table_names_original": [
+      "race",
+      "track"
     ]
   },
   {
@@ -4390,6 +5313,214 @@
       ],
       [
         0,
+        "film id"
+      ],
+      [
+        0,
+        "rank in series"
+      ],
+      [
+        0,
+        "number in season"
+      ],
+      [
+        0,
+        "title"
+      ],
+      [
+        0,
+        "directed by"
+      ],
+      [
+        0,
+        "original air date"
+      ],
+      [
+        0,
+        "production code"
+      ],
+      [
+        1,
+        "cinema id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "openning year"
+      ],
+      [
+        1,
+        "capacity"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        2,
+        "cinema id"
+      ],
+      [
+        2,
+        "film id"
+      ],
+      [
+        2,
+        "date"
+      ],
+      [
+        2,
+        "show times per day"
+      ],
+      [
+        2,
+        "price"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Film_ID"
+      ],
+      [
+        0,
+        "Rank_in_series"
+      ],
+      [
+        0,
+        "Number_in_season"
+      ],
+      [
+        0,
+        "Title"
+      ],
+      [
+        0,
+        "Directed_by"
+      ],
+      [
+        0,
+        "Original_air_date"
+      ],
+      [
+        0,
+        "Production_code"
+      ],
+      [
+        1,
+        "Cinema_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Openning_year"
+      ],
+      [
+        1,
+        "Capacity"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        2,
+        "Cinema_ID"
+      ],
+      [
+        2,
+        "Film_ID"
+      ],
+      [
+        2,
+        "Date"
+      ],
+      [
+        2,
+        "Show_times_per_day"
+      ],
+      [
+        2,
+        "Price"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "cinema",
+    "foreign_keys": [
+      [
+        [
+          "schedule",
+          "Cinema_ID"
+        ],
+        [
+          "cinema",
+          "Cinema_ID"
+        ]
+      ],
+      [
+        [
+          "schedule",
+          "Film_ID"
+        ],
+        [
+          "film",
+          "Film_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      13
+    ],
+    "table_names": [
+      "film",
+      "cinema",
+      "schedule"
+    ],
+    "table_names_original": [
+      "film",
+      "cinema",
+      "schedule"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "age category code"
       ],
       [
@@ -5144,6 +6275,285 @@
       "User_Searches",
       "Addresses",
       "Properties"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "product id"
+      ],
+      [
+        0,
+        "product"
+      ],
+      [
+        0,
+        "dimensions"
+      ],
+      [
+        0,
+        "dpi"
+      ],
+      [
+        0,
+        "pages per minute color"
+      ],
+      [
+        0,
+        "max page size"
+      ],
+      [
+        0,
+        "interface"
+      ],
+      [
+        1,
+        "store id"
+      ],
+      [
+        1,
+        "store name"
+      ],
+      [
+        1,
+        "type"
+      ],
+      [
+        1,
+        "area size"
+      ],
+      [
+        1,
+        "number of product category"
+      ],
+      [
+        1,
+        "ranking"
+      ],
+      [
+        2,
+        "district id"
+      ],
+      [
+        2,
+        "district name"
+      ],
+      [
+        2,
+        "headquartered city"
+      ],
+      [
+        2,
+        "city population"
+      ],
+      [
+        2,
+        "city area"
+      ],
+      [
+        3,
+        "store id"
+      ],
+      [
+        3,
+        "product id"
+      ],
+      [
+        4,
+        "store id"
+      ],
+      [
+        4,
+        "district id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "product_id"
+      ],
+      [
+        0,
+        "product"
+      ],
+      [
+        0,
+        "dimensions"
+      ],
+      [
+        0,
+        "dpi"
+      ],
+      [
+        0,
+        "pages_per_minute_color"
+      ],
+      [
+        0,
+        "max_page_size"
+      ],
+      [
+        0,
+        "interface"
+      ],
+      [
+        1,
+        "Store_ID"
+      ],
+      [
+        1,
+        "Store_Name"
+      ],
+      [
+        1,
+        "Type"
+      ],
+      [
+        1,
+        "Area_size"
+      ],
+      [
+        1,
+        "Number_of_product_category"
+      ],
+      [
+        1,
+        "Ranking"
+      ],
+      [
+        2,
+        "District_ID"
+      ],
+      [
+        2,
+        "District_name"
+      ],
+      [
+        2,
+        "Headquartered_City"
+      ],
+      [
+        2,
+        "City_Population"
+      ],
+      [
+        2,
+        "City_Area"
+      ],
+      [
+        3,
+        "Store_ID"
+      ],
+      [
+        3,
+        "Product_ID"
+      ],
+      [
+        4,
+        "Store_ID"
+      ],
+      [
+        4,
+        "District_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "store_product",
+    "foreign_keys": [
+      [
+        [
+          "store_product",
+          "Product_ID"
+        ],
+        [
+          "product",
+          "Product_ID"
+        ]
+      ],
+      [
+        [
+          "store_product",
+          "Store_ID"
+        ],
+        [
+          "store",
+          "Store_ID"
+        ]
+      ],
+      [
+        [
+          "store_district",
+          "District_ID"
+        ],
+        [
+          "district",
+          "District_ID"
+        ]
+      ],
+      [
+        [
+          "store_district",
+          "Store_ID"
+        ],
+        [
+          "store",
+          "Store_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      14,
+      19,
+      21
+    ],
+    "table_names": [
+      "product",
+      "store",
+      "district",
+      "store product",
+      "store district"
+    ],
+    "table_names_original": [
+      "product",
+      "store",
+      "district",
+      "store_product",
+      "store_district"
     ]
   },
   {
@@ -7526,6 +8936,290 @@
       ],
       [
         0,
+        "city id"
+      ],
+      [
+        0,
+        "official name"
+      ],
+      [
+        0,
+        "status"
+      ],
+      [
+        0,
+        "area km 2"
+      ],
+      [
+        0,
+        "population"
+      ],
+      [
+        0,
+        "census ranking"
+      ],
+      [
+        1,
+        "farm id"
+      ],
+      [
+        1,
+        "year"
+      ],
+      [
+        1,
+        "total horses"
+      ],
+      [
+        1,
+        "working horses"
+      ],
+      [
+        1,
+        "total cattle"
+      ],
+      [
+        1,
+        "oxen"
+      ],
+      [
+        1,
+        "bulls"
+      ],
+      [
+        1,
+        "cows"
+      ],
+      [
+        1,
+        "pigs"
+      ],
+      [
+        1,
+        "sheep and goats"
+      ],
+      [
+        2,
+        "competition id"
+      ],
+      [
+        2,
+        "year"
+      ],
+      [
+        2,
+        "theme"
+      ],
+      [
+        2,
+        "host city id"
+      ],
+      [
+        2,
+        "hosts"
+      ],
+      [
+        3,
+        "competition id"
+      ],
+      [
+        3,
+        "farm id"
+      ],
+      [
+        3,
+        "rank"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "City_ID"
+      ],
+      [
+        0,
+        "Official_Name"
+      ],
+      [
+        0,
+        "Status"
+      ],
+      [
+        0,
+        "Area_km_2"
+      ],
+      [
+        0,
+        "Population"
+      ],
+      [
+        0,
+        "Census_Ranking"
+      ],
+      [
+        1,
+        "Farm_ID"
+      ],
+      [
+        1,
+        "Year"
+      ],
+      [
+        1,
+        "Total_Horses"
+      ],
+      [
+        1,
+        "Working_Horses"
+      ],
+      [
+        1,
+        "Total_Cattle"
+      ],
+      [
+        1,
+        "Oxen"
+      ],
+      [
+        1,
+        "Bulls"
+      ],
+      [
+        1,
+        "Cows"
+      ],
+      [
+        1,
+        "Pigs"
+      ],
+      [
+        1,
+        "Sheep_and_Goats"
+      ],
+      [
+        2,
+        "Competition_ID"
+      ],
+      [
+        2,
+        "Year"
+      ],
+      [
+        2,
+        "Theme"
+      ],
+      [
+        2,
+        "Host_city_ID"
+      ],
+      [
+        2,
+        "Hosts"
+      ],
+      [
+        3,
+        "Competition_ID"
+      ],
+      [
+        3,
+        "Farm_ID"
+      ],
+      [
+        3,
+        "Rank"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "farm",
+    "foreign_keys": [
+      [
+        [
+          "farm_competition",
+          "Host_city_ID"
+        ],
+        [
+          "city",
+          "City_ID"
+        ]
+      ],
+      [
+        [
+          "competition_record",
+          "Farm_ID"
+        ],
+        [
+          "farm",
+          "Farm_ID"
+        ]
+      ],
+      [
+        [
+          "competition_record",
+          "Competition_ID"
+        ],
+        [
+          "farm_competition",
+          "Competition_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      17,
+      22
+    ],
+    "table_names": [
+      "city",
+      "farm",
+      "farm competition",
+      "competition record"
+    ],
+    "table_names_original": [
+      "city",
+      "farm",
+      "farm_competition",
+      "competition_record"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "address id"
       ],
       [
@@ -7966,6 +9660,610 @@
       "Parties_in_Events",
       "Agreements",
       "Assets_in_Events"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "city id"
+      ],
+      [
+        0,
+        "city"
+      ],
+      [
+        0,
+        "hanzi"
+      ],
+      [
+        0,
+        "hanyu pinyin"
+      ],
+      [
+        0,
+        "regional population"
+      ],
+      [
+        0,
+        "gdp"
+      ],
+      [
+        1,
+        "match id"
+      ],
+      [
+        1,
+        "date"
+      ],
+      [
+        1,
+        "venue"
+      ],
+      [
+        1,
+        "score"
+      ],
+      [
+        1,
+        "result"
+      ],
+      [
+        1,
+        "competition"
+      ],
+      [
+        2,
+        "city id"
+      ],
+      [
+        2,
+        "jan"
+      ],
+      [
+        2,
+        "feb"
+      ],
+      [
+        2,
+        "mar"
+      ],
+      [
+        2,
+        "apr"
+      ],
+      [
+        2,
+        "jun"
+      ],
+      [
+        2,
+        "jul"
+      ],
+      [
+        2,
+        "aug"
+      ],
+      [
+        2,
+        "sep"
+      ],
+      [
+        2,
+        "oct"
+      ],
+      [
+        2,
+        "nov"
+      ],
+      [
+        2,
+        "dec"
+      ],
+      [
+        3,
+        "year"
+      ],
+      [
+        3,
+        "match id"
+      ],
+      [
+        3,
+        "host city"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "City_ID"
+      ],
+      [
+        0,
+        "City"
+      ],
+      [
+        0,
+        "Hanzi"
+      ],
+      [
+        0,
+        "Hanyu_Pinyin"
+      ],
+      [
+        0,
+        "Regional_Population"
+      ],
+      [
+        0,
+        "GDP"
+      ],
+      [
+        1,
+        "Match_ID"
+      ],
+      [
+        1,
+        "Date"
+      ],
+      [
+        1,
+        "Venue"
+      ],
+      [
+        1,
+        "Score"
+      ],
+      [
+        1,
+        "Result"
+      ],
+      [
+        1,
+        "Competition"
+      ],
+      [
+        2,
+        "City_ID"
+      ],
+      [
+        2,
+        "Jan"
+      ],
+      [
+        2,
+        "Feb"
+      ],
+      [
+        2,
+        "Mar"
+      ],
+      [
+        2,
+        "Apr"
+      ],
+      [
+        2,
+        "Jun"
+      ],
+      [
+        2,
+        "Jul"
+      ],
+      [
+        2,
+        "Aug"
+      ],
+      [
+        2,
+        "Sep"
+      ],
+      [
+        2,
+        "Oct"
+      ],
+      [
+        2,
+        "Nov"
+      ],
+      [
+        2,
+        "Dec"
+      ],
+      [
+        3,
+        "Year"
+      ],
+      [
+        3,
+        "Match_ID"
+      ],
+      [
+        3,
+        "Host_City"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "city_record",
+    "foreign_keys": [
+      [
+        [
+          "temperature",
+          "City_ID"
+        ],
+        [
+          "city",
+          "City_ID"
+        ]
+      ],
+      [
+        [
+          "hosting_city",
+          "Match_ID"
+        ],
+        [
+          "match",
+          "Match_ID"
+        ]
+      ],
+      [
+        [
+          "hosting_city",
+          "Host_City"
+        ],
+        [
+          "city",
+          "City_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      13,
+      25
+    ],
+    "table_names": [
+      "city",
+      "match",
+      "temperature",
+      "hosting city"
+    ],
+    "table_names_original": [
+      "city",
+      "match",
+      "temperature",
+      "hosting_city"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "nationality"
+      ],
+      [
+        0,
+        "meter 100"
+      ],
+      [
+        0,
+        "meter 200"
+      ],
+      [
+        0,
+        "meter 300"
+      ],
+      [
+        0,
+        "meter 400"
+      ],
+      [
+        0,
+        "meter 500"
+      ],
+      [
+        0,
+        "meter 600"
+      ],
+      [
+        0,
+        "meter 700"
+      ],
+      [
+        0,
+        "time"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "capacity"
+      ],
+      [
+        1,
+        "city"
+      ],
+      [
+        1,
+        "country"
+      ],
+      [
+        1,
+        "opening year"
+      ],
+      [
+        2,
+        "id"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "stadium id"
+      ],
+      [
+        2,
+        "year"
+      ],
+      [
+        3,
+        "id"
+      ],
+      [
+        3,
+        "result"
+      ],
+      [
+        3,
+        "swimmer id"
+      ],
+      [
+        3,
+        "event id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "ID"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "Nationality"
+      ],
+      [
+        0,
+        "meter_100"
+      ],
+      [
+        0,
+        "meter_200"
+      ],
+      [
+        0,
+        "meter_300"
+      ],
+      [
+        0,
+        "meter_400"
+      ],
+      [
+        0,
+        "meter_500"
+      ],
+      [
+        0,
+        "meter_600"
+      ],
+      [
+        0,
+        "meter_700"
+      ],
+      [
+        0,
+        "Time"
+      ],
+      [
+        1,
+        "ID"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "Capacity"
+      ],
+      [
+        1,
+        "City"
+      ],
+      [
+        1,
+        "Country"
+      ],
+      [
+        1,
+        "Opening_year"
+      ],
+      [
+        2,
+        "ID"
+      ],
+      [
+        2,
+        "Name"
+      ],
+      [
+        2,
+        "Stadium_ID"
+      ],
+      [
+        2,
+        "Year"
+      ],
+      [
+        3,
+        "ID"
+      ],
+      [
+        3,
+        "Result"
+      ],
+      [
+        3,
+        "Swimmer_ID"
+      ],
+      [
+        3,
+        "Event_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "swimming",
+    "foreign_keys": [
+      [
+        [
+          "event",
+          "Stadium_ID"
+        ],
+        [
+          "stadium",
+          "ID"
+        ]
+      ],
+      [
+        [
+          "record",
+          "Swimmer_ID"
+        ],
+        [
+          "swimmer",
+          "ID"
+        ]
+      ],
+      [
+        [
+          "record",
+          "Event_ID"
+        ],
+        [
+          "event",
+          "ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      12,
+      18,
+      24
+    ],
+    "table_names": [
+      "swimmer",
+      "stadium",
+      "event",
+      "record"
+    ],
+    "table_names_original": [
+      "swimmer",
+      "stadium",
+      "event",
+      "record"
     ]
   },
   {
@@ -8426,7 +10724,7 @@
       "number",
       "number"
     ],
-    "db_id": "insurance_and_eCalims",
+    "db_id": "insurance_and_eClaims",
     "foreign_keys": [
       [
         [
@@ -8741,6 +11039,218 @@
       "county",
       "party",
       "election"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "conference id"
+      ],
+      [
+        0,
+        "conference name"
+      ],
+      [
+        0,
+        "year"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        1,
+        "institution id"
+      ],
+      [
+        1,
+        "institution name"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        1,
+        "founded"
+      ],
+      [
+        2,
+        "staff id"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "age"
+      ],
+      [
+        2,
+        "nationality"
+      ],
+      [
+        2,
+        "institution id"
+      ],
+      [
+        3,
+        "conference id"
+      ],
+      [
+        3,
+        "staff id"
+      ],
+      [
+        3,
+        "role"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Conference_ID"
+      ],
+      [
+        0,
+        "Conference_Name"
+      ],
+      [
+        0,
+        "Year"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        1,
+        "Institution_ID"
+      ],
+      [
+        1,
+        "Institution_Name"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        1,
+        "Founded"
+      ],
+      [
+        2,
+        "staff_ID"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "Age"
+      ],
+      [
+        2,
+        "Nationality"
+      ],
+      [
+        2,
+        "Institution_ID"
+      ],
+      [
+        3,
+        "Conference_ID"
+      ],
+      [
+        3,
+        "staff_ID"
+      ],
+      [
+        3,
+        "role"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "conference",
+    "foreign_keys": [
+      [
+        [
+          "staff",
+          "Institution_ID"
+        ],
+        [
+          "institution",
+          "Institution_ID"
+        ]
+      ],
+      [
+        [
+          "conference_participation",
+          "Conference_ID"
+        ],
+        [
+          "conference",
+          "Conference_ID"
+        ]
+      ],
+      [
+        [
+          "conference_participation",
+          "staff_ID"
+        ],
+        [
+          "staff",
+          "staff_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      9,
+      15
+    ],
+    "table_names": [
+      "conference",
+      "institution",
+      "staff",
+      "conference participation"
+    ],
+    "table_names_original": [
+      "conference",
+      "institution",
+      "staff",
+      "conference_participation"
     ]
   },
   {
@@ -9145,6 +11655,156 @@
       "Participants",
       "Events",
       "Participants_in_Events"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "mountain id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "height"
+      ],
+      [
+        0,
+        "prominence"
+      ],
+      [
+        0,
+        "range"
+      ],
+      [
+        0,
+        "country"
+      ],
+      [
+        1,
+        "climber id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "country"
+      ],
+      [
+        1,
+        "time"
+      ],
+      [
+        1,
+        "points"
+      ],
+      [
+        1,
+        "mountain id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Mountain_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Height"
+      ],
+      [
+        0,
+        "Prominence"
+      ],
+      [
+        0,
+        "Range"
+      ],
+      [
+        0,
+        "Country"
+      ],
+      [
+        1,
+        "Climber_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Country"
+      ],
+      [
+        1,
+        "Time"
+      ],
+      [
+        1,
+        "Points"
+      ],
+      [
+        1,
+        "Mountain_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "climbing",
+    "foreign_keys": [
+      [
+        [
+          "climber",
+          "Mountain_ID"
+        ],
+        [
+          "mountain",
+          "Mountain_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7
+    ],
+    "table_names": [
+      "mountain",
+      "climber"
+    ],
+    "table_names_original": [
+      "mountain",
+      "climber"
     ]
   },
   {
@@ -9644,6 +12304,169 @@
       "Scientists",
       "Projects",
       "AssignedTo"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "overall score"
+      ],
+      [
+        1,
+        "justice score"
+      ],
+      [
+        1,
+        "health score"
+      ],
+      [
+        1,
+        "education score"
+      ],
+      [
+        1,
+        "economics score"
+      ],
+      [
+        1,
+        "politics score"
+      ],
+      [
+        2,
+        "language id"
+      ],
+      [
+        2,
+        "country id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "overall_score"
+      ],
+      [
+        1,
+        "justice_score"
+      ],
+      [
+        1,
+        "health_score"
+      ],
+      [
+        1,
+        "education_score"
+      ],
+      [
+        1,
+        "economics_score"
+      ],
+      [
+        1,
+        "politics_score"
+      ],
+      [
+        2,
+        "language_id"
+      ],
+      [
+        2,
+        "country_id"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "country_language",
+    "foreign_keys": [
+      [
+        [
+          "official_languages",
+          "country_id"
+        ],
+        [
+          "countries",
+          "id"
+        ]
+      ],
+      [
+        [
+          "official_languages",
+          "language_id"
+        ],
+        [
+          "languages",
+          "id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      3,
+      11
+    ],
+    "table_names": [
+      "languages",
+      "countries",
+      "official languages"
+    ],
+    "table_names_original": [
+      "languages",
+      "countries",
+      "official_languages"
     ]
   },
   {
@@ -11132,6 +13955,258 @@
       ],
       [
         0,
+        "branch id"
+      ],
+      [
+        0,
+        "opening year"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "manager"
+      ],
+      [
+        1,
+        "customer id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "card credit"
+      ],
+      [
+        1,
+        "voucher credit"
+      ],
+      [
+        1,
+        "total credit"
+      ],
+      [
+        2,
+        "ic id"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "gradient from"
+      ],
+      [
+        2,
+        "colors"
+      ],
+      [
+        3,
+        "ic id"
+      ],
+      [
+        3,
+        "branch id"
+      ],
+      [
+        3,
+        "is new"
+      ],
+      [
+        4,
+        "ic id"
+      ],
+      [
+        4,
+        "customer id"
+      ],
+      [
+        4,
+        "quantity"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Branch_ID"
+      ],
+      [
+        0,
+        "Opening_Year"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Manager"
+      ],
+      [
+        1,
+        "Customer_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "card_credit"
+      ],
+      [
+        1,
+        "voucher_credit"
+      ],
+      [
+        1,
+        "Total_credit"
+      ],
+      [
+        2,
+        "IC_ID"
+      ],
+      [
+        2,
+        "Name"
+      ],
+      [
+        2,
+        "Gradient_from"
+      ],
+      [
+        2,
+        "Colors"
+      ],
+      [
+        3,
+        "IC_ID"
+      ],
+      [
+        3,
+        "Branch_ID"
+      ],
+      [
+        3,
+        "Is_new"
+      ],
+      [
+        4,
+        "IC_ID"
+      ],
+      [
+        4,
+        "Customer_ID"
+      ],
+      [
+        4,
+        "Quantity"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "others",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "icecream_shop",
+    "foreign_keys": [
+      [
+        [
+          "menu",
+          "Branch_ID"
+        ],
+        [
+          "branch",
+          "Branch_ID"
+        ]
+      ],
+      [
+        [
+          "menu",
+          "IC_ID"
+        ],
+        [
+          "ice_cream",
+          "IC_ID"
+        ]
+      ],
+      [
+        [
+          "order",
+          "Customer_ID"
+        ],
+        [
+          "customer",
+          "Customer_ID"
+        ]
+      ],
+      [
+        [
+          "order",
+          "IC_ID"
+        ],
+        [
+          "ice_cream",
+          "IC_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      10,
+      14,
+      17
+    ],
+    "table_names": [
+      "branch",
+      "customer",
+      "ice cream",
+      "menu",
+      "order"
+    ],
+    "table_names_original": [
+      "branch",
+      "customer",
+      "ice_cream",
+      "menu",
+      "order"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "product id"
       ],
       [
@@ -11922,6 +14997,174 @@
       "Payments",
       "Products_Booked",
       "View_Product_Availability"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "candidate id"
+      ],
+      [
+        0,
+        "people id"
+      ],
+      [
+        0,
+        "poll source"
+      ],
+      [
+        0,
+        "date"
+      ],
+      [
+        0,
+        "support rate"
+      ],
+      [
+        0,
+        "consider rate"
+      ],
+      [
+        0,
+        "oppose rate"
+      ],
+      [
+        0,
+        "unsure rate"
+      ],
+      [
+        1,
+        "people id"
+      ],
+      [
+        1,
+        "sex"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "date of birth"
+      ],
+      [
+        1,
+        "height"
+      ],
+      [
+        1,
+        "weight"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Candidate_ID"
+      ],
+      [
+        0,
+        "People_ID"
+      ],
+      [
+        0,
+        "Poll_Source"
+      ],
+      [
+        0,
+        "Date"
+      ],
+      [
+        0,
+        "Support_rate"
+      ],
+      [
+        0,
+        "Consider_rate"
+      ],
+      [
+        0,
+        "Oppose_rate"
+      ],
+      [
+        0,
+        "Unsure_rate"
+      ],
+      [
+        1,
+        "People_ID"
+      ],
+      [
+        1,
+        "Sex"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Date_of_Birth"
+      ],
+      [
+        1,
+        "Height"
+      ],
+      [
+        1,
+        "Weight"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "candidate_poll",
+    "foreign_keys": [
+      [
+        [
+          "candidate",
+          "People_ID"
+        ],
+        [
+          "people",
+          "People_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      9
+    ],
+    "table_names": [
+      "candidate",
+      "people"
+    ],
+    "table_names_original": [
+      "candidate",
+      "people"
     ]
   },
   {
@@ -16256,6 +19499,246 @@
       ],
       [
         0,
+        "member id"
+      ],
+      [
+        0,
+        "card number"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "hometown"
+      ],
+      [
+        0,
+        "level"
+      ],
+      [
+        1,
+        "branch id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "open year"
+      ],
+      [
+        1,
+        "address road"
+      ],
+      [
+        1,
+        "city"
+      ],
+      [
+        1,
+        "membership amount"
+      ],
+      [
+        2,
+        "member id"
+      ],
+      [
+        2,
+        "branch id"
+      ],
+      [
+        2,
+        "register year"
+      ],
+      [
+        3,
+        "member id"
+      ],
+      [
+        3,
+        "branch id"
+      ],
+      [
+        3,
+        "year"
+      ],
+      [
+        3,
+        "total pounds"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Member_ID"
+      ],
+      [
+        0,
+        "Card_Number"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Hometown"
+      ],
+      [
+        0,
+        "Level"
+      ],
+      [
+        1,
+        "Branch_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Open_year"
+      ],
+      [
+        1,
+        "Address_road"
+      ],
+      [
+        1,
+        "City"
+      ],
+      [
+        1,
+        "membership_amount"
+      ],
+      [
+        2,
+        "Member_ID"
+      ],
+      [
+        2,
+        "Branch_ID"
+      ],
+      [
+        2,
+        "Register_Year"
+      ],
+      [
+        3,
+        "Member_ID"
+      ],
+      [
+        3,
+        "Branch_ID"
+      ],
+      [
+        3,
+        "Year"
+      ],
+      [
+        3,
+        "Total_pounds"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number"
+    ],
+    "db_id": "shop_membership",
+    "foreign_keys": [
+      [
+        [
+          "membership_register_branch",
+          "Branch_ID"
+        ],
+        [
+          "branch",
+          "Branch_ID"
+        ]
+      ],
+      [
+        [
+          "membership_register_branch",
+          "Member_ID"
+        ],
+        [
+          "member",
+          "Member_ID"
+        ]
+      ],
+      [
+        [
+          "purchase",
+          "Branch_ID"
+        ],
+        [
+          "branch",
+          "Branch_ID"
+        ]
+      ],
+      [
+        [
+          "purchase",
+          "Member_ID"
+        ],
+        [
+          "member",
+          "Member_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6,
+      12,
+      15
+    ],
+    "table_names": [
+      "member",
+      "branch",
+      "membership register branch",
+      "purchase"
+    ],
+    "table_names_original": [
+      "member",
+      "branch",
+      "membership_register_branch",
+      "purchase"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "airport code"
       ],
       [
@@ -16835,6 +20318,263 @@
       ],
       [
         0,
+        "stadium id"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "capacity"
+      ],
+      [
+        0,
+        "highest"
+      ],
+      [
+        0,
+        "lowest"
+      ],
+      [
+        0,
+        "average"
+      ],
+      [
+        1,
+        "singer id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "country"
+      ],
+      [
+        1,
+        "song name"
+      ],
+      [
+        1,
+        "song release year"
+      ],
+      [
+        1,
+        "age"
+      ],
+      [
+        1,
+        "is male"
+      ],
+      [
+        2,
+        "concert id"
+      ],
+      [
+        2,
+        "concert name"
+      ],
+      [
+        2,
+        "theme"
+      ],
+      [
+        2,
+        "stadium id"
+      ],
+      [
+        2,
+        "year"
+      ],
+      [
+        3,
+        "concert id"
+      ],
+      [
+        3,
+        "singer id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Stadium_ID"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Capacity"
+      ],
+      [
+        0,
+        "Highest"
+      ],
+      [
+        0,
+        "Lowest"
+      ],
+      [
+        0,
+        "Average"
+      ],
+      [
+        1,
+        "Singer_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Country"
+      ],
+      [
+        1,
+        "Song_Name"
+      ],
+      [
+        1,
+        "Song_release_year"
+      ],
+      [
+        1,
+        "Age"
+      ],
+      [
+        1,
+        "Is_male"
+      ],
+      [
+        2,
+        "concert_ID"
+      ],
+      [
+        2,
+        "concert_Name"
+      ],
+      [
+        2,
+        "Theme"
+      ],
+      [
+        2,
+        "Stadium_ID"
+      ],
+      [
+        2,
+        "Year"
+      ],
+      [
+        3,
+        "concert_ID"
+      ],
+      [
+        3,
+        "Singer_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "others",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text"
+    ],
+    "db_id": "concert_singer",
+    "foreign_keys": [
+      [
+        [
+          "concert",
+          "Stadium_ID"
+        ],
+        [
+          "stadium",
+          "Stadium_ID"
+        ]
+      ],
+      [
+        [
+          "singer_in_concert",
+          "Singer_ID"
+        ],
+        [
+          "singer",
+          "Singer_ID"
+        ]
+      ],
+      [
+        [
+          "singer_in_concert",
+          "concert_ID"
+        ],
+        [
+          "concert",
+          "concert_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      15,
+      20
+    ],
+    "table_names": [
+      "stadium",
+      "singer",
+      "concert",
+      "singer in concert"
+    ],
+    "table_names_original": [
+      "stadium",
+      "singer",
+      "concert",
+      "singer_in_concert"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "song id"
       ],
       [
@@ -17150,6 +20890,331 @@
       "Performance",
       "Tracklists",
       "Vocals"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "club id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "region"
+      ],
+      [
+        0,
+        "start year"
+      ],
+      [
+        1,
+        "rank"
+      ],
+      [
+        1,
+        "club id"
+      ],
+      [
+        1,
+        "gold"
+      ],
+      [
+        1,
+        "silver"
+      ],
+      [
+        1,
+        "bronze"
+      ],
+      [
+        1,
+        "total"
+      ],
+      [
+        2,
+        "player id"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "position"
+      ],
+      [
+        2,
+        "club id"
+      ],
+      [
+        2,
+        "apps"
+      ],
+      [
+        2,
+        "tries"
+      ],
+      [
+        2,
+        "goals"
+      ],
+      [
+        2,
+        "points"
+      ],
+      [
+        3,
+        "competition id"
+      ],
+      [
+        3,
+        "year"
+      ],
+      [
+        3,
+        "competition type"
+      ],
+      [
+        3,
+        "country"
+      ],
+      [
+        4,
+        "competition id"
+      ],
+      [
+        4,
+        "club id 1"
+      ],
+      [
+        4,
+        "club id 2"
+      ],
+      [
+        4,
+        "score"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Club_ID"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "Region"
+      ],
+      [
+        0,
+        "Start_year"
+      ],
+      [
+        1,
+        "Rank"
+      ],
+      [
+        1,
+        "Club_ID"
+      ],
+      [
+        1,
+        "Gold"
+      ],
+      [
+        1,
+        "Silver"
+      ],
+      [
+        1,
+        "Bronze"
+      ],
+      [
+        1,
+        "Total"
+      ],
+      [
+        2,
+        "Player_ID"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "Position"
+      ],
+      [
+        2,
+        "Club_ID"
+      ],
+      [
+        2,
+        "Apps"
+      ],
+      [
+        2,
+        "Tries"
+      ],
+      [
+        2,
+        "Goals"
+      ],
+      [
+        2,
+        "Points"
+      ],
+      [
+        3,
+        "Competition_ID"
+      ],
+      [
+        3,
+        "Year"
+      ],
+      [
+        3,
+        "Competition_type"
+      ],
+      [
+        3,
+        "Country"
+      ],
+      [
+        4,
+        "Competition_ID"
+      ],
+      [
+        4,
+        "Club_ID_1"
+      ],
+      [
+        4,
+        "Club_ID_2"
+      ],
+      [
+        4,
+        "Score"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "sports_competition",
+    "foreign_keys": [
+      [
+        [
+          "club_rank",
+          "Club_ID"
+        ],
+        [
+          "club",
+          "Club_ID"
+        ]
+      ],
+      [
+        [
+          "player",
+          "Club_ID"
+        ],
+        [
+          "club",
+          "Club_ID"
+        ]
+      ],
+      [
+        [
+          "competition_result",
+          "Competition_ID"
+        ],
+        [
+          "competition",
+          "Competition_ID"
+        ]
+      ],
+      [
+        [
+          "competition_result",
+          "Club_ID_2"
+        ],
+        [
+          "club",
+          "Club_ID"
+        ]
+      ],
+      [
+        [
+          "competition_result",
+          "Club_ID_1"
+        ],
+        [
+          "club",
+          "Club_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      11,
+      19,
+      23
+    ],
+    "table_names": [
+      "club",
+      "club rank",
+      "player",
+      "competition",
+      "competition result"
+    ],
+    "table_names_original": [
+      "club",
+      "club_rank",
+      "player",
+      "competition",
+      "competition_result"
     ]
   },
   {
@@ -21259,6 +25324,382 @@
       ],
       [
         0,
+        "company id"
+      ],
+      [
+        0,
+        "rank"
+      ],
+      [
+        0,
+        "company"
+      ],
+      [
+        0,
+        "headquarters"
+      ],
+      [
+        0,
+        "main industry"
+      ],
+      [
+        0,
+        "sales billion"
+      ],
+      [
+        0,
+        "profits billion"
+      ],
+      [
+        0,
+        "assets billion"
+      ],
+      [
+        0,
+        "market value"
+      ],
+      [
+        1,
+        "station id"
+      ],
+      [
+        1,
+        "open year"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        1,
+        "manager name"
+      ],
+      [
+        1,
+        "vice manager name"
+      ],
+      [
+        1,
+        "representative name"
+      ],
+      [
+        2,
+        "station id"
+      ],
+      [
+        2,
+        "company id"
+      ],
+      [
+        2,
+        "rank of the year"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Company_ID"
+      ],
+      [
+        0,
+        "Rank"
+      ],
+      [
+        0,
+        "Company"
+      ],
+      [
+        0,
+        "Headquarters"
+      ],
+      [
+        0,
+        "Main_Industry"
+      ],
+      [
+        0,
+        "Sales_billion"
+      ],
+      [
+        0,
+        "Profits_billion"
+      ],
+      [
+        0,
+        "Assets_billion"
+      ],
+      [
+        0,
+        "Market_Value"
+      ],
+      [
+        1,
+        "Station_ID"
+      ],
+      [
+        1,
+        "Open_Year"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        1,
+        "Manager_Name"
+      ],
+      [
+        1,
+        "Vice_Manager_Name"
+      ],
+      [
+        1,
+        "Representative_Name"
+      ],
+      [
+        2,
+        "Station_ID"
+      ],
+      [
+        2,
+        "Company_ID"
+      ],
+      [
+        2,
+        "Rank_of_the_Year"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "gas_company",
+    "foreign_keys": [
+      [
+        [
+          "station_company",
+          "Company_ID"
+        ],
+        [
+          "company",
+          "Company_ID"
+        ]
+      ],
+      [
+        [
+          "station_company",
+          "Station_ID"
+        ],
+        [
+          "gas_station",
+          "Station_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      10,
+      16
+    ],
+    "table_names": [
+      "company",
+      "gas station",
+      "station company"
+    ],
+    "table_names_original": [
+      "company",
+      "gas_station",
+      "station_company"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "club id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "manager"
+      ],
+      [
+        0,
+        "captain"
+      ],
+      [
+        0,
+        "manufacturer"
+      ],
+      [
+        0,
+        "sponsor"
+      ],
+      [
+        1,
+        "player id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "country"
+      ],
+      [
+        1,
+        "earnings"
+      ],
+      [
+        1,
+        "events number"
+      ],
+      [
+        1,
+        "wins count"
+      ],
+      [
+        1,
+        "club id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Club_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Manager"
+      ],
+      [
+        0,
+        "Captain"
+      ],
+      [
+        0,
+        "Manufacturer"
+      ],
+      [
+        0,
+        "Sponsor"
+      ],
+      [
+        1,
+        "Player_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Country"
+      ],
+      [
+        1,
+        "Earnings"
+      ],
+      [
+        1,
+        "Events_number"
+      ],
+      [
+        1,
+        "Wins_count"
+      ],
+      [
+        1,
+        "Club_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "soccer_3",
+    "foreign_keys": [
+      [
+        [
+          "player",
+          "Club_ID"
+        ],
+        [
+          "club",
+          "Club_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7
+    ],
+    "table_names": [
+      "club",
+      "player"
+    ],
+    "table_names_original": [
+      "club",
+      "player"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "address id"
       ],
       [
@@ -23256,6 +27697,245 @@
       ],
       [
         0,
+        "repair id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "launch date"
+      ],
+      [
+        0,
+        "notes"
+      ],
+      [
+        1,
+        "machine id"
+      ],
+      [
+        1,
+        "making year"
+      ],
+      [
+        1,
+        "class"
+      ],
+      [
+        1,
+        "team"
+      ],
+      [
+        1,
+        "machine series"
+      ],
+      [
+        1,
+        "value points"
+      ],
+      [
+        1,
+        "quality rank"
+      ],
+      [
+        2,
+        "technician id"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "team"
+      ],
+      [
+        2,
+        "starting year"
+      ],
+      [
+        2,
+        "age"
+      ],
+      [
+        3,
+        "technician id"
+      ],
+      [
+        3,
+        "repair id"
+      ],
+      [
+        3,
+        "machine id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "repair_ID"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "Launch_Date"
+      ],
+      [
+        0,
+        "Notes"
+      ],
+      [
+        1,
+        "Machine_ID"
+      ],
+      [
+        1,
+        "Making_Year"
+      ],
+      [
+        1,
+        "Class"
+      ],
+      [
+        1,
+        "Team"
+      ],
+      [
+        1,
+        "Machine_series"
+      ],
+      [
+        1,
+        "value_points"
+      ],
+      [
+        1,
+        "quality_rank"
+      ],
+      [
+        2,
+        "technician_id"
+      ],
+      [
+        2,
+        "Name"
+      ],
+      [
+        2,
+        "Team"
+      ],
+      [
+        2,
+        "Starting_Year"
+      ],
+      [
+        2,
+        "Age"
+      ],
+      [
+        3,
+        "technician_id"
+      ],
+      [
+        3,
+        "repair_ID"
+      ],
+      [
+        3,
+        "Machine_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "machine_repair",
+    "foreign_keys": [
+      [
+        [
+          "repair_assignment",
+          "Machine_ID"
+        ],
+        [
+          "machine",
+          "Machine_ID"
+        ]
+      ],
+      [
+        [
+          "repair_assignment",
+          "repair_ID"
+        ],
+        [
+          "repair",
+          "repair_ID"
+        ]
+      ],
+      [
+        [
+          "repair_assignment",
+          "technician_id"
+        ],
+        [
+          "technician",
+          "technician_id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      12,
+      17
+    ],
+    "table_names": [
+      "repair",
+      "machine",
+      "technician",
+      "repair assignment"
+    ],
+    "table_names_original": [
+      "repair",
+      "machine",
+      "technician",
+      "repair_assignment"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "course id"
       ],
       [
@@ -24365,6 +29045,626 @@
       "SEMESTER",
       "STUDENT",
       "STUDENT_RECORD"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "artist id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "country"
+      ],
+      [
+        0,
+        "year join"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        1,
+        "exhibition id"
+      ],
+      [
+        1,
+        "year"
+      ],
+      [
+        1,
+        "theme"
+      ],
+      [
+        1,
+        "artist id"
+      ],
+      [
+        1,
+        "ticket price"
+      ],
+      [
+        2,
+        "exhibition id"
+      ],
+      [
+        2,
+        "date"
+      ],
+      [
+        2,
+        "attendance"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Artist_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Country"
+      ],
+      [
+        0,
+        "Year_Join"
+      ],
+      [
+        0,
+        "Age"
+      ],
+      [
+        1,
+        "Exhibition_ID"
+      ],
+      [
+        1,
+        "Year"
+      ],
+      [
+        1,
+        "Theme"
+      ],
+      [
+        1,
+        "Artist_ID"
+      ],
+      [
+        1,
+        "Ticket_Price"
+      ],
+      [
+        2,
+        "Exhibition_ID"
+      ],
+      [
+        2,
+        "Date"
+      ],
+      [
+        2,
+        "Attendance"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number"
+    ],
+    "db_id": "theme_gallery",
+    "foreign_keys": [
+      [
+        [
+          "exhibition",
+          "Artist_ID"
+        ],
+        [
+          "artist",
+          "Artist_ID"
+        ]
+      ],
+      [
+        [
+          "exhibition_record",
+          "Exhibition_ID"
+        ],
+        [
+          "exhibition",
+          "Exhibition_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6,
+      11
+    ],
+    "table_names": [
+      "artist",
+      "exhibition",
+      "exhibition record"
+    ],
+    "table_names_original": [
+      "artist",
+      "exhibition",
+      "exhibition_record"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "film id"
+      ],
+      [
+        0,
+        "title"
+      ],
+      [
+        0,
+        "studio"
+      ],
+      [
+        0,
+        "director"
+      ],
+      [
+        0,
+        "gross in dollar"
+      ],
+      [
+        1,
+        "market id"
+      ],
+      [
+        1,
+        "country"
+      ],
+      [
+        1,
+        "number cities"
+      ],
+      [
+        2,
+        "estimation id"
+      ],
+      [
+        2,
+        "low estimate"
+      ],
+      [
+        2,
+        "high estimate"
+      ],
+      [
+        2,
+        "film id"
+      ],
+      [
+        2,
+        "type"
+      ],
+      [
+        2,
+        "market id"
+      ],
+      [
+        2,
+        "year"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Film_ID"
+      ],
+      [
+        0,
+        "Title"
+      ],
+      [
+        0,
+        "Studio"
+      ],
+      [
+        0,
+        "Director"
+      ],
+      [
+        0,
+        "Gross_in_dollar"
+      ],
+      [
+        1,
+        "Market_ID"
+      ],
+      [
+        1,
+        "Country"
+      ],
+      [
+        1,
+        "Number_cities"
+      ],
+      [
+        2,
+        "Estimation_ID"
+      ],
+      [
+        2,
+        "Low_Estimate"
+      ],
+      [
+        2,
+        "High_Estimate"
+      ],
+      [
+        2,
+        "Film_ID"
+      ],
+      [
+        2,
+        "Type"
+      ],
+      [
+        2,
+        "Market_ID"
+      ],
+      [
+        2,
+        "Year"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "film_rank",
+    "foreign_keys": [
+      [
+        [
+          "film_market_estimation",
+          "Market_ID"
+        ],
+        [
+          "market",
+          "Market_ID"
+        ]
+      ],
+      [
+        [
+          "film_market_estimation",
+          "Film_ID"
+        ],
+        [
+          "film",
+          "Film_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6,
+      9
+    ],
+    "table_names": [
+      "film",
+      "market",
+      "film market estimation"
+    ],
+    "table_names_original": [
+      "film",
+      "market",
+      "film_market_estimation"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "region id"
+      ],
+      [
+        0,
+        "region name"
+      ],
+      [
+        0,
+        "date"
+      ],
+      [
+        0,
+        "label"
+      ],
+      [
+        0,
+        "format"
+      ],
+      [
+        0,
+        "catalogue"
+      ],
+      [
+        1,
+        "party id"
+      ],
+      [
+        1,
+        "minister"
+      ],
+      [
+        1,
+        "took office"
+      ],
+      [
+        1,
+        "left office"
+      ],
+      [
+        1,
+        "region id"
+      ],
+      [
+        1,
+        "party name"
+      ],
+      [
+        2,
+        "member id"
+      ],
+      [
+        2,
+        "member name"
+      ],
+      [
+        2,
+        "party id"
+      ],
+      [
+        2,
+        "in office"
+      ],
+      [
+        3,
+        "event id"
+      ],
+      [
+        3,
+        "event name"
+      ],
+      [
+        3,
+        "party id"
+      ],
+      [
+        3,
+        "member in charge id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Region_ID"
+      ],
+      [
+        0,
+        "Region_name"
+      ],
+      [
+        0,
+        "Date"
+      ],
+      [
+        0,
+        "Label"
+      ],
+      [
+        0,
+        "Format"
+      ],
+      [
+        0,
+        "Catalogue"
+      ],
+      [
+        1,
+        "Party_ID"
+      ],
+      [
+        1,
+        "Minister"
+      ],
+      [
+        1,
+        "Took_office"
+      ],
+      [
+        1,
+        "Left_office"
+      ],
+      [
+        1,
+        "Region_ID"
+      ],
+      [
+        1,
+        "Party_name"
+      ],
+      [
+        2,
+        "Member_ID"
+      ],
+      [
+        2,
+        "Member_Name"
+      ],
+      [
+        2,
+        "Party_ID"
+      ],
+      [
+        2,
+        "In_office"
+      ],
+      [
+        3,
+        "Event_ID"
+      ],
+      [
+        3,
+        "Event_Name"
+      ],
+      [
+        3,
+        "Party_ID"
+      ],
+      [
+        3,
+        "Member_in_charge_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "party_people",
+    "foreign_keys": [
+      [
+        [
+          "party",
+          "Region_ID"
+        ],
+        [
+          "region",
+          "Region_ID"
+        ]
+      ],
+      [
+        [
+          "member",
+          "Party_ID"
+        ],
+        [
+          "party",
+          "Party_ID"
+        ]
+      ],
+      [
+        [
+          "party_events",
+          "Member_in_charge_ID"
+        ],
+        [
+          "member",
+          "Member_ID"
+        ]
+      ],
+      [
+        [
+          "party_events",
+          "Party_ID"
+        ],
+        [
+          "party",
+          "Party_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      13,
+      17
+    ],
+    "table_names": [
+      "region",
+      "party",
+      "member",
+      "party events"
+    ],
+    "table_names_original": [
+      "region",
+      "party",
+      "member",
+      "party_events"
     ]
   },
   {
@@ -25793,6 +31093,165 @@
       "Customer_Orders",
       "Mailshot_Customers",
       "Order_Items"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "gymnast id"
+      ],
+      [
+        0,
+        "floor exercise points"
+      ],
+      [
+        0,
+        "pommel horse points"
+      ],
+      [
+        0,
+        "rings points"
+      ],
+      [
+        0,
+        "vault points"
+      ],
+      [
+        0,
+        "parallel bars points"
+      ],
+      [
+        0,
+        "horizontal bar points"
+      ],
+      [
+        0,
+        "total points"
+      ],
+      [
+        1,
+        "people id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "age"
+      ],
+      [
+        1,
+        "height"
+      ],
+      [
+        1,
+        "hometown"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Gymnast_ID"
+      ],
+      [
+        0,
+        "Floor_Exercise_Points"
+      ],
+      [
+        0,
+        "Pommel_Horse_Points"
+      ],
+      [
+        0,
+        "Rings_Points"
+      ],
+      [
+        0,
+        "Vault_Points"
+      ],
+      [
+        0,
+        "Parallel_Bars_Points"
+      ],
+      [
+        0,
+        "Horizontal_Bar_Points"
+      ],
+      [
+        0,
+        "Total_Points"
+      ],
+      [
+        1,
+        "People_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Age"
+      ],
+      [
+        1,
+        "Height"
+      ],
+      [
+        1,
+        "Hometown"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "gymnast",
+    "foreign_keys": [
+      [
+        [
+          "gymnast",
+          "Gymnast_ID"
+        ],
+        [
+          "people",
+          "People_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      9
+    ],
+    "table_names": [
+      "gymnast",
+      "people"
+    ],
+    "table_names_original": [
+      "gymnast",
+      "people"
     ]
   },
   {
@@ -28274,6 +33733,214 @@
       ],
       [
         0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "city"
+      ],
+      [
+        0,
+        "height"
+      ],
+      [
+        0,
+        "stories"
+      ],
+      [
+        0,
+        "status"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "headquarters"
+      ],
+      [
+        1,
+        "industry"
+      ],
+      [
+        1,
+        "sales billion"
+      ],
+      [
+        1,
+        "profits billion"
+      ],
+      [
+        1,
+        "assets billion"
+      ],
+      [
+        1,
+        "market value billion"
+      ],
+      [
+        2,
+        "building id"
+      ],
+      [
+        2,
+        "company id"
+      ],
+      [
+        2,
+        "move in year"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "City"
+      ],
+      [
+        0,
+        "Height"
+      ],
+      [
+        0,
+        "Stories"
+      ],
+      [
+        0,
+        "Status"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "Headquarters"
+      ],
+      [
+        1,
+        "Industry"
+      ],
+      [
+        1,
+        "Sales_billion"
+      ],
+      [
+        1,
+        "Profits_billion"
+      ],
+      [
+        1,
+        "Assets_billion"
+      ],
+      [
+        1,
+        "Market_Value_billion"
+      ],
+      [
+        2,
+        "building_id"
+      ],
+      [
+        2,
+        "company_id"
+      ],
+      [
+        2,
+        "move_in_year"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "company_office",
+    "foreign_keys": [
+      [
+        [
+          "Office_locations",
+          "company_id"
+        ],
+        [
+          "Companies",
+          "id"
+        ]
+      ],
+      [
+        [
+          "Office_locations",
+          "building_id"
+        ],
+        [
+          "buildings",
+          "id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      15
+    ],
+    "table_names": [
+      "buildings",
+      "companies",
+      "office locations"
+    ],
+    "table_names_original": [
+      "buildings",
+      "Companies",
+      "Office_locations"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "problem category code"
       ],
       [
@@ -29274,6 +34941,578 @@
       ],
       [
         0,
+        "university id"
+      ],
+      [
+        0,
+        "university name"
+      ],
+      [
+        0,
+        "city"
+      ],
+      [
+        0,
+        "state"
+      ],
+      [
+        0,
+        "team name"
+      ],
+      [
+        0,
+        "affiliation"
+      ],
+      [
+        0,
+        "enrollment"
+      ],
+      [
+        0,
+        "home conference"
+      ],
+      [
+        1,
+        "rank"
+      ],
+      [
+        1,
+        "university id"
+      ],
+      [
+        1,
+        "reputation point"
+      ],
+      [
+        1,
+        "research point"
+      ],
+      [
+        1,
+        "citation point"
+      ],
+      [
+        1,
+        "total"
+      ],
+      [
+        2,
+        "major id"
+      ],
+      [
+        2,
+        "major name"
+      ],
+      [
+        2,
+        "major code"
+      ],
+      [
+        3,
+        "rank"
+      ],
+      [
+        3,
+        "university id"
+      ],
+      [
+        3,
+        "major id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "University_ID"
+      ],
+      [
+        0,
+        "University_Name"
+      ],
+      [
+        0,
+        "City"
+      ],
+      [
+        0,
+        "State"
+      ],
+      [
+        0,
+        "Team_Name"
+      ],
+      [
+        0,
+        "Affiliation"
+      ],
+      [
+        0,
+        "Enrollment"
+      ],
+      [
+        0,
+        "Home_Conference"
+      ],
+      [
+        1,
+        "Rank"
+      ],
+      [
+        1,
+        "University_ID"
+      ],
+      [
+        1,
+        "Reputation_point"
+      ],
+      [
+        1,
+        "Research_point"
+      ],
+      [
+        1,
+        "Citation_point"
+      ],
+      [
+        1,
+        "Total"
+      ],
+      [
+        2,
+        "Major_ID"
+      ],
+      [
+        2,
+        "Major_Name"
+      ],
+      [
+        2,
+        "Major_Code"
+      ],
+      [
+        3,
+        "Rank"
+      ],
+      [
+        3,
+        "University_ID"
+      ],
+      [
+        3,
+        "Major_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "university_rank",
+    "foreign_keys": [
+      [
+        [
+          "overall_ranking",
+          "University_ID"
+        ],
+        [
+          "university",
+          "University_ID"
+        ]
+      ],
+      [
+        [
+          "major_ranking",
+          "Major_ID"
+        ],
+        [
+          "major",
+          "Major_ID"
+        ]
+      ],
+      [
+        [
+          "major_ranking",
+          "University_ID"
+        ],
+        [
+          "university",
+          "University_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      10,
+      15,
+      18
+    ],
+    "table_names": [
+      "university",
+      "overall ranking",
+      "major",
+      "major ranking"
+    ],
+    "table_names_original": [
+      "university",
+      "overall_ranking",
+      "major",
+      "major_ranking"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "player id"
+      ],
+      [
+        0,
+        "sponsor name"
+      ],
+      [
+        0,
+        "player name"
+      ],
+      [
+        0,
+        "gender"
+      ],
+      [
+        0,
+        "residence"
+      ],
+      [
+        0,
+        "occupation"
+      ],
+      [
+        0,
+        "votes"
+      ],
+      [
+        0,
+        "rank"
+      ],
+      [
+        1,
+        "club id"
+      ],
+      [
+        1,
+        "club name"
+      ],
+      [
+        1,
+        "region"
+      ],
+      [
+        1,
+        "start year"
+      ],
+      [
+        2,
+        "coach id"
+      ],
+      [
+        2,
+        "player name"
+      ],
+      [
+        2,
+        "gender"
+      ],
+      [
+        2,
+        "club id"
+      ],
+      [
+        2,
+        "rank"
+      ],
+      [
+        3,
+        "player id"
+      ],
+      [
+        3,
+        "coach id"
+      ],
+      [
+        3,
+        "starting year"
+      ],
+      [
+        4,
+        "rank"
+      ],
+      [
+        4,
+        "club id"
+      ],
+      [
+        4,
+        "gold"
+      ],
+      [
+        4,
+        "big silver"
+      ],
+      [
+        4,
+        "small silver"
+      ],
+      [
+        4,
+        "bronze"
+      ],
+      [
+        4,
+        "points"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Player_ID"
+      ],
+      [
+        0,
+        "Sponsor_name"
+      ],
+      [
+        0,
+        "Player_name"
+      ],
+      [
+        0,
+        "Gender"
+      ],
+      [
+        0,
+        "Residence"
+      ],
+      [
+        0,
+        "Occupation"
+      ],
+      [
+        0,
+        "Votes"
+      ],
+      [
+        0,
+        "Rank"
+      ],
+      [
+        1,
+        "Club_ID"
+      ],
+      [
+        1,
+        "Club_name"
+      ],
+      [
+        1,
+        "Region"
+      ],
+      [
+        1,
+        "Start_year"
+      ],
+      [
+        2,
+        "Coach_ID"
+      ],
+      [
+        2,
+        "Player_name"
+      ],
+      [
+        2,
+        "Gender"
+      ],
+      [
+        2,
+        "Club_ID"
+      ],
+      [
+        2,
+        "Rank"
+      ],
+      [
+        3,
+        "Player_ID"
+      ],
+      [
+        3,
+        "Coach_ID"
+      ],
+      [
+        3,
+        "Starting_year"
+      ],
+      [
+        4,
+        "Rank"
+      ],
+      [
+        4,
+        "Club_ID"
+      ],
+      [
+        4,
+        "Gold"
+      ],
+      [
+        4,
+        "Big_Silver"
+      ],
+      [
+        4,
+        "Small_Silver"
+      ],
+      [
+        4,
+        "Bronze"
+      ],
+      [
+        4,
+        "Points"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "riding_club",
+    "foreign_keys": [
+      [
+        [
+          "coach",
+          "Club_ID"
+        ],
+        [
+          "club",
+          "Club_ID"
+        ]
+      ],
+      [
+        [
+          "player_coach",
+          "Coach_ID"
+        ],
+        [
+          "coach",
+          "Coach_ID"
+        ]
+      ],
+      [
+        [
+          "player_coach",
+          "Player_ID"
+        ],
+        [
+          "player",
+          "Player_ID"
+        ]
+      ],
+      [
+        [
+          "match_result",
+          "Club_ID"
+        ],
+        [
+          "club",
+          "Club_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      9,
+      13,
+      18,
+      21
+    ],
+    "table_names": [
+      "player",
+      "club",
+      "coach",
+      "player coach",
+      "match result"
+    ],
+    "table_names_original": [
+      "player",
+      "club",
+      "coach",
+      "player_coach",
+      "match_result"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "id"
       ],
       [
@@ -29749,6 +35988,210 @@
       ],
       [
         0,
+        "county id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "population"
+      ],
+      [
+        0,
+        "police officers"
+      ],
+      [
+        0,
+        "residents per officer"
+      ],
+      [
+        0,
+        "case burden"
+      ],
+      [
+        0,
+        "crime rate"
+      ],
+      [
+        0,
+        "police force"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        1,
+        "city id"
+      ],
+      [
+        1,
+        "county id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "white"
+      ],
+      [
+        1,
+        "black"
+      ],
+      [
+        1,
+        "amerindian"
+      ],
+      [
+        1,
+        "asian"
+      ],
+      [
+        1,
+        "multiracial"
+      ],
+      [
+        1,
+        "hispanic"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "County_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Population"
+      ],
+      [
+        0,
+        "Police_officers"
+      ],
+      [
+        0,
+        "Residents_per_officer"
+      ],
+      [
+        0,
+        "Case_burden"
+      ],
+      [
+        0,
+        "Crime_rate"
+      ],
+      [
+        0,
+        "Police_force"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        1,
+        "City_ID"
+      ],
+      [
+        1,
+        "County_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "White"
+      ],
+      [
+        1,
+        "Black"
+      ],
+      [
+        1,
+        "Amerindian"
+      ],
+      [
+        1,
+        "Asian"
+      ],
+      [
+        1,
+        "Multiracial"
+      ],
+      [
+        1,
+        "Hispanic"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "county_public_safety",
+    "foreign_keys": [
+      [
+        [
+          "city",
+          "County_ID"
+        ],
+        [
+          "county_public_safety",
+          "County_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      10
+    ],
+    "table_names": [
+      "county public safety",
+      "city"
+    ],
+    "table_names_original": [
+      "county_public_safety",
+      "city"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "student id"
       ],
       [
@@ -29928,6 +36371,494 @@
       "Student",
       "Club",
       "Member_of_club"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "channel id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "analogue terrestrial channel"
+      ],
+      [
+        0,
+        "digital terrestrial channel"
+      ],
+      [
+        0,
+        "internet"
+      ],
+      [
+        1,
+        "director id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "age"
+      ],
+      [
+        2,
+        "program id"
+      ],
+      [
+        2,
+        "start year"
+      ],
+      [
+        2,
+        "title"
+      ],
+      [
+        2,
+        "director id"
+      ],
+      [
+        2,
+        "channel id"
+      ],
+      [
+        3,
+        "director id"
+      ],
+      [
+        3,
+        "channel id"
+      ],
+      [
+        3,
+        "is first director"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Channel_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Analogue_terrestrial_channel"
+      ],
+      [
+        0,
+        "Digital_terrestrial_channel"
+      ],
+      [
+        0,
+        "Internet"
+      ],
+      [
+        1,
+        "Director_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Age"
+      ],
+      [
+        2,
+        "Program_ID"
+      ],
+      [
+        2,
+        "Start_Year"
+      ],
+      [
+        2,
+        "Title"
+      ],
+      [
+        2,
+        "Director_ID"
+      ],
+      [
+        2,
+        "Channel_ID"
+      ],
+      [
+        3,
+        "Director_ID"
+      ],
+      [
+        3,
+        "Channel_ID"
+      ],
+      [
+        3,
+        "Is_first_director"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "others"
+    ],
+    "db_id": "bbc_channels",
+    "foreign_keys": [
+      [
+        [
+          "program",
+          "Channel_ID"
+        ],
+        [
+          "channel",
+          "Channel_ID"
+        ]
+      ],
+      [
+        [
+          "program",
+          "Director_ID"
+        ],
+        [
+          "director",
+          "Director_ID"
+        ]
+      ],
+      [
+        [
+          "director_admin",
+          "Channel_ID"
+        ],
+        [
+          "channel",
+          "Channel_ID"
+        ]
+      ],
+      [
+        [
+          "director_admin",
+          "Director_ID"
+        ],
+        [
+          "director",
+          "Director_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6,
+      9,
+      14
+    ],
+    "table_names": [
+      "channel",
+      "director",
+      "program",
+      "director admin"
+    ],
+    "table_names_original": [
+      "channel",
+      "director",
+      "program",
+      "director_admin"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        0,
+        "membership credit"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "membership credit"
+      ],
+      [
+        2,
+        "id"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "model year"
+      ],
+      [
+        2,
+        "type of powertrain"
+      ],
+      [
+        2,
+        "combined fuel economy rate"
+      ],
+      [
+        2,
+        "city fuel economy rate"
+      ],
+      [
+        2,
+        "highway fuel economy rate"
+      ],
+      [
+        2,
+        "cost per 25 miles"
+      ],
+      [
+        2,
+        "annual fuel cost"
+      ],
+      [
+        2,
+        "notes"
+      ],
+      [
+        3,
+        "id"
+      ],
+      [
+        3,
+        "customer id"
+      ],
+      [
+        3,
+        "discount id"
+      ],
+      [
+        3,
+        "vehicles id"
+      ],
+      [
+        3,
+        "total hours"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        0,
+        "membership_credit"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "membership_credit"
+      ],
+      [
+        2,
+        "id"
+      ],
+      [
+        2,
+        "name"
+      ],
+      [
+        2,
+        "Model_year"
+      ],
+      [
+        2,
+        "Type_of_powertrain"
+      ],
+      [
+        2,
+        "Combined_fuel_economy_rate"
+      ],
+      [
+        2,
+        "City_fuel_economy_rate"
+      ],
+      [
+        2,
+        "Highway_fuel_economy_rate"
+      ],
+      [
+        2,
+        "Cost_per_25_miles"
+      ],
+      [
+        2,
+        "Annual_fuel_cost"
+      ],
+      [
+        2,
+        "Notes"
+      ],
+      [
+        3,
+        "id"
+      ],
+      [
+        3,
+        "customer_id"
+      ],
+      [
+        3,
+        "discount_id"
+      ],
+      [
+        3,
+        "vehicles_id"
+      ],
+      [
+        3,
+        "total_hours"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "vehicle_rent",
+    "foreign_keys": [
+      [
+        [
+          "Renting_history",
+          "discount_id"
+        ],
+        [
+          "Discount",
+          "id"
+        ]
+      ],
+      [
+        [
+          "Renting_history",
+          "vehicles_id"
+        ],
+        [
+          "Vehicles",
+          "id"
+        ]
+      ],
+      [
+        [
+          "Renting_history",
+          "customer_id"
+        ],
+        [
+          "Customers",
+          "id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      8,
+      18
+    ],
+    "table_names": [
+      "customers",
+      "discount",
+      "vehicles",
+      "renting history"
+    ],
+    "table_names_original": [
+      "Customers",
+      "Discount",
+      "Vehicles",
+      "Renting_history"
     ]
   },
   {
@@ -30154,6 +37085,303 @@
       "Author_list",
       "Citation",
       "Paper"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "city"
+      ],
+      [
+        0,
+        "station name"
+      ],
+      [
+        0,
+        "owned since"
+      ],
+      [
+        0,
+        "affiliation"
+      ],
+      [
+        1,
+        "radio id"
+      ],
+      [
+        1,
+        "transmitter"
+      ],
+      [
+        1,
+        "radio mhz"
+      ],
+      [
+        1,
+        "2fm mhz"
+      ],
+      [
+        1,
+        "rnag mhz"
+      ],
+      [
+        1,
+        "lyric fm mhz"
+      ],
+      [
+        1,
+        "erp kw"
+      ],
+      [
+        2,
+        "tv show id"
+      ],
+      [
+        2,
+        "tv show name"
+      ],
+      [
+        2,
+        "sub tittle"
+      ],
+      [
+        2,
+        "next show name"
+      ],
+      [
+        2,
+        "original airdate"
+      ],
+      [
+        3,
+        "city channel id"
+      ],
+      [
+        3,
+        "radio id"
+      ],
+      [
+        3,
+        "is online"
+      ],
+      [
+        4,
+        "city channel id"
+      ],
+      [
+        4,
+        "tv show id"
+      ],
+      [
+        4,
+        "is online"
+      ],
+      [
+        4,
+        "is free"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "ID"
+      ],
+      [
+        0,
+        "City"
+      ],
+      [
+        0,
+        "Station_name"
+      ],
+      [
+        0,
+        "Owned_Since"
+      ],
+      [
+        0,
+        "Affiliation"
+      ],
+      [
+        1,
+        "Radio_ID"
+      ],
+      [
+        1,
+        "Transmitter"
+      ],
+      [
+        1,
+        "Radio_MHz"
+      ],
+      [
+        1,
+        "2FM_MHz"
+      ],
+      [
+        1,
+        "RnaG_MHz"
+      ],
+      [
+        1,
+        "Lyric_FM_MHz"
+      ],
+      [
+        1,
+        "ERP_kW"
+      ],
+      [
+        2,
+        "tv_show_ID"
+      ],
+      [
+        2,
+        "tv_show_name"
+      ],
+      [
+        2,
+        "Sub_tittle"
+      ],
+      [
+        2,
+        "Next_show_name"
+      ],
+      [
+        2,
+        "Original_Airdate"
+      ],
+      [
+        3,
+        "City_channel_ID"
+      ],
+      [
+        3,
+        "Radio_ID"
+      ],
+      [
+        3,
+        "Is_online"
+      ],
+      [
+        4,
+        "City_channel_ID"
+      ],
+      [
+        4,
+        "tv_show_ID"
+      ],
+      [
+        4,
+        "Is_online"
+      ],
+      [
+        4,
+        "Is_free"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "others",
+      "number",
+      "number",
+      "others",
+      "others"
+    ],
+    "db_id": "tv_shows",
+    "foreign_keys": [
+      [
+        [
+          "city_channel_radio",
+          "Radio_ID"
+        ],
+        [
+          "radio",
+          "Radio_ID"
+        ]
+      ],
+      [
+        [
+          "city_channel_radio",
+          "City_channel_ID"
+        ],
+        [
+          "city_channel",
+          "ID"
+        ]
+      ],
+      [
+        [
+          "city_channel_tv_show",
+          "tv_show_ID"
+        ],
+        [
+          "tv_show",
+          "tv_show_ID"
+        ]
+      ],
+      [
+        [
+          "city_channel_tv_show",
+          "City_channel_ID"
+        ],
+        [
+          "city_channel",
+          "ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6,
+      13,
+      18,
+      21
+    ],
+    "table_names": [
+      "city channel",
+      "radio",
+      "tv show",
+      "city channel radio",
+      "city channel tv show"
+    ],
+    "table_names_original": [
+      "city_channel",
+      "radio",
+      "tv_show",
+      "city_channel_radio",
+      "city_channel_tv_show"
     ]
   },
   {
@@ -30611,6 +37839,232 @@
       ],
       [
         0,
+        "book club id"
+      ],
+      [
+        0,
+        "year"
+      ],
+      [
+        0,
+        "author or editor"
+      ],
+      [
+        0,
+        "book title"
+      ],
+      [
+        0,
+        "publisher"
+      ],
+      [
+        0,
+        "category"
+      ],
+      [
+        0,
+        "result"
+      ],
+      [
+        1,
+        "movie id"
+      ],
+      [
+        1,
+        "title"
+      ],
+      [
+        1,
+        "year"
+      ],
+      [
+        1,
+        "director"
+      ],
+      [
+        1,
+        "budget million"
+      ],
+      [
+        1,
+        "gross worldwide"
+      ],
+      [
+        2,
+        "company name"
+      ],
+      [
+        2,
+        "type"
+      ],
+      [
+        2,
+        "incorporated in"
+      ],
+      [
+        2,
+        "group equity shareholding"
+      ],
+      [
+        2,
+        "book club id"
+      ],
+      [
+        2,
+        "movie id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "book_club_id"
+      ],
+      [
+        0,
+        "Year"
+      ],
+      [
+        0,
+        "Author_or_Editor"
+      ],
+      [
+        0,
+        "Book_Title"
+      ],
+      [
+        0,
+        "Publisher"
+      ],
+      [
+        0,
+        "Category"
+      ],
+      [
+        0,
+        "Result"
+      ],
+      [
+        1,
+        "movie_id"
+      ],
+      [
+        1,
+        "Title"
+      ],
+      [
+        1,
+        "Year"
+      ],
+      [
+        1,
+        "Director"
+      ],
+      [
+        1,
+        "Budget_million"
+      ],
+      [
+        1,
+        "Gross_worldwide"
+      ],
+      [
+        2,
+        "Company_name"
+      ],
+      [
+        2,
+        "Type"
+      ],
+      [
+        2,
+        "Incorporated_in"
+      ],
+      [
+        2,
+        "Group_Equity_Shareholding"
+      ],
+      [
+        2,
+        "book_club_id"
+      ],
+      [
+        2,
+        "movie_id"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text"
+    ],
+    "db_id": "culture_company",
+    "foreign_keys": [
+      [
+        [
+          "culture_company",
+          "movie_id"
+        ],
+        [
+          "movie",
+          "movie_id"
+        ]
+      ],
+      [
+        [
+          "culture_company",
+          "book_club_id"
+        ],
+        [
+          "book_club",
+          "book_club_id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      14
+    ],
+    "table_names": [
+      "book club",
+      "movie",
+      "culture company"
+    ],
+    "table_names_original": [
+      "book_club",
+      "movie",
+      "culture_company"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "template type code"
       ],
       [
@@ -30822,6 +38276,165 @@
       "Templates",
       "Documents",
       "Paragraphs"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "musical id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "year"
+      ],
+      [
+        0,
+        "award"
+      ],
+      [
+        0,
+        "category"
+      ],
+      [
+        0,
+        "nominee"
+      ],
+      [
+        0,
+        "result"
+      ],
+      [
+        1,
+        "actor id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "musical id"
+      ],
+      [
+        1,
+        "character"
+      ],
+      [
+        1,
+        "duration"
+      ],
+      [
+        1,
+        "age"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Musical_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Year"
+      ],
+      [
+        0,
+        "Award"
+      ],
+      [
+        0,
+        "Category"
+      ],
+      [
+        0,
+        "Nominee"
+      ],
+      [
+        0,
+        "Result"
+      ],
+      [
+        1,
+        "Actor_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Musical_ID"
+      ],
+      [
+        1,
+        "Character"
+      ],
+      [
+        1,
+        "Duration"
+      ],
+      [
+        1,
+        "age"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number"
+    ],
+    "db_id": "musical",
+    "foreign_keys": [
+      [
+        [
+          "actor",
+          "Musical_ID"
+        ],
+        [
+          "actor",
+          "Actor_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8
+    ],
+    "table_names": [
+      "musical",
+      "actor"
+    ],
+    "table_names_original": [
+      "musical",
+      "actor"
     ]
   },
   {
@@ -31387,6 +39000,328 @@
       "sqlite_sequence",
       "country",
       "countrylanguage"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "device id"
+      ],
+      [
+        0,
+        "device"
+      ],
+      [
+        0,
+        "carrier"
+      ],
+      [
+        0,
+        "package version"
+      ],
+      [
+        0,
+        "applications"
+      ],
+      [
+        0,
+        "software platform"
+      ],
+      [
+        1,
+        "shop id"
+      ],
+      [
+        1,
+        "shop name"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        1,
+        "open date"
+      ],
+      [
+        1,
+        "open year"
+      ],
+      [
+        2,
+        "shop id"
+      ],
+      [
+        2,
+        "device id"
+      ],
+      [
+        2,
+        "quantity"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Device_ID"
+      ],
+      [
+        0,
+        "Device"
+      ],
+      [
+        0,
+        "Carrier"
+      ],
+      [
+        0,
+        "Package_Version"
+      ],
+      [
+        0,
+        "Applications"
+      ],
+      [
+        0,
+        "Software_Platform"
+      ],
+      [
+        1,
+        "Shop_ID"
+      ],
+      [
+        1,
+        "Shop_Name"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        1,
+        "Open_Date"
+      ],
+      [
+        1,
+        "Open_Year"
+      ],
+      [
+        2,
+        "Shop_ID"
+      ],
+      [
+        2,
+        "Device_ID"
+      ],
+      [
+        2,
+        "Quantity"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "device",
+    "foreign_keys": [
+      [
+        [
+          "stock",
+          "Device_ID"
+        ],
+        [
+          "device",
+          "Device_ID"
+        ]
+      ],
+      [
+        [
+          "stock",
+          "Shop_ID"
+        ],
+        [
+          "shop",
+          "Shop_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      12
+    ],
+    "table_names": [
+      "device",
+      "shop",
+      "stock"
+    ],
+    "table_names_original": [
+      "device",
+      "shop",
+      "stock"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "building id"
+      ],
+      [
+        0,
+        "region id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "address"
+      ],
+      [
+        0,
+        "number of stories"
+      ],
+      [
+        0,
+        "completed year"
+      ],
+      [
+        1,
+        "region id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "capital"
+      ],
+      [
+        1,
+        "area"
+      ],
+      [
+        1,
+        "population"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Building_ID"
+      ],
+      [
+        0,
+        "Region_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Address"
+      ],
+      [
+        0,
+        "Number_of_Stories"
+      ],
+      [
+        0,
+        "Completed_Year"
+      ],
+      [
+        1,
+        "Region_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Capital"
+      ],
+      [
+        1,
+        "Area"
+      ],
+      [
+        1,
+        "Population"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "region_building",
+    "foreign_keys": [
+      [
+        [
+          "building",
+          "Region_ID"
+        ],
+        [
+          "region",
+          "Region_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7
+    ],
+    "table_names": [
+      "building",
+      "region"
+    ],
+    "table_names_original": [
+      "building",
+      "region"
     ]
   },
   {
@@ -32696,6 +40631,404 @@
       ],
       [
         0,
+        "employee id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        0,
+        "city"
+      ],
+      [
+        1,
+        "shop id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        1,
+        "district"
+      ],
+      [
+        1,
+        "number products"
+      ],
+      [
+        1,
+        "manager name"
+      ],
+      [
+        2,
+        "shop id"
+      ],
+      [
+        2,
+        "employee id"
+      ],
+      [
+        2,
+        "start from"
+      ],
+      [
+        2,
+        "is full time"
+      ],
+      [
+        3,
+        "employee id"
+      ],
+      [
+        3,
+        "year awarded"
+      ],
+      [
+        3,
+        "bonus"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Employee_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Age"
+      ],
+      [
+        0,
+        "City"
+      ],
+      [
+        1,
+        "Shop_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        1,
+        "District"
+      ],
+      [
+        1,
+        "Number_products"
+      ],
+      [
+        1,
+        "Manager_name"
+      ],
+      [
+        2,
+        "Shop_ID"
+      ],
+      [
+        2,
+        "Employee_ID"
+      ],
+      [
+        2,
+        "Start_from"
+      ],
+      [
+        2,
+        "Is_full_time"
+      ],
+      [
+        3,
+        "Employee_ID"
+      ],
+      [
+        3,
+        "Year_awarded"
+      ],
+      [
+        3,
+        "Bonus"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "others",
+      "text",
+      "text",
+      "number"
+    ],
+    "db_id": "employee_hire_evaluation",
+    "foreign_keys": [
+      [
+        [
+          "hiring",
+          "Employee_ID"
+        ],
+        [
+          "employee",
+          "Employee_ID"
+        ]
+      ],
+      [
+        [
+          "hiring",
+          "Shop_ID"
+        ],
+        [
+          "shop",
+          "Shop_ID"
+        ]
+      ],
+      [
+        [
+          "evaluation",
+          "Employee_ID"
+        ],
+        [
+          "employee",
+          "Employee_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      12,
+      15
+    ],
+    "table_names": [
+      "employee",
+      "shop",
+      "hiring",
+      "evaluation"
+    ],
+    "table_names_original": [
+      "employee",
+      "shop",
+      "hiring",
+      "evaluation"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "driver id"
+      ],
+      [
+        0,
+        "driver name"
+      ],
+      [
+        0,
+        "entrant"
+      ],
+      [
+        0,
+        "constructor"
+      ],
+      [
+        0,
+        "chassis"
+      ],
+      [
+        0,
+        "engine"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        1,
+        "road"
+      ],
+      [
+        1,
+        "driver id"
+      ],
+      [
+        1,
+        "race name"
+      ],
+      [
+        1,
+        "pole position"
+      ],
+      [
+        1,
+        "fastest lap"
+      ],
+      [
+        1,
+        "winning driver"
+      ],
+      [
+        1,
+        "winning team"
+      ],
+      [
+        1,
+        "report"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Driver_ID"
+      ],
+      [
+        0,
+        "Driver_Name"
+      ],
+      [
+        0,
+        "Entrant"
+      ],
+      [
+        0,
+        "Constructor"
+      ],
+      [
+        0,
+        "Chassis"
+      ],
+      [
+        0,
+        "Engine"
+      ],
+      [
+        0,
+        "Age"
+      ],
+      [
+        1,
+        "Road"
+      ],
+      [
+        1,
+        "Driver_ID"
+      ],
+      [
+        1,
+        "Race_Name"
+      ],
+      [
+        1,
+        "Pole_Position"
+      ],
+      [
+        1,
+        "Fastest_Lap"
+      ],
+      [
+        1,
+        "Winning_driver"
+      ],
+      [
+        1,
+        "Winning_team"
+      ],
+      [
+        1,
+        "Report"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text"
+    ],
+    "db_id": "car_road_race",
+    "foreign_keys": [
+      [
+        [
+          "race",
+          "Driver_ID"
+        ],
+        [
+          "driver",
+          "Driver_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8
+    ],
+    "table_names": [
+      "driver",
+      "race"
+    ],
+    "table_names_original": [
+      "driver",
+      "race"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "movie id"
       ],
       [
@@ -32968,6 +41301,237 @@
       "Highschooler",
       "Friend",
       "Likes"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "program id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "origin"
+      ],
+      [
+        0,
+        "launch"
+      ],
+      [
+        0,
+        "owner"
+      ],
+      [
+        1,
+        "channel id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "owner"
+      ],
+      [
+        1,
+        "share in percent"
+      ],
+      [
+        1,
+        "rating in percent"
+      ],
+      [
+        2,
+        "channel id"
+      ],
+      [
+        2,
+        "program id"
+      ],
+      [
+        2,
+        "time of day"
+      ],
+      [
+        3,
+        "channel id"
+      ],
+      [
+        3,
+        "program id"
+      ],
+      [
+        3,
+        "date"
+      ],
+      [
+        3,
+        "share in percent"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Program_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Origin"
+      ],
+      [
+        0,
+        "Launch"
+      ],
+      [
+        0,
+        "Owner"
+      ],
+      [
+        1,
+        "Channel_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Owner"
+      ],
+      [
+        1,
+        "Share_in_percent"
+      ],
+      [
+        1,
+        "Rating_in_percent"
+      ],
+      [
+        2,
+        "Channel_ID"
+      ],
+      [
+        2,
+        "Program_ID"
+      ],
+      [
+        2,
+        "Time_of_day"
+      ],
+      [
+        3,
+        "Channel_ID"
+      ],
+      [
+        3,
+        "Program_ID"
+      ],
+      [
+        3,
+        "Date"
+      ],
+      [
+        3,
+        "Share_in_percent"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number"
+    ],
+    "db_id": "program_share",
+    "foreign_keys": [
+      [
+        [
+          "broadcast",
+          "Program_ID"
+        ],
+        [
+          "program",
+          "Program_ID"
+        ]
+      ],
+      [
+        [
+          "broadcast",
+          "Channel_ID"
+        ],
+        [
+          "channel",
+          "Channel_ID"
+        ]
+      ],
+      [
+        [
+          "broadcast_share",
+          "Program_ID"
+        ],
+        [
+          "program",
+          "Program_ID"
+        ]
+      ],
+      [
+        [
+          "broadcast_share",
+          "Channel_ID"
+        ],
+        [
+          "channel",
+          "Channel_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6,
+      11,
+      14
+    ],
+    "table_names": [
+      "program",
+      "channel",
+      "broadcast",
+      "broadcast share"
+    ],
+    "table_names_original": [
+      "program",
+      "channel",
+      "broadcast",
+      "broadcast_share"
     ]
   },
   {
@@ -40513,6 +49077,196 @@
       ],
       [
         0,
+        "district id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "area km"
+      ],
+      [
+        0,
+        "population"
+      ],
+      [
+        0,
+        "density km"
+      ],
+      [
+        0,
+        "government website"
+      ],
+      [
+        1,
+        "spokesman id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "age"
+      ],
+      [
+        1,
+        "speach title"
+      ],
+      [
+        1,
+        "rank position"
+      ],
+      [
+        1,
+        "points"
+      ],
+      [
+        2,
+        "spokesman id"
+      ],
+      [
+        2,
+        "district id"
+      ],
+      [
+        2,
+        "start year"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "District_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Area_km"
+      ],
+      [
+        0,
+        "Population"
+      ],
+      [
+        0,
+        "Density_km"
+      ],
+      [
+        0,
+        "Government_website"
+      ],
+      [
+        1,
+        "Spokesman_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Age"
+      ],
+      [
+        1,
+        "Speach_title"
+      ],
+      [
+        1,
+        "Rank_position"
+      ],
+      [
+        1,
+        "Points"
+      ],
+      [
+        2,
+        "Spokesman_ID"
+      ],
+      [
+        2,
+        "District_ID"
+      ],
+      [
+        2,
+        "Start_year"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "district_spokesman",
+    "foreign_keys": [
+      [
+        [
+          "spokesman_district",
+          "District_ID"
+        ],
+        [
+          "district",
+          "District_ID"
+        ]
+      ],
+      [
+        [
+          "spokesman_district",
+          "Spokesman_ID"
+        ],
+        [
+          "spokesman",
+          "Spokesman_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      13
+    ],
+    "table_names": [
+      "district",
+      "spokesman",
+      "spokesman district"
+    ],
+    "table_names_original": [
+      "district",
+      "spokesman",
+      "spokesman_district"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "master customer id"
       ],
       [
@@ -40776,6 +49530,129 @@
       "Parking_Fines",
       "Rent_Arrears",
       "Electoral_Register"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "publication id"
+      ],
+      [
+        0,
+        "book id"
+      ],
+      [
+        0,
+        "publisher"
+      ],
+      [
+        0,
+        "publication date"
+      ],
+      [
+        0,
+        "price"
+      ],
+      [
+        1,
+        "book id"
+      ],
+      [
+        1,
+        "title"
+      ],
+      [
+        1,
+        "issues"
+      ],
+      [
+        1,
+        "writer"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Publication_ID"
+      ],
+      [
+        0,
+        "Book_ID"
+      ],
+      [
+        0,
+        "Publisher"
+      ],
+      [
+        0,
+        "Publication_Date"
+      ],
+      [
+        0,
+        "Price"
+      ],
+      [
+        1,
+        "Book_ID"
+      ],
+      [
+        1,
+        "Title"
+      ],
+      [
+        1,
+        "Issues"
+      ],
+      [
+        1,
+        "Writer"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text"
+    ],
+    "db_id": "book_2",
+    "foreign_keys": [
+      [
+        [
+          "publication",
+          "Book_ID"
+        ],
+        [
+          "book",
+          "Book_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6
+    ],
+    "table_names": [
+      "publication",
+      "book"
+    ],
+    "table_names_original": [
+      "publication",
+      "book"
     ]
   },
   {
@@ -41208,6 +50085,156 @@
       "employees",
       "job_history",
       "locations"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "captain id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "ship id"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        0,
+        "class"
+      ],
+      [
+        0,
+        "rank"
+      ],
+      [
+        1,
+        "ship id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "type"
+      ],
+      [
+        1,
+        "built year"
+      ],
+      [
+        1,
+        "class"
+      ],
+      [
+        1,
+        "flag"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Captain_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Ship_ID"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        0,
+        "Class"
+      ],
+      [
+        0,
+        "Rank"
+      ],
+      [
+        1,
+        "Ship_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Type"
+      ],
+      [
+        1,
+        "Built_Year"
+      ],
+      [
+        1,
+        "Class"
+      ],
+      [
+        1,
+        "Flag"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text"
+    ],
+    "db_id": "ship",
+    "foreign_keys": [
+      [
+        [
+          "captain",
+          "Ship_ID"
+        ],
+        [
+          "Ship",
+          "Ship_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7
+    ],
+    "table_names": [
+      "captain",
+      "ship"
+    ],
+    "table_names_original": [
+      "captain",
+      "Ship"
     ]
   },
   {
@@ -50197,6 +59224,471 @@
       "web_sales",
       "catalog_sales",
       "store_sales"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "platform id"
+      ],
+      [
+        0,
+        "platform name"
+      ],
+      [
+        0,
+        "market district"
+      ],
+      [
+        0,
+        "download rank"
+      ],
+      [
+        1,
+        "game id"
+      ],
+      [
+        1,
+        "title"
+      ],
+      [
+        1,
+        "release date"
+      ],
+      [
+        1,
+        "franchise"
+      ],
+      [
+        1,
+        "developers"
+      ],
+      [
+        1,
+        "platform id"
+      ],
+      [
+        1,
+        "units sold millions"
+      ],
+      [
+        2,
+        "player id"
+      ],
+      [
+        2,
+        "rank of the year"
+      ],
+      [
+        2,
+        "player name"
+      ],
+      [
+        2,
+        "position"
+      ],
+      [
+        2,
+        "college"
+      ],
+      [
+        3,
+        "player id"
+      ],
+      [
+        3,
+        "game id"
+      ],
+      [
+        3,
+        "if active"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Platform_ID"
+      ],
+      [
+        0,
+        "Platform_name"
+      ],
+      [
+        0,
+        "Market_district"
+      ],
+      [
+        0,
+        "Download_rank"
+      ],
+      [
+        1,
+        "Game_ID"
+      ],
+      [
+        1,
+        "Title"
+      ],
+      [
+        1,
+        "Release_Date"
+      ],
+      [
+        1,
+        "Franchise"
+      ],
+      [
+        1,
+        "Developers"
+      ],
+      [
+        1,
+        "Platform_ID"
+      ],
+      [
+        1,
+        "Units_sold_Millions"
+      ],
+      [
+        2,
+        "Player_ID"
+      ],
+      [
+        2,
+        "Rank_of_the_year"
+      ],
+      [
+        2,
+        "Player_name"
+      ],
+      [
+        2,
+        "Position"
+      ],
+      [
+        2,
+        "College"
+      ],
+      [
+        3,
+        "Player_ID"
+      ],
+      [
+        3,
+        "Game_ID"
+      ],
+      [
+        3,
+        "If_active"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "others"
+    ],
+    "db_id": "video_game",
+    "foreign_keys": [
+      [
+        [
+          "game",
+          "Platform_ID"
+        ],
+        [
+          "platform",
+          "Platform_ID"
+        ]
+      ],
+      [
+        [
+          "game_player",
+          "Game_ID"
+        ],
+        [
+          "game",
+          "Game_ID"
+        ]
+      ],
+      [
+        [
+          "game_player",
+          "Player_ID"
+        ],
+        [
+          "player",
+          "Player_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      12,
+      17
+    ],
+    "table_names": [
+      "platform",
+      "game",
+      "player",
+      "game player"
+    ],
+    "table_names_original": [
+      "platform",
+      "game",
+      "player",
+      "game_player"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "school id"
+      ],
+      [
+        0,
+        "school name"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        0,
+        "mascot"
+      ],
+      [
+        0,
+        "enrollment"
+      ],
+      [
+        0,
+        "ihsaa class"
+      ],
+      [
+        0,
+        "ihsaa football class"
+      ],
+      [
+        0,
+        "county"
+      ],
+      [
+        1,
+        "school id"
+      ],
+      [
+        1,
+        "year"
+      ],
+      [
+        1,
+        "budgeted"
+      ],
+      [
+        1,
+        "total budget percent budgeted"
+      ],
+      [
+        1,
+        "invested"
+      ],
+      [
+        1,
+        "total budget percent invested"
+      ],
+      [
+        1,
+        "budget invested percent"
+      ],
+      [
+        2,
+        "endowment id"
+      ],
+      [
+        2,
+        "school id"
+      ],
+      [
+        2,
+        "donator name"
+      ],
+      [
+        2,
+        "amount"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "School_id"
+      ],
+      [
+        0,
+        "School_name"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        0,
+        "Mascot"
+      ],
+      [
+        0,
+        "Enrollment"
+      ],
+      [
+        0,
+        "IHSAA_Class"
+      ],
+      [
+        0,
+        "IHSAA_Football_Class"
+      ],
+      [
+        0,
+        "County"
+      ],
+      [
+        1,
+        "School_id"
+      ],
+      [
+        1,
+        "Year"
+      ],
+      [
+        1,
+        "Budgeted"
+      ],
+      [
+        1,
+        "total_budget_percent_budgeted"
+      ],
+      [
+        1,
+        "Invested"
+      ],
+      [
+        1,
+        "total_budget_percent_invested"
+      ],
+      [
+        1,
+        "Budget_invested_percent"
+      ],
+      [
+        2,
+        "endowment_id"
+      ],
+      [
+        2,
+        "School_id"
+      ],
+      [
+        2,
+        "donator_name"
+      ],
+      [
+        2,
+        "amount"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number"
+    ],
+    "db_id": "school_finance",
+    "foreign_keys": [
+      [
+        [
+          "budget",
+          "School_id"
+        ],
+        [
+          "School",
+          "School_id"
+        ]
+      ],
+      [
+        [
+          "endowment",
+          "School_id"
+        ],
+        [
+          "School",
+          "School_id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      9,
+      16
+    ],
+    "table_names": [
+      "school",
+      "budget",
+      "endowment"
+    ],
+    "table_names_original": [
+      "School",
+      "budget",
+      "endowment"
     ]
   },
   {
@@ -60961,6 +70453,431 @@
       ],
       [
         0,
+        "model name"
+      ],
+      [
+        0,
+        "launch year"
+      ],
+      [
+        0,
+        "ram mib"
+      ],
+      [
+        0,
+        "rom mib"
+      ],
+      [
+        0,
+        "slots"
+      ],
+      [
+        0,
+        "wifi"
+      ],
+      [
+        0,
+        "bluetooth"
+      ],
+      [
+        1,
+        "graphics mode"
+      ],
+      [
+        1,
+        "char cells"
+      ],
+      [
+        1,
+        "pixels"
+      ],
+      [
+        1,
+        "hardware colours"
+      ],
+      [
+        1,
+        "used kb"
+      ],
+      [
+        1,
+        "map"
+      ],
+      [
+        1,
+        "type"
+      ],
+      [
+        2,
+        "company name"
+      ],
+      [
+        2,
+        "hardware model name"
+      ],
+      [
+        2,
+        "accreditation type"
+      ],
+      [
+        2,
+        "accreditation level"
+      ],
+      [
+        2,
+        "date"
+      ],
+      [
+        2,
+        "chip model"
+      ],
+      [
+        2,
+        "screen mode"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Model_name"
+      ],
+      [
+        0,
+        "Launch_year"
+      ],
+      [
+        0,
+        "RAM_MiB"
+      ],
+      [
+        0,
+        "ROM_MiB"
+      ],
+      [
+        0,
+        "Slots"
+      ],
+      [
+        0,
+        "WiFi"
+      ],
+      [
+        0,
+        "Bluetooth"
+      ],
+      [
+        1,
+        "Graphics_mode"
+      ],
+      [
+        1,
+        "Char_cells"
+      ],
+      [
+        1,
+        "Pixels"
+      ],
+      [
+        1,
+        "Hardware_colours"
+      ],
+      [
+        1,
+        "used_kb"
+      ],
+      [
+        1,
+        "map"
+      ],
+      [
+        1,
+        "Type"
+      ],
+      [
+        2,
+        "Company_name"
+      ],
+      [
+        2,
+        "Hardware_Model_name"
+      ],
+      [
+        2,
+        "Accreditation_type"
+      ],
+      [
+        2,
+        "Accreditation_level"
+      ],
+      [
+        2,
+        "Date"
+      ],
+      [
+        2,
+        "chip_model"
+      ],
+      [
+        2,
+        "screen_mode"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text"
+    ],
+    "db_id": "phone",
+    "foreign_keys": [
+      [
+        [
+          "phone",
+          "chip_model"
+        ],
+        [
+          "chip_model",
+          "Model_name"
+        ]
+      ],
+      [
+        [
+          "phone",
+          "screen_mode"
+        ],
+        [
+          "screen_mode",
+          "Graphics_mode"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      16
+    ],
+    "table_names": [
+      "chip model",
+      "screen mode",
+      "phone"
+    ],
+    "table_names_original": [
+      "chip_model",
+      "screen_mode",
+      "phone"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "station id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "annual entry exit"
+      ],
+      [
+        0,
+        "annual interchanges"
+      ],
+      [
+        0,
+        "total passengers"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        0,
+        "main services"
+      ],
+      [
+        0,
+        "number of platforms"
+      ],
+      [
+        1,
+        "train id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "time"
+      ],
+      [
+        1,
+        "service"
+      ],
+      [
+        2,
+        "train id"
+      ],
+      [
+        2,
+        "station id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Station_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Annual_entry_exit"
+      ],
+      [
+        0,
+        "Annual_interchanges"
+      ],
+      [
+        0,
+        "Total_Passengers"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        0,
+        "Main_Services"
+      ],
+      [
+        0,
+        "Number_of_Platforms"
+      ],
+      [
+        1,
+        "Train_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Time"
+      ],
+      [
+        1,
+        "Service"
+      ],
+      [
+        2,
+        "Train_ID"
+      ],
+      [
+        2,
+        "Station_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "train_station",
+    "foreign_keys": [
+      [
+        [
+          "train_station",
+          "Station_ID"
+        ],
+        [
+          "station",
+          "Station_ID"
+        ]
+      ],
+      [
+        [
+          "train_station",
+          "Train_ID"
+        ],
+        [
+          "train",
+          "Train_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      9,
+      13
+    ],
+    "table_names": [
+      "station",
+      "train",
+      "train station"
+    ],
+    "table_names_original": [
+      "station",
+      "train",
+      "train_station"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "role code"
       ],
       [
@@ -63357,6 +73274,412 @@
       "status",
       "trip",
       "weather"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "entrepreneur id"
+      ],
+      [
+        0,
+        "people id"
+      ],
+      [
+        0,
+        "company"
+      ],
+      [
+        0,
+        "money requested"
+      ],
+      [
+        0,
+        "investor"
+      ],
+      [
+        1,
+        "people id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "height"
+      ],
+      [
+        1,
+        "weight"
+      ],
+      [
+        1,
+        "date of birth"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Entrepreneur_ID"
+      ],
+      [
+        0,
+        "People_ID"
+      ],
+      [
+        0,
+        "Company"
+      ],
+      [
+        0,
+        "Money_Requested"
+      ],
+      [
+        0,
+        "Investor"
+      ],
+      [
+        1,
+        "People_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Height"
+      ],
+      [
+        1,
+        "Weight"
+      ],
+      [
+        1,
+        "Date_of_Birth"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text"
+    ],
+    "db_id": "entrepreneur",
+    "foreign_keys": [
+      [
+        [
+          "entrepreneur",
+          "People_ID"
+        ],
+        [
+          "people",
+          "People_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6
+    ],
+    "table_names": [
+      "entrepreneur",
+      "people"
+    ],
+    "table_names_original": [
+      "entrepreneur",
+      "people"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "conductor id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        0,
+        "nationality"
+      ],
+      [
+        0,
+        "year of work"
+      ],
+      [
+        1,
+        "orchestra id"
+      ],
+      [
+        1,
+        "orchestra"
+      ],
+      [
+        1,
+        "conductor id"
+      ],
+      [
+        1,
+        "record company"
+      ],
+      [
+        1,
+        "year of founded"
+      ],
+      [
+        1,
+        "major record format"
+      ],
+      [
+        2,
+        "performance id"
+      ],
+      [
+        2,
+        "orchestra id"
+      ],
+      [
+        2,
+        "type"
+      ],
+      [
+        2,
+        "date"
+      ],
+      [
+        2,
+        "official ratings (millions)"
+      ],
+      [
+        2,
+        "weekly rank"
+      ],
+      [
+        2,
+        "share"
+      ],
+      [
+        3,
+        "show id"
+      ],
+      [
+        3,
+        "performance id"
+      ],
+      [
+        3,
+        "if first show"
+      ],
+      [
+        3,
+        "result"
+      ],
+      [
+        3,
+        "attendance"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Conductor_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Age"
+      ],
+      [
+        0,
+        "Nationality"
+      ],
+      [
+        0,
+        "Year_of_Work"
+      ],
+      [
+        1,
+        "Orchestra_ID"
+      ],
+      [
+        1,
+        "Orchestra"
+      ],
+      [
+        1,
+        "Conductor_ID"
+      ],
+      [
+        1,
+        "Record_Company"
+      ],
+      [
+        1,
+        "Year_of_Founded"
+      ],
+      [
+        1,
+        "Major_Record_Format"
+      ],
+      [
+        2,
+        "Performance_ID"
+      ],
+      [
+        2,
+        "Orchestra_ID"
+      ],
+      [
+        2,
+        "Type"
+      ],
+      [
+        2,
+        "Date"
+      ],
+      [
+        2,
+        "Official_ratings_(millions)"
+      ],
+      [
+        2,
+        "Weekly_rank"
+      ],
+      [
+        2,
+        "Share"
+      ],
+      [
+        3,
+        "Show_ID"
+      ],
+      [
+        3,
+        "Performance_ID"
+      ],
+      [
+        3,
+        "If_first_show"
+      ],
+      [
+        3,
+        "Result"
+      ],
+      [
+        3,
+        "Attendance"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "others",
+      "text",
+      "number"
+    ],
+    "db_id": "orchestra",
+    "foreign_keys": [
+      [
+        [
+          "orchestra",
+          "Conductor_ID"
+        ],
+        [
+          "conductor",
+          "Conductor_ID"
+        ]
+      ],
+      [
+        [
+          "performance",
+          "Orchestra_ID"
+        ],
+        [
+          "orchestra",
+          "Orchestra_ID"
+        ]
+      ],
+      [
+        [
+          "show",
+          "Performance_ID"
+        ],
+        [
+          "performance",
+          "Performance_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      6,
+      12
+    ],
+    "table_names": [
+      "conductor",
+      "orchestra",
+      "performance",
+      "show"
+    ],
+    "table_names_original": [
+      "conductor",
+      "orchestra",
+      "performance",
+      "show"
     ]
   },
   {
@@ -66426,6 +76749,418 @@
       ],
       [
         0,
+        "author id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "age"
+      ],
+      [
+        0,
+        "gender"
+      ],
+      [
+        1,
+        "press id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "month profits billion"
+      ],
+      [
+        1,
+        "year profits billion"
+      ],
+      [
+        2,
+        "book id"
+      ],
+      [
+        2,
+        "title"
+      ],
+      [
+        2,
+        "book series"
+      ],
+      [
+        2,
+        "author id"
+      ],
+      [
+        2,
+        "press id"
+      ],
+      [
+        2,
+        "sale amount"
+      ],
+      [
+        2,
+        "release date"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Author_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Age"
+      ],
+      [
+        0,
+        "Gender"
+      ],
+      [
+        1,
+        "Press_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Month_Profits_billion"
+      ],
+      [
+        1,
+        "Year_Profits_billion"
+      ],
+      [
+        2,
+        "Book_ID"
+      ],
+      [
+        2,
+        "Title"
+      ],
+      [
+        2,
+        "Book_Series"
+      ],
+      [
+        2,
+        "Author_ID"
+      ],
+      [
+        2,
+        "Press_ID"
+      ],
+      [
+        2,
+        "Sale_Amount"
+      ],
+      [
+        2,
+        "Release_date"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text"
+    ],
+    "db_id": "book_press",
+    "foreign_keys": [
+      [
+        [
+          "book",
+          "Press_ID"
+        ],
+        [
+          "press",
+          "Press_ID"
+        ]
+      ],
+      [
+        [
+          "book",
+          "Author_ID"
+        ],
+        [
+          "author",
+          "Author_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      9
+    ],
+    "table_names": [
+      "author",
+      "press",
+      "book"
+    ],
+    "table_names_original": [
+      "author",
+      "press",
+      "book"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "team id"
+      ],
+      [
+        0,
+        "school id"
+      ],
+      [
+        0,
+        "team name"
+      ],
+      [
+        0,
+        "acc regular season"
+      ],
+      [
+        0,
+        "acc percent"
+      ],
+      [
+        0,
+        "acc home"
+      ],
+      [
+        0,
+        "acc road"
+      ],
+      [
+        0,
+        "all games"
+      ],
+      [
+        0,
+        "all games percent"
+      ],
+      [
+        0,
+        "all home"
+      ],
+      [
+        0,
+        "all road"
+      ],
+      [
+        0,
+        "all neutral"
+      ],
+      [
+        1,
+        "school id"
+      ],
+      [
+        1,
+        "school"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        1,
+        "founded"
+      ],
+      [
+        1,
+        "affiliation"
+      ],
+      [
+        1,
+        "enrollment"
+      ],
+      [
+        1,
+        "nickname"
+      ],
+      [
+        1,
+        "primary conference"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Team_ID"
+      ],
+      [
+        0,
+        "School_ID"
+      ],
+      [
+        0,
+        "Team_Name"
+      ],
+      [
+        0,
+        "ACC_Regular_Season"
+      ],
+      [
+        0,
+        "ACC_Percent"
+      ],
+      [
+        0,
+        "ACC_Home"
+      ],
+      [
+        0,
+        "ACC_Road"
+      ],
+      [
+        0,
+        "All_Games"
+      ],
+      [
+        0,
+        "All_Games_Percent"
+      ],
+      [
+        0,
+        "All_Home"
+      ],
+      [
+        0,
+        "All_Road"
+      ],
+      [
+        0,
+        "All_Neutral"
+      ],
+      [
+        1,
+        "School_ID"
+      ],
+      [
+        1,
+        "School"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        1,
+        "Founded"
+      ],
+      [
+        1,
+        "Affiliation"
+      ],
+      [
+        1,
+        "Enrollment"
+      ],
+      [
+        1,
+        "Nickname"
+      ],
+      [
+        1,
+        "Primary_conference"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text"
+    ],
+    "db_id": "university_basketball",
+    "foreign_keys": [
+      [
+        [
+          "basketball_match",
+          "School_ID"
+        ],
+        [
+          "university",
+          "School_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      13
+    ],
+    "table_names": [
+      "basketball match",
+      "university"
+    ],
+    "table_names_original": [
+      "basketball_match",
+      "university"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "college name"
       ],
       [
@@ -69466,6 +80201,383 @@
       ],
       [
         0,
+        "name"
+      ],
+      [
+        0,
+        "manufacturer"
+      ],
+      [
+        0,
+        "equipment id"
+      ],
+      [
+        1,
+        "member id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "date join"
+      ],
+      [
+        1,
+        "age"
+      ],
+      [
+        2,
+        "member id"
+      ],
+      [
+        2,
+        "equipment id"
+      ],
+      [
+        2,
+        "total duration min"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Manufacturer"
+      ],
+      [
+        0,
+        "Equipment_ID"
+      ],
+      [
+        1,
+        "Member_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Date_join"
+      ],
+      [
+        1,
+        "Age"
+      ],
+      [
+        2,
+        "Member_ID"
+      ],
+      [
+        2,
+        "Equipment_ID"
+      ],
+      [
+        2,
+        "Total_duration_min"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "gym",
+    "foreign_keys": [],
+    "primary_keys": [
+      3,
+      4,
+      8
+    ],
+    "table_names": [
+      "equipment",
+      "member",
+      "record"
+    ],
+    "table_names_original": [
+      "equipment",
+      "member",
+      "record"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "building id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "street address"
+      ],
+      [
+        0,
+        "years as tallest"
+      ],
+      [
+        0,
+        "height feet"
+      ],
+      [
+        0,
+        "floors"
+      ],
+      [
+        1,
+        "institution id"
+      ],
+      [
+        1,
+        "institution"
+      ],
+      [
+        1,
+        "location"
+      ],
+      [
+        1,
+        "founded"
+      ],
+      [
+        1,
+        "type"
+      ],
+      [
+        1,
+        "enrollment"
+      ],
+      [
+        1,
+        "team"
+      ],
+      [
+        1,
+        "primary conference"
+      ],
+      [
+        1,
+        "building id"
+      ],
+      [
+        2,
+        "common name"
+      ],
+      [
+        2,
+        "protein name"
+      ],
+      [
+        2,
+        "divergence from human lineage"
+      ],
+      [
+        2,
+        "accession number"
+      ],
+      [
+        2,
+        "sequence length"
+      ],
+      [
+        2,
+        "sequence identity to human protein"
+      ],
+      [
+        2,
+        "institution id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "building_id"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Street_address"
+      ],
+      [
+        0,
+        "Years_as_tallest"
+      ],
+      [
+        0,
+        "Height_feet"
+      ],
+      [
+        0,
+        "Floors"
+      ],
+      [
+        1,
+        "Institution_id"
+      ],
+      [
+        1,
+        "Institution"
+      ],
+      [
+        1,
+        "Location"
+      ],
+      [
+        1,
+        "Founded"
+      ],
+      [
+        1,
+        "Type"
+      ],
+      [
+        1,
+        "Enrollment"
+      ],
+      [
+        1,
+        "Team"
+      ],
+      [
+        1,
+        "Primary_Conference"
+      ],
+      [
+        1,
+        "building_id"
+      ],
+      [
+        2,
+        "common_name"
+      ],
+      [
+        2,
+        "protein_name"
+      ],
+      [
+        2,
+        "divergence_from_human_lineage"
+      ],
+      [
+        2,
+        "accession_number"
+      ],
+      [
+        2,
+        "sequence_length"
+      ],
+      [
+        2,
+        "sequence_identity_to_human_protein"
+      ],
+      [
+        2,
+        "Institution_id"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text"
+    ],
+    "db_id": "protein_institute",
+    "foreign_keys": [
+      [
+        [
+          "Institution",
+          "building_id"
+        ],
+        [
+          "building",
+          "building_id"
+        ]
+      ],
+      [
+        [
+          "protein",
+          "Institution_id"
+        ],
+        [
+          "Institution",
+          "Institution_id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      16
+    ],
+    "table_names": [
+      "building",
+      "institution",
+      "protein"
+    ],
+    "table_names_original": [
+      "building",
+      "Institution",
+      "protein"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
         "code"
       ],
       [
@@ -69574,6 +80686,1100 @@
       "Pieces",
       "Providers",
       "Provides"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "school id"
+      ],
+      [
+        0,
+        "school"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        0,
+        "enrollment"
+      ],
+      [
+        0,
+        "founded"
+      ],
+      [
+        0,
+        "denomination"
+      ],
+      [
+        0,
+        "boys or girls"
+      ],
+      [
+        0,
+        "day or boarding"
+      ],
+      [
+        0,
+        "year entered competition"
+      ],
+      [
+        0,
+        "school colors"
+      ],
+      [
+        1,
+        "school id"
+      ],
+      [
+        1,
+        "nickname"
+      ],
+      [
+        1,
+        "colors"
+      ],
+      [
+        1,
+        "league"
+      ],
+      [
+        1,
+        "class"
+      ],
+      [
+        1,
+        "division"
+      ],
+      [
+        2,
+        "school id"
+      ],
+      [
+        2,
+        "school year"
+      ],
+      [
+        2,
+        "class a"
+      ],
+      [
+        2,
+        "class aa"
+      ],
+      [
+        3,
+        "player id"
+      ],
+      [
+        3,
+        "player"
+      ],
+      [
+        3,
+        "team"
+      ],
+      [
+        3,
+        "age"
+      ],
+      [
+        3,
+        "position"
+      ],
+      [
+        3,
+        "school id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "School_ID"
+      ],
+      [
+        0,
+        "School"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        0,
+        "Enrollment"
+      ],
+      [
+        0,
+        "Founded"
+      ],
+      [
+        0,
+        "Denomination"
+      ],
+      [
+        0,
+        "Boys_or_Girls"
+      ],
+      [
+        0,
+        "Day_or_Boarding"
+      ],
+      [
+        0,
+        "Year_Entered_Competition"
+      ],
+      [
+        0,
+        "School_Colors"
+      ],
+      [
+        1,
+        "School_ID"
+      ],
+      [
+        1,
+        "Nickname"
+      ],
+      [
+        1,
+        "Colors"
+      ],
+      [
+        1,
+        "League"
+      ],
+      [
+        1,
+        "Class"
+      ],
+      [
+        1,
+        "Division"
+      ],
+      [
+        2,
+        "School_Id"
+      ],
+      [
+        2,
+        "School_Year"
+      ],
+      [
+        2,
+        "Class_A"
+      ],
+      [
+        2,
+        "Class_AA"
+      ],
+      [
+        3,
+        "Player_ID"
+      ],
+      [
+        3,
+        "Player"
+      ],
+      [
+        3,
+        "Team"
+      ],
+      [
+        3,
+        "Age"
+      ],
+      [
+        3,
+        "Position"
+      ],
+      [
+        3,
+        "School_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number"
+    ],
+    "db_id": "school_player",
+    "foreign_keys": [
+      [
+        [
+          "school_details",
+          "School_ID"
+        ],
+        [
+          "school",
+          "School_ID"
+        ]
+      ],
+      [
+        [
+          "school_performance",
+          "School_Id"
+        ],
+        [
+          "school",
+          "School_ID"
+        ]
+      ],
+      [
+        [
+          "player",
+          "School_ID"
+        ],
+        [
+          "school",
+          "School_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      11,
+      17,
+      21
+    ],
+    "table_names": [
+      "school",
+      "school details",
+      "school performance",
+      "player"
+    ],
+    "table_names_original": [
+      "school",
+      "school_details",
+      "school_performance",
+      "player"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "vehicle id"
+      ],
+      [
+        0,
+        "model"
+      ],
+      [
+        0,
+        "build year"
+      ],
+      [
+        0,
+        "top speed"
+      ],
+      [
+        0,
+        "power"
+      ],
+      [
+        0,
+        "builder"
+      ],
+      [
+        0,
+        "total production"
+      ],
+      [
+        1,
+        "driver id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "citizenship"
+      ],
+      [
+        1,
+        "racing series"
+      ],
+      [
+        2,
+        "driver id"
+      ],
+      [
+        2,
+        "vehicle id"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Vehicle_ID"
+      ],
+      [
+        0,
+        "Model"
+      ],
+      [
+        0,
+        "Build_Year"
+      ],
+      [
+        0,
+        "Top_Speed"
+      ],
+      [
+        0,
+        "Power"
+      ],
+      [
+        0,
+        "Builder"
+      ],
+      [
+        0,
+        "Total_Production"
+      ],
+      [
+        1,
+        "Driver_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Citizenship"
+      ],
+      [
+        1,
+        "Racing_Series"
+      ],
+      [
+        2,
+        "Driver_ID"
+      ],
+      [
+        2,
+        "Vehicle_ID"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number"
+    ],
+    "db_id": "vehicle_driver",
+    "foreign_keys": [
+      [
+        [
+          "vehicle_driver",
+          "Vehicle_ID"
+        ],
+        [
+          "vehicle",
+          "Vehicle_ID"
+        ]
+      ],
+      [
+        [
+          "vehicle_driver",
+          "Driver_ID"
+        ],
+        [
+          "driver",
+          "Driver_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      12
+    ],
+    "table_names": [
+      "vehicle",
+      "driver",
+      "vehicle driver"
+    ],
+    "table_names_original": [
+      "vehicle",
+      "driver",
+      "vehicle_driver"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "series name"
+      ],
+      [
+        0,
+        "country"
+      ],
+      [
+        0,
+        "language"
+      ],
+      [
+        0,
+        "content"
+      ],
+      [
+        0,
+        "pixel aspect ratio par"
+      ],
+      [
+        0,
+        "hight definition tv"
+      ],
+      [
+        0,
+        "pay per view ppv"
+      ],
+      [
+        0,
+        "package option"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "episode"
+      ],
+      [
+        1,
+        "air date"
+      ],
+      [
+        1,
+        "rating"
+      ],
+      [
+        1,
+        "share"
+      ],
+      [
+        1,
+        "18 49 rating share"
+      ],
+      [
+        1,
+        "viewers m"
+      ],
+      [
+        1,
+        "weekly rank"
+      ],
+      [
+        1,
+        "channel"
+      ],
+      [
+        2,
+        "id"
+      ],
+      [
+        2,
+        "title"
+      ],
+      [
+        2,
+        "directed by"
+      ],
+      [
+        2,
+        "written by"
+      ],
+      [
+        2,
+        "original air date"
+      ],
+      [
+        2,
+        "production code"
+      ],
+      [
+        2,
+        "channel"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "id"
+      ],
+      [
+        0,
+        "series_name"
+      ],
+      [
+        0,
+        "Country"
+      ],
+      [
+        0,
+        "Language"
+      ],
+      [
+        0,
+        "Content"
+      ],
+      [
+        0,
+        "Pixel_aspect_ratio_PAR"
+      ],
+      [
+        0,
+        "Hight_definition_TV"
+      ],
+      [
+        0,
+        "Pay_per_view_PPV"
+      ],
+      [
+        0,
+        "Package_Option"
+      ],
+      [
+        1,
+        "id"
+      ],
+      [
+        1,
+        "Episode"
+      ],
+      [
+        1,
+        "Air_Date"
+      ],
+      [
+        1,
+        "Rating"
+      ],
+      [
+        1,
+        "Share"
+      ],
+      [
+        1,
+        "18_49_Rating_Share"
+      ],
+      [
+        1,
+        "Viewers_m"
+      ],
+      [
+        1,
+        "Weekly_Rank"
+      ],
+      [
+        1,
+        "Channel"
+      ],
+      [
+        2,
+        "id"
+      ],
+      [
+        2,
+        "Title"
+      ],
+      [
+        2,
+        "Directed_by"
+      ],
+      [
+        2,
+        "Written_by"
+      ],
+      [
+        2,
+        "Original_air_date"
+      ],
+      [
+        2,
+        "Production_code"
+      ],
+      [
+        2,
+        "Channel"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text"
+    ],
+    "db_id": "tvshow",
+    "foreign_keys": [
+      [
+        [
+          "TV_series",
+          "Channel"
+        ],
+        [
+          "TV_Channel",
+          "id"
+        ]
+      ],
+      [
+        [
+          "Cartoon",
+          "Channel"
+        ],
+        [
+          "TV_Channel",
+          "id"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      10,
+      19
+    ],
+    "table_names": [
+      "tv channel",
+      "tv series",
+      "cartoon"
+    ],
+    "table_names_original": [
+      "TV_Channel",
+      "TV_series",
+      "Cartoon"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "wrestler id"
+      ],
+      [
+        0,
+        "name"
+      ],
+      [
+        0,
+        "reign"
+      ],
+      [
+        0,
+        "days held"
+      ],
+      [
+        0,
+        "location"
+      ],
+      [
+        0,
+        "event"
+      ],
+      [
+        1,
+        "elimination id"
+      ],
+      [
+        1,
+        "wrestler id"
+      ],
+      [
+        1,
+        "team"
+      ],
+      [
+        1,
+        "eliminated by"
+      ],
+      [
+        1,
+        "elimination move"
+      ],
+      [
+        1,
+        "time"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Wrestler_ID"
+      ],
+      [
+        0,
+        "Name"
+      ],
+      [
+        0,
+        "Reign"
+      ],
+      [
+        0,
+        "Days_held"
+      ],
+      [
+        0,
+        "Location"
+      ],
+      [
+        0,
+        "Event"
+      ],
+      [
+        1,
+        "Elimination_ID"
+      ],
+      [
+        1,
+        "Wrestler_ID"
+      ],
+      [
+        1,
+        "Team"
+      ],
+      [
+        1,
+        "Eliminated_By"
+      ],
+      [
+        1,
+        "Elimination_Move"
+      ],
+      [
+        1,
+        "Time"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text"
+    ],
+    "db_id": "wrestler",
+    "foreign_keys": [
+      [
+        [
+          "Elimination",
+          "Wrestler_ID"
+        ],
+        [
+          "wrestler",
+          "Wrestler_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7
+    ],
+    "table_names": [
+      "wrestler",
+      "elimination"
+    ],
+    "table_names_original": [
+      "wrestler",
+      "Elimination"
+    ]
+  },
+  {
+    "column_names": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "headphone id"
+      ],
+      [
+        0,
+        "model"
+      ],
+      [
+        0,
+        "class"
+      ],
+      [
+        0,
+        "driver-matched db"
+      ],
+      [
+        0,
+        "construction"
+      ],
+      [
+        0,
+        "earpads"
+      ],
+      [
+        0,
+        "price"
+      ],
+      [
+        1,
+        "store id"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "neighborhood"
+      ],
+      [
+        1,
+        "parking"
+      ],
+      [
+        1,
+        "date opened"
+      ],
+      [
+        2,
+        "store id"
+      ],
+      [
+        2,
+        "headphone id"
+      ],
+      [
+        2,
+        "quantity"
+      ]
+    ],
+    "column_names_original": [
+      [
+        -1,
+        "*"
+      ],
+      [
+        0,
+        "Headphone_ID"
+      ],
+      [
+        0,
+        "Model"
+      ],
+      [
+        0,
+        "Class"
+      ],
+      [
+        0,
+        "Driver-matched_dB"
+      ],
+      [
+        0,
+        "Construction"
+      ],
+      [
+        0,
+        "Earpads"
+      ],
+      [
+        0,
+        "Price"
+      ],
+      [
+        1,
+        "Store_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Neighborhood"
+      ],
+      [
+        1,
+        "Parking"
+      ],
+      [
+        1,
+        "Date_Opened"
+      ],
+      [
+        2,
+        "Store_ID"
+      ],
+      [
+        2,
+        "Headphone_ID"
+      ],
+      [
+        2,
+        "Quantity"
+      ]
+    ],
+    "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number"
+    ],
+    "db_id": "headphone_store",
+    "foreign_keys": [
+      [
+        [
+          "stock",
+          "Headphone_ID"
+        ],
+        [
+          "headphone",
+          "Headphone_ID"
+        ]
+      ],
+      [
+        [
+          "stock",
+          "Store_ID"
+        ],
+        [
+          "store",
+          "Store_ID"
+        ]
+      ]
+    ],
+    "primary_keys": [
+      1,
+      8,
+      13
+    ],
+    "table_names": [
+      "headphone",
+      "store",
+      "stock"
+    ],
+    "table_names_original": [
+      "headphone",
+      "store",
+      "stock"
     ]
   },
   {
