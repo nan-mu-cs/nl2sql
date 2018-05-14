@@ -1,0 +1,135 @@
+Total = 20
+
+1. How many gymnasts are there?
+
+SELECT count(*)
+FROM gymnast
+
+2. List the total points of gymnasts in descending order.
+
+SELECT Total_Points
+FROM gymnast
+order by Total_Points DESC
+
+3. List the total points of gymnasts in descending order of floor exercise points.
+
+SELECT Total_Points
+FROM gymnast
+order by Floor_Exercise_Points DESC
+
+4. What is the average horizontal bar points for all regions?
+
+SELECT avg(Horizontal_Bar_Points)
+FROM gymnast
+
+5. What are the names of people in ascending alphabetical order?
+
+SELECT Name
+from People
+order by Name ASC
+
+6. What are the names of gymnasts?
+
+SELECT T2.Name
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+
+7. What are the names of gymnasts whose hometown is not "Santo Domingo"?
+
+SELECT T2.Name
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+Where T2.Hometown != "Santo Domingo"
+
+8. What is the age of the tallest people.
+
+SELECT Age
+FROM people
+order by Height limit 1
+
+9. List the names of the top 5 oldest people.
+
+SELECT Name
+FROM People
+order by Age DESC limit 5
+
+10. What is the total points of the youngest gymnast.
+
+SELECT T1.Total_Points
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+order by T2.Age ASC limit 1
+
+11. What is the average age of all gymnasts?
+
+SELECT avg(T2.Age)
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+
+12. What are the distinct hometowns of gymnasts with total points more than 57.5?
+
+SELECT distinct T2.Hometown
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+Where T1.Total_Points > 57.5
+
+13. What are the hometowns of gymnasts and the corresponding number of gymnasts?
+
+SELECT T2.Hometown, COUNT(*)
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+group by T2.Hometown
+
+14. What is the most common hometown of gymnasts?
+
+SELECT T2.Hometown
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+group by T2.Hometown
+order by COUNT(*) DESC limit 1
+ 
+15. What are the hometowns that are shared by at least two gymnasts?
+
+SELECT T2.Hometown
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+group by T2.Hometown
+Having COUNT(*) >= 2
+
+16. List the name of gymnasts in ascending order of their heights.
+
+SELECT T2.Name
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+order by T2.Height ASC
+
+17. List the distinct hometowns that are not associated with any gymnast.
+
+SELECT distinct Hometown
+from people
+Except
+SELECT distinct T2.Hometown
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+
+18. Show the hometowns shared by people older than 23 and younger than 20.
+
+SELECT Hometown
+FROM people
+Where Age > 23
+Intersect 
+SELECT Hometown
+FROM people
+Where Age > 20
+
+19. How many distinct hometowns of people are there.
+
+SELECT count(distinct Hometown)
+FROM people
+
+20. Show the age of gymnasts in descending order of total points.
+
+SELECT T2.Age
+FROM gymnast as T1 join people as T2 
+ON T1.Gymnast_ID = T2.People_ID
+order by T1.Total_Points DESC
