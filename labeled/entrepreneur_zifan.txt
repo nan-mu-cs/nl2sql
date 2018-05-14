@@ -1,0 +1,131 @@
+Total = 20
+
+1. How many entrepreneurs are there?
+
+SELECT count(*)
+FROM entrepreneur
+
+2. List the companies of entrepreneurs in descending order of money requested.
+
+SELECT Company
+FROM entrepreneur
+order by Money_Requested DESC
+
+3. List the companies and the investors of entrepreneurs.
+
+SELECT Company, Investor
+FROM entrepreneur
+
+4. What is the average money requested by all entrepreneurs?
+
+SELECT avg(Money_Requested)
+FROM entrepreneur
+
+5. What are the names of people in ascending order of weight?
+
+SELECT Name
+from People
+order by Weight ASC
+
+6. What are the names of entrepreneurs?
+
+SELECT T2.Name
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+
+7. What are the names of entrepreneurs whose investor is not "Rachel Elnaugh"?
+
+SELECT T2.Name
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+Where T1.Investor != "Rachel Elnaugh"
+
+8. What is the weight of the shortest people.
+
+SELECT Weight
+FROM people
+order by Height ASC limit 1
+
+9. What is the name of the entrepreneur with the biggest weight.
+
+SELECT T2.Name
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+order by T2.Weight DESC limit 1
+
+10. What is the total money requested by entrepreneurs with height more than 1.85.
+
+SELECT sum(T1.Money_Requested)
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+Where T2.Height > 1.85
+
+11. What are the date of births of entrepreneurs with investor "Simon Woodroffe" or "Peter Jones"?
+
+SELECT T2.Date_of_Birth
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+Where T1.Investor = "Simon Woodroffe" or T1.Investor = "Peter Jones"
+
+12. What are the weights of entrepreneurs in descending order of money requested?
+
+SELECT T2.Weight
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+order by T1.Money_Requested DESC
+
+13. What are the investors of entrepreneurs and the corresponding number of entrepreneurs invested by each investor?
+
+SELECT Investor, COUNT(*)
+FROM entrepreneur
+group by Investor
+
+14. What is the investor that has invested in the most number of entrepreneurs?
+
+SELECT Investor
+FROM entrepreneur
+group by Investor
+order by COUNT(*) DESC limit 1
+ 
+15. What are the investors that have invested in at least two entrepreneurs?
+
+SELECT Investor
+FROM entrepreneur
+group by Investor
+Having COUNT(*) >= 2
+
+16. List the names of entrepreneurs and their companies in descending order of money requested?
+
+SELECT T2.Name, T1.Company
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+order by T1.Money_Requested
+
+17. List the names of people that are not entrepreneurs.
+
+SELECT Name
+from people
+Where People_ID not in (select People_ID from entrepreneur)
+
+18. Show the investors shared by entrepreneurs that requested money more than 140000 and 
+entrepreneurs that requested money less than 120000.
+
+SELECT Investor
+FROM entrepreneur
+Where Money_Requested > 140000
+Intersect 
+SELECT Investor
+FROM entrepreneur
+Where Money_Requested < 120000
+
+19. How many distinct companies of entrepreneurs are there.
+
+SELECT count(distinct Company)
+FROM entrepreneur
+
+20. Show the company of the tallest entrepreneur.
+
+SELECT T1.Company
+FROM entrepreneur as T1 join people as T2 
+ON T1.People_ID = T2.People_ID
+order by T2.Height DESC limit 1
