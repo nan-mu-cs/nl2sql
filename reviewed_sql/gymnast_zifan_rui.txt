@@ -17,7 +17,7 @@ SELECT Total_Points
 FROM gymnast
 order by Floor_Exercise_Points DESC
 
-4. What is the average horizontal bar points for all regions?
+4. What is the average horizontal bar points for all gymnasts?
 
 SELECT avg(Horizontal_Bar_Points)
 FROM gymnast
@@ -45,7 +45,7 @@ Where T2.Hometown != "Santo Domingo"
 
 SELECT Age
 FROM people
-order by Height limit 1
+order by Height desc limit 1
 
 9. List the names of the top 5 oldest people.
 
@@ -120,7 +120,7 @@ Where Age > 23
 Intersect 
 SELECT Hometown
 FROM people
-Where Age > 20
+Where Age < 20
 
 19. How many distinct hometowns of people are there.
 
