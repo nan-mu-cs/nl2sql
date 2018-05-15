@@ -16,7 +16,7 @@ For all different evaluation metrices, we would get the scores on all SQL-questi
 on SQL with different hardness levels.
 
 We define:
-- SQL components 1: WHERE, GROUP BY, ORDER BY, LIMIT, JOIN, OR, LIKE
+- SQL components 1: WHERE, GROUP BY, ORDER BY, LIMIT, JOIN, OR, LIKE，HAVING
 - SQL components 2: EXCEPT, UNION, INTERSECT, NESTED
 - Others: # of agg > 1, # of select columns > 1, # of where conditions > 1, # of group by clauses > 1, # of group by clauses > 1 (no consider col1-col2 math equations etc.)
 
