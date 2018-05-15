@@ -12,7 +12,6 @@ from os.path import isfile, isdir, join, split, exists, splitext
 
 from process_sql import get_sql
 
-VALUE_NUM_SYMBOL = 'VALUE'
 
 class Schema:
     """
@@ -49,49 +48,6 @@ class Schema:
             idMap[key] = i
 
         return idMap
-
-
-def strip_query(query):
-    '''
-    return keywords of sql query
-    '''
-    query_keywords = []
-    query = query.strip().replace(";","").replace("\t","")
-    query = query.replace("(", " ( ").replace(")", " ) ")
-    query = query.replace(">=", " >= ").replace("=", " = ").replace("<=", " <= ").replace("!=", " != ")
-
-
-    # then replace all stuff enclosed by "" with a numerical value to get it marked as {VALUE}
-    str_1 = re.findall("\"[^\"]*\"", query)
-    str_2 = re.findall("\'[^\']*\'", query)
-    values = str_1 + str_2
-    for val in values:
-        query = query.replace(val.strip(), VALUE_NUM_SYMBOL)
-
-    query_tokenized = query.split()
-    float_nums = re.findall("[-+]?\d*\.\d+", query)
-    query_tokenized = [VALUE_NUM_SYMBOL if qt in float_nums else qt for qt in query_tokenized]
-    query = " ".join(query_tokenized)
-    int_nums = [i.strip() for i in re.findall("[^tT]\d+", query)]
-
-
-    query_tokenized = [VALUE_NUM_SYMBOL if qt in int_nums else qt for qt in query_tokenized]
-    # print int_nums, query, query_tokenized
-
-    for tok in query_tokenized:
-        if "." in tok:
-            table = re.findall("[Tt]\d+\.", tok)
-            if len(table)>0:
-                to = tok.replace(".", " . ").split()
-                to = [t.lower() for t in to if len(t)>0]
-                query_keywords.extend(to)
-            else:
-                query_keywords.append(tok.lower())
-
-        elif len(tok) > 0:
-            query_keywords.append(tok.lower())
-
-    return query_keywords
 
 
 def get_schemas_from_json(fpath):
@@ -176,18 +132,12 @@ def parse_file_and_sql(filepath, schema, db_id):
 	    for ix, q in enumerate(questions):
                 q_toks = word_tokenize(q)
                 query_toks = word_tokenize(sql)
-                query_toks_no_value = strip_query(sql)
                 sql_label = None
-                #try:
                 sql_label = get_sql(schema, sql)
-                #except:
-                #    print("\ndb_id: {}".format(db_id))
-                #    print("query: {}".format(sql))
                 ret.append({'question': q,
                             'question_toks': q_toks,
                             'query': sql,
                             'query_toks': query_toks,
-                            'query_toks_no_value': query_toks_no_value,
                             'sql': sql_label,
                             'db_id': db_id})
 		questions = []
@@ -211,17 +161,12 @@ if __name__ == '__main__':
     db_files = [f for f in listdir(input_dir) if f.endswith('.txt')]
     fn_map = {}
     for f in db_files:
-        flag = True
         for db in db_names:
-            if db.lower() in f.lower():
-                flag = False
+            if db in f:
                 fn_map[f] = db
                 continue
-        if flag == True:
-            print "db not found: ", f
     if len(db_files) != len(fn_map.keys()):
-        tab_db_files = [f.lower() for f in fn_map.keys()]
-        print 'Warning: misspelled files: ', [f for f in db_files if f.lower() not in tab_db_files]
+        print 'Warning: misspelled files: ', [f for f in db_files if f not in fn_map.keys()]
         sys.exit()
 
     data = []
@@ -235,3 +180,4 @@ if __name__ == '__main__':
         data.extend(data_one)
     with open(output_file, 'wt') as out:
         json.dump(data, out, sort_keys=True, indent=4, separators=(',', ': '))
+

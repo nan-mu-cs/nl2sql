@@ -66,11 +66,11 @@ class Schema:
         id = 1
         for key, vals in schema.iteritems():
             for val in vals:
-                idMap[key.lower() + "." + val.lower()] = "__" + key.lower() + "." + val.lower() + "__"
+                idMap[key + "." + val] = "__" + key + "." + val + "__"
                 id += 1
 
         for key in schema:
-            idMap[key.lower()] = "__" + key.lower() + "__"
+            idMap[key] = "__" + key + "__"
             id += 1
 
         return idMap
@@ -115,7 +115,6 @@ def get_schema_from_json(fpath):
 
 def tokenize(string):
     string = str(string)
-    string = string.replace("\'", "\"")  # ensures all string values wrapped by "" problem??
     quote_idxs = [idx for idx, char in enumerate(string) if char == '"']
     assert len(quote_idxs) % 2 == 0, "Unexpected quote"
 
@@ -278,9 +277,6 @@ def parse_value(toks, start_idx, tables_with_alias, schema, default_tables=None)
 
     if toks[idx] == 'select':
         idx, val = parse_sql(toks, idx, tables_with_alias, schema)
-    elif "\"" in toks[idx]:  # token is a string value
-        val = toks[idx]
-        idx += 1
     else:
         end_idx = idx
         while end_idx < len_ and toks[end_idx] != ',' and toks[end_idx] != ')'\
@@ -561,21 +557,16 @@ if __name__ == '__main__':
     # print get_schema('art_1.sqlite')
     # fpath = '/Users/zilinzhang/Workspace/Github/nl2sql/Data/Initial/table/art_1_table.json'
     # print schema
-
-    # schema = Schema(get_schema('art_1.sqlite'))
-    # print schema.schema
-    schema = {"paragraphs": ["paragraph_text","paragraph_id", "document_id"], "documents": ["document_id", "document_name"]}
-    schema = Schema(schema)
-    # print schema.idMap
-    data = ["test1"]
-    # data = load_data("/Users/zilinzhang/Workspace/Github/nl2sql/Data/Processed/train/art_1_processed.json")
+    #schema = {"country": ["code", "indepyear"], "countrylanguage": ["language", "countrycode", "isofficial"]}
+    schema = Schema(get_schema('/data/projects/nl2sql/database/art_1/art_1.sqlite'))
+    #schema = Schema(schema)
+    data = load_data('art_1.json')
+    print len(data)
     for ix, entry in enumerate(data):
-        # query = entry["query"]
-        # query = "SELECT template_id FROM Templates WHERE template_type_code  =  \"PP\" OR template_type_code  =  \"PPT\""
-        # query = "SELECT count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_ID  =  T2.document_ID WHERE T2.document_name  =  'Summer Show'"
-        query = "SELECT T1.paragraph_id ,   T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.Document_Name  =  'Welcome to NY'"
+        query = entry["query"]
+        print '\n-----------------------------------------'
+        print query
         toks = tokenize(query)
         tables_with_alias = get_tables_with_alias(schema.schema, toks)
         _, sql = parse_sql(toks, 0, tables_with_alias, schema)
         print sql
-        break

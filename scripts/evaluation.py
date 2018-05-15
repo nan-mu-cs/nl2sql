@@ -1,281 +1,430 @@
-#!/usr/bin/python
-import sys
+################################
+# val: number(float)/string(str)/sql(dict)
+# col_unit: (agg_id, col_id, isDistinct(bool))
+# val_unit: (unit_op, col_unit1, col_unit2)
+# table_unit: (table_type, col_unit/sql)
+# cond_unit: (not_op, op_id, val_unit, val1, val2)
+# condition: [cond_unit1, 'and'/'or', cond_unit2, ...]
+# sql {
+#   'select': (isDistinct(bool), [(agg_id, val_unit), (agg_id, val_unit), ...])
+#   'from': {'table_units': [table_unit1, table_unit2, ...], 'conds': condition}
+#   'where': condition
+#   'groupBy': [col_unit1, col_unit2, ...]
+#   'orderBy': ('asc'/'desc', [val_unit1, val_unit2, ...])
+#   'having': condition
+#   'limit': None/limit value
+#   'intersect': None/sql
+#   'except': None/sql
+#   'union': None/sql
+# }
+################################
+
 import json
+import sqlite3
 
-BLACK_LIST = ['variant','value']
-def compare_node(label_node,test_node):
-	if isinstance(label_node, dict) and isinstance(test_node, list):
-		for child in test_node:
-			ret,_,_ = compare_node(label_node, child)
-			if ret == 1:
-				return 1,1,len(test_node)
-		return 0,1,len(test_node)
-	if isinstance(label_node, list) and isinstance(test_node, dict):
-		for child in label_node:
-			ret,_,_ = compare_node(child, test_node)
-			if ret == 1:
-				return 1,len(label_node),1
-		return 0,len(label_node),1
-	if isinstance(label_node, dict) and isinstance(test_node, dict):
-		for key in label_node:
-			if key in BLACK_LIST:
-				continue
-			if key not in test_node:
-#				print(key)
-				return 0,1,1
-			if isinstance(label_node[key], dict):
-				ret,label,_ = compare_node(label_node[key], test_node[key])
-				if ret != label:
-					return 0,1,1
-			else:
-				if label_node[key] != test_node[key]:
-					return 0,1,1
-		return 1,1,1
-	if isinstance(label_node, list) and isinstance(test_node, list):
-		visited = [False]*len(label_node)
-		matched = 0
-		for test_child in test_node:
-			for i,label_child in enumerate(label_node):
-				if visited[i]:
-					continue
-				ret,label,_ = compare_node(label_child, test_child)
-				if ret == label:
-					visited[i] = True
-					matched += 1
-					break
-		return matched,len(label_node),len(test_node)
-	num_label = 1
-	if isinstance(label_node, list):
-		num_label = len(label_node)				
-	num_test = 1
-	if isinstance(test_node, list):
-		num_test = len(test_node)
-	if label_node == test_node:
-		return 1,1,1
-	return 0,num_label,num_test
+CLAUSE_KEYWORDS = ('select', 'from', 'where', 'group', 'order', 'limit', 'intersect', 'union', 'except')
+JOIN_KEYWORDS = ('join', 'on', 'as')
 
-def expand_where(node,ret,exp_set):
-	if "operation" in node and (node["operation"] == "and" or node["operation"] == "or"):
-		exp_set.append(node["operation"])
-		if "left" in node:
-			expand_where(node["left"], ret, exp_set)
-		if "right" in node:
-			expand_where(node["right"], ret, exp_set)
-	else:
-		ret.append(node)
-#print(compare_node(label2, test1))
-def evaluation_ast(label_ast,test_ast):
-	ret = {
-		"select":[0,0,0],
-		"select_agg":[0,0,0],
-		"select_without_agg":[0,0,0],
-		"where_expression":[0,0,0],
-		"where_operator":[0,0,0],
-		"where_nested":[0,0,0],
-		"group":[0,0,0],
-		"having":[0,0,0],
-		"order":[0,0,0],
-		"compound":[0,0,0]
-	}
-	label_agg_node = []
-	test_agg_node = []
-	label_without_agg_node = []
-	test_without_agg_node = []
-	if "result" in label_ast:
-		for node in label_ast["result"]:
-			if "type" in node:
-				if node["type"] == "identifier":
-					label_without_agg_node.append(node)
-				elif node["type"] == "function":
-					label_agg_node.append(node)
-	if "result" in test_ast:
-		for node in test_ast["result"]:
-			if "type" in node:
-				if node["type"] == "identifier":
-					test_without_agg_node.append(node)
-				elif node["type"] == "function":
-					test_agg_node.append(node)
-	ret["select_agg"] = compare_node(label_agg_node, test_agg_node)
-	ret["select_without_agg"] = compare_node(label_without_agg_node, test_without_agg_node)
-	if "result" in label_ast and "result" in test_ast:
-		ret["select"] = compare_node(label_ast["result"], test_ast["result"])
-#		if ret["select"][0] > 0:
-#			print("compare")
-#			print(label_ast["result"])
-#			print(test_ast["result"])
-	elif "result" in label_ast:
-		ret["select"][1] = len(label_ast["result"])
-	elif "result" in test_ast:
-		ret["select"][2] = len(test_ast["result"])
-	label_nested_where = []
-	test_nested_where = []
-	label_expand_where = []
-	test_expand_where = []
-	label_expand_oper = []
-	test_expand_oper = []
-	if "where" in label_ast and isinstance(label_ast["where"], list) and len(label_ast["where"]) > 0:
-		if len(label_ast["where"]) > 1:
-			print(label_ast)
-		expand_where(label_ast["where"][0], label_expand_where, label_expand_oper)
-	if "where" in test_ast and isinstance(test_ast["where"], list) and len(test_ast["where"]) > 0:
-		if len(test_ast["where"]) > 1:
-			print(test_ast)
-		expand_where(test_ast["where"][0], test_expand_where, test_expand_oper)
-#	if len(label_expand_oper) > 0 or len(test_expand_oper) > 0:
-#		print("compare")
-#		print(label_expand_oper)
-#		print(test_expand_oper)
-	ret["where_expression"] = compare_node(label_expand_where, test_expand_where)
-	
-	ret["where_operator"] = compare_node(label_expand_oper, test_expand_oper)
-	for node in label_expand_where:
-		if "left" in node and "type" in node["left"] and node["left"]["type"] == "statement":
-			label_nested_where.append(node["left"])
-		if "right" in node and "type" in node["right"] and node["right"]["type"] == "statement":
-			label_nested_where.append(node["right"])
-	for node in test_expand_where:
-		if "left" in node and "type" in node["left"] and node["left"]["type"] == "statement":
-			test_nested_where.append(node["left"])
-		if "right" in node and "type" in node["right"] and node["right"]["type"] == "statement":
-			test_nested_where.append(node["right"])
-	ret["where_nested"] = compare_node(label_nested_where, test_nested_where)
-#	if len(label_nested_where) > 0 and len(test_nested_where) > 0:
-#		print("compare")
-#		print(label_nested_where)
-#		print(test_nested_where)
-#	if "where" in label_ast and "where" in test_ast:
-#		ret["where"] = compare_node(label_ast["where"], test_ast["where"])
-#	elif "where" in label_ast:
-#		ret["where"][1] = len(label_ast["where"])
-#	elif "where" in test_ast:
-#		ret["where"][2] = len(test_ast["where"])
-		
-	if "group" in label_ast and "group" in test_ast:
-		ret["group"] = compare_node(label_ast["group"], test_ast["group"])
-	elif "group" in label_ast:
-		ret["group"][1] = 1
-	elif "group" in test_ast:
-		ret["group"][2] = 1
-		
-	if "having" in label_ast and "having" in test_ast:
-		ret["having"] = compare_node(label_ast["having"], test_ast["having"])
-	elif "having" in label_ast:
-		ret["having"][1] = 1
-	elif "having" in test_ast:
-		ret["having"][2] = 1
-	
-	if "order" in label_ast and "order" in test_ast:
-		ret["order"] = compare_node(label_ast["order"], test_ast["order"])
-	elif "order" in label_ast:
-		ret["order"][1] = 1
-	elif "order" in test_ast:
-		ret["order"][2] = 1
-	
-	if "compound" in label_ast and "compound" in test_ast:
-		ret["compound"] = compare_node(label_ast["compound"], test_ast["compound"])
-	elif "compound" in label_ast:
-		ret["compound"][1] = 1
-	elif "compound" in test_ast:
-		ret["compound"][2] = 1
-	
-	return ret
+WHERE_OPS = ('not', 'between', '=', '>', '<', '>=', '<=', '!=', 'in', 'like', 'is', 'exists')
+UNIT_OPS = ('none', '-', '+', "*", '/')
+AGG_OPS = ('none', 'max', 'min', 'count', 'sum', 'avg')
+TABLE_TYPE = {
+    'sql': "sql",
+    'table_unit': "table_unit",
+}
 
-def evaluation(label_file,test_file):
-	label_data = json.load(open(label_file))
-	test_data = json.load(open(test_file))
-	stat = {
-		"select":[0,0,0],
-		"select_agg":[0,0,0],
-		"select_without_agg":[0,0,0],
-		"where_expression":[0,0,0],
-		"where_operator":[0,0,0],
-		"where_nested":[0,0,0],
-		"group":[0,0,0],
-		"having":[0,0,0],
-		"order":[0,0,0],
-		"compound":[0,0,0]
-	}
-	for label_ast,test_ast in zip(label_data,test_data):
-		val = evaluation_ast(label_ast, test_ast)
-		for key in stat:
-			if key in val:
-				for i in range(len(stat[key])):
-					stat[key][i] += val[key][i]
-	return stat
-ast1 = {
-			"type": "statement",
-			"variant": "select",
-			"result": [
-				{
-					"type": "identifier",
-					"variant": "column",
-					"name": "a"
-				},
-				{
-					"type": "identifier",
-					"variant": "column",
-					"name": "b"
-				}
-			],
-			"where": [
-				{
-					"type": "expression",
-					"format": "binary",
-					"variant": "operation",
-					"operation": "=",
-					"left": {
-						"type": "identifier",
-						"variant": "column",
-						"name": "a"
-					},
-					"right": {
-						"type": "literal",
-						"variant": "decimal",
-						"value": "1"
-					}
-				}
-			]
-		}
-ast2 = {
-			"type": "statement",
-			"variant": "select",
-			"result": [
-				{
-					"type": "identifier",
-					"variant": "column",
-					"name": "a"
-				}
-			],
-			"from": {
-				"type": "identifier",
-				"variant": "table",
-				"name": "b"
-			},
-			"where": [
-				{
-					"type": "expression",
-					"format": "binary",
-					"variant": "operation",
-					"operation": "in",
-					"right": {
-						"type": "statement",
-						"variant": "select",
-						"result": [
-							{
-								"type": "identifier",
-								"variant": "column",
-								"name": "d"
-							}
-						]
-					},
-					"left": {
-						"type": "identifier",
-						"variant": "column",
-						"name": "c"
-					}
-				}
-			]
-		}
-#print(evaluation_ast(ast1, ast2))	
-print(evaluation("../../mix_label_ast.json", "../../mix_iyer_ast.json"))
-		
+COND_OPS = ('and', 'or')
+SQL_OPS = ('intersect', 'union', 'except')
+ORDER_OPS = ('desc', 'asc')
+
+
+HARDNESS = {
+    "component1": ('where', 'group', 'order', 'limit', 'join', 'or', 'like'),
+    "component2": ('except', 'union', 'intersect')
+}
+
+
+def condition_has_or(conds):
+    return 'or' in conds[1::2]
+
+
+def condition_has_like(conds):
+    return WHERE_OPS.index('like') in [cond_unit[1] for cond_unit in conds[::2]]
+
+
+def condition_has_sql(conds):
+    for cond_unit in conds[::2]:
+        val1, val2 = cond_unit[3], cond_unit[4]
+        if val1 is not None and type(val1) is dict:
+            return True
+        if val2 is not None and type(val2) is dict:
+            return True
+    return False
+
+
+def val_has_op(val_unit):
+    return val_unit[0] != UNIT_OPS.index('none')
+
+
+def has_agg(unit):
+    return unit[0] != AGG_OPS.index('none')
+
+
+def accuracy(count, total):
+    if count == total:
+        return 1
+    return float(count) / total
+
+
+def recall(count, total):
+    if count == total:
+        return 1
+    return float(count) / total
+
+
+def F1(acc, rec):
+    if (acc + rec) == 0:
+        return 0
+    return (2. * acc * rec) / (acc + rec)
+
+
+def get_scores(count, pred_total, label_total):
+    acc = accuracy(count, pred_total)
+    rec = recall(count, label_total)
+    f1 = F1(acc, rec)
+    return acc, rec, f1
+
+
+def eval_sel(pred, label):
+    pred_sel = pred['select'][1]
+    label_sel = label['select'][1]
+    label_wo_agg = [unit[1] for unit in label_sel]
+    pred_total = len(pred_sel)
+    label_total = len(label_sel)
+    cnt = 0
+    cnt_wo_agg = 0
+
+    for unit in pred_sel:
+        if unit in label_sel:
+            cnt += 1
+        if unit[1] in label_wo_agg:
+            cnt_wo_agg += 1
+
+    return label_total, pred_total, cnt, cnt_wo_agg
+
+
+def eval_where(pred, label):
+    pred_conds = [unit[:3] for unit in pred['where'][::2]]  # ignore value
+    label_conds = [unit[:3] for unit in label['where'][::2]]  # ignore value
+    label_wo_agg = [unit[2] for unit in label_conds]
+    pred_total = len(pred_conds)
+    label_total = len(label_conds)
+    cnt = 0
+    cnt_wo_agg = 0
+
+    for unit in pred_conds:
+        if unit in label_conds:
+            cnt += 1
+        if unit[2] in label_wo_agg:
+            cnt_wo_agg += 1
+
+    return label_total, pred_total, cnt, cnt_wo_agg
+
+
+def eval_group(pred, label):
+    pred_cols = [unit[1] for unit in pred['groupBy']]
+    label_cols = [unit[1] for unit in label['groupBy']]
+    pred_total = len(pred_cols)
+    label_total = len(label_cols)
+    cnt = 0
+
+    for col in pred_cols:
+        if col in label_cols:
+            cnt += 1
+    return label_total, pred_total, cnt
+
+
+def eval_having(pred, label):
+    pred_total = label_total = cnt = 0
+    if len(pred['groupBy']) > 0:
+        pred_total = 1
+    if len(label['groupBy']) > 0:
+        label_total = 1
+
+    pred_cols = [unit[1] for unit in pred['groupBy']]
+    label_cols = [unit[1] for unit in label['groupBy']]
+    if pred_total == label_total == 1 and \
+        pred_cols == label_cols and pred['having'] == label['having']:
+        cnt = 1
+
+    return label_total, pred_total, cnt
+
+
+def eval_order(pred, label):
+    pred_total = label_total = cnt = 0
+    if len(pred['orderBy']) > 0:
+        pred_total = 1
+    if len(label['orderBy']) > 0:
+        label_total = 1
+
+    if len(label['orderBy']) > 0 and pred['orderBy'] == label['orderBy'] and \
+            ((pred['limit'] is None and label['limit'] is None) or (pred['limit'] is not None and label['limit'] is not None)):
+        cnt = 1
+    return label_total, pred_total, cnt
+
+
+def eval_and_or(pred, label):
+    pred_ao = pred['from']['conds'][1::2] + pred['where'][1::2] + pred['having'][1::2]
+    label_ao = label['from']['conds'][1::2] + label['where'][1::2] + label['having'][1::2]
+    pred_total = len(pred_ao)
+    label_total = len(label_ao)
+
+    cnt = 0
+    num_pred_a = len([token for token in pred_ao if token == 'and'])
+    num_label_a = len([token for token in label_ao if token == 'and'])
+    cnt += min(num_pred_a, num_label_a)
+
+    num_pred_o = len([token for token in pred_ao if token=='or'])
+    num_label_o = len([token for token in label_ao if token=='or'])
+    cnt += min(num_pred_o, num_label_o)
+
+    return label_total, pred_total, cnt
+
+
+def get_nestedSQL(sql):
+    nested = []
+    for cond_unit in sql['from']['conds'][::2] + sql['where'][::2] + sql['having'][::2]:
+        if type(cond_unit[3]) is dict:
+            nested.append(cond_unit[3])
+        if type(cond_unit[4]) is dict:
+            nested.append(cond_unit[4])
+    if sql['intersect'] is not None:
+        nested.append(sql['intersect'])
+    if sql['except'] is not None:
+        nested.append(sql['except'])
+    if sql['union'] is not None:
+        nested.append(sql['union'])
+    return nested
+
+
+def eval_IUEN(pred, label):
+    pred_nested = get_nestedSQL(pred)
+    label_nested = get_nestedSQL(label)
+    pred_total = len(pred_nested)
+    label_total = len(label_nested)
+    cnt = 0
+
+    for sql in pred_nested:
+        if sql in label_nested:
+            cnt += 1
+    return label_total, pred_total, cnt
+
+
+def get_keywords(sql):
+    res = set()
+    if len(sql['where']) > 0:
+        res.add('where')
+    if len(sql['groupBy']) > 0:
+        res.add('group')
+    if len(sql['having']) > 0:
+        res.add('having')
+    if len(sql['orderBy']) > 0:
+        res.add(sql['orderBy'][0])
+        res.add('order')
+    if sql['limit'] is not None:
+        res.add('limit')
+    if sql['except'] is not None:
+        res.add('except')
+    if sql['union'] is not None:
+        res.add('union')
+    if sql['intersect'] is not None:
+        res.add('intersect')
+
+    # or keyword
+    ao = sql['from']['conds'][1::2] + sql['where'][1::2] + sql['having'][1::2]
+    if len([token for token in ao if token == 'or']) > 0:
+        res.add('or')
+
+    cond_units = sql['from']['conds'][::2] + sql['where'][::2] + sql['having'][::2]
+    # not keyword
+    if len([cond_unit for cond_unit in cond_units if cond_unit[0]]) > 0:
+        res.add('not')
+
+    # in keyword
+    if len([cond_unit for cond_unit in cond_units if cond_unit[1] == WHERE_OPS.index('in')]) > 0:
+        res.add('in')
+
+    # like keyword
+    if len([cond_unit for cond_unit in cond_units if cond_unit[1] == WHERE_OPS.index('like')]) > 0:
+        res.add('like')
+
+    return res
+
+
+def eval_keywords(pred, label):
+    pred_keywords = get_keywords(pred)
+    label_keywords = get_keywords(label)
+    pred_total = len(pred_keywords)
+    label_total = len(label_keywords)
+    cnt = 0
+
+    for k in pred_keywords:
+        if k in label_keywords:
+            cnt += 1
+    return label_total, pred_total, cnt
+
+
+def count_agg(units):
+    return len([unit for unit in units if has_agg(unit)])
+
+
+def count_component1(sql):
+    count = 0
+    if len(sql['where']) > 0:
+        count += 1
+    if len(sql['groupBy']) > 0:
+        count += 1
+    if len(sql['orderBy']) > 0:
+        count += 1
+    if sql['limit'] is not None:
+        count += 1
+    if len(sql['where']) > 0:  # JOIN
+        count += len(sql['where']) - 1
+
+    ao = sql['from']['conds'][1::2] + sql['where'][1::2] + sql['having'][1::2]
+    count += len([token for token in ao if token == 'or'])
+    cond_units = sql['from']['conds'][::2] + sql['where'][::2] + sql['having'][::2]
+    count += len([cond_unit for cond_unit in cond_units if cond_unit[1] == WHERE_OPS.index('like')])
+
+    return count
+
+
+def count_component2(sql):
+    nested = get_nestedSQL(sql)
+    return len(nested)
+
+
+def count_others(sql):
+    count = 0
+    # number of aggregation
+    agg_count = count_agg(sql['select'][1])
+    agg_count += count_agg(sql['where'][::2])
+    agg_count += count_agg(sql['groupBy'])
+    if len(sql['orderBy']) > 0:
+        agg_count += count_agg([unit[1] for unit in sql['orderBy'][1] if unit[1]] +
+                            [unit[2] for unit in sql['orderBy'][1] if unit[2]])
+    agg_count += count_agg(sql['having'])
+    if agg_count > 1:
+        count += 1
+
+    # number of select columns
+    if len(sql['select'][1]) > 1:
+        count += 1
+
+    # number of where conditions
+    if len(sql['where']) > 1:
+        count += 1
+
+    # number of group by clauses
+    if len(sql['groupBy']) > 1:
+        count += 1
+
+    return count
+
+
+class Evaluator:
+    """A simple evaluator"""
+    def __init__(self):
+        pass
+
+    def eval_hardness(self, sql):
+        count_comp1_ = count_component1(sql)
+        count_comp2_ = count_component2(sql)
+        count_others_ = count_others(sql)
+
+        if count_comp1_ <= 1 and count_others_ == 0:
+            return "easy"
+        elif (count_others_ <= 2 and count_comp1_ <= 1) or \
+            (count_comp1_ <= 2 and count_others_ < 2):
+            return "medium"
+        elif (count_others_ > 2 and count_comp1_ <= 2 and count_comp2_ == 0) or \
+            (2 < count_comp1_ <= 3 and count_others_ <= 2 and count_comp2_ == 0) or \
+            (count_comp1_ <= 1 and count_others_ == 0 and count_comp2_ <= 1):
+            return "hard"
+        else:
+            return "extra"
+
+    def eval_exact_match(self, pred, label):
+        partial_scores = self.eval_partial_match(pred, label)
+        for _, score in partial_scores.items():
+            if score['f1'] != 1:
+                return 0
+        return 1
+
+    def eval_partial_match(self, pred, label):
+        res = {}
+        for i in range(1, 11):
+            res['type{}'.format(i)] = {
+                'acc': 0, 'rec': 0, 'f1': 0
+            }
+
+        label_total, pred_total, cnt, cnt_wo_agg = eval_sel(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type1'] = {'acc': acc, 'rec': rec, 'f1': f1}
+        acc, rec, f1 = get_scores(cnt_wo_agg, pred_total, label_total)
+        res['type2'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        label_total, pred_total, cnt, cnt_wo_agg = eval_where(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type3'] = {'acc': acc, 'rec': rec, 'f1': f1}
+        acc, rec, f1 = get_scores(cnt_wo_agg, pred_total, label_total)
+        res['type4'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        label_total, pred_total, cnt = eval_group(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type5'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        label_total, pred_total, cnt = eval_having(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type6'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        label_total, pred_total, cnt = eval_order(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type7'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        label_total, pred_total, cnt = eval_and_or(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type8'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        label_total, pred_total, cnt = eval_IUEN(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type9'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        label_total, pred_total, cnt = eval_keywords(pred, label)
+        acc, rec, f1 = get_scores(cnt, pred_total, label_total)
+        res['type10'] = {'acc': acc, 'rec': rec, 'f1': f1}
+
+        return res
+
+if __name__ == '__main__':
+    evaluator = Evaluator()
+    with open("../data/train.json") as f:
+        data = json.load(f)
+
+    # evaluate hardness
+    count = {
+        'easy': 0,
+        'medium': 0,
+        'hard': 0,
+        'extra': 0
+    }
+    for entry in data:
+        hardness = evaluator.eval_hardness(entry['sql'])
+        count[hardness] += 1
+    print count
+    for entry in data:
+        if entry['query'] == "SELECT count(*) FROM products WHERE price >= 180":
+            score = evaluator.eval_exact_match(entry['sql'], entry['sql'])
+            if score != 1:
+                print entry['sql']
+
