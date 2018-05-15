@@ -21,10 +21,10 @@ We define:
 - Others: # of agg > 1, # of select columns > 1, # of where conditions > 1, # of group by clauses > 1, # of group by clauses > 1 (no consider col1-col2 math equations etc.)
 
 1. easy: 
-   - if SQL key words ONLY have no or exact ONE from [SQL components 1] and SQL do not satisfy any conditions in [Others] above.
+   - if SQL key words ONLY have no or exact ONE from [SQL components 1] and SQL do not satisfy any conditions in [Others] above. AND no word from [SQL components 2].
 2. medium: 
-   - SQL satisfies no more than two rules in [Others] and do not have more than one word from [SQL components 1].
-   - or, SQL has exact 2 words from SQL components 1 and less than 2 ruls in [Others].
+   - SQL satisfies no more than two rules in [Others] and do not have more than one word from [SQL components 1]. AND no word from [SQL components 2]
+   - or, SQL has exact 2 words from SQL components 1 and less than 2 ruls in [Others]. AND no word from [SQL components 2]
 3. hard: 
    - SQL satisfies more than two rules in [Others] and no more than 2 key words in [SQL components 1] but no any word in [SQL components 2]
    - or, SQL has 2 < # key words in [SQL components 1] <= 3 and satisfies no more than two rules in [Others] but no any word in [SQL components 2].
