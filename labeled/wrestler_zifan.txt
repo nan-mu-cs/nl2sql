@@ -1,0 +1,128 @@
+Total = 20
+
+1. How many wrestlers are there?
+
+SELECT count(*)
+FROM wrestler
+
+2. List the names of wrestlers in descending order of days held.
+
+SELECT Name
+FROM wrestler
+order by Days_held DESC
+
+3. What is the name of the wrestler with the smallest days held?
+
+SELECT Name
+FROM wrestler
+order by Days_held ASC limit 1
+
+4. What are the distinct reigns of wrestlers whose location is not "Tokyo,Japan" ?
+
+SELECT distinct Reign
+FROM wrestler
+Where Location != "Tokyo,Japan"
+
+5. What are the names and location of the wrestlers?
+
+SELECT Name, Location
+FROM wrestler
+
+6. What are the elimination moves of wrestlers whose team is "Team Orton"?
+
+SELECT Elimination_Move
+FROM Elimination
+Where Team = "Team Orton"
+
+7. What are the names of wrestlers and the elimination moves?
+
+SELECT T2.Name, T1.Elimination_Move
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+
+8. List the names of wrestlers and the teams in elimination in descending order of days held.
+
+SELECT T2.Name, T1.Team
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+order by Days_held DESC
+
+9. List the time of elimination of the wrestlers with largest days held.
+
+SELECT T1.Time
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+order by Days_held DESC limit 1
+
+10. Show times of eliminations of wrestlers with days held more than 50.
+
+SELECT T1.Time
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+Where Days_held > 50
+
+11. Show different teams in eliminations and the number of eliminations from each team.
+
+SELECT Team, COUNT(*)
+FROM elimination
+group by Team
+
+12. Show teams that have suffered more than three eliminations.
+
+SELECT Team
+FROM elimination
+group by Team
+Having COUNT(*) > 3
+
+13. Show the most reign and days held of wrestlers.
+
+SELECT Reign, Days_held
+FROM wrestler
+
+14. What are the names of wrestlers days held less than 100 .
+
+SELECT Name
+FROM wrestler
+Where Days_held < 100
+ 
+15. Please show the most common reigns of wrestlers.
+
+SELECT Reign
+FROM wrestler
+group by Reign
+order by COUNT(*) DESC limit 1
+
+16. List the locations that are shared by more than two wrestlers.
+
+SELECT Location
+FROM wrestler
+group by Location
+Having COUNT(*) > 2
+
+17. List the names of wrestlers that have not been eliminated.
+
+SELECT Name
+from wrestler
+where Wrestler_ID not in (SELECT Wrestler_ID FROM elimination)
+
+18. Show the teams that have both wrestlers eliminated by "Orton" and wrestlers eliminated by "Benjamin".
+
+SELECT Team
+FROM Elimination
+Where Eliminated_By = "Orton"
+Intersect 
+SELECT Team
+FROM Elimination
+Where Eliminated_By = "Benjamin"
+
+19. What is the number of distinct teams that suffer elimination?
+
+SELECT count (distinct team)
+FROM elimination
+
+20. Show the time of elimination by "Punk" or "Orton"
+
+SELECT Time
+from elimination
+Where Eliminated_By = "Punk" or Eliminated_By = "Orton"
+
