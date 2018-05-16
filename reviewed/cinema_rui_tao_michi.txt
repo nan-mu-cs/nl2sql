@@ -1,0 +1,275 @@
+1. Show all the locations where no cinema has capacity over 800.
+P:
+
+select location
+from cinema
+except
+select location
+from cinema
+where capacity > 800
+
+S:
+S:
+S:
+
+
+2. Show all the locations where some cinemas were opened in both year 2010 and year 2011.
+P:
+
+select location
+from cinema
+where openning_year = 2010
+INTERSECT
+select location
+from cinema
+where openning_year = 2011
+
+S:
+S:
+S:
+
+
+3. How many cinema do we have?
+P: Count the number of cinemas.
+
+select count(*)
+from cinema
+
+S:
+S:
+S:
+
+
+4. Show name, opening year, and capacity for each cinema.
+P:
+
+select name, openning_year, capacity
+from cinema
+
+S:
+S:
+S:
+
+
+5. Show the cinema name and location for cinemas with capacity above average.
+P:
+
+select name, location
+from cinema
+where capacity > (select avg(capacity) from cinema)
+
+S:
+S:
+S:
+
+
+6. What are all the locations with a cinema?
+P: Find the distinct locations that has a cinema.
+
+select distinct location
+from cinema
+
+S:
+S:
+S:
+
+
+7. Show all the cinema names and opening years in descending order of opening year.
+P:
+
+select name, openning_year
+from cinema
+order by openning_year desc
+
+S:
+S:
+S:
+
+
+8. What are the name and location of the cinema with the largest capacity?
+P:
+
+select name, location
+from cinema
+order by capacity desc
+limit 1
+
+S:
+S:
+S:
+
+
+9. Show the average, minimum, and maximum capacity for all the cinemas opened in year 2011 or later.
+P:
+
+select avg(capacity), min(capacity), max(capacity)
+from cinema
+where openning_year >= 2011
+
+S:
+S:
+S:
+
+
+10. Show each location and the number of cinemas there.
+P:
+
+select location, count(*)
+from cinema
+group by location
+
+S:
+S:
+S:
+
+
+11. What is the location with the most cinemas opened in year 2010 or later?
+P:
+
+select location
+from cinema
+where openning_year >= 2010
+group by location
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+12. Show all the locations with at least two cinemas with capacity above 300.
+P: Which locations have 2 or more cinemas with capacity over 300?
+
+select location
+from cinema
+where capacity > 300
+group by location
+having count(*) >= 2
+
+S:
+S:
+S:
+
+
+13. Show the title and director for all films.
+P: What are the title and director of each film?
+
+select title, directed_by
+from film
+
+S:
+S:
+S:
+
+
+14. Show all directors.
+P: Who are all the directors?
+
+select distinct directed_by
+from film
+
+S:
+S:
+S:
+
+
+15. List all directors along with the number of films directed by each director.
+P:
+
+select directed_by, count(*)
+from film
+group by directed_by
+
+S:
+S:
+S:
+
+
+16. What is total number of show times per dat for each cinema?
+P:
+
+select T2.name, sum(T1.show_times_per_day)
+from schedule as T1 join cinema as T2 on T1.cinema_id = T2.cinema_id
+group by T1.cinema_id
+
+S:
+S:
+S:
+
+
+17. What are the title and maximum price of each film?
+P: Give me the title and highest price for each film.
+
+select T2.title, max(T1.price)
+from schedule as T1 join film as T2 on T1.film_id = T2.film_id
+group by T1.film_id
+
+S:
+S:
+S:
+
+
+18. Show cinema name, film title, date, and price for each record in schedule.
+P:
+
+select T3.name, T2.title, T1.date, T1.price
+from schedule as T1 join film as T2 on T1.film_id = T2.film_id join cinema as T3 on T1.cinema_id = T3.cinema_id
+
+S:
+S:
+S:
+
+
+19. What are the title and director of the films without any schedule?
+P:
+
+select title, directed_by
+from film
+where film_id NOT IN (select film_id from schedule)
+
+S:
+S:
+S:
+
+
+20. Show director with the largest number of show times in total.
+P:
+
+select T2.directed_by
+from schedule as T1 join film as T2 on T1.film_id = T2.film_id
+group by T2.directed_by
+order by sum(T1.show_times_per_day) desc
+limit 1
+
+S:
+S:
+S:
+
+
+21. Find the locations that have more than one movie theater with capacity above 300.
+P: In which locations are there more than one movie theater with capacity above 300?
+
+select location
+from cinema
+where capacity > 300
+group by location
+having count(*) > 1
+
+S:
+S:
+S:
+
+
+22. How many films have the word 'Dummy' in their titles?
+P: Count the number of films whose title contains the word 'Dummy'.
+
+select count(*)
+from film
+where title like "%Dummy%"
+
+S:
+S:
+S:
+
+
