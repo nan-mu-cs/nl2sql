@@ -1,0 +1,224 @@
+1. How many book clubs are there?
+P: Count the number of book clubs.
+
+select count(*)
+from book_club
+
+S:
+S:
+S:
+
+2. show the titles, and authors or editors for all books made after the year 1989.
+P: What are the titles and authors or editors that correspond to books made after 1989?
+
+select book_title, author_or_editor
+from book_club
+where year > 1989
+
+S:
+S:
+S:
+
+3. Show all distinct publishers for books.
+P: What are all the different book publishers?
+
+select distinct publisher
+from book_club
+
+S:
+S:
+S:
+
+4. Show the years, book titles, and publishers for all books, in descending order by year.
+P: What are the years, titles, and publishers for all books, ordered by year descending?
+
+select year, book_title, publisher
+from book_club
+order by year desc
+
+S:
+S:
+S:
+
+5. Show all publishers and the number of books for each publisher.
+P: How many books are there for each publisher?
+
+select publisher, count(*)
+from book_club
+group by publisher
+
+S:
+S:
+S:
+
+6. What is the publisher with most number of books?
+P: Return the publisher that has published the most books.
+
+select publisher
+from book_club
+group by publisher
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+7. Show all book categories and the number of books in each category.
+P: How many books fall into each category?
+
+select category, count(*)
+from book_club
+group by category
+
+S:
+S:
+S:
+
+8. List categories that have at least two books after year 1989.
+P: What categories have two or more corresponding books that were made after 1989?
+
+select category
+from book_club
+where year > 1989
+group by category
+having count(*) >= 2
+
+S:
+S:
+S:
+
+9. Show publishers with a book published in 1989 and a book in 1990.
+P: What are the publishers who have published a book in both 1989 and 1990?
+
+select publisher
+from book_club
+where year = 1989
+intersect
+select publisher
+from book_club
+where year = 1990
+
+S:
+S:
+S:
+
+10. Show all publishers which do not have a book in 1989.
+P: Which publishers did not publish a book in 1989?
+
+select publisher
+from book_club
+except
+select publisher
+from book_club
+where year = 1989
+
+S:
+S:
+S:
+
+11. Show all movie titles, years, and directors, ordered by budget.
+P: What are the titles, years, and directors of all movies, ordered by budget in millions?
+
+select title, year, director
+from movie
+order by budget_million
+
+S:
+S:
+S:
+
+12. How many movie directors are there?
+P: Count the number of different directors.
+
+select count (distinct director)
+from movie
+
+S:
+S:
+S:
+
+13. What is the title and director for the movie with highest worldwide gross in the year 2000 or before?
+P: Return the title and director of the movie released in the year 2000 or earlier that had the highest worldwide gross.
+
+select title, director
+from movie
+where year <= 2000
+order by gross_worldwide desc
+limit 1
+
+S:
+S:
+S:
+
+14. Show all director names who have a movie in both year 1999 and 2000.
+P: Which directors had a movie both in the year 1999 and 2000?
+
+select director
+from movie
+where year = 2000
+intersect
+select director
+from movie
+where year = 1999
+
+S:
+S:
+S:
+
+15. Show all director names who have a movie in the year 1999 or 2000.
+P: Which directors had a movie in either 1999 or 2000?
+
+select director
+from movie
+where year = 1999 or year = 2000
+
+S:
+S:
+S:
+
+16. What is the average, maximum, and minimum budget for all movies before 2000.
+P: Return the average, maximum, and minimum budgets in millions for movies made before the year 2000.
+
+select avg(budget_million), max(budget_million), min(budget_million)
+from movie
+where year < 2000
+
+S:
+S:
+S:
+
+17. List all company names with a book published by Alyson.
+P: What are all the company names that have a book published by Alyson?
+
+select T1.company_name
+from culture_company as T1 join book_club as T2 on T1.book_club_id = T2.book_club_id
+where T2.publisher = 'Alyson'
+
+S:
+S:
+S:
+
+
+18. Show the movie titles and book titles for all companies in China.
+P: What are the titles of movies and books corresponding to companies incorporated in China?
+
+select T1.title, T3.book_title
+from movie as T1 join culture_company as T2 on T1.movie_id = T2.movie_id join book_club as T3 on T3.book_club_id = T2.book_club_id
+where T2.incorporated_in = 'China'
+
+S:
+S:
+S:
+
+19. Show all company names with a movie directed in year 1999.
+P: What are all company names that have a corresponding movie directed in the year 1999?
+
+select T2.company_name
+from movie as T1 join culture_company as T2 on T1.movie_id = T2.movie_id
+where T1.year = 1999
+
+S:
+S:
+S:
+
