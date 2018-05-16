@@ -297,24 +297,24 @@ SELECT *
 FROM employees
 WHERE hire_date < '2002-06-21'
 
-17. display all the information for all employees who have the letters D, S, or N in their first name and also arrange the result in descending order by salary.
-P: What is all the information about employees with D, S, or N in their first name, ordered by salary descending?
+17. display all the information for all employees who have the letters D or S in their first name and also arrange the result in descending order by salary.
+P: What is all the information about employees with D or S in their first name, ordered by salary descending?
 
 SELECT *
 FROM employees
-WHERE first_name LIKE '%D%' OR first_name LIKE '%S%' OR first_name LIKE '%N%'
+WHERE first_name LIKE '%D%' OR first_name LIKE '%S%'
 ORDER BY salary DESC
 
-S: What is all the information about employees with a D, S or N in their first name?
+S: What is all the information about employees with a D or S in their first name?
 S: Order those by decreasing salary.
 
 SELECT *
 FROM employees
-WHERE first_name LIKE '%D%' OR first_name LIKE '%S%' OR first_name LIKE '%N%'
+WHERE first_name LIKE '%D%' OR first_name LIKE '%S%'
 
 SELECT *
 FROM employees
-WHERE first_name LIKE '%D%' OR first_name LIKE '%S%' OR first_name LIKE '%N%'
+WHERE first_name LIKE '%D%' OR first_name LIKE '%S%'
 ORDER BY salary DESC
 
 18. display those employees who joined after 7th September, 1987.
