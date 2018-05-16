@@ -6,10 +6,6 @@ CREATE TABLE "author" (
 "oid" int,
 primary key("aid")
 );
-CREATE TABLE "cite" (
-"cited" int,
-"citing"  int
-);
 CREATE TABLE "conference" (
 "cid" int,
 "homepage" text,
@@ -103,4 +99,10 @@ CREATE TABLE "writes" (
 primary key ("aid", "pid"),
 foreign key("pid") references "publication"("pid"),
 foreign key("aid") references "author"("aid")
+);
+CREATE TABLE "cite" (
+"cited" int,
+"citing"  int,
+foreign key("cited") references "publication"("pid"),
+foreign key("citing") references "publication"("pid")
 );
