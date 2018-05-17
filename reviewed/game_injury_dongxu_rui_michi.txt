@@ -1,50 +1,90 @@
-Total = 16
+# Total = 18
 
 1. How many games are held after season 2007?
+P: 
 
 SELECT count(*)
 FROM game
 where season > 2007
 
-2. List the date of games descendingly by home team names.
+S:
+S:
+S:
+
+
+2. List the dates of games by the home team name in descending order.
+P: 
 
 SELECT Date
 FROM game
 order by home_team desc
 
+S:
+S:
+S:
+
+
 3. List the season, home team, away team of all the games.
+P: 
 
 SELECT season, home_team, away_team
 FROM game
 
-4. What is the maximum, minimum and average home games each stadium hold?
+S:
+S:
+S:
+
+
+4. What are the maximum, minimum and average home games each stadium held?
+P: 
 
 select max(home_games), min(home_games), avg(home_games)
 from stadium
 
+S:
+S:
+S:
 
-5. What is the average attendance of stadiums with a capacity percentage higher than 100%?
+
+5. What is the average attendance of stadiums with capacity percentage higher than 100%?
+P: 
 
 select average_attendance
 from stadium
 where capacity_percentage > 100
 
+S:
+S:
+S:
+
 
 6. What are the player name, number of matches, and information source for players who do not suffer from injury of 'Knee problem'?
+P: 
 
 SELECT player, number_of_matches, source
 FROM injury_accident
 Where injury != 'Knee problem'
 
+S:
+S:
+S:
 
-7. What is the season of the game which causes 'Walter Samuel' to get injured?
+
+7. What is the season of the game which causes the player 'Walter Samuel' to get injured?
+P: 
 
 SELECT T1.season
 FROM game as T1 join injury_accident as T2
 on T1.id = T2.game_id
 where T2.player = 'Walter Samuel'
 
-8. What are the ids, scores, and dates of the game which caused at least two injury accidents?
+S:
+S:
+S:
+
+
+8. What are the ids, scores, and dates of the games which caused at least two injury accidents?
+P: 
 
 SELECT T1.id, T1.score, T1.date
 FROM game as T1 join injury_accident as T2
@@ -52,8 +92,13 @@ on T2.game_id = T1.id
 group by T1.id
 having count(*) >= 2
 
+S:
+S:
+S:
 
-9. What is the id and name of the stadium where most injury accidents happened?
+
+9. What are the id and name of the stadium where the most injury accidents happened?
+P: Find the id and name of the stadium where the largest number of injury accidents occurred.
 
 SELECT T1.id, T1.name
 FROM stadium as T1 join game as T2
@@ -63,8 +108,13 @@ on T2.id = T3.game_id
 group by T1.id
 order by count(*) desc limit 1
 
+S:
+S:
+S:
 
-10. In which season and which stadium did any player have 'Foot injury' or 'Knee problem'?
+
+10. In which season and which stadium did any player have an injury of 'Foot injury' or 'Knee problem'?
+P: 
 
 SELECT T1.season, T2.name
 from game as T1 join stadium as T2
@@ -73,13 +123,24 @@ join injury_accident as T3
 on T1.id = T3.game_id
 where T3.injury = 'Foot injury' or T3.injury = 'Knee problem'
 
+S:
+S:
+S:
 
-11. How many different kinds of information sources are there?
+
+11. How many different kinds of information sources are there for injury accidents?
+P: 
 
 select count(distinct source)
 from injury_accident
 
-12. How many games are free from injury accidents?
+S:
+S:
+S:
+
+
+12. How many games are free of injury accidents?
+P: 
 
 select count(*)
 from game
@@ -87,16 +148,26 @@ where id not in (
 select game_id from injury_accident
 )
 
-13. How many dinstinct kind of injuries happened after season 2010?
+S:
+S:
+S:
+
+
+13. How many distinct kinds of injuries happened after season 2010?
+P: 
 
 select count(distinct T1.injury)
 from injury_accident as T1 join game as T2
 on T1.game_id = T2.id
 where T2.season > 2010
 
+S:
+S:
+S:
 
-14. List the name of the stadium where both the player 'Walter Samuel' and
- the player 'Thiago Motta' got injured.
+
+14. List the name of the stadium where both the player 'Walter Samuel' and the player 'Thiago Motta' got injured.
+P: 
 
 SELECT T2.name
 from game as T1 join stadium as T2
@@ -112,7 +183,13 @@ join injury_accident as T3
 on T1.id = T3.game_id
 where T3.player = 'Thiago Motta'
 
-15. Show name, average attendance, total attendance for stadiums where no accidents happend.
+S:
+S:
+S:
+
+
+15. Show the name, average attendance, total attendance for stadiums where no accidents happened.
+P: 
 
 select name, average_attendance, total_attendance
 from stadium
@@ -123,22 +200,45 @@ on T1.stadium_id = T2.id
 join injury_accident as T3
 on T1.id = T3.game_id
 
-16. Which stadium name contains substring "Bank"?
+S:
+S:
+S:
+
+
+16. Which stadium name contains the substring "Bank"?
+P: 
 
 select name
 from stadium
 where name like "%Bank%"
 
+S:
+S:
+S:
+
 
 17. How many games has each stadium held?
+P: 
 
 select T1.id, count(*)
 from stadium as T1 join game as T2
 on T1.id = T2.stadium_id
 group by T1.id
 
-18. Give me the date of games and the injured player name in the game, order by season descendingly.
+S:
+S:
+S:
+
+
+18. For each injury accident, find the date of the game and the name of the injured player in the game, and sort the results in descending order of game season.
+P: 
 
 SELECT T1.date, T2.player
 from game as T1 join injury_accident as T2 on T1.id = T2.game_id
 order by T1.season desc
+
+S:
+S:
+S:
+
+
