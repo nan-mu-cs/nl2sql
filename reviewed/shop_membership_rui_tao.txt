@@ -36,12 +36,14 @@ group by open_year
 having count(*) >= 2
 
 6.  Show minimum and maximum amount of memberships for all branches opened in 2011 or located at city London.
+P: What are the minimum and maximum membership amounts for all branches that either opened in 2011 or are located in London?
 
 select min(membership_amount), max(membership_amount)
 from branch
 where open_year = 2011 or city = 'London'
 
 7. Show the city and the number of branches opened before 2010 for each city.
+P: For each city, how many branches opened before 2010?
 
 select city, count(*)
 from branch
@@ -49,17 +51,20 @@ where open_year < 2010
 group by city
 
 8. How many different levels do members have?
+P: What are the different membership levels?
 
 select count(distinct level)
 from member
 
 9. Show card number, name, and hometown for all members in a descending order of level.
+P: What are the card numbers, names, and hometowns of every member ordered by descending level?
 
 select card_number, name, hometown
 from member
 order by level desc
 
 10. Show the membership level with most number of members.
+P: What is the membership level with the most people?
 
 select level
 from member
@@ -68,12 +73,14 @@ order by count(*) desc
 limit 1
 
 11. Show all member names and registered branch names sorted by register year.
+P: What are the names of the members and branches at which they are registered sorted by year of registration?
 
 select T3.name, T2.name
 from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id join member as T3 on T1.member_id = T3.member_id
 order by T1.register_year
 
 12. Show all branch names with the number of members in each branch registered after 2015.
+P: For each branch id, what are the names of the branches that were registered after 2015?
 
 select T2.name, count(*)
 from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id
@@ -81,18 +88,21 @@ where T1.register_year > 2015
 group by T2.branch_id
 
 13. Show member names without any registered branch.
+P: What are the names of the members that have never registered at any branch?
 
 select name
 from member
 where member_id not in (select member_id from membership_register_branch)
 
-14. List the branch name and city without any registered member.
+14. List the branch name and city without any registered members.
+P: What are the names and cities of the branches that do not have any registered members?
 
 select name, city
 from branch
 where branch_id not in (select branch_id from membership_register_branch)
 
 15. What is the name and open year for the branch with most number of memberships registered in 2016?
+P: What is the name and opening year for the branch that registered the most members in 2016?
 
 select T2.name, T2.open_year
 from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id
@@ -102,18 +112,21 @@ order by count(*) desc
 limit 1
 
 16. Show the member name and hometown who registered a branch in 2016.
+P: What are the member names and hometowns of those who registered at a branch in 2016?
 
 select T2.name, T2.hometown
 from membership_register_branch as T1 join member as T2 on T1.member_id = T2.member_id
 where T1.register_year = 2016
 
 17. Show all city with a branch opened in 2001 and a branch with more than 100 membership.
+P: What are the cities that have a branch that opened in 2001 and a branch with more than 100 members?
 
 select city
 from branch
 where open_year = 2001 and membership_amount > 100
 
-18. Show all cities without a branch having more than 100 membership.
+18. Show all cities without a branch having more than 100 memberships.
+P: What are the cities that do not have any branches with more than 100 members?
 
 select city
 from branch
@@ -123,18 +136,21 @@ from branch
 where membership_amount > 100
 
 19. What is the sum of total pounds of purchase in year 2018 for all branches in London?
+P: How many total pounds were purchased in the year 2018 at all London branches?
 
 select sum(total_pounds)
 from purchase as T1 join branch as T2 on T1.branch_id = T2.branch_id
 where T2.city = 'London' and T1.year = 2018
 
 20. What is the total number of purchases for members with level 6?
+P: What are the total purchases for members rated at level 6?
 
 select count(*)
 from purchase as T1 join member as T2 on T1.member_id = T2.member_id
 where T2.level = 6
 
 21. Find the name of branches where have some members whose hometown is in Louisville, Kentucky and some in Hiram, Georgia.
+P: What are the names of the branches that have some members with a hometown in Louisville, Kentucky and also those from Hiram, Goergia?
 
 select T2.name
 from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.branch_id join member as T3 on T1.member_id = T3.member_id
@@ -145,6 +161,7 @@ from membership_register_branch as T1 join branch as T2 on T1.branch_id = T2.bra
 where T3.Hometown = 'Hiram, Georgia'
 
 22. list the card number of all members whose hometown address includes word "Kentucky".
+P: What are the card numbers of members from Kentucky?
 
 select card_number
 from member
