@@ -73,7 +73,7 @@ Where T2.Country = "China" or T2.Country = "Japan"
 SELECT T1.Height
 FROM people as T1 join perpetrator as T2 
 ON T1.People_ID = T2.People_ID
-order by T2.Injured
+order by T2.Injured desc
 
 13. What are the countries of perpetrators and the corresponding number of perpetrators in each country?
 
@@ -100,7 +100,7 @@ Having COUNT(*) >= 2
 SELECT T1.Name
 FROM people as T1 join perpetrator as T2 
 ON T1.People_ID = T2.People_ID
-order by T2.Year
+order by T2.Year desc
 
 17. List the names of people that are not perpetrators.
 
@@ -129,3 +129,9 @@ SELECT T2.Date
 FROM people as T1 join perpetrator as T2 
 ON T1.People_ID = T2.People_ID
 order by T1.Height DESC limit 1
+
+
+21. In which year did the most recent crime happened?
+
+select max(Year)
+from perpetrator;
