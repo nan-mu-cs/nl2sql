@@ -1,5 +1,5 @@
 
-1. Return the name of directors who are older than the average age?
+1. Return the name of directors who are older than the average age.
 
 Select name
 From director
@@ -23,13 +23,13 @@ Where internet like "%bbc%"
 Select count(distinct Digital_terrestrial_channel)
 From channel
 
-5. List all program titles in the order of starting year, list the most recent one first.
+5. List all program titles in the order of starting year. List the most recent one first.
 
 Select title
 From program
 Order by start_year desc
 
-6. Which director is in charge of the most number of programs?
+6. Which director is in charge of most number of programs?
 
 Select t2.name
 From program as t1 join director as t2 on t1.director_id = t2.director_id
@@ -38,16 +38,16 @@ Order by count(*) desc
 Limit 1
 
 
-7. Find the name and age of the directors who are in charge of the most number of programs?
+7. Find the name and age of the directors who are in charge of most number of programs?
 
-Select t2.name
+Select t2.name, t2.age
 From program as t1 join director as t2 on t1.director_id = t2.director_id
 Group by t1.director_id
 Order by count(*) desc
 Limit 1
 
 
-8. return the title of the program that began the most recent.
+8. Return the title of the program that began most recently.
 
 Select title
 From program
@@ -75,14 +75,13 @@ Where channel_id not in (select channel_id from program)
 
 12. what is the name of the director who is in the "Dracula" program?
 
-
 Select t2.name
 From program as t1 join director as t2 on t1.director_id = t2.director_id
 Where t1.title = 'Dracula'
 
 13. Find the name and internet web of the channel that is directed by most number of directors.
 
-Select t1.name
+Select t1.name, t1.internet
 From channel as t1 join director_admin as t2 on t1.channel_id = t2.channel_id
 Group by t1.channel_id
 Order by count(*) desc
@@ -94,7 +93,7 @@ Select name
 From director
 Where age between 30 and 60
 
-15. give me the name of channels that have both director younger than 40 and older than 60.
+15. give me the name of channels that have both a director younger than 40 and a director older than 60.
 
 Select t1.name
 From channel as t1 
