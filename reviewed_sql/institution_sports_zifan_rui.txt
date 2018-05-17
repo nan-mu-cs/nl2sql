@@ -58,12 +58,12 @@ FROM championship as T1 join institution as T2
 ON T1.Institution_ID = T2.Institution_ID
 order by T2.Enrollment ASC limit 1
 
-11. List the names of institutions in descending order of the number of championship.
+11. List the names of institutions in descending order of the number of championships.
 
 SELECT T2.Name
 FROM championship as T1 join institution as T2 
 ON T1.Institution_ID = T2.Institution_ID
-order by T1.Number_of_Championships
+order by T1.Number_of_Championships desc
 
 12. List the names of institutions with at least one championship.
 
@@ -87,7 +87,7 @@ group by Affiliation
 
 15. What is the most common type of affiliation for institutions?
 
-SELECT Affiliation, COUNT(*)
+SELECT Affiliation
 FROM institution
 group by Affiliation
 order by COUNT(*) DESC limit 1
