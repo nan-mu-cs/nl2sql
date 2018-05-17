@@ -1,0 +1,173 @@
+
+1. Show name, city, and state for all universities in  alphabetical order of university name.
+P: What are the names, cities, and states of all universities in alphabetical order (by name of the university).
+
+select university_name, city, state
+from University
+order by university_name
+
+2. How many universities are in Illinois or Ohio?
+P: What is the total number of universities located in Illinois or Ohio?
+
+select count(*)
+from University
+where state = 'Illinois' OR state = 'Ohio'
+
+3. What is the maximum, average, and minimum enrollment for universities?
+P: What is the maximum, average, and minimum enrollment for all universities?
+
+select max(enrollment), avg(enrollment), min(enrollment)
+from University
+
+4. List team name for all universities with enrollments above the average.
+P: What are the names of all teams from universities that have more peopel enrolled than average?
+
+select team_name
+from University
+where enrollment > (select avg(enrollment) from University)
+
+5. Show all home conferences.
+P: What are the different home conferences from the university table?
+
+select distinct home_conference
+from University
+
+6. Show all home conferences and the number of universities in each conference.
+P: For every home conference, how many universities attended that conference?
+
+select home_conference, count(*)
+from University 
+group by home_conference
+
+7. Which state has most number of universities?
+P: What is the state with the most universities?
+
+select state
+from University 
+group by state
+order by count(*) desc
+limit 1
+
+8. Show all home conferences with average enrollment of universities above 2000.
+P: What are the home conferences that have an average university enrollment above 2000?
+
+select home_conference
+from University
+group by home_conference
+having avg(enrollment) > 2000
+
+9. Which conference has the least number of total enrollment?
+P: What are the home conferences with the fewest number of people enrolled?
+
+select home_conference
+from University
+group by home_conference
+order by sum(enrollment) 
+limit 1
+
+10. List all major name and major code in the order of their major code
+P: What are the names and codes for all majors ordered by their code? 
+
+select major_name, major_code
+from Major
+order by major_code
+
+11. Show all majors and major ranks for the university with name Augustana College.
+P: What are the ranks and names of all majors at Augustana College?
+
+select T1.rank, T3.major_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T2.university_name = 'Augustana College'
+
+12. What is the name, city, state of the university with a rank 1 on Accounting major?
+P: What is the name, city, and state of the university with number 1 ranked Accounting major?
+
+select T2.university_name, T2.city, T2.state
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T1.rank = 1 and T3.major_name = 'Accounting'
+
+13. What is the name of the university that has most number of majors with rank 1?
+P: What is the name of the university with the most majors ranked number 1?
+
+select T2.university_name
+from Major_Ranking as T1 join University as T2 on T1.university_id = T2.university_id
+where T1.rank = 1
+group by T2.university_name
+order by count(*) desc
+limit 1
+
+14. Show all university names without a major with rank 1?
+P: What are the names of all universities without any majors ranked number 1?
+
+
+select university_name
+from University
+EXCEPT
+select T2.university_name
+from Major_Ranking as T1 join University as T2 on T1.university_id = T2.university_id
+where T1.rank = 1
+
+15. Show all university names with both major Accounting and major Urban Education.
+P: What are the names of all universities that have both Accounting and Urban Education majors?
+
+select T2.university_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T3.major_name = 'Accounting'
+INTERSECT
+select T2.university_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T3.major_name = 'Urban Education'
+
+16. What is the name and overall ranking of universities in Wisconsin state?
+P: What is the name and rank of every university in Wisconsin?
+
+select T1.university_name, T2.rank
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+where T1.state = 'Wisconsin'
+
+17. What is the university name with highest research point?
+P: What is the name of the university with the most research points?
+
+
+select T1.university_name
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+order by T2.research_point desc
+limit 1
+
+18. List all university names in ascending order of their reputation points.
+P: What are the names of all universities in ascending order of reputation points?
+
+select T1.university_name
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+order by T2.reputation_point
+
+19. What is the name of university with major Accounting ranked 3 or above?
+P: What are the names of the university with an Accounting major ranked 3 or higher?
+
+select T2.university_name
+from Major_Ranking as T1 join University as T2 join Major as T3 on T1.university_id = T2.university_id and T1.major_id = T3.major_id
+where T1.rank <= 3 and T3.major_name = "Accounting"
+
+20. What is the total enrollment of universities with a overall rank 5 or below?
+P: What is the total number of students enrolled in an university with a rank of 5 or below?
+
+select sum(enrollment)
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+where T2.rank >= 5
+
+21. Find the name and Citation point of the universities whose reputation points are top 3 and above.
+P: What is the name and citation point of the unversities with the top 3 reputation points?
+
+select T1.University_Name, T2.Citation_point
+from University as T1 Join Overall_ranking as T2 on T1.university_id = T2.university_id
+order by T2.Reputation_point desc
+limit 3
+
+22. which states do have more than two universities with enrollment smaller than 3000?
+P: What are the states that have more than 2 universities with an enrollment less than 3000?
+
+select state
+from university
+where enrollment < 3000
+group by state
+having count(*) > 2
