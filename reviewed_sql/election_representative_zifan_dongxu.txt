@@ -106,7 +106,7 @@ FROM representative
 group by State
 Having COUNT(*) >= 2
 
-18. List the names of representatives that have not participated in elections.
+18. List the names of representatives that have not participated in elections listed here.
 
 SELECT Name
 from representative
