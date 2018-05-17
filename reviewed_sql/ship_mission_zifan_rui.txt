@@ -34,7 +34,7 @@ SELECT Name
 FROM ship
 order by Tonnage DESC limit 1
 
-7. Show different type of ships and the number of ships of each type.
+7. Show different types of ships and the number of ships of each type.
 
 SELECT Type, COUNT(*)
 FROM ship
@@ -47,14 +47,14 @@ FROM ship
 group by Type
 order by COUNT(*) DESC limit 1
 
-9. List the status nations that have more than two ships.
+9. List the nations that have more than two ships.
 
 SELECT Nationality
 FROM ship
 group by Nationality
 Having COUNT(*) > 2
 
-10. Show different type of ships and the average tonnage of ships of each type.
+10. Show different types of ships and the average tonnage of ships of each type.
 
 SELECT Type, avg(Tonnage)
 FROM ship
@@ -66,7 +66,7 @@ SELECT T1.Code, T1.Fate, T2.Name
 FROM mission as T1 join ship as T2 
 ON T1.Ship_ID = T2.Ship_ID
 
-12. Show names of ships involved in mission launched after 1928.
+12. Show names of ships involved in a mission launched after 1928.
 
 SELECT T2.Name
 FROM mission as T1 join ship as T2 
