@@ -20,7 +20,7 @@ FROM club
 
 SELECT Name
 FROM club
-Where "Manufacturer" != "Nike"
+Where Manufacturer != "Nike"
 
 5. What are the names of players in ascending order of wins count?
 
@@ -77,7 +77,7 @@ order by avg(T2.Earnings) DESC
 
 13. Show different manufacturers and the number of clubs they are associated with.
 
-SELECT Manufacturer	, COUNT(*)
+SELECT Manufacturer, COUNT(*)
 FROM club
 group by Manufacturer	
  
@@ -105,10 +105,10 @@ Having COUNT(*) > 1
 17. List the name of clubs that do not have players.
 
 SELECT Name
-from  club
+from club
 where Club_ID not in (SELECT Club_ID FROM player)
 
-18. Show the common country of players with earnings more than 1400000 and players with earnings less than 1100000.
+18. Show the country of players with earnings more than 1400000 and players with earnings less than 1100000.
 
 SELECT Country 
 FROM player
