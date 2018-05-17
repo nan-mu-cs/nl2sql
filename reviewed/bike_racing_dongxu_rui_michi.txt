@@ -1,0 +1,231 @@
+# Total = 17
+
+1. How many bikes are heavier than 780 grams?
+P: 
+
+SELECT count(*)
+FROM bike
+where weight > 780
+
+S:
+S:
+S:
+
+
+2. List the product names and weights of the bikes in ascending order of price.
+P: 
+
+SELECT product_name, weight
+FROM bike
+order by price asc
+
+S:
+S:
+S:
+
+
+3. List the heat, name, and nation for all the cyclists.
+P: 
+
+SELECT heat, name, nation
+FROM cyclist
+
+S:
+S:
+S:
+
+
+4. What are the maximum and minimum weight of all bikes?
+P: 
+
+select max(weight), min(weight)
+from bike
+
+S:
+S:
+S:
+
+
+5. What is the average price of the bikes made of material 'Carbon CC'?
+P: 
+
+select avg(price)
+from bike
+where material = 'Carbon CC'
+
+S:
+S:
+S:
+
+
+6. What are the name and result of the cyclists not from 'Russia' ?
+P: 
+
+SELECT name, result
+from cyclist
+Where nation != 'Russia'
+
+S:
+S:
+S:
+
+
+7. What are the distinct ids and product names of the bikes that are purchased after year 2015?
+P: 
+
+SELECT distinct T1.id, T1.product_name
+FROM bike as T1 join cyclists_own_bikes as T2
+on T1.id = T2.bike_id
+where T2.purchase_year > 2015
+
+S:
+S:
+S:
+
+
+8. What are the ids and names of racing bikes that are purchased by at least 4 cyclists?
+P: 
+
+SELECT T1.id, T1.product_name
+FROM bike as T1 join cyclists_own_bikes as T2
+on T1.id = T2.bike_id
+group by T1.id
+having count(*) >= 4
+
+S:
+S:
+S:
+
+
+9. What are the id and name of the cyclist who owns the most bikes?
+P: 
+
+SELECT T1.id, T1.name
+FROM cyclist as T1 join cyclists_own_bikes as T2
+on T1.id = T2.cyclist_id
+group by T1.id
+order by count(*) desc limit 1
+
+S:
+S:
+S:
+
+
+10. What are the distinct product names of bikes owned by cyclists from 'Russia' or cyclists from 'Great Britain'?
+P: 
+
+SELECT distinct T3.product_name
+FROM cyclist as T1 join cyclists_own_bikes as T2
+on T1.id = T2.cyclist_id
+join bike as T3
+on T2.bike_id = T3.id
+where T1.nation = 'Russia' or T1.nation = 'Great Britain'
+
+S:
+S:
+S:
+
+
+11. How many different levels of heat are there for the cyclists?
+P: 
+
+select count(distinct heat)
+from cyclist
+
+S:
+S:
+S:
+
+
+12. How many cyclists did not purchase any bike after year 2015?
+P: 
+
+select count(*)
+from cyclist
+where id not in (
+select cyclist_id from cyclists_own_bikes
+where purchase_year > 2015
+)
+
+S:
+S:
+S:
+
+
+13. What are the names of distinct racing bikes that are purchased by the cyclists with better results than '4:21.558' ?
+P: 
+
+select distinct T3.product_name
+FROM cyclist as T1 join cyclists_own_bikes as T2
+on T1.id = T2.cyclist_id
+join bike as T3
+on T2.bike_id = T3.id
+where T1.result < '4:21.558'
+
+S:
+S:
+S:
+
+
+14. List the name and price of the bike that is owned by both the cyclists named 'Bradley Wiggins' and the cyclist named 'Antonio Tauler'.
+P: 
+
+select T3.product_name, T3.price
+FROM cyclist as T1 join cyclists_own_bikes as T2
+on T1.id = T2.cyclist_id
+join bike as T3
+on T2.bike_id = T3.id
+where T1.name = 'Bradley Wiggins'
+intersect
+select T3.product_name, T3.price
+FROM cyclist as T1 join cyclists_own_bikes as T2
+on T1.id = T2.cyclist_id
+join bike as T3
+on T2.bike_id = T3.id
+where T1.name = 'Antonio Tauler'
+
+S:
+S:
+S:
+
+
+15. Show the name, nation and result for the cyclists who did not purchase any racing bike.
+P: 
+
+select name, nation, result
+from cyclist
+except
+select T1.name, T1.nation, T1.result
+FROM cyclist as T1 join cyclists_own_bikes as T2
+on T1.id = T2.cyclist_id
+
+S:
+S:
+S:
+
+
+16. What are the names of the bikes that have substring 'fiber' in their material?
+P: 
+
+select product_name
+from bike
+where material like "%fiber%"
+
+S:
+S:
+S:
+
+
+17. How many bikes does each cyclist own? Order by cyclist id.
+P: 
+
+select cyclist_id, count(*)
+FROM cyclists_own_bikes cyclist_id
+group by cyclist_id
+order by cyclist_id
+
+S:
+S:
+S:
+
+
