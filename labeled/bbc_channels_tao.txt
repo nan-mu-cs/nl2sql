@@ -1,0 +1,117 @@
+
+1. Return the name of directors who are older than the average age?
+
+Select name
+From director
+Where age > (select avg(age) from director)
+
+2. Find the the name of the oldest director.
+
+Select name
+From director
+Order by age desc
+Limit 1
+
+3. How many channels have the word 'bbc' in their internet link?
+
+Select count(*)
+From channel
+Where internet like "%bbc%"
+
+4. How many different digital terrestrial channels are there?
+
+Select count(distinct Digital_terrestrial_channel)
+From channel
+
+5. List all program titles in the order of starting year, list the most recent one first.
+
+Select title
+From program
+Order by start_year desc
+
+6. Which director is in charge of the most number of programs?
+
+Select t2.name
+From program as t1 join director as t2 on t1.director_id = t2.director_id
+Group by t1.director_id
+Order by count(*) desc
+Limit 1
+
+
+7. Find the name and age of the directors who are in charge of the most number of programs?
+
+Select t2.name
+From program as t1 join director as t2 on t1.director_id = t2.director_id
+Group by t1.director_id
+Order by count(*) desc
+Limit 1
+
+
+8. return the title of the program that began the most recent.
+
+Select title
+From program
+Order by start_year desc
+Limit 1
+
+9. find the name and website link of the channels that have more than one program.
+
+Select t1.name, t1.internet
+From channel as t1 join program as t2 on t1.channel_id = t2.channel_id
+group by t1.channel_id
+having count(*) > 1
+
+10. Find the number of programs for each channel, return the name of each channel as well.
+
+Select t1.name, count(*)
+From channel as t1 join program as t2 on t1.channel_id = t2.channel_id
+group by t1.channel_id
+
+11. Find the number of channels that do not run any program.
+
+Select count(*)
+From channel
+Where channel_id not in (select channel_id from program)
+
+12. what is the name of the director who is in the "Dracula" program?
+
+
+Select t2.name
+From program as t1 join director as t2 on t1.director_id = t2.director_id
+Where t1.title = 'Dracula'
+
+13. Find the name and internet web of the channel that is directed by most number of directors.
+
+Select t1.name
+From channel as t1 join director_admin as t2 on t1.channel_id = t2.channel_id
+Group by t1.channel_id
+Order by count(*) desc
+Limit 1
+
+14. find the name of directors whose age is between 30 and 60.
+
+Select name
+From director
+Where age between 30 and 60
+
+15. give me the name of channels that have both director younger than 40 and older than 60.
+
+Select t1.name
+From channel as t1 
+     join director_admin as t2 on t1.channel_id = t2.channel_id
+     Join director as t3 on t2.director_id = t3.director_id
+where t3.age < 40
+intersect
+Select t1.name
+From channel as t1 
+     join director_admin as t2 on t1.channel_id = t2.channel_id
+     Join director as t3 on t2.director_id = t3.director_id
+where t3.age > 60
+
+16. Find the id and name of the channel that is not directed by Hank Baskett.
+
+Select t1.name, t1.channel_id
+From channel as t1 
+     join director_admin as t2 on t1.channel_id = t2.channel_id
+     Join director as t3 on t2.director_id = t3.director_id
+where t3.name != "Hank Baskett"
