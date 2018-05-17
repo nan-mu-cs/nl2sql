@@ -1,0 +1,112 @@
+1. How many drivers are there?
+
+select count(*)
+from driver
+
+2. Show the name, home city, and age for all drivers.
+
+select name, home_city, age
+from driver
+
+3. Show the party and the number of drivers in each party.
+
+select party, count(*)
+from driver
+group by party
+
+4. Show the name of drivers in descending order of age.
+
+select name
+from driver
+order by age desc
+
+5. Show all distinct home cities.
+
+select distinct home_city
+from driver
+
+6. Show the home city with most number of drivers.
+
+select home_city
+from driver
+group by home_city
+order by count(*) desc
+limit 1
+
+
+7. Show the party with drivers from Hartford and drivers older than 40.
+
+select party
+from driver
+where home_city = 'Hartford'
+INTERSECT
+select party
+from driver
+where age > 40
+
+8. Show home city where at least two drivers older than 40 are from.
+
+select home_city
+from driver
+where age > 40
+group by home_city
+having count(*) >= 2
+
+9. Show all home cities except for those having a driver older than 40.
+
+select home_city
+from driver
+except
+select home_city
+from driver
+where age > 40
+
+
+9. Show driver names without a school bus.
+
+select name
+from driver
+where driver_id NOT IN (select driver_id from school_bus)
+
+10. Show the school type having two schools.
+
+select type
+from school
+group by type
+having count(*) = 2
+
+
+11. Show the school name and driver name for all school buses.
+
+select T2.school, T3.name
+from school_bus as T1 join school as T2 on T1.school_id = T2.school_id join driver as T3 on T1.driver_id = T3.driver_id
+
+
+12. What is the maximum, minimum and average years working for school buses?
+
+select max(years_working), min(years_working), avg(years_working)
+from school_bus
+
+13. Show the school name and type for schools without a school bus.
+
+select school, type
+from school
+where school_id not in (select school_id from school_bus)
+
+14. Show the type of school and the number of buses in each type.
+
+select T2.type, count(*)
+from school_bus as T1 join school as T2 on T1.school_id = T2.school_id
+group by T2.type
+
+15. How many drivers are from Hartford city or younger than 40?
+
+select count(*)
+from driver
+where home_city = 'Hartford' OR age < 40
+
+16. List names for drivers from Hartford city and younger than 40.
+
+select name
+from driver
+where home_city = 'Hartford' AND age < 40
