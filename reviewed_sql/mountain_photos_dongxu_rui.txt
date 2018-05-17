@@ -109,7 +109,7 @@ join camera_lens as T3
 on T2.camera_lens_id = T3.id
 where T1.range = 'Lasta Massif'
 
-15. Show name, prominence of the mountain that are not taken picture of by lens of brand 'Sigma'
+15. Show name and prominence of the mountains that do not have a picture by lens of brand 'Sigma'.
 
 select name, prominence
 from mountain
