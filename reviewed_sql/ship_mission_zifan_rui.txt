@@ -1,0 +1,97 @@
+Total = 15
+
+1. How many ships are there?
+
+SELECT count(*)
+FROM ship
+
+2. List the name of ships in ascending order of tonnage.
+
+SELECT Name
+FROM ship
+order by Tonnage ASC
+
+3. What are the type and nationality of ships?
+
+SELECT Type, Nationality
+FROM ship
+
+4. List the name of ships whose nationality is not "United States".
+
+SELECT Name
+FROM ship
+Where Nationality != "United States"
+
+5. Show the name of ships whose nationality is either United States or United Kingdom.
+
+SELECT Name
+FROM ship
+Where Nationality = "United States" or Nationality = "United Kingdom"
+
+6. What is the name of the ship with the largest tonnage?
+
+SELECT Name
+FROM ship
+order by Tonnage DESC limit 1
+
+7. Show different type of ships and the number of ships of each type.
+
+SELECT Type, COUNT(*)
+FROM ship
+group by Type
+ 
+8. Please show the most common type of ships.
+
+SELECT Type
+FROM ship
+group by Type
+order by COUNT(*) DESC limit 1
+
+9. List the status nations that have more than two ships.
+
+SELECT Nationality
+FROM ship
+group by Nationality
+Having COUNT(*) > 2
+
+10. Show different type of ships and the average tonnage of ships of each type.
+
+SELECT Type, avg(Tonnage)
+FROM ship
+group by Type
+
+11. Show codes and fates of missions, and names of ships involved.
+
+SELECT T1.Code, T1.Fate, T2.Name
+FROM mission as T1 join ship as T2 
+ON T1.Ship_ID = T2.Ship_ID
+
+12. Show names of ships involved in mission launched after 1928.
+
+SELECT T2.Name
+FROM mission as T1 join ship as T2 
+ON T1.Ship_ID = T2.Ship_ID
+Where T1.Launched_Year > 1928
+
+13. Show the distinct fate of missions that involve ships with nationality "United States"
+
+SELECT distinct T1.Fate
+FROM mission as T1 join ship as T2 
+ON T1.Ship_ID = T2.Ship_ID
+Where T2.Nationality = "United States"
+
+14. List the name of ships that are not involved in any mission
+
+SELECT Name
+from ship
+where Ship_ID not in (SELECT Ship_ID FROM mission)
+
+15. Show the types of ships that have both ships with tonnage larger than 6000 and ships with tonnage smaller than 4000.
+
+SELECT Type
+FROM ship
+Where Tonnage > 6000
+Intersect 
+SELECT Type
+FROM ship
+Where Tonnage < 4000
