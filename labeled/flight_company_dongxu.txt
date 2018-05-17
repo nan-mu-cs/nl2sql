@@ -1,122 +1,129 @@
 Total = 16
 
-1. How many flights have velocity larger than 200?
+1. How many architects are female?
 
 SELECT count(*)
-FROM flight
-where velocity > 200
+FROM architect
+where gender = 'female'
 
-2. List the vehicle flight number, date and pilot of all the flights, order by altitude.
+2. List the name, nationality and id of male architect order by their name lexicographically.
 
-SELECT vehicle_flight_number, date, pilot
-FROM flight
-order by altitude asc
-
-3. List the id, country, city and name of the airports.
-
-SELECT id, country, city, name
-FROM airport
-
-4. What is maximum group equity shareholding of the companies?
-
-select max(group_equity_shareholding)
-from operate_company
-
-5. What is the velocity of the pilot named 'Thompson'?
-
-select avg(velocity)
-from flight
-where pilot = 'Thompson'
-
-6. What are the names and types of the companies who have ever operated a flight?
-
-select T1.name, T1.type
-from operate_company as T1 join flight as t2
-on T1.id = T2.company_id
+SELECT name, nationality, id
+FROM architect
+order by name
 
 
-7. What are the names of the airports which are not in the country 'Iceland'?
+3. What is maximum length in meters of the bridges and what is the architects' name?
+
+select max(T1.length_meters), T2.name
+from bridge as T1 join architect as T2
+on T1.architect_id = T2.id
+
+4. What is the average length in feet of the bridges?
+
+select avg(length_feet)
+from bridge
+
+5. What are the names and built years of the mills of 'Grondzeiler' type?
+
+select name, built_year
+from mill
+where type = 'Grondzeiler'
+
+6. What are the distinct names and nationalities of the architects who have ever built a mill?
+
+select distinct T1.name, T1.nationality
+from architect as T1 join mill as t2
+on T1.id = T2.architect_id
+
+
+7. What are the names of the mills which are not located in 'Donceel'?
 
 SELECT name
-from airport
-Where country != 'Iceland'
+from mill
+Where location != 'Donceel'
 
 
-8. What are the distinct types of the companies which have operated any flights with velocity lower than 200?
+8. What are the distinct types mills that are built by American or Canadian architects?
 
 select distinct T1.type
-from operate_company as T1 join flight as t2
-on T1.id = T2.company_id
-where T2.velocity < 200
+from mill as T1 join architect as t2
+on T1.architect_id = T2.id
+where T2.nationality = 'American' or T2.nationality = 'Canadian'
 
-9. What are the id and name of the companies that operated more than one flights?
+9. What are the id and name of the architects who built at least 3 bridges ?
 
 select T1.id, T1.name
-from operate_company as T1 join flight as t2
-on T1.id = T2.company_id
+from architect as T1 join bridge as T2
+on T1.id = T2.architect_id
 group by T1.id
-having count(*) > 1
+having count(*) >= 3
 
 
-10. What is the id, name and IATA code of the airport that had most number of flights?
+10. What is the id, name and nationality of the architect who built most mills?
 
-SELECT T1.id, T1.name, T1.IATA
-from airport as T1 join flight as T2
-on T1.id = T2.airport_id
-group by T2.id
+select T1.id, T1.name, T1.nationality
+from architect as T1 join mill as T2
+on T1.id = T2.architect_id
+group by T1.id
 order by count(*) desc limit 1
 
 
-11. What are the distinct pilot names who had piloted a flight in the country 'United States' or in the airport named 'Billund Airport'?
+11. What are the id, name and gender of the architects who built two bridges or one mill?
 
-select distinct T2.pilot
-from airport as T1 join flight as T2
-on T1.id = T2.airport_id
-where T1.country = 'United States' or T1.name = 'Billund Airport'
+select T1.id, T1.name, T1.gender
+from architect as T1 join bridge as T2
+on T1.id = T2.architect_id
+group by T1.id
+having count(*) = 2
+union
+select T1.id, T1.name, T1.gender
+from architect as T1 join mill as T2
+on T1.id = T2.architect_id
+group by T1.id
+having count(*) = 1
 
 
-12. What is the most common company type, and how many are there?
+
+12. What are the location of the bridge named 'Kolob Arch' or 'Rainbow Bridge'?
+
+select location
+from bridge
+where name = 'Kolob Arch' or name = 'Rainbow Bridge'
+
+
+13. Which of the mill names contains the french word 'Moulin'?
+
+select name
+from mill
+where name like '%Moulin%'
+
+
+
+14. What are the distinct name of the mills built by the architects who have also built a bridge longer than 80 meters?
+
+select distinct T1.name
+from mill as T1 join architect as t2
+on T1.architect_id = T2.id
+join bridge as T3
+on T3.architect_id = T2.id
+where T3.length_meters > 80
+
+
+
+
+15. What is the most common mill type, and how many are there?
 
 select type, count(*)
-from operate_company
+from mill
 group by type
 order by count(*) desc limit 1
 
-13. How many airports haven't the pilot 'Thompson' driven an aircraft?
+16. How many architects haven't built a mill before year 1850?
 
 select count(*)
-from airport
+from architect
 where id not in (
-select airport_id from flight
-where pilot = 'Thompson'
+select architect_id from mill
+where built_year < 1850
 );
-
-14. List the name of the pilots who have flied for both a company that mainly provide 'Cargo' services and a company that runs 'Catering services' activities.
-
-select T2.pilot
-from operate_company as T1 join flight as t2
-on T1.id = T2.company_id
-where T1.principal_activities = 'Cargo'
-intersect
-select T2.pilot
-from operate_company as T1 join flight as t2
-on T1.id = T2.company_id
-where T1.principal_activities = 'Catering services'
-
-15. Which of the airport names contains the word 'international'?
-
-select name
-from airport
-where name like '%international%'
-
-16. How many companies operates airlines in each airport?
-
-select T3.id, count(*)
-from operate_company as T1 join flight as t2
-on T1.id = T2.company_id
-join airport as T3
-on T2.airport_id = T3.id
-group by T3.id
-
-
-
