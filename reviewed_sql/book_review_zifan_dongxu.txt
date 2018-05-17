@@ -1,4 +1,4 @@
-Total = 20
+Total = 21
 
 1. How many books are there?
 
@@ -90,7 +90,7 @@ order by COUNT(*) DESC limit 1
 SELECT Type
 FROM book
 group by Type
-Having COUNT(*) >= 3
+having COUNT(*) >= 3
 
 16. List the titles of books in ascending order of the ratings in review?
 
@@ -99,16 +99,16 @@ FROM book as T1 join review as T2
 ON T1.Book_ID = T2.Book_ID
 order by T2.Rating ASC
 
-17. List the titles of books by the descending order of the number of readers?
+17. List the titles and audio length of books by the descending order of the number of readers?
 
-SELECT T1.Title
+SELECT T1.Title, T1.audio
 FROM book as T1 join review as T2 
 ON T1.Book_ID = T2.Book_ID
 order by T2.Readers_in_Million DESC
 
-18. List the title of books that do not have reviews.
+18. How many are books that do not have reviews?
 
-SELECT Title
+SELECT count(*)
 from book
 Where Book_ID not in (select Book_ID from review)
 
@@ -126,3 +126,12 @@ Where Chapters < 50
 
 SELECT count(distinct Type)
 FROM book
+
+21. What is the type and title of the book that are not rated?
+
+select type, title
+from book
+except
+select T1.type, T1.title
+from book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID;
