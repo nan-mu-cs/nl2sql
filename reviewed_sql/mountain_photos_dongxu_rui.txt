@@ -1,0 +1,143 @@
+Total = 17
+
+1. How many camera lens has focal length longer than 15?
+
+SELECT count(*)
+FROM camera_lens
+where focal_length_mm > 15
+
+2. List the brand and name of the camera lens order by maximum aperture descendingly.
+
+SELECT brand, name
+FROM camera_lens
+order by max_aperture desc
+
+3. List the id, color scheme and names of all the photos.
+
+SELECT id, color, name
+FROM photos
+
+4. What is the maximum, and average height of the mountains?
+
+select max(height), avg(height)
+from mountain
+
+
+5. What is the average prominence of the mountains in country 'Morocco'?
+
+select avg(prominence)
+from mountain
+where country = 'Morocco'
+
+
+6. What are the mountain names, height and prominence which do not belong
+to the range 'Aberdare Range' ?
+
+SELECT name, height, prominence
+from mountain
+Where range != 'Aberdare Range'
+
+
+7. What are the id and names of the photos that are taken of the mountains
+higher than 4000 meters?
+
+SELECT T1.id, T1.name
+FROM mountain as T1 join photos as T2
+on T1.id = T2.mountain_id
+where T1.height > 4000
+
+8. What are the id and names of the mountains that has at least 2 photos?
+
+SELECT T1.name, T1.name
+FROM mountain as T1 join photos as T2
+on T1.id = T2.mountain_id
+group by T1.id
+having count(*) >= 2
+
+
+9. What is the name of the cameras that have taken picture of most mountains?
+
+SELECT T3.name
+FROM mountain as T1 join photos as T2
+on T1.id = T2.mountain_id
+join camera_lens as T3
+on T2.camera_lens_id = T3.id
+group by T3.id
+order by count(*) desc limit 1
+
+
+10. Which photos are taken with the lens brand 'Sigma' or 'Olympus'?
+
+SELECT T1.name
+FROM camera_lens as T1 join photos as T2
+on T2.camera_lens_id = T1.id
+where T1.brand = 'Sigma' or T1.brand = 'Olympus'
+
+
+11. How many different kinds lens brands?
+
+select count(distinct brand)
+from camera_lens
+
+12. How many camera lens are not used in taking any photos?
+
+select count(*)
+from camera_lens
+where id not in (
+select camera_lens_id from photos
+);
+
+13. How many dinstinct kind of camera lens are used to take photos of mountains 
+in the country 'Ethiopia'?
+
+select count(distinct T3.id)
+FROM mountain as T1 join photos as T2
+on T1.id = T2.mountain_id
+join camera_lens as T3
+on T2.camera_lens_id = T3.id
+where T1.country = 'Ethiopia'
+
+
+14. List the brand of the lens which both took picture of range 'Toubkal Atlas' ane
+range 'Lasta Massif'
+
+select T3.brand
+FROM mountain as T1 join photos as T2
+on T1.id = T2.mountain_id
+join camera_lens as T3
+on T2.camera_lens_id = T3.id
+where T1.range = 'Toubkal Atlas'
+intersect
+select T3.brand
+FROM mountain as T1 join photos as T2
+on T1.id = T2.mountain_id
+join camera_lens as T3
+on T2.camera_lens_id = T3.id
+where T1.range = 'Lasta Massif'
+
+15. Show name, prominence of the mountain that are not taken picture of by lens of brand 'Sigma'
+
+select name, prominence
+from mountain
+except
+select T1.name, T1.prominence
+FROM mountain as T1 join photos as T2
+on T1.id = T2.mountain_id
+join camera_lens as T3
+on T2.camera_lens_id = T3.id
+where T3.brand = 'Sigma'
+
+16. Which lens name contains substring "Digital"?
+
+select name
+from camera_lens
+where name like "%Digital%"
+
+
+17. How many pictures has each camera lens taken order by count?
+
+select T1.id, count(*)
+from camera_lens as T1 join photos as T2
+on T1.id = T2.camera_lens_id
+group by T1.id
+order by count(*)
