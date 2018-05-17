@@ -45,21 +45,21 @@ on T1.Wrestler_ID = T2.Wrestler_ID
 SELECT T2.Name, T1.Team
 FROM elimination as T1 JOIN wrestler as T2
 on T1.Wrestler_ID = T2.Wrestler_ID
-order by Days_held DESC
+order by T2.Days_held DESC
 
 9. List the time of elimination of the wrestlers with largest days held.
 
 SELECT T1.Time
 FROM elimination as T1 JOIN wrestler as T2
 on T1.Wrestler_ID = T2.Wrestler_ID
-order by Days_held DESC limit 1
+order by T2.Days_held DESC limit 1
 
 10. Show times of eliminations of wrestlers with days held more than 50.
 
 SELECT T1.Time
 FROM elimination as T1 JOIN wrestler as T2
 on T1.Wrestler_ID = T2.Wrestler_ID
-Where Days_held > 50
+Where T2.Days_held > 50
 
 11. Show different teams in eliminations and the number of eliminations from each team.
 
@@ -74,7 +74,7 @@ FROM elimination
 group by Team
 Having COUNT(*) > 3
 
-13. Show the most reign and days held of wrestlers.
+13. Show the reign and days held of wrestlers.
 
 SELECT Reign, Days_held
 FROM wrestler
