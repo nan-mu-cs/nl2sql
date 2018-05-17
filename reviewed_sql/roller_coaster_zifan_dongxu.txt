@@ -1,4 +1,4 @@
-Total = 15
+Total = 17
 
 1. How many roller coasters are there?
 
@@ -79,9 +79,9 @@ ON T1.Country_ID = T2.Country_ID
 group by T1.Name
 Having COUNT(*) > 1
 
-14. Show the name of the country that has the highest roller coaster.
+14. Show the name and population of the country that has the highest roller coaster.
 
-SELECT T1.Name
+SELECT T1.Name, T1.population
 FROM country as T1 join roller_coaster as T2 
 ON T1.Country_ID = T2.Country_ID
 order by T2.Height DESC limit 1
@@ -92,3 +92,31 @@ SELECT T1.Name, avg(T2.Speed)
 FROM country as T1 join roller_coaster as T2 
 ON T1.Country_ID = T2.Country_ID
 group by T1.Name
+
+
+16. How many countries do not have an roller coaster longer than 3000?
+
+
+select count(*)
+from country
+where country_id not in (
+select country_id
+from roller_coaster
+where length > 3000
+)
+
+
+17. What are the country names, area and population which has both roller coasters with speed higher 
+than 60 and roller coasters with speed lower than 55?
+
+select T1.name, T1.area, T1.population
+FROM country as T1 join roller_coaster as T2 
+ON T1.Country_ID = T2.Country_ID
+where T2.speed > 60
+intersect
+select T1.name, T1.area, T1.population
+FROM country as T1 join roller_coaster as T2 
+ON T1.Country_ID = T2.Country_ID
+where T2.speed < 55
+
+
