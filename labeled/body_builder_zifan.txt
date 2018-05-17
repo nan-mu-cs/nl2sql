@@ -1,4 +1,4 @@
-Total = 24
+Total = 20
 
 1. How many body builders are there?
 
@@ -28,7 +28,7 @@ SELECT Clean_Jerk
 FROM body_builder
 order by Total DESC limit 1
 
-6. What are the birthdays of people in ascending order of height?
+6. What are the birth dates of people in ascending order of height?
 
 SELECT Birth_Date
 from People
@@ -40,14 +40,14 @@ SELECT T2.Name
 FROM body_builder as T1 join people as T2 
 ON T1.People_ID = T2.People_ID
 
-8. What are the names of body builders whose total score is higher than 300?
+8. What are the names of body builders whose total score is bigger than 300?
 
 SELECT T2.Name
 FROM body_builder as T1 join people as T2 
 ON T1.People_ID = T2.People_ID
 Where T1.Total > 300
 
-9. What is the name of the body builder with the biggest body weight.
+9. What is the name of the body builder with the biggest weight.
 
 SELECT T2.Name
 FROM body_builder as T1 join people as T2 
@@ -80,7 +80,7 @@ Where T2.Height > 200
 SELECT T2.Name
 FROM body_builder as T1 join people as T2 
 ON T1.People_ID = T2.People_ID
-order by T1.Total desc
+order by T1.Total
 
 14. What are different birth places of people and the corresponding number of people from each place?
 
@@ -113,42 +113,13 @@ order by Height DESC
 SELECT * 
 FROM body_builder
 
-19. List the names and origins of people that are not body builders.
+19. List the names of people that are not body builders.
 
-SELECT Name, birth_place
+SELECT Name
 FROM people
-except
-SELECT T1.Name, T1.birth_place
-FROM people as T1 join body_builder as T2
-on T1.people_id = T2.people_id
+Where People_ID not in (select People_ID from body_builder)
 
 20. How many distinct birth places are there?
 
 SELECT count(distinct Birth_Place)
 FROM people
-
-21. How many persons are not body builders?
-
-select count(*)
-from people
-where people_id not in (select People_ID from body_builder)
-
-
-22. List the weight of the body builders who have snatch score higher than 140 or have the height taller than 200?
-
-select T2.weight
-from body_builder as T1 join people as T2
-on T1.people_id = T2.people_id
-where T1.snatch > 140 or T2.height > 200;
-
-23. What are the total scores of the body builders whose birthday contains the string "January" ?
-
-select T1.total
-from body_builder as T1 join people as T2 on T1.people_id = T2.people_id
-where T2.Birth_Date like "%January%";
-
-
-24. What is the minimum snatch score?
-
-select min(snatch)
-from body_builder
