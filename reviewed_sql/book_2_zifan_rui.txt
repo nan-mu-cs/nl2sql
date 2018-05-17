@@ -32,9 +32,9 @@ FROM book
 
 SELECT Publication_Date
 FROM publication
-order by Price ASC
+order by Price DESC
 
-7. What are the distinct publishers of publications with price bigger than 5000000?
+7. What are the distinct publishers of publications with price higher than 5000000?
 
 SELECT distinct Publisher
 FROM publication
@@ -105,8 +105,8 @@ SELECT Title
 from book
 where Book_ID not in (SELECT Book_ID FROM publication)
 
-18. Show the publishers that have publications with price more than 10000000 and publications
-with price smaller than 5000000.
+18. Show the publishers that have publications with price higher than 10000000 and publications
+with price lower than 5000000.
 
 SELECT Publisher
 FROM publication
