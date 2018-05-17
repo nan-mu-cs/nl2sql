@@ -66,14 +66,14 @@ FROM actor as T1 join musical as T2
 ON T1.Musical_ID = T2.Musical_ID
 order by T2.Year DESC
 
-12. Show names of musicals and the number of actors that have appeared in the musicals.
+12. Show names of musicals and the number of actors who have appeared in the musicals.
 
 SELECT T2.Name, COUNT(*)
 FROM actor as T1 join musical as T2 
 ON T1.Musical_ID = T2.Musical_ID
 group by T1.Musical_ID
 
-13. Show names of musicals that have at least three actors appeared in the musicals.
+13. Show names of musicals which have at least three actors.
 
 SELECT T2.Name
 FROM actor as T1 join musical as T2 
@@ -81,13 +81,13 @@ ON T1.Musical_ID = T2.Musical_ID
 group by T1.Musical_ID
 Having COUNT(*) >= 3
 
-14. Show different nominees and the number of musicals they have nominated.
+14. Show different nominees and the number of musicals they have been nominated.
 
 SELECT Nominee, COUNT(*)
 FROM musical
 group by Nominee
  
-15. Please show the nominee that have nominated the most number of musicals.
+15. Please show the nominee that have been nominated the most number of musicals.
 
 SELECT Nominee
 FROM musical
@@ -101,7 +101,7 @@ FROM musical
 group by Result
 order by COUNT(*) DESC limit 1
 
-17. List the nominees that have nominated more than two musicals.
+17. List the nominees that have been nominated more than two musicals.
 
 SELECT Nominee
 FROM musical
@@ -124,7 +124,7 @@ SELECT Nominee
 FROM musical
 Where Award = "Drama Desk Award"
 
-20. Show the musicals with nominee "Bob Fosse" or "Cleavant Derricks".
+20. Show the musical nominee with award "Bob Fosse" or "Cleavant Derricks". 
 
 SELECT Nominee
 FROM musical
