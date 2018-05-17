@@ -1,0 +1,517 @@
+# Total = 40
+
+1. How many assessment notes are there in total?
+P: 
+
+SELECT count(*)
+FROM ASSESSMENT_NOTES
+
+S:
+S:
+S:
+
+
+2. What are the dates of the assessment notes?
+P: 
+
+Select date_of_notes
+from Assessment_Notes
+
+S:
+S:
+S:
+
+
+3. How many addresses have zip code 197?
+P: 
+
+SELECT count(*)
+FROM ADDRESSES
+WHERE zip_postcode = "197"
+
+S:
+S:
+S:
+
+
+4. How many distinct incident type codes are there?
+P: 
+
+SELECT count(distinct incident_type_code)
+FROM Behavior_Incident
+
+S:
+S:
+S:
+
+
+5. Return all distinct detention type codes.
+P: 
+
+SELECT distinct detention_type_code
+FROM Detention
+
+S:
+S:
+S:
+
+
+6. What are the start and end dates for incidents with incident type code "NOISE"?
+P: 
+
+SELECT date_incident_start, date_incident_end
+FROM Behavior_Incident
+WHERE incident_type_code = "NOISE"
+
+S:
+S:
+S:
+
+
+7. Return all detention summaries.
+P: 
+
+select detention_summary
+from Detention
+
+S:
+S:
+S:
+
+
+8. Return the cell phone number and email address for all students.
+P: 
+
+select cell_mobile_number, email_address
+from STUDENTS
+
+S:
+S:
+S:
+
+
+9. What is the email of the student with first name "Emma" and last name "Rohan"?
+P: 
+
+SELECT email_address
+FROM Students
+WHERE first_name = "Emma" AND last_name = "Rohan"
+
+S:
+S:
+S:
+
+
+10. How many distinct students have been in detention?
+P: 
+
+select count(distinct student_id)
+FROM Students_in_Detention
+
+S:
+S:
+S:
+
+
+11. What is the gender of the teacher with last name "Medhurst"?
+P: 
+
+select gender
+FROM TEACHERS
+WHERE last_name = "Medhurst"
+
+S:
+S:
+S:
+
+
+12. What is the incident type description for the incident type with code "VIOLENCE"?
+P: 
+
+select incident_type_description
+from Ref_Incident_Type
+WHERE incident_type_code = "VIOLENCE"
+
+S:
+S:
+S:
+
+
+13. Find the maximum and minimum monthly rental for all student addresses.
+P: 
+
+SELECT max(monthly_rental), min(monthly_rental)
+FROM Student_Addresses
+
+S:
+S:
+S:
+
+
+14. Find the first names of teachers whose email address contains the word "man".
+P: 
+
+SELECT first_name
+FROM Teachers
+WHERE email_address LIKE '%man%'
+
+S:
+S:
+S:
+
+
+15. List all information about the assessment notes sorted by date in ascending order.
+P: 
+
+SELECT *
+FROM Assessment_Notes
+ORDER BY date_of_notes ASC
+
+S:
+S:
+S:
+
+
+16. List all cities of addresses in alphabetical order.
+P: 
+
+SELECT city
+FROM Addresses
+ORDER BY city
+
+S:
+S:
+S:
+
+
+17. Find the first names and last names of teachers in alphabetical order of last name.
+P: 
+
+SELECT first_name, last_name
+FROM Teachers
+ORDER BY last_name
+
+S:
+S:
+S:
+
+
+18. Find all information about student addresses, and sort by monthly rental in descending order.
+P: 
+
+SELECT *
+FROM Student_Addresses
+ORDER BY monthly_rental DESC
+
+S:
+S:
+S:
+
+
+19. Find the id and first name of the student that has the most number of assessment notes?
+P: 
+
+SELECT T1.student_id, T2.first_name
+FROM Assessment_Notes as T1 JOIN Students as T2
+on T1.student_id = T2.student_id
+GROUP BY T1.student_id
+ORDER BY count(*) desc
+LIMIT 1
+
+S:
+S:
+S:
+
+
+20. Find the ids and first names of the 3 teachers that have the most number of assessment notes?
+P: 
+
+SELECT T1.teacher_id, T2.first_name
+FROM Assessment_Notes as T1 JOIN Teachers as T2
+on T1.teacher_id = T2.teacher_id
+GROUP BY T1.teacher_id
+ORDER BY count(*) desc
+LIMIT 3
+
+S:
+S:
+S:
+
+
+21. Find the id and last name of the student that has the most behavior incidents?
+P: 
+
+SELECT T1.student_id, T2.last_name
+FROM Behavior_Incident as T1 JOIN Students as T2
+on T1.student_id = T2.student_id
+GROUP BY T1.student_id
+ORDER BY count(*) desc
+LIMIT 1
+
+S:
+S:
+S:
+
+
+22. Find the id and last name of the teacher that has the most detentions with detention type code "AFTER"?
+P: 
+
+SELECT T1.teacher_id, T2.last_name
+FROM Detention as T1 JOIN Teachers as T2
+on T1.teacher_id = T2.teacher_id
+WHERE T1.detention_type_code = "AFTER"
+GROUP BY T1.teacher_id
+ORDER BY count(*) desc
+LIMIT 1
+
+S:
+S:
+S:
+
+
+23. What are the id and first name of the student whose addresses have the highest average monthly rental?
+P: 
+
+SELECT T1.student_id, T2.first_name
+FROM Student_Addresses as T1 JOIN Students as T2
+on T1.student_id = T2.student_id
+GROUP BY T1.student_id
+ORDER BY AVG(monthly_rental) desc
+LIMIT 1
+
+S:
+S:
+S:
+
+
+24. Find the id and city of the student address with the highest average monthly rental.
+P: 
+
+SELECT T2.address_id, T1.city
+FROM Addresses as T1 JOIN Student_Addresses as T2
+on T1.address_id = T2.address_id
+GROUP BY T2.address_id
+ORDER BY AVG(monthly_rental) desc
+LIMIT 1
+
+S:
+S:
+S:
+
+
+25. What are the code and description of the most frequent behavior incident type?
+P: 
+
+select T1.incident_type_code, T2.incident_type_description
+from Behavior_Incident as T1 JOIN Ref_Incident_Type as T2
+on T1.incident_type_code = T2.incident_type_code
+Group by T1.incident_type_code
+order by count(*) desc limit 1
+
+S:
+S:
+S:
+
+
+26. What are the code and description of the least frequent detention type ?
+P: 
+
+select T1.detention_type_code, T2.detention_type_description
+from Detention as T1 JOIN Ref_Detention_Type as T2
+on T1.detention_type_code = T2.detention_type_code
+Group by T1.detention_type_code
+order by count(*) asc limit 1
+
+S:
+S:
+S:
+
+
+27. Find the dates of assessment notes for students with first name "Fanny".
+P: 
+
+SELECT T1.date_of_notes
+FROM Assessment_Notes as T1 JOIN Students as T2
+on T1.student_id = T2.student_id
+Where T2.first_name = "Fanny"
+
+S:
+S:
+S:
+
+
+28. Find the texts of assessment notes for teachers with last name "Schuster".
+P: 
+
+SELECT T1.text_of_notes
+FROM Assessment_Notes as T1 JOIN Teachers as T2
+on T1.teacher_id = T2.teacher_id
+Where T2.last_name = "Schuster"
+
+S:
+S:
+S:
+
+
+29. Find the start and end dates of behavior incidents of students with last name "Fahey".
+P: 
+
+SELECT T1.date_incident_start, date_incident_end
+FROM Behavior_Incident as T1 JOIN Students as T2
+on T1.student_id = T2.student_id
+Where T2.last_name = "Fahey"
+
+S:
+S:
+S:
+
+
+30. Find the start and end dates of detentions of teachers with last name "Schultz".
+P: 
+
+SELECT T1.datetime_detention_start, datetime_detention_end
+FROM Detention as T1 JOIN Teachers as T2
+on T1.teacher_id = T2.teacher_id
+Where T2.last_name = "Schultz"
+
+S:
+S:
+S:
+
+
+31. What are the id and zip code of the address with the highest monthly rental?
+P: 
+
+SELECT T2.address_id, T1.zip_postcode
+FROM Addresses as T1 JOIN Student_Addresses as T2
+on T1.address_id = T2.address_id
+ORDER BY monthly_rental desc LIMIT 1
+
+S:
+S:
+S:
+
+
+32. What is the cell phone number of the student whose address has the lowest monthly rental?
+P: 
+
+SELECT T2.cell_mobile_number
+FROM Student_Addresses as T1 JOIN Students as T2
+on T1.student_id = T2.student_id
+ORDER BY T1.monthly_rental ASC LIMIT 1
+
+S:
+S:
+S:
+
+
+33. What are the monthly rentals of student addresses in Texas state?
+P: 
+
+SELECT T2.monthly_rental
+FROM Addresses as T1 JOIN Student_Addresses as T2
+on T1.address_id = T2.address_id
+WHERE T1.state_province_county = "Texas"
+
+S:
+S:
+S:
+
+
+34. What are the first names and last names of students with address in Wisconsin state?
+P: 
+
+SELECT T2.first_name, T2.last_name
+FROM Addresses as T1 JOIN Students as T2
+on T1.address_id = T2.address_id
+WHERE T1.state_province_county = "Wisconsin"
+
+S:
+S:
+S:
+
+
+35. What are the line 1 and average monthly rentals of all student addresses?
+P: 
+
+SELECT T1.line_1, avg(T2.monthly_rental)
+FROM Addresses as T1 JOIN Student_Addresses as T2
+on T1.address_id = T2.address_id
+Group by T2.address_id
+
+S:
+S:
+S:
+
+
+36. What is the zip code of the address where the teacher with first name "Lyla" lives?
+P: 
+
+SELECT T1.zip_postcode
+FROM Addresses as T1 JOIN Teachers as T2
+on T1.address_id = T2.address_id
+Where T2.first_name = "Lyla"
+
+S:
+S:
+S:
+
+
+37. What are the email addresses of teachers whose address has zip code "918"?
+P: 
+
+SELECT T2.email_address
+FROM Addresses as T1 JOIN Teachers as T2
+on T1.address_id = T2.address_id
+WHERE T1.zip_postcode = "918"
+
+S:
+S:
+S:
+
+
+38. How many students are not involved in any behavior incident?
+P: 
+
+SELECT count(*)
+FROM STUDENTS
+WHERE student_id not in (
+select student_id from Behavior_Incident
+)
+
+S:
+S:
+S:
+
+
+39. Find the last names of teachers who are not involved in any detention.
+P: 
+
+select last_name
+from Teachers
+except
+select T1.last_name
+from Teachers as T1 join Detention as T2
+on T1.teacher_id = T2.teacher_id
+
+S:
+S:
+S:
+
+
+40. What are the line 1 of addresses shared by some students and some teachers?
+P: 
+
+select T1.line_1
+from Addresses as T1 join Students as T2
+on T1.address_id = T2.address_id
+intersect
+select T1.line_1
+from Addresses as T1 join Teachers as T2
+on T1.address_id = T2.address_id
+
+S:
+S:
+S:
+
+
