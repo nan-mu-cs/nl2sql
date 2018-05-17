@@ -17,7 +17,7 @@ SELECT Name
 FROM artwork
 Where Type != "Program Talent Show"
 
-4. What are the names and location of festivaLs?
+4. What are the names and location of festivals?
 
 SELECT Festival_Name, Location
 FROM festival_detail
@@ -26,7 +26,7 @@ FROM festival_detail
 
 SELECT Chair_Name
 FROM festival_detail
-order by Year DESC
+order by Year ASC
 
 6. What is the location of the festival with the most number of audience?
 
@@ -86,9 +86,9 @@ join festival_detail as T3
 on T1.Festival_ID = T3.Festival_ID
 Where T2.Type = "Program Talent Show"
 
-14. Show names of festivals that have at least two nomination for artworks.
+14. Show id and names of festivals that have at least two nomination for artworks.
 
-SELECT T3.Festival_Name
+SELECT T1.Festival_ID, T3.Festival_Name
 FROM nomination as T1 join artwork as T2 
 ON T1.Artwork_ID = T2.Artwork_ID
 join festival_detail as T3
@@ -96,9 +96,9 @@ on T1.Festival_ID = T3.Festival_ID
 group by T1.Festival_ID
 Having COUNT(*) >= 2
 
-15. Show names of festivals and the number of artworks they have nominated.
+15. Show id, names of festivals and the number of artworks they have nominated.
 
-SELECT T3.Festival_Name, COUNT(*)
+SELECT T1.Festival_ID, T3.Festival_Name, COUNT(*)
 FROM nomination as T1 join artwork as T2 
 ON T1.Artwork_ID = T2.Artwork_ID
 join festival_detail as T3
@@ -136,3 +136,23 @@ where Artwork_ID not in (SELECT Artwork_ID FROM nomination)
 SELECT Num_of_Audience
 FROM festival_detail
 Where Year = 2008 or Year = 2010
+
+
+21. What are the total number of the audiences who visited any of the festivals?
+
+select sum(Num_of_Audience)
+from festival_detail
+
+
+
+22. In which year, there is a festival both inside the 'United States' and outside the 'United States'?
+
+select year
+from festival_detail
+where Location = 'United States'
+intersect
+select year
+from festival_detail
+where Location != 'United States'
+
+
