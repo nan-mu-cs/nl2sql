@@ -1,0 +1,244 @@
+1. How many buildings are there?
+P:
+
+select count(*)
+from building
+
+S:
+S:
+S:
+
+
+2. Show the name, street address, and number of floors for all buildings ordered by the number of floors.
+P:
+
+select name, street_address, floors
+from building
+order by floors
+
+S:
+S:
+S:
+
+
+3. What is the name of the tallest building?
+P:
+
+select name
+from building
+order by height_feet desc
+limit 1
+
+S:
+S:
+S:
+
+
+4. What are the average, maximum, and minimum number of floors for all buildings?
+P:
+
+select avg(floors), max(floors), min(floors)
+from building
+
+S:
+S:
+S:
+
+
+5. Show the number of buildings with a height above the average or a number of floors above the average.
+P:
+
+select count(*)
+from building
+where height_feet > (select avg(height_feet) from building) OR floors > (select avg(floors) from building)
+
+S:
+S:
+S:
+
+
+6. List the names of buildings with at least 200 feet of height and with at least 20 floors.
+P:
+
+select name
+from building
+where height_feet >= 200 and floors >= 20
+
+S:
+S:
+S:
+
+
+7. Show the names and locations of institutions that are founded after 1990 and have the type "Private".
+P:
+
+select institution, location
+from institution
+where founded > 1990 and type = 'Private'
+
+S:
+S:
+S:
+
+
+8. Show institution types, along with the number of institutions and total enrollment for each type.
+P:
+
+select type, count(*), sum(enrollment)
+from institution
+group by type
+
+S:
+S:
+S:
+
+
+9. Show the institution type with the largest number of institutions.
+P:
+
+select type
+from institution
+group by type
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+10. Show the institution type with an institution founded after 1990 and an institution with at least 1000 enrollment.
+P:
+
+select type
+from institution
+where founded > 1990 and enrollment >= 1000
+
+S:
+S:
+S:
+
+
+11. Show the name of buildings that do not have any institution.
+P:
+
+select name
+from building
+where building_id NOT IN (select building_id from institution)
+
+S:
+S:
+S:
+
+
+12. Show the names of buildings except for those having an institution founded in 2003.
+P:
+
+select name
+from building
+except
+select T1.name
+from building as T1 join institution as T2 on T1.building_id = T2.building_id
+where T2.founded = 2003
+
+S:
+S:
+S:
+
+
+13. For each building, show the name of the building and the number of institutions in it.
+P:
+
+select T1.name, count(*)
+from building as T1 join institution as T2 on T1.building_id = T2.building_id
+group by T1.building_id
+
+S:
+S:
+S:
+
+
+14. Show the names and heights of buildings with at least two institutions founded after 1880.
+P:
+
+select T1.name, T1.height_feet
+from building as T1 join institution as T2 on T1.building_id = T2.building_id
+where T2.founded > 1880
+group by T1.building_id
+having count(*) >= 2
+
+S:
+S:
+S:
+
+
+15. Show all the distinct institution types.
+P:
+
+select distinct type
+from institution
+
+S:
+S:
+S:
+
+
+16. Show institution names along with the number of proteins for each institution.
+P:
+
+select T1.institution, count(*)
+from institution as T1 join protein as T2 on T1.institution_id = T2.institution_id
+group by T1.institution_id
+
+S:
+S:
+S:
+
+
+17. How many proteins are associated with an institution founded after 1880 or an institution with type "Private"?
+P:
+
+select count(*)
+from institution as T1 join protein as T2 on T1.institution_id = T2.institution_id
+where T1.founded > 1880 or T1.type = 'Private'
+
+S:
+S:
+S:
+
+
+18. Show the protein name and the institution name.
+P:
+
+select T2.protein_name, T1.institution
+from institution as T1 join protein as T2 on T1.institution_id = T2.institution_id
+
+S:
+S:
+S:
+
+
+19. How many proteins are associated with an institution in a building with at least 20 floors?
+P:
+
+select count(*)
+from institution as T1 join protein as T2 on T1.institution_id = T2.institution_id join building as T3 on T3.building_id = T1.building_id
+where T3.floors >= 20
+
+S:
+S:
+S:
+
+
+20. How many institutions do not have an associated protein in our record?
+P:
+
+select count(*)
+from institution
+where institution_id not in (select institution_id from protein)
+
+S:
+S:
+S:
+
+
