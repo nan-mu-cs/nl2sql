@@ -1,0 +1,146 @@
+Total = 16
+
+1. How many main stream browsers whose market share is at least 5 are there?
+
+SELECT count(*)
+FROM browser
+where market_share >= 5
+
+2. List the name of browsers in descendingly by market share.
+
+SELECT name
+FROM browser
+order by market_share desc
+
+3. List the id, names and market shares of all the browsers.
+
+SELECT id, name, market_share
+FROM browser
+
+4. What is the maximum, minimum and average market share of the listed browsers?
+
+select max(market_share), min(market_share), avg(market_share)
+from browser
+
+
+5. What is the id and market share of the browser Safari?
+
+select id, market_share
+from browser
+where name = 'Safari'
+
+
+6. What are the name and os of web client accellerators which does not work with only 'Broadband' type connection?
+
+SELECT name, operating_system
+FROM web_client_accelerator
+Where connection != 'Broadband'
+
+
+7. What is the name of the browser that became compatible with the accelerator 'CProxy' after year 1998 ?
+
+SELECT T1.name
+FROM browser as T1 join accelerator_compatible_browser as T2
+on T1.id = T2.browser_id
+join web_client_accelerator as T3
+on T2.accelerator_id = T3.id
+where T3.name = 'CProxy' and T2.compatible_since_year > 1998
+
+8. What are the ids and names of the web accelerators that are compatible with two or more browsers?
+
+SELECT T1.id, T1.Name
+FROM web_client_accelerator as T1 join accelerator_compatible_browser as T2
+on T2.accelerator_id = T1.id
+group by T1.id
+having count(*) >= 2
+
+
+9. What is the id and name of the browser that is compatible with most web accelerators?
+
+SELECT T1.id, T1.name
+FROM browser as T1 join accelerator_compatible_browser as T2
+on T1.id = T2.browser_id
+group by T1.id
+order by count(*) desc limit 1
+
+
+10. When did the web accelerator 'CACHEbox' and browser 'Internet Explorer' became compatible?
+
+SELECT T1.compatible_since_year
+from accelerator_compatible_browser as T1 join browser as T2
+on T1.browser_id = T2.id
+join web_client_accelerator as T3
+on T1.accelerator_id = T3.id
+where T3.name = 'CACHEbox' and T2.name = 'Internet Explorer'
+
+
+11. How many different kinds of clients are supported by the web clients accelerators?
+
+select count(distinct client)
+from web_client_accelerator
+
+12. How many accelerator are not compatible with the browsers listed ?
+
+select count(*)
+from web_client_accelerator
+where id not in (
+select accelerator_id from accelerator_compatible_browser
+);
+
+13. What distinct accelerator names are compatible with the browswers that have market share higher than 15?
+
+select distinct T1.name
+from web_client_accelerator as T1 join accelerator_compatible_browser as T2
+on T2.accelerator_id = T1.id
+join browser as T3
+on T2.browser_id = T3.id
+where T3.market_share > 15;
+
+
+14. List the name of the browser which is compatible with both 'CACHEbox' and 'Fasterfox'.
+
+select T3.name
+from web_client_accelerator as T1 join accelerator_compatible_browser as T2
+on T2.accelerator_id = T1.id
+join browser as T3
+on T2.browser_id = T3.id
+where T1.name = 'CACHEbox'
+intersect
+select T3.name
+from web_client_accelerator as T1 join accelerator_compatible_browser as T2
+on T2.accelerator_id = T1.id
+join browser as T3
+on T2.browser_id = T3.id
+where T1.name = 'Fasterfox'
+
+15. Show the accelerator names and supporting operating systems that are not compatible with the browser named 'Opera'.
+
+select name, operating_system
+from web_client_accelerator
+except
+select T1.name, T1.operating_system
+from web_client_accelerator as T1 join accelerator_compatible_browser as T2
+on T2.accelerator_id = T1.id
+join browser as T3
+on T2.browser_id = T3.id
+where T3.name = 'Opera'
+
+16. Which accelerator name contains substring "Opera"?
+
+select name
+from web_client_accelerator
+where name like "%Opera%"
+
+
+17. Find the number of web accelerators used for each Operating system.
+
+select Operating_system, count(*)
+from web_client_accelerator
+group by Operating_system
+
+18. give me names of all compatible browsers and accelerators in the descending order of compatible year
+
+SELECT T2.name, T3.name
+from accelerator_compatible_browser as T1 join browser as T2 on T1.browser_id = T2.id
+      join web_client_accelerator as T3 on T1.accelerator_id = T3.id
+order by T1.compatible_since_year desc
