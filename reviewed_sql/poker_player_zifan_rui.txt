@@ -39,14 +39,14 @@ SELECT T1.Name
 FROM people as T1 join poker_player as T2 
 ON T1.People_ID = T2.People_ID
 
-8. What are the names of poker players whose earnings is bigger than 300000?
+8. What are the names of poker players whose earnings is higher than 300000?
 
 SELECT T1.Name
 FROM people as T1 join poker_player as T2 
 ON T1.People_ID = T2.People_ID
 Where T2.Earnings > 300000
 
-9. List the names of poker players order by the final tables made in ascending order.
+9. List the names of poker players ordered by the final tables made in ascending order.
 
 SELECT T1.Name
 FROM people as T1 join poker_player as T2 
@@ -67,7 +67,7 @@ FROM people as T1 join poker_player as T2
 ON T1.People_ID = T2.People_ID
 order by T1.Height DESC limit 1
 
-12. What is the average earnings of poker players with height bigger than 200?
+12. What is the average earnings of poker players with height higher than 200?
 
 SELECT avg(T2.Earnings)
 FROM people as T1 join poker_player as T2 
@@ -79,7 +79,7 @@ Where T1.Height > 200
 SELECT T1.Name
 FROM people as T1 join poker_player as T2 
 ON T1.People_ID = T2.People_ID
-order by T2.Earnings
+order by T2.Earnings desc
 
 14. What are different nationalities of people and the corresponding number of people from each nation?
 
