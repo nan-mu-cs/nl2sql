@@ -1,0 +1,102 @@
+Total = 15
+
+1. How many players are there?
+
+SELECT count(*)
+FROM player
+
+2. List the names of players in ascending order of votes.
+
+SELECT Player_name
+FROM player
+order by Votes ASC
+
+3. What are the gender and occupation of players?
+
+SELECT Gender, Occupation
+FROM player
+
+4. List the name of players whose occupation is not "Researcher".
+
+SELECT Player_name
+FROM player
+Where Occupation != "Researcher"
+
+5. Show the name of sponsors of players whose residence is either "Brandon" or "Birtle".
+
+SELECT Sponsor_name
+FROM player
+Where Residence = "Brandon" or Residence = "Birtle"
+
+6. What is the name of the player with the largest number of votes?
+
+SELECT Player_name
+FROM player
+order by Votes DESC limit 1
+
+7. Show different occupations and the number of players of each occupation.
+
+SELECT Occupation, COUNT(*)
+FROM player
+group by Occupation
+ 
+8. Please show the most common occupation of players.
+
+SELECT Occupation
+FROM player
+group by Occupation
+order by COUNT(*) DESC limit 1
+
+9. Show the residence that have at least two players.
+
+SELECT Residence
+FROM player
+group by Residence
+Having COUNT(*) >= 2
+
+10. Show names of player and names of coaches.
+
+SELECT T3.Player_name, T2.Player_name
+FROM player_coach as T1 join coach as T2 
+ON T1.Coach_ID = T2.Coach_ID join player as T3
+on T1.Player_ID = T3.Player_ID
+
+11. Show names of player coached by the rank 1 coach.
+
+SELECT T3.Player_name
+FROM player_coach as T1 join coach as T2 
+ON T1.Coach_ID = T2.Coach_ID join player as T3
+on T1.Player_ID = T3.Player_ID
+Where T2.Rank = 1
+
+12. Show names of player with a coach starting after 2011.
+
+SELECT T3.Player_name
+FROM player_coach as T1 join coach as T2 
+ON T1.Coach_ID = T2.Coach_ID join player as T3
+on T1.Player_ID = T3.Player_ID
+Where T1.Starting_year > 2011
+
+13. Show names of player and names of coaches in descending order of the votes of players.
+
+SELECT T3.Player_name, T2.Player_name
+FROM player_coach as T1 join coach as T2 
+ON T1.Coach_ID = T2.Coach_ID join player as T3
+on T1.Player_ID = T3.Player_ID
+order by T3.Votes DESC
+
+14. List the name of players that do not have coaches.
+
+SELECT Player_name
+from player
+where Player_ID not in (SELECT Player_ID FROM player_coach)
+
+15. Show the residences that have both player of gender "M" and player of gender "F".
+
+SELECT Residence
+FROM player
+Where gender = "M"
+Intersect 
+SELECT Residence
+FROM player
+Where gender = "F"
