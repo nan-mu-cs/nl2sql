@@ -57,17 +57,17 @@ FROM railway as T1 join train as T2
 ON T1.Railway_ID = T2.Railway_ID
 Where T2.Name = "Andaman Exp"
 
-11. Show location of railways that are associated with more than one train.
+11. Show id and location of railways that are associated with more than one train.
 
-SELECT T1.Location
+SELECT T2.Railway_ID, T1.Location
 FROM railway as T1 join train as T2 
 ON T1.Railway_ID = T2.Railway_ID
 group by T2.Railway_ID
 Having COUNT(*) > 1
 
-12. Show the builder of the railway that are associated with the most number of trains.
+12. Show the id and builder of the railway that are associated with the most number of trains.
 
-SELECT T1.Builder
+SELECT T2.Railway_ID, T1.Builder
 FROM railway as T1 join train as T2 
 ON T1.Railway_ID = T2.Railway_ID
 group by T2.Railway_ID
@@ -125,4 +125,10 @@ FROM manager
 SELECT Working_year_starts
 from manager
 order by Level DESC
+
+21. Show the countries that have managers with age more than 50 or less than 46.
+
+SELECT Country
+FROM manager
+Where Age > 50 or Age < 46
 
