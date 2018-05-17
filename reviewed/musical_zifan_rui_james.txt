@@ -1,0 +1,232 @@
+Total = 20
+
+1. How many actors are there?
+P: Count the number of actors.
+
+SELECT count(*)
+FROM actor
+
+S:
+S:
+S:
+
+2. List the name of actors in ascending alphabetical order.
+P: What are the names of actors, ordered alphabetically?
+
+SELECT Name
+FROM actor
+order by Name ASC
+
+S:
+S:
+S:
+
+3. What are the characters and duration of actors?
+P: Return the characters and durations for each actor.
+
+SELECT Character, Duration
+FROM actor
+
+S:
+S:
+S:
+
+4. List the name of actors whose age is not 20.
+P: What are the names of actors who are not 20 years old?
+
+SELECT Name
+FROM actor
+Where Age != 20
+
+S:
+S:
+S:
+
+5. What are the characters of actors in descending order of age?
+P: Return the characters for actors, ordered by age descending.
+
+SELECT Character
+FROM actor
+order by age DESC
+
+S:
+S:
+S:
+
+6. What is the duration of the oldest actor?
+P: Return the duration of the actor with the greatest age.
+
+SELECT Duration
+FROM actor
+order by Age DESC limit 1
+
+S:
+S:
+S:
+
+7. What are the names of musicals with nominee "Bob Fosse"?
+P: Return the names of musicals who have the nominee Bob Fosse.
+
+SELECT Name
+FROM musical
+Where Nominee = "Bob Fosse"
+
+S:
+S:
+S:
+
+8. What are the distinct nominees of the musicals with the award that is not "Tony Award"?
+P: Return the different nominees of musicals that have an award that is not the Tony Award.
+
+SELECT distinct Nominee
+FROM musical
+Where Award != "Tony Award"
+
+S:
+S:
+S:
+
+9. Show names of actors and names of musicals they are in.
+P: What are the names of actors and the musicals that they are in?
+
+SELECT T1.Name, T2.Name
+FROM actor as T1 join musical as T2 
+ON T1.Musical_ID = T2.Musical_ID
+
+S:
+S:
+S:
+
+10. Show names of actors that have appeared in musical with name "The Phantom of the Opera".
+P: What are the names of actors who have been in the musical titled The Phantom of the Opera?
+
+SELECT T1.Name
+FROM actor as T1 join musical as T2 
+ON T1.Musical_ID = T2.Musical_ID
+Where T2.Name = "The Phantom of the Opera"
+
+S:
+S:
+S:
+
+11. Show names of actors in descending order of the year their musical is awarded.
+P: What are the names of actors ordered descending by the year in which their musical was awarded?
+
+SELECT T1.Name
+FROM actor as T1 join musical as T2 
+ON T1.Musical_ID = T2.Musical_ID
+order by T2.Year DESC
+
+S:
+S:
+S:
+
+12. Show names of musicals and the number of actors who have appeared in the musicals.
+P: How many actors have appeared in each musical?
+
+SELECT T2.Name, COUNT(*)
+FROM actor as T1 join musical as T2 
+ON T1.Musical_ID = T2.Musical_ID
+group by T1.Musical_ID
+
+S:
+S:
+S:
+
+13. Show names of musicals which have at least three actors.
+P: What are the names of musicals who have at 3 or more actors?
+
+SELECT T2.Name
+FROM actor as T1 join musical as T2 
+ON T1.Musical_ID = T2.Musical_ID
+group by T1.Musical_ID
+Having COUNT(*) >= 3
+
+S:
+S:
+S:
+
+14. Show different nominees and the number of musicals they have been nominated.
+P: How many musicals has each nominee been nominated for?
+
+SELECT Nominee, COUNT(*)
+FROM musical
+group by Nominee
+ 
+S:
+S:
+S:
+
+15. Please show the nominee who has been nominated the greatest number of times.
+P: Who is the nominee who has been nominated for the most musicals?
+
+SELECT Nominee
+FROM musical
+group by Nominee
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+16. List the most common result of the musicals.
+P: Return the most frequent result across all musicals.
+
+SELECT Result
+FROM musical
+group by Result
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+17. List the nominees that have been nominated more than two musicals.
+P: Who are the nominees who have been nominated more than two times?
+
+SELECT Nominee
+FROM musical
+group by Nominee
+Having COUNT(*) > 2
+
+S:
+S:
+S:
+
+18. List the name of musicals that do not have actors.
+P: What are the names of musicals who have no actors?
+
+SELECT Name
+from musical
+where Musical_ID not in (SELECT Musical_ID FROM actor)
+
+S:
+S:
+S:
+
+19. Show the nominees that have nominated musicals for both "Tony Award" and "Drama Desk Award".
+P: Who are the nominees who have been nominated for both a Tony Award and a Drama Desk Award?
+
+SELECT Nominee
+FROM musical
+Where Award = "Tony Award"
+Intersect 
+SELECT Nominee
+FROM musical
+Where Award = "Drama Desk Award"
+
+S:
+S:
+S:
+
+20. Show the musical nominee with award "Bob Fosse" or "Cleavant Derricks". 
+P: Who are the nominees who were nominated for either of the Bob Fosse or Cleavant Derricks awards?
+
+SELECT Nominee
+FROM musical
+Where Award = "Tony Award" or Award = "Cleavant Derricks"
+
+S:
+S:
+S:
+
