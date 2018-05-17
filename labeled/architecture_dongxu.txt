@@ -10,6 +10,7 @@ where gender = 'female'
 
 SELECT name, nationality, id
 FROM architect
+where gender = 'male'
 order by name
 
 
@@ -44,7 +45,7 @@ from mill
 Where location != 'Donceel'
 
 
-8. What are the distinct types mills that are built by American or Canadian architects?
+8. What are the distinct types of mills that are built by American or Canadian architects?
 
 select distinct T1.type
 from mill as T1 join architect as t2
