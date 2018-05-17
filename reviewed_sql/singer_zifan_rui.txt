@@ -11,7 +11,7 @@ SELECT Name
 FROM singer
 order by Net_Worth_Millions ASC
 
-3. What are the birth year and citizenship of ships?
+3. What are the birth year and citizenship of singers?
 
 SELECT Birth_Year, Citizenship
 FROM singer
@@ -59,7 +59,7 @@ SELECT T2.Title, T1.Name
 FROM singer as T1 join song as T2 
 ON T1.Singer_ID = T2.Singer_ID
 
-11. Show distinct names of singers that have songs with sales more than 300000,
+11. Show distinct names of singers that have songs with sales more than 300000.
 
 SELECT distinct T1.Name
 FROM singer as T1 join song as T2 
