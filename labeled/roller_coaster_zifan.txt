@@ -1,0 +1,94 @@
+Total = 15
+
+1. How many roller coasters are there?
+
+SELECT count(*)
+FROM roller_coaster
+
+2. List the name of roller coasters in ascending order of length.
+
+SELECT Name
+FROM roller_coaster
+order by Length ASC
+
+3. What are the length and height of roller coasters?
+
+SELECT Length, Height
+FROM roller_coaster
+
+4. List the name of countries whose language is not "German".
+
+SELECT Name
+FROM country
+Where Languages != "German"
+
+5. Show the status of roller coasters longer than 3300 or higher than 100.
+
+SELECT Status
+from roller_coaster
+Where Length > 3300 or Height > 100
+
+6. What is the speed of the longest roller coaster?
+
+SELECT Speed
+FROM roller_coaster
+order by Length DESC limit 1
+
+7. What is the average speed of roller coasters?
+
+SELECT avg(Speed)
+FROM roller_coaster
+
+8. Show different status and the number of roller coasters of each status.
+
+SELECT Status, COUNT(*)
+FROM roller_coaster
+group by Status
+ 
+9. Please show the most common status of roller coasters.
+
+SELECT Status
+FROM roller_coaster
+group by Status
+order by COUNT(*) DESC limit 1
+
+10. List the status shared by more than two roller coaster.
+
+SELECT Status
+FROM roller_coaster
+group by Status
+Having COUNT(*) > 2
+
+11. Show the park of the roller coaster with the highest speed.
+
+SELECT Park
+FROM roller_coaster
+order by Speed DESC limit 1
+
+12. Show names of roller coasters and names of country they are in.
+
+SELECT T2.Name, T1.Name
+FROM country as T1 join roller_coaster as T2 
+ON T1.Country_ID = T2.Country_ID
+
+13. Show names of countries that have more than one roller coaster.
+
+SELECT T1.Name
+FROM country as T1 join roller_coaster as T2 
+ON T1.Country_ID = T2.Country_ID
+group by T1.Name
+Having COUNT(*) > 1
+
+14. Show the name of the country that has the highest roller coaster.
+
+SELECT T1.Name
+FROM country as T1 join roller_coaster as T2 
+ON T1.Country_ID = T2.Country_ID
+order by T2.Height DESC limit 1
+
+15. Show names of countries and the average speed of roller coasters from each country.
+
+SELECT T1.Name, avg(T2.Speed)
+FROM country as T1 join roller_coaster as T2 
+ON T1.Country_ID = T2.Country_ID
+group by T1.Name
