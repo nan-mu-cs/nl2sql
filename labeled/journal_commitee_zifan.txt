@@ -1,0 +1,97 @@
+Total = 15
+
+1. How many editors are there?
+
+SELECT count(*)
+FROM editor
+
+2. List the names of editors in ascending order of age.
+
+SELECT Name
+FROM editor
+order by Age ASC
+
+3. What are the name and age of editors?
+
+SELECT Name, Age
+FROM editor
+
+4. List the name of editors who is older than 25.
+
+SELECT Name
+FROM editor
+Where Age > 25
+
+5. Show the name of editors aged either 24 or 25.
+
+SELECT Name
+FROM editor
+Where Age = 24 or Age = 25
+
+6. What is the name of the youngest editor?
+
+SELECT Name
+FROM editor
+order by Age ASC limit 1
+
+7. Show different age of editors and the number of editors of each age.
+
+SELECT Age, COUNT(*)
+FROM editor
+group by Age
+ 
+8. Please the most common age of editors.
+
+SELECT Age
+FROM editor
+group by Age
+order by COUNT(*) DESC limit 1
+
+9. Show the distinct themes of journals
+
+SELECT distinct Theme
+from journal
+
+10. Show names of editors and the theme of journals where they serve on committees.
+
+SELECT T2.Name, T3.Theme
+FROM journal_committee as T1 join editor as T2 
+ON T1.Editor_ID = T2.Editor_ID join journal as T3
+on T1.Journal_ID = T3.Journal_ID
+
+11. Show names of editors and the theme of journals where they serve on committees in ascending alphabetical order of theme.
+
+SELECT T2.Name, T3.Theme
+FROM journal_committee as T1 join editor as T2 
+ON T1.Editor_ID = T2.Editor_ID join journal as T3
+on T1.Journal_ID = T3.Journal_ID
+order by T3.Theme ASC
+
+12. Show the names of editors that are on the committee of journals with sales bigger than 3000.
+
+SELECT T2.Name
+FROM journal_committee as T1 join editor as T2 
+ON T1.Editor_ID = T2.Editor_ID join journal as T3
+on T1.Journal_ID = T3.Journal_ID
+Where T3.Sales > 3000
+
+13. Show names of editors and the number of journal committees they are on.
+
+SELECT T1.Name, COUNT(*)
+FROM editor as T1 join journal_committee as T2
+on T1.Editor_ID = T2.Editor_ID
+group by T1.Name
+
+14. Show names of editors that are on at least two journal committees.
+
+SELECT T1.Name
+FROM editor as T1 join journal_committee as T2
+on T1.Editor_ID = T2.Editor_ID
+group by T1.Name
+Having COUNT(*) >= 2
+
+15. List the names of editors that are not on any journal committee.
+
+SELECT Name
+from editor
+where editor_id not in (SELECT editor_id FROM journal_committee)
