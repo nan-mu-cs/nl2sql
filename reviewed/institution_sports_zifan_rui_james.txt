@@ -1,0 +1,228 @@
+Total = 20
+
+1. How many institutions are there?
+P: Count the number of institutions.
+
+SELECT count(*)
+FROM institution
+
+S:
+S:
+S:
+
+2. List the names of institutions in ascending alphabetical order.
+P: What are the names of institutions, ordered alphabetically?
+
+SELECT Name
+FROM institution
+order by Name ASC
+
+S:
+S:
+S:
+
+3.  List the names of institutions in ascending order of founded year.
+P: What are the names of institutions, ordered by the years in which they were founded?
+
+SELECT Name
+FROM institution
+order by Founded ASC
+
+S:
+S:
+S:
+
+4. What are the cities and provinces of institutions?
+P: Return the cities and provinces of institutions.
+
+SELECT City, Province
+FROM institution
+
+S:
+S:
+S:
+
+5. What are the maximum and minimum enrollment of all institutions?
+P: Return the maximum and minimum enrollment across all institutions.
+
+SELECT max(Enrollment), min(Enrollment)
+from institution
+
+S:
+S:
+S:
+
+6. What are the affiliations of institutions that are not in city "Vancouver"?
+P: Return the affiliations of instituions that are not in the city of Vancouver.
+
+SELECT Affiliation
+from institution
+Where City != "Vancouver"
+
+S:
+S:
+S:
+
+7. What are the stadiums of institutions in descending order of the capacity.
+P: Return the stadiums of institutions, ordered by capacity descending.
+
+SELECT Stadium
+from institution
+order by Capacity DESC
+
+S:
+S:
+S:
+
+8. What is the stadium of the institution with the largest enrollment?
+P: Give the stadium of the institution which is the greatest enrollment.
+
+SELECT Stadium
+from institution
+order by Enrollment DESC limit 1
+
+S:
+S:
+S:
+
+9. What are the names and nicknames of institutions?
+P: Return the names of institutions, as well as their nicknames.
+
+SELECT T2.Name, T1.Nickname
+FROM championship as T1 join institution as T2 
+ON T1.Institution_ID = T2.Institution_ID
+
+S:
+S:
+S:
+
+10. What is the nickname of the institution with the smallest enrollment?
+P: Return the nickname of the institution with the lowest enrollment.
+
+SELECT T1.Nickname
+FROM championship as T1 join institution as T2 
+ON T1.Institution_ID = T2.Institution_ID
+order by T2.Enrollment ASC limit 1
+
+S:
+S:
+S:
+
+11. List the names of institutions in descending order of the number of championships.
+P: What are the names of institutions, ordered descending by their number of championships?
+
+SELECT T2.Name
+FROM championship as T1 join institution as T2 
+ON T1.Institution_ID = T2.Institution_ID
+order by T1.Number_of_Championships desc
+
+S:
+S:
+S:
+
+12. List the names of institutions with at least one championship.
+P: What are the names of institutions that have 1 or more championships?
+
+SELECT T2.Name
+FROM championship as T1 join institution as T2 
+ON T1.Institution_ID = T2.Institution_ID
+Where T1.Number_of_Championships >= 1
+
+S:
+S:
+S:
+
+13. What is the total number of championship of institution with public affiliation?
+P: Return the total number of championships of institutions that have a Public affiliation.
+
+SELECT sum(T1.Number_of_Championships)
+FROM championship as T1 join institution as T2 
+ON T1.Institution_ID = T2.Institution_ID
+Where T2.Affiliation = "Public"
+
+S:
+S:
+S:
+
+14. What are different types of affiliations of institutions and the corresponding number of institutions?
+P: How many institutions are there for each type of affiliation?
+
+SELECT Affiliation, COUNT(*)
+FROM institution
+group by Affiliation
+
+S:
+S:
+S:
+
+15. What is the most common type of affiliation for institutions?
+P: Return the most common type of affiliation across all institutions.
+
+SELECT Affiliation
+FROM institution
+group by Affiliation
+order by COUNT(*) DESC limit 1
+ 
+S:
+S:
+S:
+
+16. In which years were more than one institution founded?
+P: Return the years in which more than 1 institution was founded, as well as the number of institutions founded in each of those.
+
+SELECT Founded, COUNT(*)
+FROM institution
+group by Founded
+Having COUNT(*) > 1
+
+S:
+S:
+S:
+
+17. List the nicknames of institutions in descending order of capacity.
+P: What are the nicknames of institutions, ordered descending by their capacities?
+
+SELECT T1.Nickname
+FROM championship as T1 join institution as T2 
+ON T1.Institution_ID = T2.Institution_ID
+order by T2.Capacity DESC
+
+S:
+S:
+S:
+
+18. What are the enrollment of institutions in city "Vancouver" or "Calgary"?
+P: Return the enrollments of institutions in either the city of Vancouver or the city of Calgary.
+
+SELECT Enrollment	
+FROM institution
+Where City = "Vancouver" or City = "Calgary"
+
+S:
+S:
+S:
+
+19. Show the provinces that have both institutions founded before 1920 and institutions founded after 1950.
+P: What are the provinces that have not only institutions founded before 1920, but also institutions founded after 1950?
+
+SELECT Province
+FROM institution
+Where Founded < 1920
+Intersect
+SELECT Province
+FROM institution
+Where Founded > 1950
+
+S:
+S:
+S:
+
+20. How many distinct provinces are the institutions in?
+P: Count the number of different provinces that have institutions.
+
+SELECT count(distinct Province)
+FROM institution
+
+S:
+S:
+S:
