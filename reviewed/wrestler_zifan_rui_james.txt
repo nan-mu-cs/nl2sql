@@ -1,0 +1,228 @@
+Total = 20
+
+1. How many wrestlers are there?
+P: Count the number of wrestlers.
+
+SELECT count(*)
+FROM wrestler
+
+S:
+S:
+S:
+
+2. List the names of wrestlers in descending order of days held.
+P: What are the names of the wrestlers, ordered descending by days held?
+
+SELECT Name
+FROM wrestler
+order by Days_held DESC
+
+S:
+S:
+S:
+
+3. What is the name of the wrestler with the fewest days held?
+P: Return the name of the wrestler who had the lowest number of days held.
+
+SELECT Name
+FROM wrestler
+order by Days_held ASC limit 1
+
+S:
+S:
+S:
+
+4. What are the distinct reigns of wrestlers whose location is not "Tokyo,Japan" ?
+P: Give the different reigns of wrestlers who are not located in Tokyo, Japan.
+
+SELECT distinct Reign
+FROM wrestler
+Where Location != "Tokyo,Japan"
+
+S:
+S:
+S:
+
+5. What are the names and location of the wrestlers?
+P: Give the names and locations of all wrestlers.
+
+SELECT Name, Location
+FROM wrestler
+
+S:
+S:
+S:
+
+6. What are the elimination moves of wrestlers whose team is "Team Orton"?
+P: Return the elimination movies of wrestlers on Team Orton.
+
+SELECT Elimination_Move
+FROM Elimination
+Where Team = "Team Orton"
+
+S:
+S:
+S:
+
+7. What are the names of wrestlers and the elimination moves?
+P: Give the names of wrestlers and their elimination moves.
+
+SELECT T2.Name, T1.Elimination_Move
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+
+S:
+S:
+S:
+
+8. List the names of wrestlers and the teams in elimination in descending order of days held.
+P: What are the names of wrestlers and their teams in elimination, ordered descending by days held?
+
+SELECT T2.Name, T1.Team
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+order by T2.Days_held DESC
+
+S:
+S:
+S:
+
+9. List the time of elimination of the wrestlers with largest days held.
+P: What is the time of elimination for the wrestler with the most days held?
+
+SELECT T1.Time
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+order by T2.Days_held DESC limit 1
+
+S:
+S:
+S:
+
+10. Show times of elimination of wrestlers with days held more than 50.
+P: What are the times of elimination for wrestlers with over 50 days held?
+
+SELECT T1.Time
+FROM elimination as T1 JOIN wrestler as T2
+on T1.Wrestler_ID = T2.Wrestler_ID
+Where T2.Days_held > 50
+
+S:
+S:
+S:
+
+11. Show different teams in eliminations and the number of eliminations from each team.
+P: How many eliminations did each team have?
+
+SELECT Team, COUNT(*)
+FROM elimination
+group by Team
+
+S:
+S:
+S:
+
+12. Show teams that have suffered more than three eliminations.
+P: Which teams had more than 3 eliminations?
+
+SELECT Team
+FROM elimination
+group by Team
+Having COUNT(*) > 3
+
+S:
+S:
+S:
+
+13. Show the reign and days held of wrestlers.
+P: What are the reigns and days held of all wrestlers?
+
+SELECT Reign, Days_held
+FROM wrestler
+
+S:
+S:
+S:
+
+14. What are the names of wrestlers days held less than 100?
+P: Return the names of wrestlers with fewer than 100 days held.
+
+SELECT Name
+FROM wrestler
+Where Days_held < 100
+ 
+S:
+S:
+S:
+
+15. Please show the most common reigns of wrestlers.
+P: Which reign is the most common among wrestlers?
+
+SELECT Reign
+FROM wrestler
+group by Reign
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+16. List the locations that are shared by more than two wrestlers.
+P: Which locations are shared by more than two wrestlers?
+
+SELECT Location
+FROM wrestler
+group by Location
+Having COUNT(*) > 2
+
+S:
+S:
+S:
+
+17. List the names of wrestlers that have not been eliminated.
+P: What are the names of wrestlers who have never been eliminated?
+
+SELECT Name
+from wrestler
+where Wrestler_ID not in (SELECT Wrestler_ID FROM elimination)
+
+S:
+S:
+S:
+
+18. Show the teams that have both wrestlers eliminated by "Orton" and wrestlers eliminated by "Benjamin".
+P: What are the teams that have both wrestlers eliminated by Orton and wrestlers eliminated by Benjamin?
+
+SELECT Team
+FROM Elimination
+Where Eliminated_By = "Orton"
+Intersect 
+SELECT Team
+FROM Elimination
+Where Eliminated_By = "Benjamin"
+
+S:
+S:
+S:
+
+19. What is the number of distinct teams that suffer elimination?
+P: How many different teams have had eliminated wrestlers?
+
+SELECT count (distinct team)
+FROM elimination
+
+S:
+S:
+S:
+
+20. Show the times of elimination by "Punk" or "Orton".
+P: What are the times of elimination for any instances in which the elimination was done by Punk or Orton?
+
+SELECT Time
+from elimination
+Where Eliminated_By = "Punk" or Eliminated_By = "Orton"
+
+S:
+S:
+S:
+

@@ -1,0 +1,198 @@
+1. how many buttercup kitchen are there in san francisco ?
+
+SELECT COUNT ( * ) FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "san francisco" AND t1.name = "buttercup kitchen";
+
+2. how many chinese restaurants are there in the bay area ?
+P: how many places for chinese food are there in the bay area ?
+P: how many chinese places are there in the bay area ?
+P: how many places for chinese are there in the bay area ?
+
+SELECT COUNT ( * ) FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name WHERE t2.region = "bay area" AND t1.food_type = "chinese";
+
+3. how many jamerican cuisine are there in santa cruz county ?
+
+SELECT COUNT ( * ) FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name WHERE t2.county = "santa cruz county" AND t1.name = "jamerican cuisine";
+
+4. where is jamerican cuisine ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t1.name = "jamerican cuisine";
+
+5. what is the best french restaurant in san francisco ?
+P: What is the best french in san francisco ?
+P: What is the best place in san francisco for french food ?
+P: Give me the best place in san francisco for french food ?
+P: Where is the best french in san francisco ?
+P: Give me the best french in san francisco ?
+P: Where is the best french restaurant in san francisco ?
+P: Give me the best restaurant in san francisco for french food ?
+P: Give me the best french restaurant in san francisco ?
+P: What is the best restaurant in san francisco for french food ?
+P: Where is the best restaurant in san francisco for french food ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "san francisco" AND t1.food_type = "french" AND t1.rating = ( SELECT MAX ( t1.rating ) FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "san francisco" AND t1.food_type = "french" );
+
+6. where is denny in the bay area ?
+
+SELECT t3.house_number , t1.name FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name JOIN location AS t3 ON t1.id = t3.restaurant_id WHERE t2.region = "bay area" AND t1.name = "denny";
+
+7. what are some good restaurants on bethel island rd in bethel island ?
+P: give me some good restaurants on bethel island rd in bethel island ?
+P: give me a good restaurant on bethel island rd in bethel island ?
+P: what is a good restaurant on bethel island rd in bethel island ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "bethel island" AND t2.street_name = "bethel island rd" AND t1.rating > 2.5;
+
+8. where can we find a restaurant in alameda ?
+P: give me a restaurant in alameda ?
+P: where can we find some restaurants in alameda ?
+P: where is a restaurant in alameda ?
+P: give me some restaurants in alameda ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "alameda";
+
+9. give me some restaurants good for french food ?
+P: where are some restaurants good for french food ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t1.food_type = "french" AND t1.rating > 2.5;
+
+10. how many places for french food are there in palo alto ?
+P: how many french restaurants are there in palo alto ?
+P: how many french restaurant are there in palo alto ?
+P: how many places for french are there in palo alto ?
+
+SELECT COUNT ( * ) FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "palo alto" AND t1.food_type = "french";
+
+11. how many italian restaurants are in the yolo county ?
+
+SELECT COUNT ( * ) FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name WHERE t2.county = "yolo county" AND t1.food_type = "italian";
+
+12. where can i eat french food in mountain view ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "mountain view" AND t1.food_type = "french";
+
+13. how many denny are there in the bay area ?
+
+SELECT COUNT ( * ) FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name WHERE t2.region = "bay area" AND t1.name = "denny";
+
+14. give me a good restaurant in alameda ?
+P: what are some good restaurants in alameda ?
+P: what is a good restaurant in alameda ?
+P: give me some good restaurants in alameda ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "alameda" AND t1.rating > 2.5;
+
+15. where is a good restaurant on buchanan in san francisco for arabic food ?
+P: where are some good arabics on buchanan in san francisco ?
+P: where is a good arabic restaurant on buchanan in san francisco ?
+P: what are some good places for arabic on buchanan in san francisco ?
+P: give me a good arabic on buchanan in san francisco ?
+P: give me some restaurants good for arabic food on buchanan in san francisco ?
+P: give me a good place on buchanan in san francisco for arabic food ?
+P: where is a good place on buchanan in san francisco for arabic food ?
+P: where can i eat arabic food on buchanan in san francisco ?
+P: give me some good places on buchanan in san francisco for arabic food ?
+P: where is a arabic restaurant on buchanan in san francisco ?
+P: give me a restaurant on buchanan in san francisco that serves good arabic food ?
+P: give me a good restaurant on buchanan in san francisco for arabic food ?
+P: where is a restaurant on buchanan in san francisco that serves good arabic food ?
+P: give me some good restaurants on buchanan in san francisco for arabic food ?
+P: give me some good places for arabic on buchanan in san francisco ?
+P: where can i eat some good arabic food on buchanan in san francisco ?
+P: where is a good arabic on buchanan in san francisco ?
+P: where are some restaurants good for arabic food on buchanan in san francisco ?
+P: where are some good places for arabic on buchanan in san francisco ?
+P: give me a good arabic restaurant on buchanan in san francisco ?
+P: give me some good arabics on buchanan in san francisco ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "san francisco" AND t2.street_name = "buchanan" AND t1.food_type = "arabic" AND t1.rating > 2.5;
+
+16. where can i eat french food in the bay area ?
+
+SELECT t3.house_number , t1.name FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name JOIN location AS t3 ON t1.id = t3.restaurant_id WHERE t2.region = "bay area" AND t1.food_type = "french";
+
+17. give me some restaurants on bethel island rd in bethel island ?
+P: give me a restaurant on bethel island rd in bethel island ?
+P: where can we find a restaurant on bethel island rd in bethel island ?
+P: where can we find some restaurants on bethel island rd in bethel island ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "bethel island" AND t2.street_name = "bethel island rd";
+
+18. where is the best restaurant in the bay area for american food ?
+P: where is the best restaurant in bay area for american food ?
+P: what is the best restaurant in bay area for american food ?
+P: what is the best american restaurant in the bay area ?
+P: where is the best american restaurant in the bay area ?
+P: what is the best american in the bay area ?
+P: give me the best restaurant in the bay area for american food ?
+P: give me the best restaurant in bay area for american food ?
+P: what is the best restaurant in the bay area for american food ?
+P: where is the best american in the bay area ?
+P: give me the best american in the bay area ?
+P: give me the best american restaurant in the bay area ?
+
+SELECT t3.house_number , t1.name FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name JOIN location AS t3 ON t1.id = t3.restaurant_id WHERE t2.region = "bay area" AND t1.food_type = "american" AND t1.rating = ( SELECT MAX ( t1.rating ) FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name WHERE t2.region = "bay area" AND t1.food_type = "american" );
+
+19. give me some restaurants good for french food in the yosemite and mono lake area ?
+P: what are some good places in the yosemite and mono lake area for french food ?
+P: give me a good restaurant in the yosemite and mono lake area for french food ?
+P: give me a good french restaurant in the yosemite and mono lake area ?
+P: where is a good place in the yosemite and mono lake area for french food ?
+P: where are some restaurants good for french food in the yosemite and mono lake area ?
+P: give me a good place in the yosemite and mono lake area for french food ?
+P: where is a good restaurant in the yosemite and mono lake area for french food ?
+P: what are some good restaurants in the yosemite and mono lake area for french food ?
+P: where is a good french restaurant in the yosemite and mono lake area ?
+P: where can i eat some good french food in the yosemite and mono lake area ?
+
+SELECT t3.house_number , t1.name FROM restaurant AS t1 JOIN geographic AS t2 ON t1.city_name = t2.city_name JOIN location AS t3 ON t1.id = t3.restaurant_id WHERE t2.region = "yosemite and mono lake area" AND t1.food_type = "french" AND t1.rating > 2.5;
+
+20. where are some restaurants good for arabic food in mountain view ?
+P: what are some good places in mountain view for arabic food ?
+P: where are some good arabic restaurants in mountain view ?
+P: show me a good arabic restaurant in mountain view ?
+P: give me a good arabic in mountain view ?
+P: give me a good arabic restaurant in mountain view ?
+P: give me a good place in mountain view for arabic food ?
+P: where are some good arabics in mountain view ?
+P: where is a restaurant in mountain view that serves good arabic food ?
+P: what are some good restaurants in mountain view for arabic food ?
+P: give me some restaurants good for arabic food in mountain view ?
+P: where can i eat some good arabic food in mountain view ?
+P: give me some good places for arabic in mountain view ?
+P: where is a good arabic in mountain view ?
+P: give me a restaurant in mountain view that serves good arabic food ?
+P: give me some good arabic restaurants in mountain view ?
+P: where are some good places for arabic in mountain view ?
+P: give me some good arabics in mountain view ?
+P: give me a good restaurant in mountain view for arabic food ?
+P: where is a good arabic restaurant in mountain view ?
+P: what are some good places for arabic in mountain view ?
+P: where is a good restaurant in mountain view for arabic food ?
+P: where is a good place in mountain view for arabic food ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "mountain view" AND t1.food_type = "arabic" AND t1.rating > 2.5;
+
+21. where can i find a jamerican cuisine in san francisco ?
+P: where is jamerican cuisine in san francisco ?
+P: where is a jamerican cuisine in san francisco ?
+
+SELECT t2.house_number , t1.name FROM restaurant AS t1 JOIN location AS t2 ON t1.id = t2.restaurant_id WHERE t2.city_name = "san francisco" AND t1.name = "jamerican cuisine";
+
+
+
+22. where can we find some restaurants in the bay area ?
+P: give me some restaurants in the bay area ?
+P: give me a restaurant in the bay area ?
+P: where can i find a restaurant in the bay area ?
+
+SELECT t2.house_number , t1.name FROM location AS t2 join restaurant AS t1 on t1.id = t2.restaurant_id WHERE t1.city_name IN ( SELECT city_name FROM geographic WHERE region = "bay area" );
+
+
+
+23. give me a good restaurant in the bay area ?
+P: what are some good restaurants in the bay area ?
+P: give me some good restaurants in the bay area ?
+P: what is a good restaurant in the bay area ?
+{"region0": "bay area"}
+
+SELECT t2.house_number , t1.name FROM location AS t2 join restaurant AS t1 on t1.id = t2.restaurant_id  WHERE t1.city_name IN ( SELECT city_name FROM geographic WHERE region = "region0" ) AND t1.rating > 2.5;

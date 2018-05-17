@@ -1,0 +1,158 @@
+Total = 20
+
+1. How many artworks are there?
+
+SELECT count(*)
+FROM artwork
+
+2. List the name of artworks in ascending alphabetical order.
+
+SELECT Name
+FROM artwork
+order by Name ASC
+
+3. List the name of artworks whose type is not "Program Talent Show".
+
+SELECT Name
+FROM artwork
+Where Type != "Program Talent Show"
+
+4. What are the names and location of festivals?
+
+SELECT Festival_Name, Location
+FROM festival_detail
+
+5. What are the names of chairs of festivals in ascending order of the year held?
+
+SELECT Chair_Name
+FROM festival_detail
+order by Year ASC
+
+6. What is the location of the festival with the most number of audience?
+
+SELECT Location
+FROM festival_detail
+order by Num_of_Audience DESC limit 1
+
+7. What are the names of festivals held in year "2007"?
+
+SELECT Festival_Name
+FROM festival_detail
+Where Year = 2007
+
+8. What is the average number of audience for festivals?
+
+SELECT avg(Num_of_Audience)
+FROM festival_detail
+
+9. Show the name of the three most recent festivals.
+
+SELECT Festival_Name
+FROM festival_detail
+order by Year DESC limit 3
+
+10. Show names of artwork and names of festivals where they are nominated.
+
+SELECT T2.Name, T3.Festival_Name
+FROM nomination as T1 join artwork as T2 
+ON T1.Artwork_ID = T2.Artwork_ID
+join festival_detail as T3
+on T1.Festival_ID = T3.Festival_ID
+
+11. Show distinct type of artworks that are nominated in festivals in 2007.
+
+SELECT distinct T2.Type
+FROM nomination as T1 join artwork as T2 
+ON T1.Artwork_ID = T2.Artwork_ID
+join festival_detail as T3
+on T1.Festival_ID = T3.Festival_ID
+Where T3.Year = 2007
+
+12. Show names of artworks in ascending order of the year they are nominated.
+
+SELECT T2.Name
+FROM nomination as T1 join artwork as T2 
+ON T1.Artwork_ID = T2.Artwork_ID
+join festival_detail as T3
+on T1.Festival_ID = T3.Festival_ID
+order by T3.Year
+
+13. Show names of festivals that have nominated artworks of type "Program Talent Show".
+
+SELECT T3.Festival_Name
+FROM nomination as T1 join artwork as T2 
+ON T1.Artwork_ID = T2.Artwork_ID
+join festival_detail as T3
+on T1.Festival_ID = T3.Festival_ID
+Where T2.Type = "Program Talent Show"
+
+14. Show id and names of festivals that have at least two nomination for artworks.
+
+SELECT T1.Festival_ID, T3.Festival_Name
+FROM nomination as T1 join artwork as T2 
+ON T1.Artwork_ID = T2.Artwork_ID
+join festival_detail as T3
+on T1.Festival_ID = T3.Festival_ID
+group by T1.Festival_ID
+Having COUNT(*) >= 2
+
+15. Show id, names of festivals and the number of artworks they have nominated.
+
+SELECT T1.Festival_ID, T3.Festival_Name, COUNT(*)
+FROM nomination as T1 join artwork as T2 
+ON T1.Artwork_ID = T2.Artwork_ID
+join festival_detail as T3
+on T1.Festival_ID = T3.Festival_ID
+group by T1.Festival_ID
+ 
+16. Please show different types of artworks and the corresponding number of artworks of each type.
+
+SELECT Type, COUNT(*)
+FROM artwork
+group by Type
+
+17. List the most common type of artworks.
+
+SELECT Type
+FROM artwork
+group by Type
+order by COUNT(*) DESC limit 1
+
+18. List the year in which there are more than one festivals.
+
+SELECT Year
+FROM festival_detail
+group by Year
+Having COUNT(*) > 1
+
+19. List the name of artworks that are not nominated.
+
+SELECT Name
+from Artwork
+where Artwork_ID not in (SELECT Artwork_ID FROM nomination)
+
+20. Show the number of audience in year 2008 or 2010.
+
+SELECT Num_of_Audience
+FROM festival_detail
+Where Year = 2008 or Year = 2010
+
+
+21. What are the total number of the audiences who visited any of the festivals?
+
+select sum(Num_of_Audience)
+from festival_detail
+
+
+
+22. In which year, there is a festival both inside the 'United States' and outside the 'United States'?
+
+select year
+from festival_detail
+where Location = 'United States'
+intersect
+select year
+from festival_detail
+where Location != 'United States'
+
+

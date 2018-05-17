@@ -1,0 +1,264 @@
+# Total = 21
+
+1. How many books are there?
+P:
+
+SELECT count(*)
+FROM book
+
+S:
+S:
+S:
+
+
+2. List the titles of books in ascending alphabetical order.
+P:
+
+SELECT Title
+FROM book
+order by Title ASC
+
+S:
+S:
+S:
+
+
+3. List the titles of books in descending order of pages.
+P:
+
+SELECT Title
+FROM book
+order by Pages DESC
+
+S:
+S:
+S:
+
+
+4. What are the types and release dates of books?
+P:
+
+SELECT Type, Release
+FROM book
+
+S:
+S:
+S:
+
+
+5. What are the maximum and minimum number of chapters for each book?
+P:
+
+SELECT max(Chapters), min(Chapters)
+from book
+
+S:
+S:
+S:
+
+
+6. What are the titles of books that are not "Poet"?
+P:
+
+SELECT Title
+from book
+Where Type != "Poet"
+
+S:
+S:
+S:
+
+
+7. What is the average rating in reviews?
+P:
+
+SELECT avg(Rating)
+from review
+
+S:
+S:
+S:
+
+
+8. What are the titles and ratings of books?
+P:
+
+SELECT T1.Title, T2.Rating
+FROM book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID
+
+S:
+S:
+S:
+
+
+9. What is the rating of the book with the largest number of chapters?
+P:
+
+SELECT T2.Rating
+FROM book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID
+order by T1.Chapters DESC limit 1
+
+S:
+S:
+S:
+
+
+10. What is the rank of the book with the smallest number of pages?
+P:
+
+SELECT T2.Rank
+FROM book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID
+order by T1.Pages ASC limit 1
+
+S:
+S:
+S:
+
+
+11. What is the title of the book with the highest rank in the review?
+P:
+
+SELECT T1.Title
+FROM book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID
+order by T2.Rank limit 1
+
+S:
+S:
+S:
+
+
+12. What is the average number of readers for books of type "Novel"?
+P:
+
+SELECT avg(T2.Readers_in_Million)
+FROM book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID
+Where T1.Type = "Novel"
+
+S:
+S:
+S:
+
+
+13. For each book type return the type and the number of books of that type.
+P:
+
+SELECT Type, COUNT(*)
+FROM book
+group by Type
+
+S:
+S:
+S:
+
+
+14. What is the most common type of books?
+P:
+
+SELECT Type
+FROM book
+group by Type
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+15. What are the types of books that have at least three books belonging to?
+P:
+
+SELECT Type
+FROM book
+group by Type
+having COUNT(*) >= 3
+
+S:
+S:
+S:
+
+
+16. List the titles of books in ascending order of the ratings in review?
+P:
+
+SELECT T1.Title
+FROM book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID
+order by T2.Rating ASC
+
+S:
+S:
+S:
+
+
+17. List the title and audio length for all the books in descending order of the number of readers.
+P:
+
+SELECT T1.Title, T1.audio
+FROM book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID
+order by T2.Readers_in_Million DESC
+
+S:
+S:
+S:
+
+
+18. How many books do not have reviews?
+P:
+
+SELECT count(*)
+from book
+Where Book_ID not in (select Book_ID from review)
+
+S:
+S:
+S:
+
+
+19. Show the types of books that have both books with more than 75 chapters and books with less than 50 chapters.
+P:
+
+SELECT Type
+FROM book
+Where Chapters > 75
+Intersect
+SELECT Type
+FROM book
+Where Chapters < 50
+
+S:
+S:
+S:
+
+
+20. How many distinct types of book are there?
+P:
+
+SELECT count(distinct Type)
+FROM book
+
+S:
+S:
+S:
+
+
+21. What are the type and title of the books that are not rated?
+P:
+
+select type, title
+from book
+except
+select T1.type, T1.title
+from book as T1 join review as T2
+ON T1.Book_ID = T2.Book_ID;
+
+S:
+S:
+S:
+
+

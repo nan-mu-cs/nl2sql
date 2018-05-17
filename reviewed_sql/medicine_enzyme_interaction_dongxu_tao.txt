@@ -1,0 +1,166 @@
+Total = 21
+
+1. How many kinds of enzymes are there?
+
+SELECT count(*)
+FROM enzyme
+
+2. List the name of elections in lexicographical order descendingly.
+
+SELECT name
+FROM enzyme
+order by enzyme DESC
+
+3. List the names and the locations that the enzymes can make an effect.
+
+SELECT name, location
+FROM enzyme
+
+
+4. What is the maximum Online Mendelian Inheritance in Man (OMIM) value of the enzymes?
+
+select max(OMIM)
+from enzyme
+
+
+5. What is the product, chromosome and porphyria related to the enzymes which take effect at the location 'Cytosol'?
+
+
+select product, chromosome, porphyria
+from enzyme
+where location = 'Cytosol'
+
+
+6. What are the names of enzymes who does not produce 'Heme'?
+
+SELECT name 
+FROM enzyme
+Where product != 'Heme'
+
+
+7. What are the names and trade names of the medicines which has 'Yes' value in the FDA record?
+
+SELECT name, trade_name
+FROM medicine
+Where FDA_approved = 'Yes'
+
+8. What are the names of enzymes that the medicine named 'Amisulpride' can serve as an 'inhibitor'?
+
+SELECT T1.name
+FROM enzyme as T1 join medicine_enzyme_interaction as T2
+on T1.id = T2.enzyme_id
+join medicine as T3
+on T2.medicine_id = T3.id
+where T3.name = 'Amisulpride' and T2.interaction_type = 'inhibitor'
+
+9. What are the ids and names of the medicine that can interact with two or more enzymes?
+
+SELECT T1.id, T1.Name
+FROM medicine as T1 join medicine_enzyme_interaction as T2
+on T2.medicine_id = T1.id
+group by T1.id
+having count(*) >= 2
+
+
+10. What are the ids, names and FDA approval status of medicines in descending order of the number of enzymes that it can interact with.
+
+SELECT T1.id, T1.Name, T1.FDA_approved
+FROM medicine as T1 join medicine_enzyme_interaction as T2
+on T2.medicine_id = T1.id
+group by T1.id
+order by count(*) desc
+
+11. What is the id and name of the enzyme with most number of medicines that can interact as 'activator'?
+
+SELECT T1.id, T1.name
+FROM enzyme as T1 join medicine_enzyme_interaction as T2
+on T1.id = T2.enzyme_id
+where T2.interaction_type = 'activitor'
+group by T1.id
+order by count(*) desc limit 1
+
+12. What is the interaction type of the enzyme named 'ALA synthase' and the medicine named 'Aripiprazole'?
+
+SELECT T1.interaction_type
+from medicine_enzyme_interaction as T1 join medicine as T2
+on T1.medicine_id = T2.id
+join enzyme as T3
+on T1.enzyme_id = T3.id
+where T3.name = 'ALA synthase' and T2.name = 'Aripiprazole'
+
+13. What is the most common interaction type between enzymes and medicine? And how many are there?
+
+select interaction_type, count(*)
+from medicine_enzyme_interaction
+group by interaction_type
+order by count(*) desc limit 1
+
+14. How many medicines have the FDA approval status 'No' ?
+
+select count(*)
+from medicine
+where FDA_approved = 'No'
+
+15. How many enzymes do not have any interactions?
+
+select count(*)
+from enzyme
+where id not in (
+select enzyme_id from medicine_enzyme_interaction
+);
+
+16. What is the id and trade name of the medicines can interact with at least 3 enzymes?
+
+SELECT T1.id, T1.trade_name
+FROM medicine as T1 join medicine_enzyme_interaction as T2
+on T2.medicine_id = T1.id
+group by T1.id
+Having COUNT(*) >= 3
+
+17. What are the distinct name, location and products of the enzymes which has any 'inhibitor' interaction?
+
+select distinct T1.name, T1.location, T1.product
+from enzyme as T1 join medicine_enzyme_interaction as T2
+on T2.enzyme_id = T1.id
+where T2.interaction_type = 'inhibitor'
+
+18. List the medicine name and trade name which can both interact as 'inhibitor' and 'activitor' with enzymes.
+
+select T1.name, T1.trade_name
+from medicine as T1 join medicine_enzyme_interaction as T2
+on T2.medicine_id = T1.id
+where interaction_type = 'inhibitor'
+intersect
+select T1.name, T1.trade_name
+from medicine as T1 join medicine_enzyme_interaction as T2
+on T2.medicine_id = T1.id
+where interaction_type = 'activitor'
+
+19. Show the medicine names and trade names that cannot interact with the enzyme with product 'Heme'.
+
+SELECT name, trade_name
+FROM medicine
+except
+SELECT T1.name, T1.trade_name
+FROM medicine as T1 join medicine_enzyme_interaction as T2
+on T2.medicine_id = T1.id
+join enzyme as T3
+on T3.id = T2.enzyme_id
+where T3.product = 'Protoporphyrinogen IX'
+
+20. How many distinct FDA approval statuses are there for the medicines?
+
+SELECT count(distinct FDA_approved)
+FROM medicine
+
+21. Which enzyme names have the substring "ALA"?
+
+select name
+from enzyme
+where name like "%ALA%"
+
+22. find the number of medicines offered by each trade.
+
+select trade_name, count(*)
+from medicine
+group by trade_name

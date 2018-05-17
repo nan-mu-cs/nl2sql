@@ -1,0 +1,129 @@
+Total = 20
+
+1. How many books are there?
+
+SELECT count(*)
+FROM book
+
+2. List the writers of the books in ascending alphabetical order.
+
+SELECT Writer
+FROM book
+order by Writer ASC
+
+3. List the titles of the books in ascending order of issues.
+
+SELECT Title
+FROM book
+order by Issues ASC
+
+4. What are the titles of the books whose write is not "Elaine Lee"?
+
+SELECT Title
+FROM book
+Where Writer != "Elaine Lee"
+
+5. What are the title and issues of the books?
+
+SELECT Title, Issues
+FROM book
+
+6. What are the dates of publications in descending order of price?
+
+SELECT Publication_Date
+FROM publication
+order by Price DESC
+
+7. What are the distinct publishers of publications with price higher than 5000000?
+
+SELECT distinct Publisher
+FROM publication
+Where Price > 5000000
+
+8. List the publisher of the publication with the highest price.
+
+SELECT Publisher
+FROM publication
+order by Price DESC limit 1
+
+9. List the publication dates of publications with 3 lowest prices.
+
+SELECT Publication_Date
+FROM publication
+order by Price ASC limit 3
+
+10. Show title and publication dates of books.
+
+SELECT T1.Title, T2.Publication_Date
+FROM book as T1 join publication as T2 
+ON T1.Book_ID = T2.Book_ID
+
+11. Show writers that have published book with price more than 4000000.
+
+SELECT T1.Writer
+FROM book as T1 join publication as T2 
+ON T1.Book_ID = T2.Book_ID
+Where T2.Price > 4000000
+
+12. Show title of books in descending order of publication price.
+
+SELECT T1.Title
+FROM book as T1 join publication as T2 
+ON T1.Book_ID = T2.Book_ID
+order by T2.Price DESC
+
+13. Show publishers that have more than one publication.
+
+SELECT Publisher
+FROM publication
+group by Publisher
+Having COUNT(*) > 1
+
+14. Show different publishers and the number of publications they have.
+
+SELECT Publisher, COUNT(*)
+FROM publication
+group by Publisher
+ 
+15. Please show the most common publication date.
+
+SELECT Publication_Date
+FROM publication
+group by Publication_Date
+order by COUNT(*) DESC limit 1
+
+16. List the writers that have written more than one book.
+
+SELECT Writer
+FROM book
+group by Writer
+Having COUNT(*) > 1
+
+17. List the title of books that are not published.
+
+SELECT Title
+from book
+where Book_ID not in (SELECT Book_ID FROM publication)
+
+18. Show the publishers that have publications with price higher than 10000000 and publications
+with price lower than 5000000.
+
+SELECT Publisher
+FROM publication
+Where Price > 10000000
+Intersect 
+SELECT Publisher
+FROM publication
+Where Price < 5000000
+
+19. What is the number of distinct publication dates?
+
+SELECT count (distinct Publication_Date)
+FROM publication
+
+20. Show the price of publications whose publisher is "Person" or "Wiley"
+
+SELECT Price
+from publication
+Where Publisher = "Person" or Publisher = "Wiley"
+

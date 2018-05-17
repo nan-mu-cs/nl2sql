@@ -1,0 +1,134 @@
+Total = 20
+
+1. How many railways are there?
+
+SELECT count(*)
+FROM railway
+
+2. List the builders of railways in ascending alphabetical order.
+
+SELECT Builder
+FROM railway
+order by Builder ASC
+
+3. List the wheels and location of the railways.
+
+SELECT Wheels, Location
+from railway
+
+4. What is the maximum level of managers not in country "Australia"?
+
+SELECT max(Level)
+FROM manager
+Where Country != "Australia	"
+
+5. What is the average age for all managers?
+
+SELECT avg(Age)
+FROM manager
+
+6. What are the names of managers in ascending order of level?
+
+SELECT Name
+FROM manager
+order by Level ASC
+
+7. What are the names and arrival time of trains?
+
+SELECT Name, Arrival
+FROM train
+
+8. What is the name of the oldest manager?
+
+SELECT Name
+FROM manager
+order by Age DESC limit 1
+
+9. Show names of trains and location of railways they are on.
+
+SELECT T2.Name, T1.Location
+FROM railway as T1 join train as T2 
+ON T1.Railway_ID = T2.Railway_ID
+
+10. Show builder of railways associated with trains named "Andaman Exp".
+
+SELECT T1.Builder
+FROM railway as T1 join train as T2 
+ON T1.Railway_ID = T2.Railway_ID
+Where T2.Name = "Andaman Exp"
+
+11. Show id and location of railways that are associated with more than one train.
+
+SELECT T2.Railway_ID, T1.Location
+FROM railway as T1 join train as T2 
+ON T1.Railway_ID = T2.Railway_ID
+group by T2.Railway_ID
+Having COUNT(*) > 1
+
+12. Show the id and builder of the railway that are associated with the most number of trains.
+
+SELECT T2.Railway_ID, T1.Builder
+FROM railway as T1 join train as T2 
+ON T1.Railway_ID = T2.Railway_ID
+group by T2.Railway_ID
+order by COUNT(*) DESC limit 1
+
+13. Show different builders of railways and the corresponding number of railways using each builder.
+
+SELECT Builder, COUNT(*)
+FROM railway
+group by Builder
+
+14. Show the most common builder of railways.
+
+SELECT Builder
+FROM railway
+group by Builder
+order by COUNT(*) DESC limit 1
+ 
+15. Show different locations of railways and the corresponding number of railways at each location.
+
+SELECT Location, COUNT(*)
+FROM railway
+group by Location
+
+16. Show the location that have more than one railways.
+
+SELECT Location
+FROM railway
+group by Location
+Having COUNT(*) > 1
+
+17. List the object number of railways that do not have any trains.
+
+SELECT ObjectNumber
+from railway
+where Railway_ID not in (SELECT Railway_ID FROM train)
+
+18. Show the countries that have managers with age more than 50 and managers with age less than 46.
+
+SELECT Country
+FROM manager
+Where Age > 50
+Intersect 
+SELECT Country
+FROM manager
+Where Age < 46
+
+19. Show the distinct country of managers.
+
+SELECT distinct Country
+FROM manager
+
+20. Show the working years of managers in descending order of their level.
+
+SELECT Working_year_starts
+from manager
+order by Level DESC
+
+21. Show the countries that have managers with age more than 50 or less than 46.
+
+SELECT Country
+FROM manager
+Where Age > 50 or Age < 46
+

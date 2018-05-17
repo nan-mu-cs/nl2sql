@@ -1,0 +1,131 @@
+Total = 20
+
+1. How many clubs are there?
+
+SELECT count(*)
+FROM club
+
+2. List the name of clubs in ascending alphabetical order.
+
+SELECT Name
+FROM club
+order by Name ASC
+
+3. What are the managers and captains of clubs?
+
+SELECT Manager, Captain
+FROM club
+
+4. List the name of clubs whose manufacturer is not "Nike"
+
+SELECT Name
+FROM club
+Where Manufacturer != "Nike"
+
+5. What are the names of players in ascending order of wins count?
+
+SELECT Name
+FROM player
+order by Wins_count ASC
+
+6. What is the name of the player with the highest earnings?
+
+SELECT Name
+FROM player
+order by Earnings DESC limit 1
+
+7. What are the distinct countries of players with earnings higher than 1200000?
+
+SELECT distinct Country
+FROM player
+Where Earnings > 1200000
+
+8. What is the country of the player with the highest earnings among players that have more than 2 win counts?
+
+SELECT Country
+FROM player
+Where Wins_count > 2
+order by Earnings DESC limit 1
+
+9. Show names of players and names of clubs they are in.
+
+SELECT T2.Name, T1.Name
+FROM club as T1 join player as T2 
+ON T1.Club_ID = T2.Club_ID
+
+10. Show names of clubs that have players with more than 2 win counts.
+
+SELECT T1.Name
+FROM club as T1 join player as T2 
+ON T1.Club_ID = T2.Club_ID
+Where T2.Wins_count > 2
+
+11. Show names of players from the club with manager "Sam Allardyce".
+
+SELECT T2.Name
+FROM club as T1 join player as T2 
+ON T1.Club_ID = T2.Club_ID
+Where T1.Manager = "Sam Allardyce"
+
+12. Show names of clubs in descending order of average earnings of players belonging.
+
+SELECT T1.Name
+FROM club as T1 join player as T2 
+ON T1.Club_ID = T2.Club_ID
+group by T1.Club_ID
+order by avg(T2.Earnings) DESC
+
+13. Show different manufacturers and the number of clubs they are associated with.
+
+SELECT Manufacturer, COUNT(*)
+FROM club
+group by Manufacturer	
+ 
+14. Please show the most common manufacturer of clubs.
+
+SELECT Manufacturer
+FROM club
+group by Manufacturer
+order by COUNT(*) DESC limit 1
+
+15. List the manufacturers that are associated with more than one club.
+
+SELECT Manufacturer
+FROM club
+group by Manufacturer
+Having COUNT(*) > 1
+
+16. List the country that have more than one player.
+
+SELECT Country
+FROM player
+group by Country
+Having COUNT(*) > 1
+
+17. List the name of clubs that do not have players.
+
+SELECT Name
+from club
+where Club_ID not in (SELECT Club_ID FROM player)
+
+18. Show the country of players with earnings more than 1400000 and players with earnings less than 1100000.
+
+SELECT Country 
+FROM player
+Where Earnings > 1400000
+Intersect 
+SELECT Country 
+FROM player
+Where Earnings < 1100000
+
+19. What is the number of distinct countries of all players?
+
+SELECT count (distinct Country)
+FROM player
+
+20. Show the earnings of players from country "Australia" or "Zimbabwe"
+
+SELECT Earnings 
+from player
+Where Country = "Australia" or Country = "Zimbabwe"
+
