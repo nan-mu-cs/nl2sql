@@ -1,0 +1,101 @@
+
+1. How many pilots are there?
+
+SELECT count(*)
+FROM pilot
+
+2. List the names of pilots in ascending order of rank.
+
+SELECT Pilot_name
+FROM pilot
+order by Rank ASC
+
+3. What are the positions and teams of pilots?
+
+SELECT Position, Team
+FROM pilot
+
+4. List the distinct position of pilots older than 30
+
+SELECT distinct Position
+FROM pilot
+Where Age > 30
+
+5. Show the name of pilots from team "Bradley" or "Fordham".
+
+SELECT Pilot_name
+FROM pilot
+Where Team = "Bradley" or Team = "Fordham"
+
+6. What is the joined year of the pilot of the highest rank?
+
+SELECT Join_Year
+FROM pilot
+order by Rank ASC limit 1
+
+7. Show different nationalities of pilots and the number of pilots of each nationality.
+
+SELECT Nationality, COUNT(*)
+FROM pilot
+group by Nationality
+ 
+8. Show the most common nationality of pilots.
+
+SELECT Nationality
+FROM pilot
+group by Nationality
+order by COUNT(*) DESC limit 1
+
+9. Show the position of the pilots that have both pilots joined after year 2005 and pilots joined before 2000.
+
+SELECT Position
+from pilot
+Where Join_Year	< 2000
+Intersect 
+SELECT Position
+from pilot
+Where Join_Year	> 2005
+
+10. Show names of pilots and models of aircrafts they have flied with.
+
+SELECT T3.Pilot_name, T2.Model
+FROM pilot_record as T1 join aircraft as T2 
+ON T1.Aircraft_ID = T2.Aircraft_ID join pilot as T3
+on T1.Pilot_ID = T3.Pilot_ID
+
+11. Show names of pilots and fleet series of the aircrafts they have flied with in ascending order of the rank of the pilot.
+
+SELECT T3.Pilot_name, T2.Fleet_Series
+FROM pilot_record as T1 join aircraft as T2 
+ON T1.Aircraft_ID = T2.Aircraft_ID join pilot as T3
+on T1.Pilot_ID = T3.Pilot_ID
+order by T3.Rank
+
+12. Show the fleet series of the aircrafts flied by pilots younger than 34
+
+SELECT T2.Fleet_Series
+FROM pilot_record as T1 join aircraft as T2 
+ON T1.Aircraft_ID = T2.Aircraft_ID join pilot as T3
+on T1.Pilot_ID = T3.Pilot_ID
+Where T3.Age < 34
+
+13. Show names of pilots and the number of records they have.
+
+SELECT T2.Pilot_name, COUNT(*)
+FROM pilot_record as T1 join pilot as T2
+on T1.pilot_ID = T2.pilot_ID
+group by T2.Pilot_name
+
+14. Show names of pilots that have more than one record.
+
+SELECT T2.Pilot_name, COUNT(*)
+FROM pilot_record as T1 join pilot as T2
+on T1.pilot_ID = T2.pilot_ID
+group by T2.Pilot_name
+Having COUNT(*) > 1
+
+15. List the names of pilots that do not have any record.
+
+SELECT Pilot_name
+from pilot
+where Pilot_ID not in (SELECT Pilot_ID FROM pilot_record)
