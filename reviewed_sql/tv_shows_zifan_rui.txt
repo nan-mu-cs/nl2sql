@@ -22,7 +22,7 @@ SELECT Station_name
 FROM city_channel
 Where Affiliation != "ABC"
 
-5. Show the transmitters of radios whose ERP is bigger than 150 or smaller than 50.
+5. Show the transmitters of radios whose ERP is bigger than 150 or smaller than 30.
 
 SELECT Transmitter
 from radio
@@ -34,7 +34,7 @@ SELECT Transmitter
 FROM radio
 order by ERP_kW DESC limit 1
 
-7. What is the ERP of radios?
+7. What is the average ERP of radios?
 
 SELECT avg(ERP_kW)
 FROM radio
@@ -45,7 +45,7 @@ SELECT Affiliation, COUNT(*)
 FROM city_channel
 group by Affiliation
  
-9. Please show the most common affiliation of city channels
+9. Please show the most common affiliation of city channels.
 
 SELECT Affiliation
 FROM city_channel
@@ -78,15 +78,14 @@ SELECT T3.Transmitter, T2.Station_name
 FROM city_channel_radio as T1 join city_channel as T2 
 ON T1.City_channel_ID = T2.ID join radio as T3
 on T1.Radio_ID = T3.Radio_ID
-order by T3.ERP_kW
+order by T3.ERP_kW desc
 
 14. Show the transmitters of the radios and the number of city channels they are associated with.
 
-SELECT T3.Transmitter, COUNT(*)
-FROM city_channel_radio as T1 join city_channel as T2 
-ON T1.City_channel_ID = T2.ID join radio as T3
-on T1.Radio_ID = T3.Radio_ID
-group by T3.Transmitter
+SELECT T2.Transmitter, COUNT(*)
+FROM city_channel_radio as T1 join radio as T2
+on T1.Radio_ID = T2.Radio_ID
+group by T2.Transmitter
 
 15. Show distinct transmitters of radios that are not associated with any city channel.
 
