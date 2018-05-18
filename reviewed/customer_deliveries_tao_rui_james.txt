@@ -1,0 +1,105 @@
+1. Find the ids of orders whose status is 'Success'.
+
+Select actual_order_id
+From actual_orders
+Where order_status_code = 'Success'
+
+2. Find the name and price of the product that has been ordered the greatest number of times.
+
+Select t1.product_name,  t1.product_price
+From products as t1 join regular_order_products as t2 on t1.product_id = t2.product_id
+Group by t2.product_id
+order by count(*) desc
+Limit 1
+
+3. Find the number of customers in total.
+
+Select count(*)
+From customers
+
+4. How many different payment methods are there?
+
+Select count(distinct payment_method)
+From customers
+
+5. Show the details of all trucks in the order of their license number.
+
+select truck_details
+From trucks
+Order by truck_licence_number
+
+6. Find the name of the most expensive product.
+
+Select product_name
+From products
+Order by product_price desc
+Limit 1
+
+7. Find the names of customers who are not living in the state of California.
+
+Select customer_name
+From customers
+Except 
+Select t1.customer_name
+From customers as t1 join customer_addresses as t2 on t1.customer_id = t2.customer_id join addresses as t3 on t2.address_id = t3.address_id
+Where t3.state_province_county = 'California'
+
+8. List the names and emails of customers who payed by Visa card.
+
+Select customer_email, customer_name
+From customers
+Where payment_method = 'Visa'
+
+9. Find the names and phone numbers of customers living in California state.
+
+Select t1.customer_name, t1.customer_phone
+From customers as t1 join customer_addresses as t2 on t1.customer_id = t2.customer_id join addresses as t3 on t2.address_id = t3.address_id
+Where t3.state_province_county = 'California'
+
+10. Find the states which do not have any employee in their record.
+
+Select state_province_county
+From addresses
+Where address_id not in (select employee_address_id from Employees)
+
+
+11. List the names, phone numbers, and emails of all customers sorted by their dates of becoming customers.
+
+Select customer_name, customer_phone, customer_email
+From Customers
+Order by date_became_customer
+
+12. Find the name of the first 5 customers.
+
+Select customer_name
+From Customers
+Order by date_became_customer
+Limit 5
+
+13. Find the payment method that is used most frequently.
+
+Select payment_method
+From Customers
+Group by payment_method
+Order by count(*) desc
+Limit 1
+
+14. List the names of all routes in alphabetic order.
+
+Select route_name
+From Delivery_Routes
+Order by route_name
+
+15. Find the name of route that has the highest number of deliveries.
+
+Select t1.route_name
+From Delivery_Routes as t1 join Delivery_Route_Locations as t2 on t1.route_id = t2.route_id
+Group by t1.route_id
+Order by count(*) desc
+Limit 1
+
+16. List the state names and the number of customers living in each state.
+
+Select t2.state_province_county, count(*)
+From customer_addresses as t1 join addresses as t2 on t1.address_id = t2.address_id
+Group by t2.state_province_county
