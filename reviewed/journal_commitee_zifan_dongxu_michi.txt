@@ -1,0 +1,216 @@
+# Total = 17
+
+1. How many editors are there?
+P: 
+
+SELECT count(*)
+FROM editor
+
+S:
+S:
+S:
+
+
+2. List the names of editors in ascending order of age.
+P: 
+
+SELECT Name
+FROM editor
+order by Age ASC
+
+S:
+S:
+S:
+
+
+3. What are the names and ages of editors?
+P: 
+
+SELECT Name, Age
+FROM editor
+
+S:
+S:
+S:
+
+
+4. List the names of editors who are older than 25.
+P: 
+
+SELECT Name
+FROM editor
+Where Age > 25
+
+S:
+S:
+S:
+
+
+5. Show the names of editors of age either 24 or 25.
+P: 
+
+SELECT Name
+FROM editor
+Where Age = 24 or Age = 25
+
+S:
+S:
+S:
+
+
+6. What is the name of the youngest editor?
+P: 
+
+SELECT Name
+FROM editor
+order by Age ASC limit 1
+
+S:
+S:
+S:
+
+
+7. What are the different ages of editors? Show each age along with the number of editors of that age.
+P: 
+
+SELECT Age, COUNT(*)
+FROM editor
+group by Age
+
+S:
+S:
+S:
+
+
+8. Please show the most common age of editors.
+P: 
+
+SELECT Age
+FROM editor
+group by Age
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+9. Show the distinct themes of journals.
+P: 
+
+SELECT distinct Theme
+from journal
+
+S:
+S:
+S:
+
+
+10. Show the names of editors and the theme of journals for which they serve on committees.
+P: For each journal_committee, find the editor name and the journal theme.
+
+SELECT T2.Name, T3.Theme
+FROM journal_committee as T1 join editor as T2
+ON T1.Editor_ID = T2.Editor_ID join journal as T3
+on T1.Journal_ID = T3.Journal_ID
+
+S:
+S:
+S:
+
+
+11. Show the names and ages of editors and the theme of journals for which they serve on committees, in ascending alphabetical order of theme.
+P: 
+
+SELECT T2.Name, T2.age, T3.Theme
+FROM journal_committee as T1 join editor as T2
+ON T1.Editor_ID = T2.Editor_ID join journal as T3
+on T1.Journal_ID = T3.Journal_ID
+order by T3.Theme ASC
+
+S:
+S:
+S:
+
+
+12. Show the names of editors that are on the committee of journals with sales bigger than 3000.
+P: 
+
+SELECT T2.Name
+FROM journal_committee as T1 join editor as T2
+ON T1.Editor_ID = T2.Editor_ID join journal as T3
+on T1.Journal_ID = T3.Journal_ID
+Where T3.Sales > 3000
+
+S:
+S:
+S:
+
+
+13. Show the id, name of each editor and the number of journal committees they are on.
+P: 
+
+SELECT T1.editor_id, T1.Name, COUNT(*)
+FROM editor as T1 join journal_committee as T2
+on T1.Editor_ID = T2.Editor_ID
+group by T1.editor_id
+
+S:
+S:
+S:
+
+
+14. Show the names of editors that are on at least two journal committees.
+P: 
+
+SELECT T1.Name
+FROM editor as T1 join journal_committee as T2
+on T1.Editor_ID = T2.Editor_ID
+group by T1.Name
+Having COUNT(*) >= 2
+
+S:
+S:
+S:
+
+
+15. List the names of editors that are not on any journal committee.
+P: 
+
+SELECT Name
+from editor
+where editor_id not in (SELECT editor_id FROM journal_committee)
+
+S:
+S:
+S:
+
+
+16. List the date, theme and sales of the journal which did not have any of the listed editors serving on committee.
+P: 
+
+select date, theme, sales
+from journal
+except
+SELECT T1.date, T1.theme, T1.sales
+FROM journal as T1 join journal_committee as T2
+on T1.journal_ID = T2.journal_ID
+
+S:
+S:
+S:
+
+
+17. What is the average sales of the journals that have an editor whose work type is 'Photo'?
+P: 
+
+select avg(T1.sales)
+FROM journal as T1 join journal_committee as T2
+on T1.journal_ID = T2.journal_ID
+where T2.work_type = 'Photo'
+
+S:
+S:
+S:
+
+
