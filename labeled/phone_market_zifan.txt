@@ -82,19 +82,17 @@ Where T2.Num_of_shops > 50
 
 13. Show names of phones and the total number of stocks of each phone.
 
-SELECT T3.Name, sum(T1.Num_of_stock)
-FROM phone_market as T1 join market as T2 
-ON T1.Market_ID = T2.Market_ID join phone as T3
-on T1.Phone_ID = T3.Phone_ID
-group by T3.Name
+SELECT T2.Name, sum(T1.Num_of_stock)
+FROM phone_market as T1 join phone as T2
+on T1.Phone_ID = T2.Phone_ID
+group by T2.Name
 
 14. Show names of phones that have total number of stocks bigger than 2000 in descending order of the number of stocks
 
-SELECT T3.Name
-FROM phone_market as T1 join market as T2 
-ON T1.Market_ID = T2.Market_ID join phone as T3
-on T1.Phone_ID = T3.Phone_ID
-group by T3.Name
+SELECT T2.Name
+FROM phone_market as T1 join phone as T2
+on T1.Phone_ID = T2.Phone_ID
+group by T2.Name
 Having sum(T1.Num_of_stock) >= 2000
 order by sum(T1.Num_of_stock) DESC
 
