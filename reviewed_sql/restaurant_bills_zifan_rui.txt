@@ -1,0 +1,97 @@
+Total = 15
+
+1. How many customers are there?
+
+SELECT count(*)
+FROM customer
+
+2. List the names of customers in ascending order of level of membership.
+
+SELECT Name
+FROM customer
+order by Level_of_Membership ASC
+
+3. What are the nationalities and card credits of customers?
+
+SELECT Nationality, Card_Credit
+FROM customer
+
+4. Show the names of customers with nationality "England" or "Australia"
+
+SELECT Name
+FROM customer
+Where Nationality = "England" or Nationality = "Australia"
+
+5. What is the average card credit of customers with membership level higher than 1?
+
+SELECT avg(Card_Credit)
+FROM customer
+Where Level_of_Membership > 1
+
+6. What is the card credit of the customer with the highest membership level?
+
+SELECT Card_Credit
+FROM customer
+order by Level_of_Membership DESC limit 1
+
+7. Show different nationalities of customers and the number of customers of each nationality.
+
+SELECT Nationality, COUNT(*)
+FROM customer
+group by Nationality
+ 
+8. Show the most common nationality of customers.
+
+SELECT Nationality
+FROM customer
+group by Nationality
+order by COUNT(*) DESC limit 1
+
+9. Show the nations that have both customers with card credit smaller than 50 and customers with card credit bigger than 75.
+
+SELECT Nationality
+from customer
+Where Card_Credit < 50
+Intersect 
+SELECT Nationality
+from customer
+Where Card_Credit > 75
+
+10. Show names of customers and names of dish they order.
+
+SELECT T1.Name, T2.Dish_Name
+FROM customer as T1 JOIN customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+
+11. Show names of customers and names of dish they order in descending order of the quantity of dish.
+
+SELECT T1.Name, T2.Dish_Name
+FROM customer as T1 JOIN customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+order by T2.Quantity desc
+
+12. Show the customer names and total quantities of dishes ordered by each customer.
+
+SELECT T1.Name, sum(T2.Quantity)
+FROM customer as T1 join customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+group by T1.Name
+
+13. Show the customers with total quantity of orders bigger than 1.
+
+SELECT T1.Name
+FROM customer as T1 join customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+group by T1.Name
+Having sum(T2.Quantity) > 1
+
+14. Show distinct managers of branches.
+
+SELECT distinct Manager
+FROM branch
+
+15. List the names of customers that do not have any order.
+
+SELECT name
+from customer
+where Customer_ID not in (SELECT Customer_ID FROM customer_order)

@@ -1,0 +1,97 @@
+Total = 15
+
+1. How many submissions are there?
+
+SELECT count(*)
+FROM submission
+
+2. List the authors of submissions in ascending order of scores.
+
+SELECT Author
+FROM submission
+order by Scores ASC
+
+3. What are the authors of submissions and their colleges?
+
+SELECT Author, College
+FROM submission
+
+4. Show the names of authors from college "Florida" or "Temple"
+
+SELECT Author
+FROM submission
+Where College = "Florida" or College = "Temple"
+
+5. What is the average score of submission?
+
+SELECT avg(Scores)
+FROM submission
+
+6. What is the author of the submission with the highest score?
+
+SELECT Author
+FROM submission
+order by Scores DESC limit 1
+
+7. Show different colleges and the number of authors of submission from each college.
+
+SELECT College, COUNT(*)
+FROM submission
+group by College
+ 
+8. Show the most common college of authors of submissions.
+
+SELECT College
+FROM submission
+group by College
+order by COUNT(*) DESC limit 1
+
+9. Show the colleges that have both authors with submission score larger than 90 and authors with submission score smaller than 80.
+
+SELECT College
+from submission
+Where Scores > 90
+Intersect 
+SELECT College
+from submission
+Where Scores < 80
+
+10. Show authors of submissions and the results of their submission
+
+SELECT T2.Author, T1.Result
+FROM acceptance as T1 JOIN submission as T2
+on T1.Submission_ID = T2.Submission_ID
+
+11. Show the result of the submission with the highest score
+
+SELECT T1.Result
+FROM acceptance as T1 JOIN submission as T2
+on T1.Submission_ID = T2.Submission_ID
+order by T2.Scores DESC limit 1
+
+12. Show the authors of submissions and the number of workshops they submitted to.
+
+SELECT T2.Author, COUNT(*)
+FROM acceptance as T1 JOIN submission as T2
+on T1.Submission_ID = T2.Submission_ID
+group by T2.Author
+
+13. Show the authors of submissions that are submitted to more than one workshop.
+
+SELECT T2.Author
+FROM acceptance as T1 JOIN submission as T2
+on T1.Submission_ID = T2.Submission_ID
+group by T2.Author
+Having COUNT(*) > 1
+
+14. Show date and venue of workshop in ascending alphabetical order of the venue.
+
+SELECT Date, Venue
+FROM workshop
+order by Venue
+
+15. List the authors of submissions that are not submitted to any workshop
+
+SELECT Author
+from submission
+where Submission_ID not in (SELECT Submission_ID FROM acceptance)

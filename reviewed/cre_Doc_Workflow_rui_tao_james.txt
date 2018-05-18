@@ -1,0 +1,431 @@
+Total = # 40 
+
+
+1. How many authors do we have?
+
+
+select count(*)
+from Authors
+
+S:
+S:
+S:
+
+2. Show all author names.
+
+
+select author_name
+from Authors
+
+S:
+S:
+S:
+
+3. Show the names and other details for all authors.
+
+
+select author_name, other_details
+from Authors
+
+S:
+S:
+S:
+
+4. Show the other details for the author Addison Denesik.
+
+
+select other_details
+from Authors
+where author_name = "Addison Denesik"
+
+S:
+S:
+S:
+
+5. Show the number of documents.
+
+
+select count(*)
+from Documents
+
+S:
+S:
+S:
+
+6. Who is the author of the document with id 4?
+
+
+select author_name
+from Documents
+where document_id = 4
+
+S:
+S:
+S:
+
+7. Who is the author of the document "Travel to Brazil"?
+
+
+select author_name
+from Documents
+where document_name = "Travel to Brazil"
+
+S:
+S:
+S:
+
+8. How many documents does has the author Era Kerluke written?
+
+
+select count(*)
+from Documents
+where author_name = "Era Kerluke"
+
+S:
+S:
+S:
+
+9. Show the names and descriptions for all documents.
+
+
+select document_name, document_description
+from Documents
+
+S:
+S:
+S:
+
+10. Show the ids and names for all documents by author Bianka Cummings.
+
+
+select document_id, document_name
+from Documents
+where author_name = "Bianka Cummings"
+
+S:
+S:
+S:
+
+11. Show the author name and details for the document "Travel to China".
+
+
+select T2.author_name, T2.other_details
+from Documents as T1 join Authors as T2 on T1.author_name = T2.author_name
+where document_name = "Travel to China"
+
+S:
+S:
+S:
+
+12. Show all author names and number of documents corresponding to each.
+
+
+select author_name, count(*)
+from Documents
+group by author_name
+
+S:
+S:
+S:
+
+13. What is the name of the author with most number of documents?
+
+
+select author_name
+from Documents
+group by author_name
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+14. Show the names for authors with at least two documents.
+
+
+select author_name
+from Documents
+group by author_name
+having count(*) >= 2
+
+S:
+S:
+S:
+
+15. How many business processes do we have?
+
+
+select count(*)
+from Business_processes
+
+S:
+S:
+S:
+
+16. Show the next process id, process name, process description for process with id 9.
+
+
+select next_process_id, process_name, process_description
+from Business_processes
+where process_id = 9
+
+S:
+S:
+S:
+
+17. What is the process name for the next process of the process with id 9?
+
+
+select process_name
+from Business_processes
+where process_id = (select next_process_id from Business_processes where process_id = 9)
+
+S:
+S:
+S:
+
+18. Show the number of process outcomes.
+
+
+select count(*)
+from Process_outcomes
+
+S:
+S:
+S:
+
+19. List the codes and descriptions for all process outcomes.
+
+
+select process_outcome_code, process_outcome_description
+from Process_outcomes
+
+S:
+S:
+S:
+
+20. What is the description for the process outcome code working?
+
+
+select process_outcome_description
+from Process_outcomes
+where process_outcome_code = "working"
+
+S:
+S:
+S:
+
+21. Show the number of process status.
+
+
+select count(*)
+from Process_status
+
+S:
+S:
+S:
+
+22. List the codes and descriptions for all process status.
+
+
+select process_status_code, process_status_description
+from Process_status
+
+S:
+S:
+S:
+
+23. What is the description for process status code ct?
+
+
+select process_status_description
+from Process_status
+where process_status_code = "ct"
+
+S:
+S:
+S:
+
+24. How many staff do we have?
+
+
+select count(*)
+from Staff
+
+S:
+S:
+S:
+
+25. Show the ids and details for all staff.
+
+
+select staff_id, staff_details
+from Staff
+
+S:
+S:
+S:
+
+26. What are the details for the staff member with id 100.
+
+
+select staff_details
+from Staff
+where staff_id = 100
+
+S:
+S:
+S:
+
+27. Show the number of staff roles.
+
+
+select count(*)
+from Ref_staff_roles
+
+S:
+S:
+S:
+
+28. List the codes and descriptions for all staff roles.
+
+
+select staff_role_code, staff_role_description
+from Ref_staff_roles
+
+S:
+S:
+S:
+
+29. What is the description for staff role code HR?
+
+
+select staff_role_description
+from Ref_staff_roles
+where staff_role_code = "HR"
+
+S:
+S:
+S:
+
+30. How many documents have a process?
+
+
+select count(distinct document_id)
+from Documents_processes
+
+S:
+S:
+S:
+
+31. List all process ids with a document.
+
+
+select distinct process_id
+from Documents_processes
+
+S:
+S:
+S:
+
+32. Show all document ids without a process.
+
+
+select document_id
+from Documents
+EXCEPT
+select document_id
+from Documents_processes
+
+S:
+S:
+S:
+
+33. List all process ids with no document.
+
+
+select process_id
+from Business_processes
+EXCEPT
+select process_id
+from Documents_processes
+
+S:
+S:
+S:
+
+34. What is the process outcome description and process status description for the document with id 0?
+
+
+select T2.process_outcome_description, T3.process_status_description
+from Documents_processes as T1 join Process_outcomes as T2 on T1.process_outcome_code = T2.process_outcome_code join Process_Status as T3 on T1.process_status_code = T3.process_status_code
+where T1.document_id = 0
+
+S:
+S:
+S:
+
+35. What is the process name for the document "Travel to Brazil"?
+
+
+select T3.process_name
+from Documents_processes as T1 join Documents as T2 on T1.document_id = T2.document_id join Business_processes as T3 on T1.process_id = T3.process_id
+where T2.document_name = "Travel to Brazil"
+
+S:
+S:
+S:
+
+36. Show all process ids and the number of documents in each process.
+
+
+select process_id, count(*)
+from Documents_processes
+group by process_id
+
+S:
+S:
+S:
+
+37. How many staff are the document with id 0 and process with id 9.
+
+
+select count(*)
+from Staff_in_processes
+where document_id = 0 and process_id = 9
+
+S:
+S:
+S:
+
+38. Show all staff ids and the number of document processes for each staff.
+
+
+select staff_id, count(*)
+from Staff_in_processes
+group by staff_id
+
+S:
+S:
+S:
+
+39. Show all staff role codes and the number of document processes for each role.
+
+select staff_role_code, count(*)
+from Staff_in_processes
+group by staff_role_code
+
+S:
+S:
+S:
+
+40. How many different roles does the staff with id 3 have?
+
+select count(distinct staff_role_code)
+from Staff_in_processes
+where staff_id = 3
+
+S:
+S:
+S:
