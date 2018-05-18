@@ -1,0 +1,100 @@
+Total = 15
+
+1. How many parties are there?
+
+SELECT count(*)
+FROM party
+
+2. List the theme of parties in ascending order of number of hosts.
+
+SELECT Party_Theme
+FROM party
+order by Number_of_hosts ASC
+
+3. What are the theme and locations of parties?
+
+SELECT Party_Theme, Location
+FROM party
+
+4. Show the first year and last year of parties with theme "Spring" or "Teqnology".
+
+SELECT First_year, Last_year	
+FROM party
+Where Party_Theme = "Spring" or Party_Theme = "Teqnology"
+
+5. What is the average number of hosts for parties?
+
+SELECT avg(Number_of_hosts)
+FROM party
+
+6. What is the location of the party with the most number of hosts?
+
+SELECT Location
+FROM party
+order by Number_of_hosts DESC limit 1
+
+7. Show different nationalities and the number of hosts of each nationality.
+
+SELECT Nationality, COUNT(*)
+FROM host
+group by Nationality
+ 
+8. Show the most common nationality of hosts.
+
+SELECT Nationality
+FROM host
+group by Nationality
+order by COUNT(*) DESC limit 1
+
+9. Show the nations that have both hosts older than 45 and hosts younger than 35 
+
+SELECT Nationality
+from host
+Where Age > 45
+Intersect 
+SELECT Nationality
+from host
+Where Age < 35
+
+10. Show the themes of parties and the names of the main hosts.
+
+SELECT T3.Party_Theme, T2.Name
+FROM party_host as T1 JOIN host as T2
+on T1.Host_ID = T2.Host_ID join party as T3
+on T1.Party_ID = T3.Party_ID
+
+11. Show the locations of parties and the names of the main hosts in ascending order of the age of the main host.
+
+SELECT T3.Location, T2.Name
+FROM party_host as T1 JOIN host as T2
+on T1.Host_ID = T2.Host_ID join party as T3
+on T1.Party_ID = T3.Party_ID
+order by T2.Age
+
+12. Show the locations of parties with main hosts older than 50.
+
+SELECT T3.Location, T2.Name
+FROM party_host as T1 JOIN host as T2
+on T1.Host_ID = T2.Host_ID join party as T3
+on T1.Party_ID = T3.Party_ID
+Where T2.Age > 50
+
+13. Show the names of the main hosts of parties with number of hosts bigger than 50
+
+SELECT T2.Name
+FROM party_host as T1 JOIN host as T2
+on T1.Host_ID = T2.Host_ID join party as T3
+on T1.Party_ID = T3.Party_ID
+Where T3.Number_of_hosts > 50
+
+14. Show the name and the nationality of the oldest host.
+
+SELECT Name, Nationality
+FROM host
+order by Age DESC limit 1
+
+15. List the names of hosts that are not main host of any party.
+
+SELECT Name
+from host
+where Host_ID not in (SELECT Host_ID FROM party_host)
