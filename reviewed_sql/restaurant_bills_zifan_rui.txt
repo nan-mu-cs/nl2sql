@@ -20,7 +20,7 @@ FROM customer
 
 SELECT Name
 FROM customer
-Where Nationality = "England" or Team = "Australia"
+Where Nationality = "England" or Nationality = "Australia"
 
 5. What is the average card credit of customers with membership level higher than 1?
 
@@ -68,16 +68,16 @@ on T1.Customer_ID = T2.Customer_ID
 SELECT T1.Name, T2.Dish_Name
 FROM customer as T1 JOIN customer_order as T2
 on T1.Customer_ID = T2.Customer_ID
-order by T2.Quantity
+order by T2.Quantity desc
 
-12. Show the customers and total quantities of dishes order by each customer.
+12. Show the customer names and total quantities of dishes ordered by each customer.
 
 SELECT T1.Name, sum(T2.Quantity)
 FROM customer as T1 join customer_order as T2
 on T1.Customer_ID = T2.Customer_ID
 group by T1.Name
 
-13. Show the customers with total quantity of orders bigger than 1
+13. Show the customers with total quantity of orders bigger than 1.
 
 SELECT T1.Name
 FROM customer as T1 join customer_order as T2
@@ -92,6 +92,6 @@ FROM branch
 
 15. List the names of customers that do not have any order.
 
-SELECT customer_name
+SELECT name
 from customer
 where Customer_ID not in (SELECT Customer_ID FROM customer_order)
