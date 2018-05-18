@@ -34,7 +34,7 @@ SELECT Starting_Year
 FROM technician
 order by Age DESC limit 1
 
-7. Show different team of technicians and the number of technicians on each team.
+7. Show different teams of technicians and the number of technicians in each team.
 
 SELECT Team, COUNT(*)
 FROM technician
@@ -69,7 +69,7 @@ ON T1.machine_id = T2.machine_id join technician as T3
 on T1.technician_ID = T3.technician_ID
 order by T2.quality_rank
 
-12. Show names of technicians that are assigned to repair machines with value point more than 70
+12. Show names of technicians who are assigned to repair machines with value point more than 70.
 
 SELECT T3.Name
 FROM repair_assignment as T1 join machine as T2 
@@ -77,15 +77,14 @@ ON T1.machine_id = T2.machine_id join technician as T3
 on T1.technician_ID = T3.technician_ID
 Where T2.value_points > 70
 
-13. Show names of technicians and the number of machines they are assigned to repair
+13. Show names of technicians and the number of machines they are assigned to repair.
 
-SELECT T3.Name, COUNT(*)
-FROM repair_assignment as T1 join machine as T2 
-ON T1.machine_id = T2.machine_id join technician as T3
-on T1.technician_ID = T3.technician_ID
-group by T3.Name
+SELECT T2.Name, COUNT(*)
+FROM repair_assignment as T1 join technician as T2
+on T1.technician_ID = T2.technician_ID
+group by T2.Name
 
-14. List the names of technicians that have not been assigned to repair machines.
+14. List the names of technicians who have not been assigned to repair machines.
 
 SELECT Name
 from technician
