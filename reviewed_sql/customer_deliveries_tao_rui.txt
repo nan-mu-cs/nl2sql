@@ -1,6 +1,4 @@
-
-
-1. Find the id of orders whose status is ‘success’.
+1. Find the id of orders whose status is 'Success'.
 
 Select actual_order_id
 From actual_orders
@@ -14,8 +12,7 @@ Group by t2.product_id
 order by count(*) desc
 Limit 1
 
-
-3. Find the number of customers in total?
+3. Find the number of customers in total.
 
 Select count(*)
 From customers
@@ -31,13 +28,12 @@ select truck_details
 From trucks
 Order by truck_licence_number
 
-6. Find the name of most expensive product.
+6. Find the name of the most expensive product.
 
 Select product_name
 From products
 Order by product_price desc
 Limit 1
-
 
 7. Find the name of customers who are not living in the state of California.
 
@@ -54,13 +50,13 @@ Select customer_email, customer_name
 From customers
 Where payment_method = 'Visa'
 
-9. Find the name and phone number of employee working in California state.
+9. Find the name and phone number of customers living in California state.
 
 Select t1.customer_name, t1.customer_phone
 From customers as t1 join customer_addresses as t2 on t1.customer_id = t2.customer_id join addresses as t3 on t2.address_id = t3.address_id
 Where t3.state_province_county = 'California'
 
-10. Find the state where does not have any employee in our record.
+10. Find the state which does not have any employee in our record.
 
 Select state_province_county
 From addresses
@@ -102,11 +98,11 @@ Group by t1.route_id
 Order by count(*) desc
 Limit 1
 
-16. Find the number of customers and number of employees living in each state.
+16. List the state name and the number of customers living in each state.
 
-Select t3.state_province_county, count(*)
-From customer_addresses as t2 join addresses as t3 on t2.address_id = t3.address_id
-Group by t3.state_province_county
+Select t2.state_province_county, count(*)
+From customer_addresses as t1 join addresses as t2 on t1.address_id = t2.address_id
+Group by t2.state_province_county
 
 
 
