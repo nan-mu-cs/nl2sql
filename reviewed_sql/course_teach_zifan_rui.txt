@@ -92,7 +92,7 @@ on T1.Teacher_ID = T2.Teacher_ID
 group by T2.Name
 Having COUNT(*) >= 2
 
-15. List the names of teachers wcho have not been arranged to teach courses.
+15. List the names of teachers who have not been arranged to teach courses.
 
 SELECT Name
 from teacher
