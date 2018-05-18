@@ -16,7 +16,7 @@ order by Product_Price ASC
 SELECT Product_Name, Product_Type_Code
 FROM Products
 
-4. Show the prices of the products named "Dining" or "Trading Policy"
+4. Show the prices of the products named "Dining" or "Trading Policy".
 
 SELECT Product_Price
 FROM Products
