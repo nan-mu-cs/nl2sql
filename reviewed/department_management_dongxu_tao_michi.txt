@@ -1,0 +1,209 @@
+1. How many heads of the departments are older than 56 ?
+P: 
+
+SELECT count(*)
+FROM head
+where age > 56
+
+S:
+S:
+S:
+
+
+2. List the name, born state and age of the heads of departments ordered by age.
+P: 
+
+SELECT name, born_state, age
+FROM head
+order by age
+
+S:
+S:
+S:
+
+
+3. List the creation year, name and budget of each department.
+P: 
+
+SELECT creation, name, budget_in_billions
+FROM department
+
+S:
+S:
+S:
+
+
+4. What are the maximum and minimum budget of the departments?
+P: 
+
+select max(budget_in_billions), min(budget_in_billions)
+from department
+
+S:
+S:
+S:
+
+
+5. What is the average number of employees of the departments whose rank is between 10 and 15?
+P: 
+
+select avg(num_employees)
+from department
+where ranking between 10 and 15
+
+S:
+S:
+S:
+
+
+6. What are the names of the heads who are born outside the California state?
+P: 
+
+SELECT name
+from head
+Where born_state != 'California'
+
+S:
+S:
+S:
+
+
+7. What are the distinct creation years of the departments managed by a secretary born in state 'Alabama'?
+P: 
+
+SELECT distinct T1.creation
+FROM department as T1 join management as T2
+on T1.department_id = T2.department_id
+join head as T3
+on T2.head_id = T3.head_id
+where T3.born_state = 'Alabama'
+
+S:
+S:
+S:
+
+
+8. What are the names of the states where at least 3 heads were born?
+P: 
+
+SELECT born_state
+from head
+group by born_state
+having count(*) >= 3
+
+S:
+S:
+S:
+
+
+9. In which year were most departments established?
+P: 
+
+SELECT creation
+from department
+group by creation
+order by count(*)
+desc limit 1
+
+S:
+S:
+S:
+
+
+10. Show the name and number of employees for the departments managed by heads whose temporary acting value is 'Yes'?
+P: 
+
+SELECT T1.name, T1.num_employees
+from department as T1 join management as T2
+on T1.department_id = T2.department_id
+where T2.temporary_acting = 'Yes'
+
+S:
+S:
+S:
+
+
+11. How many acting statuses are there?
+P: 
+
+select count(distinct temporary_acting)
+from management
+
+S:
+S:
+S:
+
+
+12. How many departments are led by heads who are not mentioned?
+P: 
+
+select count(*)
+from department
+where department_id not in (select department_id from management);
+
+S:
+S:
+S:
+
+
+13. What are the distinct ages of the heads who are acting?
+P: 
+
+select distinct T1.age
+from management as T2 join head as T1
+on T1.head_id = T2.head_id
+where T2.temporary_acting = 'Yes'
+
+S:
+S:
+S:
+
+
+14. List the states where both the secretary of 'Treasury' department and the secretary of 'Homeland Security' were born.
+P: 
+
+SELECT T3.born_state
+FROM department as T1 join management as T2
+on T1.department_id = T2.department_id
+join head as T3
+on T2.head_id = T3.head_id
+where T1.name = 'Treasury'
+intersect
+SELECT T3.born_state
+FROM department as T1 join management as T2
+on T1.department_id = T2.department_id
+join head as T3
+on T2.head_id = T3.head_id
+where T1.name = 'Homeland Security'
+
+S:
+S:
+S:
+
+
+15. Which department has more than 1 head at a time? List the id, name and the number of heads.
+P: 
+
+select T1.department_id, T1.name, count(*)
+from management as T2 join department as T1
+on T1.department_id = T2.department_id
+group by T1.department_id
+having count(*) > 1
+
+S:
+S:
+S:
+
+
+16. Which head's name has the substring 'Ha'? List the id and name.
+P: 
+
+select head_id, name
+from head
+where name like '%Ha%'
+
+S:
+S:
+S:
+
+
