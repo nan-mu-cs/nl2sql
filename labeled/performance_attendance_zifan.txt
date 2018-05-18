@@ -1,0 +1,101 @@
+Total = 15
+
+1. How many performances are there?
+
+SELECT count(*)
+FROM performance
+
+2. List the hosts of performances in ascending order of attendance.
+
+SELECT Host
+FROM performance
+order by Attendance ASC
+
+3. What are the dates and locations of performances?
+
+SELECT Date, Location
+FROM performance
+
+4. Show the attendance of the performances at location "TD Garden" or "Bell Centre"
+
+SELECT Attendance
+FROM performance
+Where Location = "TD Garden" or Location = "Bell Centre"
+
+5. What is the average number of attendance for performances?
+
+SELECT avg(Attendance)
+FROM performance
+
+6. What is the date of the performance with the most number of attendance?
+
+SELECT Date
+FROM performance
+order by Attendance DESC limit 1
+
+7. Show different locations and the number of performances at each location.
+
+SELECT Location, COUNT(*)
+FROM performance
+group by Location
+ 
+8. Show the most common location of performances.
+
+SELECT Location
+FROM performance
+group by Location
+order by COUNT(*) DESC limit 1
+
+9. Show the locations that have at least two performances.
+
+SELECT Location
+FROM performance
+group by Location
+Having COUNT(*) >= 2
+
+10. Show the locations that have both performances with more than 2000 attendance and performances with less than 1000 attendance.
+
+SELECT Location
+from performance
+Where Attendance > 2000
+Intersect 
+SELECT Location
+from performance
+Where Attendance < 1000
+
+11. Show the names of members and the location of performances they attend.
+
+SELECT T2.Name, T3.Location
+FROM member_attendance as T1 JOIN member as T2
+on T1.Member_ID = T2.Member_ID join performance as T3
+on T1.Performance_ID = T3.Performance_ID
+
+12. Show the names of members and the location of performances they attend in ascending alphabetical order of the member names
+
+SELECT T2.Name, T3.Location
+FROM member_attendance as T1 JOIN member as T2
+on T1.Member_ID = T2.Member_ID join performance as T3
+on T1.Performance_ID = T3.Performance_ID
+order by T2.Name ASC
+
+13. Show the dates of performances with attending members whose roles are "Violin".
+
+SELECT T3.Date
+FROM member_attendance as T1 JOIN member as T2
+on T1.Member_ID = T2.Member_ID join performance as T3
+on T1.Performance_ID = T3.Performance_ID
+Where T2.Role = "Violin"
+
+14. Show the names of members and the dates of performances they attend in descending order of attendance of the performances.
+
+SELECT T2.Name, T3.Date
+FROM member_attendance as T1 JOIN member as T2
+on T1.Member_ID = T2.Member_ID join performance as T3
+on T1.Performance_ID = T3.Performance_ID
+order by T3.Attendance ASC
+
+15. List the names of members that do not attend any performance.
+
+SELECT Name
+from member
+where Member_ID not in (SELECT Member_ID FROM member_attendance)
