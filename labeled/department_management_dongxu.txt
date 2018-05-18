@@ -1,7 +1,7 @@
 
 Total = 17
 
-1. How many head of the deparments are older than 56 ?
+1. How many head of the departments are older than 56 ?
 
 SELECT count(*)
 FROM head
