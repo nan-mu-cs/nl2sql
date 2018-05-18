@@ -33,7 +33,7 @@ From museum
 Order by num_of_staff desc
 Limit 1
 
-6. Find the average number of staff working for the museums where were open before 2009.
+6. Find the average number of staff working for the museums which were open before 2009.
 
 Select avg(num_of_staff)
 From museum
@@ -45,30 +45,30 @@ Select Num_of_Staff, Open_Year
 From museum
 Where name = 'Plaza Museum'
 
-8. find the name of museums where has more staff than the minimum staff number of all museums opened after 2010.
+8. find the name of museums which has more staff than the minimum staff number of all museums opened after 2010.
 
 Select name
 From museum
 Where num_of_staff > (select min(num_of_staff) from museum where open_year > 2010)
 
-9. find the name of visitors who visited some museums more than once.
+9. find the id, name and age of visitors who visited some museums more than once.
 
-Select t1.name
+Select t1.id, t1.name, t1.age
 From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
-Group by t2.visitor_id
+Group by t1.id
 Having count(*) > 1
 
-10. What are the name and membership level of visitors who have spent the most amount of money in all museum tickets?
+10. What are the id, name and membership level of visitors who have spent the most total amount of money in all museum tickets?
 
-Select t1.name, t1.Level_of_membership
+Select t2.visitor_id, t1.name, t1.Level_of_membership
 From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
 Group by t2.visitor_id
 Order by sum(t2.Total_spent) desc
 Limit 1
 
-11. What is the name of the museum where has the most number times of visiting?
+11. What is the id and name of the museum visited most times?
 
-Select t1.name
+Select t2.Museum_ID, t1.name
 From museum as t1 join visit as t2 on t1.Museum_ID = t2.Museum_ID
 group by t2.Museum_ID
 Order by count(*) desc
@@ -88,12 +88,12 @@ From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
 Order by t2.num_of_ticket desc
 Limit 1
 
-14. What are the average and maximum ticket number bought by all visitors?
+14. What are the average and maximum ticket number bought each visit?
 
 Select avg(num_of_ticket), max(num_of_ticket)
 From visit
 
-15. What is the total ticket spent of the visitors whose membership level is 1?
+15. What is the total ticket expense of the visitors whose membership level is 1?
 
 Select sum(t2.Total_spent)
 From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
