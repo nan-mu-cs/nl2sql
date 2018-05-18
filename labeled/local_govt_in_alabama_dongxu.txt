@@ -1,5 +1,5 @@
 
-Total = 14
+Total = 15
 
 1. what are the event details of the services which has the type code 'Marriage'?
 
