@@ -1,4 +1,4 @@
-Total = 15
+Total = 17
 
 1. How many members are there?
 
@@ -69,7 +69,7 @@ ON T1.Club_ID = T2.Club_ID join member as T3
 on T1.Member_ID = T3.Member_ID
 Where T2.Overall_Ranking < 100
 
-12. Show names of club leaders that joined the club before 2018.
+12. Show names of club leaders that joined their club before 2018.
 
 SELECT T3.Name, T2.Club_Name
 FROM club_leader as T1 join club as T2 
@@ -100,3 +100,17 @@ Intersect
 SELECT Nationality
 FROM member
 Where Age < 19
+
+16. What is the average age of all the club leaders?
+
+select avg(T2.age)
+from club_leader as T1 join member as T2
+on T1.member_id = T2.member_id
+
+
+17. Which club name contains the string 'state'?
+
+select club_name
+from club
+where club_name like '%state%'
+
