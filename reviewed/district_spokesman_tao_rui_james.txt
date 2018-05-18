@@ -1,0 +1,218 @@
+1. Find the name of the district which has the largest area.
+
+Select name
+From district
+Order by Area_km desc
+Limit 1
+
+S:
+S:
+S:
+
+2. Select the area and government website of the district with the smallest population.
+
+Select area_km, Government_website
+From district
+Order by Population
+Limit 1
+
+S:
+S:
+S:
+
+3. Find the names and populations of the districts whose area is greater than the average area.
+
+Select name, population
+From district
+Where area_km > (select avg(area_km) from district)
+
+S:
+S:
+S:
+
+4. Give me the biggest and average areas of all districts.
+
+Select max(area_km), avg(area_km)
+From district
+
+S:
+S:
+S:
+
+5. What is the total population of the districts whose areas are in the top 3?
+
+Select sum(population)
+From district
+order by area_km desc
+Limit 3
+
+S:
+S:
+S:
+
+6. List the ids, names, and government websites of all districts sorted by population.
+
+Select name, Government_website, district_id
+From district
+Order by Population
+
+S:
+S:
+S:
+
+7. Find the names of districts whose government links use a 'gov' domain.
+
+Select name
+From district
+Where Government_website like "%gov%"
+
+S:
+S:
+S:
+
+8. Return the ids and names of the districts whose population is larger than 4000 or area bigger than 3000.
+
+Select district_id, name
+From district
+Where area_km > 3000 or population > 4000
+
+S:
+S:
+S:
+
+9. Find all spokesman's names and speech titles.
+
+Select name, speach_title
+From spokesman
+
+S:
+S:
+S:
+
+10. Find the average points and average ages of all spokesmen whose rank position is 1.
+
+Select avg(points), avg(age)
+From spokesman
+Where rank_position = 1
+
+S:
+S:
+S:
+
+11. What are the names and points of spokesmen who are younger than 40?
+
+Select name, points
+From spokesman
+Where age < 40
+
+S:
+S:
+S:
+
+12. Who is the oldest spokesman?
+
+Select name
+From spokesman
+Order by age desc
+Limit 1
+
+S:
+S:
+S:
+
+13. Which spokesman has lower points than the average?
+
+Select name
+From spokesman
+Where points < (select avg(points) from spokesman)
+
+S:
+S:
+S:
+
+14. Find the name of the district which has greatest number of spokesmen.
+
+Select t1.name
+From district as t1 join spokesman_district as t2 on t1.District_ID = t2.District_ID
+group by t2.District_ID
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+15. Find the names of spokesmen who have served some district before 2004.
+
+Select t1.name
+From spokesman as t1 join spokesman_district as t2 on t1.Spokesman_ID = t2.Spokesman_ID
+Where t2.start_year < 2004
+
+S:
+S:
+S:
+
+16. Find the number of spokesmen for each district, and the show district names as well.
+
+Select t1.name, count(*)
+From district as t1 join spokesman_district as t2 on t1.District_ID = t2.District_ID
+group by t2.District_ID
+
+S:
+S:
+S:
+
+17. Find the names of the districts which have had both spokesman with rank position 1 and 2.
+
+Select t3.name
+From spokesman as t1 join spokesman_district as t2 on t1.Spokesman_ID = t2.Spokesman_ID join district as t3 on t3.district_id = t2.district_id
+Where t1.rank_position = 1
+Intersect 
+Select t3.name
+From spokesman as t1 join spokesman_district as t2 on t1.Spokesman_ID = t2.Spokesman_ID join district as t3 on t3.district_id = t2.district_id
+Where t1.rank_position = 2
+
+S:
+S:
+S:
+
+18. Find the names of districts which have more than one spokesman.
+
+Select t1.name
+From district as t1 join spokesman_district as t2 on t1.District_ID = t2.District_ID
+group by t2.District_ID
+Having count(*) > 1
+
+S:
+S:
+S:
+
+19. Find the number of districts which have no spokesmen.
+
+Select count(*)
+From district
+Where district_id not in (select district_id from spokesman_district)
+
+S:
+S:
+S:
+
+20. Find the name of spokesmen who do not speak for any district.
+
+Select name
+From spokesman
+Where Spokesman_ID not in (select Spokesman_ID from spokesman_district)
+
+S:
+S:
+S:
+
+21. Find the total and average population of the districts which have some spokesman.
+
+Select sum(population), avg(population)
+From district
+Where district_id in (select district_id from spokesman_district)
+
+S:
+S:
+S:
