@@ -78,7 +78,7 @@ on T1.Member_ID = T2.Member_ID
 SELECT T1.Name
 FROM member as T1 join round as T2
 on T1.Member_ID = T2.Member_ID
-Where Rank_in_Round < 3
+Where T2.Rank_in_Round > 3
 
 14. Show the names of members in ascending order of their rank in rounds.
 
