@@ -1,0 +1,137 @@
+count = 17
+
+1. How many residents has each property had?
+List property id and resident count.
+
+select T1.property_id, count(*)
+from properties as T1 join residents as T2
+on T1.property_id = T2.property_id
+group by T1.property_id
+
+
+
+2. What is the distinct service types that is provided
+to by the organization which has detail 'Denesik and Sons Party'?
+
+select distinct T1.service_type_code
+from services as T1 join organizations as T2
+on T1.organization_id = T2.organization_id
+where T2.organization_details = 'Denesik and Sons Party'
+
+
+
+
+3. How many services has each resident requested? List the redsident id, details and number, and order by the number descendingly.
+
+select T1.resident_id, T1.other_details, count(*)
+from Residents as T1 join Residents_Services as T2
+on T1.resident_id = T2.resident_id
+group by T1.resident_id
+order by count(*) desc
+
+4. What is the maximum number that a certain 
+service is provided? List the service id, details and number.
+
+select T1.service_id, T1.service_details,  count(*)
+from Services as T1 join Residents_Services as T2
+on T1.service_id = T2.service_id
+group by T1.service_id
+order by count(*) desc limit 1
+
+5. List the the id and type of the things, and the organization details that owns them.
+
+select T1.thing_id, T1.type_of_Thing_Code, T2.organization_details
+from Things as T1 join Organizations as T2
+on T1.organization_id = T2.organization_id
+
+6. What is the id and details of the customers that went through at least 3 events?
+
+select T1.customer_id, T1.customer_details
+from Customers as T1 join Customer_Events as T2
+on T1.customer_id = T2.customer_id
+group by T1.customer_id 
+having count(*) >= 3
+
+
+
+7. What is each customer's move in date, and the corresponding customer id and details?
+
+select T1.date_moved_in, T2.customer_id, T2.customer_details
+from Customers as T2 join Customer_Events as T1
+on T1.customer_id = T2.customer_id
+
+
+8. Which events has the notes number between one and three? List the event id, and the property id.
+
+
+select T1.Customer_Event_ID , T1.property_id
+from Customer_Events as T1 join Customer_Event_Notes as T2
+on T1.Customer_Event_ID = T2.Customer_Event_ID
+group by T1.customer_event_id
+having count(*) between 1 and 3
+
+
+9. What are the distinct id and type of things which has the status 'Close' or has a status record before the date '2017-06-19 02:59:21'
+
+select distinct T2.thing_id, T2.Type_of_Thing_Code
+from Timed_Status_of_Things as T1 join Things as T2
+on T1.thing_id = T2.thing_id
+where T1.Status_of_Thing_Code = 'Close' or T1.Date_and_Date < '2017-06-19 02:59:21'
+
+
+10. How many distinct locations has the things with service detail 'Unsatisfied' been located in?
+
+select count(distinct T2.Location_Code)
+from Things  as T1 join Timed_Locations_of_Things as T2
+on T1.thing_id = T2.thing_id
+where T1.service_details = 'Unsatisfied'
+
+
+
+11. How many different status types are there?
+
+select count( distinct(Status_of_Thing_Code))
+from Timed_Status_of_Things
+
+12. which organizations are not parent organization of others? List the organization id.
+
+
+select organization_id
+from organizations
+except
+select
+parent_organization_id
+from organizations
+
+
+13. When is the last day that any resident moved in?
+
+select max(date_moved_in)
+from  Residents
+
+
+14. What are the resident details containing the substring 'Miss'?
+
+select other_details
+from Residents
+where other_details like '%Miss%'
+
+
+15. List the customer event id and the corresponding move in date and property id.
+
+select customer_event_id, date_moved_in, property_id
+from customer_events
+
+16. How many customers did not have any event?
+
+select count(*)
+from customers
+where customer_id
+not in (
+select customer_id from customer_events
+)
+
+17. What are the distinct move in dates of the residents?
+
+select distinct date_moved_in
+from residents;
