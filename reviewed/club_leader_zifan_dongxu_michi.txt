@@ -1,0 +1,217 @@
+# Total = 17
+
+1. How many members are there?
+P: 
+
+SELECT count(*)
+FROM member
+
+S:
+S:
+S:
+
+
+2. List the names of members in ascending order of age.
+P: 
+
+SELECT Name
+FROM member
+order by Age ASC
+
+S:
+S:
+S:
+
+
+3. What are the names and nationalities of the members?
+P: 
+
+SELECT Name, Nationality
+FROM member
+
+S:
+S:
+S:
+
+
+4. List the names of members whose nationality is not "England".
+P: 
+
+SELECT Name, Nationality
+FROM member
+Where Nationality != "England"
+
+S:
+S:
+S:
+
+
+5. Show the names of members whose age is either 19 or 20.
+P: 
+
+SELECT Name
+FROM member
+Where Age = 19 or Age = 20
+
+S:
+S:
+S:
+
+
+6. What is the name of the oldest member?
+P: 
+
+SELECT Name
+FROM member
+order by Age DESC limit 1
+
+S:
+S:
+S:
+
+
+7. Show different nationalities along with the number of members of each nationality.
+P: 
+
+SELECT Nationality, COUNT(*)
+FROM member
+group by Nationality
+
+S:
+S:
+S:
+
+
+8. Please show the most common nationality of members.
+P: 
+
+SELECT Nationality, COUNT(*)
+FROM member
+group by Nationality
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+9. Show the nations that have at least two members.
+P: 
+
+SELECT Nationality
+FROM member
+group by Nationality
+Having COUNT(*) >= 2
+
+S:
+S:
+S:
+
+
+10. Show the names of club leaders and the names of clubs they joined.
+P: 
+
+SELECT T3.Name, T2.Club_Name
+FROM club_leader as T1 join club as T2
+ON T1.Club_ID = T2.Club_ID join member as T3
+on T1.Member_ID = T3.Member_ID
+
+S:
+S:
+S:
+
+
+11. Show the names of club leaders of clubs with overall ranking higher than 100.
+P: 
+
+SELECT T3.Name, T2.Club_Name
+FROM club_leader as T1 join club as T2
+ON T1.Club_ID = T2.Club_ID join member as T3
+on T1.Member_ID = T3.Member_ID
+Where T2.Overall_Ranking < 100
+
+S:
+S:
+S:
+
+
+12. Show the names of club leaders that joined their club before 2018.
+P: 
+
+SELECT T3.Name, T2.Club_Name
+FROM club_leader as T1 join club as T2
+ON T1.Club_ID = T2.Club_ID join member as T3
+on T1.Member_ID = T3.Member_ID
+Where T1.Year_Join < 2018
+
+S:
+S:
+S:
+
+
+13. Show the name of the leader of the club named "Houston".
+P: 
+
+SELECT T3.Name
+FROM club_leader as T1 join club as T2
+ON T1.Club_ID = T2.Club_ID join member as T3
+on T1.Member_ID = T3.Member_ID
+Where T2.Club_Name = "Houston"
+
+S:
+S:
+S:
+
+
+14. List the names of members that are not club leaders.
+P: 
+
+SELECT Name
+from member
+where Member_ID not in (SELECT Member_ID FROM club_leader)
+
+S:
+S:
+S:
+
+
+15. Show the nations that have both members older than 22 and members younger than 19.
+P: 
+
+SELECT Nationality
+FROM member
+Where Age > 22
+Intersect
+SELECT Nationality
+FROM member
+Where Age < 19
+
+S:
+S:
+S:
+
+
+16. What is the average age of all the club leaders?
+P: 
+
+select avg(T2.age)
+from club_leader as T1 join member as T2
+on T1.member_id = T2.member_id
+
+S:
+S:
+S:
+
+
+17. Which club name contains the string 'state'?
+P: 
+
+select club_name
+from club
+where club_name like '%state%'
+
+S:
+S:
+S:
+
+
