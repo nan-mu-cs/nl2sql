@@ -71,6 +71,7 @@ Select address
 From member
 Where Membership_card = 'Black'
 
+
 11. Show the shop addresses ordered by their opening year.
 
 Select address
