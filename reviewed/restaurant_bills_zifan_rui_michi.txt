@@ -1,0 +1,188 @@
+# Total = 15
+
+1. How many customers are there?
+P: Count the number of customers.
+
+SELECT count(*)
+FROM customer
+
+S:
+S:
+S:
+
+
+2. List the names of customers in ascending order of level of membership.
+P: Sort all the customers by the level of membership in ascending order, and return the customer names.
+
+SELECT Name
+FROM customer
+order by Level_of_Membership ASC
+
+S:
+S:
+S:
+
+
+3. What are the nationalities and card credits of customers?
+P: Find the nationality and card credit of each customer.
+
+SELECT Nationality, Card_Credit
+FROM customer
+
+S:
+S:
+S:
+
+
+4. Show the names of customers with nationality "England" or "Australia".
+P: Which customers have nationality "England" or "Australia"? Give me their names.
+
+SELECT Name
+FROM customer
+Where Nationality = "England" or Nationality = "Australia"
+
+S:
+S:
+S:
+
+
+5. What is the average card credit of customers with membership level higher than 1?
+P: Find the average card credit customers whose membership level is above 1.
+
+SELECT avg(Card_Credit)
+FROM customer
+Where Level_of_Membership > 1
+
+S:
+S:
+S:
+
+
+6. What is the card credit of the customer with the highest membership level?
+P: Find the customer with the highest membership level and return his or her card credit.
+
+SELECT Card_Credit
+FROM customer
+order by Level_of_Membership DESC limit 1
+
+S:
+S:
+S:
+
+
+7. Show different nationalities of customers, along with the number of customers of each nationality.
+P: How many customers are associated with each nationality? List the nationality and the number of customers.
+
+SELECT Nationality, COUNT(*)
+FROM customer
+group by Nationality
+
+S:
+S:
+S:
+
+
+8. Show the most common nationality of customers.
+P: Which nationality does the most customers have?
+
+SELECT Nationality
+FROM customer
+group by Nationality
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+9. Show the nations that have both customers with card credit smaller than 50 and customers with card credit bigger than 75.
+P: Which nations have both customers with card credit above 50 and customers with card credit below 75.
+
+SELECT Nationality
+from customer
+Where Card_Credit < 50
+Intersect
+SELECT Nationality
+from customer
+Where Card_Credit > 75
+
+S:
+S:
+S:
+
+
+10. Show the names of customers and names of dishes they order.
+P: For each order, return the customer name and the dish name.
+
+SELECT T1.Name, T2.Dish_Name
+FROM customer as T1 JOIN customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+
+S:
+S:
+S:
+
+
+11. Show the names of customers and names of dishes they order, in descending order of the quantity of dish.
+P: For each order, find the customer name and the dish name. Sort the result in descending order of the quantity of dish.
+
+SELECT T1.Name, T2.Dish_Name
+FROM customer as T1 JOIN customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+order by T2.Quantity desc
+
+S:
+S:
+S:
+
+
+12. Show each customer name and the total quantities of dishes ordered by that customer.
+P: What is the total quantities of dishes ordered by each customer? List the customer name and the quantity.
+
+SELECT T1.Name, sum(T2.Quantity)
+FROM customer as T1 join customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+group by T1.Name
+
+S:
+S:
+S:
+
+
+13. Show the customers with total quantity of order bigger than 1.
+P: Which customers have total order quantity greater than 1? Give me the customer names.
+
+SELECT T1.Name
+FROM customer as T1 join customer_order as T2
+on T1.Customer_ID = T2.Customer_ID
+group by T1.Name
+Having sum(T2.Quantity) > 1
+
+S:
+S:
+S:
+
+
+14. Show distinct managers of branches.
+P: Who are the distinct managers of branches?
+
+SELECT distinct Manager
+FROM branch
+
+S:
+S:
+S:
+
+
+15. List the names of customers that do not have any order.
+P: Which customers do not have any order? Give me the customer names.
+
+SELECT name
+from customer
+where Customer_ID not in (SELECT Customer_ID FROM customer_order)
+
+S:
+S:
+S:
+
+
