@@ -1,0 +1,240 @@
+
+1. Which assets have 2 parts and have less than 2 fault logs? List the asset id and company.
+
+
+select T1.asset_id, T1.asset_details
+from Assets as T1  JOIN Asset_Parts as T2
+on T1.asset_id = T2.asset_id
+group by T1.asset_id
+having count(*) = 2
+INTERSECT
+select T1.asset_id, T1.asset_details
+from Assets as T1 JOIN Fault_Log as T2
+on T1.asset_id = T2.asset_id
+group by T1.asset_id
+having count(*) < 2;
+
+
+2. How many assets does each maintenance contract contains? List the number and the contract id.
+
+select count(*), T1.maintenance_contract_id
+from Maintenance_Contracts as T1 JOIN Assets as T2
+on T1.maintenance_contract_id = T2.maintenance_contract_id
+group by T1.maintenance_contract_id;
+
+
+3. How many assets does each third party company supplies? List the count and the company id.
+
+select count(*), T1.company_id
+from Third_Party_Companies as T1 JOIN Assets as T2
+on T1.company_id = T2.supplier_company_id
+group by T1.company_id;
+
+
+5. What is the staff name and id of the staff who recorded fault log but have not contacted any visiting engineers?
+
+
+select T1.staff_name, T1.staff_id
+from Staff as T1 JOIN Fault_Log as T2
+on T1.staff_id = T2.recorded_by_staff_id
+EXCEPT
+select T1.staff_name, T1.staff_id
+from Staff as T1 JOIN Engineer_Visits as T2
+on T1.staff_id = T2.contact_staff_id
+
+6. Which engineer has visited for most times? Show the engineer id, first name and last name.
+
+
+select T1.engineer_id, T1.first_name, T1.last_name
+from Maintenance_Engineers as T1 JOIN Engineer_Visits as T2
+group by T1.engineer_id
+order by count(*) desc limit 1; 
+
+
+7. Which parts may have more than 2 kinds of faults? Show the part name and id.
+
+select T1.part_name, T1.part_id
+from Parts as T1 JOIN Part_Faults as T2
+on T1.part_id = T2.part_id
+group by T1.part_id
+having count(*) > 2;
+
+8. List all the engineer first name, last name, details and coresponding skill descriptions.
+
+select T1.first_name, T1.last_name, T1.other_details, T3.skill_description
+from Maintenance_Engineers as T1 JOIN Engineer_Skills as T2
+on T1.engineer_id = T2.engineer_id
+join Skills as T3
+on T2.skill_id = T3.skill_id;
+
+
+9. For all the faults of different parts, what are all the decriptions of the skills required to fix them? List the name of the faults and the skill description.
+
+select T1.fault_short_name, T3.skill_description
+from Part_Faults as T1 JOIN Skills_Required_To_Fix as T2
+on T1.part_fault_id = T2.part_fault_id
+JOIN Skills as T3
+on T2.skill_id = T3.skill_id;
+
+10. How many assets can each parts be used in? List the part name and the number.
+
+select T1.part_name, count(*)
+from Parts as T1 JOIN Asset_Parts as T2
+on T1.part_id = T2.part_id
+group by T1.part_name;
+
+13. What are all the fault descriptions and the status code of the all the faults recoreded in the logs?
+
+select T1.fault_description, T2.fault_status_code
+from Fault_Log as T1 JOIN Fault_Log_Parts as T2
+on T1.fault_log_entry_id = T2.fault_log_entry_id;
+
+14. How many engineer visits are required at most for a single fault log? List the number and the log entry id.
+
+select count(*), T1.fault_log_entry_id
+from Fault_Log as T1 JOIN Engineer_Visits as T2
+on T1.fault_log_entry_id = T2.fault_log_entry_id
+group by T1.fault_log_entry_id
+order by count(*) desc limit 1;
+
+15. What are all the distinct last names of all the engineers?
+
+select distinct last_name
+from Maintenance_Engineers;
+
+
+16. How many fault status codes are recoreded in the fault log parts table?
+
+select distinct fault_status_code
+from Fault_Log_Parts;
+
+
+17. Which engineers never visited to maintain the assets? List the engineer first name and last name.
+
+select first_name, last_name
+from Maintenance_Engineers
+where engineer_id not in (select engineer_id from Engineer_Visits)
+
+18. List the assets' name, details and make.
+
+select asset_id, asset_details, asset_make
+from Assets;
+
+19. When was the first asset acquired?
+
+select asset_acquired_date
+from Assets
+order by asset_acquired_date asc limit 1;
+
+
+20. Which king of part fault requires the most number of skills to fix? List part id and name.
+
+select T1.part_id, T1.part_name
+from Parts as T1 JOIN Part_Faults as T2
+on T1.part_id = T2.part_id
+JOIN Skills_Required_To_Fix as T3
+on T2.part_fault_id = T3.part_fault_id 
+group by T1.part_id
+order by count(*) desc limit 1;
+
+
+21. Which kind of part have the least kinds of faults? List the part name.
+
+select T1.part_name
+from Parts as T1 JOIN Part_Faults as T2
+on T1.part_id = T2.part_id
+group by T1.part_name
+order by count(*) asc limit 1;
+
+
+23. Among those engineers who have visited, which engineer makes the least number of visits? List the engineer id, first name and last name.
+
+
+select T1.engineer_id, T1.first_name, T1.last_name
+from Maintenance_Engineers as T1 JOIN Engineer_Visits as T2
+on T1.engineer_id = T2.engineer_id
+group by T1.engineer_id
+order by count(*) asc limit 1;
+
+
+24. Which staff have contacted which engineers? List the staff name and the engineer first name and last name.
+
+select T1.staff_name, T3.first_name, T3.last_name
+from Staff as T1 JOIN Engineer_Visits as T2
+on T1.staff_id = T2.contact_staff_id
+JOIN Maintenance_Engineers as T3
+on T2.engineer_id = T3.engineer_id;
+
+
+25. Which fault log included the most number of faulty parts? List the fault log id, description and record time.
+
+
+select T1.fault_log_entry_id, T1.fault_description, T1.fault_log_entry_datetime
+from Fault_Log as T1 JOIN Fault_Log_Parts as T2
+on T1.fault_log_entry_id = T2.fault_log_entry_id
+group by T1.fault_log_entry_id
+order by count(*) desc limit 1;
+
+
+27. Paraphrase: What are all the status description of the faults that each visiting engineer need to tackle with? List the fault status description and the visiting engineer first name and last name.
+
+
+28. Which is the most useful skill? That is, which skill is used in fixing the most number of faults? List the skill id and description.
+
+select T1.skill_id, T1.skill_description
+from Skills as T1 JOIN Skills_Required_To_Fix as T2
+on T1.skill_id = T2.skill_id
+group by T1.skill_id
+order by count(*) desc limit 1;
+
+29. What are all the distinct asset models?
+
+select distinct asset_model 
+from Assets;
+
+30. List the all the assets make, model, details by the disposed date ascendingly.
+
+select asset_make, asset_model, asset_details
+from Assets
+order by asset_disposed_date;
+
+
+31. Which part has the least chargeable amount? List the part id and amount.
+
+select part_id, chargeable_amount
+from Parts
+order by chargeable_amount asc limit 1;
+
+32. Which company started the earliest the maintenance contract? Show the company name.
+
+
+select T1.company_name
+from Third_Party_Companies as T1 JOIN Maintenance_Contracts as T2
+on T1.company_id = T2.maintenance_contract_company_id
+order by T2.contract_start_date asc limit 1;
+
+
+34. Which gender takes up the majority of the staff?
+
+select gender
+from staff
+group by gender
+order by count(*) desc limit 1;
+
+
+35. How many engineers does each staff contacted? List both the contact staff name and the engineer number.
+
+
+select T1.staff_name, count(*)
+from Staff as T1 JOIN Engineer_Visits as T2
+on T1.staff_id = T2.contact_staff_id
+group by T1.staff_name;
+
+
+36. Which assets did not incur any fault log? List the asset model.
+
+select asset_model
+from Assets
+where asset_id not in (select asset_id from Fault_Log);
+
+
