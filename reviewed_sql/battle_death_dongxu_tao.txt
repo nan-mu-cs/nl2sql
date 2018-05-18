@@ -1,0 +1,119 @@
+Total = 16
+
+1. How many ships ended up being 'Captured'?
+
+SELECT count(*)
+FROM ship
+where disposition_of_ship = 'Captured'
+
+2. List the name, tonnage order by name lexicographically descendingly.
+
+SELECT name, tonnage
+FROM ship
+order by name desc
+
+3. List the name, date and result of each battle?
+
+SELECT name, date
+FROM battle
+
+4. What is maximum, and minimum death toll caused each time?
+
+select max(killed), min(killed)
+from death
+
+5. What is the average number of injuries caused each time?
+
+select avg(injured)
+from death
+
+6. What are the death and injury situations caused by the ship with tonnage 't'?
+
+select T1.killed, T1.injured
+from death as T1 join ship as t2
+on T1.caused_by_ship_id = T2.id
+where T2.tonnage = 't'
+
+
+7. What are the name and results of the battles when the bulgarian commander is not 'Boril'
+
+SELECT name, result
+from battle
+Where bulgarian_commander != 'Boril'
+
+
+8. What are the distinct id and names of the battles that lost any 'Brig' type shipes?
+
+SELECT distinct T1.id, T1.name
+FROM battle as T1 join ship as T2
+on T1.id = T2.lost_in_battle
+where T2.ship_type = 'Brig'
+
+9. What are the id and name of the battles that lead to more than 10 persons killed in total.
+
+SELECT T1.id, T1.name
+FROM battle as T1 join ship as T2
+on T1.id = T2.lost_in_battle
+join death as T3
+on T2.id = T3.caused_by_ship_id
+group by T1.id
+having sum(T3.killed) > 10
+
+
+10. What is the ship id and name that caused most total injuries?
+
+SELECT T2.id, T2.name
+from death as T1 join ship as t2
+on T1.caused_by_ship_id = T2.id
+group by T2.id
+order by count(*) desc limit 1
+
+
+11. What are the distinct battle names which are between bulgarian commander 'Kaloyan' and latin commander 'Baldwin I'?
+
+select name
+from battle
+where bulgarian_commander = 'Kaloyan' and latin_commander = 'Baldwin I'
+
+12. How many different results are there for the battles?
+
+select count(distinct result)
+from battle
+
+13. How many battles did not lost any ship with tonnage '225'?
+
+select count(*)
+from battle
+where id not in (
+select lost_in_battle from ship
+where tonnage = '225'
+);
+
+14. List the name and date the battle that has lost the ship named 'Lettice' and the ship named 'HMS Atalanta'
+
+select T1.name, T1.date
+FROM battle as T1 join ship as T2
+on T1.id = T2.lost_in_battle
+where T2.name = 'Lettice'
+intersect
+select T1.name, T1.date
+FROM battle as T1 join ship as T2
+on T1.id = T2.lost_in_battle
+where T2.name = 'HMS Atalanta'
+
+15. Show names, results and bulgarian commanders of the battles which did not any ship at the location 'English Channel'.
+
+select name, result, bulgarian_commander
+from battle
+except
+select T1.name, T1.result, T1.bulgarian_commander
+FROM battle as T1 join ship as T2
+on T1.id = T2.lost_in_battle
+where T2.location = 'English Channel'
+
+16. What are the notes of the death events which has substring 'East'?
+
+select note
+from death
+where note like '%East%'
+
