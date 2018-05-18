@@ -1,0 +1,102 @@
+Total = 15
+
+1. How many technicians are there?
+
+SELECT count(*)
+FROM technician
+
+2. List the names of technicians in ascending order of age.
+
+SELECT Name
+FROM technician
+order by Age ASC
+
+3. What are the team and starting year of technicians?
+
+SELECT Team, Starting_Year
+FROM technician
+
+4. List the name of technicians whose team is not "NYY".
+
+SELECT Name
+FROM technician
+Where Team != "NYY"
+
+5. Show the name of technicians aged either 36 or 37
+
+SELECT Name
+FROM technician
+Where Age = 36 or Age = 37
+
+6. What is the starting year of the oldest technicians?
+
+SELECT Starting_Year
+FROM technician
+order by Age DESC limit 1
+
+7. Show different team of technicians and the number of technicians on each team.
+
+SELECT Team, COUNT(*)
+FROM technician
+group by Team
+ 
+8. Please show the team that has the most number of technicians.
+
+SELECT Team
+FROM technician
+group by Team
+order by COUNT(*) DESC limit 1
+
+9. Show the team that have at least two technicians.
+
+SELECT Team
+FROM technician
+group by Team
+Having COUNT(*) >= 2
+
+10. Show names of technicians and series of machines they are assigned to repair.
+
+SELECT T3.Name, T2.Machine_series
+FROM repair_assignment as T1 join machine as T2 
+ON T1.machine_id = T2.machine_id join technician as T3
+on T1.technician_ID = T3.technician_ID
+
+11. Show names of technicians in ascending order of quality rank of the machine they are assigned.
+
+SELECT T3.Name
+FROM repair_assignment as T1 join machine as T2 
+ON T1.machine_id = T2.machine_id join technician as T3
+on T1.technician_ID = T3.technician_ID
+order by T2.quality_rank
+
+12. Show names of technicians that are assigned to repair machines with value point more than 70
+
+SELECT T3.Name
+FROM repair_assignment as T1 join machine as T2 
+ON T1.machine_id = T2.machine_id join technician as T3
+on T1.technician_ID = T3.technician_ID
+Where T2.value_points > 70
+
+13. Show names of technicians and the number of machines they are assigned to repair
+
+SELECT T3.Name, COUNT(*)
+FROM repair_assignment as T1 join machine as T2 
+ON T1.machine_id = T2.machine_id join technician as T3
+on T1.technician_ID = T3.technician_ID
+group by T3.Name
+
+14. List the names of technicians that have not been assigned to repair machines.
+
+SELECT Name
+from technician
+where technician_id not in (SELECT technician_id FROM repair_assignment)
+
+15. Show the starting years shared by technicians from team "CLE" and "CWS".
+
+SELECT Starting_Year
+FROM technician
+Where Team = "CLE"
+Intersect 
+SELECT Starting_Year
+FROM technician
+Where Team = "CWS"
