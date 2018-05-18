@@ -1,0 +1,123 @@
+
+
+1. How many visitors below age 30 are there?
+
+Select count(*)
+From visitor
+Where age < 30
+
+2. List the names of the visitors whose membership level is higher than 4, order the results by the level from big to small.
+
+Select name
+From visitor
+Where Level_of_membership > 4
+Order by Level_of_membership desc
+
+3. What is the average age of the visitors whose membership level is not higher than 4.
+
+Select avg(age)
+From visitor
+Where Level_of_membership <= 4
+
+4. list and order the name and membership level of the visitors whose membership level is higher than 4 by their age from old to young.
+
+Select name, Level_of_membership
+From visitor
+Where Level_of_membership > 4
+Order by age desc
+
+5. find the id and name of the museum has the most number of staff?
+
+Select museum_id, name
+From museum
+Order by num_of_staff desc
+Limit 1
+
+6. Find the average number of staff working for the museums where were open before 2009.
+
+Select avg(num_of_staff)
+From museum
+Where open_year < 2009
+
+7. What are the opening year and staff number of the Plaza Museum?
+
+Select Num_of_Staff, Open_Year
+From museum
+Where name = 'Plaza Museum'
+
+8. find the name of museums where has more staff than the minimum staff number of all museums opened after 2010.
+
+Select name
+From museum
+Where num_of_staff > (select min(num_of_staff) from museum where open_year > 2010)
+
+9. find the name of visitors who visited some museums more than once.
+
+Select t1.name
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+Group by t2.visitor_id
+Having count(*) > 1
+
+10. What are the name and membership level of visitors who have spent the most amount of money in all museum tickets?
+
+Select t1.name, t1.Level_of_membership
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+Group by t2.visitor_id
+Order by sum(t2.Total_spent) desc
+Limit 1
+
+11. What is the name of the museum where has the most number times of visiting?
+
+Select t1.name
+From museum as t1 join visit as t2 on t1.Museum_ID = t2.Museum_ID
+group by t2.Museum_ID
+Order by count(*) desc
+Limit 1
+
+12. What is the name of the museum that had no any visitor yet?
+
+Select name
+From museum 
+Where Museum_ID not in (select museum_id from visit)
+
+13. Find the name and age of the visitor who bought the most number of tickets at one time.
+
+
+Select t1.name, t1.age
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+Order by t2.num_of_ticket desc
+Limit 1
+
+14. What are the average and maximum ticket number bought by all visitors?
+
+Select avg(num_of_ticket), max(num_of_ticket)
+From visit
+
+15. What is the total ticket spent of the visitors whose membership level is 1?
+
+Select sum(t2.Total_spent)
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+where t1.Level_of_membership = 1
+
+16. What is the name of the visitor who visited both museum opened before 2009 and museum opened after 2011?
+
+Select t1.name
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id join museum as t3 on t3.Museum_ID = t2.Museum_ID
+Where t3.open_year < 2009
+Intersect
+Select t1.name
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id join museum as t3 on t3.Museum_ID = t2.Museum_ID
+Where t3.open_year > 2011
+
+17. Find the number of visitors who did not visit any museum opened after 2010.
+
+Select count(*)
+From visitor
+Where id not in (select t2.visitor_id From museum as t1 join visit as t2 on t1.Museum_ID = t2.Museum_ID where t1.open_year > 2010)
+
+
+18. How many museums are open after 2013 or before 2008?
+
+Select count(*)
+From museum
+Where open_year > 2013 or open_year < 2008
