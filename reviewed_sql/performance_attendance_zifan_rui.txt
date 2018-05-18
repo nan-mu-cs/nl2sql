@@ -92,9 +92,9 @@ SELECT T2.Name, T3.Date
 FROM member_attendance as T1 JOIN member as T2
 on T1.Member_ID = T2.Member_ID join performance as T3
 on T1.Performance_ID = T3.Performance_ID
-order by T3.Attendance ASC
+order by T3.Attendance DESC
 
-15. List the names of members that do not attend any performance.
+15. List the names of members who do not attend any performance.
 
 SELECT Name
 from member
