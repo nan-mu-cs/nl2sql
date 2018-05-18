@@ -1,0 +1,116 @@
+Total = 17
+
+1. How many states are there?
+
+SELECT count(*)
+FROM area_code_state
+
+2. List the contestant number and name, order by contestant name descendingly.
+
+SELECT contestant_number, contestant_name
+FROM contestants
+order by contestant_name desc
+
+3. List the vote id, phone number and state of all the votes.
+
+SELECT vote_id, phone_number, state
+FROM votes
+
+4. What is the maximum, and minimum value of the area code?
+
+select max(area_code), min(area_code)
+from area_code_state
+
+
+5. What is last date of the votes from 'CA' state created?
+
+select max(created)
+from votes
+where state = 'CA'
+
+
+6. What are the names of the contestants whose name is not 'Jessie Alloway'
+
+SELECT contestant_name
+from contestants
+Where contestant_name != 'Jessie Alloway'
+
+
+7. What are the distinct states and create time of all the votes?
+
+SELECT distinct state, created
+FROM votes
+
+8. What are the contestant number and name of the contestants who had at least two votes?
+
+SELECT T1.contestant_number,T1.contestant_name
+FROM contestants as T1 join votes as T2
+on T1.contestant_number = T2.contestant_number
+group by T1.contestant_number
+having count(*) >= 2
+
+
+9. Of all the contestants that got voted, what is the contestant number and 
+name of the contestant that got least votes?
+
+SELECT T1.contestant_number,T1.contestant_name
+FROM contestants as T1 join votes as T2
+on T1.contestant_number = T2.contestant_number
+group by T1.contestant_number
+order by count(*) asc limit 1
+
+
+10. What are the number of votes that voted from state 'NY' or 'CA'?
+
+SELECT count(*)
+from votes
+where state = 'NY' or state = 'CA'
+
+
+11. How many contestants did not got voted here?
+
+select count(*)
+from contestants
+where contestant_number not in (
+select contestant_number from votes
+);
+
+12. What is the area code that most voters voted?
+
+
+select T1.area_code
+from area_code_state as T1 join votes as T2
+on T1.state = T2.state
+group by T1.area_code
+order by count(*) desc limit 1
+
+13. What are the create date, state and phone number of the votes that are 
+voted to the contestant called 'Tabatha Gehling'?
+
+select created, state, phone_number
+FROM contestants as T1 join votes as T2
+on T1.contestant_number = T2.contestant_number
+where T1.contestant_name = 'Tabatha Gehling'
+
+14. List the state's area code which voted both to 'Tabatha Gehling'
+and to 'Kelly Clauss' ?
+
+select T3.area_code
+FROM contestants as T1 join votes as T2
+on T1.contestant_number = T2.contestant_number
+join area_code_state as T3
+on T2.state = T3.state
+where T1.contestant_name = 'Tabatha Gehling'
+intersect
+select T3.area_code
+FROM contestants as T1 join votes as T2
+on T1.contestant_number = T2.contestant_number
+join area_code_state as T3
+on T2.state = T3.state
+where T1.contestant_name = 'Kelly Clauss'
+
+15. What are the names of the contestants that have substring 'Al'.
+
+select contestant_name
+from contestants
+where contestant_name like "%Al%"
