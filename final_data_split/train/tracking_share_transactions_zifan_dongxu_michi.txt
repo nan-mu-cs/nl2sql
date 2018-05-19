@@ -474,24 +474,12 @@ S:
 S:
 
 
-39. What are the dates of transactions with type code "SALE" and at least 100 share count, or with type code "PUR" and at least 200 share count?
+40. What are the dates of transactions with at least 100 share count or amount bigger than 100?
 P:
 
 select date_of_transaction
 From TRANSACTIONS
-WHERE (transaction_type_code = "SALE" AND share_count >= 100) or (transaction_type_code = "PUR" AND share_count >= 200)
-
-S:
-S:
-S:
-
-
-40. What are the dates of transactions with at least 100 share count and amount bigger than 100, or with at least 200 share count and amount bigger than 50?
-P:
-
-select date_of_transaction
-From TRANSACTIONS
-WHERE (share_count >= 100 AND amount_of_transaction >= 100) or (share_count >= 200 AND amount_of_transaction >= 50)
+WHERE share_count >= 100 or amount_of_transaction >= 100
 
 S:
 S:
