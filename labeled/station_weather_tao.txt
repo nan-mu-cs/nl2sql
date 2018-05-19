@@ -1,0 +1,99 @@
+1. list local authority and serivces provided all stations.
+
+select local_authority, services
+from station
+
+2. show all train number and names ordered by their time from early to late.
+
+select train_number, name
+from train
+order by time
+
+3. Give me the time and number of all trains that go to Chennai, show the result in the time order.
+
+select time, train_number
+from train
+where destination = 'Chennai'
+order by time
+
+4. How many trains do have 'Express' in their names?
+
+select count(*)
+from train
+where name LIKE "%Express%"
+
+5. Find the number and time of the train that goes from Chennai to Guruvayur.
+
+select train_number, time
+from train
+where origin = 'Chennai' and destination = 'Guruvayur'
+
+6. find number of trains starting from each origin.
+
+select origin, count(*)
+from train
+group by origin
+
+6. find name of trains starting from some places which more than one train as origin.
+
+select origin, name
+from train
+group by origin
+having count(*) > 1
+
+7. Find the name of the train whose route runs through most number of stations.
+
+select t1.name
+from train as t1 join route as t2 on t1.id = t2.train_id
+group by t2.train_id
+order by count(*) desc
+limit 1
+
+8. Find the number of the trains for each station, show staion network name and services too.
+
+select count(*), t1.network_name, t1.services
+from station as t1 join route as t2 on t1.id = t2.station_id
+group by t2.station_id
+
+9. what is the average high temperature for each day of week?
+
+select avg(high_temperature), day_of_week
+from weekly_weather
+group by day_of_week
+
+10. give me the maximum low temperature and average precipitation of the Amersham station.
+
+select max(t1.low_temperature), avg(t1.precipitation)
+from weekly_weather as t1 join station as t2 on t1.station_id = t2.id
+where network_name = "Amersham"
+
+11. Find number of trains that run through stations for local authority Chiltern.
+
+select t3.name, t3.time
+from station as t1 join route as t2 on t1.id = t2.station_id join train as t3 on t2.train_id = t3.id
+where t1.local_authority = "Chiltern"
+
+12. How many different services provided by all stations?
+
+select count(distinct service)
+from station
+
+13. Find the id and local authority of the station where has the highest average high temperature.
+
+select t2.id, t2.local_authority
+from weekly_weather as t1 join station as t2 on t1.station_id = t2.id
+group by t1.station_id
+order by avg(high_temperature) desc
+limit 1
+
+14. Find the id and wind speed of the station whose maximum precipitation is higher than 50.
+
+select t2.id, t2.local_authority
+from weekly_weather as t1 join station as t2 on t1.station_id = t2.id
+group by t1.station_id
+having max(precipitation) > 50
+
+15. show the lowest low temperature and highest wind speed in miles per hour in the record.
+
+select min(low_temperature), max(wind_speed_mph)
+from weekly_weather

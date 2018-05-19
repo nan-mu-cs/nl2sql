@@ -1,0 +1,98 @@
+1. How many addresses are there in country USA?
+
+select count(*)
+from addresses
+where country = 'USA'
+
+2. Show all distinct city in address record.
+
+select distinct city
+from addresses
+
+3. Show the state and the number of addresses in each state.
+
+select state_province_county, count(*)
+from addresses
+group by state_province_county
+
+4. Show names and phones of customers who do not have address information
+
+select customer_name, customer_phone
+from customers
+where customer_id not in (select customer_id from customer_address_history)
+
+5. Show the customer name who has most number of orders.
+
+select T1.customer_name
+from customers as T1 join customer_orders as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by count(*) desc limit 1
+
+6. Show product type codes which have at least two products.
+
+select product_type_code
+from products
+group by product_type_code
+having count(*) >= 2
+
+
+7. Show names of customers who have both orders in completed status and part status.
+
+select T1.customer_name
+from customers as T1 join customer_orders as T2 on T1.customer_id = T2.customer_id
+where T2.order_status_code = 'Completed'
+intersect
+select T1.customer_name
+from customers as T1 join customer_orders as T2 on T1.customer_id = T2.customer_id
+where T2.order_status_code = 'Part'
+
+8. Show name, phone, and payment method code for all customers in a descending order by customer number.
+
+select customer_name, customer_phone, payment_method_code
+from customers
+order by customer_number desc
+
+9. Show the product name and total order quantity for each product.
+
+select T1.product_name, sum(T2.order_quantity)
+from products as T1 join order_items as T2 on T1.product_id = T2.product_id
+group by T1.product_id
+
+10. Show the minimum, maximum, average price for all products.
+
+select min(product_price), max(product_price), avg(product_price)
+from products
+
+11. How many products have a price higher than the average?
+
+select count(*)
+from products
+where product_price > (select avg(product_price) from products)
+
+12. Show customer name, customer address city, and date from and date to for all customer address history.
+
+select T2.customer_name, T3.city, T1.date_from, T1.date_to
+from customer_address_history as T1 join customers as T2 on T1.customer_id = T2.customer_id join addresses as T3 on T1.address_id = T3.address_id
+
+
+13. Show the names of customers with Credit Card payment method and with more than 2 orders.
+
+select T1.customer_name
+from customers as T1 join customer_orders as T2 on T1.customer_id = T2.customer_id
+where T1.payment_method_code = 'Credit Card'
+group by T1.customer_id
+having count(*) > 2
+
+
+14. What is the name and phone for customer with most ordered product quantity?
+
+select  T1.customer_name, T1.customer_phone
+from customers as T1 join customer_orders as T2 on T1.customer_id = T2.customer_id join order_items as T3 on T3.order_id = T2.order_id
+group by T1.customer_id
+order by sum(T3.order_quantity) desc limit 1
+
+15. Show product type and name for products with price higher than 1000 or lower than 500.
+
+select product_type_code, product_name
+from products
+where product_price > 1000 OR product_price < 500
