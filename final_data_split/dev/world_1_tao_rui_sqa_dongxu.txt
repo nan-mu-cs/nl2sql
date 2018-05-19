@@ -1245,10 +1245,9 @@ limit 1
 58. What is the language spoken by the largest percentage of people in each country?
 P: What are the country codes of the different countries, and what are the languages spoken by the greatest percentage of people for each?
 
-SELECT Language, CountryCode
+SELECT Language, CountryCode, max(Percentage)
 from countrylanguage
 group by CountryCode
-having Percentage = max(Percentage)
 
 S: What languages are spoken in each country?
 S: For each country, which is spoken by the largest percentage of the population?
@@ -1257,20 +1256,18 @@ SELECT Language, CountryCode
 from countrylanguage
 group by CountryCode
 
-SELECT Language, CountryCode
+SELECT Language, CountryCode, max(Percentage)
 from countrylanguage
 group by CountryCode
-having Percentage = max(Percentage)
 
 59. What is the total number of countries where Spanish is spoken by the largest percentage of people?
 P: Count the number of countries for which Spanish is the predominantly spoken language.
 
-select count(*)
+select count(*),  max(Percentage)
 from (SELECT CountryCode
 from countrylanguage
 where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage))
 
 S: What are the country codes for countries where Spanish is spoken?
 S: Of those countries, which have Spanish as the dominant language?
@@ -1281,26 +1278,24 @@ from countrylanguage
 where Language = "Spanish"
 
 
-SELECT CountryCode
+SELECT CountryCode,  max(Percentage)
 from countrylanguage
 where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage)
 
-select count(*)
+select count(*),  max(Percentage)
 from (SELECT CountryCode
 from countrylanguage
 where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage))
 
 60.  What are the codes of countries where Spanish is spoken by the largest percentage of people?
 P: Return the codes of countries for which Spanish is the predominantly spoken language.
 
-SELECT CountryCode
+SELECT CountryCode, max(Percentage)
 from countrylanguage
+where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage) and Language = "Spanish"
 
 S: What are all the country codes for countries where Spanish is spoken?
 S: Of those, what are the country codes for countries that have Spanish as the dominant language?
@@ -1309,7 +1304,7 @@ SELECT CountryCode
 from countrylanguage
 where Language = "Spanish"
 
-SELECT CountryCode
+SELECT CountryCode, max(Percentage)
 from countrylanguage
+where Language = "Spanish"
 group by CountryCode
-having Percentage = max(Percentage) and Language = "Spanish"
