@@ -108,8 +108,8 @@ def get_schemas_from_json(fpath):
         table_names_original = db['table_names_original']
         tables[db_id] = {'column_names_original': column_names_original, 'table_names_original': table_names_original}
         for i, tabn in enumerate(table_names_original):
-            table = str(tabn.lower())
-            cols = [str(col.lower()) for td, col in column_names_original if td == i]
+            table = str(tabn.encode("utf8").lower())
+            cols = [str(col.encode("utf8").lower()) for td, col in column_names_original if td == i]
             schema[table] = cols
         schemas[db_id] = schema
 
@@ -169,16 +169,17 @@ def parse_file_and_sql(filepath, schema, db_id):
 	    sql = re.sub(r"(<=|>=|=|<|>|,)",r" \1 ",sql)
 #			sql = sql.replace("\"","'")
 	    sql = re.sub(r"(T\d+\.)\s",r"\1",sql)
-	    if len(questions) != 2:
-		print '\n-----------------------------wrong indexing!-----------------------------------\n'
-		print 'questions: ', questions
-		sys.exit()
+	    #if len(questions) != 2:
+	    #	print '\n-----------------------------wrong indexing!-----------------------------------\n'
+	    #	print 'questions: ', questions
+	    #	sys.exit()
 	    for ix, q in enumerate(questions):
-                q_toks = word_tokenize(q)
-                query_toks = word_tokenize(sql)
-                query_toks_no_value = strip_query(sql)
-                sql_label = None
                 try:
+                    q_toks = word_tokenize(q.encode("utf8"))
+                    query_toks = word_tokenize(sql)
+                    query_toks_no_value = strip_query(sql)
+                    sql_label = None
+
                     sql_label = get_sql(schema, sql)
                     #print("query: {}".format(sql))
                     #print("\ndb_id: {}".format(db_id))

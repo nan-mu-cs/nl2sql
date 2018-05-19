@@ -6,6 +6,7 @@ from os import listdir, makedirs
 from os.path import isfile, isdir, join, split, exists, splitext
 from nltk import word_tokenize, tokenize
 
+EXIST = {"atis", "geo", "advising", "yelp", "restaurants", "imdb", "academic"}
 
 def convert_fk_index(data):
     fk_holder = []
@@ -26,7 +27,7 @@ def convert_fk_index(data):
         except:
             print "table_names_original: ", data['table_names_original']
             print "finding tab name: ", tn, ref_tn
-
+            sys.exit()
     return fk_holder
 
 
@@ -88,11 +89,16 @@ if __name__ == '__main__':
     output_file = sys.argv[2]
     ex_tab_file = sys.argv[3]
 
+    all_fs = [df for df in listdir(input_dir) if exists(join(input_dir, df, df+'.sqlite'))]
     with open(ex_tab_file) as f:
         ex_tabs = json.load(f)
+        #for tab in ex_tabs:
+        #    tab["foreign_keys"] = convert_fk_index(tab)
         for tab in ex_tabs:
-            tab["foreign_keys"] = convert_fk_index(tab)
-        ex_tabs = {tab["db_id"]: tab for tab in ex_tabs}
+            if not tab["db_id"] in all_fs or tab["db_id"] in EXIST:
+                print "removing tables: ", tab["db_id"]
+        ex_tabs = {tab["db_id"]: tab for tab in ex_tabs if tab["db_id"] in all_fs and not tab["db_id"] in EXIST}
+        print "precessed file num: ", len(ex_tabs)
     not_fs = [df for df in listdir(input_dir) if not exists(join(input_dir, df, df+'.sqlite'))]
     for d in not_fs:
         print "no sqlite file found in: ", d
@@ -107,5 +113,6 @@ if __name__ == '__main__':
         print '\nreading new db: ', df
         table = dump_db_json_schema(db, df)
         tables.append(table)
+    print "final db num: ", len(tables)
     with open(output_file, 'wt') as out:
         json.dump(tables, out, sort_keys=True, indent=2, separators=(',', ': '))

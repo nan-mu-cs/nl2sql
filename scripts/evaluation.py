@@ -21,6 +21,8 @@
 
 import json
 import sqlite3
+from collections import defaultdict
+from process_sql import get_sql
 
 CLAUSE_KEYWORDS = ('select', 'from', 'where', 'group', 'order', 'limit', 'intersect', 'union', 'except')
 JOIN_KEYWORDS = ('join', 'on', 'as')
@@ -42,6 +44,64 @@ HARDNESS = {
     "component1": ('where', 'group', 'order', 'limit', 'join', 'or', 'like'),
     "component2": ('except', 'union', 'intersect')
 }
+
+class Schema:
+    """
+    Simple schema which maps table&column to a unique identifier
+    """
+    def __init__(self, schema, table):
+        self._schema = schema
+        self._table = table
+        self._idMap = self._map(self._schema, self._table)
+
+    @property
+    def schema(self):
+        return self._schema
+
+    @property
+    def idMap(self):
+        return self._idMap
+
+    def _map(self, schema, table):
+        column_names_original = table['column_names_original']
+        table_names_original = table['table_names_original']
+        #print 'column_names_original: ', column_names_original
+        #print 'table_names_original: ', table_names_original
+        for i, (tab_id, col) in enumerate(column_names_original):
+            if tab_id == -1:
+                idMap = {'*': i}
+            else:
+                key = table_names_original[tab_id].lower()
+                val = col.lower()
+                idMap[key + "." + val] = i
+
+        for i, tab in enumerate(table_names_original):
+            key = tab.lower()
+            idMap[key] = i
+
+        return idMap
+
+
+def get_schemas_from_json(fpath):
+    with open(fpath) as f:
+        data = json.load(f)
+    db_names = [db['db_id'] for db in data]
+
+    tables = {}
+    schemas = {}
+    for db in data:
+        db_id = db['db_id']
+        schema = {} #{'table': [col.lower, ..., ]} * -> __all__
+        column_names_original = db['column_names_original']
+        table_names_original = db['table_names_original']
+        tables[db_id] = {'column_names_original': column_names_original, 'table_names_original': table_names_original}
+        for i, tabn in enumerate(table_names_original):
+            table = str(tabn.lower())
+            cols = [str(col.lower()) for td, col in column_names_original if td == i]
+            schema[table] = cols
+        schemas[db_id] = schema
+
+    return schemas, db_names, tables
 
 
 def condition_has_or(conds):
@@ -286,16 +346,18 @@ def count_component1(sql):
         count += 1
     if len(sql['orderBy']) > 0:
         count += 1
+    if len(sql['having']) > 0:
+        count += 1
     if sql['limit'] is not None:
         count += 1
-    if len(sql['where']) > 0:  # JOIN
-        count += len(sql['where']) - 1
+    if len(sql['from']['table_units']) > 0:  # JOIN
+        count += len(sql['from']['table_units']) - 1
 
     ao = sql['from']['conds'][1::2] + sql['where'][1::2] + sql['having'][1::2]
     count += len([token for token in ao if token == 'or'])
     cond_units = sql['from']['conds'][::2] + sql['where'][::2] + sql['having'][::2]
     count += len([cond_unit for cond_unit in cond_units if cond_unit[1] == WHERE_OPS.index('like')])
-
+    count += len([cond_unit for cond_unit in cond_units if cond_unit[1] == WHERE_OPS.index('between')])
     return count
 
 
@@ -342,10 +404,10 @@ class Evaluator:
         count_comp2_ = count_component2(sql)
         count_others_ = count_others(sql)
 
-        if count_comp1_ <= 1 and count_others_ == 0:
+        if count_comp1_ <= 1 and count_others_ == 0 and count_comp2_ == 0:
             return "easy"
-        elif (count_others_ <= 2 and count_comp1_ <= 1) or \
-            (count_comp1_ <= 2 and count_others_ < 2):
+        elif (count_others_ <= 2 and count_comp1_ <= 1 and count_comp2_ == 0) or \
+            (count_comp1_ <= 2 and count_others_ < 2 and count_comp2_ == 0):
             return "medium"
         elif (count_others_ > 2 and count_comp1_ <= 2 and count_comp2_ == 0) or \
             (2 < count_comp1_ <= 3 and count_others_ <= 2 and count_comp2_ == 0) or \
@@ -408,7 +470,7 @@ class Evaluator:
 
 if __name__ == '__main__':
     evaluator = Evaluator()
-    with open("../data/train.json") as f:
+    with open("../data/dev.json") as f:
         data = json.load(f)
 
     # evaluate hardness
@@ -418,13 +480,29 @@ if __name__ == '__main__':
         'hard': 0,
         'extra': 0
     }
+
+    sql_hardness = defaultdict(list)
     for entry in data:
         hardness = evaluator.eval_hardness(entry['sql'])
+        sql_hardness[hardness].append(entry["query"])
         count[hardness] += 1
-    print count
-    for entry in data:
-        if entry['query'] == "SELECT count(*) FROM products WHERE price >= 180":
-            score = evaluator.eval_exact_match(entry['sql'], entry['sql'])
-            if score != 1:
-                print entry['sql']
 
+    for key, sqls in sql_hardness.items():
+         print "\n-------------------------{}-----------------------".format(key)
+         for sql in sqls:
+             print sql
+    # print count
+
+    schemas, db_names, tables = get_schemas_from_json("../data/tables.json")
+    for entry in data:
+        db_id = entry["db_id"]
+        query = entry["query"]
+        schema = schemas[db_id]
+        table = tables[db_id]
+        schema = Schema(schema, table)
+        sql_label = get_sql(schema, query)
+        score = evaluator.eval_exact_match(sql_label, entry['sql'])
+        #if score != 1:
+        #    print "\n---------------------"
+        #    print sql_label
+        #    print entry['sql']
