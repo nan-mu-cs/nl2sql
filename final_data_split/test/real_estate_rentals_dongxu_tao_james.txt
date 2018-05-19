@@ -270,7 +270,7 @@ from Users as T1 JOIN User_Searches as T2 on T1.user_id = T2.user_id
 group by T1.user_id
 having count(*) <= 2
 INTERSECT
-select T1.last_name, T1.user_id
-from Users as T1 JOIN Properties as T2 on T1.user_id = T2.owner_user_id
-group by T1.user_id
+select T3.last_name, T3.user_id
+from Users as T3 JOIN Properties as T4 on T3.user_id = T4.owner_user_id
+group by T3.user_id
 having count(*) >= 2;
