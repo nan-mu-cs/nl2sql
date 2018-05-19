@@ -220,7 +220,7 @@ S:
 P: 
 
 select cyclist_id, count(*)
-FROM cyclists_own_bikes cyclist_id
+FROM cyclists_own_bikes
 group by cyclist_id
 order by cyclist_id
 
