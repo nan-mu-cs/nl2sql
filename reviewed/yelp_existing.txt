@@ -56,7 +56,7 @@ SELECT t4.text FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.bu
 
 15. find the number of reviews written for " Cafe Zinho " restaurant in Texas
 
-SELECT COUNT ( DISTINCT ( t3.text ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id WHERE t1.name = "Cafe Zinho" AND t1.state = "Texas" AND t2.category_name = "restaurant";
+SELECT COUNT ( DISTINCT t3.text ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id WHERE t1.name = "Cafe Zinho" AND t1.state = "Texas" AND t2.category_name = "restaurant";
 
 16. List all 5 star Italian restaurant
 
@@ -186,11 +186,11 @@ P: How many escape games exist in Madison
 P: What is the number of escape games in " Madison " ?
 P: How many escape games are there in Madison ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Madison" AND t2.category_name = "escape games";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Madison" AND t2.category_name = "escape games";
 
 46. find the number of restaurant rated more than 3.5
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.rating > 3.5 AND t2.category_name = "restaurant";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.rating > 3.5 AND t2.category_name = "restaurant";
 
 47. find the total checkins in Moroccan restaurant in " Los Angeles "
 
@@ -210,7 +210,7 @@ SELECT t1.state , SUM ( t4.count ) FROM category AS t2 JOIN business AS t1 ON t2
 
 51. How many reviews has Niloofar written in 2015
 
-SELECT COUNT ( DISTINCT ( t1.text ) ) FROM user AS t2 JOIN review AS t1 ON t2.user_id = t1.user_id WHERE t1.year = 2015 AND t2.name = "Niloofar";
+SELECT COUNT ( DISTINCT t1.text ) FROM user AS t2 JOIN review AS t1 ON t2.user_id = t1.user_id WHERE t1.year = 2015 AND t2.name = "Niloofar";
 
 52. what is the average rating given in Michelle reviews
 
@@ -222,15 +222,15 @@ SELECT t2.count FROM checkin AS t2 JOIN business AS t1 ON t2.business_id = t1.bu
 
 54. how many users reviewed " Sushi Too " in Pittsburgh
 
-SELECT COUNT ( DISTINCT ( t3.name ) ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t1.city = "Pittsburgh" AND t1.name = "Sushi Too";
+SELECT COUNT ( DISTINCT t3.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t1.city = "Pittsburgh" AND t1.name = "Sushi Too";
 
 55. What is the number of restaurant in Pittsburgh rated 4.5
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Pittsburgh" AND t1.rating = 4.5 AND t2.category_name = "restaurant";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Pittsburgh" AND t1.rating = 4.5 AND t2.category_name = "restaurant";
 
 56. How many tips have been written in 2015
 
-SELECT COUNT ( DISTINCT ( text ) ) FROM tip WHERE year = 2015;
+SELECT COUNT ( DISTINCT text ) FROM tip WHERE year = 2015;
 
 57. What is the total likes on tips from Niloofar
 
@@ -247,36 +247,36 @@ SELECT SUM ( t2.likes ) FROM tip AS t2 JOIN business AS t1 ON t2.business_id = t
 60. How many tips has Michelle written in 2010
 P: Return me the number of tips that are written by Michelle in 2010 .
 
-SELECT COUNT ( DISTINCT ( t1.text ) ) FROM user AS t2 JOIN tip AS t1 ON t2.user_id = t1.user_id WHERE t1.year = 2010 AND t2.name = "Michelle";
+SELECT COUNT ( DISTINCT t1.text ) FROM user AS t2 JOIN tip AS t1 ON t2.user_id = t1.user_id WHERE t1.year = 2010 AND t2.name = "Michelle";
 
 61. How many tips has Michelle written in April
 
-SELECT COUNT ( DISTINCT ( t1.text ) ) FROM user AS t2 JOIN tip AS t1 ON t2.user_id = t1.user_id WHERE t1.month = "April" AND t2.name = "Michelle";
+SELECT COUNT ( DISTINCT t1.text ) FROM user AS t2 JOIN tip AS t1 ON t2.user_id = t1.user_id WHERE t1.month = "April" AND t2.name = "Michelle";
 
 62. what is the number of restaurant in Texas
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.state = "Texas" AND t2.category_name = "restaurant";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.state = "Texas" AND t2.category_name = "restaurant";
 
 63. How many Bars in " Dallas " have a rating above 3.5 ?
 P: How many Bars in Dallas have a rating above 3.5 ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Dallas" AND t1.rating > 3.5 AND t2.category_name = "Bars";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Dallas" AND t1.rating > 3.5 AND t2.category_name = "Bars";
 
 64. How many people reviewed the restaurant " Texas de Brazil " in Dallas Texas ?
 
-SELECT COUNT ( DISTINCT ( t4.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id JOIN user AS t4 ON t4.user_id = t3.user_id WHERE t1.city = "Dallas" AND t1.name = "Texas de Brazil" AND t1.state = "Texas" AND t2.category_name = "restaurant";
+SELECT COUNT ( DISTINCT t4.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id JOIN user AS t4 ON t4.user_id = t3.user_id WHERE t1.city = "Dallas" AND t1.name = "Texas de Brazil" AND t1.state = "Texas" AND t2.category_name = "restaurant";
 
 65. How many people reviewed " Bistro Di Napoli " in 2015 ?
 
-SELECT COUNT ( DISTINCT ( t3.name ) ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t1.name = "Bistro Di Napoli" AND t2.year = 2015;
+SELECT COUNT ( DISTINCT t3.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t1.name = "Bistro Di Napoli" AND t2.year = 2015;
 
 66. How many restaurant are there in the Hazelwood district of Dallas ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t3 JOIN business AS t1 ON t3.business_id = t1.business_id JOIN neighbourhood AS t2 ON t2.business_id = t1.business_id WHERE t1.city = "Dallas" AND t3.category_name = "restaurant" AND t2.neighbourhood_name = "Hazelwood";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t3 JOIN business AS t1 ON t3.business_id = t1.business_id JOIN neighbourhood AS t2 ON t2.business_id = t1.business_id WHERE t1.city = "Dallas" AND t3.category_name = "restaurant" AND t2.neighbourhood_name = "Hazelwood";
 
 67. How many Starbucks are there in Dallas Texas ?
 
-SELECT COUNT ( DISTINCT ( business_id ) ) FROM business WHERE city = "Dallas" AND name = "Starbucks" AND state = "Texas";
+SELECT COUNT ( DISTINCT business_id ) FROM business WHERE city = "Dallas" AND name = "Starbucks" AND state = "Texas";
 
 68. How many reviews does " Acacia Cafe " have ?
 
@@ -288,35 +288,35 @@ SELECT AVG ( t3.count ) , t3.day FROM category AS t2 JOIN business AS t1 ON t2.b
 
 70. How many businesses are there in the " Stone Meadows " neighbourhood in Madison ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM neighbourhood AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Madison" AND t2.neighbourhood_name = "Stone Meadows";
+SELECT COUNT ( DISTINCT t1.name ) FROM neighbourhood AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t1.city = "Madison" AND t2.neighbourhood_name = "Stone Meadows";
 
 71. What is the number of businesses user Michelle reviews per month ?
 
-SELECT COUNT ( DISTINCT ( t2.text ) ) , t2.month FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id , user AS t3 WHERE t3.name = "Michelle" GROUP BY t2.month;
+SELECT COUNT ( DISTINCT t2.text ) , t2.month FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id , user AS t3 WHERE t3.name = "Michelle" GROUP BY t2.month;
 
 72. How many reviews has Adrienne written ?
 
-SELECT COUNT ( DISTINCT ( t1.text ) ) FROM user AS t2 JOIN review AS t1 ON t2.user_id = t1.user_id WHERE t2.name = "Adrienne";
+SELECT COUNT ( DISTINCT t1.text ) FROM user AS t2 JOIN review AS t1 ON t2.user_id = t1.user_id WHERE t2.name = "Adrienne";
 
 73. How many reviews has Michelle written in March 2014 ?
 
-SELECT COUNT ( DISTINCT ( t1.text ) ) FROM user AS t2 JOIN review AS t1 ON t2.user_id = t1.user_id WHERE t1.month = "March" AND t1.year = 2014 AND t2.name = "Michelle";
+SELECT COUNT ( DISTINCT t1.text ) FROM user AS t2 JOIN review AS t1 ON t2.user_id = t1.user_id WHERE t1.month = "March" AND t1.year = 2014 AND t2.name = "Michelle";
 
 74. How many businesses has Michelle reviewed in 2010 ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t2.year = 2010 AND t3.name = "Michelle";
+SELECT COUNT ( DISTINCT t1.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t2.year = 2010 AND t3.name = "Michelle";
 
 75. How many businesses in " San Diego " has Christine reviewed in 2010 ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t1.city = "San Diego" AND t2.year = 2010 AND t3.name = "Christine";
+SELECT COUNT ( DISTINCT t1.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN user AS t3 ON t3.user_id = t2.user_id WHERE t1.city = "San Diego" AND t2.year = 2010 AND t3.name = "Christine";
 
 76. How many Target are there in " Los Angeles " ?
 
-SELECT COUNT ( DISTINCT ( business_id ) ) FROM business WHERE city = "Los Angeles" AND name = "Target";
+SELECT COUNT ( DISTINCT business_id ) FROM business WHERE city = "Los Angeles" AND name = "Target";
 
 77. How many users have reviewed Irish Pub in Dallas ?
 
-SELECT COUNT ( DISTINCT ( t4.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id JOIN user AS t4 ON t4.user_id = t3.user_id WHERE t1.city = "Dallas" AND t2.category_name = "Irish Pub";
+SELECT COUNT ( DISTINCT t4.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id JOIN user AS t4 ON t4.user_id = t3.user_id WHERE t1.city = "Dallas" AND t2.category_name = "Irish Pub";
 
 78. What is the average rating of reviews written in year 2014 ?
 
@@ -324,27 +324,27 @@ SELECT AVG ( rating ) FROM review WHERE year = 2014;
 
 79. How many people reviewed restaurant " Vintner Grill " in 2010 ?
 
-SELECT COUNT ( DISTINCT ( t4.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id JOIN user AS t4 ON t4.user_id = t3.user_id WHERE t1.name = "Vintner Grill" AND t2.category_name = "category_category_name0" AND t3.year = 2010;
+SELECT COUNT ( DISTINCT t4.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN review AS t3 ON t3.business_id = t1.business_id JOIN user AS t4 ON t4.user_id = t3.user_id WHERE t1.name = "Vintner Grill" AND t2.category_name = "category_category_name0" AND t3.year = 2010;
 
 80. Find the number of reviews on businesses located in " South Summerlin " neighbourhood
 
-SELECT COUNT ( DISTINCT ( t3.text ) ) FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id = t2.business_id JOIN review AS t3 ON t3.business_id = t2.business_id WHERE t1.neighbourhood_name = "South Summerlin";
+SELECT COUNT ( DISTINCT t3.text ) FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id = t2.business_id JOIN review AS t3 ON t3.business_id = t2.business_id WHERE t1.neighbourhood_name = "South Summerlin";
 
 81. Find the number of users called Michelle
 
-SELECT COUNT ( DISTINCT ( name ) ) FROM user WHERE name = "Michelle";
+SELECT COUNT ( DISTINCT name ) FROM user WHERE name = "Michelle";
 
 82. Return me the number of businesses that are restaurant .
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t2.category_name = "restaurant";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t2.category_name = "restaurant";
 
 83. Return me the number of cities that has " Panda Express " .
 
-SELECT COUNT ( DISTINCT ( city ) ) FROM business WHERE name = "Panda Express";
+SELECT COUNT ( DISTINCT city ) FROM business WHERE name = "Panda Express";
 
 84. Return me the number of tips that are written by Michelle .
 
-SELECT COUNT ( DISTINCT ( t1.text ) ) FROM user AS t2 JOIN tip AS t1 ON t2.user_id = t1.user_id WHERE t2.name = "Michelle";
+SELECT COUNT ( DISTINCT t1.text ) FROM user AS t2 JOIN tip AS t1 ON t2.user_id = t1.user_id WHERE t2.name = "Michelle";
 
 85. Find the total checkins in " Brighton Heights " neighbourhood
 
@@ -356,15 +356,15 @@ SELECT SUM ( COUNT ) FROM checkin WHERE day = "Sunday";
 
 87. Find the total number of reviews written in March
 
-SELECT COUNT ( DISTINCT ( text ) ) FROM review WHERE month = "March";
+SELECT COUNT ( DISTINCT text ) FROM review WHERE month = "March";
 
 88. Find the number of tips written in each month
 
-SELECT COUNT ( DISTINCT ( text ) ) , month FROM tip GROUP BY month;
+SELECT COUNT ( DISTINCT text ) , month FROM tip GROUP BY month;
 
 89. How many neighbourhoods have a business with rating 5 in Madison ?
 
-SELECT COUNT ( DISTINCT ( t1.neighbourhood_name ) ) FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id = t2.business_id WHERE t2.city = "Madison" AND t2.rating = 5;
+SELECT COUNT ( DISTINCT t1.neighbourhood_name ) FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id = t2.business_id WHERE t2.city = "Madison" AND t2.rating = 5;
 
 90. Give me all the Moroccan restaurant in Texas
 
@@ -376,7 +376,7 @@ SELECT t1.name FROM checkin AS t2 JOIN business AS t1 ON t2.business_id = t1.bus
 
 92. which neighbourhood has the most number of businesses in Madison
 
-SELECT t1.neighbourhood_name FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id = t2.business_id WHERE t2.city = "Madison" GROUP BY t1.neighbourhood_name ORDER BY COUNT ( DISTINCT ( t2.name ) ) DESC LIMIT 1;
+SELECT t1.neighbourhood_name FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id = t2.business_id WHERE t2.city = "Madison" GROUP BY t1.neighbourhood_name ORDER BY COUNT ( DISTINCT t2.name ) DESC LIMIT 1;
 
 93. Find all Mexican restaurant in Dallas with at least 3.5 stars
 P: Find all Mexican restaurant in Dallas with a rating above 3.5
@@ -397,7 +397,7 @@ SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.bu
 
 97. How many Egyptian restaurant are there in Edinburgh ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN category AS t3 ON t3.business_id = t1.business_id WHERE t1.city = "Edinburgh" AND t2.category_name = "restaurant" AND t3.category_name = "Egyptian";
+SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id JOIN category AS t3 ON t3.business_id = t1.business_id WHERE t1.city = "Edinburgh" AND t2.category_name = "restaurant" AND t3.category_name = "Egyptian";
 
 98. Find users whose average review rating is below 3
 
@@ -405,8 +405,8 @@ SELECT t2.name FROM user AS t2 JOIN review AS t1 ON t2.user_id = t1.user_id GROU
 
 99. Find the business with the most number of reviews in April
 
-SELECT t1.name FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t2.month = "April" GROUP BY t1.name ORDER BY COUNT ( DISTINCT ( t2.text ) ) DESC LIMIT 1;
+SELECT t1.name FROM review AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id WHERE t2.month = "April" GROUP BY t1.name ORDER BY COUNT ( DISTINCT t2.text ) DESC LIMIT 1;
 
 100. Find the business which has the most number of categories
 
-SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id GROUP BY t1.name ORDER BY COUNT ( DISTINCT ( t2.category_name ) ) DESC LIMIT 1;
+SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id = t1.business_id GROUP BY t1.name ORDER BY COUNT ( DISTINCT t2.category_name ) DESC LIMIT 1;

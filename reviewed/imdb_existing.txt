@@ -218,76 +218,76 @@ SELECT t3.name FROM director AS t3 JOIN directed_by AS t2 ON t3.did = t2.did JOI
 
 49. What is the number of movies in which " Jennifer Aniston " acted after 2010 ?
 
-SELECT COUNT ( DISTINCT ( t2.title ) ) FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Jennifer Aniston" AND t2.release_year > 2010;
+SELECT COUNT ( DISTINCT t2.title  ) FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Jennifer Aniston" AND t2.release_year > 2010;
 
 50. What is the number of actors in the movie " Saving Private Ryan " ?
 P: How many actors are in the movie " Saving Private Ryan " ?
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM cast AS t2 JOIN actor AS t1 ON t2.aid = t1.aid JOIN movie AS t3 ON t3.mid = t2.msid WHERE t3.title = "Saving Private Ryan";
+SELECT COUNT ( DISTINCT t1.name  ) FROM cast AS t2 JOIN actor AS t1 ON t2.aid = t1.aid JOIN movie AS t3 ON t3.mid = t2.msid WHERE t3.title = "Saving Private Ryan";
 
 51. How many movies did " Steven Spielberg " direct ?
 
-SELECT COUNT ( DISTINCT ( t3.title ) ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Steven Spielberg";
+SELECT COUNT ( DISTINCT t3.title  ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Steven Spielberg";
 
 52. How many movies were produced in the year 2013 ?
 P: What is the number of movies produced in 2013 ?
 
-SELECT COUNT ( DISTINCT ( title ) ) FROM movie WHERE release_year = 2013;
+SELECT COUNT ( DISTINCT title  ) FROM movie WHERE release_year = 2013;
 
 53. What is the number of movies directed by " Woody Allen " per year ?
 
-SELECT COUNT ( DISTINCT ( t3.title ) ) , t3.release_year FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Woody Allen" GROUP BY t3.release_year;
+SELECT COUNT ( DISTINCT t3.title  ) , t3.release_year FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Woody Allen" GROUP BY t3.release_year;
 
 54. How many movies did " Shahab Hosseini " act in ?
 P: What is the number of movies in which " Shahab Hosseini " acted ?
 P: What is the number of movies featuring " Shahab Hosseini " ?
 P: How many movies did " Shahab Hosseini " act in
 
-SELECT COUNT ( DISTINCT ( t2.title ) ) FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Shahab Hosseini";
+SELECT COUNT ( DISTINCT t2.title  ) FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Shahab Hosseini";
 
 55. How many actors were born in " Los Angeles " after 2000 ?
 
-SELECT COUNT ( DISTINCT ( name ) ) FROM actor WHERE birth_city = "Los Angeles" AND birth_year > 2000;
+SELECT COUNT ( DISTINCT name  ) FROM actor WHERE birth_city = "Los Angeles" AND birth_year > 2000;
 
 56. How many movies did " Humphrey Bogart " act in before 1942 ?
 
-SELECT COUNT ( DISTINCT ( t2.title ) ) FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Humphrey Bogart" AND t2.release_year < 1942;
+SELECT COUNT ( DISTINCT t2.title  ) FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Humphrey Bogart" AND t2.release_year < 1942;
 
 57. What is the number of movies that " Brad Pitt " acts in per year ?
 
-SELECT COUNT ( DISTINCT ( t2.title ) ) , t2.release_year FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Brad Pitt" GROUP BY t2.release_year;
+SELECT COUNT ( DISTINCT t2.title  ) , t2.release_year FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.name = "Brad Pitt" GROUP BY t2.release_year;
 
 58. How many movies about Iraq war were produced in 2015 ?
 
-SELECT COUNT ( DISTINCT ( t3.title ) ) FROM tags AS t2 JOIN keyword AS t1 ON t2.kid = t1.id JOIN movie AS t3 ON t2.msid = t3.mid WHERE t1.keyword = "Iraq war" AND t3.release_year = 2015;
+SELECT COUNT ( DISTINCT t3.title  ) FROM tags AS t2 JOIN keyword AS t1 ON t2.kid = t1.id JOIN movie AS t3 ON t2.msid = t3.mid WHERE t1.keyword = "Iraq war" AND t3.release_year = 2015;
 
 59. How many movies about Persians were released after 1990 ?
 
-SELECT COUNT ( DISTINCT ( t3.title ) ) FROM tags AS t2 JOIN keyword AS t1 ON t2.kid = t1.id JOIN movie AS t3 ON t2.msid = t3.mid WHERE t1.keyword = "Persians" AND t3.release_year > 1990;
+SELECT COUNT ( DISTINCT t3.title  ) FROM tags AS t2 JOIN keyword AS t1 ON t2.kid = t1.id JOIN movie AS t3 ON t2.msid = t3.mid WHERE t1.keyword = "Persians" AND t3.release_year > 1990;
 
 60. How many movies did " Quentin Tarantino " direct after 2010 ?
 
-SELECT COUNT ( DISTINCT ( t3.title ) ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Quentin Tarantino" AND t3.release_year > 2010;
+SELECT COUNT ( DISTINCT t3.title  ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Quentin Tarantino" AND t3.release_year > 2010;
 
 61. How many movies did " Quentin Tarantino " direct before 2010 ?
 
-SELECT COUNT ( DISTINCT ( t3.title ) ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Quentin Tarantino" AND t3.release_year < 2010;
+SELECT COUNT ( DISTINCT t3.title  ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JOIN movie AS t3 ON t3.mid = t1.msid WHERE t2.name = "Quentin Tarantino" AND t3.release_year < 2010;
 
 62. How many movies did " Quentin Tarantino " direct before 2002 and after 2010 ?
 
-SELECT COUNT ( DISTINCT ( t4.title ) ) FROM director AS t3 JOIN directed_by AS t2 ON t3.did = t2.did JOIN movie AS t4 ON t4.mid = t2.msid JOIN made_by AS t5 ON t4.mid = t5.msid JOIN producer AS t1 ON t1.pid = t5.pid WHERE t3.name = "Quentin Tarantino" AND t4.release_year < 2010 AND t4.release_year > 2002;
+SELECT COUNT ( DISTINCT t4.title  ) FROM director AS t3 JOIN directed_by AS t2 ON t3.did = t2.did JOIN movie AS t4 ON t4.mid = t2.msid JOIN made_by AS t5 ON t4.mid = t5.msid JOIN producer AS t1 ON t1.pid = t5.pid WHERE t3.name = "Quentin Tarantino" AND t4.release_year < 2010 AND t4.release_year > 2002;
 
 63. How many female actors were born in " New York City " after 1980 ?
 
-SELECT COUNT ( DISTINCT ( name ) ) FROM actor WHERE birth_city = "New York City" AND birth_year > 1980 AND gender = "female";
+SELECT COUNT ( DISTINCT name  ) FROM actor WHERE birth_city = "New York City" AND birth_year > 1980 AND gender = "female";
 
 64. find the number of actors from Iran who played in " Jim Jarmusch " movies
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM cast AS t4 JOIN actor AS t1 ON t4.aid = t1.aid JOIN movie AS t5 ON t5.mid = t4.msid JOIN directed_by AS t2 ON t5.mid = t2.msid JOIN director AS t3 ON t3.did = t2.did WHERE t1.nationality = "Iran" AND t3.name = "Jim Jarmusch";
+SELECT COUNT ( DISTINCT t1.name  ) FROM cast AS t4 JOIN actor AS t1 ON t4.aid = t1.aid JOIN movie AS t5 ON t5.mid = t4.msid JOIN directed_by AS t2 ON t5.mid = t2.msid JOIN director AS t3 ON t3.did = t2.did WHERE t1.nationality = "Iran" AND t3.name = "Jim Jarmusch";
 
 65. How many actors from China have acted in " Rush Hour 3 "
 
-SELECT COUNT ( DISTINCT ( t1.name ) ) FROM cast AS t2 JOIN actor AS t1 ON t2.aid = t1.aid JOIN movie AS t3 ON t3.mid = t2.msid WHERE t1.nationality = "China" AND t3.title = "Rush Hour 3";
+SELECT COUNT ( DISTINCT t1.name  ) FROM cast AS t2 JOIN actor AS t1 ON t2.aid = t1.aid JOIN movie AS t3 ON t3.mid = t2.msid WHERE t1.nationality = "China" AND t3.title = "Rush Hour 3";
 
 66. Find all movies that star both " Woody Strode " and " Jason Robards "
 P: Find all movies featuring " Woody Strode " and " Jason Robards "
@@ -306,11 +306,11 @@ SELECT t3.title FROM director AS t5 JOIN directed_by AS t2 ON t5.did = t2.did JO
 
 69. Find the movie which is classified in the most number of genres
 
-SELECT t3.title FROM genre AS t2 JOIN classification AS t1 ON t2.gid = t1.gid JOIN movie AS t3 ON t3.mid = t1.msid GROUP BY t3.title ORDER BY COUNT ( DISTINCT ( t2.genre ) ) DESC LIMIT 1;
+SELECT t3.title FROM genre AS t2 JOIN classification AS t1 ON t2.gid = t1.gid JOIN movie AS t3 ON t3.mid = t1.msid GROUP BY t3.title ORDER BY COUNT ( DISTINCT t2.genre  ) DESC LIMIT 1;
 
 70. which movie has the most number of actors from China ?
 
-SELECT t2.title FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.nationality = "China" GROUP BY t2.title ORDER BY COUNT ( DISTINCT ( t1.name ) ) DESC LIMIT 1;
+SELECT t2.title FROM cast AS t3 JOIN actor AS t1 ON t3.aid = t1.aid JOIN movie AS t2 ON t2.mid = t3.msid WHERE t1.nationality = "China" GROUP BY t2.title ORDER BY COUNT ( DISTINCT t1.name  ) DESC LIMIT 1;
 
 71. Find the actors who played in the latest movie by " Quentin Tarantino "
 
@@ -326,7 +326,7 @@ SELECT t3.title FROM director AS t2 JOIN directed_by AS t1 ON t2.did = t1.did JO
 
 74. Which producer has worked with the most number of directors ?
 
-SELECT t1.name FROM director AS t3 JOIN directed_by AS t2 ON t3.did = t2.did JOIN movie AS t4 ON t4.mid = t2.msid JOIN made_by AS t5 ON t4.mid = t5.msid JOIN producer AS t1 ON t1.pid = t5.pid GROUP BY t1.name ORDER BY COUNT ( DISTINCT ( t3.name ) ) DESC LIMIT 1;
+SELECT t1.name FROM director AS t3 JOIN directed_by AS t2 ON t3.did = t2.did JOIN movie AS t4 ON t4.mid = t2.msid JOIN made_by AS t5 ON t4.mid = t5.msid JOIN producer AS t1 ON t1.pid = t5.pid GROUP BY t1.name ORDER BY COUNT ( DISTINCT t3.name  ) DESC LIMIT 1;
 
 75. Find the latest movie which " Gabriele Ferzetti " acted in
 
