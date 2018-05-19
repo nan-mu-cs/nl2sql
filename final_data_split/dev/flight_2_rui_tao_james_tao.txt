@@ -576,52 +576,52 @@ P: Which airlines have departing flights from both APG and CVO airports?
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "APG"
+where T2.SourceAirport = "APG"
 intersect
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "CVO"
+where T2.SourceAirport = "CVO"
 
 S: Which airlines have flights departing from APG?
 S: Of those, which also have flights from CVO?
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "APG"
+where T2.SourceAirport = "APG"
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "APG"
+where T2.SourceAirport = "APG"
 intersect
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "CVO"
+where T2.SourceAirport = "CVO"
 
 31. Find all airlines that have flights from airport 'CVO' but not from 'APG'.
 P: Which airlines have departures from CVO but not from APG airports?
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "CVO"
+where T2.SourceAirport = "CVO"
 except
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "APG"
+where T2.SourceAirport = "APG"
 
 S: Which airlines have flights from CVO?
 S: Of these, which do not have flights from APG?
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "CVO"
+where T2.SourceAirport = "CVO"
 
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "CVO"
+where T2.SourceAirport = "CVO"
 except
 select T1.Airline
 from AIRLINES as T1 join FLIGHTS as T2 on T1.uid = T2.Airline
-where T2.SourceAirport == "APG"
+where T2.SourceAirport = "APG"
 
 32. Find all airlines that have at least 10 flights.
 P: Which airlines have at least 10 flights?
