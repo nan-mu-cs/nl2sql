@@ -1,0 +1,170 @@
+1. How many furniture components are there in total?
+
+select sum(num_of_component)
+from furniture
+
+S:
+S:
+S:
+
+2. Return the name and id of the furniture with the highest market rate.
+
+select name, furniture_id
+from furniture
+order by market_rate desc
+limit 1
+
+S:
+S:
+S:
+
+3. find the total market rate of the furnitures that have the top 2 market shares.
+
+select sum(market_rate)
+from furniture
+order by market_rate desc
+limit 2
+
+S:
+S:
+S:
+
+4. Find the component amounts and names of all furnitures that have more than 10 components.
+
+select Num_of_Component, name
+from furniture
+where Num_of_Component > 10
+
+S:
+S:
+S:
+
+5. Find the name and component amount of the least popular furniture.
+
+select name, Num_of_Component
+from furniture
+order by market_rate
+limit 1
+
+S:
+S:
+S:
+
+6. Find the names of furnitures whose prices are lower than the highest price.
+
+select t1.name
+from furniture as t1 join furniture_manufacte as t2 on t1.Furniture_ID = t2.Furniture_ID
+where t2.Price_in_Dollar < (select max(Price_in_Dollar) from furniture_manufacte)
+
+S:
+S:
+S:
+
+7. Which manufacturer has the most number of shops? List its name and year of opening.
+
+select open_year, name
+from manufacturer
+order by num_of_shops desc
+limit 1
+
+S:
+S:
+S:
+
+8. Find the average number of factories for the manufacturers that have more than 20 shops.
+
+select avg(Num_of_Factories)
+from manufacturer
+where num_of_shops > 20
+
+S:
+S:
+S:
+
+9. List all manufacturer names and ids ordered by their opening year.
+
+select name, manufacturer_id
+from manufacturer
+order by open_year
+
+S:
+S:
+S:
+
+10. Give me the name and year of opening of the manufacturers that have either less than 10 factories or more than 10 shops.
+
+select name, open_year
+from manufacturer
+where num_of_shops > 10 or Num_of_Factories < 10
+
+S:
+S:
+S:
+
+11. what is the average number of factories and maximum number of shops for manufacturers that opened before 1990.
+
+select max(num_of_shops), avg(Num_of_Factories)
+from manufacturer
+where open_year < 1990
+
+S:
+S:
+S:
+
+12. Find the id and number of shops for the company that produces the most expensive furniture.
+
+select t1.manufacturer_id, t1.num_of_shops
+from manufacturer as t1 join furniture_manufacte as t2 on t1.manufacturer_id = t2.manufacturer_id
+order by t2.Price_in_Dollar desc
+limit 1
+
+S:
+S:
+S:
+
+13. Find the number of funiture types produced by each manufacturer as well as the company names.
+
+select count(*), t1.name
+from manufacturer as t1 join furniture_manufacte as t2 on t1.manufacturer_id = t2.manufacturer_id
+group by t1.manufacturer_id
+
+S:
+S:
+S:
+
+14. Give me the names and prices of furnitures which some companies are manufacturing.
+
+select t1.name, t2.price_in_dollar
+from furniture as t1 join furniture_manufacte as t2 on t1.Furniture_ID = t2.Furniture_ID
+
+S:
+S:
+S:
+
+15. Find the market shares and names of furnitures which no any company is producing in our records.
+
+select Market_Rate, name
+from furniture
+where Furniture_ID not in (select Furniture_ID from furniture_manufacte)
+
+S:
+S:
+S:
+
+16. Find the name of the company that produces both furnitures with less than 6 components and furnitures with more than 10 components.
+
+select t3.name
+from furniture as t1 
+  join furniture_manufacte as t2 on t1.Furniture_ID = t2.Furniture_ID
+  join manufacturer as t3 on t2.manufacturer_id = t3.manufacturer_id
+where t1.num_of_component < 6
+intersect
+select t3.name
+from furniture as t1 
+  join furniture_manufacte as t2 on t1.Furniture_ID = t2.Furniture_ID
+  join manufacturer as t3 on t2.manufacturer_id = t3.manufacturer_id
+where t1.num_of_component > 10
+
+S:
+S:
+S:
