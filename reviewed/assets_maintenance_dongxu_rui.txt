@@ -149,11 +149,7 @@ from Fault_Log_Parts
 
 select first_name, last_name
 from Maintenance_Engineers
-where engineer_id not in
-(
-	select engineer_id
-	from Engineer_Visits
-)
+where engineer_id not in (select engineer_id from Engineer_Visits)
 
 18. List the asset id, details, make and model for every asset.
 
@@ -295,7 +291,4 @@ group by T1.staff_name
 
 select asset_model
 from Assets
-where asset_id not in (
-select asset_id
-from Fault_Log
-)
+where asset_id not in (select asset_id from Fault_Log)
