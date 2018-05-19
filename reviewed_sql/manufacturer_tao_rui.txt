@@ -36,20 +36,20 @@ select t1.name
 from furniture as t1 join furniture_manufacte as t2 on t1.Furniture_ID = t2.Furniture_ID
 where t2.Price_in_Dollar < (select max(Price_in_Dollar) from furniture_manufacte)
 
-7. which manufacturer has the most number of shops? list its name and year of opening.
+7. Which manufacturer has the most number of shops? list its name and year of opening.
 
 select open_year, name
 from manufacturer
 order by num_of_shops desc
 limit 1
 
-8. Find the average nnumber of factories for the manufacturers that have more than 20 shops.
+8. Find the average number of factories for the manufacturers that have more than 20 shops.
 
 select avg(Num_of_Factories)
 from manufacturer
 where num_of_shops > 20
 
-9. List all manufacturer names and ids order by their opening year.
+9. List all manufacturer names and ids ordered by their opening year.
 
 select name, manufacturer_id
 from manufacturer
@@ -63,7 +63,7 @@ where num_of_shops > 10 or Num_of_Factories < 10
 
 11. what are the average number of factories and maximum number of shops for the manufacturers opened before 1990.
 
-select max(num_of_shops), min(Num_of_Factories)
+select max(num_of_shops), avg(Num_of_Factories)
 from manufacturer
 where open_year < 1990
 
@@ -74,7 +74,7 @@ from manufacturer as t1 join furniture_manufacte as t2 on t1.manufacturer_id = t
 order by t2.Price_in_Dollar desc
 limit 1
 
-13. find the number of funiture types produced by each manufacturer, show the company names as well.
+13. Find the number of funiture types produced by each manufacturer, show the company names as well.
 
 select count(*), t1.name
 from manufacturer as t1 join furniture_manufacte as t2 on t1.manufacturer_id = t2.manufacturer_id
@@ -82,7 +82,7 @@ group by t1.manufacturer_id
 
 14. Give me the name and price of furnitures which some companies are providing.
 
-select t1.name, t2.price
+select t1.name, t2.price_in_dollar
 from furniture as t1 join furniture_manufacte as t2 on t1.Furniture_ID = t2.Furniture_ID
 
 15. Find the market share and name of furnitures which no any company is producing in our records.
