@@ -231,14 +231,6 @@ select max(T1.value), T2.location
 from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
 group by T2.location
 
-32. Find the value and contents of the most expensive boxes saved in each location.
-P: For each warehouse location, what are the value and contents of the most expensive box?
-
-select T1.value, T1.contents, T2.location
-from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
-group by T2.location
-having  T1.value = max(T1.value)
-
 33. Select the warehouse codes along with the number of boxes in each warehouse.
 P: How many boxes are there with each warehouse code?
 
@@ -288,13 +280,6 @@ from boxes as T1 join Warehouses as T2 on T1.warehouse = T2.code
 group by T2.code
 having count(*) > T2.capacity
 
-——or ———
-SELECT code
-FROM Warehouses
-WHERE capacity <
-(SELECT COUNT(*)
-FROM Boxes
-WHERE Warehouse = Warehouses.Code)
 
 40. Find the total values of boxes that are not in the warehouses located at Chicago.
 P: What is the total value of boxes contained in any location but Chicago?
