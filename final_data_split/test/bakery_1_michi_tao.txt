@@ -879,17 +879,17 @@ Select id
 From goods
 where food = "Cookie" and price < (select min(price) from goods where food = 'Croissant')
 
-43. Give me the ids of Cakes whose price is at least three times as much as the average price of Tart?
-P: What are the ids of cakes that are at least three times as expensive as the average Tart?
+43. Give me the ids of Cakes whose price is at least as much as the average price of Tart?
+P: What are the ids of cakes that are at least as expensive as the average Tart?
 
 Select id
 From goods
-where food = "Cake" and price >= 3 * (select avg(price)
+where food = "Cake" and price >= (select avg(price)
                              from goods
                              where food = "Tart")
 
 S: What is the price of the average tart?
-S: What are the ids of goods that are at least three times as expensive?
+S: What are the ids of goods that are at least as the same expensive?
 S: Of those, which are cakes?
 
 select avg(price)
@@ -898,13 +898,13 @@ where food = "Tart"
 
 Select id
 From goods
-where price >= 3 * (select avg(price)
+where price >= (select avg(price)
                              from goods
                              where food = "Tart")
 
 Select id
 From goods
-where food = "Cake" and price >= 3 * (select avg(price)
+where food = "Cake" and price >= (select avg(price)
                              from goods
                              where food = "Tart")
 
@@ -913,17 +913,17 @@ P: Give the ids of goods that are more than twice as expensive as the average go
 
 Select id
 From goods
-where price > 2 * (select avg(price) from goods)
+where price > (select avg(price) from goods)
 
 S: What is the average price of a good?
-S: What are the ids of goods that are more than twice as expensive?
+S: What are the ids of goods that are more than once as expensive?
 
 select avg(price)
 from goods
 
 Select id
 From goods
-where price > 2 * (select avg(price) from goods)
+where price > (select avg(price) from goods)
 
 45. List the id, flavor and type of food of goods ordered by price.
 P: What are the ids, flavors, and food types of goods, ordered by price?
