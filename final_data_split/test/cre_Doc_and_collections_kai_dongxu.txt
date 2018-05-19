@@ -282,8 +282,8 @@ SELECT DISTINCT T2.Document_Object_ID
 FROM Collections as T1 JOIN Documents_in_Collections as T2 ON T1.Collection_ID=T2.Collection_ID
 WHERE T1.Collection_Name="Best"
 EXCEPT
-SELECT DISTINCT T1.Document_Object_ID
-FROM Document_Subset_Members as T1 JOIN Document_Subsets as T2 ON T1.Document_Subset_ID= T2.Document_Subset_ID
+SELECT DISTINCT T3.Document_Object_ID
+FROM Document_Subset_Members as T3 JOIN Document_Subsets as T4 ON T3.Document_Subset_ID= T4.Document_Subset_ID
 WHERE T2.Document_Subset_Name="Best for 2000"
 
 
