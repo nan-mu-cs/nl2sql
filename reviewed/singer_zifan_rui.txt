@@ -1,0 +1,113 @@
+Total = 15
+
+1. How many singers are there?
+P: What is the count of singers?
+
+SELECT count(*)
+FROM singer
+
+2. List the name of singers in ascending order of net worth.
+P: What are the names of singers ordered by ascending net worth?
+
+SELECT Name
+FROM singer
+order by Net_Worth_Millions ASC
+
+3. What are the birth year and citizenship of singers?
+P: What are the birth years and citizenships of the singers?
+
+SELECT Birth_Year, Citizenship
+FROM singer
+
+4. List the name of singers whose citizenship is not "France".
+P: What are the names of the singers who are not French citizens?
+
+SELECT Name
+FROM singer
+Where Citizenship != "France"
+
+5. Show the name of singers whose birth year is either 1948 or 1949?
+P: What are the names of the singers whose birth years are either 1948 or 1949?
+
+SELECT Name
+FROM singer
+Where Birth_Year = 1948 or Birth_Year = 1949
+
+6. What is the name of the singer with the largest net worth?
+P: What is the name of the singer who is worth the most?
+
+SELECT Name
+FROM singer
+order by Net_Worth_Millions DESC limit 1
+
+7. Show different citizenship of singers and the number of singers of each citizenship.
+P: For each citizenship, how many singers are from that country?
+
+SELECT Citizenship, COUNT(*)
+FROM singer
+group by Citizenship
+ 
+8. Please show the most common citizenship of singers.
+P: What is the msot common singer citizenship?
+
+SELECT Citizenship
+FROM singer
+group by Citizenship
+order by COUNT(*) DESC limit 1
+
+9. Show different citizenships and the maximum net worth of singers of each citizenship.
+P: For each citizenship, what is the maximum net worth?
+
+SELECT Citizenship, max(Net_Worth_Millions)
+FROM singer
+group by Citizenship
+
+10. Show titles of songs and names of singers.
+P: What are the song titles and singer names?
+
+SELECT T2.Title, T1.Name
+FROM singer as T1 join song as T2 
+ON T1.Singer_ID = T2.Singer_ID
+
+11. Show distinct names of singers that have songs with sales more than 300000.
+P: what are the different names of the singers that have sales more than 300000?
+
+SELECT distinct T1.Name
+FROM singer as T1 join song as T2 
+ON T1.Singer_ID = T2.Singer_ID
+Where T2.Sales > 300000
+
+12. Show the names of singers that have more than one song.
+P: What are the names of the singers that have more than one songs?
+
+SELECT T1.Name
+FROM singer as T1 join song as T2 
+ON T1.Singer_ID = T2.Singer_ID
+group by T1.Name
+Having COUNT(*) > 1
+
+13. Show the names of singers and the total sales of their songs.
+P: For each singer name, what is the total sales for their songs?
+
+SELECT T1.Name, sum(T2.Sales)
+FROM singer as T1 join song as T2 
+ON T1.Singer_ID = T2.Singer_ID
+group by T1.Name
+
+14. List the name of singers that do not have any song.
+P: What is the sname of every sing that does not have any song?
+
+SELECT Name
+from singer
+where Singer_ID not in (SELECT Singer_ID FROM song)
+
+15. Show the citizenship shared by singers with birth year before 1945 and after 1955.
+P: What are the citizenships that are shared by singers with a birth year before 1945 and after 1955?
+
+SELECT Citizenship
+FROM singer
+Where Birth_Year < 1945
+Intersect 
+SELECT Citizenship
+FROM singer
+Where Birth_Year > 1955

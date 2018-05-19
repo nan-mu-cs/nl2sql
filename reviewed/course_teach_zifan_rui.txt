@@ -1,0 +1,114 @@
+Total = 15
+
+1. How many teachers are there?
+P: What is the total count of teachers?
+
+SELECT count(*)
+FROM teacher
+
+2. List the names of teachers in ascending order of age.
+P: What are the names of the teachers ordered by ascending age?
+
+SELECT Name
+FROM teacher
+order by Age ASC
+
+3. What are the age and hometown of teachers?
+P: What is the age and hometown of every teacher?
+
+SELECT Age, Hometown
+FROM teacher
+
+4. List the name of teachers whose hometown is not "Little Lever Urban District".
+P: What are the names of the teachers whose hometown is not "Little Lever Urban District"?
+
+SELECT Name
+FROM teacher
+Where Hometown != "Little Lever Urban Distric"
+
+5. Show the name of teachers aged either 32 or 33?
+P: What are the names of the teachers who are aged either 32 or 33?
+
+SELECT Name
+FROM teacher
+Where Age = 32 or Age = 33
+
+6. What is the hometown of the youngest teacher?
+P: Where is the youngest teacher from?
+
+SELECT Hometown
+FROM teacher
+order by Age ASC limit 1
+
+7. Show different hometown of teachers and the number of teachers from each hometown.
+P: For each hometown, how many teachers are there?
+
+SELECT Hometown, COUNT(*)
+FROM teacher
+group by Hometown
+ 
+8. List the most common hometown of teachers.
+P: What is the most commmon hometowns for teachers?
+
+SELECT Hometown
+FROM teacher
+group by Hometown
+order by COUNT(*) DESC limit 1
+
+9. Show the hometowns shared by at least two teachers.
+P: What are the towns from which at least two teachers come from?
+
+SELECT Hometown
+FROM teacher
+group by Hometown
+Having COUNT(*) >= 2
+
+10. Show names of teachers and the courses they are arranged to teach.
+P: What is the name of each teacher and what course they teach?
+
+SELECT T3.Name, T2.Course
+FROM course_arrange as T1 join course as T2 
+ON T1.Course_ID = T2.Course_ID join teacher as T3
+on T1.Teacher_ID = T3.Teacher_ID
+
+11. Show names of teachers and the courses they are arranged to teach in ascending alphabetical order of the teacher's name.
+P: What are the names of the teachers and the courses they teach in ascending alphabetical order by the name of the teacher?
+
+SELECT T3.Name, T2.Course
+FROM course_arrange as T1 join course as T2 
+ON T1.Course_ID = T2.Course_ID join teacher as T3
+on T1.Teacher_ID = T3.Teacher_ID
+order by T3.Name
+
+12. Show the name of the teacher for the math course.
+P: What are the names of the people who teach math courses?
+
+SELECT T3.Name
+FROM course_arrange as T1 join course as T2 
+ON T1.Course_ID = T2.Course_ID join teacher as T3
+on T1.Teacher_ID = T3.Teacher_ID
+Where T2.Course = "Math"
+
+13. Show names of teachers and the number of courses they teach.
+P: What are the names of the teachers and how many courses do they teach?
+
+SELECT T2.Name, COUNT(*)
+FROM course_arrange as T1 join teacher as T2
+on T1.Teacher_ID = T2.Teacher_ID
+group by T2.Name
+
+14. Show names of teachers that teach at least two courses.
+P: What are the names of the teachers who teach at least two courses?
+
+SELECT T2.Name
+FROM course_arrange as T1 join teacher as T2
+on T1.Teacher_ID = T2.Teacher_ID
+group by T2.Name
+Having COUNT(*) >= 2
+
+15. List the names of teachers who have not been arranged to teach courses.
+P: What are the names of the teachers whose courses have not been arranged?
+
+SELECT Name
+from teacher
+where Teacher_id not in (SELECT Teacher_id FROM course_arrange)
