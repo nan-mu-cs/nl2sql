@@ -1,4 +1,4 @@
-# Total =
+
 
 1. What is the id of the problem log that is created most recently?
 P: Which problem log was created most recently? Give me the log id.
@@ -128,7 +128,7 @@ P: Find the ids of the problems reported after 1978-06-26.
 
 SELECT problem_id
 FROM problems
-WHERE date_problem_reported>datetime("1978-06-26")
+WHERE date_problem_reported>"1978-06-26"
 
 S:
 S:
@@ -140,7 +140,7 @@ P: Which problems are reported before 1978-06-26? Give me the ids of the problem
 
 SELECT problem_id
 FROM problems
-WHERE date_problem_reported<datetime("1978-06-26")
+WHERE date_problem_reported<"1978-06-26"
 
 S:
 S:
@@ -164,7 +164,7 @@ P: What are the products that have problems reported after 1986-11-13? Give me t
 
 SELECT count(*), T2.product_id
 FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
-WHERE T1.date_problem_reported>datetime("1986-11-13")
+WHERE T1.date_problem_reported>"1986-11-13"
 GROUP BY T2.product_id
 
 S:
@@ -279,7 +279,7 @@ P: What are the ids of the problems that are from the product "voluptatem" and a
 
 SELECT T1.problem_id
 FROM problems as T1 JOIN product as T2 ON T1.product_id=T2.product_id
-WHERE T2.product_name="voluptatem" and T1.date_problem_reported>datetime("1995")
+WHERE T2.product_name="voluptatem" and T1.date_problem_reported>"1995"
 
 S:
 S:
