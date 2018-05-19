@@ -385,8 +385,8 @@ P: Give the full names of artists who have created paintings and sculptures.
 Select T1.lname, T1.fname
 From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
 INTERSECT
-Select T1.lname, T1.fname
-From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
+Select T3.lname, T3.fname
+From artists as T3 JOIN paintings as T4 ON T3.artistID = T4.painterID
 
 S: Which artists have works of paintings?
 S: Which artists created some sculptures?
@@ -411,9 +411,9 @@ Select T1.lname, T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 where T2.medium = "oil"
 INTERSECT
-Select T1.lname, T1.fname
-From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
-where T2.medium = "lithograph"
+Select T3.lname, T3.fname
+From artists as T3 JOIN paintings as T4 ON T3.artistID = T4. painterID
+where T4.medium = "lithograph"
 
 S: Which artists have medium oil paintings?
 S: Of those, who also have paintings with the lithographic medium?
@@ -1269,8 +1269,8 @@ P: What are the first and last names of the artists who did not sculpt but could
 Select T1.lname, T1.fname
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2. painterID
 EXCEPT
-Select T1.lname, T1.fname
-From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
+Select T3.lname, T3.fname
+From artists as T3 JOIN sculptures as T4 ON T3.artistID = T4.sculptorID
 
 S: Which artists created paintings?
 S: Out of those, who never created a sculpture?
