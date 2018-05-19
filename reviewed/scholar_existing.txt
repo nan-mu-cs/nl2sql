@@ -1,0 +1,1185 @@
+1. papers that are coauthored by Peter Mertens and Dina Barbian
+P: papers written by Peter Mertens and Dina Barbian
+P: what are the papers that have Peter Mertens and Dina Barbian as co-authors
+P: What papers have Peter Mertens and Dina Barbian written ?
+P: what paper did Peter Mertens and Dina Barbian write together ?
+P: Has Peter Mertens and Dina Barbian written a paper together ?
+P: Papers by Peter Mertens and Dina Barbian
+P: papers by authors Peter Mertens and Dina Barbian
+P: What papers were written by authors Peter Mertens and Dina Barbian
+P: papers by Peter Mertens and Dina Barbian
+P: papers written by authors Peter Mertens and Dina Barbian
+P: When did Peter Mertens and Dina Barbian collaborate ?
+P: what are the collaborations of Peter Mertens and Dina Barbian ?
+P: Have Peter Mertens and Dina Barbian written a paper together ?
+P: Peter Mertens and Dina Barbian as co-authors
+P: Does Peter Mertens ever collaborated with Dina Barbian ?
+P: Which papers have Peter Mertens and Dina Barbian as co-authors ?
+P: papers coauthored by Peter Mertens and Dina Barbian
+P: What papers have been written by Peter Mertens and Dina Barbian ?
+P: What papers have been written by both Peter Mertens and Dina Barbian ?
+P: What papers have been written by Peter Mertens and Dina Barbian .
+
+SELECT DISTINCT t3.paperid FROM writes AS t3 JOIN author AS t2 ON t3.authorid = t2.authorid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t2.authorname = "Peter Mertens" AND t1.authorname = "Dina Barbian";
+
+2. who has written the most syntactic parsing papers ?
+P: who is the most published author in syntactic parsing ?
+P: who has the most publications in syntactic parsing ?
+P: who has written the most papers on syntactic parsing ?
+P: List prominent scholars in syntactic parsing ?
+P: who wrote the most papers on syntactic parsing ?
+P: Who are the authors with the most published papers in syntactic parsing ?
+P: top syntactic parsing author
+P: top author in syntactic parsing
+P: who published the most in syntactic parsing ?
+P: who published the most papers in syntactic parsing ?
+
+SELECT DISTINCT COUNT ( t4.paperid ) , t3.authorid FROM paperkeyphrase AS t1 JOIN keyphrase AS t2 ON t1.keyphraseid = t2.keyphraseid JOIN paper AS t4 ON t4.paperid = t1.paperid JOIN writes AS t3 ON t3.paperid = t4.paperid WHERE t2.keyphrasename = "syntactic parsing" GROUP BY t3.authorid ORDER BY COUNT ( t4.paperid ) DESC;
+
+3. How many citation noah a smith has ?
+P: noah a smith citation count
+P: how many citations does noah a smith have ?
+P: How many citations does noah a smith have ?
+P: number of citations of noah a smith
+P: How many citations does noah a smith have
+P: How many times was noah a smith cited ?
+P: How many citations does noah a smith has ?
+
+SELECT DISTINCT COUNT ( t4.citedpaperid ) FROM paper AS t3 JOIN cite AS t4 ON t3.paperid = t4.citedpaperid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "noah a smith";
+
+4. chi papers
+P: papers at chi
+P: papers in chi
+P: chi
+P: Papers about chi
+P: Show me chi papers .
+P: what papers did chi publish ?
+P: list papers published in chi
+P: Papers on chi
+
+SELECT DISTINCT t1.paperid FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t2.venuename = "chi";
+
+5. Has mirella lapata written any papers in 2016 ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t2.authorid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "mirella lapata" AND t3.year = 2016 GROUP BY t2.authorid;
+
+6. What papers has sharon goldwater written ?
+P: What papers has written by sharon goldwater ?
+P: papers by sharon goldwater
+P: what did sharon goldwater write ?
+P: papers where sharon goldwater is an author
+P: Papers authored by sharon goldwater
+P: sharon goldwater papers
+P: Papers by sharon goldwater
+P: Papers written by sharon goldwater
+P: which papers has sharon goldwater written ?
+P: papers written by sharon goldwater
+P: What has sharon goldwater published ?
+P: Does sharon goldwater have any papers published ?
+P: sharon goldwater 's papers
+P: show me papers by sharon goldwater .
+P: What papers are authored by sharon goldwater ?
+P: papers by sharon goldwater ?
+
+SELECT DISTINCT t2.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "sharon goldwater";
+
+7. What was oren etzioni 's latest paper ?
+P: Latest paper by oren etzioni
+P: What is the latest paper by oren etzioni ?
+P: What is oren etzioni 's latest paper ?
+P: What are the latest papers by oren etzioni ?
+P: most recent papers by oren etzioni
+
+SELECT DISTINCT t2.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "oren etzioni" ORDER BY t3.year DESC;
+
+8. are there any monte carlo simulation papers since 2011 ?
+P: monte carlo simulation papers later than 2011
+P: monte carlo simulation later than 2011
+P: monte carlo simulation papers published after 2011
+P: monte carlo simulation papers since 2011
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "monte carlo simulation" AND t3.year > 2011;
+
+9. does ras bodik publish a lot ?
+
+SELECT COUNT ( t3.paperid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "ras bodik";
+
+10. How many papers did David M. Blei publish at AISTATS ?
+P: How many papers does David M. Blei have in AISTATS ?
+P: How many papers has David M. Blei published in AISTATS ?
+P: how many papers does David M. Blei have at AISTATS
+P: how many papers does David M. Blei have in AISTATS ?
+P: how many David M. Blei papers are in AISTATS ?
+P: How many papers David M. Blei has in AISTATS ?
+P: How many papers does David M. Blei have in AISTATS
+
+SELECT DISTINCT COUNT ( t3.paperid ) FROM venue AS t4 JOIN paper AS t3 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "David M. Blei" AND t4.venuename = "AISTATS";
+
+11. List all academic papers on machine networks for one shot learning
+P: machine networks for one shot learning
+
+SELECT DISTINCT paperid FROM paper WHERE title = "machine networks for one shot learning";
+
+12. which EMNLP 2010 papers have the most citations ?
+P: Which paper from EMNLP 2010 was cited most ?
+P: most cited EMNLP 2010 papers
+P: which EMNLP 2010 papers have been cited the most ?
+
+SELECT DISTINCT t3.citedpaperid , COUNT ( t3.citedpaperid ) FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t1.year = 2010 AND t2.venuename = "EMNLP" GROUP BY t3.citedpaperid ORDER BY COUNT ( t3.citedpaperid ) DESC;
+
+13. What papers were published at CVPR in 2016 about Class consistent multi-modal fusion with binary features applied to RGB-D Object Dataset ?
+P: What papers were published at CVPR '16 about Class consistent multi-modal fusion with binary features applied to RGB-D Object Dataset ?
+
+SELECT DISTINCT t3.paperid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.datasetname = "RGB-D Object Dataset" AND t3.title = "Class consistent multi-modal fusion with binary features" AND t3.year = 2016 AND t4.venuename = "CVPR";
+
+14. How many papers are in deep learning ?
+P: How many papers are about deep learning ?
+P: how many papers about deep learning ?
+P: How many papers are related to deep learning ?
+
+SELECT DISTINCT COUNT ( DISTINCT t3.paperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "deep learning";
+
+15. How many papers has Christopher D. Manning written ?
+P: How many papers does Christopher D. Manning have ?
+P: How many papers has Christopher D. Manning ?
+P: How many papers has Christopher D. Manning published ?
+P: how many papers has Christopher D. Manning written ?
+P: Has Christopher D. Manning published any papers ?
+P: how many papers has Christopher D. Manning published ?
+P: how many papers does Christopher D. Manning have ?
+P: How many paper does Christopher D. Manning have ?
+P: How many publications does Christopher D. Manning have ?
+P: How many papers does Christopher D. Manning have
+P: number of papers written by Christopher D. Manning
+
+SELECT DISTINCT COUNT ( DISTINCT t2.paperid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "Christopher D. Manning";
+
+16. what kind of papers does Luke Zettlemoyer publish
+P: Keyphrases used by Luke Zettlemoyer
+P: What keywords are in papers by Luke Zettlemoyer ?
+P: keywords used by Luke Zettlemoyer
+P: what keywords are used by Luke Zettlemoyer
+P: keyphrases used by Luke Zettlemoyer
+P: keyphrases by Luke Zettlemoyer
+P: give me the keywords used by Luke Zettlemoyer
+P: What topic does Luke Zettlemoyer write about ?
+P: what topics does Luke Zettlemoyer publish in
+P: keywords in the papers written by Luke Zettlemoyer
+P: keyphrases used by Luke Zettlemoyer .
+P: topics used by Luke Zettlemoyer
+
+SELECT DISTINCT t1.keyphraseid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t5 ON t4.authorid = t5.authorid WHERE t5.authorname = "Luke Zettlemoyer";
+
+17. What conference does Daniella Coelho publish in ?
+P: conferences that Daniella Coelho has published in
+P: In which conferences does Daniella Coelho typically publish ?
+P: in what conferences does Daniella Coelho publish ?
+P: What conferences does Daniella Coelho publish in ?
+P: At which conferences does Daniella Coelho publish ?
+P: What conferences does Daniella Coelho submit to ?
+
+SELECT DISTINCT t3.venueid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Daniella Coelho";
+
+18. How many papers are there ?
+
+SELECT DISTINCT COUNT ( DISTINCT paperid ) FROM paper;
+
+19. How many papers by Ed Desmond contain the keyphrases Semantic Parsing ?
+P: How many papers does Ed Desmond have in Semantic Parsing area ?
+P: How many Semantic Parsing papers has Ed Desmond written ?
+P: How many paper has Ed Desmond written about Semantic Parsing ?
+
+SELECT DISTINCT COUNT ( DISTINCT t3.paperid ) FROM paperkeyphrase AS t1 JOIN keyphrase AS t4 ON t1.keyphraseid = t4.keyphraseid JOIN writes AS t3 ON t3.paperid = t1.paperid JOIN author AS t2 ON t3.authorid = t2.authorid WHERE t2.authorname = "Ed Desmond" AND t4.keyphrasename = "Semantic Parsing";
+
+20. What conferences did li dong submit to in 2016 ?
+P: Where did li dong publish in 2016
+P: What conferences did li dong publish in in 2016 ?
+P: Where did li dong publish in 2016 ?
+
+SELECT DISTINCT t3.venueid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "li dong" AND t3.year = 2016;
+
+21. what are most cited papers of tom mitchell and oren etzioni ?
+P: what are commonly cited papers by tom mitchell and oren etzioni ?
+P: what papers are typically cited by tom mitchell and oren etzioni
+P: most cited by tom mitchell and oren etzioni
+
+SELECT DISTINCT t1.authorname , t4.citedpaperid , COUNT ( t4.citedpaperid ) FROM paper AS t3 JOIN cite AS t4 ON t3.paperid = t4.citedpaperid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname IN ( "tom mitchell" , "oren etzioni" ) GROUP BY t4.citedpaperid , t1.authorname ORDER BY COUNT ( t4.citedpaperid ) DESC;
+
+22. acl papers in 2012 on Parsing
+P: What papers were published in acl in 2012 about Parsing ?
+P: papers on Parsing appeared at acl last year
+P: Parsing papers from acl 2012
+P: papers about Parsing in acl 2012
+P: acl papers in 2012 in Parsing
+P: acl papers in 2012 about Parsing
+P: What papers were published at acl in 2012 were about Parsing ?
+P: papers on Parsing appeared at acl in 2012
+P: how many Parsing papers did acl 2012 have ?
+P: who published Parsing papers at acl 2012
+P: which papers in acl 2012 had Parsing in them ?
+P: what were some Parsing based papers in acl 2012 ?
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.keyphrasename = "Parsing" AND t3.year = 2012 AND t4.venuename = "acl";
+
+23. what are popular datasets used in structured prediction
+
+SELECT DISTINCT COUNT ( 1 ) , t2.datasetid FROM paperdataset AS t3 JOIN dataset AS t2 ON t3.datasetid = t2.datasetid JOIN paperkeyphrase AS t1 ON t1.paperid = t3.paperid JOIN keyphrase AS t4 ON t1.keyphraseid = t4.keyphraseid WHERE t4.keyphrasename = "structured prediction" GROUP BY t2.datasetid ORDER BY COUNT ( 1 ) DESC;
+
+24. List the popular publications on dependent types
+P: Which paper should I read about dependent types ?
+P: top dependent types papers
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "dependent types";
+
+25. List papers that has a keyword Question Answering
+P: Question Answering research papers
+P: papers on Question Answering
+P: papers related to Question Answering
+P: papers about Question Answering
+P: Papers about Question Answering
+P: papers published in the area of Question Answering
+P: Question Answering experiments
+P: Show me the papers on Question Answering
+P: papers that used Question Answering
+P: papers that mention Question Answering
+P: Question Answering papers
+P: Show me Question Answering papers .
+P: Question Answering publications
+P: Fetch me some papers on Question Answering
+P: papers on Question Answering experiments
+P: What papers talk about Question Answering ?
+P: What is the paper about Question Answering ?
+P: Which papers are about about Question Answering ?
+P: list papers that used Question Answering
+P: papers for Question Answering
+P: List papers that has keyword Question Answering
+P: papers with Question Answering in keyphrases
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "Question Answering";
+
+26. keyphrases used by Luke S Zettlemoyer for each year
+
+SELECT DISTINCT t2.keyphraseid , t3.year FROM paper AS t3 JOIN paperkeyphrase AS t2 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "Luke S Zettlemoyer" ORDER BY t3.year , t2.keyphraseid;
+
+27. recent research interests of sanjeev arora
+P: recent papers by sanjeev arora
+P: recent papers written by sanjeev arora
+
+SELECT DISTINCT t1.keyphrasename , t3.year FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t5 ON t4.authorid = t5.authorid WHERE t5.authorname = "sanjeev arora" ORDER BY t3.year DESC;
+
+28. list papers published by balakrishnan prabhakaran
+
+SELECT DISTINCT t3.paperid , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "balakrishnan prabhakaran";
+
+29. citation count of zachary tatlock 's papers
+
+SELECT DISTINCT t3.paperid , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "zachary tatlock";
+
+30. subhasis chaudhuri
+P: list papers by subhasis chaudhuri
+P: List of papers by subhasis chaudhuri
+P: conference papers of subhasis chaudhuri
+
+SELECT DISTINCT t3.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "subhasis chaudhuri";
+
+31. how many parsing papers in ACL 2014
+P: how many parsing papers appeared in the proceeeding of ACL 2014 ?
+P: how many parsing papers were published at ACL 2014 ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.keyphrasename = "parsing" AND t3.year = 2014 AND t4.venuename = "ACL";
+
+32. brian curless convolution paper
+P: convolution by brian curless
+P: papers by brian curless about convolution
+P: brian curless 's paper about convolution
+P: What are the papers of brian curless in convolution ?
+P: papers brian curless wrote about convolution
+P: brian curless 's papers on convolution
+P: What is the paper about convolution from brian curless ?
+P: papers by brian curless in convolution topic
+P: I want the papers on keyphrase0 by brian curless
+P: convolution papers by brian curless
+P: What papers has brian curless written on convolution ?
+P: What papers has brian curless written about convolution ?
+P: convolution paper by brian curless
+P: Does brian curless do convolution ?
+
+SELECT DISTINCT t1.authorid , t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t5 ON t2.keyphraseid = t5.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "brian curless" AND t5.keyphrasename = "convolution";
+
+33. What papers has Liwen Xiong written in 2015
+P: papers by Liwen Xiong in 2015
+P: What did Liwen Xiong published in 2015 ?
+P: Papers written by Liwen Xiong in 2015
+P: What are the papers of Liwen Xiong in 2015
+P: papers by Liwen Xiong from 2015
+P: Papers published in 2015 by Liwen Xiong
+P: what has Liwen Xiong done in the past year
+P: What papers did Liwen Xiong publish last year ?
+P: papers published in 2015 by Liwen Xiong
+P: Liwen Xiong 's papers in 2015 ?
+P: Liwen Xiong 's papers in 2015
+P: Liwen Xiong publication 2015
+P: Papers authored by Liwen Xiong in 2015
+P: Papers from Liwen Xiong in 2015
+P: what papers are published by Liwen Xiong in 2015
+
+SELECT DISTINCT t3.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Liwen Xiong" AND t3.year = 2015;
+
+34. What TAIL paper published in NIPS ?
+P: List the papers on TAIL that were published in NIPS
+P: what are the papers in NIPS about TAIL ?
+P: Papers about TAIL in NIPS
+P: papers at NIPS related to TAIL
+P: papers about TAIL published at NIPS
+P: TAIL papers in NIPS
+P: papers on TAIL NIPS
+P: TAIL papers used in NIPS
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.keyphrasename = "TAIL" AND t4.venuename = "NIPS";
+
+35. How many co-authors has Mark Steedman had ?
+
+SELECT DISTINCT COUNT ( DISTINCT t1.authorid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname != "Mark Steedman" AND t2.paperid IN ( SELECT t2.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "Mark Steedman" );
+
+36. keyphrases used by Christof Dallermassl in 2000
+P: Keyphrases used by Christof Dallermassl in 2000
+P: keyphrases Christof Dallermassl used in papers written last year
+P: What are keyphrases by Christof Dallermassl in 2000 ?
+
+SELECT DISTINCT t2.keyphraseid FROM paper AS t3 JOIN paperkeyphrase AS t2 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "Christof Dallermassl" AND t3.year = 2000;
+
+37. what author is most cited ?
+
+SELECT DISTINCT t1.authorname , COUNT ( t3.citingpaperid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN cite AS t3 ON t2.paperid = t3.citedpaperid GROUP BY t1.authorname ORDER BY COUNT ( t3.citingpaperid ) DESC;
+
+38. which papers use WordNet or Dbpedia ?
+P: papers using WordNet and Dbpedia
+P: papers about WordNet and Dbpedia
+P: papers using WordNet or Dbpedia
+P: papers that use WordNet or Dbpedia
+
+SELECT DISTINCT t3.paperid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.datasetname IN ( "WordNet" , "Dbpedia" ) GROUP BY t3.paperid;
+
+39. journal articles by mohammad rastegari
+P: Journal Papers by mohammad rastegari
+
+SELECT DISTINCT t3.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "mohammad rastegari" AND t3.journalid >= 0;
+
+40. best paper in TACL 2014 ?
+P: What was the best paper at TACL 2014 ?
+
+SELECT DISTINCT COUNT ( DISTINCT t3.citingpaperid ) , t1.paperid FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t1.year = 2014 AND t2.venuename = "TACL" GROUP BY t1.paperid ORDER BY COUNT ( DISTINCT t3.citingpaperid ) DESC;
+
+41. who published at acl 2016 ?
+P: acl 2016 authors
+P: authors of acl 2016 papers
+P: List of authors acl 2016
+P: author published acl 2016
+P: who had papers at acl 2016 ?
+P: List of authors in acl 2016
+
+SELECT DISTINCT t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t2.year = 2016 AND t3.venuename = "acl";
+
+42. How many papers were written on Multiuser Receiver in the Decision Feedback this year ?
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "Multiuser Receiver in the Decision Feedback" AND t3.year = 2016 GROUP BY t3.paperid HAVING COUNT ( DISTINCT t1.keyphrasename ) > 1;
+
+43. How many papers run experiments on ImageNet ?
+P: How many papers used ImageNet dataset ?
+P: How many papers written on ImageNet ?
+P: how many papers are based on ImageNet
+P: how many papers use ImageNet ?
+
+SELECT DISTINCT COUNT ( DISTINCT t3.paperid ) FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.datasetname LIKE "ImageNet";
+
+44. How many papers did Mirella Lapata cite ?
+P: how many papers does Mirella Lapata cite
+P: how many papers has Mirella Lapata cited ?
+
+SELECT DISTINCT COUNT ( t3.citedpaperid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN cite AS t3 ON t2.paperid = t3.citingpaperid WHERE t1.authorname = "Mirella Lapata";
+
+45. When does Michael Stonebraker publish the first VLDB paper ?
+
+SELECT DISTINCT t3.year FROM venue AS t4 JOIN paper AS t3 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "Michael Stonebraker" AND t4.venuename = "VLDB" ORDER BY t3.year;
+
+46. does geoffrey e. hinton or yann lecun have more papers ?
+P: has geoffrey e. hinton or yann lecun published more papers ?
+P: Does geoffrey e. hinton have more papers than yann lecun ?
+P: Who has more papers : geoffrey e. hinton or yann lecun ?
+P: Is it true that geoffrey e. hinton has more citations than yann lecun ?
+
+SELECT DISTINCT t1.authorname , COUNT ( t2.paperid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname IN ( "geoffrey e. hinton" , "yann lecun" ) GROUP BY t1.authorname ORDER BY COUNT ( t2.paperid ) DESC;
+
+47. semantic parsing dataset
+P: data sets for semantic parsing
+P: list datasets for semantic parsing
+P: datasets for semantic parsing
+P: Datasets with semantic parsing information
+P: datasets used by semantic parsing papers
+P: datasets in semantic parsing papers
+P: semantic parsing datasets
+P: datasets in papers about semantic parsing
+P: datasets used for semantic parsing
+P: large-scale datasets used in semantic parsing
+P: datasets with semantic parsing
+P: datasets used for evaluating semantic parsing
+
+SELECT DISTINCT t2.datasetid FROM paperdataset AS t3 JOIN dataset AS t2 ON t3.datasetid = t2.datasetid JOIN paperkeyphrase AS t1 ON t1.paperid = t3.paperid JOIN keyphrase AS t4 ON t1.keyphraseid = t4.keyphraseid WHERE t4.keyphrasename = "semantic parsing";
+
+48. where does Peter Mertens publish ?
+P: in what venues does Peter Mertens publish ?
+P: Where does Peter Mertens publish ?
+
+SELECT DISTINCT t3.journalid , t4.venueid FROM venue AS t4 JOIN paper AS t3 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "Peter Mertens";
+
+49. how many papers appeared at nature communications last year
+P: How many papers were at nature communications 2015 ?
+P: how many papers accepted in nature communications 2015
+P: How many papers were published in nature communications in 2015 ?
+P: How many papers on nature communications in 2015 ?
+P: how many papers in nature communications 2015
+P: How many papers were accepted at nature communications 2015 ?
+P: How many papers are presented in nature communications 2015 ?
+P: How many papers published in nature communications in 2015 ?
+P: how many papers published in nature communications 2015 ?
+P: How many papers were published in nature communications 2015 conference ?
+P: How many papers was published in nature communications in 2015
+
+SELECT DISTINCT COUNT ( t1.paperid ) FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t1.year = 2015 AND t2.venuename = "nature communications";
+
+50. what was the first deep learning paper ?
+P: what year was the first deep learning paper published ?
+
+SELECT DISTINCT t2.datasetid , t4.year FROM paperdataset AS t3 JOIN dataset AS t2 ON t3.datasetid = t2.datasetid JOIN paperkeyphrase AS t1 ON t1.paperid = t3.paperid JOIN paper AS t4 ON t4.paperid = t3.paperid JOIN keyphrase AS t5 ON t1.keyphraseid = t5.keyphraseid WHERE t5.keyphrasename = "deep learning" ORDER BY t4.year ASC;
+
+51. datasets mentioned at ACL
+P: what datasets do papers at ACL use most ?
+
+SELECT DISTINCT t1.datasetid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t4.venuename = "ACL";
+
+52. the papers on semantic parsing by li dong at acl in 2016
+
+SELECT DISTINCT t2.paperid FROM paperkeyphrase AS t5 JOIN keyphrase AS t3 ON t5.keyphraseid = t3.keyphraseid JOIN paper AS t2 ON t2.paperid = t5.paperid JOIN venue AS t6 ON t6.venueid = t2.venueid JOIN writes AS t4 ON t4.paperid = t2.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "li dong" AND t3.keyphrasename = "semantic parsing" AND t2.year = 2016 AND t6.venuename = "acl";
+
+53. How many papers were written on convolutional neural networks in the past year ?
+P: How many papers were published on convolutional neural networks in 2016 ?
+P: How many papers were written on convolutional neural networks in 2016 ?
+P: How many papers were written on the convolutional neural networks this year ?
+P: how many papers on convolutional neural networks have been published in the past year ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "convolutional neural networks" AND t3.year = 2016;
+
+54. What papers were written on question answering this year ?
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "question answering" AND t3.year = 2016;
+
+55. which year had the most NIPS papers ?
+P: what year had the most NIPS papers ?
+P: what year had the most number of NIPS papers ?
+P: when were most NIPS papers published ?
+
+SELECT DISTINCT COUNT ( t1.paperid ) , t1.year FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t2.venuename = "NIPS" GROUP BY t1.year ORDER BY COUNT ( t1.paperid ) DESC;
+
+56. who writes papers with Noah A Smith ?
+P: Who is a coauthor with Noah A Smith ?
+P: Who are Noah A Smith 's co-authors
+P: Who has coauthored with Noah A Smith ?
+P: co-authors of Noah A Smith
+P: author who wrote papers with Noah A Smith
+P: authors who collaborated with Noah A Smith
+P: who does Noah A Smith author with ?
+P: Who are Noah A Smith 's coauthors
+P: who are all the co-authors of Noah A Smith ?
+P: who does Noah A Smith work with ?
+P: who does Noah A Smith collaborate with ?
+P: Who are Noah A Smith 's coauthors ?
+P: coauthors of Noah A Smith
+
+SELECT DISTINCT t1.authorid FROM writes AS t3 JOIN author AS t2 ON t3.authorid = t2.authorid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t2.authorname = "Noah A Smith";
+
+57. what datasets did jitendra malik use ?
+P: what datasets are used in papers by jitendra malik
+P: what datasets did jitendra malik use in his papers ?
+P: what datasets were used by jitendra malik ?
+P: datasets used in papers written by jitendra malik ?
+P: Datasets by jitendra malik
+P: What datasets have jitendra malik used
+
+SELECT DISTINCT t2.datasetid FROM paper AS t3 JOIN paperdataset AS t2 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "jitendra malik";
+
+58. recent deep learning papers
+P: new deep learning papers
+P: What are the latest publications on deep learning ?
+P: Most recent deep learning conference ?
+P: Show me some recent papers on deep learning ?
+P: What are some recent papers written in deep learning ?
+P: What is the most recent paper of deep learning ?
+P: What are recent papers on deep learning ?
+P: Current research on deep learning
+P: latest deep learning papers
+P: newest deep learning papers
+
+SELECT DISTINCT t3.paperid , t3.year FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "deep learning" ORDER BY t3.year DESC;
+
+59. What years did Pedro Domingos publish papers in ?
+P: In what years did Pedro Domingos publish a paper ?
+
+SELECT DISTINCT t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Pedro Domingos" GROUP BY t3.year;
+
+60. jamie callan 's publications by year
+
+SELECT DISTINCT t3.paperid , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "jamie callan" ORDER BY t3.year;
+
+61. How many papers does jamie callan publish each year ?
+P: number of papers by year from jamie callan
+P: how many papers jamie callan published each year ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "jamie callan" GROUP BY t3.year;
+
+62. who does oren etzioni cite
+
+SELECT DISTINCT t3.paperid FROM paper AS t3 JOIN cite AS t4 ON t3.paperid = t4.citingpaperid JOIN writes AS t2 ON t2.paperid = t4.citedpaperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "oren etzioni";
+
+63. what papers does oren etzioni cite
+
+SELECT DISTINCT t3.paperid FROM paper AS t3 JOIN cite AS t4 ON t3.paperid = t4.citingpaperid JOIN writes AS t2 ON t2.paperid = t4.citedpaperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "oren etzioni";
+
+64. papers citing Daniel Jurafsky
+P: What papers cite Daniel Jurafsky ?
+P: Which papers cite Daniel Jurafsky ?
+P: citations for Daniel Jurafsky
+
+SELECT DISTINCT t3.paperid FROM paper AS t3 JOIN cite AS t4 ON t3.paperid = t4.citingpaperid JOIN writes AS t2 ON t2.paperid = t4.citedpaperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "Daniel Jurafsky";
+
+65. journal papers for instance segmentation
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "instance segmentation" AND t3.journalid >= 0;
+
+66. who has the most papers in semantic parsing after 2005 ?
+P: who has written the most papers on semantic parsing since 2005 ?
+P: who published the most in semantic parsing after 2005 ?
+
+SELECT DISTINCT COUNT ( t4.paperid ) , t3.authorid FROM paperkeyphrase AS t1 JOIN keyphrase AS t2 ON t1.keyphraseid = t2.keyphraseid JOIN paper AS t4 ON t4.paperid = t1.paperid JOIN writes AS t3 ON t3.paperid = t4.paperid WHERE t2.keyphrasename = "semantic parsing" AND t4.year > 2005 GROUP BY t3.authorid ORDER BY COUNT ( t4.paperid ) DESC;
+
+67. How many citations does Dan Makumbi 's Genetic Identity paper have ?
+
+SELECT DISTINCT COUNT ( t5.citingpaperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t3 ON t2.keyphraseid = t3.keyphraseid JOIN writes AS t4 ON t4.paperid = t2.paperid JOIN cite AS t5 ON t4.paperid = t5.citedpaperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "Dan Makumbi" AND t3.keyphrasename = "Genetic Identity";
+
+68. character recognition papers earlier than 2010
+P: papers before 2010 about character recognition
+P: character recognition papers from before 2010
+P: papers about character recognition from before 2010
+P: character recognition papers before 2010
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "character recognition" AND t3.year < 2010;
+
+69. what topics does oren etzioni write about most ?
+
+SELECT DISTINCT COUNT ( t2.keyphraseid ) , t2.keyphraseid FROM paper AS t3 JOIN paperkeyphrase AS t2 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "oren etzioni" GROUP BY t2.keyphraseid ORDER BY COUNT ( t2.keyphraseid ) DESC;
+
+70. How many papers related to deep learning cited the dataset ImageNet ?
+
+SELECT DISTINCT COUNT ( t4.paperid ) FROM paperdataset AS t3 JOIN dataset AS t2 ON t3.datasetid = t2.datasetid JOIN paper AS t4 ON t4.paperid = t3.paperid JOIN paperkeyphrase AS t1 ON t4.paperid = t1.paperid JOIN keyphrase AS t5 ON t1.keyphraseid = t5.keyphraseid WHERE t2.datasetname = "ImageNet" AND t5.keyphrasename = "deep learning";
+
+71. most cited papers on parsing
+P: parsing top papers
+P: List top papers for parsing
+P: parsing papers that have the most citations
+P: What is the paper about parsing of the most citation ?
+P: Paper on parsing with most citations
+P: parsing papers with most citations
+P: most cited parsing papers
+P: what are the parsing papers that have the most citations ?
+P: highly cited parsing papers
+P: most cited papers for parsing
+P: Most cited papers on parsing
+
+SELECT DISTINCT t4.citedpaperid , COUNT ( t4.citedpaperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN cite AS t4 ON t3.paperid = t4.citedpaperid WHERE t1.keyphrasename = "parsing" GROUP BY t4.citedpaperid ORDER BY COUNT ( t4.citedpaperid ) DESC;
+
+72. What paper did Michael Armstrong wrote in the 90s ?
+
+SELECT DISTINCT t3.year , t2.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname LIKE "Michael Armstrong" AND t3.year LIKE "199";
+
+73. What is the most cited paper by ohad shamir ?
+P: What is the highest cited paper by ohad shamir ?
+P: What is the most cited paper of ohad shamir ?
+P: What is ohad shamir 's highest cited paper ?
+P: What paper by ohad shamir has the most citation ?
+P: what is the most cited paper of ohad shamir ?
+P: what is ohad shamir 's most cited paper ?
+
+SELECT DISTINCT t4.citedpaperid , COUNT ( t4.citedpaperid ) FROM paper AS t3 JOIN cite AS t4 ON t3.paperid = t4.citedpaperid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "ohad shamir" GROUP BY t4.citedpaperid ORDER BY COUNT ( t4.citedpaperid ) DESC;
+
+74. How many papers did michael i. jordan publish in 2016 ?
+P: How many papers does michael i. jordan have in 2016 ?
+P: How many papers did michael i. jordan publish in 2016
+
+SELECT DISTINCT COUNT ( t2.paperid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "michael i. jordan" AND t3.year = 2016;
+
+75. How many papers has Dan Suciu and Magdalena Balazinska written together ?
+P: how many papers Dan Suciu and Magdalena Balazinska coauthored ?
+P: how many papers did Dan Suciu and Magdalena Balazinska write together
+P: How many papers by Dan Suciu and Magdalena Balazinska
+P: how many papers has Dan Suciu and Magdalena Balazinska written together ?
+P: How many papers have Dan Suciu and Magdalena Balazinska ?
+P: How many papers do Dan Suciu and Magdalena Balazinska have ?
+P: How many papers did Dan Suciu co-authored with Magdalena Balazinska
+P: How many papers have Dan Suciu and Magdalena Balazinska written ?
+
+SELECT DISTINCT COUNT ( 1 ) FROM writes AS t3 JOIN author AS t2 ON t3.authorid = t2.authorid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t2.authorname = "Dan Suciu" AND t1.authorname = "Magdalena Balazinska";
+
+76. count of ACL papers by author
+P: how many ACL papers by author
+P: number of ACL papers by author
+
+SELECT DISTINCT COUNT ( t2.paperid ) , t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t3.venuename = "ACL" GROUP BY t1.authorid;
+
+77. who wrote the most papers for CVPR 2007
+P: who published papers in CVPR 2007
+P: who wrote the most CVPR papers in 2007
+P: most published author at CVPR 2007
+P: who published the most papers in CVPR 2007
+P: Who published the most papers in 2007 at CVPR ?
+
+SELECT DISTINCT COUNT ( t2.paperid ) , t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t2.year = 2007 AND t3.venuename = "CVPR" GROUP BY t1.authorid ORDER BY COUNT ( t2.paperid ) DESC;
+
+78. How many papers in ACL 2015 ?
+P: number of papers published in ACL 2015
+
+SELECT DISTINCT COUNT ( DISTINCT t1.paperid ) FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t1.year = 2015 AND t2.venuename = "ACL";
+
+79. papers from 2014
+P: 2014 papers
+
+SELECT DISTINCT paperid FROM paper WHERE year = 2014;
+
+80. What papers does Richard Ladner have in chi ?
+P: what paper has Richard Ladner published in chi journal ?
+P: what paper has Richard Ladner published in chi ?
+P: papers by Richard Ladner published at chi
+P: Does Richard Ladner publish in chi ?
+P: What has Richard Ladner published at chi ?
+P: What papers has Richard Ladner written at chi ?
+P: Which paper did Richard Ladner present at chi ?
+
+SELECT DISTINCT t3.paperid FROM venue AS t4 JOIN paper AS t3 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "Richard Ladner" AND t4.venuename = "chi";
+
+81. What is the paper with the most citation about Artificial Intelligence ?
+P: Fetch me the most cited publications for Artificial Intelligence
+
+SELECT DISTINCT t4.citedpaperid , COUNT ( t4.citingpaperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN cite AS t4 ON t3.paperid = t4.citedpaperid WHERE t1.keyphrasename = "Artificial Intelligence" GROUP BY t4.citedpaperid ORDER BY COUNT ( t4.citingpaperid ) DESC;
+
+82. keyphrases used by Luke S Zettlemoyer and Mirella Lapata
+P: keywords shared by Luke S Zettlemoyer and Mirella Lapata
+
+SELECT DISTINCT t2.keyphraseid FROM writes AS t3 JOIN author AS t1 ON t3.authorid = t1.authorid JOIN paperkeyphrase AS t2 ON t3.paperid = t2.paperid WHERE t1.authorname IN ( "Luke S Zettlemoyer" , "Mirella Lapata" ) GROUP BY t2.keyphraseid HAVING COUNT ( DISTINCT t3.authorid ) = 2;
+
+83. topics at ACL 2014
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t1.keyphraseid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t3.year = 2014 AND t4.venuename = "ACL" GROUP BY t1.keyphraseid ORDER BY COUNT ( t3.paperid ) DESC;
+
+84. most common topics at NIPS 2015
+P: most popular topics at NIPS 2015
+P: hot topics at NIPS 2015
+P: popular topics at NIPS 2015
+P: which topics were most popular at NIPS 2015
+P: topics popular at NIPS 2015
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t1.keyphraseid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t3.year = 2015 AND t4.venuename = "NIPS" GROUP BY t1.keyphraseid ORDER BY COUNT ( t3.paperid ) DESC;
+
+85. How many papers related to deep reinforcement learning in nips ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.keyphrasename = "deep reinforcement learning" AND t4.venuename = "nips";
+
+86. Papers on WebKB
+P: which papers used WebKB ?
+P: papers about WebKB
+P: List the papers that used WebKB dataset
+P: papers using WebKB
+P: papers that use WebKB
+P: WebKB papers
+P: papers that used WebKB
+P: Papers that use the WebKB dataset
+
+SELECT DISTINCT t3.paperid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.datasetname = "WebKB";
+
+87. conferences in 2013
+
+SELECT DISTINCT venueid FROM paper WHERE year = 2013;
+
+88. how is the most cited author in CVPR ?
+P: who is the most cited author at CVPR ?
+
+SELECT DISTINCT COUNT ( DISTINCT t4.citingpaperid ) , t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid JOIN cite AS t4 ON t1.paperid = t4.citedpaperid WHERE t3.venuename = "CVPR" GROUP BY t1.authorid ORDER BY COUNT ( DISTINCT t4.citingpaperid ) DESC;
+
+89. what are some syntactic parsing papers that chris dyer did not write ?
+P: are there any syntactic parsing papers not written by chris dyer ?
+P: what are syntactic parsing papers not written by chris dyer
+P: syntactic parsing papers not written by chris dyer
+
+SELECT DISTINCT t1.authorname , t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t5 ON t2.keyphraseid = t5.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname != "chris dyer" AND t5.keyphrasename = "syntactic parsing";
+
+90. papers published in the last year
+
+SELECT DISTINCT paperid FROM paper WHERE year = ( SELECT MAX ( year ) FROM paper );
+
+91. who works on Multiuser Receiver for Decision Feedback
+P: authors in Multiuser Receiver for Decision Feedback
+P: who publishes in Multiuser Receiver for Decision Feedback
+P: Decision Feedback authors using Multiuser Receiver
+P: who writes about Multiuser Receiver for Decision Feedback
+
+SELECT DISTINCT t3.authorid FROM paperkeyphrase AS t1 JOIN keyphrase AS t2 ON t1.keyphraseid = t2.keyphraseid JOIN paper AS t4 ON t4.paperid = t1.paperid JOIN writes AS t3 ON t3.paperid = t4.paperid WHERE t2.keyphrasename IN ( "Multiuser Receiver" , "Decision Feedback" ) GROUP BY t3.authorid HAVING COUNT ( DISTINCT t2.keyphrasename ) > 1;
+
+92. When was benjamin mako hill 's first publication ?
+P: When was benjamin mako hill 's first paper written ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "benjamin mako hill" GROUP BY t3.year ORDER BY t3.year;
+
+93. When did ameet soni publish ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "ameet soni" GROUP BY t3.year ORDER BY t3.year;
+
+94. Who cites Daniel A Reed the most
+P: Who cites Daniel A Reed most ?
+
+SELECT DISTINCT COUNT ( t4.citingpaperid ) , t3.authorid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN cite AS t4 ON t2.paperid = t4.citedpaperid JOIN writes AS t3 ON t3.paperid = t4.citingpaperid WHERE t1.authorname = "Daniel A Reed" GROUP BY t3.authorid ORDER BY COUNT ( t4.citingpaperid ) DESC;
+
+95. What journals does yuting ye publish most in ?
+
+SELECT DISTINCT COUNT ( 1 ) , t3.journalid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "yuting ye" GROUP BY t3.journalid;
+
+96. how many papers are in sigir ?
+P: how many papers does sigir have ?
+P: how many papers are published in sigir ?
+P: number of papers in sigir conference
+
+SELECT DISTINCT COUNT ( t1.paperid ) FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t2.venuename = "sigir";
+
+97. what papers have fewer than 5 citations by ACL papers ?
+P: ACL papers with less than 5 citations
+P: what ACL papers have less than 5 citations ?
+P: what papers have fewer than 5 citations by ACL papers
+
+SELECT DISTINCT t3.citingpaperid FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t2.venuename = "ACL" GROUP BY t3.citingpaperid HAVING COUNT ( DISTINCT t3.citedpaperid ) < 5;
+
+98. What are the 5 most recent papers of Mirella Lapata ?
+
+SELECT DISTINCT t3.paperid , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Mirella Lapata" ORDER BY t3.year DESC LIMIT 5;
+
+99. What were the papers published at pldi 2015 ?
+P: Papers from pldi 2015 conference
+P: papers published at pldi 2015
+P: What are the papers from pldi 2015 ?
+P: Papers from pldi 2015 ?
+P: Which papers were accepted in pldi 2015 ?
+P: What papers were published during the conference pldi 2015 ?
+P: papers in pldi 2015
+P: List of papers in pldi 2015
+P: pldi papers in 2015
+P: what papers are published in pldi 2015
+P: papers from pldi 2015
+P: pldi papers 2015
+P: pldi 2015 conference
+P: pldi best paper award 2015
+P: pldi 2015 list of papers
+
+SELECT DISTINCT t1.paperid FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t1.year = 2015 AND t2.venuename = "pldi";
+
+100. List today 's journals
+P: List the journals published in March , 2011
+
+SELECT DISTINCT journalid FROM paper WHERE year = 2011 GROUP BY journalid;
+
+101. ACL papers in 2016 with neural attention in the title
+
+SELECT DISTINCT t1.paperid FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t1.title LIKE "neural attention" AND t1.year = 2016 AND t2.venuename = "ACL";
+
+102. Who writes a lot of papers in Machine Learning ?
+
+SELECT DISTINCT t1.authorname FROM paperkeyphrase AS t2 JOIN keyphrase AS t4 ON t2.keyphraseid = t4.keyphraseid JOIN writes AS t3 ON t3.paperid = t2.paperid JOIN author AS t1 ON t3.authorid = t1.authorid WHERE t4.keyphrasename = "Machine Learning" GROUP BY t1.authorname ORDER BY COUNT ( DISTINCT t3.paperid ) DESC;
+
+103. Who wrote sensor fusion ?
+P: Authors of papers on sensor fusion
+P: people working on sensor fusion
+P: Who publishes in sensor fusion ?
+P: who publishes papers about sensor fusion
+
+SELECT DISTINCT t1.authorname FROM paperkeyphrase AS t2 JOIN keyphrase AS t4 ON t2.keyphraseid = t4.keyphraseid JOIN writes AS t3 ON t3.paperid = t2.paperid JOIN author AS t1 ON t3.authorid = t1.authorid WHERE t4.keyphrasename LIKE "sensor fusion";
+
+104. how many papers by dan klein are cited by michael i. jordan
+P: how many of dan klein 's papers cite michael i. jordan
+
+SELECT DISTINCT COUNT ( t5.citingpaperid ) FROM writes AS t3 JOIN author AS t2 ON t3.authorid = t2.authorid JOIN cite AS t5 ON t3.paperid = t5.citedpaperid JOIN writes AS t4 ON t4.paperid = t5.citingpaperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t2.authorname = "michael i. jordan" AND t1.authorname = "dan klein";
+
+105. who else was on the paper with Ameet Soni and Ras Bodik ?
+
+SELECT DISTINCT t5.authorid FROM writes AS t3 JOIN author AS t2 ON t3.authorid = t2.authorid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN writes AS t5 ON t5.paperid = t4.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t2.authorname = "Ameet Soni" AND t1.authorname = "Ras Bodik";
+
+106. what papers are in the ACL of 2014
+
+SELECT DISTINCT t1.paperid FROM venue AS t2 JOIN paper AS t1 ON t2.venuename = t1.venueid WHERE t1.year = 2014 = "ACL";
+
+107. What conference does Noah A. Smith publish the most in
+P: what venue does Noah A. Smith publish the most in
+P: What conferences does Noah A. Smith publish in the most ?
+
+SELECT DISTINCT COUNT ( 1 ) , t3.venueid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Noah A. Smith" GROUP BY t3.venueid ORDER BY COUNT ( 1 ) DESC;
+
+108. Since 2004 who has published works about fibromyalgia ( Inflammatory Bowel Disease ) and diet ?
+P: Since 2004 who has published works about fibromyalgia and diet ?
+
+SELECT DISTINCT t3.authorid FROM paperkeyphrase AS t1 JOIN keyphrase AS t2 ON t1.keyphraseid = t2.keyphraseid JOIN paper AS t4 ON t4.paperid = t1.paperid JOIN writes AS t3 ON t3.paperid = t4.paperid WHERE t2.keyphrasename IN ( "fibromyalgia" , "diet" ) AND t4.year > 2004 GROUP BY t3.authorid;
+
+109. 2014 papers using ImageNet
+
+SELECT DISTINCT t3.paperid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.datasetname = "ImageNet" AND t3.year = 2014;
+
+110. What is the earliest Decision Feedback paper for Multiuser Receiver ?
+P: Earliest Multiuser Receiver paper with Decision Feedback
+P: Which Multiuser Receiver papers first used Decision Feedback ?
+P: Which paper first used Decision Feedback for Multiuser Receiver ?
+
+SELECT DISTINCT t3.paperid , t3.year FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename IN ( "Multiuser Receiver" , "Decision Feedback" ) GROUP BY t3.paperid , t3.year HAVING COUNT ( DISTINCT t1.keyphrasename ) > 1 ORDER BY t3.year ASC;
+
+111. What journals are Takashi Matsumoto 's articles published in ?
+P: What journals has Takashi Matsumoto published in ?
+P: In what scholarly journals does Takashi Matsumoto publish ?
+
+SELECT DISTINCT t3.journalid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Takashi Matsumoto" GROUP BY t3.journalid;
+
+112. What authors wrote papers about Bacterial Wilt in 2016 ?
+P: Who wrote on the topic of Bacterial Wilt in 2016 ?
+
+SELECT DISTINCT t3.authorid FROM paperkeyphrase AS t1 JOIN keyphrase AS t2 ON t1.keyphraseid = t2.keyphraseid JOIN paper AS t4 ON t4.paperid = t1.paperid JOIN writes AS t3 ON t3.paperid = t4.paperid JOIN author AS t5 ON t3.authorid = t5.authorid WHERE t2.keyphrasename = "Bacterial Wilt" AND t4.year = 2016;
+
+113. When did Luke S Zettlemoyer publish ?
+
+SELECT DISTINCT t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Luke S Zettlemoyer" ORDER BY t3.year;
+
+114. question answering 2016 papers
+P: What papers were written on question answering in 2016 ?
+
+SELECT DISTINCT t3.paperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "question answering" AND t3.year = 2016;
+
+115. who writes for vldb or icml ?
+P: who publishes in vldb or icml ?
+P: who published in vldb or icml ?
+
+SELECT DISTINCT t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t3.venuename IN ( "vldb" , "icml" ) GROUP BY t1.authorid;
+
+116. what keyphrases get most citations ?
+
+SELECT DISTINCT COUNT ( t3.citingpaperid ) , t1.keyphrasename FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN cite AS t3 ON t2.paperid = t3.citedpaperid GROUP BY t1.keyphrasename ORDER BY COUNT ( t3.citingpaperid ) DESC;
+
+117. Find journals about Temporal Data .
+P: List the journals related to Temporal Data
+
+SELECT DISTINCT t3.journalid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "Temporal Data" GROUP BY t3.journalid;
+
+118. which ACL 2014 papers about Parsing used Jeopardy! Questions ?
+P: Parsing papers using Jeopardy! Questions published at ACL 2014
+P: Parsing papers from ACL 2014 using Jeopardy! Questions
+P: Parsing papers from ACL 2014 that used Jeopardy! Questions
+P: papers about Parsing that used Jeopardy! Questions and were published at ACL 2014
+
+SELECT DISTINCT t2.paperid FROM paperdataset AS t3 JOIN dataset AS t5 ON t3.datasetid = t5.datasetid JOIN paperkeyphrase AS t4 ON t4.paperid = t3.paperid JOIN paper AS t2 ON t2.paperid = t3.paperid JOIN venue AS t6 ON t6.venueid = t2.venueid JOIN keyphrase AS t1 ON t4.keyphraseid = t1.keyphraseid WHERE t5.datasetname = "Jeopardy! Questions" AND t1.keyphrasename = "Parsing" AND t2.year = 2014 AND t6.venuename = "ACL";
+
+119. in what journals does linda shapiro publish ?
+P: Which journals did linda shapiro submit papers to ?
+
+SELECT DISTINCT t2.journalid FROM paper AS t3 JOIN journal AS t2 ON t3.journalid = t2.journalid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "linda shapiro";
+
+120. NIPS authors
+P: who are the authors at NIPS ?
+P: who authored papers at NIPS ?
+P: who publishes in NIPS ?
+P: who has papers at NIPS ?
+
+SELECT DISTINCT t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t3.venuename = "NIPS";
+
+121. which papers has Michael I. Jordan cited the most ?
+
+SELECT DISTINCT t3.citedpaperid , COUNT ( 1 ) AS derived_field_0 FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN cite AS t3 ON t2.paperid = t3.citingpaperid WHERE t1.authorname = "Michael I. Jordan" GROUP BY t3.citedpaperid ORDER BY derived_field_0 DESC;
+
+122. which venue publishes the most papers about deep learning
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t4.venueid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.keyphrasename = "deep learning" GROUP BY t4.venueid ORDER BY COUNT ( t3.paperid ) DESC;
+
+123. How many publications were added to the Cell journal this year ?
+P: How many articles were published in the Cell journal in 2015 ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) FROM paper AS t3 JOIN journal AS t2 ON t3.journalid = t2.journalid JOIN paperkeyphrase AS t1 ON t3.paperid = t1.paperid WHERE t2.journalname = "Cell" AND t3.year = 2015;
+
+124. What are all the publication titles by Donald E Knuth ?
+
+SELECT DISTINCT t3.title FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Donald E Knuth";
+
+125. papers published in eccv 2016 by ali farhadi
+P: Does ali farhadi have a paper in eccv in 2016 ?
+P: papers of ali farhadi in eccv 2016
+
+SELECT DISTINCT t3.paperid FROM venue AS t4 JOIN paper AS t3 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "ali farhadi" AND t3.year = 2016 AND t4.venuename = "eccv";
+
+126. What are some papers dealing with Semantic Data in YAGO ?
+
+SELECT DISTINCT t2.paperid FROM paperdataset AS t3 JOIN dataset AS t1 ON t3.datasetid = t1.datasetid JOIN paperkeyphrase AS t2 ON t2.paperid = t3.paperid JOIN keyphrase AS t4 ON t2.keyphraseid = t4.keyphraseid WHERE t1.datasetname = "YAGO" AND t4.keyphrasename = "Semantic Data";
+
+127. Who has published more papers in chi ?
+P: Who has written the most papers at chi ?
+P: how is the most prolific author in chi ?
+P: who published the most at chi
+
+SELECT DISTINCT COUNT ( DISTINCT t2.paperid ) , t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t3.venuename = "chi" GROUP BY t1.authorid ORDER BY COUNT ( DISTINCT t2.paperid ) DESC;
+
+128. In what year did Ye Cao publish the most papers
+P: What year did Ye Cao publish the most papers
+
+SELECT DISTINCT COUNT ( DISTINCT t3.paperid ) , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname LIKE "Ye Cao" GROUP BY t3.year ORDER BY COUNT ( DISTINCT t3.paperid ) DESC;
+
+129. conferences that mention ImageNet
+
+SELECT DISTINCT t3.venueid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.datasetname = "ImageNet";
+
+130. first deep learning paper
+P: What was the first paper on deep learning written ?
+P: When was deep learning proposed ?
+P: when was the first deep learning paper published ?
+
+SELECT DISTINCT t3.year FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "deep learning" GROUP BY t3.year ORDER BY t3.year ASC;
+
+131. what papers were published in Academic radiology in 1995 ?
+
+SELECT DISTINCT t2.paperid FROM paper AS t2 JOIN journal AS t1 ON t2.journalid = t1.journalid WHERE t1.journalname = "Academic radiology" AND t2.year = 1995;
+
+132. what papers do parsing papers typically cite ?
+P: papers typically cited by parsing papers
+
+SELECT DISTINCT t4.citedpaperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN cite AS t4 ON t3.paperid = t4.citingpaperid WHERE t1.keyphrasename = "parsing";
+
+133. venue for Trophic Cascade
+P: conferences for Trophic Cascade
+P: what conferences are related to Trophic Cascade
+P: What was the conference name that approved Trophic Cascade ?
+
+SELECT DISTINCT t3.venueid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "Trophic Cascade";
+
+134. How many papers were written on question answering in 2011 through 2016 ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "question answering" AND t3.year >= 2011;
+
+135. Who has published the most number of papers with Richard Sutton ?
+
+SELECT DISTINCT COUNT ( 1 ) , t3.authorid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN writes AS t3 ON t3.paperid = t2.paperid WHERE t1.authorname = "Richard Sutton" GROUP BY t3.authorid ORDER BY COUNT ( 1 ) DESC;
+
+136. What are the best NLP conferences ?
+
+SELECT DISTINCT COUNT ( DISTINCT t4.citingpaperid ) , t3.venueid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN cite AS t4 ON t3.paperid = t4.citedpaperid WHERE t1.keyphrasename = "NLP" GROUP BY t3.venueid ORDER BY COUNT ( DISTINCT t4.citingpaperid ) DESC;
+
+137. ACL papers by author
+
+SELECT DISTINCT t2.paperid , t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t3.venuename = "ACL";
+
+138. papers with more than 10 citations
+
+SELECT DISTINCT t2.citingpaperid FROM paper AS t1 JOIN cite AS t2 ON t1.paperid = t2.citedpaperid GROUP BY t2.citingpaperid HAVING COUNT ( DISTINCT t2.citedpaperid ) > 10;
+
+139. Which authors published papers in 2015 ?
+P: who wrote papers in 2015
+
+SELECT DISTINCT t1.authorid FROM writes AS t1 JOIN paper AS t2 ON t1.paperid = t2.paperid WHERE t2.year = 2015;
+
+140. what keyphrase does Brian DeRenzi write about that gets most citations ?
+P: main topics of work by Brian DeRenzi
+
+SELECT DISTINCT t1.keyphrasename , SUM ( t3.numcitedby ) FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t5 ON t4.authorid = t5.authorid WHERE t5.authorname = "Brian DeRenzi" GROUP BY t1.keyphrasename ORDER BY SUM ( t3.numcitedby ) DESC;
+
+141. authors with at least 5 papers
+
+SELECT DISTINCT COUNT ( t2.paperid ) , t1.authorid FROM writes AS t1 JOIN paper AS t2 ON t1.paperid = t2.paperid GROUP BY t1.authorid HAVING COUNT ( t2.paperid ) >= 5;
+
+142. papers that were not published in the last year
+
+SELECT DISTINCT paperid FROM paper WHERE year != 2015;
+
+143. When was Michael Stonebraker GIS Database published ?
+P: When did Michael Stonebraker publish his GIS Database paper ?
+P: When does Michael Stonebraker publish the GIS Database paper ?
+
+SELECT DISTINCT t3.year FROM paperkeyphrase AS t2 JOIN keyphrase AS t5 ON t2.keyphraseid = t5.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN writes AS t4 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname = "Michael Stonebraker" AND t5.keyphrasename = "GIS Database";
+
+144. What are the latest papers by Nigam H. Shah and Srinivasan Iyer ?
+
+SELECT DISTINCT t3.year , t2.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname IN ( "Nigam H. Shah" , "Srinivasan Iyer" ) GROUP BY t2.paperid HAVING COUNT ( DISTINCT t2.authorid ) = 2 ORDER BY t3.year DESC;
+
+145. In 2010 what journal published an article about Trophic Cascade ?
+
+SELECT DISTINCT t3.journalid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "Trophic Cascade" AND t3.year = 2010 GROUP BY t3.journalid;
+
+146. which author has the largest number of publications ?
+
+SELECT DISTINCT COUNT ( 1 ) , t1.authorid FROM writes AS t1 JOIN paper AS t2 ON t1.paperid = t2.paperid GROUP BY t1.authorid ORDER BY COUNT ( 1 ) DESC;
+
+147. What is the most popular paper this year in CVPR ?
+
+SELECT DISTINCT t3.citedpaperid , COUNT ( t3.citingpaperid ) FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t1.year = 2016 AND t2.venuename = "CVPR" GROUP BY t3.citedpaperid ORDER BY COUNT ( t3.citingpaperid ) DESC;
+
+148. How many citations does luke zettlemoyer have per year
+
+SELECT DISTINCT COUNT ( t4.citedpaperid ) , t3.year FROM paper AS t3 JOIN cite AS t4 ON t3.paperid = t4.citedpaperid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "luke zettlemoyer" GROUP BY t3.year;
+
+149. authors working on ImageNet
+
+SELECT DISTINCT t2.paperid FROM paperdataset AS t3 JOIN dataset AS t1 ON t3.datasetid = t1.datasetid JOIN paper AS t4 ON t4.paperid = t3.paperid JOIN writes AS t2 ON t2.paperid = t4.paperid WHERE t1.datasetname = "ImageNet" GROUP BY t2.paperid;
+
+150. What articles have been published since 2006 about the effects of juicing for cancer patients ?
+
+SELECT DISTINCT paperid , title FROM paper WHERE title LIKE "the effects of juicing for cancer patients" AND year > 2006;
+
+151. Eric C. Kerrigan 's Liquid Automatica paper
+
+SELECT DISTINCT t2.paperid FROM paperkeyphrase AS t5 JOIN keyphrase AS t3 ON t5.keyphraseid = t3.keyphraseid JOIN writes AS t4 ON t4.paperid = t5.paperid JOIN paper AS t2 ON t4.paperid = t2.paperid JOIN author AS t1 ON t4.authorid = t1.authorid JOIN venue AS t6 ON t6.venueid = t2.venueid WHERE t1.authorname = "Eric C. Kerrigan" AND t3.keyphrasename = "Liquid" AND t6.venuename = "Automatica";
+
+152. Where did sergey levine publish his last paper ?
+
+SELECT DISTINCT t3.venueid , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "sergey levine" GROUP BY t3.venueid , t3.year ORDER BY t3.year DESC;
+
+153. Who has published both in ICML and Science ( New York , N.Y. ) ?
+P: who writes for ICML and Science ( New York , N.Y. )
+
+SELECT DISTINCT t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t3.venuename IN ( "ICML" , "Science ( New York , N.Y. )" ) GROUP BY t1.authorid HAVING COUNT ( DISTINCT t3.venueid ) = 2;
+
+154. keyphrases used by dan klein in his emnlp papers
+
+SELECT DISTINCT t2.keyphraseid FROM paper AS t3 JOIN paperkeyphrase AS t2 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid JOIN writes AS t5 ON t5.paperid = t3.paperid JOIN author AS t1 ON t5.authorid = t1.authorid WHERE t1.authorname = "dan klein" AND t4.venuename = "emnlp";
+
+155. Who are the prominent researchers in Neutralizing Antibody in 2012 ?
+
+SELECT DISTINCT COUNT ( t4.paperid ) , t3.authorid FROM paperkeyphrase AS t1 JOIN keyphrase AS t2 ON t1.keyphraseid = t2.keyphraseid JOIN paper AS t4 ON t4.paperid = t1.paperid JOIN writes AS t3 ON t3.paperid = t4.paperid WHERE t2.keyphrasename = "Neutralizing Antibody" AND t4.year = 2012 GROUP BY t3.authorid ORDER BY COUNT ( t4.paperid ) DESC;
+
+156. the papers at eccv in 2014 using ImageNet dataset
+P: which papers in eccv 2014 use ImageNet ?
+P: eccv 2014 papers using ImageNet
+
+SELECT DISTINCT t3.paperid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.datasetname = "ImageNet" AND t3.year = 2014 AND t4.venuename = "eccv";
+
+157. Euclidean Distance papers citing NIPS papers
+
+SELECT DISTINCT t5.citingpaperid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN cite AS t5 ON t2.paperid = t5.citingpaperid JOIN paper AS t3 ON t3.paperid = t5.citedpaperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.keyphrasename = "Euclidean Distance" AND t4.venuename = "NIPS";
+
+158. Who is the most cited author that publishes in both ICASSP and ICSLP ?
+
+SELECT DISTINCT COUNT ( DISTINCT t4.citingpaperid ) , t1.authorid FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid JOIN cite AS t4 ON t1.paperid = t4.citedpaperid WHERE t3.venuename IN ( "ICASSP" , "ICSLP" ) GROUP BY t1.authorid HAVING COUNT ( DISTINCT t3.venueid ) = 2 ORDER BY COUNT ( DISTINCT t4.citingpaperid ) DESC;
+
+159. top authors working on ImageNet ?
+
+SELECT DISTINCT COUNT ( t4.paperid ) , t3.paperid FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t4 ON t4.paperid = t2.paperid JOIN writes AS t3 ON t3.paperid = t4.paperid WHERE t1.datasetname = "ImageNet" GROUP BY t3.paperid ORDER BY COUNT ( t4.paperid ) DESC;
+
+160. how many ACL 2012 papers have more than 7 citations ?
+
+SELECT DISTINCT ( t1.paperid ) , COUNT ( t3.citingpaperid ) FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t1.year = 2012 AND t2.venuename = "ACL" GROUP BY t1.paperid HAVING COUNT ( t3.citingpaperid ) > 7;
+
+161. What was the topic of best paper in 2012 EMNLP-CoNLL ?
+
+SELECT DISTINCT COUNT ( DISTINCT t4.citingpaperid ) , t1.keyphraseid , t2.paperid FROM paper AS t2 JOIN cite AS t4 ON t2.paperid = t4.citedpaperid JOIN paperkeyphrase AS t1 ON t2.paperid = t1.paperid JOIN venue AS t3 ON t3.venueid = t2.venueid WHERE t2.year = 2012 AND t3.venuename = "EMNLP-CoNLL" GROUP BY t2.paperid , t1.keyphraseid ORDER BY COUNT ( DISTINCT t4.citingpaperid ) DESC;
+
+162. How many papers has Noah Smith co-authored since 2009 ?
+
+SELECT DISTINCT COUNT ( DISTINCT t2.paperid ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname != "Noah Smith" AND t3.year > 2009 AND t2.paperid IN ( SELECT t2.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname LIKE "Noah Smith" );
+
+163. Number of ACL papers with more than 2 citations
+
+SELECT DISTINCT COUNT ( t3.citingpaperid ) FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t2.venuename = "ACL" GROUP BY t3.citingpaperid HAVING COUNT ( DISTINCT t3.citedpaperid ) > 2;
+
+164. What is the name of Eric C. Kerrigan 's Liquid Automatica paper ?
+
+SELECT DISTINCT t2.title FROM paperkeyphrase AS t5 JOIN keyphrase AS t3 ON t5.keyphraseid = t3.keyphraseid JOIN writes AS t4 ON t4.paperid = t5.paperid JOIN paper AS t2 ON t4.paperid = t2.paperid JOIN author AS t1 ON t4.authorid = t1.authorid JOIN venue AS t6 ON t6.venueid = t2.venueid WHERE t1.authorname LIKE "Eric C. Kerrigan" AND t3.keyphrasename = "Liquid" AND t6.venuename = "Automatica";
+
+165. Is popl or oopsla better ?
+
+SELECT DISTINCT COUNT ( t3.citedpaperid ) , t2.venuename FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t2.venuename IN ( "popl" , "oopsla" ) GROUP BY t2.venuename;
+
+166. How many papers used ImageNet datasets in cvpr ?
+
+SELECT DISTINCT COUNT ( t3.paperid ) FROM paperdataset AS t2 JOIN dataset AS t1 ON t2.datasetid = t1.datasetid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t1.datasetname = "ImageNet" AND t4.venuename = "cvpr";
+
+167. What is the latest Semantic Parsing paper from Nabil Aouf 's group ?
+
+SELECT DISTINCT t4.year , t3.paperid FROM paperkeyphrase AS t1 JOIN keyphrase AS t5 ON t1.keyphraseid = t5.keyphraseid JOIN writes AS t3 ON t3.paperid = t1.paperid JOIN paper AS t4 ON t3.paperid = t4.paperid , author AS t2 WHERE t2.authorname = "Nabil Aouf" AND t5.keyphrasename = "Semantic Parsing" ORDER BY t4.year DESC;
+
+168. What venues are for Neuroscience ?
+
+SELECT DISTINCT venueid FROM venue WHERE venuename = "Neuroscience";
+
+169. When was the last time Mary Crainie published a paper ?
+
+SELECT DISTINCT MAX ( t3.year ) FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Mary Crainie";
+
+170. I want the co-authors of papers on Machine Translation Output with Philipp Koehn
+
+SELECT DISTINCT t1.authorid FROM paperkeyphrase AS t6 JOIN keyphrase AS t3 ON t6.keyphraseid = t3.keyphraseid JOIN writes AS t4 ON t4.paperid = t6.paperid JOIN writes AS t5 ON t5.paperid = t4.paperid JOIN author AS t1 ON t5.authorid = t1.authorid JOIN author AS t2 ON t4.authorid = t2.authorid WHERE t2.authorname = "Philipp Koehn" AND t3.keyphrasename = "Machine Translation Output";
+
+171. How many papers does Samuel Madden publish outside of PVLDB area ?
+
+SELECT DISTINCT COUNT ( DISTINCT t3.paperid ) FROM venue AS t4 JOIN paper AS t3 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "Samuel Madden" AND t4.venuename != "PVLDB";
+
+172. which journal did Donald E Knuth publish his last paper ?
+
+SELECT DISTINCT t3.journalid , t3.year FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Donald E Knuth" GROUP BY t3.journalid , t3.year ORDER BY t3.year DESC;
+
+173. What is the venue of Fracture of acrylic bone cement ?
+
+SELECT DISTINCT venueid FROM paper WHERE title = "Fracture of acrylic bone cement";
+
+174. How many authors published at sigcse in 2010 ?
+
+SELECT DISTINCT COUNT ( t2.paperid ) FROM venue AS t3 JOIN paper AS t2 ON t3.venueid = t2.venueid JOIN writes AS t1 ON t1.paperid = t2.paperid WHERE t2.year = 2010 AND t3.venuename = "sigcse";
+
+175. keyphrases used by torlak at popl or pldi
+
+SELECT DISTINCT t2.keyphraseid FROM paper AS t3 JOIN paperkeyphrase AS t2 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid JOIN writes AS t5 ON t5.paperid = t3.paperid JOIN author AS t1 ON t5.authorid = t1.authorid WHERE t1.authorname = "torlak" AND t4.venuename IN ( "popl" , "pldi" );
+
+176. What is the year of publication of " A Switching Architecture For ISDN " ?
+
+SELECT DISTINCT title , year FROM paper WHERE title = "A Switching Architecture For ISDN";
+
+177. what keywords are used by papers at uist
+
+SELECT DISTINCT t1.keyphraseid FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid WHERE t4.venuename = "uist";
+
+178. who published the most papers at EMNLP or ACL since 2011
+
+SELECT DISTINCT COUNT ( DISTINCT t3.paperid ) , t2.authorid FROM paperkeyphrase AS t1 JOIN keyphrase AS t5 ON t1.keyphraseid = t5.keyphraseid JOIN paper AS t3 ON t3.paperid = t1.paperid JOIN venue AS t4 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid WHERE t3.year > 2011 AND t4.venuename IN ( "ACL" , "EMNLP" ) GROUP BY t2.authorid ORDER BY COUNT ( t3.paperid ) DESC;
+
+179. How many papers in 1986
+
+SELECT DISTINCT COUNT ( 1 ) FROM paper WHERE year = 1986;
+
+180. the papers of li dong at acl or emnlp last year
+
+SELECT DISTINCT t3.paperid FROM venue AS t4 JOIN paper AS t3 ON t4.venueid = t3.venueid JOIN writes AS t2 ON t2.paperid = t3.paperid JOIN author AS t1 ON t2.authorid = t1.authorid WHERE t1.authorname = "li dong" AND t3.year = 2015 AND t4.venuename IN ( "acl" , "emnlp" );
+
+181. Give me the papers written by Su-In Lee before 2012 .
+
+SELECT DISTINCT t3.paperid FROM writes AS t2 JOIN author AS t1 ON t2.authorid = t1.authorid JOIN paper AS t3 ON t2.paperid = t3.paperid WHERE t1.authorname = "Su-In Lee" AND t3.year < 2012;
+
+182. papers in semantic parsing for each year
+
+SELECT DISTINCT COUNT ( t3.paperid ) , t3.year FROM paperkeyphrase AS t2 JOIN keyphrase AS t1 ON t2.keyphraseid = t1.keyphraseid JOIN paper AS t3 ON t3.paperid = t2.paperid WHERE t1.keyphrasename = "semantic parsing" GROUP BY t3.year ORDER BY t3.year DESC;
+
+183. papers with at least 5 citations
+P: papers cited by at least 5 papers
+
+SELECT DISTINCT t2.citingpaperid FROM paper AS t1 JOIN cite AS t2 ON t1.paperid = t2.citedpaperid GROUP BY t2.citingpaperid HAVING COUNT ( DISTINCT t2.citedpaperid ) >= 5;
+
+184. What is the most cited paper at sigcomm ?
+
+SELECT DISTINCT t3.citedpaperid , COUNT ( t3.citingpaperid ) FROM paper AS t1 JOIN cite AS t3 ON t1.paperid = t3.citedpaperid JOIN venue AS t2 ON t2.venueid = t1.venueid WHERE t2.venuename = "sigcomm" GROUP BY t3.citedpaperid ORDER BY COUNT ( t3.citingpaperid ) DESC;
+
+185. Which has more publications , ACL or NIPS ?
+
+SELECT DISTINCT COUNT ( DISTINCT t1.paperid ) , t2.venuename FROM venue AS t2 JOIN paper AS t1 ON t2.venueid = t1.venueid WHERE t2.venuename IN ( "ACL" , "NIPS" ) GROUP BY t2.venuename ORDER BY COUNT ( DISTINCT t1.paperid ) DESC;
+
+186. What is the name of Ranjit Jhala 's Liquid Haskell paper ?
+
+SELECT DISTINCT t3.title FROM paperkeyphrase AS t2 JOIN keyphrase AS t5 ON t2.keyphraseid = t5.keyphraseid JOIN writes AS t4 ON t4.paperid = t2.paperid JOIN paper AS t3 ON t4.paperid = t3.paperid JOIN author AS t1 ON t4.authorid = t1.authorid WHERE t1.authorname LIKE "Ranjit Jhala" AND t5.keyphrasename = "Liquid Haskell";
