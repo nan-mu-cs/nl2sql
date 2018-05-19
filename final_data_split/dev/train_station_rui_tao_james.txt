@@ -221,9 +221,9 @@ S:
 
 select T2.name
 from train_station as T1 join train as T2 on T1.train_id = T2.train_id
-where T1.station_id not in (select T2.station_id
-from train_station as T1 join station as T2 on T1.station_id = T2.station_id
-where location = "London")
+where T1.station_id not in (select T4.station_id
+from train_station as T3 join station as T4 on T3.station_id = T4.station_id
+where t4.location = "London")
 
 S:
 S:
