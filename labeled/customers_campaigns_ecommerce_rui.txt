@@ -61,7 +61,6 @@ from mailshot_customers as T1 join customers as T2 on T1.customer_id = T2.custom
 group by T1.customer_id
 order by count(*) desc limit 1
 
-
 11. What is the name and payment method of customers with both mailshots in 'Order' outcome and mailshots in 'No Response' outcome.
 
 select T2.customer_name, T2.payment_method
@@ -71,7 +70,6 @@ intersect
 select T2.customer_name, T2.payment_method
 from mailshot_customers as T1 join customers as T2 on T1.customer_id = T2.customer_id
 where T1.outcome_code = 'No Response'
-
 
 12. Show premise type and address type code for all customer addresses.
 
