@@ -161,5 +161,5 @@ P: What are the names and locations of the universities that did not have any st
 
 select T1.Institution_Name, T1.location
 from institution as T1 join staff as T2 on T1.institution_id = T2.institution_id
-where T2.staff_id not in (select T2.staff_id from Conference as T1 JOIN Conference_participation as T2 ON T1.conference_id = T2.conference_id where T1.year = 2004)
+where T2.staff_id not in (select T4.staff_id from Conference as T3 JOIN Conference_participation as T4 ON T3.conference_id = T4.conference_id where T3.year = 2004)
 
