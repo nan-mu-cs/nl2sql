@@ -131,7 +131,7 @@ P: Which customers made orders between 2009-01-01 and 2010-01-01? Find their nam
 
 SELECT T1.customer_name
 FROM customers as T1 JOIN orders as T2 ON T1.customer_id=T2.customer_id
-WHERE T2.date_order_placed>=date("2009-01-01") and T2.date_order_placed<=date("2010-01-01")
+WHERE T2.date_order_placed>="2009-01-01" and T2.date_order_placed<="2010-01-01"
 
 S:
 S:
@@ -143,7 +143,7 @@ P: What are the distinct ids of products ordered between 1975-01-01 and 1976-01-
 
 SELECT distinct T2.product_id
 FROM orders as T1 JOIN order_items as T2 ON T1.order_id=T2.order_id
-WHERE T1.date_order_placed>=date("1975-01-01") and T1.date_order_placed<=date("1976-01-01")
+WHERE T1.date_order_placed>="1975-01-01" and T1.date_order_placed<="1976-01-01"
 
 S:
 S:
@@ -235,7 +235,7 @@ P: Which orders have shipment after 2000-01-01? Give me the order ids.
 
 SELECT order_id
 FROM shipments
-WHERE shipment_date>date("2000-01-01")
+WHERE shipment_date>"2000-01-01"
 
 S:
 S:
@@ -311,7 +311,7 @@ P: What are the invoice numbers created before 1989-09-03 or after 2007-12-25?
 
 SELECT invoice_number
 FROM invoices
-WHERE invoice_date<date("1989-09-03") or invoice_date>date("2007-12-25")
+WHERE invoice_date<"1989-09-03" or invoice_date>"2007-12-25"
 
 S:
 S:
@@ -323,7 +323,7 @@ P: What are the distinct details of invoices created before 1989-09-03 or after 
 
 SELECT distinct invoice_details
 FROM invoices
-WHERE invoice_date<date("1989-09-03") or invoice_date>date("2007-12-25")
+WHERE invoice_date<"1989-09-03" or invoice_date>"2007-12-25"
 
 S:
 S:
