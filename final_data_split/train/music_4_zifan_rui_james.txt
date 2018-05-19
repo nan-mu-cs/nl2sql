@@ -1,0 +1,340 @@
+Total = 30
+
+1. How many artists are there?
+P: Count the number of artists.
+
+SELECT count(*)
+FROM artist
+
+S:
+S:
+S:
+
+2. List the age of all music artists.
+P: What are the ages of all music artists?
+
+SELECT Age
+FROM artist
+
+S:
+S:
+S:
+
+3. What is the average age of all artists?
+P: Return the average age across all artists.
+
+SELECT avg(Age)
+FROM artist
+
+S:
+S:
+S:
+
+4. What are the famous titles of the artist "Triumfall"?
+P: Return the famous titles of the artist called "Triumfall".
+
+SELECT Famous_Title
+FROM artist
+WHERE Artist = "Triumfall"
+
+S:
+S:
+S:
+
+5. What are the distinct Famous release dates?
+P: Give the distinct famous release dates for all artists.
+
+SELECT distinct(Famous_Release_date) 
+FROM artist
+
+S:
+S:
+S:
+
+6. Return the dates of ceremony and the results of all music festivals
+P: What are the dates of ceremony and results for each music festival?
+
+SELECT Date_of_ceremony, Result
+FROM music_festival
+
+S:
+S:
+S:
+
+7. What are the category of music festivals with result "Awarded"?
+P: Return the categories of music festivals that have the result "Awarded".
+
+SELECT Category
+FROM music_festival
+where Result = "Awarded"
+
+S:
+S:
+S:
+
+8. What are the maximum and minimum week on top of all volumes?
+P: Give the maximum and minimum weeks on top across all volumes.
+
+SELECT max(Weeks_on_Top), min(Weeks_on_Top)
+FROM volume
+
+S:
+S:
+S:
+
+9. What are the songs in volumes with more than 1 week on top?
+P: Give the songs included in volumes that have more than 1 week on top.
+
+SELECT Song
+FROM volume
+where Weeks_on_Top > 1
+
+S:
+S:
+S:
+
+10. Please list all songs in volumes in ascending alphabetical order.
+P: What are the the songs in volumes, listed in ascending order?
+
+SELECT Song
+FROM volume
+order by Song
+
+S:
+S:
+S:
+
+11. How many distinct artists do the volumes associate to?
+P: Count the number of distinct artists who have volumes.
+
+SELECT COUNT(distinct Artist_ID)
+FROM volume
+
+S:
+S:
+S:
+
+12. Please show the date of ceremony of the volumes that last more than 2 weeks on top.
+P: What are the dates of ceremony at music festivals corresponding to volumes that lasted more than 2 weeks on top?
+
+SELECT T1.Date_of_ceremony
+FROM music_festival as T1 join volume as T2 
+on T1.Volume = T2.Volume_ID
+Where T2.Weeks_on_Top > 2
+
+S:
+S:
+S:
+
+13. Please show the songs that have result "nominated" at music festivals. 
+P: What are the songs in volumes that have resulted in a nomination at music festivals?
+
+SELECT T2.Song
+FROM music_festival as T1 join volume as T2 
+on T1.Volume = T2.Volume_ID
+Where T1.Result = "Nominated"
+
+S:
+S:
+S:
+
+14. What are the issue dates of volumes associated with the artist "Gorgoroth"?
+P: Return the issue dates of volumes that are by the artist named Gorgoroth.
+
+SELECT T2.Issue_Date
+FROM artist as T1 join volume as T2 
+on T1.Artist_ID = T2.Artist_ID
+Where T1.Artist = "Gorgoroth"
+
+S:
+S:
+S:
+
+15. What are the songs in volumes associated with the artist aged 32 or older?
+P: Return names of songs in volumes that are by artists that are at least 32 years old.
+
+SELECT T2.Song
+FROM artist as T1 join volume as T2 
+on T1.Artist_ID = T2.Artist_ID
+Where T1.age >= 32
+
+S:
+S:
+S:
+
+16. What is the average weeks on top of volumes associated with the artist aged 25 or younger?
+P: Return the average number of weeks on top for volumes by artists that are at most 25 years old.
+
+SELECT avg(T2.Weeks_on_Top)
+FROM artist as T1 join volume as T2 
+on T1.Artist_ID = T2.Artist_ID
+Where T1.age <= 25
+
+S:
+S:
+S:
+
+17. What are the famous title of the artists associated with volumes with more than 2 weeks on top?
+P: Return the famous titles for artists that have volumes that lasted more than 2 weeks on top.
+
+SELECT T1.Famous_Title
+FROM artist as T1 join volume as T2 
+on T1.Artist_ID = T2.Artist_ID
+Where T2.Weeks_on_Top > 2
+
+S:
+S:
+S:
+
+18. Please list the age and famous title of artists in descending order of age.
+P: What are the famous titles and ages of each artist, listed in descending order by age?
+
+SELECT Famous_Title, Age
+From artist
+order by Age DESC
+
+S:
+S:
+S:
+
+19. What is the famous release date of the artist with the oldest age?
+P: Return the famous release date for the oldest artist.
+
+SELECT Famous_Release_date
+From artist
+order by Age DESC limit 1
+
+S:
+S:
+S:
+
+20. Please show the categories of the music festivals and the count.
+P: Return the number of music festivals of each category.
+
+SELECT Category, COUNT(*)
+From music_festival
+group by Category
+
+S:
+S:
+S:
+
+21. What is the most common result of the music festival?
+P: Return the result that is most frequent at music festivals.
+
+SELECT Result
+From music_festival
+group by Result
+order by COUNT(*) DESC Limit 1
+
+S:
+S:
+S:
+
+22. Please show the categories of the music festivals with count more than 1.
+P: What are the categories of music festivals for which there have been more than 1 music festival?
+
+SELECT Category
+From music_festival
+group by Category
+Having COUNT(*) > 1
+
+S:
+S:
+S:
+
+23. What is the song in the volume with the maximum weeks on top?
+P: Return the song in the volume that has spent the most weeks on top?
+
+SELECT Song
+From volume
+order by Weeks_on_Top DESC limit 1
+
+S:
+S:
+S:
+
+24. Find the famous titles of artists that do not have any volume.
+P: What are the famous titles of artists who do not have any volumes?
+
+SELECT Famous_Title
+from artist
+where Artist_ID not in(SELECT Artist_ID FROM volume)
+
+S:
+S:
+S:
+
+25. Show the famous titles of the artists with both volumes that lasted more than 2 weeks on top and volumes that lasted less than 2 weeks on top.
+P: What are the famous titles of artists who have not only had volumes that spent more than 2 weeks on top but also volumes that spent less than 2 weeks on top?
+
+SELECT T1.Famous_Title
+FROM artist as T1 join volume as T2 
+on T1.Artist_ID = T2.Artist_ID
+Where T2.Weeks_on_Top > 2
+Intersect 
+SELECT T1.Famous_Title
+FROM artist as T1 join volume as T2 
+on T1.Artist_ID = T2.Artist_ID
+Where T2.Weeks_on_Top < 2
+
+S:
+S:
+S:
+
+26. What are the date of ceremony of music festivals with category "Best Song" and result "Awarded"?
+P: Return the dates of ceremony corresponding to music festivals that had the category "Best Song" and result "Awarded".
+
+SELECT Date_of_ceremony
+FROM music_festival
+where Category = "Best Song" AND Result = "Awarded"
+
+S:
+S:
+S:
+
+27. What is the issue date of the volume with the minimum weeks on top?
+P: Return the issue date of the volume that has spent the fewest weeks on top.
+
+SELECT Issue_Date
+From volume
+order by Weeks_on_Top ASC limit 1
+
+S:
+S:
+S:
+
+28. How many distinct artists have volumes?
+P: Count the number of artists who have had volumes.
+
+SELECT COUNT(distinct Artist_ID) 
+From volume
+
+S:
+S:
+S:
+
+29. Please show the results of music festivals and the number of music festivals that have had each, ordered by this count.
+P: How many music festivals have had each kind of result, ordered descending by count?
+
+SELECT Result, COUNT(*)
+From music_festival
+group by Result
+order by COUNT(*) DESC
+
+S:
+S:
+S:
+
+30. What are the issue dates of volumes associated with the artist aged 23 or younger?
+P: Return the issue dates of volumes by artists who are at most 23 years old?
+
+SELECT Issue_Date
+FROM artist as T1 join volume as T2 
+on T1.Artist_ID = T2.Artist_ID
+Where T1.age <= 23
+
+S:
+S:
+S:
+

@@ -1,0 +1,154 @@
+Total = 15
+
+1. How many radios are there?
+
+SELECT count(*)
+FROM radio
+
+S:
+S:
+S:
+
+2. List the transmitters of radios in ascending order of ERP.
+
+SELECT Transmitter
+FROM radio
+order by ERP_kW ASC
+
+S:
+S:
+S:
+
+3. What are the names and original air dates of tv shows?
+
+SELECT tv_show_name, Original_Airdate
+FROM tv_show
+
+S:
+S:
+S:
+
+4. List the station names of city channels whose affiliation is not "ABC".
+
+SELECT Station_name
+FROM city_channel
+Where Affiliation != "ABC"
+
+S:
+S:
+S:
+
+5. Show the transmitters of radios whose ERP is bigger than 150 or smaller than 30.
+
+SELECT Transmitter
+from radio
+Where ERP_kW > 150 or ERP_kW < 30
+
+S:
+S:
+S:
+
+6. What is the transmitter of the radio with the largest ERP_kW?
+
+SELECT Transmitter
+FROM radio
+order by ERP_kW DESC limit 1
+
+S:
+S:
+S:
+
+7. What is the average ERP across all radios?
+
+SELECT avg(ERP_kW)
+FROM radio
+
+S:
+S:
+S:
+
+8. Show the different affiliations of city channels and the number of city channels with each affiliation.
+
+SELECT Affiliation, COUNT(*)
+FROM city_channel
+group by Affiliation
+ 
+S:
+S:
+S:
+
+9. Please show the most common affiliation for city channels.
+
+SELECT Affiliation
+FROM city_channel
+group by Affiliation
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+10. List the affiliations shared by more than three city channels.
+
+SELECT Affiliation
+FROM city_channel
+group by Affiliation
+Having COUNT(*) > 3
+
+S:
+S:
+S:
+
+11. Show the cities and station names of city channels in ascending alphabetical order of station name.
+
+SELECT City, Station_name
+FROM city_channel
+order by Station_name ASC
+
+S:
+S:
+S:
+
+12. Show the transmitters of radios and the cities of the channels they are associated with.
+
+SELECT T3.Transmitter, T2.City
+FROM city_channel_radio as T1 join city_channel as T2 
+ON T1.City_channel_ID = T2.ID join radio as T3
+on T1.Radio_ID = T3.Radio_ID
+
+S:
+S:
+S:
+
+13. Show the transmitters of radios and the station names of the channels they are associated with in descending order of the ERP of the radios.
+
+SELECT T3.Transmitter, T2.Station_name
+FROM city_channel_radio as T1 join city_channel as T2 
+ON T1.City_channel_ID = T2.ID join radio as T3
+on T1.Radio_ID = T3.Radio_ID
+order by T3.ERP_kW desc
+
+S:
+S:
+S:
+
+14. Show the transmitters of the radios and the number of city channels they are associated with.
+
+SELECT T2.Transmitter, COUNT(*)
+FROM city_channel_radio as T1 join radio as T2
+on T1.Radio_ID = T2.Radio_ID
+group by T2.Transmitter
+
+S:
+S:
+S:
+
+15. Show the distinct transmitters of radios that are not associated with any city channel.
+
+SELECT Transmitter
+FROM radio
+Where Radio_ID not in (SELECT Radio_ID FROM city_channel_radio)
+
+S:
+S:
+S:

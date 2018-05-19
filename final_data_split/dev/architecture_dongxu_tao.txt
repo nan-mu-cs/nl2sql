@@ -1,0 +1,130 @@
+Total = 16
+
+1. How many architects are female?
+
+SELECT count(*)
+FROM architect
+where gender = 'female'
+
+2. List the name, nationality and id of all male architects ordered by their names lexicographically.
+
+SELECT name, nationality, id
+FROM architect
+where gender = 'male'
+order by name
+
+
+3. What is the maximum length in meters for the bridges and what are the architects' names?
+
+select max(T1.length_meters), T2.name
+from bridge as T1 join architect as T2
+on T1.architect_id = T2.id
+
+4. What is the average length in feet of the bridges?
+
+select avg(length_feet)
+from bridge
+
+5. What are the names and year of construction for the mills of 'Grondzeiler' type?
+
+select name, built_year
+from mill
+where type = 'Grondzeiler'
+
+6. What are the distinct names and nationalities of the architects who have ever built a mill?
+
+select distinct T1.name, T1.nationality
+from architect as T1 join mill as t2
+on T1.id = T2.architect_id
+
+
+7. What are the names of the mills which are not located in 'Donceel'?
+
+SELECT name
+from mill
+Where location != 'Donceel'
+
+
+8. What are the distinct types of mills that are built by American or Canadian architects?
+
+select distinct T1.type
+from mill as T1 join architect as t2
+on T1.architect_id = T2.id
+where T2.nationality = 'American' or T2.nationality = 'Canadian'
+
+9. What are the ids and names of the architects who built at least 3 bridges ?
+
+select T1.id, T1.name
+from architect as T1 join bridge as T2
+on T1.id = T2.architect_id
+group by T1.id
+having count(*) >= 3
+
+
+10. What is the id, name and nationality of the architect who built most mills?
+
+select T1.id, T1.name, T1.nationality
+from architect as T1 join mill as T2
+on T1.id = T2.architect_id
+group by T1.id
+order by count(*) desc limit 1
+
+
+11. What are the ids, names and genders of the architects who built two bridges or one mill?
+
+select T1.id, T1.name, T1.gender
+from architect as T1 join bridge as T2
+on T1.id = T2.architect_id
+group by T1.id
+having count(*) = 2
+union
+select T1.id, T1.name, T1.gender
+from architect as T1 join mill as T2
+on T1.id = T2.architect_id
+group by T1.id
+having count(*) = 1
+
+12. What is the location of the bridge named 'Kolob Arch' or 'Rainbow Bridge'?
+
+select location
+from bridge
+where name = 'Kolob Arch' or name = 'Rainbow Bridge'
+
+
+13. Which of the mill names contains the french word 'Moulin'?
+
+select name
+from mill
+where name like '%Moulin%'
+
+14. What are the distinct name of the mills built by the architects who have also built a bridge longer than 80 meters?
+
+select distinct T1.name
+from mill as T1 join architect as t2
+on T1.architect_id = T2.id
+join bridge as T3
+on T3.architect_id = T2.id
+where T3.length_meters > 80
+
+15. What is the most common mill type, and how many are there?
+
+select type, count(*)
+from mill
+group by type
+order by count(*) desc limit 1
+
+16. How many architects haven't built a mill before year 1850?
+
+select count(*)
+from architect
+where id not in (
+select architect_id from mill
+where built_year < 1850
+);
+
+17. show the name of all bridges that was designed by american archtect, and sort the result by the bridge feet length.
+
+select t1.name
+from bridge as t1 join architect as t2 on t1.architect_id = t2.id
+where t2.nationality = 'American'
+order by t1.length_feet

@@ -1,0 +1,304 @@
+Total # = 40
+
+1. Select all details of all warehouses.
+P: What is all the information about the warehouses?
+
+select *
+from warehouses
+
+2. Find all different contents stored in New York.
+P: What are all the different contents stored in boxes in New York?
+
+select distinct T1.contents
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where location = 'New York'
+
+3. Select contents of all boxes with a value larger than $150.
+P: What are the contents of boxes with value greater than 150?
+
+select contents
+from boxes
+where Value > 150
+
+4. Select the warehouse code and the average value of the boxes in each warehouse.
+P: What is the average value of boxes for each warehouse?
+
+select warehouse, avg(value)
+from boxes
+group by warehouse
+
+5. Find the average and total values of all boxes.
+P: What are the average and total values across all boxes?
+
+select avg(value), sum(value)
+from boxes
+
+6. Find the average and total capacity of all warehouses.
+P: What are the average and total capacities across all warehouses?
+
+select avg(capacity), sum(capacity)
+from warehouses
+
+7. Find the average and maximum value for each different content.
+P: What are the average and maximum values for each type of content in boxes?
+
+select avg(value), max(value), contents
+from boxes
+group by contents
+
+8. Find the content that has the highest total values in all boxes.
+P: What is the content with the greatest value across all boxes?
+
+select contents
+from boxes
+order by value desc
+limit 1
+
+9. Select the average value of all the boxes.
+P: What is the average value of boxes?
+
+select avg(value)
+from boxes
+
+
+10. Select all distinct contents in all the boxes.
+P: What are the different contents in boxes?
+
+select distinct contents
+from boxes
+
+11. Find the number of all distinct contents in all the boxes.
+P: How many different contents are stored in boxes?
+
+select count(distinct contents)
+from boxes
+
+12. Find all distinct locations of warehouses.
+P: What are the different locations of warehouses?
+
+select count(distinct location)
+from warehouses
+
+
+13. Find the code of boxes that are stored at the warehouses located at Chicago or New York.
+P: What are the codes of boxes stored in warehouses in either Chicago or New York?
+
+select T1.code 
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T2.location = 'Chicago' or T2.location = 'New York'
+
+14. Find the total value of boxes in the warehouses located at Chicago or New York.
+P: What is the total value of boxes located in Chicago or New York?
+
+select sum(T1.value)
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T2.location = 'Chicago' or T2.location = 'New York'
+
+15. Find all contents present in warehouses located in Chicago and those located in New York.
+P: Find the contents that are stored in both Chicago and New York.
+
+select T1.contents
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T2.location = 'Chicago'
+INTERSECT
+select T1.contents
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T2.location = 'New York'
+
+16. Find the type of contents that are not in the warehouses located at New York.
+P: What types of contents cannot be found in warehouses in New York?
+
+select contents
+from boxes
+except
+select T1.contents
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T2.location = 'New York'
+
+17. Find the location of the warehouses which have contents Rocks but not Scissors.
+P: What are the locations of warehouses that have boxes containing Rocks but not Scissors?
+
+select T2.location
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T1.contents = 'Rocks'
+except
+select T2.location
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T1.contents = 'Scissors'
+
+18. Find the warehouses which store contents Rocks or Scissors.
+P: What are the distinct warehouses that have boxes with Rocks or Scissors as contents?
+
+select distinct warehouse
+from boxes
+where contents = 'Rocks' or contents = 'Scissors'
+
+19. Find the location of the warehouses which store contents Rocks and Scissors.
+P: What are the locations of warehouses in which boxes that contain Rocks and Scissors are kept?
+
+select T2.location
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T1.contents = 'Rocks'
+intersect
+select T2.location
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T1.contents = 'Scissors'
+
+
+20. List the code and contents of all boxes sorted by their values.
+P: What are the codes and corresponding contents of all the boxes, ordered by their values?
+
+select code, contents
+from boxes
+order by value
+
+21. Find the code and contents of the box with the lowest value.
+P: What is the code and contents for the box that has the smallest value?
+
+select code, contents
+from boxes
+order by value
+limit 1
+
+22. Find the unique contents of all boxes whose value is higher than the average value of all boxes.
+P: What are the different contents of boxes for which the value is higher than the average value across all boxes?
+
+select distinct contents
+from boxes
+where value > (select avg(value) from boxes)
+
+23. List all different types of contents ordered by contents.
+P: What are the different contents of boxes, ordered alphabetically?
+
+select distinct contents
+from boxes
+order by contents
+
+24. Find the code of all boxes whose value is higher than the value of any boxes with Rocks as content.
+P: What are the codes of boxes for which the value is greater than the value of any box that contains Rocks?
+
+select code
+from boxes
+where value > (select min(value) from boxes where contents = 'Rocks')
+
+25. Find the code and content of all boxes whose value is higher than the value of all boxes with Scissors as content.
+P: What are the codes and corresponding contents of boxes for which their value is higher than the values of all boxes containing Scissors?
+
+select code, contents
+from boxes
+where value > (select max(value) from boxes where contents = 'Scissors')
+
+26. Find the total value of boxes stored in the warehouse with the largest capacity.
+P: What is the total value of boxes kept in the warehouse with the greatest capacity?
+
+select sum(T1.value)
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+order by T2.capacity desc
+limit 1
+
+27. Select the warehouse code and the average value of the boxes only for those warehouses where the average value of the boxes is greater than 150.
+P: What are the average values of boxes for each warehouse than has an average value greater than 150?
+
+select warehouse, avg(value)
+from boxes
+group by warehouse
+having avg(value) > 150
+
+28. Find the total value and number of boxes for each content type.
+P: For each content, what is the total value and number of boxes?
+
+select sum(value), count(*), contents
+from boxes
+group by contents
+
+29. Find the total, average, and maximum capacity for different locations.
+P: For each location, what are the total, average, and maximum capacities of warehouses?
+
+select sum(capacity), avg(capacity), max(capacity), location
+from warehouses
+group by location
+
+30. Find the total capacity of all warehouse locations.
+P: What is the total capacity of all warehouses?
+
+select sum(capacity)
+from warehouses
+
+31. Find the value of the most expensive boxes saved in each warehouse location.
+P: For each warehouse location, what is the value of the most expensive box?
+
+select max(T1.value), T2.location
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+group by T2.location
+
+32. Find the value and contents of the most expensive boxes saved in each location.
+P: For each warehouse location, what are the value and contents of the most expensive box?
+
+select T1.value, T1.contents, T2.location
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+group by T2.location
+having  T1.value = max(T1.value)
+
+33. Select the warehouse codes along with the number of boxes in each warehouse.
+P: How many boxes are there with each warehouse code?
+
+select Warehouse, count(*)
+from boxes
+group by warehouse
+
+34. Find the number of different locations where Rocks are stored.
+P: In how many different warehouses are Rocks stored within boxes?
+
+select count(distinct location)
+from boxes as T1 join warehouses as T2 on T1.warehouse = T2.code
+where T1.contents = 'Rocks'
+
+35. Select the code of each box, along with the name of the city the box is located in.
+P: What are the codes of all boxes, as well as the locations of the warehouses they are in?
+
+select T1.code, T2.location
+from boxes as T1 join warehouses as T2 on T1.Warehouse = T2.Code
+
+36. Select the codes of all the boxes located in Chicago.
+P: What are the codes of boxes stored in warehouses in Chicago?
+
+select T1.code
+from boxes as T1 join Warehouses as T2 on T1.warehouse = T2.code
+where T2.location = 'Chicago'
+
+37. Find the number of boxes saved in each warehouse.
+P: How many boxes are stored in each warehouse?
+
+select count(*), warehouse
+from boxes
+group by warehouse
+
+38. Find the number of distinct types of contents in each warehouse.
+P: How many different types of contents are stored in each warehouse?
+
+select count(distinct contents), warehouse
+from boxes
+group by warehouse
+
+39. Select the codes of all warehouses that are above capacity.
+P: What are the codes of warehouses that have more boxes than their capacity?
+
+select T2.code
+from boxes as T1 join Warehouses as T2 on T1.warehouse = T2.code
+group by T2.code
+having count(*) > T2.capacity
+
+——or ———
+SELECT code
+FROM Warehouses
+WHERE capacity <
+(SELECT COUNT(*)
+FROM Boxes
+WHERE Warehouse = Warehouses.Code)
+
+40. Find the total values of boxes that are not in the warehouses located at Chicago.
+P: What is the total value of boxes contained in any location but Chicago?
+
+select sum(T1.value)
+from boxes as T1 join Warehouses as T2 on T1.warehouse = T2.code
+where T2.location != 'Chicago'

@@ -1,0 +1,188 @@
+# Total = 15
+
+1. How many debates are there?
+P: 
+
+SELECT count(*)
+FROM debate
+
+S:
+S:
+S:
+
+
+2. List the venues of debates in ascending order of the number of audience.
+P: 
+
+SELECT Venue
+FROM debate
+order by Num_of_Audience ASC
+
+S:
+S:
+S:
+
+
+3. What are the date and venue of each debate?
+P: 
+
+SELECT Date, Venue
+FROM debate
+
+S:
+S:
+S:
+
+
+4. List the dates of debates with number of audience bigger than 150
+P: 
+
+SELECT Date
+FROM debate
+Where Num_of_Audience > 150
+
+S:
+S:
+S:
+
+
+5. Show the names of people aged either 35 or 36.
+P: 
+
+SELECT Name
+FROM  people
+Where Age = 35 or Age = 36
+
+S:
+S:
+S:
+
+
+6. What is the party of the youngest people?
+P: 
+
+SELECT Party
+FROM people
+order by Age ASC limit 1
+
+S:
+S:
+S:
+
+
+7. Show different parties of people along with the number of people in each party.
+P: 
+
+SELECT Party, COUNT(*)
+FROM people
+group by Party
+
+S:
+S:
+S:
+
+
+8. Show the party that has the most people.
+P: 
+
+SELECT Party
+FROM people
+group by Party
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+9. Show the distinct venues of debates
+P: 
+
+SELECT distinct Venue
+from debate
+
+S:
+S:
+S:
+
+
+10. Show the names of people, and dates and venues of debates they are on the affirmative side.
+P: 
+
+SELECT T3.Name, T2.Date, T2.Venue
+FROM debate_people as T1 join debate as T2
+ON T1.Debate_ID = T2.Debate_ID join people as T3
+on T1.Affirmative = T3.People_ID
+
+S:
+S:
+S:
+
+
+11. Show the names of people, and dates and venues of debates they are on the negative side, ordered in ascending alphabetical order of name.
+P: 
+
+SELECT T3.Name, T2.Date, T2.Venue
+FROM debate_people as T1 join debate as T2
+ON T1.Debate_ID = T2.Debate_ID join people as T3
+on T1.Negative = T3.People_ID
+order by T3.Name ASC
+
+S:
+S:
+S:
+
+
+12. Show the names of people that are on affirmative side of debates with number of audience bigger than 200.
+P: 
+
+SELECT T3.Name
+FROM debate_people as T1 join debate as T2
+ON T1.Debate_ID = T2.Debate_ID join people as T3
+on T1.Affirmative = T3.People_ID
+Where T2.Num_of_Audience > 200
+
+S:
+S:
+S:
+
+
+13. Show the names of people and the number of times they have been on the affirmative side of debates.
+P: 
+
+SELECT T2.Name, COUNT(*)
+FROM debate_people as T1 join people as T2
+on T1.Affirmative = T2.People_ID
+group by T2.Name
+
+S:
+S:
+S:
+
+
+14. Show the names of people who have been on the negative side of debates at least twice.
+P: 
+
+SELECT T2.Name
+FROM debate_people as T1 join people as T2
+on T1.Negative = T2.People_ID
+group by T2.Name
+Having COUNT(*) >= 2
+
+S:
+S:
+S:
+
+
+15. List the names of people that have not been on the affirmative side of debates.
+P: 
+
+SELECT Name
+from people
+where People_id not in (SELECT Affirmative FROM debate_people)
+
+S:
+S:
+S:
+
+

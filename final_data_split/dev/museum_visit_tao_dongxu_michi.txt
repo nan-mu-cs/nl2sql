@@ -1,0 +1,228 @@
+1. How many visitors below age 30 are there?
+P: 
+
+Select count(*)
+From visitor
+Where age < 30
+
+S:
+S:
+S:
+
+
+2. Find the names of the visitors whose membership level is higher than 4, and order the results by the level from high to low.
+P: 
+
+Select name
+From visitor
+Where Level_of_membership > 4
+Order by Level_of_membership desc
+
+S:
+S:
+S:
+
+
+3. What is the average age of the visitors whose membership level is not higher than 4?
+P: 
+
+Select avg(age)
+From visitor
+Where Level_of_membership <= 4
+
+S:
+S:
+S:
+
+
+4. Find the name and membership level of the visitors whose membership level is higher than 4, and sort by their age from old to young.
+P: 
+
+Select name, Level_of_membership
+From visitor
+Where Level_of_membership > 4
+Order by age desc
+
+S:
+S:
+S:
+
+
+5. Find the id and name of the museum that has the most staff members?
+P: 
+
+Select museum_id, name
+From museum
+Order by num_of_staff desc
+Limit 1
+
+S:
+S:
+S:
+
+
+6. Find the average number of staff working for the museums that were open before 2009.
+P: 
+
+Select avg(num_of_staff)
+From museum
+Where open_year < 2009
+
+S:
+S:
+S:
+
+
+7. What are the opening year and staff number of the museum named Plaza Museum?
+P: 
+
+Select Num_of_Staff, Open_Year
+From museum
+Where name = 'Plaza Museum'
+
+S:
+S:
+S:
+
+
+8. find the names of museums which have more staff than the minimum staff number of all museums opened after 2010.
+P: 
+
+Select name
+From museum
+Where num_of_staff > (select min(num_of_staff) from museum where open_year > 2010)
+
+S:
+S:
+S:
+
+
+9. find the id, name and age for visitors who visited some museums more than once.
+P: 
+
+Select t1.id, t1.name, t1.age
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+Group by t1.id
+Having count(*) > 1
+
+S:
+S:
+S:
+
+
+10. What are the id, name and membership level of visitors who have spent the largest amount of money in total in all museum tickets?
+P: 
+
+Select t2.visitor_id, t1.name, t1.Level_of_membership
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+Group by t2.visitor_id
+Order by sum(t2.Total_spent) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+11. What are the id and name of the museum visited most times?
+P: 
+
+Select t2.Museum_ID, t1.name
+From museum as t1 join visit as t2 on t1.Museum_ID = t2.Museum_ID
+group by t2.Museum_ID
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+12. What is the name of the museum that had no visitor yet?
+P: 
+
+Select name
+From museum
+Where Museum_ID not in (select museum_id from visit)
+
+S:
+S:
+S:
+
+
+13. Find the name and age of the visitor who bought the most tickets at once.
+P: 
+
+Select t1.name, t1.age
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+Order by t2.num_of_ticket desc
+Limit 1
+
+S:
+S:
+S:
+
+
+14. What are the average and maximum number of tickets bought in all visits?
+P: 
+
+Select avg(num_of_ticket), max(num_of_ticket)
+From visit
+
+S:
+S:
+S:
+
+
+15. What is the total ticket expense of the visitors whose membership level is 1?
+P: 
+
+Select sum(t2.Total_spent)
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id
+where t1.Level_of_membership = 1
+
+S:
+S:
+S:
+
+
+16. What is the name of the visitor who visited both a museum opened before 2009 and a museum opened after 2011?
+P: 
+
+Select t1.name
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id join museum as t3 on t3.Museum_ID = t2.Museum_ID
+Where t3.open_year < 2009
+Intersect
+Select t1.name
+From visitor as t1 join visit as t2 on t1.id = t2.visitor_id join museum as t3 on t3.Museum_ID = t2.Museum_ID
+Where t3.open_year > 2011
+
+S:
+S:
+S:
+
+
+17. Find the number of visitors who did not visit any museum opened after 2010.
+P: 
+
+Select count(*)
+From visitor
+Where id not in (select t2.visitor_id From museum as t1 join visit as t2 on t1.Museum_ID = t2.Museum_ID where t1.open_year > 2010)
+
+S:
+S:
+S:
+
+
+18. How many museums were opened after 2013 or before 2008?
+P: 
+
+Select count(*)
+From museum
+Where open_year > 2013 or open_year < 2008
+
+S:
+S:
+S:
+
+

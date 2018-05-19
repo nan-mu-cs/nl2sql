@@ -1,0 +1,266 @@
+# total = 21
+
+1. Find the names of all the catalog entries.
+P: What are all the catalog entry names?
+
+select distinct(catalog_entry_name)
+from catalog_contents
+
+S:
+S:
+S:
+
+
+2. Find the list of attribute data types possessed by more than 3 attribute definitions.
+P: What are the attribute data types with more than 3 attribute definitions?
+
+select attribute_data_type
+from Attribute_Definitions
+group by attribute_data_type
+having count(*) > 3
+
+S:
+S:
+S:
+
+
+3. What is the attribute data type of the attribute with name "Green"?
+P: Find the attribute data type for the attribute named "Green".
+
+select attribute_data_type
+from Attribute_Definitions
+where attribute_name = "Green"
+
+S:
+S:
+S:
+
+
+4. Find the name and level of catalog structure with level between 5 and 10.
+P: What are the name and level of catalog structure with level number between 5 and 10
+
+select catalog_level_name, catalog_level_number
+from Catalog_Structure
+where catalog_level_number between 5 and 10
+
+S:
+S:
+S:
+
+
+5. Find all the catalog publishers whose name contains "Murray"
+P: Which catalog publishers have substring "Murray" in their names?
+
+select distinct(catalog_publisher)
+from catalogs
+where catalog_publisher like "%Murray%"
+
+S:
+S:
+S:
+
+
+6. Which catalog publisher has published the most catalogs?
+P: Find the catalog publisher that has the most catalogs.
+
+select catalog_publisher
+from catalogs
+group by catalog_publisher
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+7. Find the names and publication dates of all catalogs that have catalog level number greater than 5.
+P: What are the name and publication date of the catalogs with catalog level number above 5?
+
+select t1.catalog_name, t1.date_of_publication
+from catalogs as t1 join catalog_structure as t2
+on t1.catalog_id = t2.catalog_id
+where catalog_level_number > 5
+
+S:
+S:
+S:
+
+
+8. What are the entry names of catalog with the attribute possessed by most entries.
+P: Find the entry names of the catalog with the attribute that have the most entries.
+
+select t1.catalog_entry_name
+from Catalog_Contents as t1 join Catalog_Contents_Additional_Attributes as t2 on t1.catalog_entry_id = t2.catalog_entry_id
+where t2.attribute_value = (select attribute_value
+from Catalog_Contents_Additional_Attributes
+group by attribute_value
+order by count(*) desc
+limit 1)
+
+S:
+S:
+S:
+
+
+9. What is the entry name of the most expensive catalog (in USD)?
+P: Find the entry name of the catalog with the highest price (in USD).
+
+select catalog_entry_name
+from catalog_contents
+order by price_in_dollars desc
+limit 1
+
+S:
+S:
+S:
+
+
+10. What is the level name of the cheapest catalog (in USD)?
+P: Find the level name of the catalog with the lowest price (in USD).
+
+select t2.catalog_level_name
+from catalog_contents as t1 join catalog_structure as t2 on t1.catalog_level_number = t2.catalog_level_number
+order by t1.price_in_dollars
+limit 1
+
+S:
+S:
+S:
+
+
+11. What are the average and minimum price (in Euro) of all products?
+P: Give me the average and minimum price (in Euro) of the products.
+
+select avg(price_in_euros), min(price_in_euros)
+from catalog_contents
+
+S:
+S:
+S:
+
+
+12. What is the product with the highest height? Give me the catalog entry name.
+P: Which catalog content has the highest height? Give me the catalog entry name.
+
+select catalog_entry_name
+from catalog_contents
+order by height desc
+limit 1
+
+S:
+S:
+S:
+
+
+13. Find the name of the product that has the smallest capacity.
+P: Which catalog content has the smallest capacity? Return the catalog entry name.
+
+select catalog_entry_name
+from catalog_contents
+order by capacity asc
+limit 1
+
+S:
+S:
+S:
+
+
+14. Find the names of all the products whose stock number starts with "2".
+P: Which catalog contents have a product stock number that starts from "2"? Show the catalog entry names.
+
+select catalog_entry_name
+from catalog_contents
+where product_stock_number like "2%"
+
+S:
+S:
+S:
+
+
+15. Find the names of catalog entries with level number 8.
+P: What are the names of catalog entries with level number 8?
+
+select t1.catalog_entry_name
+from Catalog_Contents as t1 join Catalog_Contents_Additional_Attributes as t2
+on t1.catalog_entry_id = t2.catalog_entry_id
+where t2.catalog_level_number = "8"
+
+S:
+S:
+S:
+
+
+16. Find the names of the products with length smaller than 3 or height greater than 5.
+P: Which catalog contents have length below 3 or above 5? Find the catalog entry names.
+
+select catalog_entry_name
+from catalog_contents
+where length < 3 or width > 5
+
+S:
+S:
+S:
+
+
+17. Find the name and attribute ID of the attribute definitions with attribute value 0.
+P: Which attribute definitions have attribute value 0? Give me the attribute name and attribute ID.
+
+select t1.attribute_name, t1.attribute_id
+from Attribute_Definitions as t1 join Catalog_Contents_Additional_Attributes as t2
+on t1.attribute_id = t2.attribute_id
+where t2.attribute_value = 0
+
+S:
+S:
+S:
+
+
+18. Find the name and capacity of products with price greater than 700 (in USD).
+P: Which catalog contents has price above 700 dollars? Show their catalog entry names and capacities.
+
+select catalog_entry_name, capacity
+from Catalog_Contents
+where price_in_dollars > 700
+
+S:
+S:
+S:
+
+
+19. Find the dates on which more than one revisions were made.
+P: On which days more than one revisions were made on catalogs.
+
+select date_of_latest_revision
+from Catalogs
+group by date_of_latest_revision
+having count(*) > 1
+
+S:
+S:
+S:
+
+
+20. How many products are there in the records?
+P: Find the total number of catalog contents.
+
+select count(*)
+from catalog_contents
+
+S:
+S:
+S:
+
+
+21. Name all the products with next entry ID greater than 8.
+P: What are the catalog entry names of the products with next entry ID above 8?
+
+select catalog_entry_name
+from catalog_contents
+where next_entry_id > 8
+
+S:
+S:
+S:
+
+

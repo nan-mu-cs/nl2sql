@@ -1,0 +1,314 @@
+# Total = 25
+
+1. How many drivers are there?
+P: Find the total number of drivers.
+
+SELECT count(*)
+FROM driver
+
+S:
+S:
+S:
+
+
+2. Find the number of drivers whose points are greater than 150 for each make.
+P: How many drivers receive points greater than 150 for each make? Show the make and the count.
+
+select make, count(*)
+FROM driver
+where points > 150
+group by make
+
+S:
+S:
+S:
+
+
+3. Find the average age of drivers for each make.
+P: What is the average age of drivers for each make? Return the average age and make.
+
+SELECT avg(age), Make
+FROM driver
+group by make
+
+S:
+S:
+S:
+
+
+4. What are the average laps of all the drivers who are younger than 20?
+P: Compute the average laps of drivers under the age of 20.
+
+SELECT avg(Laps)
+FROM driver
+where age < 20
+
+S:
+S:
+S:
+
+
+5. What are the managers and sponsors of teams? Sort the results by Car Owners.
+P: Find the manager and sponsor for each team and order them by the car owner.
+
+SELECT Manager, Sponsor
+FROM team
+order by Car_Owner
+
+S:
+S:
+S:
+
+
+6. Find the make that has more than one team.
+P: Which make has more than one team?
+
+select make
+from team
+group by team
+having count(*) > 1
+
+S:
+S:
+S:
+
+
+7. What are the makes of the teams with car owner "Buddy Arrington"?
+P: Find the make of the team whose car owner is "Buddy Arrington".
+
+SELECT Make
+FROM team
+WHERE Car_Owner = "Buddy Arrington"
+
+S:
+S:
+S:
+
+
+8. What are the maximum and minimum points of drivers.
+P: Find the highest and lowest points of drivers.
+
+SELECT max(Points), min(Points)
+FROM driver
+
+S:
+S:
+S:
+
+
+9. How many drivers have points smaller than 150?
+P: Count the number of drivers whose points are below 150.
+
+SELECT count(*)
+FROM driver
+where Points < 150
+
+S:
+S:
+S:
+
+
+10. List all the driver names in ascending order of age.
+P: Sort the driver names by age in ascending order.
+
+SELECT Driver
+FROM driver
+order by Age ASC
+
+S:
+S:
+S:
+
+
+11. List all the driver names in descending order of points.
+P: What is the list of drivers ordered by points in descending order?
+
+SELECT Driver
+FROM driver
+order by Points DESC
+
+S:
+S:
+S:
+
+
+12. Please show the names of drivers, and countries they are from.
+P: For each driver, return his or her name and country.
+
+SELECT T2.Driver, T1.Country
+FROM country as T1 join driver as T2
+on T1.Country_ID = T2.Country
+
+S:
+S:
+S:
+
+
+13. Show the maximum points of the drivers from countries with capital "Dublin"
+P: What is the maximum points of the drivers from a country whose capital is "Dublin"?
+
+SELECT max(T2.Points)
+FROM country as T1 join driver as T2
+on T1.Country_ID = T2.Country
+Where T1.Capital = "Dublin"
+
+S:
+S:
+S:
+
+
+14. What is the average age of drivers from countries with official native language "English"
+P: Find the average age of the drivers from the countries that use "English" as official native language.
+
+SELECT avg(T2.age)
+FROM country as T1 join driver as T2
+on T1.Country_ID = T2.Country
+Where T1.Official_native_language = "English"
+
+S:
+S:
+S:
+
+
+15. What are the countries that have drivers with points larger than 150?
+P: Find all the countries where some drivers have points above 150.
+
+SELECT T1.Country
+FROM country as T1 join driver as T2
+on T1.Country_ID = T2.Country
+Where T2.Points > 150
+
+S:
+S:
+S:
+
+
+16. What is the capital of the country where the driver with the most points is from?
+P: Which country is the driver with the highest points from? Give me the capital of the country.
+
+SELECT T1.Capital
+FROM country as T1 join driver as T2
+on T1.Country_ID = T2.Country
+order by T2.Points DESC limit 1
+
+S:
+S:
+S:
+
+
+17. List each make with the number of drivers with that make.
+P: For each make, return the make and the count of drivers with that make.
+
+SELECT Make, COUNT(*)
+FROM driver
+group by Make
+
+S:
+S:
+S:
+
+
+18. List the make that are associated with most drivers.
+P: Which make does the most drivers have?
+
+SELECT Make
+FROM driver
+group by Make
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+19. List the driver makes that are associated with at least three drivers.
+P: Which make is associated with 3 or more drivers?
+
+SELECT Make
+FROM driver
+group by Make
+Having COUNT(*) >= 3
+
+S:
+S:
+S:
+
+
+20. List the names of teams that do not have any drivers.
+P: Which team does not have drivers?
+
+SELECT Team
+from team
+where Team_ID not in (SELECT Team_ID FROM team_driver)
+
+S:
+S:
+S:
+
+
+21. Which country has both drivers with make "Dodge" and drivers with make "Chevrolet"?
+P: Find the countries in which there are both drivers with make "Dodge" and drivers with make "Chevrolet".
+
+SELECT t2.country
+FROM driver as t1 join country as t2 on t1.country = t2.country_id
+Where t1.Make = "Dodge"
+Intersect
+SELECT t2.country
+FROM driver as t1 join country as t2 on t1.country = t2.country_id
+Where t1.Make = "Chevrolet"
+
+S:
+S:
+S:
+
+
+22. Show total and average points of all drivers.
+P: What are the total and average points of drivers?
+
+select sum(Points), avg(Points)
+from driver
+
+S:
+S:
+S:
+
+
+23. Find the countries where no driver come from.
+P: Which countries do not have any drivers?
+
+select country
+from country
+where country_id not in (select country from driver)
+
+S:
+S:
+S:
+
+
+24. What are the manager and sponsor of the team that has the most drivers?
+P: Find the manager and sponsor of the team that has the most drivers.
+
+select t1.manager, t1.sponsor
+from team as t1 join team_driver as t2 on t1.team_id = t2.team_id
+group by t2.team_id
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+25. What are the manager and car owner of the team that has at least 2 drivers?
+P: Find the team with two or more drivers and return the the manager and car owner of the team.
+
+select t1.manager, t1.car_owner
+from team as t1 join team_driver as t2 on t1.team_id = t2.team_id
+group by t2.team_id
+having count(*) >= 2
+
+S:
+S:
+S:
+
+

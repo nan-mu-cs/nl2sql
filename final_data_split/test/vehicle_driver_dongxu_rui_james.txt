@@ -1,0 +1,254 @@
+1. What is the model of the vehicle with maximum top speed whose power is higher than 6000?
+P: Of vehicles with power over 6000, return the model of the vehicle with the greatest top speed.
+
+select model 
+from vehicle
+where power > 6000
+order by top_speed desc limit 1
+
+S:
+S:
+S:
+
+2. What are the names of the drivers who are citizens of the 'United States'?
+P: Return the names of drivers with citizenship from the United States.
+
+select name
+from driver
+where citizenship = 'United States'
+
+S:
+S:
+S:
+
+3. How many vehicles has a driver driven at most, and what is the driver id of the driver who has driven this many vehicles?
+P: What is the id of the driver who has driven the most vehicles, and how many vehicles is this?
+
+select count(*), driver_id
+from vehicle_driver
+group by driver_id
+order by count(*) desc limit 1
+
+S:
+S:
+S:
+
+4. What is the maximum and average power for the vehicles manufactured by 'Zhuzhou'?
+P: Return the maximum and average power for the vehicles built by Zhuzhou.
+
+select max(power), avg(power)
+from vehicle
+where builder = 'Zhuzhou'
+
+S:
+S:
+S:
+
+5. What is the id of the vehicle driven for the least times for the vehicles ever used?
+P: Return the id of the vehicle that has been driven the fewest times.
+
+select vehicle_id
+from vehicle_driver
+group by vehicle_id
+order by count(*) asc limit 1
+
+S:
+S:
+S:
+
+6. What is the top speed and power of the vehicle manufactured in the year of 1996?
+P: Return the top speed and power of the vehicle that was built in the year 1996.
+
+select top_speed, power
+from vehicle
+where build_year = 1996
+
+S:
+S:
+S:
+
+7. What are the build year, model name and builder of the vehicles?
+P: Give the build year, model, and builder of each vehicle.
+
+select build_year, model, builder
+from vehicle
+
+S:
+S:
+S:
+
+8. How many drivers have driven vehicles built in 2012?
+P: Count the number of different drivers who have driven vehicles built in 2012.
+
+select count(distinct T1.driver_id)
+from vehicle_driver as T1 join vehicle as T2
+on T1.vehicle_id = T2.vehicle_id
+where T2.build_year = 2012
+
+S:
+S:
+S:
+
+9. How many drivers have raced in 'NASCAR'?
+P: Count the number of drivers who have raced in NASCAR.
+
+select count(*)
+from driver
+where Racing_Series = 'NASCAR'
+
+S:
+S:
+S:
+
+10. What is the average top speed of vehicles?
+P: Return the average top speed across all vehicles.
+
+select avg(top_speed)
+from vehicle
+
+S:
+S:
+S:
+
+11. What are the distinct names who have driven vehicles with power more than 5000?
+P: Return the names of drivers who have driven vehicles with power over 5000.
+
+select distinct T1.Name
+from driver as T1 join vehicle_driver as T2
+on T1.driver_id = T2.driver_id
+join vehicle as T3
+on T2.vehicle_id = T3.vehicle_id
+where T3.power > 5000
+
+S:
+S:
+S:
+
+12. Which car models have total production larger than 100 or top speed higher than 150?
+P: Give the models of cars that have a total production of over 100 or a top speed over 150.
+
+select model
+from vehicle
+where total_production > 100 or top_speed > 150
+
+S:
+S:
+S:
+
+13. What are the model names and build year of the cars with 'DJ' in its model name?
+P: Return the model and build year of cars that include "DJ" in their model names.
+
+select model, build_year
+from vehicle
+where model like '%DJ%'
+
+S:
+S:
+S:
+
+14. What are the models which have not been driven by any drivers?
+P: Return the models of vehicles that have never been driven.
+
+select model
+from vehicle
+except
+select T1.model
+from vehicle as T1 join vehicle_driver as T2
+on T1.vehicle_id = T2.vehicle_id
+
+S:
+S:
+S:
+
+15. What are the vehicle ids and models of the vehicle which have been driven by two drivers or been manufactured by 'Ziyang'.
+P: Return the ids and models of vehicles that have been driven by exactly two drivers or built by Ziyang.
+
+select T1.vehicle_id, T1.model
+from vehicle as T1 join vehicle_driver as T2
+on T1.vehicle_id = T2.vehicle_id
+group by T2.vehicle_id
+having count(*) = 2 or T1.builder = 'Ziyang'
+
+S:
+S:
+S:
+
+16. What are the vehicle ids and models which have been driven by more than 2 drivers or been driven by the driver named 'Jeff Gordon'?
+P: Return the ids and models of vehicles that have been driven by more than 2 drivers or been driven by the Jeff Gordon.
+
+select T1.vehicle_id, T1.model
+from vehicle as T1 join vehicle_driver as T2
+on T1.vehicle_id = T2.vehicle_id
+join driver as T3
+on T2.driver_id = T3.driver_id
+where T3.name = 'Jeff Gordon'
+union
+select T1.vehicle_id, T1.model
+from vehicle as T1 join vehicle_driver as T2
+on T1.vehicle_id = T2.vehicle_id
+group by T2.vehicle_id
+having count(*) > 2
+
+S:
+S:
+S:
+
+17. How many vehicles have maximum top speed?
+P: Count the number of vehicles that have a top speed equal to the maximum across all vehicles.
+
+select count(*)
+from vehicle
+where top_speed = (select max(top_speed) from vehicle)
+
+S:
+S:
+S:
+
+18. Show all driver names in the alphabetical order.
+P: What are the names of drivers, returned in alphbetical order?
+
+select name
+from driver
+order by name
+
+S:
+S:
+S:
+
+19. How many drivers have been racing in each racing series?
+P: Count the number of drivers that have raced in each series.
+
+select count(*), racing_series
+from driver
+group by racing_series
+
+S:
+S:
+S:
+
+20. What are the name and citizenship of the drivers who have driven the vehicle model 'DJ1'?
+P: Return the names and citizenships of drivers who have driven the vehicle with the model 'DJ1'.
+
+select T1.name, T1.citizenship
+from driver as T1 join vehicle_driver as T2
+on T1.driver_id = T2.driver_id
+join vehicle as T3
+on T2.vehicle_id = T3.vehicle_id
+where T3.model = 'DJ1'
+
+S:
+S:
+S:
+
+21. How many drivers have not driven any cars?
+P: Count the number of drivers who have not driven any vehicles.
+
+select count(*)
+from driver
+where driver_id not in (
+select driver_id from vehicle_driver
+)
+
+S:
+S:
+S:

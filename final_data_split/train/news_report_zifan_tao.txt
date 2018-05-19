@@ -1,0 +1,119 @@
+
+1. How many journalists are there?
+
+SELECT count(*)
+FROM journalist
+
+2. List the names of journalists in ascending order of years working.
+
+SELECT Name
+FROM journalist
+order by Years_working ASC
+
+3. What are the nationalities and ages of journalists?
+
+SELECT Nationality, Age
+FROM journalist
+
+4. Show the names of journalists from "England" or "Wales".
+
+SELECT Name
+FROM journalist
+Where Nationality = "England" or Nationality = "Wales"
+
+5. What is the average number of years spent working as a journalist?
+
+SELECT avg(Years_working)
+FROM journalist
+
+6. What is the nationality of the journalist with the largest number of years working?
+
+SELECT Nationality
+FROM journalist
+order by Years_working DESC limit 1
+
+7. Show the different nationalities and the number of journalists of each nationality.
+
+SELECT Nationality, COUNT(*)
+FROM journalist
+group by Nationality
+ 
+8. Show the most common nationality for journalists.
+
+SELECT Nationality
+FROM journalist
+group by Nationality
+order by COUNT(*) DESC limit 1
+
+9. Show the nations that have both journalists with more than 10 years of working and journalists with less than 3 years of working.
+
+SELECT Nationality
+from journalist
+Where Years_working > 10
+Intersect 
+SELECT Nationality
+from journalist
+Where Years_working < 3
+
+10. Show the dates, places, and names of events in descending order of the attendance.
+
+SELECT Date, Name, venue
+from event
+order by Event_Attendance DESC 
+
+11. Show the names of journalists and the dates of the events they reported.
+
+SELECT T3.Name, T2.Date
+FROM news_report as T1 JOIN event as T2
+on T1.Event_ID = T2.Event_ID join journalist as T3
+on T1.journalist_ID = T3.journalist_ID
+
+12. Show the names of journalists and the names of the events they reported in ascending order 
+of the attendance of the event.
+
+SELECT T3.Name, T2.Name
+FROM news_report as T1 JOIN event as T2
+on T1.Event_ID = T2.Event_ID join journalist as T3
+on T1.journalist_ID = T3.journalist_ID
+order by T2.Event_Attendance ASC
+
+13. Show the names of journalists and the number of events they reported.
+
+SELECT T3.Name, COUNT(*)
+FROM news_report as T1 JOIN event as T2
+on T1.Event_ID = T2.Event_ID join journalist as T3
+on T1.journalist_ID = T3.journalist_ID
+group by T3.Name
+
+14. Show the names of journalists that have reported more than one event.
+
+SELECT T3.Name
+FROM news_report as T1 JOIN event as T2
+on T1.Event_ID = T2.Event_ID join journalist as T3
+on T1.journalist_ID = T3.journalist_ID
+group by T3.Name
+Having COUNT(*) > 1
+
+15. List the names of journalists who have not reported any event.
+
+SELECT Name
+from journalist
+where journalist_ID not in (SELECT journalist_ID FROM news_report)
+
+16. what are the average and maximum attendances of all events?
+
+select avg(Event_Attendance), max(Event_Attendance)
+from event
+
+17. Find the average age and experience working length of journalists working on different role type.
+
+select avg(t1.age), avg(Years_working), t2.work_type
+from journalist as t1 join news_report as t2 on t1.journalist_id = t2.journalist_id
+group by t2.work_type
+
+18. List the event venues and names that have the top 2 most number of people attended.
+
+select venue, name
+from event
+order by Event_Attendance desc
+limit 2

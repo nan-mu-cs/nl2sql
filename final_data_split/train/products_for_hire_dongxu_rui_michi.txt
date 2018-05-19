@@ -1,0 +1,234 @@
+1. Are the customers holding coupons with amount 500 bad or good?
+P: 
+
+select T1.good_or_bad_customer
+from customers as T1 join discount_coupons as T2
+on T1.coupon_id = T2.coupon_id
+where T2.coupon_amount = 500
+
+S:
+S:
+S:
+
+
+2. How many bookings did each customer make? List the customer id, first name, and the count.
+P: 
+
+select T1.customer_id, T1.first_name, count(*)
+from Customers as T1 join bookings as T2
+on T1.customer_id = T2.customer_id
+group by T1.customer_id
+
+S:
+S:
+S:
+
+
+3. What is the maximum total amount paid by a customer? List the customer id and amount.
+P: 
+
+select customer_id, sum(amount_paid)
+from Payments
+group by customer_id
+order by sum(amount_paid) desc limit 1
+
+S:
+S:
+S:
+
+
+4. What are the id and the amount of refund of the booking that incurred the most times of payments?
+P: 
+
+select T1.booking_id, T1.amount_of_refund
+from Bookings as T1 join Payments as T2
+on T1.booking_id = T2.booking_id
+group by T1.booking_id
+order by count(*) desc limit 1
+
+S:
+S:
+S:
+
+
+5. What is the id of the product that is booked for 3 times?
+P: 
+
+select product_id
+from products_booked
+group by product_id
+having count(*) = 3
+
+S:
+S:
+S:
+
+
+6. What is the product description of the product booked with an amount of 102.76?
+P: 
+
+select T2.product_description
+from products_booked as T1 join products_for_hire as T2
+on T1.product_id = T2.product_id
+where T1.booked_amount = 102.76
+
+S:
+S:
+S:
+
+
+7. What are the start date and end date of the booking that has booked the product named 'Book collection A'?
+P: 
+
+select T3.booking_start_date,  T3.booking_end_date
+from Products_for_hire as T1 join products_booked as T2
+on T1.product_id = T2.product_id
+join bookings as T3
+on T2.booking_id = T3.booking_id
+where T1.product_name = 'Book collection A'
+
+S:
+S:
+S:
+
+
+8. What are the names of products whose availability equals to 1?
+P: 
+
+select T2.product_name
+from view_product_availability as T1 join products_for_hire as T2
+on T1.product_id = T2.product_id
+where T1.available_yn = 1
+
+S:
+S:
+S:
+
+
+9. How many different product types are there?
+P: 
+
+select count(distinct product_type_code)
+from products_for_hire
+
+S:
+S:
+S:
+
+
+10. What are the first name, last name, and gender of all the good customers? Order by their last name.
+P: 
+
+select first_name, last_name, gender_mf
+from customers
+where good_or_bad_customer = 'good'
+order by last_name
+
+S:
+S:
+S:
+
+
+11. What is the average amount due for all the payments?
+P: 
+
+select avg(amount_due)
+from payments
+
+S:
+S:
+S:
+
+
+12. What are the maximum, minimum, and average booked count for the products booked?
+P: 
+
+select max(booked_count), min(booked_count), avg(booked_count)
+from products_booked
+
+S:
+S:
+S:
+
+
+13. What are all the distinct payment types?
+P: 
+
+select distinct payment_type_code
+from payments
+
+S:
+S:
+S:
+
+
+14. What are the daily hire costs for the products with substring 'Book' in its name?
+P: 
+
+select daily_hire_cost
+from Products_for_hire
+where product_name like '%Book%'
+
+S:
+S:
+S:
+
+
+15. How many products are never booked with amount higher than 200?
+P: 
+
+select count(*)
+from Products_for_hire
+where product_id not in (
+select product_id
+from products_booked
+where booked_amount > 200
+)
+
+S:
+S:
+S:
+
+
+16. What are the coupon amount of the coupons owned by both good and bad customers?
+P: 
+
+select T1.coupon_amount
+from Discount_Coupons as T1 join customers as T2
+on T1.coupon_id = T2.coupon_id
+where T2.good_or_bad_customer = 'good'
+intersect
+select T1.coupon_amount
+from Discount_Coupons as T1 join customers as T2
+on T1.coupon_id = T2.coupon_id
+where T2.good_or_bad_customer = 'bad'
+
+S:
+S:
+S:
+
+
+17. What are the payment date of the payment with amount paid higher than 300 or with payment type is 'Check'
+P: 
+
+select payment_date
+from payments
+where amount_paid > 300 or payment_type_code = 'Check'
+
+S:
+S:
+S:
+
+
+18. What are the names and descriptions of the products that are of 'Cutlery' type and have daily hire cost lower than 20?
+P: 
+
+select product_name, product_description
+from products_for_hire
+where product_type_code = 'Cutlery' and daily_hire_cost < 20
+
+S:
+S:
+S:
+
+

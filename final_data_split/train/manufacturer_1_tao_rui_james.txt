@@ -1,0 +1,288 @@
+Total # = 40
+
+1. Who is the founder of Sony?
+P: Return the founder of Sony.
+
+Select founder
+from manufacturers
+Where name = 'Sony'
+
+2. Where is the headquarter of the company founded by James?
+P: What is the headquarter of the company whose founder is James?
+
+Select headquarter
+From manufacturers
+Where founder = 'James'
+
+3. Find all manufacturers' names and their headquarters, sorted by the ones with highest revenue first.
+P: What are the names and headquarters of all manufacturers, ordered by revenue descending?
+
+Select name, headquarter
+From manufacturers
+Order by revenue desc
+
+4. What are the average, maximum and total revenues of all companies?
+P: Return the average, maximum, and total revenues across all manufacturers.
+
+Select avg(revenue), max(revenue), sum(revenue)
+From manufacturers
+
+5. How many companies were created by Andy?
+P: Return the number of companies created by Andy.
+
+Select count(*)
+From manufacturers
+Where founder = 'Andy'
+
+6. Find the total revenue created by the companies whose headquarter is located at Austin.
+P: What is the sum of revenue from companies with headquarters in Austin?
+
+Select sum(revenue)
+From manufacturers
+Where headquarter = 'Austin'
+
+7. What are the different cities listed?
+P: Give the distinct headquarters of manufacturers.
+
+Select distinct headquarter
+From manufacturers
+
+8. Find the number of manufactures that are based in Tokyo or Beijing.
+P: How many manufacturers have headquarters in either Tokyo or Beijing?
+
+Select count(*)
+From manufacturers
+Where headquarter = 'Tokyo' or headquarter = 'Beijing'
+
+9. Find the founder of the company whose name begins with the letter 'S'.
+P: Who is the founders of companies whose first letter is S?
+
+Select founder
+From manufacturers
+Where name LIKE 'S%'
+
+10. Find the name of companies whose revenue is between 100 and 150.
+P: What are the names of companies with revenue between 100 and 150?
+
+Select name
+From manufacturers
+Where revenue between 100 and 150
+
+11. What is the total revenue of all companies whose main office is at Tokyo or Taiwan?
+P: Return the total revenue of companies with headquarters in Tokyo or Taiwan.
+
+Select sum(revenue)
+From manufacturers
+Where Headquarter = 'Tokyo' or Headquarter = 'Taiwan'
+
+12. Find the name of product that is produced by both companies Creative Labs and Sony.
+P: What are the names of products produced by both Creative Labs and Sony?
+
+Select T1.name
+From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
+where T2.name = 'Creative Labs'
+INTERSECT
+Select T1.name
+From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
+where T2.name = 'Sony'
+
+13. Find the name, headquarter and founder of the manufacturer that has the highest revenue.
+P: What are the names, headquarters and founders of the company with the highest revenue?
+
+Select name, headquarter, founder
+From manufacturers
+Order by revenue desc
+Limit 1
+
+14. Find the name, headquarter and revenue of all manufacturers sorted by their revenue in the descending order.
+P: What are the names, headquarters and revenues for manufacturers, sorted by revenue descending?
+
+Select name, headquarter, revenue
+From manufacturers
+Order by revenue desc
+
+
+15. Find the name of companies whose revenue is greater than the average revenue of all companies.
+P: What are the names of manufacturers with revenue greater than the average of all revenues?
+
+Select name
+From manufacturers
+Where revenue > (select avg(revenue) From manufacturers)
+
+16. Find the name of companies whose revenue is smaller than the revenue of all companies based in Austin.
+P: What are the names of companies with revenue less than the lowest revenue of any manufacturer in Austin?
+
+Select name
+From manufacturers
+Where revenue < (select min(revenue) From manufacturers where headquarter = 'Austin')
+
+17. Find the total revenue of companies whose revenue is larger than the revenue of some companies based in Austin.
+P: What is the total revenue of companies with revenue greater than the lowest revenue of any manufacturer in Austin?
+
+Select sum(revenue)
+From manufacturers
+Where revenue > (select min(revenue) From manufacturers where headquarter = 'Austin')
+
+18. Find the total revenue of companies of each founder.
+P: What is the total revenue of companies started by founder?
+
+Select sum(revenue), founder
+From manufacturers
+Group by founder
+
+19. Find the name and revenue of the company that earns the highest revenue in each city.
+P: What are the names and revenues of the companies with the highest revenues in each headquarter city?
+
+Select name, max(revenue), Headquarter
+From manufacturers
+Group by Headquarter
+
+20. Find the total revenue for each manufacturer.
+P: What is the total revenue of each manufacturer?
+
+Select sum(revenue), name
+From manufacturers
+Group by name
+
+21. Find the average prices of all products from each manufacture, and list each company's name.
+P: What are the average prices of products for each manufacturer?
+
+Select avg(T1.price), T2.name
+From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
+Group by T2.name
+
+22. Find the number of different products that are produced by companies at different headquarter cities.
+P: How many different products are produced in each headquarter city?
+
+Select count(distinct T1.name), T2.Headquarter
+From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
+Group by T2.Headquarter
+
+23. Find number of products which Sony does not make.
+P: How many products are not made by Sony?
+
+Select count(distinct name)
+From products
+Where name NOT IN (select T1.name From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code where T2.name = 'Sony')
+
+24. Find the name of companies that do not make DVD drive.
+P: What are the names of companies that do not make DVD drives?
+
+Select name
+from manufacturers
+EXCEPT
+Select T2.name
+From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
+where T1.name = 'DVD drive'
+
+25. Find the number of products for each manufacturer, showing the name of each company.
+P: How many products are there for each manufacturer?
+
+Select count(*), T2.name
+From products as T1 JOIN manufacturers as T2 on T1.Manufacturer = T2.code
+Group by T2.name
+
+26. Select the names of all the products in the store.
+P: What are the names of all products?
+
+select Name
+from Products
+
+27. Select the names and the prices of all the products in the store.
+P: What are the names and prices of all products in the store?
+
+select name, price
+from products
+
+28. Select the name of the products with a price less than or equal to $200.
+P: What are the names of products with price at most 200?
+
+select name
+from products
+where price <= 200
+
+29. Find all information of all the products with a price between $60 and $120.
+P: What is all the information of all the products that have a price between 60 and 120?
+
+select *
+from products
+where price between 60 and 120
+
+30. Compute the average price of all the products.
+P: What is the average price across all products?
+
+select avg(price)
+from products
+
+31. Compute the average price of all products with manufacturer code equal to 2.
+P: What is the average price of products with manufacturer codes equal to 2?
+
+select avg(price)
+from products
+where Manufacturer = 2
+
+32. Compute the number of products with a price larger than or equal to $180.
+P: How many products have prices of at least 180?
+
+select count(*)
+from products
+where price>=180
+
+33. Select the name and price of all products with a price larger than or equal to $180, and sort first by price (in descending order), and then by name  (in ascending order).
+P: What are the names and prices of products that cost at least 180, sorted by price decreasing and name ascending?
+
+select name, price
+from products
+where price >= 180
+order by price desc, name asc
+
+34. Select all the data from the products and each product's manufacturer.
+P: What is all the product data, as well as  each product's manufacturer?
+
+select *
+from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
+
+35. Select the average price of each manufacturer's products, showing only the manufacturer's code.
+P: What are the average prices of products, grouped by manufacturer code?
+
+SELECT AVG(Price), Manufacturer
+FROM Products
+GROUP BY Manufacturer
+
+36. Select the average price of each manufacturer's products, showing the manufacturer's name.
+P: What are the average prices of products, grouped by manufacturer name?
+
+select avg(T1.Price), T2.name
+from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
+group by T2.name
+
+37. Select the names of manufacturer whose products have an average price higher than or equal to $150.
+P: What are the names and average prices of products for manufacturers whose products cost on average 150 or more?
+
+select avg(T1.Price), T2.name
+from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
+group by T2.name
+having avg(T1.price)>=150
+
+38. Select the name and price of the cheapest product.
+P: What is the name and price of the cheapest product?
+
+SELECT name, price
+FROM Products
+ORDER BY price ASC
+LIMIT 1
+
+39. Select the name of each manufacturer along with the name and price of its most expensive product.
+P: For each manufacturer name, what are the names and prices of their most expensive product?
+
+select T1.Name, max(T1.Price), T2.name
+from products as T1 join Manufacturers as T2 on T1.manufacturer = T2.code
+group by T2.name
+
+40. Select the code of the product that is cheapest in each product category.
+P: What are the codes and names of the cheapest products in each category?
+
+Select code, name
+from products
+Group by name
+Having price = min(price)

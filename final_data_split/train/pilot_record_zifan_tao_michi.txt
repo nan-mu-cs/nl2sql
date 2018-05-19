@@ -1,0 +1,191 @@
+1. How many pilots are there?
+P: 
+
+SELECT count(*)
+FROM pilot
+
+S:
+S:
+S:
+
+
+2. List the names of pilots in ascending order of rank.
+P: 
+
+SELECT Pilot_name
+FROM pilot
+order by Rank ASC
+
+S:
+S:
+S:
+
+
+3. What are the positions and teams of pilots?
+P: 
+
+SELECT Position, Team
+FROM pilot
+
+S:
+S:
+S:
+
+
+4. List the distinct positions of pilots older than 30.
+P: 
+
+SELECT distinct Position
+FROM pilot
+Where Age > 30
+
+S:
+S:
+S:
+
+
+5. Show the names of pilots from team "Bradley" or "Fordham".
+P: 
+
+SELECT Pilot_name
+FROM pilot
+Where Team = "Bradley" or Team = "Fordham"
+
+S:
+S:
+S:
+
+
+6. What is the joined year of the pilot of the highest rank?
+P: 
+
+SELECT Join_Year
+FROM pilot
+order by Rank ASC limit 1
+
+S:
+S:
+S:
+
+
+7. What are the different nationalities of pilots? Show each nationality and the number of pilots of each nationality.
+P: 
+
+SELECT Nationality, COUNT(*)
+FROM pilot
+group by Nationality
+
+S:
+S:
+S:
+
+
+8. Show the most common nationality of pilots.
+P: 
+
+SELECT Nationality
+FROM pilot
+group by Nationality
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+9. Show the pilot positions that have both pilots joining after year 2005 and pilots joining before 2000.
+P: 
+
+SELECT Position
+from pilot
+Where Join_Year	< 2000
+Intersect
+SELECT Position
+from pilot
+Where Join_Year	> 2005
+
+S:
+S:
+S:
+
+
+10. Show the names of pilots and models of aircrafts they have flied with.
+P: 
+
+SELECT T3.Pilot_name, T2.Model
+FROM pilot_record as T1 join aircraft as T2
+ON T1.Aircraft_ID = T2.Aircraft_ID join pilot as T3
+on T1.Pilot_ID = T3.Pilot_ID
+
+S:
+S:
+S:
+
+
+11. Show the names of pilots and fleet series of the aircrafts they have flied with in ascending order of the rank of the pilot.
+P: 
+
+SELECT T3.Pilot_name, T2.Fleet_Series
+FROM pilot_record as T1 join aircraft as T2
+ON T1.Aircraft_ID = T2.Aircraft_ID join pilot as T3
+on T1.Pilot_ID = T3.Pilot_ID
+order by T3.Rank
+
+S:
+S:
+S:
+
+
+12. Show the fleet series of the aircrafts flied by pilots younger than 34
+P: 
+
+SELECT T2.Fleet_Series
+FROM pilot_record as T1 join aircraft as T2
+ON T1.Aircraft_ID = T2.Aircraft_ID join pilot as T3
+on T1.Pilot_ID = T3.Pilot_ID
+Where T3.Age < 34
+
+S:
+S:
+S:
+
+
+13. Show the names of pilots and the number of records they have.
+P: 
+
+SELECT T2.Pilot_name, COUNT(*)
+FROM pilot_record as T1 join pilot as T2
+on T1.pilot_ID = T2.pilot_ID
+group by T2.Pilot_name
+
+S:
+S:
+S:
+
+
+14. Show names of pilots that have more than one record.
+P: 
+
+SELECT T2.Pilot_name, COUNT(*)
+FROM pilot_record as T1 join pilot as T2
+on T1.pilot_ID = T2.pilot_ID
+group by T2.Pilot_name
+Having COUNT(*) > 1
+
+S:
+S:
+S:
+
+
+15. List the names of pilots that do not have any record.
+P: 
+
+SELECT Pilot_name
+from pilot
+where Pilot_ID not in (SELECT Pilot_ID FROM pilot_record)
+
+S:
+S:
+S:
+
+

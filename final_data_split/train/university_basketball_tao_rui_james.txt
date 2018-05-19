@@ -1,0 +1,258 @@
+total # = 23
+
+1. List all schools and their nicknames in the order of founded year.
+P: What are the different schools and their nicknames, ordered by their founding years?
+
+Select school, nickname
+From university
+Order by founded
+
+S:
+S:
+S:
+
+2. List all public schools and their locations.
+P: What are the public schools and what are their locations?
+
+Select school, location
+From university
+Where affiliation = 'Public'
+
+S:
+S:
+S:
+
+3. When was the school with the largest enrollment founded?
+P: Return the founded year for the school with the largest enrollment.
+
+Select founded
+From university
+Order by enrollment desc
+Limit 1
+
+S:
+S:
+S:
+
+4. Find the founded year of the newest non public school.
+P: What is the founded year of the non public school that was founded most recently?
+
+Select founded
+From university
+Where affiliation != 'Public'
+Order by founded desc
+Limit 1
+
+S:
+S:
+S:
+
+5. How many schools are in the basketball match?
+P: Count the number of schools that have had basketball matches.
+
+Select count(distinct school_id)
+From basketball_match
+
+S:
+S:
+S:
+
+6. What is the highest acc percent score in the competition?
+P: Return the highest acc percent across all basketball matches.
+
+Select acc_percent
+From basketball_match
+Order by acc_percent desc
+Limit 1
+
+S:
+S:
+S:
+
+7. What is the primary conference of the school that has the lowest acc percent score in the competition?
+P: Return the primary conference of the school with the lowest acc percentage score.
+
+Select t1.Primary_conference
+From university as t1 join basketball_match as t2 on t1.school_id = t2.school_id
+Order by t2.acc_percent
+Limit 1
+
+S:
+S:
+S:
+
+8. What is the team name and acc regular season score of the school that was founded for the longest time?
+P: Return the name of the team and the acc during the regular season for the school that was founded the earliest.
+
+Select t2.team_name, t2.ACC_Regular_Season
+From university as t1 join basketball_match as t2 on t1.school_id = t2.school_id
+Order by t1.founded
+Limit 1
+
+S:
+S:
+S:
+
+9. Find the location and all games score of the school that has Clemson as its team name.
+P: What are the all games score and location of the school called Clemson?
+
+Select t2.All_Games, t1.location
+From university as t1 join basketball_match as t2 on t1.school_id = t2.school_id
+Where team_name = 'Clemson'
+
+S:
+S:
+S:
+
+10. What are the average enrollment size of the universities that are founded before 1850?
+P: Return the average enrollment of universities founded before 1850.
+
+Select avg(enrollment)
+From university
+Where founded < 1850
+
+S:
+S:
+S:
+
+11. Show the enrollment and primary_conference of the oldest college.
+P: What are the enrollment and primary conference for the university which was founded the earliest?
+
+Select enrollment, primary_conference
+From university
+Order by founded
+Limit 1
+
+S:
+S:
+S:
+
+12. What is the total and minimum enrollment of all schools?
+P: Return the total and minimum enrollments across all schools.
+
+Select sum(enrollment), min(enrollment)
+From university
+
+S:
+S:
+S:
+
+13. Find the total student enrollment for different affiliation type schools.
+P: What are the total enrollments of universities of each affiliation type?
+
+Select sum(enrollment), affiliation
+From university
+Group by affiliation
+
+S:
+S:
+S:
+
+14. How many schools do not participate in the basketball match?
+P: Count the number of universities that do not participate in the baketball match.
+
+Select count(*)
+From university
+Where school_id not in (select school_id from basketball_match)
+
+S:
+S:
+S:
+
+15. Find the schools that were either founded after 1850 or public.
+P: What are the schools that were either founded before 1850 or are public?
+
+Select school
+From university
+Where founded > 1850 or affiliation = 'Public'
+
+S:
+S:
+S:
+
+16. Find how many different affiliation types there are.
+P: Count the number of different affiliation types.
+
+Select count(distinct affiliation)
+From university
+
+S:
+S:
+S:
+
+17. Find how many school locations have the word 'NY'.
+P: How many universities have a location that contains NY?
+
+Select count(*)
+From university
+Where location LIKE "%NY%"
+
+S:
+S:
+S:
+
+18. Find the team names of the universities whose enrollments are smaller than the average enrollment size.
+P: What are the names of teams from universities that have a below average enrollment?
+
+Select t2.team_name
+From university as t1 join basketball_match as t2 on t1.school_id = t2.school_id
+Where enrollment < (select avg(enrollment) from university)
+
+S:
+S:
+S:
+
+19. Find the number of universities that have over a 20000 enrollment size for each affiliation type.
+P: What are the different affiliations, and how many schools with each have an enrollment size of above 20000?
+
+Select count(*), affiliation
+From university
+Where enrollment > 20000
+Group by affiliation
+
+S:
+S:
+S:
+
+20. Find the total number of students enrolled in the colleges that were founded after the year of 1850 for each affiliation type.
+P: What are the different affiliations, and what is the total enrollment of schools founded after 1850 for each enrollment type?
+
+Select sum(Enrollment), affiliation
+From university
+Where founded > 1850
+Group by affiliation
+
+S:
+S:
+S:
+
+21. What is the maximum enrollment across all schools?
+P: Return the maximum enrollment across all schools.
+
+Select max(Enrollment)
+From university
+
+S:
+S:
+S:
+
+22. List all information regarding the basketball match.
+P: What is all the information about the basketball match?
+
+Select *
+From basketball_match
+
+S:
+S:
+S:
+
+23. List names of all teams in the basketball competition, ordered by all home scores in descending order.
+P: What are the names of all the teams in the basketball competition, sorted by all home scores in descending order?
+
+Select team_name
+From basketball_match
+Order by All_Home desc
+
+S:
+S:
+S:

@@ -1,0 +1,291 @@
+1. Find all the phone numbers.
+P: What are all the phone numbers?
+
+select customer_phone
+from available_policies
+
+S:
+S:
+S:
+
+
+2. What are the customer phone numbers under the policy "Life Insurance"?
+P: What are the phone numbers of customers using the policy with the code "Life Insurance"?
+
+select customer_phone
+from available_policies
+where policy_type_code = "Life Insurance"
+
+S:
+S:
+S:
+
+
+3. Which policy type has the most records in the database?
+P: Which policy type appears most frequently in the available policies?
+
+select policy_type_code
+from available_policies
+group by policy_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+4. What are all the customer phone numbers under the most popular policy type?
+P: Find the phone numbers of customers using the most common policy type among the available policies.
+
+select customer_phone
+from available_policies
+where policy_type_code = (select policy_type_code
+from available_policies
+group by policy_type_code
+order by count(*) desc
+limit 1)
+
+S:
+S:
+S:
+
+
+5. Find the policy type used by more than 4 customers.
+P: Find the policy types more than 4 customers use. Show their type code.
+
+select policy_type_code
+from available_policies
+group by policy_type_code
+having count(*) > 4
+
+S:
+S:
+S:
+
+
+6. Find the total and average amount of settlements.
+P: Return the sum and average of all settlement amounts.
+
+select sum(settlement_amount), avg(settlement_amount)
+from settlements
+
+S:
+S:
+S:
+
+
+7. Find the name of services that have been used for more than 2 times in first notification of loss.
+P: Which services have been used more than twice in first notification of loss? Return the service name.
+
+select t2.service_name
+from first_notification_of_loss as t1 join services as t2 on t1.service_id = t2.service_id
+group by t1.service_id
+having count(*) > 2
+
+S:
+S:
+S:
+
+
+8. What is the effective date of the claim that has the largest amount of total settlement?
+P: Find the claim that has the largest total settlement amount. Return the effective date of the claim.
+
+select t1.Effective_Date
+from claims as t1 join settlements as t2
+on t1.claim_id = t2.claim_id
+group by t1.claim_id
+order by sum(t2.settlement_amount) desc
+limit 1
+
+S:
+S:
+S:
+
+
+9. How many policies are listed for the customer named "Dayana Robel"?
+P: Count the total number of policies used by the customer named "Dayana Robel".
+
+select count(*)
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name = "Dayana Robel"
+
+S:
+S:
+S:
+
+
+10. What is the name of the customer who has the most policies listed?
+P: Which customer uses the most policies? Give me the customer name.
+
+select t1.customer_name
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+group by t1.customer_name
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+11. What are all the policy types of the customer named "Dayana Robel"?
+P: Tell me the types of the policy used by the customer named "Dayana Robel".
+
+select distinct t3.policy_type_code
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+join available_policies as t3
+on t2.policy_id = t3.policy_id
+where t1.customer_name = "Dayana Robel"
+
+S:
+S:
+S:
+
+
+12. What are all the policy types of the customer that has the most policies listed?
+P: List all the policy types used by the customer enrolled in the most policies.
+
+select distinct t3.policy_type_code
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+join available_policies as t3
+on t2.policy_id = t3.policy_id
+where t1.customer_name = (select t1.customer_name
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+group by t1.customer_name
+order by count(*) desc
+limit 1)
+
+S:
+S:
+S:
+
+
+13. List all the services in the alphabetical order.
+P: Give me a list of all the service names sorted alphabetically.
+
+select service_name
+from services
+order by service_name
+
+S:
+S:
+S:
+
+
+14. How many services are there?
+P: Count the total number of available services.
+
+select count(*)
+from services
+
+S:
+S:
+S:
+
+
+15. Find the names of users who do not have a first notification of loss record.
+P: Which customers do not have a first notification of loss record? Give me the customer names.
+
+select customer_name
+from customers
+except
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+
+S:
+S:
+S:
+
+
+16. Find the names of customers who have used either the service "Close a policy" or the service "Upgrade a policy".
+P: Which customers have used the service named "Close a policy" or "Upgrade a policy"? Give me the customer names.
+
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t3.service_name = "Close a policy" or t3.service_name = "Upgrade a policy"
+
+S:
+S:
+S:
+
+
+17. Find the names of customers who have used both the service "Close a policy" and the service "New policy application".
+P: Which customers have used both the service named "Close a policy" and the service named "Upgrade a policy"? Give me the customer names.
+
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t3.service_name = "Close a policy"
+intersect
+select t1.customer_name
+from customers as t1 join first_notification_of_loss as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t3.service_name = "New policy application"
+
+S:
+S:
+S:
+
+
+18. Find the IDs of customers whose name contains "Diana".
+P: What are the IDs of customers who have "Diana" in part of their names?
+
+select customer_id
+from customers
+where customer_name like "%Diana%"
+
+S:
+S:
+S:
+
+
+19. What are the maximum and minimum settlement amount on record?
+P: Find the maximum and minimum settlement amount.
+
+select max(settlement_amount), min(settlement_amount)
+from settlements
+
+S:
+S:
+S:
+
+
+20. List all the customers in increasing order of IDs.
+P: What is the ordered list of customer ids?
+
+select customer_id, customer_name
+from customers
+order by customer_id asc
+
+S:
+S:
+S:
+
+
+21. Retrieve the open and close dates of all the policies associated with the customer whose name contains "Diana"
+P: What are the open and close dates of all the policies used by the customer who have "Diana" in part of their names?
+
+select t2.date_opened, t2.date_closed
+from customers as t1 join customers_policies as t2
+on t1.customer_id = t2.customer_id
+where t1.customer_name like "%Diana%"
+
+S:
+S:
+S:
+
+

@@ -1,0 +1,267 @@
+# Total = 20
+
+1. How many songs contain "Love" in their names?
+P: 
+
+SELECT count(*)
+FROM songs
+where name like "%Love%"
+
+S:
+S:
+S:
+
+
+2. List the name of the songs in ascending, lexicographical order.
+P: 
+
+SELECT name
+FROM songs
+order by name
+
+S:
+S:
+S:
+
+
+3. List the names and languages of the songs.
+P: 
+
+SELECT name, language
+FROM songs
+
+S:
+S:
+S:
+
+
+4. What are the maximum and minimum voice sound quality score of the performances?
+P: 
+
+select max(voice_sound_quality), min(voice_sound_quality)
+from performance_score
+
+S:
+S:
+S:
+
+
+5. What are the voice sound quality score, rhythm tempo score and stage presence score performed by the participant named 'Freeway'?
+P: 
+
+select T1.voice_sound_quality, T1.rhythm_tempo, T1.stage_presence
+from performance_score as T1 join participants as T2
+on T1.participant_id = T2.id
+where T2.name = 'Freeway'
+
+S:
+S:
+S:
+
+
+6. What are the id, language and original artist of the songs whose name is not 'Love'?
+P: 
+
+SELECT id, language, original_artist
+FROM songs
+Where name != 'Love'
+
+S:
+S:
+S:
+
+
+7. What are the names and original artists of the song whose English translation is 'All the streets of love'?
+P: 
+
+SELECT name, original_artist
+FROM songs
+Where english_translation = 'All the streets of love'
+
+S:
+S:
+S:
+
+
+8. What are the distinct stage presence scores for all the songs that are in language 'English' ?
+P: 
+
+select distinct T2.stage_presence
+from songs as T1 join performance_score as T2
+on T1.id = T2.songs_id
+where T1.language = 'English'
+
+S:
+S:
+S:
+
+
+9. What are the ids and names of the participants who have performed at least two songs?
+P: 
+
+SELECT T1.id, T1.Name
+FROM participants as T1 join performance_score as T2
+on T2.participant_id = T1.id
+group by T1.id
+having count(*) >= 2
+
+S:
+S:
+S:
+
+
+10. What are the ids, names and popularity of the participants, order by the number of songs they perform?
+P: 
+
+SELECT T1.id, T1.Name, T1.popularity
+FROM participants as T1 join performance_score as T2
+on T2.participant_id = T1.id
+group by T1.id
+order by count(*)
+
+S:
+S:
+S:
+
+
+11. What are the id and name of the participants who received score 5 for their sound quality or rhythm tempo?
+P: 
+
+SELECT T1.id, T1.name
+FROM participants as T1 join performance_score as T2
+on T2.participant_id = T1.id
+where T2.voice_sound_quality = 5 or T2.rhythm_tempo = 5
+
+S:
+S:
+S:
+
+
+12. What are the voice sound quality scores received for the song named ' The Balkan Girls ' in English language ?
+P: 
+
+SELECT T1.voice_sound_quality
+from performance_score as T1 join songs as T2
+on T1.songs_id = T2.id
+where T2.name = ' The Balkan Girls ' and T2.language = 'English'
+
+S:
+S:
+S:
+
+
+13. What are the id and name of the song sung by the most participants?
+P: 
+
+select T1.id, T1.name
+from songs as T1 join performance_score as T2
+on T1.id = T2.songs_id
+group by T1.id
+order by count(*) desc limit 1
+
+S:
+S:
+S:
+
+
+14. How many performances have a stage presence score less than 7 or higher than 9?
+P: 
+
+select count(*)
+from performance_score
+where stage_presence < 7 or stage_presence > 9
+
+S:
+S:
+S:
+
+
+15. How many songs listed are not performed?
+P: 
+
+select count(*)
+from songs
+where id not in (
+select songs_id from performance_score
+);
+
+S:
+S:
+S:
+
+
+16. What are the average rhythm scores for the songs in each different language?
+P: 
+
+SELECT avg(T2.rhythm_tempo), T1.language
+FROM songs as T1 join performance_score as T2
+on T2.songs_id = T1.id
+group by T1.language
+
+S:
+S:
+S:
+
+
+17. What are the distinct names of the participants who have sung a song in 'English'?
+P: 
+
+select distinct T1.name
+from participants as T1 join performance_score as T2
+on T2.participant_id = T1.id
+join songs as T3
+on T3.id = T2.songs_id
+where T3.language = 'English'
+
+S:
+S:
+S:
+
+
+18. What are the name and popularity of participants who have sung a song both in 'Croatian' language and in 'English' language?
+P: 
+
+select T1.name, T1.popularity
+from participants as T1 join performance_score as T2
+on T2.participant_id = T1.id
+join songs as T3
+on T3.id = T2.songs_id
+where T3.language = 'Croatian'
+intersect
+select T1.name, T1.popularity
+from participants as T1 join performance_score as T2
+on T2.participant_id = T1.id
+join songs as T3
+on T3.id = T2.songs_id
+where T3.language = 'English'
+
+S:
+S:
+S:
+
+
+19. Which song names have the substring "Is"?
+P: 
+
+select name
+from songs
+where name like "%Is%"
+
+S:
+S:
+S:
+
+
+20. Find the original artists who sing songs with rhythm tempo above 5, andlist results for each sound quality.
+P: 
+
+select T2.original_artist
+from performance_score as T1 join songs as T2 on T2.id = T1.songs_id
+where T1.rhythm_tempo > 5
+order by T1.voice_sound_quality desc
+
+S:
+S:
+S:
+
+

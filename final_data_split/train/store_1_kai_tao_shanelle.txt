@@ -1,0 +1,708 @@
+Total # = 56
+
+1. A list of the top 5 countries by number of invoices. List country name and number of invoices.
+P: What are the top 5 countries by number of invoices and how many do they have?
+
+SELECT billing_country, COUNT(*)
+FROM invoices
+GROUP BY billing_country
+ORDER BY count(*) DESC
+LIMIT 5;
+
+S:
+S:
+S:
+
+2. A list of the top 8 countries by gross/total invoice size. List country name and gross invoice size.
+P: What are the names of the top 8 countries by total invoice size and what are those sizes?
+
+SELECT billing_country, SUM(total)
+FROM invoices
+GROUP BY billing_country
+ORDER BY SUM(total) DESC
+LIMIT 8;
+
+S:
+S:
+S:
+
+
+3. A list of the top 10 countries by average invoice size. List country name and average invoice size.
+P: What are the names of the countries and average invoice size of the top countries by size?
+
+SELECT billing_country, AVG(total)
+FROM invoices
+GROUP BY billing_country
+ORDER BY AVG(total) DESC
+LIMIT 10;
+
+S:
+S:
+S:
+
+
+6. Find out 5 customers who most recently purchased something. List customers' first and last name.
+P: What are the first and last names of the 5 customers who purchased something most recently?
+
+SELECT T1.first_name, T1.last_name
+FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id = T1.id
+ORDER BY T2.invoice_date DESC
+LIMIT 5;
+
+S:
+S:
+S:
+
+7. Find out the top 10 customers by total number of orders. List customers' first and last name and the number of total orders.
+P: What are the top 10 customers' first and last names by total number of orders and how many orders did they make?
+
+SELECT T1.first_name, T1.last_name, COUNT(*)
+FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id = T1.id
+GROUP BY T1.id
+ORDER BY COUNT(*) DESC
+LIMIT 10;
+
+S:
+S:
+S:
+
+8. List the top 10 customers by total gross sales. List customers' first and last name and total gross sales.
+P: What are the top 10 customers' first and last names with the highest gross sales, and also what are the sales?
+
+SELECT T1.first_name, T1.last_name, SUM(T2.total)
+FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id = T1.id
+GROUP BY T1.id
+ORDER BY SUM(T2.total) DESC
+LIMIT 10;
+
+S:
+S:
+S:
+
+9. List the top 5 genres by number of tracks. List genres name and total tracks.
+P: How many tracks does each genre have and what are the names of the top 5?
+
+SELECT T1.name, COUNT(*)
+FROM genres AS T1 JOIN tracks AS T2 ON T2.genre_id = T1.id
+GROUP BY T1.id
+ORDER BY count(*) DESC
+LIMIT 5;
+
+S:
+S:
+S:
+
+10. List every album's title.
+P: What are the titles of all the albums?
+
+SELECT title FROM albums;
+
+S:
+S:
+S:
+
+11. List every album ordered by album title in ascending order.
+P: What are the titles of all the albums alphabetically ascending?
+
+SELECT title FROM albums ORDER BY title;
+
+S:
+S:
+S:
+
+12. List every album whose title starts with A in alphabetical order.
+P: What are the titles of all albums that start with A in alphabetical order?
+
+SELECT title FROM albums WHERE title LIKE 'A%' ORDER BY title;
+
+
+S:
+S:
+S:
+
+13. List the customers first and last name of 10 least expensive invoices.
+P: What are the first and last names of the customers with the 10 cheapest invoices?
+
+SELECT T1.first_name, T1.last_name
+FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id = T1.id
+ORDER BY total
+LIMIT 10;
+
+
+S:
+S:
+S:
+
+
+14. List total amount of  invoice from Chicago, IL.
+P: What are the total amount of money in the invoices billed from Chicago, Illinois?
+
+SELECT sum(total) FROM invoices WHERE billing_city = "Chicago" AND billing_state = "IL";
+
+S:
+S:
+S:
+
+
+15. List the number of invoices from Chicago, IL.
+P: How many invoices were billed from Chicago, IL?
+
+SELECT COUNT(*) FROM invoices WHERE billing_city = "Chicago" AND billing_state = "IL";
+
+S:
+S:
+S:
+
+
+16. List the number of invoices from the US, grouped by state.
+P: How many invoices were billed from each state?
+
+SELECT billing_state, COUNT(*) FROM invoices WHERE billing_country = "USA" GROUP BY billing_state;
+
+
+S:
+S:
+S:
+
+
+17.List the state in the US with the most invoices.
+P: What are the states with the most invoices?
+
+SELECT billing_state, COUNT(*) FROM invoices WHERE billing_country = "USA" GROUP BY billing_state ORDER BY COUNT(*) DESC LIMIT 1;
+
+
+S:
+S:
+S:
+
+
+18. List the number of invoices and the invoice total from California.
+P: What is the number of invoices and total money billed in them from CA?
+
+SELECT billing_state, COUNT(*), SUM(total) FROM invoices WHERE billing_state = "CA";
+
+
+S:
+S:
+S:
+
+
+19. List Aerosmith's albums.
+P: What are the titles of all the Aerosmith albums?
+
+Select T1.title
+FROM albums AS T1 join artists AS T2 on  T1.artist_id=T2.id
+Where T2.name="Aerosmith";
+
+
+S:
+S:
+S:
+
+
+20. How many albums does Billy Cobham has?
+P: How many albums has Billy Cobam released?
+
+Select count(*)
+FROM albums AS T1 join artists AS T2 on  T1.artist_id=T2.id
+Where T2.name="Billy Cobham";
+
+S:
+S:
+S:
+
+
+21. Eduardo Martins is a customer at which company?
+P: What is the company where Eduardo Martins is a customer?
+
+SELECT company
+FROM customers
+WHERE first_name="Eduardo" and last_name="Martins";
+
+S:
+S:
+S:
+
+
+22. What is Astrid Gruber's email and phone number?
+P: What is the email and phone number of Astrid Gruber the customer?
+
+SELECT email, phone
+FROM customers
+WHERE first_name="Astrid" and last_name="Gruber";
+
+
+S:
+S:
+S:
+
+
+23. How many customers live in Prague city?
+P: How many customers live in the city of Prague?
+
+SELECT count(*)
+FROM customers
+WHERE city="Prague";
+
+S:
+S:
+S:
+
+25. How many customers in state of CA?
+P: How many customers are from California?
+
+SELECT count(*)
+FROM customers
+WHERE state="CA";
+
+
+S:
+S:
+S:
+
+
+26. What country does Roberto Almeida live?
+P: In which country does Roberto Almeida?
+
+SELECT country
+FROM customers
+WHERE first_name="Roberto" and last_name="Almeida";
+
+
+S:
+S:
+S:
+
+
+27. List the name of albums that are released by aritist whose name has 'Led'
+P: What is the title of the album that was released by the artist whose name has the phrase 'Led'?
+
+
+select T2.title
+from artists as T1 join albums as T2 on T1.id = T2.artist_id
+where T1.name LIKE '%Led%'
+
+
+S:
+S:
+S:
+
+
+28. How many customers does Steve Johnson support?
+P: What is the count of customers that Steve Johnson supports?
+
+SELECT count(*)
+FROM employees AS T1 JOIN customers AS T2 ON T2.support_rep_id=T1.id
+WHERE T1.first_name="Steve" and T1.last_name="Johnson";
+
+
+S:
+S:
+S:
+
+29. What is the title, phone and hire date of Nancy Edwards?
+P: What is the title, phone number and hire date for the employee named Nancy Edwards?
+
+SELECT title, phone, hire_date
+FROM employees
+WHERE first_name="Nancy" and last_name="Edwards";
+
+S:
+S:
+S:
+
+
+30. find the full name of employees who report to Nancy Edwards?
+P: What is the first and last name of the employee who reports to Nancy Edwards?
+
+SELECT T2.first_name,T2.last_name
+FROM employees AS T1 JOIN employees AS T2 ON T1.id=T2.reports_to
+WHERE T1.first_name="Nancy" and T1.last_name="Edwards";
+
+S:
+S:
+S:
+
+31. What is the address of employee Nancy Edwards?
+P: What is Nancy Edwards's address?
+
+SELECT address
+FROM employees
+WHERE first_name="Nancy" and last_name="Edwards";
+
+
+S:
+S:
+S:
+
+
+32. Find the full name of employee who supported the most number of customers.
+P: What is the full name of the employee who has the most customers?
+
+
+SELECT T1.first_name,T1.last_name
+FROM employees as T1 join customers as T2 on T1.id = T2.support_rep_id
+group by T1.id
+order by count(*) desc
+limit 1
+
+
+S:
+S:
+S:
+
+
+33. How many employees are living in Canada?
+P: How many employees live in Canada?
+
+SELECT count(*)
+FROM employees
+WHERE country="Canada";
+
+
+S:
+S:
+S:
+
+
+34. What is employee Nancy Edwards's phone number?
+P: What is the the phone number of Nancy Edwards?
+
+SELECT phone
+FROM employees
+WHERE first_name="Nancy" and last_name="Edwards";
+
+S:
+S:
+S:
+
+
+35. Who is the youngest employee in the company? List employee's first and last name.
+P: What si the youngest employee's first and last name?
+
+
+SELECT first_name,last_name
+FROM employees
+ORDER BY birth_date DESC
+LIMIT 1;
+
+
+S:
+S:
+S:
+
+
+36. List top 10 employee work longest in the company. List employee's first and last name.
+P: What are the first and last names of the top 10 longest-serving employees?
+
+SELECT first_name,last_name
+FROM employees
+ORDER BY hire_date ASC
+LIMIT 10;
+
+
+S:
+S:
+S:
+
+
+37. Find the number of employees whose title is IT Staff from each city?
+P: How many employees who are IT staff are from each city?
+
+SELECT count(*), city
+FROM employees
+where title = 'IT Staff'
+group by city
+
+
+S:
+S:
+S:
+
+
+38.Which employee manage most number of peoples? List employee's first and last name, and number of people report to that employee.
+P: What are the first and last names of all the employees and how many people report to them?
+
+SELECT T2.first_name,T2.last_name, count(T1.reports_to)
+FROM employees AS T1 JOIN employees AS T2 ON T1.reports_to=T2.id
+GROUP BY T1.reports_to
+ORDER BY count(T1.reports_to) desc
+LIMIT 1;
+
+
+S:
+S:
+S:
+
+
+39. How many orders does Lucas Mancini has?
+P: How many orders does Luca Mancini have in his invoices?
+
+SELECT count(*)
+FROM customers AS T1 JOIN invoices AS T2 ON T1.id=T2.customer_id
+WHERE T1.first_name="Lucas" and T1.last_name="Mancini";
+
+
+S:
+S:
+S:
+
+
+40. What is the total amount of money spent by Lucas Mancini?
+P: How much money did Lucas Mancini spend?
+
+SELECT sum(T2.total)
+FROM customers AS T1 JOIN invoices AS T2 ON T1.id=T2.customer_id
+WHERE T1.first_name="Lucas" and T1.last_name="Mancini";
+
+
+S:
+S:
+S:
+
+
+41. List all media types.
+P: What are the names of all the media types?
+
+SELECT name from media_types;
+
+
+S:
+S:
+S:
+
+
+42. List all different genre types.
+P: What are the different names of the genres?
+
+SELECT distinct name FROM genres;
+
+S:
+S:
+S:
+
+
+43. List the name of all playlist.
+P: What are the names of all the playlists?
+
+SELECT name FROM playlists;
+
+
+S:
+S:
+S:
+
+
+44. Who is the composer of track Fast As a Shark?
+P: What is the composer who created the track "Fast As a Shark"?
+
+SELECT composer
+FROM tracks
+WHERE name="Fast As a Shark";
+
+S:
+S:
+S:
+
+45. How long does track Fast As a Shark has?
+P: How many milliseconds long is Fast As a Shark?
+
+SELECT milliseconds
+FROM tracks
+WHERE name="Fast As a Shark";
+
+S:
+S:
+S:
+
+46. What is the name of tracks whose genre is Rock?
+P: What is the name of all tracks in the Rock genre?
+
+SELECT T2.name
+FROM genres AS T1 JOIN tracks AS T2 ON T1.id=T2.genre_id
+WHERE T1.name="Rock";
+
+S:
+S:
+S:
+
+
+47. What is title of album which track Balls to the Wall belongs to?
+P: What is the name of the album that has the track Ball to the Wall?
+
+SELECT T1.title
+FROM albums AS T1 JOIN tracks AS T2 ON T1.id=T2.genre_id
+WHERE T2.name="Balls to the Wall";
+
+S:
+S:
+S:
+
+
+48. List name of all tracks in Balls to the Wall.
+P: What is the name of all tracks in the album named Balls to the Wall?
+
+SELECT T2.name
+FROM albums AS T1 JOIN tracks AS T2 ON T1.id=T2.genre_id
+WHERE T1.title="Balls to the Wall";
+
+S:
+S:
+S:
+
+49. List title of albums have the number of tracks greater than 10.
+P: What are the names of the albums that have more than 10 tracks?
+
+SELECT T1.title
+FROM albums AS T1 JOIN tracks AS T2 ON T1.id=T2.album_id
+GROUP BY T1.id
+HAVING count(T1.id) > 10;
+
+S:
+S:
+S:
+
+50. List the name of tracks belongs to genre Rock and whose media type is MPEG audio file.
+P: What are the names of all Rock tracks that are stored on MPEG audio files?
+
+SELECT T2.name
+FROM genres AS T1 JOIN tracks AS T2 ON T1.id=T2.genre_id JOIN media_types AS T3 ON T3.id=T2.media_type_id
+WHERE T1.name="Rock" and T3.name="MPEG audio file";
+
+
+S:
+S:
+S:
+
+
+51. List the name of tracks belongs to genre Rock or media type is MPEG audio file.
+P: What are the names of all tracks that belong to the Rock genre and whose media type is MPEG?
+
+SELECT T2.name
+FROM genres AS T1 JOIN tracks AS T2 ON T1.id=T2.genre_id JOIN media_types AS T3 ON T3.id=T2.media_type_id
+WHERE T1.name="Rock" OR T3.name="MPEG audio file";
+
+
+S:
+S:
+S:
+
+
+52. List the name of tracks belongs to genre Rock or genre Jazz.
+P: What are the names of the tracks that are Rock or Jazz songs?
+
+SELECT T2.name
+FROM genres AS T1 JOIN tracks AS T2 ON T1.id=T2.genre_id
+WHERE T1.name="Rock" OR T1.name="Jazz"
+
+
+S:
+S:
+S:
+
+
+53. List the name of all tracks in the playlists of Movies.
+P: What are the names of all tracks that are on playlists titled Movies?
+
+SELECT T1.name
+FROM tracks AS T1 join playlist_tracks AS T2 ON T1.id=T2.track_id JOIN playlists AS T3 ON T3.id=T2.playlist_id
+WHERE T3.name="Movies";
+
+
+S:
+S:
+S:
+
+
+54. List the name of playlist which has number of tracks greater than 100.
+P: What are the names of all playlists that have more than 100 tracks?
+
+SELECT T2.name
+FROM playlist_tracks AS T1 JOIN playlists AS T2 ON T2.id=T1.playlist_id
+GROUP BY T1.playlist_id
+HAVING count(T1.track_id) > 100;
+
+
+S:
+S:
+S:
+
+
+55.List all tracks bought by customer Daan Peeters.
+P: What are the tracks that Dean Peeters bought?
+
+SELECT T1.name
+FROM tracks AS T1 JOIN invoice_lines AS T2 ON T1.id=T2.track_id JOIN invoices AS T3 ON T3.id=T2.invoice_id JOIN customers AS T4 ON T4.id=T3.customer_id
+WHERE T4.first_name="Daan" and T4.last_name="Peeters";
+
+
+S:
+S:
+S:
+
+
+56. How much is the track Fast As a Shark?
+P: What is the unit price of the tune "Fast As a Shark"?
+
+SELECT unit_price
+FROM tracks
+WHERE name="Fast As a Shark";
+
+
+S:
+S:
+S:
+
+
+57. Find the name of tracks which are in Movies playlist but not in music playlist.
+P: What are the names of all tracks that are on the Movies playlist but not in the music playlist?
+
+select T1.name
+from tracks as T1
+     join playlist_tracks as T2 on T1.id = T2.track_id
+     join playlists as T3 on T2.playlist_id = T3.id
+where T3.name = 'Movies'
+except
+select T1.name
+from tracks as T1
+     join playlist_tracks as T2 on T1.id = T2.track_id
+     join playlists as T3 on T2.playlist_id = T3.id
+where T3.name = 'Music'
+
+
+S:
+S:
+S:
+
+
+58. Find the name of tracks which are in both Movies and music playlists.
+P: What are the names of all the tracks that are in both the Movies and music playlists?
+
+select T1.name
+from tracks as T1
+     join playlist_tracks as T2 on T1.id = T2.track_id
+     join playlists as T3 on T2.playlist_id = T3.id
+where T3.name = 'Movies'
+intersect
+select T1.name
+from tracks as T1
+     join playlist_tracks as T2 on T1.id = T2.track_id
+     join playlists as T3 on T2.playlist_id = T3.id
+where T3.name = 'Music'
+
+
+S:
+S:
+S:
+
+59. Find number of tracks in each genre?
+P: How many tracks are in each genre?
+
+SELECT count(*), T1.name
+FROM genres AS T1 JOIN tracks AS T2 ON T1.id=T2.genre_id
+group by T1.name;
+
+
+S:
+S:
+S:

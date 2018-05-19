@@ -1,0 +1,331 @@
+
+Total # = 42
+
+1. Find the name of the airport in the city of Goroka. 
+P: What are the names of the airports in the city of Goroka?
+
+select name
+from airports
+where city = 'Goroka'
+
+2. Find the name, city, country, and altitude (or elevation) of the airports in the city of New York.
+P: What is the name, city, country, and elevation for every airport in the city of New York?
+
+select name, city, country, elevation
+from airports
+where city = 'New York'
+
+3. How many airlines are there?
+P: What is the total number of airlines?
+
+select count(*)
+from airlines
+
+4. How many airlines does Russia has?
+P: What is the number of airlines based in Russia?
+
+select count(*)
+from airlines
+where country = 'Russia'
+
+5. What is the maximum elevation of all airports in the country of Iceland?
+P: What is the highest elevation of an airport in the country of Iceland?
+
+select max(elevation)
+from airports
+where country = 'Iceland'
+
+6. Find the name of the airports located in Cuba or Argentina.
+P: What are the names of all airports in Cuba or Argentina?
+
+select name
+from airports
+where country = 'Cuba' or country = 'Argentina'
+
+7. Find the country of the airlines whose name starts with 'Orbit'. 
+P: What are the countries of all airlines whose names start with Orbit?
+
+select country
+from airlines
+where name LIKE 'Orbit%'
+
+8. Find the name of airports whose altitude is between -50 and 50.
+P: What are the names of all airports whose elevation is between -50 and 50?
+
+select name
+from airports
+where elevation between -50 and 50
+
+9. Which country is the airport that has the highest altitude located in?
+P: What is the country of the airport with the highest elevation?
+
+select country
+from airports
+order by elevation desc
+limit 1
+
+10. Find the number of airports whose name contain the word 'International'.
+P: How many airports' names have the word Interanation in them?
+
+select count(*)
+from airports
+where name LIKE '%International%'
+
+11. How many different cities do have some airport in the country of Greenland?
+P: In how many cities are there airports in the country of Greenland?
+
+select count(distinct city)
+from airports
+where country = 'Greenland'
+
+12. Find the number of routes operated by American Airlines.
+P: How many routes does American Airlines operate?
+
+select count(*)
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+where T1.name = 'American Airlines'
+
+13. Find the number of routes whose destination airports are in Canada.
+P: How many routes end in a Canadian airport?
+
+select count(*)
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+where country = 'Canada'
+
+14. Find the name, city, and country of the airport that has the lowest altitude.
+P: What is the name, city, and country of the airport with the lowest altitude?
+
+select name, city, country
+from airports
+order by elevation
+limit 1
+
+15. Find the name, city, and country of the airport that has the highest latitude.
+P: What is the name, city, and country of the airport with the highest elevation?
+
+select name, city, country
+from airports
+order by elevation desc
+limit 1
+
+16. Find the name and city of the airport which is the destination of the most number of routes.
+P: What is the name and city of the airport that the most routes end at?
+
+select T1.name, T1.city, T2.dst_apid
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+group by T2.dst_apid 
+order by count(*) desc
+limit 1
+
+17. Find the names of the top 10 airlines that operate the most number of routes.
+P: For the airline ids with the top 10 most routes operated, what are their names?
+
+select T1.name, T2.alid
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+group by T2.alid
+order by count(*) desc
+limit 10
+
+18. Find the name and city of the airport which is the source for the most number of flight routes.
+P: What is the name and city of the airport from most of the routes start?
+
+select T1.name, T1.city, T2.src_apid
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+group by T2.src_apid
+order by count(*) desc
+limit 1
+
+19. Find the number of different airports which are the destinations of the American Airlines.
+P: What is the number of different different airports that are destinations for American Airlines?
+
+select count(distinct dst_apid)
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+where T1.name = 'American Airlines'
+
+
+20. Which countries has the most number of airlines?
+P: What is the name of the country with the most number of home airlines?
+
+select country
+from airlines
+group by country
+order by count(*) desc
+limit 1
+
+21. Which countries has the most number of airlines whose active status is 'Y'?
+P: What are the countries with the most airlines whose active status is Y?
+
+select country
+from airlines
+where active = 'Y'
+group by country
+order by count(*) desc
+limit 1
+
+22. List all countries and their number of airlines in the descending order of number of airlines.
+P: How many airlines operate out of each country in descending order?
+
+select country, count(*)
+from airlines
+group by country
+order by count(*) desc
+
+23. How many airports are there per country? Order the countries by decreasing number of airports.
+P: What is the number of airports per country, ordered from most to least?
+
+select count(*), country
+from airports
+group by country
+order by count(*) desc
+
+24. How many airports are there per city in the United States? Order the cities by decreasing number of airports.
+P: How many airports are there per city in the US ordered from most to least?
+
+select count(*), city
+from airports
+where country = 'United States'
+group by city
+order by count(*) desc
+
+25. Return the cities with more than 3 airports in the United States.
+P: What is the number of cities in the United States with more than 3 airports?
+
+select city
+from airports
+where country = 'United States'
+group by city
+having count(*) > 3
+
+26. How many cities are there that have more than 3 airports?
+P: What is the count of cities with more than 3 airports?
+
+select count(*)
+from 
+(select city
+from airports
+group by city
+having count(*) > 3)
+
+27. List the cities which have more than one airport and number of airports.
+P: What are the names of all cities with more than one airport and how many airports do they have?
+
+select city, count(*)
+from airports
+group by city
+having count(*) > 1
+
+28. List the cities which have more than 2 airports sorted by the number of airports.
+P: What are the cities that have more than 2 airports sorted by number of airports?
+select city
+from airports
+group by city
+having count(*) > 2
+order by count(*)
+
+29. Find the number of routes for each source airport and the airport name.
+P: For each airport name, how many routes start at that airport?
+
+select count(*), T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+group by T1.name
+
+
+30. Find the number of routes and airport name for each source airport, order the results by decreasing number of routes.
+P: For each  airport name, how many routes start at that airport, ordered from most to least?
+
+select count(*), T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+group by T1.name
+order by count(*) desc
+
+31. Find the average elevation of all airports for each country.
+P: For each country, what is the average elevation of that country's airports?
+
+select avg(elevation), country
+from airports
+group by country
+
+32. Find the cities which have exactly two airports.
+P: What are the cities with exactly two airports?
+
+select city
+from airports
+group by city
+having count(*) = 2
+
+33. For each country and airline name, how many routes are there?
+P: What is the total number of routes for each country and airline in that country?
+
+###wrong check
+select T1.country, T1.name, count(*)
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+group by T1.country, T1.name
+
+34. Find the number of routes with destination airports in Italy.
+P: What is the number of routes whose destinations are Italian airports?
+
+select count(*)
+from routes as T1 join airports as T2 on T1.dst_apid = T2.apid
+where T2.country = 'Italy'
+
+35. Return the number of routes with destination airport in Italy operated by the airline with name 'American Airlines'.
+P: What is the number of routes operated by the airline American Airlines whose destinations are in Italy?
+
+select count(*)
+from routes as T1 
+     join airports as T2 on T1.dst_apid = T2.apid
+     join airlines as T3 on T1.alid = T3.alid
+where T2.country = 'Italy' and T3.name = 'American Airlines'
+
+36. Find the number of routes that have destination John F Kennedy International Airport.
+P: What is the number of routes that end at John F Kennedy International Airport?
+
+select count(*)
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+where T1.name = 'John F Kennedy International Airport'
+
+37. Find the number of routes from the United States to Canada.
+P: How many routes go from the United States to Canada?
+
+select count(*)
+from routes 
+where dst_apid IN (select apid from airports where country = 'Canada') 
+      and src_apid IN (select apid from airports where country = 'United States')
+
+38. Find the id of routes whose source and destination airports are in the United States.
+P: What is the id of the routes whose source and destination airports are in the United States?
+
+select rid
+from routes 
+where dst_apid IN (select apid from airports where country = 'United States') 
+      and src_apid IN (select apid from airports where country = 'United States')
+
+
+40. Find the name of airline which runs the most number of routes.
+P: What is the name of the airline with the most routes?
+
+select T1.name
+from airlines as T1 join routes as T2 on T1.alid = T2.alid
+group by T1.name
+order by count(*) desc
+limit 1
+
+41. Find the busiest source airport that runs most number of routes in China.
+P: What is the name of the airport with the most number of routes that start in China?
+
+select T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.src_apid
+where T1.country = 'China'
+group by T1.name
+order by count(*) desc
+limit 1
+
+42. Find the busiest destination airport that runs most number of routes in China.
+P: What is the name of the airport that is the destination of the most number of routes that start in China?
+
+select T1.name
+from airports as T1 join routes as T2 on T1.apid = T2.dst_apid
+where T1.country = 'China'
+group by T1.name
+order by count(*) desc
+limit 1

@@ -1,0 +1,339 @@
+Total * = 30
+
+1. How many countries are there in total?
+P: Count the number of countries.
+
+select count(*)
+from country
+
+S:
+S:
+S:
+
+2. Show the country name and capital of all countries.
+P: What are the names and capitals of each country?
+
+select Country_name, Capital
+from country
+
+S:
+S:
+S:
+
+3. Show all official native languages that contain the word "English".
+P: What are the official native languages that contain the string "English".
+
+select Official_native_language
+from country
+where Official_native_language LIKE "%English%"
+
+S:
+S:
+S:
+
+4. Show all distinct positions of matches.
+P: What are the different positions for match season?
+
+select distinct Position
+from match_season
+
+S:
+S:
+S:
+
+5. Show the players from college UCLA.
+P: Who are the players from UCLA?
+
+select Player
+from match_season
+Where College = "UCLA"
+
+S:
+S:
+S:
+
+6. Show the distinct position of players from college UCLA or Duke.
+P: What are the different positions of players from UCLA or Duke colleges?
+
+select distinct Position
+from match_season
+Where College = "UCLA" OR College = "Duke"
+
+S:
+S:
+S:
+
+7. Show the draft pick numbers and draft classes of players whose positions are defenders.
+P: What are the draft pick numbers and draft classes for players who play the Defender position?
+
+select Draft_Pick_Number, Draft_Class
+from match_season
+Where Position = "Defender"
+
+S:
+S:
+S:
+
+8. How many distinct teams are involved in match seasons?
+P: Count the number of different teams involved in match season.
+
+select count(distinct Team)
+from match_season
+
+S:
+S:
+S:
+
+9. Show the players and the years played.
+P: Who are the different players and how many years has each played?
+
+select Player, Years_Played 
+from player
+
+S:
+S:
+S:
+
+10. Show all team names.
+P: What are the names of all teams?
+
+select Name
+from Team
+
+S:
+S:
+S:
+
+11. Show the season, the player, and the name of the country that player belongs to.
+P: For each player, what are their name, season, and country that they belong to?
+
+select T2.Season, T2.Player, T1.Country_name
+from country as T1 JOIN match_season as T2 
+on T1.Country_id = T2.Country
+
+S:
+S:
+S:
+
+12. Which players are from Indonesia?
+P: Who are the players from Indonesia?
+
+select T2.Player
+from country as T1 JOIN match_season as T2 
+on T1.Country_id = T2.Country
+where T1.Country_name = "Indonesia"
+
+S:
+S:
+S:
+
+13. What are the distinct positions of the players from a country whose capital is Dublin?
+P: Give the different positions of players who play for the country with the capital Dublin.
+
+select distinct T2.Position
+from country as T1 JOIN match_season as T2 
+on T1.Country_id = T2.Country
+where T1.Capital = "Dublin"
+
+S:
+S:
+S:
+
+14. What are the official languages of the countries of players from Maryland or Duke college?
+P: Return the official native languages of countries who have players from Maryland or Duke colleges.
+
+select T1.Official_native_language
+from country as T1 JOIN match_season as T2 
+on T1.Country_id = T2.Country
+where T2.College = "Maryland" or T2.College = "Duke"
+
+S:
+S:
+S:
+
+15. How many distinct official languages are there among countries of players whose positions are defenders.
+P: Count the number of different official languages corresponding to countries that players who play Defender are from.
+
+select count(distinct T1.Official_native_language)
+from country as T1 JOIN match_season as T2 
+on T1.Country_id = T2.Country
+where T2.Position = "Defender"
+
+S:
+S:
+S:
+
+16. Show the season, the player, and the name of the team that players belong to.
+P: Who are the different players, what season do they play in, and what is the name of the team they are on?
+
+select T1.Season, T1.Player, T2.Name
+from match_season as T1 JOIN team as T2
+on T1.Team = T2.Team_id
+
+S:
+S:
+S:
+
+17. Show the positions of the players from the team with name "Ryley Goldner".
+P: Return the positions of players on the team Ryley Goldner.
+
+select T1.Position
+from match_season as T1 JOIN team as T2
+on T1.Team = T2.Team_id
+where T2.Name = "Ryley Goldner"
+
+S:
+S:
+S:
+
+18. How many distinct colleges are associated with players from the team with name "Columbus Crew".
+P: Count the number of different colleges that players who play for Columbus Crew are from.
+
+select count(distinct T1.College)
+from match_season as T1 JOIN team as T2
+on T1.Team = T2.Team_id
+where T2.Name = "Columbus Crew"
+
+S:
+S:
+S:
+
+19. Show the players and years played for players from team "Columbus Crew".
+P: What are the players who played for Columbus Crew, and how many years did each play for?
+
+select T1.Player,T1.Years_Played
+from player as T1 JOIN team as T2
+on T1.Team = T2.Team_id
+where T2.Name = "Columbus Crew"
+
+S:
+S:
+S:
+
+
+20. Show the position of players and the corresponding number of players.
+P: How many players played each position?
+
+select Position, COUNT(*)
+from match_season
+group by Position
+
+S:
+S:
+S:
+
+21. Show the country names and the corresponding number of players.
+P: How many players are from each country?
+
+select Country_name, COUNT(*)
+from country as T1 JOIN match_season as T2
+on T1.Country_id = T2.Country
+group by T1.Country_name
+
+S:
+S:
+S:
+
+22. Return all players sorted by college in ascending alphabetical order.
+P: What are all the players who played in match season, sorted by college in ascending alphabetical order?
+
+select player
+from match_season
+order by College ASC
+
+S:
+S:
+S:
+
+23. Show the most common position of players in match seasons.
+P: What is the position that is most common among players in match seasons?
+
+select Position
+from match_season
+group by Position
+order by count(*) DESC limit 1
+
+S:
+S:
+S:
+
+24. Show the top 3 most common colleges of players in match seasons.
+P: What are the three colleges from which the most players are from?
+
+select College
+from match_season
+group by College
+order by count(*) DESC limit 3
+
+S:
+S:
+S:
+
+25. Show the name of colleges that have at least two players.
+P: What are the names of all colleges that have two or more players?
+
+select College
+from match_season
+group by College
+Having count(*) >= 2
+
+S:
+S:
+S:
+
+26. Show the name of colleges that have at least two players in descending alphabetical order.
+P: What are the names of colleges that have two or more players, listed in descending alphabetical order?
+
+select College
+from match_season
+group by College
+Having count(*) >= 2
+order by College DESC
+
+S:
+S:
+S:
+
+
+27. What are the names of teams that do no have match season record?
+P: Return the names of teams that have no match season record.
+
+select Name
+from team
+Where Team_id not in (select Team from match_season)
+
+S:
+S:
+S:
+
+28. What are the names of countries that have both players with position forward and players with position defender?
+P: Return the names of countries that have players that play the Forward position, as well as players who play the Defender position.
+
+select T1.Country_name
+from country as T1 JOIN match_season as T2 
+on T1.Country_id = T2.Country
+where T2.Position = "Forward"
+intersect
+select T1.Country_name
+from country as T1 JOIN match_season as T2 
+on T1.Country_id = T2.Country
+where T2.Position = "Defender"
+
+S:
+S:
+S:
+
+29. Which college have both players with position midfielder and players with position defender?
+P: Return the colleges that have players who play the Midfielder position, as well as players who play the Defender position.
+
+select College
+from match_season
+where Position = "Midfielder"
+intersect
+select College
+from match_season
+where Position = "Defender"
+
+S:
+S:
+S:

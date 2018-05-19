@@ -1,0 +1,314 @@
+Total = # 40
+
+
+1. How many addresses do we have?
+P: Count the number of addresses.
+
+select count(*)
+from Addresses
+
+2. List all address ids and address details.
+P: What are all the address ids and address details?
+
+select address_id, address_details
+from Addresses
+
+3. How many products do we have?
+P: Count the number of products.
+
+select count(*)
+from Products
+
+4. Show all product ids, product type codes, and product name.
+P: What are the ids, type codes, and names for all products?
+
+select product_id, product_type_code, product_name
+from Products
+
+5. What is the price for the product with name Monitor?
+P: Give the price of the Monitor product.
+
+select product_price
+from Products
+where product_name = "Monitor"
+
+6. Show the minimum, average, maximum price for all products.
+P: What are the minimum, average, and maximum prices across all products?
+
+select min(product_price), avg(product_price), max(product_price)
+from Products
+
+7. What is the average price for products with type Clothes?
+P: Return the average price of Clothes.
+
+select avg(product_price)
+from Products
+where product_type_code = "Clothes"
+
+8. How many hardware type products do we have? 
+P: Count the number of products of the type Hardware.
+
+select count(*)
+from Products
+where product_type_code = "Hardware"
+
+9. Show all product names with price higher than the average.
+P: What are the names of products that have a price above the average for all products.
+
+select product_name
+from Products
+where product_price > (select avg(product_price) from Products)
+
+10. Show all hardware product names with price higher than the average price of hardware type products.
+P: What are the names of Hardware product with prices above the average price of Hardware products.
+
+select product_name
+from Products
+where product_type_code = "Hardware" and product_price > (select avg(product_price) from Products where product_type_code = "Hardware")
+
+11. What is the name of the most expensive product with type Clothes?
+P: Give the name of the most expensive Clothes product.
+
+select product_name
+from Products
+where product_type_code = "Clothes"
+order by product_price desc
+limit 1
+
+12. What is the product id and product name for the cheapest Hardware type product?
+P: Give the id and name of the cheapest Hardware product.
+
+select product_id, product_name
+from Products
+where product_type_code = "Hardware"
+order by product_price asc
+limit 1
+
+13. List all product names in descending order of price.
+P: What are the names of the products, sorted by descending price?
+
+select product_name
+from Products
+order by product_price desc
+
+14. Show all hardware type products in ascending order of price.
+P: What are the names of all Hardware products, sorted by price ascending?
+
+select product_name
+from Products
+where product_type_code = "Hardware"
+order by product_price asc
+
+15. List all product type codes and the number of products in each type.
+P: How many products are there for each product type?
+
+select product_type_code, count(*)
+from Products
+group by product_type_code
+
+16. Show all product type codes and the average price for each type.
+P: What is the average price of products for each product type?
+
+select product_type_code, avg(product_price)
+from Products
+group by product_type_code
+
+17. What are the product type code with at least two products?
+P: Give the product type codes of product types that have two or more products.
+
+select product_type_code
+from Products
+group by product_type_code
+having count(*) >= 2
+
+18. What is the product type code with most number of products?
+P: What is the most frequent product type code?
+
+select product_type_code
+from Products
+group by product_type_code
+order by count(*) desc
+limit 1
+
+19. How many customers do we have?
+P: Count the number of customers.
+
+select count(*)
+from Customers
+
+20. Show all customer ids and customer names.
+P: What are the ids and names of all customers?
+
+select customer_id, customer_name
+from Customers
+
+21. What is the customer address, customer phone, and customer email for Jeromy?
+P: Give the address, phone, and email for customers with the name Jeromy.
+
+select customer_address, customer_phone, customer_email
+from Customers
+where customer_name = "Jeromy"
+
+22. Show all payment method codes and the number of customers in each code.
+P: How many customers use each payment method?
+
+select payment_method_code, count(*)
+from Customers
+group by payment_method_code
+
+23. What is the payment method code used by most number of customers?
+P: Give the code of the payment method that is most commonly used.
+
+select payment_method_code
+from Customers
+group by payment_method_code
+order by count(*) desc
+limit 1
+
+24. Show all customer names with the  payment method code used by least number of customers.
+P: What are the names of customers who use the least common payment method?
+
+select customer_name
+from Customers
+where payment_method_code = (
+select payment_method_code
+from Customers
+group by payment_method_code
+order by count(*) asc
+limit 1)
+
+25. What is the payment method and customer number for customer named Jeromy?
+P: Give the payment method code and customer number corresponding to the customer named Jeromy.
+
+select payment_method_code, customer_number
+from Customers
+where customer_name = "Jeromy"
+
+26. What are the distinct payment methods used by customers?
+P: Give the different payment method codes that customers use.
+
+select distinct payment_method_code
+from Customers
+
+27. Show the id and the product type for all products, order by product name.
+P: What are the ids and product types for all products, sorted alphabetically by product name?
+
+select product_id, product_type_code
+from Products
+order by product_name
+
+28. What is the product type with least number of products?
+P: What is the code of the product type that is least common?
+
+select product_type_code
+from Products
+group by product_type_code
+order by count(*) asc
+limit 1
+
+29. How many customer orders do we have?
+P: Count the number of customer orders.
+
+select count(*)
+from Customer_orders
+
+30. Show the order ids, order dates, and order status codes for all orders by customer Jeromy.
+P: What were the ids, dates, and status codes for orders made by Jeromy?
+
+select order_id, order_date, order_status_code
+from Customer_orders as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+where T2.customer_name = "Jeromy"
+
+31. Show all customer names, ids and the number of orders by each customer.
+P: What are the names, ids, and number of orders made for each customer?
+
+select T2.customer_name, T1.customer_id, count(*)
+from Customer_orders as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+
+32. What is the customer id, name, phone, and email for the customer with most orders?
+P: Give the id, name, phone, and email corresponding to the customer who made the most orders.
+
+select T1.customer_id, T2.customer_name, T2.customer_phone, T2.customer_email
+from Customer_orders as T1 join Customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by count(*) desc
+limit 1
+
+33. Show all order status and the number of orders in each status.
+P: How many orders have each order status code?
+
+select order_status_code, count(*)
+from Customer_orders
+group by order_status_code
+
+34. What is the order status code that is most common?
+P: Give the order status code that is most frequent across customer orders.
+
+select order_status_code
+from Customer_orders
+group by order_status_code
+order by count(*) desc
+limit 1
+
+35. How many customers do not have an order?
+P: Count the number of customers who have not made an order.
+
+select count(*)
+from Customers
+where customer_id NOT IN  (
+select customer_id
+from Customer_orders)
+
+36. Show all product names without an order.
+P: What are the names of products that have not been ordered?
+
+select product_name
+from Products
+EXCEPT
+select T1.product_name
+from Products as t1 join Order_items as T2
+on T1.product_id = T2.product_id
+
+37. How many products named Monitor have been ordered? 
+P: What is the total number of Monitor products that have been ordered?
+
+select sum(order_quantity)
+from Order_items as T1 join Products as T2 on T1.product_id = T2.product_id
+where T2.product_name = "Monitor"
+
+38. How many customers have ordered the product named Monitor?
+P: Count the number of different customers who have bought a Monitor Product.
+
+select count(distinct T3.customer_id)
+from Order_items as T1 join Products as T2 on T1.product_id = T2.product_id join Customer_orders as T3 on T3.order_id = T1.order_id
+where T2.product_name = "Monitor"
+
+39. How many customers have an order?
+P: Count the number of differnt customers who have made an order.
+
+select count(distinct customer_id)
+from Customer_orders
+
+40. Show all customer ids without an order.
+P: What are the ids of customers who have not made an order?
+
+select customer_id
+from Customers
+EXCEPT 
+select customer_id
+from Customer_orders
+
+41. Show all the order dates and ids of the orders with quantity of any product larger than 6 or with more than 3 products.
+P: What are the order ids and corresponding order dates for orders with a quantity greater than 6 or consisting of more than 3 products?
+
+select T1.order_date, T1.order_id
+from Customer_Orders as T1 join Order_items as T2
+on T1.order_id = T2.order_id
+where T2.order_quantity > 6
+union 
+select T1.order_date, T1.order_id
+from Customer_Orders as T1 join Order_items as T2
+on T1.order_id = T2.order_id
+group by T1.order_id
+having count(*) > 3;

@@ -1,0 +1,232 @@
+1. How many members have the black membership card?
+P: 
+
+Select count(*)
+From member
+Where Membership_card = 'Black'
+
+S:
+S:
+S:
+
+
+2. Find the number of members living in each address.
+P: 
+
+Select count(*), address
+From member
+Group by address
+
+S:
+S:
+S:
+
+
+3. Give me the names of members whose address is in Harford or Waterbury.
+P: 
+
+Select name
+From member
+where address = 'Harford' or address = 'Waterbury'
+
+S:
+S:
+S:
+
+
+4. Find the ids and names of members who are under age 30 or with black membership card.
+P: 
+
+Select name, member_id
+From member
+Where Membership_card = 'Black' or age < 30
+
+S:
+S:
+S:
+
+
+5. Find the purchase time, age and address of each member, and show the results in the order of purchase time.
+P: 
+
+Select Time_of_purchase, age, address
+From member
+Order by Time_of_purchase
+
+S:
+S:
+S:
+
+
+6. Which membership card has more than 5 members?
+P: 
+
+Select Membership_card
+From member
+Group by Membership_card
+Having count(*) > 5
+
+S:
+S:
+S:
+
+
+7. Which address has both members younger than 30 and members older than 40?
+P: 
+
+Select address
+From member
+Where age < 30
+Intersect
+Select address
+From member
+Where age > 40
+
+S:
+S:
+S:
+
+
+8. What is the membership card held by both members living in Hartford and ones living in Waterbury address?
+P: 
+
+Select membership_card
+From member
+Where address = 'Hartford'
+Intersect
+Select membership_card
+From member
+Where address = 'Waterbury'
+
+S:
+S:
+S:
+
+
+9. How many members are not living in Hartford?
+P: 
+
+Select count(*)
+From member
+Where address != 'Hartford'
+
+S:
+S:
+S:
+
+
+10. Which address do not have any member with the black membership card?
+P: 
+
+Select address
+From member
+except
+Select address
+From member
+Where Membership_card = 'Black'
+
+S:
+S:
+S:
+
+
+11. Show the shop addresses ordered by their opening year.
+P: 
+
+Select address
+From shop
+Order by open_year
+
+S:
+S:
+S:
+
+
+12. What are the average score and average staff number of all shops?
+P: 
+
+Select avg(num_of_staff), avg(score)
+From shop
+
+S:
+S:
+S:
+
+
+13. Find the id and address of the shops whose score is below the average score.
+P: 
+
+Select shop_id, address
+From shop
+Where score < (select avg(score) from shop)
+
+S:
+S:
+S:
+
+
+14. Find the address and staff number of the shops that do not have any happy hour.
+P: 
+
+select address, num_of_staff
+From shop
+Where shop_id not in (select shop_id from happy_hour)
+
+S:
+S:
+S:
+
+
+15. What are the id and address of the shops which have a happy hour in May?
+P: 
+
+Select t1.address, t1.shop_id
+From shop as t1 join happy_hour as t2 on t1.shop_id = t2.shop_id
+Where month = 'May'
+
+S:
+S:
+S:
+
+
+16. which shop has happy hour most frequently? List its id and number of happy hours.
+P: 
+
+Select shop_id, count(*)
+From happy_hour
+Group by shop_id
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+17. Which month has the most happy hours?
+P: 
+
+Select month
+From happy_hour
+Group by month
+Order by count(*) desc
+Limit 1
+
+S:
+S:
+S:
+
+
+18. Which months have more than 2 happy hours?
+P: 
+
+Select month
+From happy_hour
+Group by month
+Having count(*) > 2
+
+S:
+S:
+S:
+
+

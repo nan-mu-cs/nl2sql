@@ -1,0 +1,118 @@
+
+1. List all country and league names.
+
+
+select T1.name, T2.name
+from Country as T1 JOIN League as T2 on T1.id = T2.country_id
+
+
+2.How many leagues are there in England?
+
+
+select count(*)
+from Country as T1 JOIN League as T2 on T1.id = T2.country_id
+where T1.name = "England"
+
+
+2. What is the average weight of all players?
+
+
+select avg(weight)
+from Player
+
+
+3. What is the maximum and minimum height of all players?
+
+
+select max(weight), min(weight)
+from Player
+
+7. List all player names who have an overall rating higher than the average.
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.overall_rating > ( select avg(overall_rating)
+                                 from Player_Attributes )
+
+
+8. What are the names of players who have the best dribbling?
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.dribbling = ( select max(overall_rating)
+                         from Player_Attributes)
+
+
+8. List the names of all players who have a crossing score higher than 90 and prefer their right foot.
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.crossing > 90 and T2.preferred_foot = "right"
+
+
+9. List the names of all left-footed players who have overall rating between 85 and 90.
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id=T2.player_api_id
+where T2.preferred_foot = "left" and T2.overall_rating >= 85 and T2.overall_rating <= 90
+
+15. What is the average rating for right-footed players and left-footed players?
+
+
+select preferred_foot, avg(overall_rating)
+from Player_Attributes
+group by preferred_foot
+
+
+16. Of all players with an overall rating greater than 80, how many are right-footed and left-footed?
+
+
+select preferred_foot, count(*)
+from Player_Attributes
+where overall_rating > 80
+group by preferred_foot
+
+
+16. List all of the player ids with a height of at least 180cm and an overall rating higher than 85.
+
+
+select player_api_id
+from Player
+where height >= 180
+INTERSECT
+select player_api_id
+from Player_Attributes
+where overall_rating > 85
+
+
+17. List all of the ids for left-footed players with a height between 180cm and 190cm.
+
+
+select player_api_id
+from Player
+where height >= 180 and height <= 190
+INTERSECT
+select player_api_id
+from Player_Attributes
+where preferred_foot = "left"
+
+20. Who are the top 3 players in terms of overall rating?
+
+
+select distinct T1.player_name
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id = T2.player_api_id
+order by overall_rating desc
+limit 3
+
+
+21. List the names and birthdays of the top five players in terms of potential.
+
+
+select distinct T1.player_name, T1.birthday
+from Player as T1 JOIN Player_Attributes as T2 on T1.player_api_id = T2.player_api_id
+order by potential desc
+limit 5

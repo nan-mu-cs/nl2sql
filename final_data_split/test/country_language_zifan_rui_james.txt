@@ -1,0 +1,232 @@
+Total = 20
+
+1. How many languages are there?
+P: Count the number of languages.
+
+SELECT count(*)
+FROM languages
+
+S:
+S:
+S:
+
+2. List the name of languages in ascending alphabetical order.
+P: What are the names of languages, in alphabetical order?
+
+SELECT name
+FROM languages
+order by name ASC
+
+S:
+S:
+S:
+
+3. What are the names of languages that contain the word "ish"?
+P: Return the names of langauges that contain the substring "ish".
+
+SELECT name
+FROM languages
+where name LIKE "%ish%"
+
+S:
+S:
+S:
+
+4. Show the names of countries in descending order of overall scores.
+P: What are the names of the countries, ordered descending by overall score?
+
+SELECT name
+FROM countries
+order by overall_score DESC
+
+S:
+S:
+S:
+
+5. What is the average justice scores among countries?
+P: Give the average justice scores across all countries.
+
+SELECT avg(justice_score)
+FROM countries
+
+S:
+S:
+S:
+
+6. What are the maximum and minimum health scores among countries that are not "Norway".
+P: Return the maximum and minimum health scores across all countries other than Norway.
+
+SELECT max(health_score), min(health_score)
+FROM countries
+Where name != "Norway"
+
+S:
+S:
+S:
+
+7. How many different official languages are there?
+P: Count the number of different official languages.
+
+SELECT count(distinct language_id)
+FROM official_languages
+
+S:
+S:
+S:
+
+8. List names of countries in descending order of education_score.
+P: What are the names of the countries, ordered descending by education score?
+
+SELECT name
+FROM countries
+order by education_score DESC
+
+S:
+S:
+S:
+
+9. List the name of the country with the biggest score in politics.
+P: What is the name of the country with the highest politics score?
+
+SELECT name
+FROM countries
+order by politics_score DESC limit 1
+
+S:
+S:
+S:
+
+10. Show the names of countries and their official languages.
+P: What are the names of the countries, as well as the names of their official langauges?
+
+SELECT T1.name, T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+
+S:
+S:
+S:
+
+11. Show the official languages and the number of countries speaking each language.
+P: What are the names of the different official languages, as well as the number of countries that speak each?
+
+SELECT T2.name, COUNT(*)
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.name
+
+S:
+S:
+S:
+
+12. Show the official language spoken by the most number of countries.
+P: What is the official language that is most common?
+
+SELECT T2.name
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.id
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+13. Show the official languages spoken by at least two countries.
+P: Which official languages are spoken in two or more countries?
+
+SELECT T2.name
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.id
+Having COUNT(*) >= 2
+
+S:
+S:
+S:
+
+14. Show the average overall scores of countries whose official language is "English".
+P: What is the average overall score across countries with English as their official language?
+
+SELECT avg(T1.overall_score)
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+Where T3.name = "English"
+ 
+S:
+S:
+S:
+
+15. Show the three official languages that are most commonly spoken.
+P: What are the names of the three official languages spoken in the most countries?
+
+SELECT T2.name
+FROM official_languages as T1 join languages as T2 on T1.language_id = T2.id
+group by T2.id
+order by COUNT(*) DESC limit 3
+
+S:
+S:
+S:
+
+16. Show the official languages sorted in descending order by the average overall scores among countries speaking them.
+P: What are the names of the official languages, sorted descending by the average overall scores across the countries that correspond to each?
+
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+group by T3.id
+order by avg(T1.overall_score) DESC 
+
+S:
+S:
+S:
+
+17. Show the name of the country that has the greatest number of official languages.
+P: Which country has the greatest number of official languages?
+
+SELECT T1.Name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+group by T1.id
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+18. List the names of languages that are not the official language of any countries.
+P: What are the names of languages that are not the official language of any country?
+
+SELECT name
+from languages
+where id not in (SELECT language_id FROM official_languages)
+
+S:
+S:
+S:
+
+19. List the names of countries that do not have any official language.
+P: What are the names of countries that do not have an official language?
+
+SELECT name
+from countries
+where id not in (SELECT country_id FROM official_languages)
+
+S:
+S:
+S:
+
+20. Show the names of languages that are the official language for both countries with overall score greater than 95 and countries with overall score less than than 90.
+P: What are the names of languages that are the official language not only for countries that have an overall score of above 95, but also for countries that have an overall score below 90?
+
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+Where T1.overall_score > 95
+Intersect 
+SELECT T3.name
+FROM countries as T1 join official_languages as T2 ON T1.id = T2.country_id
+join languages as T3 on T2.language_id = T3.id
+Where T1.overall_score < 90
+
+S:
+S:
+S:
+

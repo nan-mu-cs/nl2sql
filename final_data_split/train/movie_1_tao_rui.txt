@@ -1,0 +1,607 @@
+Total # = 53
+
+1. Find the titles of all movies directed by steven spielberg.
+P: What are the names of all movies directed by Steven Spielberg?
+
+S:
+S:
+S:
+
+ select title
+ from Movie
+ where director='Steven Spielberg'
+
+2. What is the name of the movie produced after 2000 and directed by James Cameron?
+P: What are the titles of all movies that James Cameron directed after 2000?
+
+S:
+S:
+S:
+
+select title
+from Movie
+where director='James Cameron' and year > 2000
+
+3. How many movies were made before 2000?
+P: How many movies were made before 2000?
+
+S:
+S:
+S:
+
+select count(*)
+from Movie
+where year < 2000
+
+4. Who is the director of movie Avatar?
+P: Who directed Avatar?
+
+S:
+S:
+S:
+
+ select director
+ from Movie
+ where title ='Avatar'
+
+5. How many reviewers listed?
+P: How many reviewers are there?
+
+S:
+S:
+S:
+
+Select count(*)
+From Reviewer
+
+6. What is the id of the reviewer whose name has substring “Mike”?
+P: What is the id of the reviewer whose name includes the word "Mike"?
+
+S:
+S:
+S:
+
+SELECT rID
+FROM Reviewer
+WHERE name LIKE "%Mike%"
+
+7. What is the reviewer id of Daniel Lewis?
+P: What is the id of the reviewer named Daniel Lewis?
+
+S:
+S:
+S:
+
+SELECT rID
+FROM Reviewer
+WHERE name = "Daniel Lewis"
+
+8. What is the total number of ratings that has more than 3 stars?
+P: How many movie ratings have more than 3 stars?
+
+S:
+S:
+S:
+
+Select count(*)
+From Rating
+Where stars > 3
+
+9. What is the lowest and highest rating star?
+P: What is the maximum and mininum number of stars a rating can receive?
+
+S:
+S:
+S:
+
+Select max(stars), min(stars)
+From Rating
+
+10. Find all years that have a movie that received a rating of 4 or 5, and sort them in increasing order of year.
+P: In what years did a movie receive a 4 or 5 star rating, and list the years from oldest to most recently? 
+
+S:
+S:
+S:
+
+ select distinct year
+ from Movie as T1 JOIN Rating as T2 on T1.mID = T2.mID
+ where T2.stars >= 4
+ order by T1.year
+
+11. What are the names of directors who directed movies with 5 star rating? Also return the title of these movies.
+P: What are the names of the directors who created a movie with a 5 star rating, and what was the name of those movies?
+
+S:
+S:
+S:
+
+select T1.director, T1.title
+from Movie as T1 JOIN Rating as T2 on T1.mID = T2.mID
+where T2.stars = 5
+
+12. What is the average rating star for each reviewer?
+P: What is the average number of stars that each reviewer awards for a movie?
+
+S:
+S:
+S:
+
+select T2.name, avg(T1.stars)
+from Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
+Group by T2.name
+
+13. Find the titles of all movies that have no ratings.
+P: What are the titles of all movies that have not been rated?
+
+S:
+S:
+S:
+
+select title
+from Movie
+where mID not in (select mID from Rating)
+
+14.Find the names of all reviewers who have ratings with a NULL value for the date.
+P: What are the different names of all reviewers whose ratings do not have a date field?
+
+S:
+S:
+S:
+
+ select distinct name
+ from Reviewer as T1 JOIN Rating as T2 on T1.rID = T2.rID
+ where ratingDate is NULL
+
+15. What is the average rating stars and title for the oldest movie?
+P: For the oldest movie listed, what is its average rating and title?
+
+S:
+S:
+S:
+
+select avg(T1.stars), T2.title
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+where T2.year = (select min(year) from Movie)
+
+16. What is the name of the most recent movie?
+P: What is the title of the newest movie?
+
+S:
+S:
+S:
+
+select title
+from Movie
+where year = (select max(year) from Movie)
+
+17. What is the maximum stars and year for the most recent movie?
+P: What is highest rating for the most recent movie and when was it released?
+
+S:
+S:
+S:
+
+select max(T1.stars), T2.year
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+where T2.year = (select max(year) from Movie)
+
+18. What is the names of movies whose created year is after all movies directed by Steven Spielberg?
+P: What are the names of all movies that were created after the most recent Steven Spielberg film?
+
+S:
+S:
+S:
+
+select title
+from Movie
+where year > (select max(year) from Movie where director = "Steven Spielberg")
+
+19. What are the titles and directors of the movies whose star is greater than the average stars of the movies directed by James Cameron?
+P: What are the titles and directors of all movies that have a rating higher than the average James Cameron film rating?
+
+S:
+S:
+S:
+
+select T2.title, T2.director
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+where T1.stars > (select avg(T1.stars) from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID where T2.director = "James Cameron")
+
+20. Return reviewer name, movie title, stars, and ratingDate. And sort the data first by reviewer name, then by movie title, and lastly by number of stars.
+P: What is the reviewer name, film title, movie rating, and rating date  for every movie ordered by reviewer name, movie title, then finally rating?
+
+S:
+S:
+S:
+
+ select T3.name, T2.title, T1.stars, T1.ratingDate
+ from Rating as T1 
+      JOIN Movie as T2 on T1.mID = T2.mID
+      JOIN Reviewer as T3 on T1.rID = T3.rID
+ order by T3.name, T2.title, T1.stars
+
+What are all reviewer name, movie titles and rating stars? 
+
+select T3.name, T2.title, T1.stars
+ from Rating as T1 
+      JOIN Movie as T2 on T1.mID = T2.mID
+      JOIN Reviewer as T3 on T1.rID = T3.rID
+
+21. Find the names of all reviewers who have contributed three or more ratings.
+P: What are the names of all reviewers that have rated 3 or more movies?
+
+S:
+S:
+S:
+
+ SELECT T2.name
+ FROM Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
+ GROUP BY T1.rID
+ HAVING COUNT(*) >= 3
+
+ 
+22. Find the names of all reviewers who rated Gone with the Wind.
+P: What are the names of all the different reviewers who rates Gone with the Wind?
+
+S:
+S:
+S:
+
+ select distinct T3.name
+ from Rating as T1 
+      JOIN Movie as T2 on T1.mID = T2.mID
+      JOIN Reviewer as T3 on T1.rID = T3.rID
+ where T2.title = 'Gone with the Wind'
+
+23. Find the names of all directors whose movies are rated by Sarah Martinez.
+P: What are the names of all directors whose movies have been reviewed by Sarah Martinez?
+
+S:
+S:
+S:
+
+ select distinct T2.director
+ from Rating as T1 
+      JOIN Movie as T2 on T1.mID = T2.mID
+      JOIN Reviewer as T3 on T1.rID = T3.rID
+ where T3.name = 'Sarah Martinez'
+ 
+24. For any rating where the name of reviewer is the same as the director of the movie, return the reviewer name, movie title, and number of stars.
+P: What are the different reviewer names, movie titles, and stars for every rating where the reviewer had the same name as the director?
+
+S:
+S:
+S:
+
+ select distinct T3.name, T2.title, T1.stars
+ from Rating as T1 
+      JOIN Movie as T2 on T1.mID = T2.mID
+      JOIN Reviewer as T3 on T1.rID = T3.rID
+ where T2.director = T3.name
+
+ 
+25. Return all reviewer names and movie names together in a single list.
+P: What are the names of all the reviewers and movie names?
+
+S:
+S:
+S:
+
+select name
+from Reviewer
+union
+select title
+from Movie
+
+ 
+27. Find the titles of all movies not reviewed by Chris Jackson.
+P: What are the titles of all movies that were not reviewed by Chris Jackson?
+
+S:
+S:
+S:
+
+select distinct title 
+from Movie
+EXCEPT
+select T2.title
+from Rating as T1 
+      JOIN Movie as T2 on T1.mID = T2.mID
+      JOIN Reviewer as T3 on T1.rID = T3.rID
+ where T3.name = 'Chris Jackson'
+ 
+ 
+28. For all directors who directed more than one movie, return the titles of all movies directed by them, along with the director name. Sort by director name, then movie title.
+P: For all directors who have directed more than one movie, what movies have they directed and what are their names?
+
+S:
+S:
+S:
+
+
+  select T1.title, T1.director
+  from Movie as T1 join Movie as T2 on T1.director = T2.director
+  where T1.title != T2.title
+  order by T1.director, T1.title
+
+29. For directors who had more than one movie, return the titles and produced years of all movies directed by them.
+P: For each director who directed more than one movie, what are the titles and dates of release for all those movies?
+
+S:
+S:
+S:
+
+ select T1.title, T1.year
+ from Movie as T1 join Movie as T2 on T1.director = T2.director
+ where T1.title != T2.title
+
+30. What are the names of the directors who made exactly one movie?
+P: What are the names of all directors who made one movie?
+
+S:
+S:
+S:
+
+select director
+from Movie 
+group by director
+having count(*) = 1
+
+31. What are the names of the directors who made exactly one movie excluding director NULL?
+P: What are the names of all directors who have made one movie except for the director named NULL?
+
+S:
+S:
+S:
+
+select director
+from Movie
+where director is not NULL
+group by director
+having count(*) = 1
+
+32. How many movie reviews does each director get?
+P: For each director, how many reviews have they received?
+
+S:
+S:
+S:
+
+select count(*), T1.director
+from Movie as T1 JOIN Rating as T2 ON T1.mID = T2.mID
+group by T1.director
+
+ 
+33. Find the movies with the highest average rating. Return the movie titles and average rating.
+P: What are the movie titles with the highest average rating and what are those ratings?
+
+S:
+S:
+S:
+
+select T2.title, avg(T1.stars)
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+group by T1.mID
+order by avg(T1.stars) DESC
+limit 1
+
+
+34. What are the movie titles and average rating of the movies with the lowest average rating? 
+P: What are the titles and average ratings for all movies that have the lowest average rating? 
+
+S:
+S:
+S:
+
+select T2.title, avg(T1.stars)
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+group by T1.mID
+order by avg(T1.stars)
+limit 1
+
+35. What are the names and years of the movies that has the top 3 highest rating star?
+P: What are the names and years released for the movies with the top 3 highest ratings?
+
+S:
+S:
+S:
+
+select T2.title, T2.year
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+order by T1.stars desc
+limit 3
+ 
+36. For each director, return the director's name together with the title of the movie they directed that received the highest rating among all of their movies, and the value of that rating. Ignore movies whose director is NULL.
+P: For each director, what are the titles and ratings for all the movies they reviewed?
+
+S:
+S:
+S:
+
+select T2.title, T1.stars, T2.director
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+where director is not NULL
+group by director
+Having T1.stars = max(T1.stars)
+
+37. Find the title and star rating of the movie that got the least rating star for each reviewer.
+P: For each reviewer id, what is the title and rating for the movie with the smallest rating? 
+
+S:
+S:
+S:
+
+ SELECT T2.title, T1.rID, T1.stars
+ FROM Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+ GROUP BY T1.rID
+Having T1.stars = min(T1.stars)
+
+38. Find the title and score of the movie with the lowest rating among all movies directed by each director.
+P: For each director, what is the title and score of their most poorly rated movie?
+
+S:
+S:
+S:
+
+select T2.title, T1.stars, T2.director
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+group by T2.director
+Having T1.stars = min(T1.stars)
+
+39. What is the name of the movie that is rated by most of times?
+P: What is the name of the movie that has been reviewed the most?
+
+S:
+S:
+S:
+
+select T2.title, T1.mID
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+group by T1.mID
+order by count(*) desc
+limit 1
+
+40. What are the titles of all movies that have rating star is between 3 and 5?
+P: What are the titles of all movies that have between 3 and 5 stars?
+
+S:
+S:
+S:
+
+select T2.title
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+where T1.stars between 3 and 5
+
+41. Find the names of reviewers who had given higher than 3 star ratings.
+P: What are the names of the reviewers who have rated a movie more than 3 stars before?
+
+S:
+S:
+S:
+
+
+select T2.name
+from Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
+where T1.stars > 3
+
+42.  Find the average rating star for each movie that are not reviewed by Brittany Harris.
+P: What is the average rating for each movie that has never been reviewed by Brittany Harris?
+
+S:
+S:
+S:
+
+select mID, avg(stars)
+from Rating
+where mID NOT IN
+(select T1.mID
+from Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
+where T2.name = "Brittany Harris")
+GROUP BY mID
+
+43. What are the ids of the movies that are not reviewed by Brittany Harris.
+P: What are the ids of all moviest hat have not been reviewed by Britanny Harris?
+
+S:
+S:
+S:
+
+select mID
+from Rating
+EXCEPT
+select T1.mID
+from Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
+where T2.name = "Brittany Harris"
+
+44. Find the average rating star for each movie that received at least 2 ratings.
+P: For each movie that received more than 3 reviews, what is the average rating?
+
+S:
+S:
+S:
+
+select mID, avg(stars)
+from Rating
+GROUP BY mID
+having count(*) >= 2
+
+45. find the ids of reviewers who did not give 4 star.
+P: What are the ids of all reviewers who did not give 4 stars?
+
+S:
+S:
+S:
+
+select rID
+from Rating
+EXCEPT
+select rID
+from Rating
+where stars = 4
+
+46. Find the ids of reviewers who didn't only give 4 star.
+P: What are the ids of all reviewers who have not given 4 stars at least once?
+
+S:
+S:
+S:
+
+select rID
+from Rating
+where stars != 4
+
+
+47. What are names of the movies that are either made after 2000 or reviewed by Brittany Harris?
+P: What are the names of all movies that were made after 2000 or reviewed by Brittany Harris?
+
+S:
+S:
+S:
+
+select distinct T2.title
+from Rating as T1 
+      JOIN Movie as T2 on T1.mID = T2.mID
+      JOIN Reviewer as T3 on T1.rID = T3.rID
+ where T3.name = 'Brittany Harris' or T2.year > 2000
+
+48. What are names of the movies that are either made before 1980 or directed by James Cameron?
+P: What are the names of all movies made before 1980 or had James Cameron as the director?
+
+S:
+S:
+S:
+
+select title
+from Movie 
+where director = "James Cameron" or year  < 1980
+
+25. What are the names of reviewers who had rated 3 star and 4 star?
+P: What are the names of all reviewers that have given 3 or 4 stars for reviews? 
+
+S:
+S:
+S:
+
+select T2.name
+from Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
+where T1.stars = 3
+INTERSECT
+select T2.name
+from Rating as T1 JOIN Reviewer as T2 on T1.rID = T2.rID
+where T1.stars = 4
+
+26. What are the names of movies that get 3 star and 4 star?
+P: What are the names of all movies that received 3 or 4 stars?
+
+S:
+S:
+S:
+
+select T2.title
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+where T1.stars = 3
+INTERSECT
+select T2.title
+from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
+where T1.stars = 4

@@ -1,0 +1,249 @@
+# Total = 20
+
+1. How many elections are there?
+P:
+
+SELECT count(*)
+FROM election
+
+S:
+S:
+S:
+
+
+2. List the votes of elections in descending order.
+P:
+
+SELECT Votes
+FROM election
+order by Votes DESC
+
+S:
+S:
+S:
+
+
+3. List the dates and vote percents of elections.
+P:
+
+SELECT Date, Vote_Percent
+FROM election
+
+S:
+S:
+S:
+
+
+4. What are the minimum and maximum vote percents of elections?
+P:
+
+SELECT min(Vote_Percent), max(Vote_Percent)
+FROM election
+
+S:
+S:
+S:
+
+
+5. What are the names and parties of representatives?
+P:
+
+SELECT Name, Party
+FROM representative
+
+S:
+S:
+S:
+
+
+6. What are the names of representatives whose party is not "Republican"?
+P:
+
+SELECT Name
+FROM Representative
+Where Party != "Republican"
+
+S:
+S:
+S:
+
+
+7. What are the life spans of representatives from New York state or Indiana state?
+P:
+
+SELECT Lifespan
+FROM representative
+Where State = "New York" or State = "Indiana"
+
+S:
+S:
+S:
+
+
+8. What are the names of representatives and the dates of elections they participated in.
+P:
+
+SELECT T2.Name, T1.Date
+FROM election as T1 join representative as T2
+ON T1.Representative_ID = T2.Representative_ID
+
+S:
+S:
+S:
+
+
+9. What are the names of representatives with more than 10000 votes in election?
+P:
+
+SELECT T2.Name
+FROM election as T1 join representative as T2
+ON T1.Representative_ID = T2.Representative_ID
+Where Votes > 10000
+
+S:
+S:
+S:
+
+
+10. What are the names of representatives in descending order of votes?
+P:
+
+SELECT T2.Name
+FROM election as T1 join representative as T2
+ON T1.Representative_ID = T2.Representative_ID
+order by votes DESC
+
+S:
+S:
+S:
+
+
+11. What is the party of the representative that has the smallest number of votes.
+P:
+
+SELECT T2.Party
+FROM election as T1 join representative as T2
+ON T1.Representative_ID = T2.Representative_ID
+order by votes ASC limit 1
+
+S:
+S:
+S:
+
+
+12. What are the lifespans of representatives in descending order of vote percent?
+P:
+
+SELECT T2.Lifespan
+FROM election as T1 join representative as T2
+ON T1.Representative_ID = T2.Representative_ID
+order by Vote_Percent DESC
+
+S:
+S:
+S:
+
+
+13. What is the average number of votes of representatives from party "Republican"?
+P:
+
+SELECT avg(T1.Votes)
+FROM election as T1 join representative as T2
+ON T1.Representative_ID = T2.Representative_ID
+Where T2.Party = "Republican"
+
+S:
+S:
+S:
+
+
+14. What are the different parties of representative? Show the party name and the number of representatives in each party.
+P:
+
+SELECT Party, COUNT(*)
+FROM representative
+group by Party
+
+S:
+S:
+S:
+
+
+15. What is the party that has the largest number of representatives?
+P:
+
+SELECT Party, COUNT(*)
+FROM representative
+group by Party
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+16. What parties have at least three representatives?
+P:
+
+SELECT Party
+FROM representative
+group by Party
+Having COUNT(*) >= 3
+
+S:
+S:
+S:
+
+
+17. What states have at least two representatives?
+P:
+
+SELECT State
+FROM representative
+group by State
+Having COUNT(*) >= 2
+
+S:
+S:
+S:
+
+
+18. List the names of representatives that have not participated in elections listed here.
+P:
+
+SELECT Name
+from representative
+Where Representative_ID not in (select Representative_ID from election)
+
+S:
+S:
+S:
+
+
+19. Show the parties that have both representatives in New York state and representatives in Pennsylvania state.
+P:
+
+SELECT Party
+FROM representative
+Where State = "New York"
+Intersect
+SELECT Party
+FROM representative
+Where State = "Pennsylvania"
+
+S:
+S:
+S:
+
+
+20. How many distinct parties are there for representatives?
+P:
+
+SELECT count(distinct Party)
+FROM representative
+
+S:
+S:
+S:
+
+

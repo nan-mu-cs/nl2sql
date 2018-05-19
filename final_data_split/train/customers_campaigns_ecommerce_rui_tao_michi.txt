@@ -1,0 +1,183 @@
+1. How many premises are there?
+P: 
+
+select count(*)
+from premises
+
+S:
+S:
+S:
+
+
+2. What are all the distinct premise types?
+P: 
+
+select distinct premises_type
+from premises
+
+S:
+S:
+S:
+
+
+3. Find the types and details for all premises and order by the premise type.
+P: 
+
+select premises_type, premise_details
+from premises
+order by premises_type
+
+S:
+S:
+S:
+
+
+4. Show each premise type and the number of premises in that type.
+P: 
+
+select premises_type, count(*)
+from premises
+group by premises_type
+
+S:
+S:
+S:
+
+
+5. Show all distinct product categories along with the number of mailshots in each category.
+P: 
+
+select product_category, count(*)
+from mailshot_campaigns
+group by product_category
+
+S:
+S:
+S:
+
+
+6. Show the name and phone of the customer without any mailshot.
+P: 
+
+select customer_name, customer_phone
+from customers
+where customer_id not in (select customer_id from mailshot_customers)
+
+S:
+S:
+S:
+
+
+7. Show the name and phone for customers with a mailshot with outcome code 'No Response'.
+P: 
+
+select T1.customer_name, T1.customer_phone
+from customers as T1 join mailshot_customers as T2 on T1.customer_id = T2.customer_id
+where T2.outcome_code = 'No Response'
+
+S:
+S:
+S:
+
+
+8. Show the outcome code of mailshots along with the number of mailshots in each outcome code.
+P: 
+
+select outcome_code, count(*)
+from mailshot_customers
+group by outcome_code
+
+S:
+S:
+S:
+
+
+9. Show the names of customers who have at least 2 mailshots with outcome code 'Order'.
+P: 
+
+select T2.customer_name
+from mailshot_customers as T1 join customers as T2 on T1.customer_id = T2.customer_id
+where outcome_code = 'Order'
+group by T1.customer_id
+having count(*) >= 2
+
+S:
+S:
+S:
+
+
+10. Show the names of customers who have the most mailshots.
+P: 
+
+select T2.customer_name
+from mailshot_customers as T1 join customers as T2 on T1.customer_id = T2.customer_id
+group by T1.customer_id
+order by count(*) desc limit 1
+
+S:
+S:
+S:
+
+
+11. What are the name and payment method of customers who have both mailshots in 'Order' outcome and mailshots in 'No Response' outcome.
+P: 
+
+select T2.customer_name, T2.payment_method
+from mailshot_customers as T1 join customers as T2 on T1.customer_id = T2.customer_id
+where T1.outcome_code = 'Order'
+intersect
+select T2.customer_name, T2.payment_method
+from mailshot_customers as T1 join customers as T2 on T1.customer_id = T2.customer_id
+where T1.outcome_code = 'No Response'
+
+S:
+S:
+S:
+
+
+12. Show the premise type and address type code for all customer addresses.
+P: 
+
+select T2.premises_type, T1.address_type_code
+from customer_addresses as T1 join premises as T2 on T1.premise_id = T2.premise_id
+
+S:
+S:
+S:
+
+
+13. What are the distinct address type codes for all customer addresses?
+P: 
+
+select distinct address_type_code
+from customer_addresses
+
+S:
+S:
+S:
+
+
+14. Show the shipping charge and customer id for customer orders with order status Cancelled or Paid.
+P: 
+
+select order_shipping_charges, customer_id
+from customer_orders
+where order_status_code = 'Cancelled' OR order_status_code = 'Paid'
+
+S:
+S:
+S:
+
+
+15. Show the names of customers having an order with shipping method FedEx and order status Paid.
+P: 
+
+select T1.customer_name
+from customers as T1 join customer_orders as T2 on T1.customer_id = T2.customer_id
+where shipping_method_code = 'FedEx' AND order_status_code = 'Paid'
+
+S:
+S:
+S:
+
+

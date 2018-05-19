@@ -1,0 +1,843 @@
+Total # = 37
+
+1.Find the names of all modern rooms with a base price below $160 and two beds.
+P: What are the names of modern rooms that have a base price lower than $160 and two beds.
+
+SELECT roomName
+FROM Rooms
+WHERE basePrice < 160 AND beds= 2 and decor = 'modern';
+
+S: Find all the modern rooms.
+S: Of those, which have a base price lower than $160 and two beds? Return the room names.
+
+SELECT *
+FROM Rooms
+WHERE decor = 'modern'
+
+SELECT roomName
+FROM Rooms
+WHERE basePrice < 160 AND beds= 2 and decor = 'modern';
+
+
+2. Find all the rooms that have a price higher than 160 and can accommodate more than 2 people. Report room names and ids.
+P: What are the room names and ids of all the rooms that cost more than 160 and can accommodate more than two people.
+
+SELECT roomName, RoomId
+FROM Rooms
+WHERE basePrice > 160 AND maxOccupancy > 2;
+
+S: Find all the rooms whose price is above 160.
+S: Of those, which rooms can accommodate more than two people?
+S: Give me the name and id of those rooms.
+
+SELECT *
+FROM Rooms
+WHERE basePrice > 160
+
+SELECT *
+FROM Rooms
+WHERE basePrice > 160 AND maxOccupancy > 2;
+
+SELECT roomName, RoomId
+FROM Rooms
+WHERE basePrice > 160 AND maxOccupancy > 2;
+
+
+3.Find the most popular room in the hotel. The most popular room is the room that had seen the largest number of reservations.
+P: Which room has the largest number of reservations?
+
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY count(*) desc
+LIMIT 1;
+
+S: How many reservations were made for each room?
+S: Which room has the largest number of reservations?
+S: Tell me the name of that room.
+
+Select count(*)
+FROM Reservations
+GROUP Room
+
+Select *
+FROM Reservations
+GROUP Room
+ORDER BY count(*) desc
+LIMIT 1
+
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY count(*) desc
+LIMIT 1;
+
+
+4.How many kids stay in the rooms reserved by ROY SWEAZY?
+P: Find the number of kids staying in the rooms reserved by a person called ROY SWEAZ.
+
+SELECT kids
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+S: Find the reservations made by a person called ROY SWEAZ
+S: How many kids stay in the rooms reserved by this person?
+
+Select *
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+SELECT kids
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+
+5.How many times does ROY SWEAZY has reserved a room.
+P: Find the number of times ROY SWEAZY has reserved a room.
+
+SELECT count(*)
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+S: Find the reservations made by a person called ROY SWEAZ
+S: Count the number of times ROY SWEAZY has made reservations.
+
+SELECT *
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+SELECT count(*)
+FROM Reservations
+WHERE FirstName="ROY" AND LastName = "SWEAZY";
+
+
+6.Which room has the highest rate? List the room's full name, rate, check in and check out date.
+P: Return the name, rate, check in and check out date for the room with the highest rate.
+
+SELECT T2.roomName, T1.Rate, T1.CheckIn, T1.CheckOut
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY T1.Rate desc
+Limit 1;
+
+S: Find the room with the highest rate.
+S: What are the name, rate, check in and check out date of this room?
+
+SELECT *
+FROM Reservations
+GROUP BY Room
+ORDER BY Rate desc
+Limit 1;
+
+SELECT T2.roomName, T1.Rate, T1.CheckIn, T1.CheckOut
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T1.Room
+ORDER BY T1.Rate desc
+Limit 1;
+
+
+7.How many adults stay in the room CONRAD SELBIG checked in on Oct 23, 2010?
+P: Find the number of adults for the room reserved and checked in by CONRAD SELBIG on Oct 23, 2010.
+
+SELECT Adults
+FROM Reservations
+WHERE CheckIn = "2010-10-23" and FirstName = "CONRAD" AND LastName = "SELBIG";
+
+S: Which reservations were made by CONRAD SELBIG?
+S: Which one has check in date Oct 23, 2010?
+S: Find the number of adults for this reservation.
+
+SELECT *
+FROM Reservations
+WHERE FirstName = "CONRAD" AND LastName = "SELBIG";
+
+SELECT *
+FROM Reservations
+WHERE CheckIn = "2010-10-23" and FirstName = "CONRAD" AND LastName = "SELBIG";
+
+SELECT Adults
+FROM Reservations
+WHERE CheckIn = "2010-10-23" and FirstName = "CONRAD" AND LastName = "SELBIG";
+
+
+8.How many kids stay in the room DAMIEN TRACHSEL checked in on Sep 21, 2010?
+P: Return the number of kids for the room reserved and checked in by DAMIEN TRACHSEL on  Sep 21, 2010.
+
+SELECT Kids
+FROM Reservations
+WHERE CheckIn = "2010-09-21" and FirstName = "DAMIEN" AND LastName = "TRACHSEL";
+
+S: Which reservations were made by DAMIEN TRACHSEL?
+S: Which one has check in date Sep 21, 2010?
+S: Find the number of kids for this reservation.
+
+SELECT *
+FROM Reservations
+WHERE FirstName = "DAMIEN" AND LastName = "TRACHSEL";
+
+SELECT *
+FROM Reservations
+WHERE CheckIn = "2010-09-21" and FirstName = "DAMIEN" AND LastName = "TRACHSEL";
+
+SELECT Kids
+FROM Reservations
+WHERE CheckIn = "2010-09-21" and FirstName = "DAMIEN" AND LastName = "TRACHSEL";
+
+
+9.How many king beds are there?
+P: Find the total number of king beds available.
+
+SELECT sum(beds)
+FROM Rooms
+WHERE bedtype = 'King';
+
+S: Return all the rooms with king beds.
+S: What is the total number of king beds?
+
+SELECT *
+FROM Rooms
+WHERE bedtype = 'King';
+
+SELECT sum(beds)
+FROM Rooms
+WHERE bedtype = 'King';
+
+
+10. List the names and decor of rooms that have a king bed. Sort the list by their price.
+P: What are the names and decor of rooms with a king bed? Sort them by their price
+
+SELECT roomName, decor
+FROM Rooms
+WHERE bedtype = 'King'
+ORDER BY basePrice;
+
+S: Return all the rooms with king beds.
+S: What are the names and decor of these rooms?
+S: Sort the list by the room base price.
+
+SELECT *
+FROM Rooms
+WHERE bedtype = 'King'
+
+SELECT roomName, decor
+FROM Rooms
+WHERE bedtype = 'King'
+
+SELECT roomName, decor
+FROM Rooms
+WHERE bedtype = 'King'
+ORDER BY basePrice;
+
+
+11.Which room has cheapest base price? List the room's name and the base price.
+P: What are the room name and base price of the room with the lowest base price?
+
+SELECT roomName, basePrice
+FROM Rooms
+ORDER BY basePrice ASC
+LIMIT 1;
+
+S: What is the base price of each room?
+S: Order the rooms by their base price.
+S: Report the room name and base price of the cheapest room.
+
+SELECT basePrice
+FROM Rooms
+
+SELECT *
+FROM Rooms
+ORDER BY basePrice ASC
+
+SELECT roomName, basePrice
+FROM Rooms
+ORDER BY basePrice ASC
+LIMIT 1;
+
+
+12. What is the decor of room Recluse and defiance?
+P: Return the decor of the room named "Recluse and defiance".
+
+SELECT decor
+FROM Rooms
+WHERE roomName = "Recluse and defiance";
+
+S: Find the room with name "Recluse and defiance".
+S: What is its decor?
+
+SELECT *
+FROM Rooms
+WHERE roomName = "Recluse and defiance";
+
+SELECT decor
+FROM Rooms
+WHERE roomName = "Recluse and defiance";
+
+
+13. What is the average base price of different bed type? List bed type and average base price.
+P: For each bed type, find the average base price of different bed type.
+
+SELECT bedType, avg(basePrice)
+FROM Rooms
+GROUP BY bedType;
+
+S: Group all the rooms by the bed type.
+S: For each bed type, find the average base price of different bed type.
+
+SELECT *
+FROM Rooms
+GROUP BY bedType;
+
+SELECT bedType, avg(basePrice)
+FROM Rooms
+GROUP BY bedType;
+
+
+14. What is the total number of people who could stay in the modern rooms in this inn?
+P: How many people in total can stay in the modern rooms of this inn?
+
+SELECT sum(maxOccupancy)
+FROM Rooms
+WHERE decor = 'modern';
+
+S: For each modern room, find the maximum number of people who can stay in.
+S: What is the total number of people who can stay in the modern rooms of this inn?
+
+SELECT maxOccupancy
+FROM Rooms
+WHERE decor = 'modern';
+
+SELECT sum(maxOccupancy)
+FROM Rooms
+WHERE decor = 'modern';
+
+
+15.What kind of decor has the least number of reservations?
+P: What is the least popular kind of decor?
+
+SELECT T2.decor
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T2.decor
+ORDER BY count(T2.decor) asc
+Limit 1;
+
+S: Find the decor of each room
+S: For each type of decor, how many reservations were made?
+S: Which decor is the least popular?
+
+SELECT decor
+From Rooms
+
+SELECT count(T2.decor)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T2.decor
+
+SELECT T2.decor
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+GROUP BY T2.decor
+ORDER BY count(T2.decor) asc
+Limit 1;
+
+
+16. List how many times the number of people in the room reached the maximum occupancy of the room. The number of people include adults and kids.
+P: How many times the number of adults and kids staying in a room reached the maximum capacity of the room?
+
+SELECT count(*)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+WHERE T2.maxOccupancy = T1.Adults + T1.Kids;
+
+S: What is the maximum capacity of each room?
+S: What is the number of people who actually stayed for each room reservation? The number of people include adults and kids.
+S: How many times the number reached the maximum capacity?
+
+SELECT maxOccupancy
+FROM Rooms
+
+SELECT T1.Adults + T1.Kids
+FROM Reservations
+
+SELECT count(*)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+WHERE T2.maxOccupancy = T1.Adults + T1.Kids;
+
+
+17. Find the first and last names of people who payed more than the rooms' base prices.
+P: What are the first and last names of people who payed more than the rooms' base prices?
+
+SELECT T1.firstname, T1.lastname
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+Where T1.Rate - T2.basePrice > 0
+
+S: For each reservation, find the base price and the actual rate payed.
+S: How many times did the actual price exceeded the base price?
+S: What are the first and last names of people who payed more than the rooms' base prices?
+
+SELECT T1.Rate, T2.basePrice
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+
+SELECT count(*)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+Where T1.Rate - T2.basePrice > 0
+
+SELECT T1.firstname, T1.lastname
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+Where T1.Rate - T2.basePrice > 0
+
+
+18.How many rooms are there?
+P: What is the total number of rooms available in this inn?
+
+SELECT count(*)
+FROM Rooms;
+
+S: List all the rooms.
+S: Count the number of rooms.
+
+SELECT *
+FROM Rooms;
+
+SELECT count(*)
+FROM Rooms;
+
+
+19.Find the number of rooms with a king bed.
+P: How many rooms have a king bed?
+
+SELECT count(*)
+FROM Rooms
+WHERE bedType = "King";
+
+S: Return all the rooms with king beds.
+S: What is the total number such rooms?
+
+SELECT *
+FROM Rooms
+WHERE bedtype = 'King';
+
+SELECT count(*)
+FROM Rooms
+WHERE bedtype = 'King';
+
+
+20.Find the number of rooms for each bed type.
+P: What are the number of rooms for each bed type?
+
+SELECT bedType, count(*)
+FROM Rooms
+GROUP BY bedType;
+
+S: Group all the rooms by the bed type
+S: For each bed type, count the number of rooms.
+
+SELECT *
+FROM Rooms
+GROUP BY bedType;
+
+SELECT bedType, count(*)
+FROM Rooms
+GROUP BY bedType;
+
+
+21.Find the name of the room with the maximum occupancy.
+P: What is the name of the room that can accommodate the most people?
+
+SELECT roomName
+FROM Rooms
+ORDER BY maxOccupancy DESC
+LIMIT 1;
+
+S: Sort all the rooms by the maximum occupancy.
+S: Which room has the largest capacity?
+S: Tell me the name of that room.
+
+SELECT *
+FROM Rooms
+ORDER BY maxOccupancy DESC
+
+SELECT *
+FROM Rooms
+ORDER BY maxOccupancy DESC
+LIMIT 1;
+
+SELECT roomName
+FROM Rooms
+ORDER BY maxOccupancy DESC
+LIMIT 1;
+
+
+22.Find the id and name of the most expensive base price room.
+P: Which room has the highest base price?
+
+SELECT RoomId, roomName
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 1;
+
+S: List all the rooms in the descending order of the base price.
+S: Which room has the highest base price?
+S: Give me the id and name of this room.
+
+SELECT *
+FROM Rooms
+ORDER BY basePrice DESC
+
+SELECT *
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 1;
+
+SELECT RoomId, roomName
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 1;
+
+
+23.List the type of bed and name of all traditional rooms.
+P: What are the bed type and name of all the rooms with traditional decor?
+
+SELECT roomName, bedType
+FROM Rooms
+WHERE decor="traditional";
+
+S: Which rooms have traditional decor?
+S: What are the name and bed type of those rooms?
+
+SELECT *
+FROM Rooms
+WHERE decor="traditional";
+
+SELECT roomName, bedType
+FROM Rooms
+WHERE decor="traditional";
+
+
+24.Find the number of rooms with king bed for each decor type.
+P: How many rooms have king beds? Report the number for each decor type.
+
+SELECT decor, count(*)
+FROM Rooms
+WHERE bedType="King"
+GROUP BY decor;
+
+S: Which rooms have king beds?
+S: Group all the rooms with king beds according to the decor type.
+S: Count the number of rooms for each decor type.
+
+Select *
+FROM Rooms
+WHERE bedType="King"
+
+SELECT *
+FROM Rooms
+WHERE bedType="King"
+GROUP BY decor;
+
+SELECT decor, count(*)
+FROM Rooms
+WHERE bedType="King"
+GROUP BY decor;
+
+
+25.Find the average and minimum price of the rooms in different decor.
+P: What is the average minimum and price of the rooms for each different decor.
+
+SELECT decor,avg(basePrice), min(basePrice)
+FROM Rooms
+GROUP BY decor;
+
+S: What is the average price of all the rooms?
+S: What about the minimum price?
+S: Tell me the average and minimum price of the rooms for each different decor.
+
+SELECT avg(basePrice)
+FROM Rooms
+
+SELECT min(basePrice)
+FROM Rooms
+
+SELECT decor,avg(basePrice), min(basePrice)
+FROM Rooms
+GROUP BY decor;
+
+
+26. List the name of all rooms sorted by their prices.
+P: Sort all the rooms according to the price. Just report the room names.
+
+SELECT roomName
+FROM Rooms
+Order by basePrice;
+
+S: Sort all the rooms according to the price
+S: Just show the room names
+
+SELECT *
+FROM Rooms
+Order by basePrice;
+
+SELECT roomName
+FROM Rooms
+Order by basePrice;
+
+
+27.Find the number of rooms with price higher than 120 for different decor.
+P: How many rooms cost more than 120, for each different decor?
+
+SELECT decor,count(*)
+FROM Rooms
+WHERE basePrice > 120
+GROUP BY decor;
+
+S: Show me all the rooms that cost more than 120.
+S: How many rooms?
+S: Tell me how many rooms cost more than 120, for each different decor.
+
+SELECT *
+FROM Rooms
+WHERE basePrice > 120
+
+SELECT count(*)
+FROM Rooms
+WHERE basePrice > 120
+
+SELECT decor,count(*)
+FROM Rooms
+WHERE basePrice > 120
+GROUP BY decor;
+
+
+28. For each bed type, find the average room price.
+P: What is the average base price of rooms, for each bed type?
+
+SELECT bedType, avg(basePrice)
+FROM Rooms
+GROUP BY bedType;
+
+S: Tell me the average price of rooms.
+S: Report the average room price for each bed type.
+
+SELECT avg(basePrice)
+FROM Rooms
+
+SELECT bedType, avg(basePrice)
+FROM Rooms
+GROUP BY bedType;
+
+
+29.List the name of rooms with king or queen bed.
+P: What are the names of rooms that have either king or queen bed?
+
+SELECT roomName
+FROM Rooms
+WHERE bedType = "King" OR bedType = "Queen";
+
+S: Find all the rooms with a king bed.
+S: How about queen bed?
+S: Return the names of rooms that have either of them.
+
+SELECT *
+FROM Rooms
+WHERE bedType = "King"
+
+SELECT *
+FROM Rooms
+WHERE bedType = "Queen";
+
+SELECT roomName
+FROM Rooms
+WHERE bedType = "King" OR bedType = "Queen";
+
+
+30.How many different types of beds are there?
+P: Find the number of distinct bed types available in this inn.
+
+SELECT count(distinct bedType)
+FROM Rooms;
+
+S: Tell me the bed type for each room.
+S: How many distinct types of beds are there?
+
+SELECT bedType
+FROM Rooms;
+
+SELECT count(distinct bedType)
+FROM Rooms;
+
+
+31.Find the name and id of the top 3 expensive rooms.
+P: What are the name and id of the three highest priced rooms?
+
+SELECT RoomId, roomName
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 3;
+
+S: Return a list of all the rooms sorted in the descending order of base prices.
+S: Return the top three.
+S: Just tell me the room id and name for these rooms.
+
+SELECT *
+FROM Rooms
+ORDER BY basePrice DESC
+
+SELECT *
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 3;
+
+SELECT RoomId, roomName
+FROM Rooms
+ORDER BY basePrice DESC
+LIMIT 3;
+
+
+32.Find the name of rooms whose price is higher than the average price.
+P: What are the name of rooms that cost more than the average.
+
+SELECT roomName
+FROM Rooms
+WHERE basePrice > (
+	SELECT avg(basePrice)
+	FROM Rooms
+);
+
+S: What is the average room price in this inn?
+S: Find all the rooms that cost more than that.
+S: What are their room names?
+
+SELECT avg(basePrice)
+	FROM Rooms
+
+SELECT *
+FROM Rooms
+WHERE basePrice > (
+	SELECT avg(basePrice)
+	FROM Rooms
+);
+
+SELECT roomName
+FROM Rooms
+WHERE basePrice > (
+	SELECT avg(basePrice)
+	FROM Rooms
+);
+
+
+33. Find the number of rooms that do not have any reservation.
+P: How many rooms have not had any reservation yet?
+
+select count(*)
+from rooms
+where roomid NOT IN (select distinct room from reservations)
+
+S: Find the ids of all the rooms that have been reserved before.
+S: Which rooms have not had any reservation yet?
+S: How many are there?
+
+select distinct room from reservations
+
+select *
+from rooms
+where roomid NOT IN (select distinct room from reservations)
+
+select count(*)
+from rooms
+where roomid NOT IN (select distinct room from reservations)
+
+
+34. Return the name and number of reservations made for each of the rooms.
+P: For each room, find its name and the number of times reservations were made for it.
+
+SELECT T2.roomName, count(*), T1.Room
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+group by T1.Room
+
+S: Group all the reservation record by the rooms.
+S: For each room, count how many times it was booked.
+S: Also report the name of each room.
+
+SELECT *
+FROM Reservations
+group by Room
+
+SELECT count(*)
+FROM Reservations
+group by Room
+
+SELECT T2.roomName, count(*)
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+group by T1.Room
+
+
+35. Find the names of rooms that have been reserved for more than 60 times.
+P: What are the names of rooms whose reservation frequency exceeds 60 times?
+
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+group by T1.Room
+having count(*) > 60
+
+S: For each room, count how many times it was booked.
+S: Which rooms have been booked more than 60 times?
+S: Give me the names of the rooms.
+
+SELECT count(*)
+FROM Reservations
+group by Room
+
+SELECT *
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+group by T1.Room
+having count(*) > 60
+
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+group by T1.Room
+having count(*) > 60
+
+
+36. Find the name of rooms whose base price is between 120 and 150.
+P: Which rooms cost between 120 and 150? Give me the room names.
+
+select roomname
+from rooms
+where baseprice between 120 and 150
+
+S: Which rooms' base prices are between 120 and 150?
+S: Give me the names of these rooms.
+
+select *
+from rooms
+where baseprice between 120 and 150
+
+select roomname
+from rooms
+where baseprice between 120 and 150
+
+
+37. Find the name of rooms booked by some customers whose first name contains ROY.
+P: What are the name of rooms booked by customers whose first name has "ROY" in part?
+
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+where firstname LIKE '%ROY%'
+
+S: Find the reservations made by customers whose first name has "ROY" in part.
+S: What rooms were booked by these customers?
+S: What are the names of these rooms?
+
+SELECT *
+FROM Reservations
+where firstname LIKE '%ROY%'
+
+SELECT *
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+where firstname LIKE '%ROY%'
+
+SELECT T2.roomName
+FROM Reservations AS T1 JOIN Rooms AS T2 on T1.Room = T2.RoomId
+where firstname LIKE '%ROY%'
+
+
+
+
+
+

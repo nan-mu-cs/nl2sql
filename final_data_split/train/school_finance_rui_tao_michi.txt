@@ -1,0 +1,301 @@
+1. How many schools are there?
+P: Count the number of schools.
+
+select count(*)
+from school
+
+S:
+S:
+S:
+
+
+2. Show all school names in alphabetical order.
+P:
+
+select school_name
+from school
+order by school_name
+
+S:
+S:
+S:
+
+
+3. List the name, location, mascot for all schools.
+P:
+
+select school_name, location, mascot
+from school
+
+S:
+S:
+S:
+
+
+4. What are the total and average enrollment of all schools?
+P:
+
+select sum(enrollment), avg(enrollment)
+from school
+
+S:
+S:
+S:
+
+
+5. What are the mascots for schools with enrollments above the average?
+P:
+
+select mascot
+from school
+where enrollment > (select avg(enrollment) from school)
+
+S:
+S:
+S:
+
+
+6. List the name of the school with the smallest enrollment.
+P:
+
+select school_name
+from school
+order by enrollment
+limit 1
+
+S:
+S:
+S:
+
+
+7. Show the average, maximum, minimum enrollment of all schools.
+P:
+
+select avg(enrollment), max(enrollment), min(enrollment)
+from school
+
+S:
+S:
+S:
+
+
+8. Show each county along with the number of schools and total enrollment in each county.
+P:
+
+select county, count(*), sum(enrollment)
+from school
+group by county
+
+S:
+S:
+S:
+
+
+9. How many donors have endowment for school named "Glenn"?
+P:
+
+select count(distinct T1.donator_name)
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = "Glenn"
+
+S:
+S:
+S:
+
+
+10. List each donator name and the amount of endowment in descending order of the amount of endowment.
+P:
+
+select donator_name, sum(amount)
+from endowment
+group by donator_name
+order by sum(amount) desc
+
+S:
+S:
+S:
+
+
+11. List the names of the schools without any endowment.
+P:
+
+select school_name
+from school
+where school_id NOT IN (select school_id from endowment)
+
+S:
+S:
+S:
+
+
+12. List all the names of schools with an endowment amount smaller than or equal to 10.
+P:
+
+select T2.school_name
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+group by T1.school_id
+having sum(T1.amount) <= 10
+
+S:
+S:
+S:
+
+
+13. Show the names of donors who donated to both school "Glenn" and "Triton."
+P:
+
+select T1.donator_name
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = 'Glenn'
+INTERSECT
+select T1.donator_name
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = 'Triton'
+
+S:
+S:
+S:
+
+
+14. Show the names of all the donors except those whose donation amount less than 9.
+P:
+
+select donator_name
+from endowment
+except
+select donator_name
+from endowment
+where amount < 9
+
+S:
+S:
+S:
+
+
+15. List the amount and donor name for the largest amount of donation.
+P:
+
+select amount, donator_name
+from endowment
+order by amount desc
+limit 1
+
+S:
+S:
+S:
+
+
+16. How many budgets are above 3000 in year 2001 or before?
+P: Count the number of budgets in year 2001 or before whose budgeted amount is greater than 3000
+
+select count(*)
+from budget
+where budgeted > 3000 AND year <= 2001
+
+S:
+S:
+S:
+
+
+17. Show each school name, its budgeted amount, and invested amount in year 2002 or after.
+P:
+
+select T2.school_name, T1.budgeted, T1.invested
+from budget as T1 join school as T2 on T1.school_id = T2.school_id
+where T1.year >= 2002
+
+S:
+S:
+S:
+
+
+18. Show all donor names.
+P:
+
+select distinct donator_name
+from endowment
+
+S:
+S:
+S:
+
+
+19. How many budget record has a budget amount smaller than the invested amount?
+P:
+
+select count(*)
+from budget
+where budgeted < invested
+
+S:
+S:
+S:
+
+
+20. What is the total budget amount for school "Glenn" in all years?
+P:
+
+select sum(T1.budgeted)
+from budget as T1 join school as T2 on T1.school_id = T2.school_id
+where T2.school_name = 'Glenn'
+
+S:
+S:
+S:
+
+
+21. Show the names of schools with a total budget amount greater than 100 or a total endowment greater than 10.
+P:
+
+select T2.school_name
+from budget as T1 join school as T2 on T1.school_id = T2.school_id join endowment as T3 on T2.school_id = T3.school_id
+group by T2.school_name
+having sum(T1.budgeted) > 100 OR sum(T3.amount) > 10
+
+S:
+S:
+S:
+
+
+22. Find the names of schools that have more than one donator with donation amount above 8.5.
+P:
+
+select T2.School_name
+from endowment as T1 join school as T2 on T1.school_id = T2.school_id
+where T1.amount > 8.5
+group by T1.school_id
+having count(*) > 1
+
+S:
+S:
+S:
+
+
+23. Find the number of schools that have more than one donator whose donation amount is less than 8.5.
+P:
+
+select count(*)
+from (select *
+from endowment
+where amount > 8.5
+group by school_id
+having count(*) > 1)
+
+S:
+S:
+S:
+
+
+24. List the name, IHSAA Football Class, and Mascot of the schools that have more than 6000 of budgeted amount or were founded before 2003, in the order of percent of total invested budget and total budgeted budget.
+P:
+
+select T1.School_name, T1.Mascot, T1.IHSAA_Football_Class
+from school as T1 join budget as T2 on T1.school_id = T2.school_id
+where Budgeted > 6000 or year < 2003
+order by T2.total_budget_percent_invested, T2.total_budget_percent_budgeted
+
+S:
+S:
+S:
+
+

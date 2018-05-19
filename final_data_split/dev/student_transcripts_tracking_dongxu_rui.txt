@@ -1,0 +1,368 @@
+# count = 41
+
+
+1. what are all the addresses including line 1 and line 2?
+P: What is the first and second line for all addresses?
+
+select line_1, line_2
+from addresses
+
+
+2. How many courses in total are listed?
+P: How many courses are there?
+
+
+select count(*)
+from Courses
+
+
+3. How is the math course described?
+P: What are the descriptions for all the math courses?
+
+
+select course_description
+from Courses
+where course_name = 'math'
+
+
+4. What is the zip code of the address in the city Port Chelsea?
+P: What is the zip code for Port Chelsea?
+
+
+
+select zip_postcode
+from Addresses
+where city = 'Port Chelsea'
+
+
+
+5. Which department offers the most number of degrees? List department name and id.
+P: For each department id, what is the name of the department with the most number of degrees?
+
+select T2.department_name, T1.department_id
+from Degree_Programs as T1 JOIN Departments as T2 on T1.department_id = T2.department_id
+group by T1.department_id
+order by count(*) desc limit 1
+
+
+6. How many departments offer any degree?
+P: How many different departments offer degrees?
+
+
+select count(distinct department_id)
+from Degree_Programs
+
+
+7. How many different degree names are offered?
+P: How many different degrees are offered?
+
+
+select count(distinct degree_summary_name)
+from Degree_Programs
+
+
+8. How many degrees does the engineering department offer?
+P: How many degrees does the engineering department have?
+
+
+select count(*)
+from Departments as T1 JOIN Degree_Programs as T2 on T1.department_id = T2.department_id
+where T1.department_name = 'engineer'
+
+
+9. What are the names and descriptions of all the sections?
+P: What are the names and descriptions for all the sections?
+
+select section_name, section_description
+from Sections
+
+
+10. What are the names and id of courses having at most 2 sections? 
+P: What are the names and ids of every course with less than 2 sections?
+
+
+select T1.course_name, T1.course_id
+from Courses as T1 JOIN Sections as T2 on T1.course_id = T2.course_id
+group by T1.course_id
+having count(*) <= 2
+
+
+11. List the section_name in reversed lexicographical order.
+P: What are the names of the sections in reverse alphabetical order?
+
+
+
+select section_name
+from Sections
+order by section_name desc
+
+
+12. What is the semester which most student registered in? Show both the name and the id.
+P: For each semester, what is the name and id of the one with the most students registered?
+
+
+select T1.semester_name, T1.semester_id
+from Semesters as T1 JOIN Student_Enrolment as T2 on T1.semester_id = T2.semester_id
+group by T1.semester_id
+order by count(*) desc limit 1
+
+13. What is the description of the department whose name has the substring the computer?
+P: What is the department description for the one whose name has the word computer?
+
+
+select department_description
+from Departments
+where department_name LIKE '%computer%'
+
+
+
+
+14. Who are enrolled in 2 degree programs in one semester? List the first name, middle name and last name and the id.
+P: What are the first, middle, and last names, along with the ids, of all students who enrolled in 2 degree programs in one semester?
+
+select T1.first_name, T1.middle_name, T1.last_name, T1.student_id
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id
+group by T1.student_id
+having count(*) = 2
+
+
+
+15. Who is enrolled in a Bachelor degree program? List the first name, middle name, last name.
+P: What are the first, middle, and last names for everybody enrolled in a Bachelors program?
+
+select distinct T1.first_name, T1.middle_name, T1.last_name
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id JOIN Degree_Programs as T3 on T2.degree_program_id = T3.degree_program_id
+where T3.degree_summary_name = 'Bachelor'
+
+
+
+16. Find the kind of program which most number of students are enrolled in?
+P: What is the degree summary name that has the most number of students enrolled?
+
+select T1.degree_summary_name
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+group by T1.degree_summary_name
+order by count(*) desc limit 1
+
+
+
+17. Find the program which most number of students are enrolled in. List both the id and the summary.
+P: What is the program id and the summary of the degree that has the most students enrolled?
+
+select T1.degree_program_id, T1.degree_summary_name
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+group by T1.degree_program_id
+order by count(*) desc limit 1
+
+
+18. Which student has enrolled for the most times in any program? List the id, first name, middle name, last name, the number of enrollments and student id.
+P: What is the first, middle, and last name, along with the id and number of enrollments, for the student who enrolled the most in any program?
+
+
+select T1.student_id, T1.first_name, T1.middle_name, T1.last_name, count(*), T1.student_id
+from Students as T1 JOIN Student_Enrolment as T2 on T1.student_id = T2.student_id
+group by T1.student_id
+order by count(*) desc limit 1
+
+
+19. Which semesters do not have any student enrolled? List the semester name.
+P: What is the name of the semester with no students enrolled?
+
+
+select semester_name
+from Semesters
+where semester_id not in(
+	select semester_id from Student_Enrolment
+)
+
+
+21. What are all the course names of the courses which ever have students enrolled in?
+P: What are the names of all courses that have some students enrolled?
+
+
+select distinct T1.course_name
+from Courses as T1 JOIN Student_Enrolment_Courses as T2
+on T1.course_id = T2.course_id
+
+
+22. What's the name of the course with most number of enrollments?
+P: What is the name of the course with the most students enrolled?
+
+
+select  T1.course_name
+from Courses as T1 JOIN Student_Enrolment_Courses as T2
+on T1.course_id = T2.course_id
+group by T1.course_name
+order by count(*) desc limit 1
+
+
+
+23. Find the last name of the students who currently live in the state of North Carolina but have not registered in any degree program.
+P: What are the last name of the students who live in North Carolina but have not registered in any degree programs?
+
+
+select T1.last_name
+from Students as T1 JOIN Addresses as T2 on T1.current_address_id = T2.address_id
+where T2.state_province_county = 'NorthCarolina'
+EXCEPT
+select distinct T3.last_name
+from Students as T3 JOIN Student_Enrolment as T4 on T3.student_id = T4.student_id
+
+
+
+24. Show the date and id of the transcript with at least 2 course results.
+P: What is the date and id of the transcript with at least 2 courses listed?
+
+
+select T2.transcript_date, T1.transcript_id
+from Transcript_Contents as T1 JOIN Transcripts as T2 on T1.transcript_id = T2.transcript_id
+group by T1.transcript_id
+having count(*) >= 2
+
+
+
+
+25. What is the phone number of the man with the first name Timmothy and the last name Ward?
+P: What is the mobile phone number of the student named Timothy Ward?
+
+
+select cell_mobile_number
+from Students
+where first_name = 'Timmothy' and last_name = 'Ward'
+
+
+
+26. Who is the first student to register? List the first name, middle name and last name.
+P: What is the first, middle, and last name of the first student to register?
+
+
+select first_name, middle_name, last_name
+from Students
+order by date_first_registered asc limit 1
+
+
+27. Who is the earliest graduate of the school? List the first name, middle name and last name.
+P: What is the first, middle, and last name of the earliest school graduate?
+
+
+select first_name, middle_name, last_name
+from Students
+order by date_left asc limit 1
+
+
+28. Whose permanent address is different from his or her current address? List his or her first name.
+P: What is the first name of the student whose permanent address is different from his or her current one?
+
+
+select first_name
+from Students
+where current_address_id != permanent_address_id
+
+
+29. Which address holds the most number of students currently? List the address id and all lines.
+P: What is the id, line 1, and line 2 of the address with the most students?
+
+
+select T1.address_id, T1.line_1, T1.line_2
+from Addresses as T1 JOIN Students as T2 on T1.address_id = T2.current_address_id
+group by T1.address_id
+order by count(*) desc limit 1
+
+
+30. On average, when were the transcripts printed?
+P: What is the average transcript date?
+
+select avg(transcript_date)
+from Transcripts
+
+
+31. When is the first transcript released? List the date and details.
+P: What is the earliest date of a transcript release, and what details can you tell me?
+
+
+select transcript_date, other_details
+from Transcripts
+order by transcript_date asc limit 1
+
+
+32. How many transcripts are released?
+P: How many transcripts are listed?
+
+select count(*)
+from Transcripts
+
+
+33. What is the last transcript release date?
+P: When was the last transcript released?
+
+select transcript_date
+from Transcripts
+order by transcript_date desc limit 1
+
+
+34. How many times at most can a course enrollment result show in different transcripts? Also show the course enrollment id.
+P: What is the maximum number of times that a course shows up in different transcripts and what is that course's enrollment id?
+
+select count(*), student_course_id
+from Transcript_Contents
+group by student_course_id
+order by count(*) desc limit 1
+
+
+
+35. Show the date of the transcript which shows the least number of results, also list the id.
+P: What is the date and id of the transcript with the least number of results?
+
+
+select T2.transcript_date, T1.transcript_id
+from Transcript_Contents as T1 JOIN Transcripts as T2 on T1.transcript_id = T2.transcript_id
+group by T1.transcript_id
+order by count(*) asc limit 1
+
+36. Find the semester when both Master students and Bachelor students got enrolled in.
+P: What is the id of the semester that had both Masters and Bachelors students enrolled?
+
+
+select distinct T2.semester_id
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+where degree_summary_name = 'Master'
+INTERSECT 
+select distinct T2.semester_id
+from Degree_Programs as T1 JOIN Student_Enrolment as T2 on T1.degree_program_id = T2.degree_program_id
+where degree_summary_name = 'Bachelor'
+
+
+37. How many different addresses do the students currently live?
+P: What are the different addresses that have students living there?
+
+
+select count(distinct current_address_id)
+from Students
+
+
+38. List all the student details in reversed lexicographical order.
+P: What other details can you tell me about students in reverse alphabetical order?
+
+select other_student_details
+from Students
+order by other_student_details desc
+
+40. Describe the section h.
+P: What is the description for the section named h?
+
+select section_description
+from Sections
+where section_name = 'h'
+
+
+41. Find the first name of the students who permanently live in the country Haiti or have the cell phone number 09700166582.
+P: What are the first names of the students who live in Haiti permanently or have the cell phone number 09700166582?
+
+
+select T1.first_name
+from Students as T1 JOIN Addresses as T2 on T1.permanent_address_id = T2.address_id
+where T2.country = 'Haiti'
+UNION
+select first_name
+from Students
+where cell_mobile_number = '09700166582'

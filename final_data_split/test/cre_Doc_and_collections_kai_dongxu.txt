@@ -1,0 +1,330 @@
+Total # = 40
+
+1. List all collections' subset. List the subsets' names.
+P: What are the collection susbset names?
+
+
+SELECT Collection_Subset_Name FROM Collection_Subsets;
+
+2. What is detail of collection subset with name 'Top collection'?
+P: What collection details are there on the subset named 'Top collection'?
+
+SELECT Collecrtion_Subset_Details
+FROM Collection_Subsets
+WHERE Collection_Subset_Name="Top collection";
+
+3. List all documents's subset. List the subset's name.
+P: What are the document subset names?
+
+SELECT Document_Subset_Name FROM Document_Subsets;
+
+4. What is the detail of document subset with name 'Best for 2000'?
+P: What are the details on the document subsets that are named 'Best for 2000'?
+
+SELECT Document_Subset_Details
+FROM Document_Subsets
+WHERE Document_Subset_Name="Best for 2000";
+
+5. List document id of all documents.
+P: What is the object id of the document objects?
+
+SELECT Document_Object_ID FROM Document_Objects;
+
+6. What is the parent document of document owned by Marlin? List the document id.
+P: What are the document object ids of the objects owned by Marlin?
+
+SELECT Parent_Document_Object_ID
+FROM Document_Objects
+WHERE Owner = 'Marlin'
+
+7. What is the owner of document with the Description 'Braeden Collection'?
+P: What are the owners of the document objects described as the 'Braeden Collection'?
+SELECT Owner
+FROM Document_Objects
+WHERE Description = 'Braeden Collection'
+
+8. What is the owner of the parent document of document owned by 'Marlin'?
+P: Who is the owner of the parent document of every documents where 'Marlin' is the owner?
+
+SELECT T2.Owner
+FROM Document_Objects AS T1 JOIN Document_Objects AS T2 ON T1.Parent_Document_Object_ID=T2.Document_Object_ID
+WHERE T1.Owner = 'Marlin'
+
+9. What are the different descriptions of all the parent documents?
+P: What is the unique description of every parent document?
+
+SELECT distinct T2.Description
+FROM Document_Objects AS T1 JOIN Document_Objects AS T2 ON T1.Parent_Document_Object_ID=T2.Document_Object_ID
+
+10. How many documents owned by Marlin?
+P: What is the count of documents owned by Marlin?
+
+SELECT count(*)
+FROM Document_Objects
+WHERE Owner="Marlin";
+
+11. List all documents ids that are not the parent of other documents.
+P: What are the ids of the documents that are not parent documents?
+
+SELECT Document_Object_ID
+FROM Document_Objects
+EXCEPT
+SELECT Parent_Document_Object_ID
+from Document_Objects
+
+12. How many child documents does each parent document has? List the document id and the number.
+P: What is the number of child documents for each parent document, and what are the ids of the parent documents?
+
+SELECT T2.Document_Object_ID, count(*)
+FROM Document_Objects AS T1 JOIN Document_Objects AS T2 ON T1.Parent_Document_Object_ID=T2.Document_Object_ID
+group by T2.Document_Object_ID;
+
+13. List the name of all collections.
+P: what are the collection names?
+
+SELECT Collection_Name FROM Collections;
+
+14. What is the description of collection named Best?
+P: What are the collection descriptions that are named as 'Best'?
+
+SELECT Collection_Description
+FROM Collections
+WHERE Collection_Name="Best";
+
+15. What is the name of the parent collection of the collection named Nice? 
+P: What are the names of all parent collections of the collection named Nice?
+
+SELECT T2.Collection_Name
+FROM Collections AS T1 JOIN Collections AS T2 ON T1. Parent_Collection_ID=T2.Collection_ID
+WHERE T1.Collection_Name="Nice";
+
+16. Which collection is not the parent of other collection? List the collection's name.
+P: What are the names of the collections that are not the parent of the other collections?
+
+SELECT Collection_Name
+FROM Collections
+EXCEPT
+SELECT T2.Collection_Name
+FROM Collections AS T1 JOIN Collections AS T2 ON T1. Parent_Collection_ID=T2.Collection_ID;
+
+17. List document that have more than one child. List the document id.
+P: What are the ids of the documents that have more than one child?
+
+SELECT T2.Document_Object_ID
+FROM Document_Objects AS T1 JOIN Document_Objects AS T2 ON T1.Parent_Document_Object_ID=T2.Document_Object_ID
+GROUP BY T2.Document_Object_ID
+HAVING count(*) > 1;
+
+18. How many child collection does the collection named Best has?
+P: What is the number of child collections belonging to the collection named Best?
+
+SELECT count(*)
+FROM Collections AS T1 JOIN Collections AS T2 ON T1. Parent_Collection_ID=T2.Collection_ID
+WHERE T2.Collection_Name="Best";
+
+19. List all document which is related to document owned by Ransom. List the document id.
+P: What are the document object ids of the related to the document owned by Ransom? 
+
+SELECT T1.Related_Document_Object_ID
+FROM Document_Subset_Members as T1 join Document_Objects as T2
+on T1.Document_Object_ID = T2.Document_Object_ID
+WHERE T2.Owner = 'Ransom'
+
+
+20. List collection subset id, name and number of collections in each subset.
+P: What are the collection subset ids, names, and number of collections for each subset?
+
+SELECT T2.Collection_Subset_ID, T1.Collection_Subset_Name, count(*)
+FROM Collection_Subsets as T1 JOIN Collection_Subset_Members as T2
+ON T1.Collection_Subset_ID= T2.Collection_Subset_ID
+GROUP BY T2.Collection_Subset_ID;
+
+21. Which document has most of child? List the document id and the number of child.
+P: For each document object id, how many children do they have?
+
+SELECT T2.Document_Object_ID, count(*)
+FROM Document_Objects AS T1 JOIN Document_Objects AS T2 ON T1.Parent_Document_Object_ID=T2.Document_Object_ID
+GROUP BY T2.Document_Object_ID
+ORDER BY count(*) DESC
+LIMIT 1;
+
+
+22. Which document has least number of related documents? List the document id and the number of related documents.
+P: What is the document object id with the least number of related documents?
+
+SELECT Document_Object_ID,count(*)
+FROM Document_Subset_Members
+GROUP BY Document_Object_ID
+ORDER BY count(*) ASC
+LIMIT 1;
+
+
+23. Which document has between 2 and 4 number of related documents? List the document id and the number of related documents.
+P: What are the ids of the dcouments that have between 2 and 4 related documents and how many related items are there?
+
+SELECT Document_Object_ID,count(*)
+FROM Document_Subset_Members
+GROUP BY Document_Object_ID
+Having count(*) between 2 and 4;
+
+
+24. List all owner of documents that is related to documents owned by Braeden.
+P: What are the different owners of documents that are related to ones owned by Braeden?
+
+SELECT DISTINCT Owner
+FROM Document_Subset_Members as T1 JOIN Document_Objects as T2
+ON T1.Related_Document_Object_ID = T2.Document_Object_ID
+WHERE T2.Owner = 'Braeden';
+
+25. Which unique subset does document owned by Braeden belong to? List the subset name.
+P: What are the different subset names of all documents owned by Braeden?
+
+SELECT distinct T1.Document_Subset_Name
+FROM Document_Subsets as T1 JOIN Document_Subset_Members as T2
+ON T1.Document_Subset_ID= T2.Document_Subset_ID
+JOIN Document_Objects as T3
+on T2.Document_Object_ID = T3.Document_Object_ID
+WHERE T3.owner = 'Braeden'
+
+26. List subset id, name and number of different documents in each subset.
+P: What is the subset id, name, and number of different documents for each subset?
+
+SELECT T1.Document_Subset_ID, T2.Document_Subset_Name,count(distinct T1.Document_Object_ID)
+FROM Document_Subset_Members as T1 JOIN Document_Subsets as T2
+ON T1.Document_Subset_ID= T2.Document_Subset_ID
+GROUP BY T1.Document_Subset_ID;
+
+27. Which document subset has most of number of distinct documents? List subset id, name and number of documents.
+P: For the document subset with the most number of different documents, what are the ids and names of the subset, as well as the number of documents?
+
+SELECT T1.Document_Subset_ID, T2.Document_Subset_Name,count(distinct T1.Document_Object_ID)
+FROM Document_Subset_Members as T1 JOIN Document_Subsets as T2
+ON T1.Document_Subset_ID= T2.Document_Subset_ID
+GROUP BY T1.Document_Subset_ID
+ORDER BY count(distinct T1.Document_Object_ID) DESC
+LIMIT 1;
+
+28. For document subset named 'Best for 2000', List all document id that in this subset.
+P: For the document subset named 'Best for 2000', what are the document ids in that subset?
+
+SELECT DISTINCT T1.Document_Object_ID
+FROM Document_Subset_Members as T1 JOIN Document_Subsets as T2 ON T1.Document_Subset_ID= T2.Document_Subset_ID
+WHERE T2.Document_Subset_Name="Best for 2000";
+
+29. List all document subsets of documents that related to each document id. List the name of document subset and the document id.
+P: What are the different subsets of documents related to each document id, as well as the name of the document subset and id of the actual document?
+
+SELECT distinct T3.Document_Subset_Name, T1.Document_Object_ID
+FROM Document_Subset_Members AS T1 JOIN Document_Subset_Members  AS T2 
+ON T1.Related_Document_Object_ID=T2.Document_Object_ID 
+JOIN Document_Subsets as T3
+ON T2.Document_Subset_ID= T3.Document_Subset_ID
+
+30. List the Collection_Name that document owned by 'Ransom' belong to.
+P: What is the collection name of a document owned by 'Ransom'?
+
+SELECT T1.Collection_Name
+FROM Collections as T1 JOIN Documents_in_Collections as T2
+ON T1.Collection_ID=T2.Collection_ID
+join Document_Objects as T3
+on T2.Document_object_id = T3.Document_object_id 
+WHERE T3.owner = 'Ransom'
+
+31. How many collections does each document belong to? List the count and the document id.
+P: For each document object id, how many collections does it belong to?
+
+SELECT count(*), T2.Document_Object_ID
+FROM Collections as T1 JOIN Documents_in_Collections as T2
+ON T1.Collection_ID=T2.Collection_ID
+group by T2.Document_Object_ID
+
+32. How many documents does collection named 'Best' has?
+P: What is the number of documents in the collection named 'Best'?
+
+SELECT count(*)
+FROM Collections as T1 JOIN Documents_in_Collections as T2 ON T1.Collection_ID=T2.Collection_ID
+WHERE T1.Collection_Name="Best";
+
+33. List the document id of all documents in collection named Best.
+P: What is the number of document object ids in the collection named Best?
+
+SELECT T2.Document_Object_ID
+FROM Collections as T1 JOIN Documents_in_Collections as T2 ON T1.Collection_ID=T2.Collection_ID
+WHERE T1.Collection_Name="Best";
+
+34. Which collection have most number of documents? List collection name, id and number of documents.
+P: For ever collection named 'Best', what is the name and id of the one with the most documents, and how many documents does it have? 
+
+SELECT T1.Collection_Name, T1.Collection_ID, count(*)
+FROM Collections as T1 JOIN Documents_in_Collections as T2 ON T1.Collection_ID=T2.Collection_ID
+WHERE T1.Collection_Name="Best"
+GROUP BY T1.Collection_ID
+ORDER BY count(*) DESC
+LIMIT 1;
+
+35.List id of documents that in document subset Best for 2000 and collection named Best.
+P: What are the different document object ids in the subset named 'Best for 2000' and in the collection named 'Best'?
+
+
+SELECT DISTINCT T1.Document_Object_ID
+FROM Document_Subset_Members as T1 JOIN Document_Subsets as T2
+ON T1.Document_Subset_ID= T2.Document_Subset_ID
+JOIN Documents_in_Collections T3
+on T1.Document_Object_ID = T3.Document_Object_ID
+JOIN Collections as T4
+on T3.Collection_ID = T4.Collection_ID
+WHERE T2.Document_Subset_Name="Best for 2000" and T4.Collection_Name="Best";
+
+36.List id of documents that in collection named Best but not in document subset Best for 2000.
+P: What are the different document object ids that are in the collection named Best but not in the subset named 'Best for 2000'?
+
+SELECT DISTINCT T2.Document_Object_ID
+FROM Collections as T1 JOIN Documents_in_Collections as T2 ON T1.Collection_ID=T2.Collection_ID
+WHERE T1.Collection_Name="Best"
+EXCEPT
+SELECT DISTINCT T1.Document_Object_ID
+FROM Document_Subset_Members as T1 JOIN Document_Subsets as T2 ON T1.Document_Subset_ID= T2.Document_Subset_ID
+WHERE T2.Document_Subset_Name="Best for 2000"
+
+
+37.List id of documents that in document subset Best for 2000 or in collection named Best. 
+P: What are the different document ids that are in the subset named 'Best for 2000' or in the collection named 'Best'?
+
+SELECT DISTINCT T1.Document_Object_ID
+FROM Document_Subset_Members as T1 JOIN Document_Subsets as T2
+ON T1.Document_Subset_ID= T2.Document_Subset_ID
+JOIN Documents_in_Collections T3
+on T1.Document_Object_ID = T3.Document_Object_ID
+JOIN Collections as T4
+on T3.Collection_ID = T4.Collection_ID
+WHERE T2.Document_Subset_Name="Best for 2000" or T4.Collection_Name="Best";
+
+38. List all name of collections that are related to collection named Best.
+P: What are the names of the collections that are related to the collection named Best?
+
+SELECT distinct T4.Collection_Name
+FROM Collection_Subset_Members AS T1 JOIN Collection_Subset_Members AS T2 ON T1.Related_Collection_ID=T2.Collection_ID 
+JOIN Collections AS T3 
+ON T1.Collection_ID=T3.Collection_ID 
+JOIN Collections AS T4 ON 
+T2.Collection_ID=T4.Collection_ID
+WHERE T3.Collection_Name="Best";
+
+39. How many collections that are related to collection named Best?
+P: How many different collections are related to the one named 'Best'?
+
+SELECT count(distinct T1.Related_Collection_ID)
+FROM Collection_Subset_Members as T1 JOIN Collections as T2 
+ON T1.Collection_ID = T2.Collection_ID
+WHERE T2.Collection_Name="Best";
+
+40.Which collection subset does collection name Best in? List collection subset name.
+P: What are the collection subsets that the collection named 'Best' in?
+
+SELECT DISTINCT T1.Collection_Subset_Name
+FROM Collection_Subsets as T1 JOIN Collection_Subset_Members as T2
+ON T1.Collection_Subset_ID= T2.Collection_Subset_ID 
+JOIN Collections as T3
+ON T2.Collection_ID= T3.Collection_ID
+WHERE T3.Collection_Name="Best";
+ 

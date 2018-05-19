@@ -1,0 +1,112 @@
+Total = 15
+
+1. How many ships are there?
+P: What is the number of ships?
+
+SELECT count(*)
+FROM ship
+
+2. List the name of ships in ascending order of tonnage.
+P: what are the names of the ships ordered by ascending tonnage?
+
+SELECT Name
+FROM ship
+order by Tonnage ASC
+
+3. What are the type and nationality of ships?
+P: What are the types and nationalities of every ship?
+
+SELECT Type, Nationality
+FROM ship
+
+4. List the name of ships whose nationality is not "United States".
+P: What are the names of the ships that are not from the United States?
+
+SELECT Name
+FROM ship
+Where Nationality != "United States"
+
+5. Show the name of ships whose nationality is either United States or United Kingdom.
+P: What are the names of the ships  that are from either the US or the UK?
+
+SELECT Name
+FROM ship
+Where Nationality = "United States" or Nationality = "United Kingdom"
+
+6. What is the name of the ship with the largest tonnage?
+P: What is the ship with the largest amount of tonnage called?
+
+SELECT Name
+FROM ship
+order by Tonnage DESC limit 1
+
+7. Show different types of ships and the number of ships of each type.
+P: For each type, how many ships are there?
+
+SELECT Type, COUNT(*)
+FROM ship
+group by Type
+ 
+8. Please show the most common type of ships.
+P: What is the most common type of ships?
+
+SELECT Type
+FROM ship
+group by Type
+order by COUNT(*) DESC limit 1
+
+9. List the nations that have more than two ships.
+P: What are the nations that have more than two ships?
+
+SELECT Nationality
+FROM ship
+group by Nationality
+Having COUNT(*) > 2
+
+10. Show different types of ships and the average tonnage of ships of each type.
+P: For each type, what is the average tonnage?
+
+SELECT Type, avg(Tonnage)
+FROM ship
+group by Type
+
+11. Show codes and fates of missions, and names of ships involved.
+P: What are the mission codes, fates, and names of the ships involved?
+
+SELECT T1.Code, T1.Fate, T2.Name
+FROM mission as T1 join ship as T2 
+ON T1.Ship_ID = T2.Ship_ID
+
+12. Show names of ships involved in a mission launched after 1928.
+P: What are the names of ships that were involved in a mission launched after 1928?
+
+SELECT T2.Name
+FROM mission as T1 join ship as T2 
+ON T1.Ship_ID = T2.Ship_ID
+Where T1.Launched_Year > 1928
+
+13. Show the distinct fate of missions that involve ships with nationality "United States"
+P: What are the different fates of the mission that involved ships from the United States?
+
+SELECT distinct T1.Fate
+FROM mission as T1 join ship as T2 
+ON T1.Ship_ID = T2.Ship_ID
+Where T2.Nationality = "United States"
+
+14. List the name of ships that are not involved in any mission
+P: What are the names of the ships that are not involved in any missions?
+
+SELECT Name
+from ship
+where Ship_ID not in (SELECT Ship_ID FROM mission)
+
+15. Show the types of ships that have both ships with tonnage larger than 6000 and ships with tonnage smaller than 4000.
+P: What are the types of the ships that have both shiips with tonnage more than 6000 and those with tonnage less than 4000?
+
+SELECT Type
+FROM ship
+Where Tonnage > 6000
+Intersect 
+SELECT Type
+FROM ship
+Where Tonnage < 4000

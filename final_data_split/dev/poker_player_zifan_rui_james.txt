@@ -1,0 +1,225 @@
+Total = 20
+
+1. How many poker players are there?
+P: Count the number of poker players.
+   
+SELECT count(*)
+FROM poker_player
+
+S:
+S:
+S:
+
+2. List the earnings of poker players in descending order.
+P: What are the earnings of poker players, ordered descending by value?
+
+SELECT Earnings
+FROM poker_player
+order by Earnings DESC
+
+S:
+S:
+S:
+
+3. List the final tables made and the best finishes of poker players.
+P: What are the final tables made and best finishes for all poker players?
+
+SELECT Final_Table_Made, Best_Finish
+FROM poker_player
+
+S:
+S:
+S:
+
+4. What is the average earnings of poker players?
+P: Return the average earnings across all poker players.
+
+SELECT avg(Earnings)
+FROM poker_player
+
+S:
+S:
+S:
+
+5. What is the money rank of the poker player with the highest earnings?
+P: Return the money rank of the player with the greatest earnings.
+
+SELECT Money_Rank
+FROM poker_player
+order by Earnings DESC limit 1
+
+S:
+S:
+S:
+
+6. What is the maximum number of final tables made among poker players with earnings less than 200000?
+P: Return the maximum final tables made across all poker players who have earnings below 200000.
+
+SELECT max(Final_Table_Made)
+from poker_player
+Where Earnings < 200000
+
+S:
+S:
+S:
+
+7. What are the names of poker players?
+P: Return the names of all the poker players.
+
+SELECT T1.Name
+FROM people as T1 join poker_player as T2 
+ON T1.People_ID = T2.People_ID
+
+S:
+S:
+S:
+
+8. What are the names of poker players whose earnings is higher than 300000?
+P: Give the names of poker players who have earnings above 300000.
+
+SELECT T1.Name
+FROM people as T1 join poker_player as T2 
+ON T1.People_ID = T2.People_ID
+Where T2.Earnings > 300000
+
+S:
+S:
+S:
+
+9. List the names of poker players ordered by the final tables made in ascending order.
+P: What are the names of poker players, ordered ascending by the number of final tables they have made?
+
+SELECT T1.Name
+FROM people as T1 join poker_player as T2 
+ON T1.People_ID = T2.People_ID
+order by T2.Final_Table_Made
+
+S:
+S:
+S:
+
+10. What is the birth date of the poker player with the lowest earnings?
+P: Return the birth date of the poker player with the lowest earnings.
+
+SELECT T1.Birth_Date
+FROM people as T1 join poker_player as T2 
+ON T1.People_ID = T2.People_ID
+order by T2.Earnings ASC limit 1
+
+S:
+S:
+S:
+
+11. What is the money rank of the tallest poker player?
+P: Return the money rank of the poker player with the greatest height.
+
+SELECT T2.Money_Rank
+FROM people as T1 join poker_player as T2 
+ON T1.People_ID = T2.People_ID
+order by T1.Height DESC limit 1
+
+S:
+S:
+S:
+
+12. What is the average earnings of poker players with height higher than 200?
+P: Give average earnings of poker players who are taller than 200.
+
+SELECT avg(T2.Earnings)
+FROM people as T1 join poker_player as T2 
+ON T1.People_ID = T2.People_ID
+Where T1.Height > 200
+
+S:
+S:
+S:
+
+13. What are the names of poker players in descending order of earnings?
+P: Return the names of poker players sorted by their earnings descending.
+
+SELECT T1.Name
+FROM people as T1 join poker_player as T2 
+ON T1.People_ID = T2.People_ID
+order by T2.Earnings desc
+
+S:
+S:
+S:
+
+14. What are different nationalities of people and the corresponding number of people from each nation?
+P: How many people are there of each nationality?
+
+SELECT Nationality, COUNT(*)
+FROM people
+group by Nationality
+
+S:
+S:
+S:
+
+15. What is the most common nationality of people?
+P: Give the nationality that is most common across all people.
+
+SELECT Nationality
+FROM people
+group by Nationality
+order by COUNT(*) DESC limit 1
+ 
+S:
+S:
+S:
+
+16. What are the nationalities that are shared by at least two people?
+P: Return the nationalities for which there are two or more people.
+
+SELECT Nationality
+FROM people
+group by Nationality
+Having COUNT(*) >= 2
+
+S:
+S:
+S:
+
+17. List the names and birth dates of people in ascending alphabetical order of name.
+P: What are the names and birth dates of people, ordered by their names in alphabetical order?
+
+SELECT Name, Birth_Date
+FROM people
+order by Name ASC
+
+S:
+S:
+S:
+
+18. Show names of people whose nationality is not "Russia".
+P: What are the names of people who are not from Russia?
+
+SELECT Name 
+FROM people
+Where Nationality != "Russia"
+
+S:
+S:
+S:
+
+19. List the names of people that are not poker players.
+P: What are the names of people who do not play poker?
+
+SELECT Name
+FROM people
+Where People_ID not in (select People_ID from poker_player)
+
+S:
+S:
+S:
+
+20. How many distinct nationalities are there?
+P: Count the number of different nationalities.
+
+SELECT count(distinct Nationality)
+FROM people
+
+S:
+S:
+S:

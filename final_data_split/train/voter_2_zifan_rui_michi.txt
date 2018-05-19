@@ -1,0 +1,458 @@
+# Total number = 37
+
+1. Find the number of students in total.
+P: How many students are there in total?
+
+select count(*)
+from STUDENT
+
+S:
+S:
+S:
+
+
+2. Find the number of voting records in total.
+P: How many voting records do we have?
+
+select count(*)
+from VOTING_RECORD
+
+S:
+S:
+S:
+
+
+3. Find the distinct number of president votes.
+P: How many distinct president votes are recorded?
+
+select count(distinct President_Vote)
+from VOTING_RECORD
+
+S:
+S:
+S:
+
+
+4. Find the maximum age of all the students.
+P: What is the oldest age among the students?
+
+Select max(Age)
+from STUDENT
+
+S:
+S:
+S:
+
+
+5. Find the last names of students with major 50.
+P: What are the last names of students studying major 50?
+
+select LName
+from STUDENT
+where Major = 50
+
+S:
+S:
+S:
+
+
+6. Find the first names of students with age above 22.
+P: What are the first names of all the students aged above 22?
+
+select Fname
+from STUDENT
+where Age > 22
+
+S:
+S:
+S:
+
+
+7. What are the majors of male (sex is M) students?
+P: List the major of each male student.
+
+select Major
+from STUDENT
+where Sex = "M"
+
+S:
+S:
+S:
+
+
+8. What is the average age of female (sex is F) students?
+P: Find the average age of female students.
+
+select avg(Age)
+from STUDENT
+where Sex = "F"
+
+S:
+S:
+S:
+
+
+9. What are the maximum and minimum age of students with major 600?
+P: Tell me the ages of the oldest and youngest students studying major 600.
+
+select max(Age), min(Age)
+from STUDENT
+where Major = 600
+
+S:
+S:
+S:
+
+
+10. Who are the advisors for students that live in a city with city code "BAL"?
+P: Show the advisors of the students whose city of residence has city code "BAL".
+
+select Advisor
+from STUDENT
+Where city_code = "BAL"
+
+S:
+S:
+S:
+
+
+11. What are the distinct secretary votes in the fall election cycle?
+P: Return all the distinct secretary votes made in the fall election cycle.
+
+select distinct Secretary_Vote
+from VOTING_RECORD
+where ELECTION_CYCLE = "Fall"
+
+S:
+S:
+S:
+
+
+12. What are the distinct president votes on 08/30/2015?
+P: Show all the distinct president votes made on 08/30/2015.
+
+select distinct PRESIDENT_Vote
+from VOTING_RECORD
+where Registration_Date = "08/30/2015"
+
+S:
+S:
+S:
+
+
+13. Report the distinct registration date and the election cycle.
+P: What are the distinct registration dates and the election cycles?
+
+select distinct Registration_Date, Election_Cycle
+from VOTING_RECORD
+
+S:
+S:
+S:
+
+
+14. Report the distinct president vote and the vice president vote.
+P: List all the distinct president votes and the vice president votes.
+
+select distinct President_Vote, VICE_President_Vote
+from VOTING_RECORD
+
+S:
+S:
+S:
+
+
+15. Find the distinct last names of the students who have class president votes.
+P: What are the distinct last names of the students who have class president votes?
+
+select distinct T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.CLASS_President_VOTE
+
+S:
+S:
+S:
+
+
+16. Find the distinct first names of the students who have class senator votes.
+P: What are the distinct first names of the students who have class president votes?
+
+select distinct T1.Fname
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.CLASS_Senator_VOTE
+
+S:
+S:
+S:
+
+
+17. Find the distinct ages of students who have secretary votes in the fall election cycle.
+P: What are the distinct ages of students who have secretary votes in the fall election cycle?
+
+select distinct T1.Age
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.Secretary_Vote
+where T2.Election_Cycle = "Fall"
+
+S:
+S:
+S:
+
+
+18. Find the distinct Advisor of students who have treasurer votes in the spring election cycle.
+P: Who served as an advisor for students who have treasurer votes in the spring election cycle?
+
+select distinct T1.Advisor
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.Treasurer_Vote
+where T2.Election_Cycle = "Spring"
+
+S:
+S:
+S:
+
+
+19. Find the distinct majors of students who have treasurer votes.
+P: What are the distinct majors that students with treasurer votes are studying?
+
+select distinct T1.Major
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.Treasurer_Vote
+
+S:
+S:
+S:
+
+
+20. Find the first and last names of all the female (sex is F) students who have president votes.
+P: What are the first and last names of all the female students who have president votes?
+
+select distinct T1.Fname, T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.President_VOTE
+where T1.sex = "F"
+
+S:
+S:
+S:
+
+
+21. Find the first and last name of all the students of age 18 who have vice president votes.
+P: What are the first names and last names of the students who are 18 years old and have vice president votes.
+
+select distinct T1.Fname, T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.VICE_President_VOTE
+where T1.age = 18
+
+S:
+S:
+S:
+
+
+22. How many male (sex is M) students have class senator votes in the fall election cycle?
+P: Count the number of male students who had class senator votes in the fall election cycle.
+
+select count(*)
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = Class_Senator_Vote
+where T1.Sex = "M" and T2.Election_Cycle = "Fall"
+
+S:
+S:
+S:
+
+
+23. Find the number of students whose city code is NYC and who have class senator votes in the spring election cycle.
+P: Which students live in the city with code "NYC" and have class senator votes in the spring election cycle? Count the numbers.
+
+select count(*)
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = Class_Senator_Vote
+where T1.city_code = "NYC" and T2.Election_Cycle = "Spring"
+
+S:
+S:
+S:
+
+
+24. Find the average age of students who live in the city with code "NYC" and have secretary votes in the spring election cycle.
+P: What is the average age of students who have city code "NYC" and have secretary votes for the spring election cycle?
+
+select avg(T1.Age)
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = SECRETARY_Vote
+where T1.city_code = "NYC" and T2.Election_Cycle = "Spring"
+
+S:
+S:
+S:
+
+
+25. Find the average age of female (sex is F) students who have secretary votes in the spring election cycle.
+P: What is the average age of the female students with secretary votes in the spring election cycle?
+
+select avg(T1.Age)
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = SECRETARY_Vote
+where T1.Sex = "F" and T2.Election_Cycle = "Spring"
+
+S:
+S:
+S:
+
+
+26. Find the distinct first names of all the students who have vice president votes and whose city code is not PIT.
+P: What are the distinct first names of the students who have vice president votes and reside in a city whose city code is not PIT?
+
+select distinct T1.Fname
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = T2.VICE_PRESIDENT_Vote
+except
+select distinct Fname
+from STUDENT
+where city_code = "PIT"
+
+S:
+S:
+S:
+
+
+27. Find the distinct last names of all the students who have president votes and whose advisor is not 2192.
+P: What are the distinct last names of the students who have president votes but do not have 2192 as the advisor?
+
+select distinct T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = PRESIDENT_Vote
+except
+select distinct LName
+from STUDENT
+where Advisor = "2192"
+
+S:
+S:
+S:
+
+
+28. Find the distinct last names of all the students who have president votes and whose advisor is 8741.
+P: What are the distinct last names of the students who have president votes and have 8741 as the advisor?
+
+select distinct T1.LName
+from STUDENT as T1 join VOTING_RECORD as T2
+on T1.StuID = PRESIDENT_Vote
+INTERSECT
+select distinct LName
+from STUDENT
+where Advisor = "8741"
+
+S:
+S:
+S:
+
+
+29. For each advisor, report the total number of students advised by him or her.
+P: How many students does each advisor have?
+
+select Advisor, count(*)
+from STUDENT
+group by Advisor
+
+S:
+S:
+S:
+
+
+30. Report all advisors that advise more than 2 students.
+P: Which advisors have more than two students?
+
+select Advisor
+from STUDENT
+group by Advisor
+HAVING COUNT(*) > 2
+
+S:
+S:
+S:
+
+
+31. Report all majors that have less than 3 students.
+P: What are the majors only less than three students are studying?
+
+select Major
+from STUDENT
+group by Major
+HAVING COUNT(*) < 3
+
+S:
+S:
+S:
+
+
+32. For each election cycle, report the number of voting records.
+P: Count the number of voting records for each election cycle.
+
+select Election_Cycle, count(*)
+from VOTING_RECORD
+group by Election_Cycle
+
+S:
+S:
+S:
+
+
+33. Which major has the most students?
+P: Find the major that is studied by the largest number of students.
+
+select Major
+from STUDENT
+group by major
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+34. What is the most common major among female (sex is F) students?
+P: Find the major that is studied by the most female students.
+
+select Major
+from STUDENT
+Where Sex = "F"
+group by major
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+35. What is the city_code of the city that the most students live in?
+P: Return the code of the city that has the most students.
+
+select city_code
+from STUDENT
+group by city_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+37. Report the distinct advisors who have more than 2 students.
+P: Which advisors are advising more than 2 students?
+
+select Advisor
+from STUDENT
+group by Advisor
+having count(*) > 2
+
+S:
+S:
+S:
+
+

@@ -1,0 +1,545 @@
+Total = 43
+
+1. How many products are there?
+P: Count the number of products.
+
+select count(*)
+from products
+
+S:
+S:
+S:
+
+2. How many colors are there?
+P: Count the number of colors.
+
+select count(*)
+from ref_colors
+
+S:
+S:
+S:
+
+3. How many characteristics are there?
+P: Count the number of characteristics.
+
+select count(*)
+from characteristics
+
+S:
+S:
+S:
+
+4. What are the names and buying prices of all the products?
+P: Return the names and typical buying prices for all products.
+
+select product_name, typical_buying_price
+from products
+
+S:
+S:
+S:
+
+5. List the description of all the colors.
+P: What are the descriptions for each color?
+
+select color_description
+from ref_colors
+
+S:
+S:
+S:
+
+6. Find the names of all the product characteristics.
+P: What are the different names of the product characteristics?
+
+select distinct characteristic_name
+from characteristics
+
+S:
+S:
+S:
+
+7. What are the names of products with category "Spices"?
+P: Return the names of products in the category 'Spices'.
+
+select product_name
+from products
+where product_category_code = "Spices"
+
+S:
+S:
+S:
+
+8. List the names, color descriptions and product descriptions of products with category "Herbs".
+P: What are the names, color descriptions, and product descriptions for products in the 'Herbs' category? 
+
+select T1.product_name, T2.color_description, T1.product_description
+from products as T1 JOIN Ref_colors as T2
+on T1.color_code = T2.color_code
+where product_category_code = "Herbs"
+
+S:
+S:
+S:
+
+9. How many products are there under the category "Seeds"?
+P: Count the number of products in the category 'Seeds'.
+
+select count(*)
+from products
+where product_category_code = "Seeds"
+
+S:
+S:
+S:
+
+10. Find the number of products with category "Spices" and typically sold above 1000.
+P: How many products are in the 'Spices' category and have a typical price of over 1000?
+
+select count(*)
+from products
+where product_category_code = "Spices" and typical_buying_price > 1000
+
+S:
+S:
+S:
+
+11. What is the category and typical buying price  of the product with name "cumin"?
+P: Return the category code and typical price of 'cumin'.
+
+select product_category_code, typical_buying_price
+from products
+where product_name = "cumin"
+
+S:
+S:
+S:
+
+12. Which category does the product named "flax" belong to?
+P: What is the code of the category that the product with the name 'flax' belongs to?
+
+select product_category_code
+from products
+where product_name = "flax" 
+
+S:
+S:
+S:
+
+13. What is the name of the product with the color description 'yellow'?
+P: Give the name of the products that have a color description 'yellow'.
+
+select T1.product_name
+from products as T1 join ref_colors as T2
+on T1.color_code = T2.color_code
+where T2.color_description = 'yellow'
+
+S:
+S:
+S:
+
+14. Find the category descriptions of the products whose descriptions include letter 't'.
+P: What are the descriptions of the categories that products with product descriptions that contain the letter t are in?
+
+select T1.product_category_description
+from ref_product_categories as T1 join products as T2
+on T1.product_category_code = T2.product_category_code
+where T2.product_description like '%t%'
+
+S:
+S:
+S:
+
+15. What is the color description of the product with name "catnip"?
+P: Give the color description for the product 'catnip'.
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t1.product_name = "catnip"
+
+S:
+S:
+S:
+
+16. What is the color code and description of the product named "chervil"?
+P: Return the color code and description for the product with the name 'chervil'.
+
+select t1.color_code, t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t1.product_name = "chervil"
+
+S:
+S:
+S:
+
+17. Find the id and color description of the products with at least 2 characteristics.
+P: What are the product ids and color descriptions for products with two or more characteristics?
+
+select t1.product_id, t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+join product_characteristics as t3
+on t1.product_id = t3.product_id
+group by t1.product_id
+having count(*) >= 2
+
+S:
+S:
+S:
+
+18. List all the product names with the color description "white".
+P: What are the names of products with 'white' as their color description?
+
+select t1.product_name
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t2.color_description = "white"
+
+S:
+S:
+S:
+
+19. What are the name and typical buying and selling prices of the products that have color described as "yellow"?
+P: Return the names and typical buying and selling prices for products that have 'yellow' as their color description.
+
+select t1.product_name, t1.typical_buying_price, t1.typical_selling_price
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+where t2.color_description = "yellow"
+
+S:
+S:
+S:
+
+20. How many characteristics does the product named "sesame" have?
+P: Count the number of characteristics the product 'sesame' has.
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+where t1.product_name = "sesame"
+
+S:
+S:
+S:
+
+21. How many distinct characteristic names does the product "cumin" have?
+P: Count the number of different characteristic names the product 'cumin' has.
+
+select count(distinct t3.characteristic_name)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join Characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "sesame"
+
+S:
+S:
+S:
+
+22. What are all the characteristic names of product "sesame"?
+P: Return the characteristic names of the 'sesame' product.
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "sesame"
+
+S:
+S:
+S:
+
+23. List all the characteristic names and data types of product "cumin".
+P: What are the names and data types of the characteristics of the 'cumin' product?
+
+select t3.characteristic_name, t3.characteristic_data_type
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "cumin"
+
+S:
+S:
+S:
+
+24. List all characteristics of product named "sesame" with type code "Grade".
+P: What are the names of the characteristics of the product 'sesame' that have the characteristic type code 'Grade'?
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "sesame" and t3.characteristic_type_code = "Grade"
+
+S:
+S:
+S:
+
+25. How many characteristics does the product named "laurel" have?
+P: Count the number of characteristics of the product named 'laurel'.
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "laurel"
+
+S:
+S:
+S:
+
+26. Find the number of characteristics that the product "flax" has.
+P: Count the number of characteristics of the 'flax' product.
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t1.product_name = "flax"
+
+S:
+S:
+S:
+
+27. Find the name of the products that have the color description "red" and have the characteristic name "fast".
+P: What are the names of the products that have a color description of 'red' and the 'fast' characteristic?
+
+select product_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+join ref_colors as t4
+on t1.color_code = t4.color_code
+where t4.color_description = "red" and t3.characteristic_name = "fast"
+
+S:
+S:
+S:
+
+28. How many products have the characteristic named "hot"?
+P: Count the number of products with the 'hot' charactersitic.
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t3.characteristic_name = "hot"
+
+S:
+S:
+S:
+
+29. List the all the distinct names of the products with the characteristic name 'warm'.
+P: What are the different product names for products that have the 'warm' characteristic:?
+
+select distinct t1.product_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+where t3.characteristic_name = "warm"
+
+S:
+S:
+S:
+
+30. Find the number of the products that have their color described as "red" and have a characteristic named "slow".
+P: How many products have the color description 'red' and the characteristic name 'slow'?
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+join ref_colors as t4
+on t1.color_code = t4.color_code
+where t4.color_description = "red" and t3.characteristic_name = "slow"
+
+S:
+S:
+S:
+
+31. Count the products that have the color description "white" or have the characteristic name "hot".
+P: How many products have their color described as 'white' or have a characteristic with the name 'hot'?
+
+select count(*)
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+join ref_colors as t4
+on t1.color_code = t4.color_code
+where t4.color_description = "white" or t3.characteristic_name = "hot"
+
+S:
+S:
+S:
+
+32. What is the unit of measuerment of the product category code "Herbs"?
+P: Return the unit of measure for 'Herb' products.
+
+select unit_of_measure
+from ref_product_categories
+where product_category_code = "Herbs"
+
+S:
+S:
+S:
+
+33. Find the product category description of the product category with code "Spices".
+P: What is the description of the product category with the code 'Spices'?
+
+select product_category_description
+from ref_product_categories
+where product_category_code = "Spices"
+
+S:
+S:
+S:
+
+34. What is the product category description and unit of measurement of category "Herbs"?
+P: Return the description and unit of measurement for products in the 'Herbs' category.
+
+select product_category_description, unit_of_measure
+from ref_product_categories
+where product_category_code = "Herbs"
+
+S:
+S:
+S:
+
+35. What is the unit of measurement of product named "cumin"?
+P: Give the unit of measure for the product with the name 'cumin'.
+
+select t2.unit_of_measure
+from products as t1 join ref_product_categories as t2
+on t1.product_category_code = t2.product_category_code
+where t1.product_name = "cumin"
+
+S:
+S:
+S:
+
+36. Find the unit of measurement and product category code of product named "chervil".
+P: What are the unit of measure and category code for the 'chervil' product?
+
+select t2.unit_of_measure, t2.product_category_code
+from products as t1 join ref_product_categories as t2
+on t1.product_category_code = t2.product_category_code
+where t1.product_name = "chervil"
+
+S:
+S:
+S:
+
+37. Find the product names that are colored 'white' but do not have unit of measurement "Handful".
+P: What are the names of products that are not 'white' in color and are not measured by the unit 'Handful'?
+
+select t1.product_name
+from products as t1 join ref_product_categories as t2
+on t1.product_category_code = t2.product_category_code
+join ref_colors as t3
+on t1.color_code = t3.color_code
+where t3.color_description = "white" and t2.unit_of_measure != "Handful"
+
+S:
+S:
+S:
+
+38. What is the description of the color for most products?
+P: Return the color description that is most common across all products.
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+group by t2.color_description
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+39. What is the description of the color used by least products?
+P: Give the color description that is least common across products.
+
+select t2.color_description
+from products as t1 join ref_colors as t2
+on t1.color_code = t2.color_code
+group by t2.color_description
+order by count(*) asc
+limit 1
+
+S:
+S:
+S:
+
+40. What is the characteristic name used by most number of the products?
+P: Return the name of the characteristic that is most common across all products.
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+group by t3.characteristic_name
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+41. What are the names, details and data types of the characteristics which are never used by any product?
+P: Give the names, details, and data types of characteristics that are not found in any product.
+
+select characteristic_name, other_characteristic_details, characteristic_data_type
+from Characteristics
+except
+select t1.characteristic_name, t1.other_characteristic_details, t1.characteristic_data_type
+from characteristics as t1 join product_characteristics as t2
+on t1.characteristic_id = t2.characteristic_id
+
+S:
+S:
+S:
+
+42. What are characteristic names used at least twice across all products?
+P: Give the names of characteristics that are in two or more products?
+
+select t3.characteristic_name
+from products as t1 join product_characteristics as t2
+on t1.product_id = t2.product_id
+join characteristics as t3
+on t2.characteristic_id = t3.characteristic_id
+group by t3.characteristic_name
+having count(*) >=2
+
+S:
+S:
+S:
+
+43. How many colors are never used by any product?
+P: Count the number of colors that are not used in any products.
+
+select count(*)
+from Ref_colors
+where color_code not in (
+select color_code
+from products
+)
+
+S:
+S:
+S:

@@ -1,0 +1,273 @@
+1. List all the channel names in alphabetical order.
+P: What is the list of channel names ordered alphabetically?
+
+select channel_details
+from channels
+order by channel_details
+
+S:
+S:
+S:
+
+
+2. How many services are there?
+P: Count the number of services.
+
+select count(*)
+from services
+
+S:
+S:
+S:
+
+
+3. What is the most common analytical layer type code?
+P: Find the analytical layer type code that appears most often.
+
+select analytical_layer_type_code
+from analytical_layer
+group by analytical_layer_type_code
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+4. Find all the services that has been used by the customer with details "Hardy Kutch".
+P: Which services were used by the customer with details "Hardy Kutch"? Give me the service details.
+
+select t3.service_details
+from customers as t1 join customers_and_services as t2
+on t1.customer_id = t2.customer_id
+join services as t3
+on t2.service_id = t3.service_id
+where t1.customer_details = "Hardy Kutch"
+
+S:
+S:
+S:
+
+
+5. Find the names of the services that have been used by more than 3 times.
+P: Which services were used by customers by more than 3 times? Give me the service details.
+
+select t1.service_details
+from services as t1 join customers_and_services as t2
+on t1.service_id = t2.service_id
+group by t1.service_details
+having count(*) > 3
+
+S:
+S:
+S:
+
+
+6. Find the details of the customer who has used services the most times.
+P: Count the number of times each customer used services, and return the details of the customer with largest count.
+
+select t1.customer_details
+from customers as t1 join customers_and_services as t2
+on t1.customer_id = t2.customer_id
+group by t1.customer_details
+order by count(*) desc
+limit 1
+
+S:
+S:
+S:
+
+
+7. Find the name of the customer who has used the most types of services.
+P: Which customer has used the most types of services? Give me the customer details.
+
+select t1.customer_details
+from customers as t1 join customers_and_services as t2
+on t1.customer_id = t2.customer_id
+group by t1.customer_details
+order by count(distinct t2.service_id) desc
+limit 1
+
+S:
+S:
+S:
+
+
+8. Find the name of the customer who has never used any services.
+P: Which customers never used any services? Give me the customer names.
+
+select customer_details
+from customers
+except
+select t1.customer_details
+from customers as t1 join customers_and_services as t2
+
+S:
+S:
+S:
+
+
+9. Find the names of the customers who have used the least-used service.
+P: Which customers used the least commonly-used service? Give me the distinct customer details.
+
+select distinct t1.customer_details
+from customers as t1 join customers_and_services as t2
+on t1.customer_id = t2.customer_id
+where t2.service_id = (select service_id
+from services
+group by service_id
+order by count(*) desc
+limit 1)
+
+S:
+S:
+S:
+
+
+10. How many distinct customer and services details are there?
+P: Count the total number of available customers and services details.
+
+select count(distinct customers_and_services_details)
+from customers_and_services
+
+S:
+S:
+S:
+
+
+11. Find all the customers whose name contains "Kutch".
+P: What are the details of the customers who have "Kutch" in part of their details?
+
+select customer_details
+from customers
+where customer_details like "%Kutch%"
+
+S:
+S:
+S:
+
+
+12. Find the name of all the services which either have been used by customer "Hardy Kutch" or have been rated as "good" in one of the customer interactions.
+P: Which services are used by the customer "Hardy Kutch" or are rated as "good" in a customer interaction? Give me the service details.
+
+select distinct t3.service_details
+from customers as t1
+join customers_and_services as t2 on t1.customer_id = t2.customer_id
+join services as t3 on t2.service_id = t3.service_id
+join customer_interactions as t4 on t3.service_id = t4.service_id
+where t1.customer_details = "Hardy Kutch" or t4.services_and_channels_details = "good"
+
+S:
+S:
+S:
+
+
+13. Find the names of all the services which both have been used by customer "Hardy Kutch" and have been rated "bad" in one of the customer interactions.
+P: Which services are both used by the customer "Hardy Kutch" and are rated as "bad" in a customer interaction? Give me the service details.
+
+select distinct t3.service_details
+from customers as t1
+join customers_and_services as t2 on t1.customer_id = t2.customer_id
+join services as t3 on t2.service_id = t3.service_id
+join customer_interactions as t4 on t3.service_id = t4.service_id
+where t1.customer_details = "Hardy Kutch" and t4.services_and_channels_details = "bad"
+
+S:
+S:
+S:
+
+
+14. Find all the services that have interacted with the channel "15 ij".
+P: Give me the details of all the services that have interacted with the channel with detail "15 ij".
+
+select distinct t1.service_details
+from services as t1
+join customer_interactions as t2 on t1.service_id = t2.service_id
+join channels as t3 on t2.channel_id = t3.channel_id
+where t3.channel_details = "15 ij"
+
+S:
+S:
+S:
+
+
+15. Find all the name of the customers who have been involved in an interaction with status "Stuck" and service and channel detail "bad".
+P: Which customers have experienced status "Stuck" and service and channel detail "bad" in  an interaction? Give me the customer details.
+
+select t1.customer_details
+from customers as t1 join customer_interactions as t2
+on t1.customer_id = t2.customer_id
+where t2.status_code = "Stuck" and services_and_channels_details = "bad"
+
+S:
+S:
+S:
+
+
+16. How many integration platforms are successful?
+P: Count the number of integration platforms that have "Success" in the details.
+
+select count(*)
+from integration_platform
+where integration_platform_details = "Success"
+
+S:
+S:
+S:
+
+
+17. List the names of all the customers who are associated with a failed integration platform.
+P: Which customers have integration platform details "Fail" in interactions? Give me the customer details.
+
+select distinct t1.customer_details
+from customers as t1 join customer_interactions as t2
+on t1.customer_id = t2.customer_id
+join integration_platform as t3
+where t3.integration_platform_details = "Fail"
+
+S:
+S:
+S:
+
+
+18. Which service(s) has never been used by any customer?
+P: Find the services that no customer has ever used. Return the service details.
+
+select service_details
+from services
+except
+select t2.service_details
+from customers_and_services as t1 join services as t2
+on t1.service_id = t2.service_id
+
+S:
+S:
+S:
+
+
+19. Find all the layer type codes with their corresponding usage count.
+P: For each analytical layer, return the analytical layer type code and the number of times it was used.
+
+select analytical_layer_type_code, count(*)
+from analytical_layer
+group by analytical_layer_type_code
+
+S:
+S:
+S:
+
+
+20. Find all the services that have been marked as "unsatisfied" in customers and services details.
+P: Which services have been rated as "unsatisfied" in customers and services details? Give me the service_details.
+
+select distinct t1.service_details
+from services as t1 join customers_and_services as t2
+on t1.service_id = t2.service_id
+where t2.customers_and_services_details = "Unsatisfied"
+
+S:
+S:
+S:
+
+

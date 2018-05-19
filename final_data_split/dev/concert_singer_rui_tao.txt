@@ -1,0 +1,175 @@
+1. How many singers do we have?
+P: What is the total number of singers?
+
+select count(*)
+from singer
+
+2. Show name, country, age for all singers ordered by age from the oldest to the youngest.
+P: What are the names, countries, and ages for every singer in descending order of age?
+select name, country, age
+from singer
+order by age desc
+
+3. What is the average, minimum, and maximum age of all singers from France?
+P: What is the average, minimum, and maximum age for all French singers?
+
+select avg(age), min(age), max(age)
+from singer
+where country = 'France'
+
+4. Show the name and the release year of the song by the youngest singer.
+P: What are the names and release years for all the songs of the youngest singer?
+
+select song_name, song_release_year
+from singer
+order by age
+limit 1
+
+5. What are all distinct countries where singers above age 20 are from?
+P: What are  the different countries with singers above age 20?
+
+select distinct country
+from singer
+where age > 20
+
+6. Show all countries and the number of singers in each country.
+P: How many singers are from each country?
+
+select country, count(*)
+from singer
+group by country
+
+7. List all song names by singers above the average age.
+P: What are all the song names by singers who are older than average?
+
+select song_name
+from singer
+where age > (select avg(age) from singer)
+
+8. Show location and name for all stadiums with a capacity between 5000 and 10000.
+P: What are the locations and names of all stations with capacity between 5000 and 10000?
+
+select location, name
+from stadium
+where capacity between 5000 and 10000
+
+9. What is the average and the maximum capacity of all stadiums?
+P: What is the average and maximum capacities for all stations?
+
+select avg(capacity), max(capacity)
+from stadium
+
+10. What is the name and capacity for the stadium with highest average attendance?
+P: What is the name and capacity for the stadium with the highest average attendance?
+
+select name, capacity
+from stadium
+order by average desc
+limit 1
+
+11. How many concerts are there in year 2014 or 2015?
+P: How many concerts occurred in 2014 or 2015?
+
+select count(*)
+from concert
+where year = 2014 or year = 2015
+
+12. Show the stadium name and the number of concerts in each stadium.
+P: For each stadium, how many concerts play there?
+
+select T2.name, count(*)
+from concert as T1 join stadium as T2 on T1.stadium_id = T2.stadium_id
+group by T1.stadium_id
+
+13. Show the stadium name and capacity with most number of concerts in year 2014 or after.
+P: What is the name and capacity of the stadium  with the most concerts after 2013? 
+
+select T2.name, T2.capacity
+from concert as T1 join stadium as T2 on T1.stadium_id = T2.stadium_id
+where T1.year >= 2014
+group by T2.stadium_id
+order by count(*) desc
+limit 1
+
+14. Which year has most number of concerts?
+P: What is the year that had the most concerts?
+
+select year
+from concert
+group by year
+order by count(*) desc
+limit 1
+
+15. Show the stadium names without any concert.
+P: What are the names of the stadiums without any concerts?
+
+select name
+from stadium
+where stadium_id not in (select stadium_id from concert)
+
+16. Show countries where a singer above age 40 and a singer below 30 are from.
+What are all the countries that are the homes of singers above age 40 and singers below 30?
+select country
+from singer
+where age > 40
+INTERSECT
+select country
+from singer
+where age < 30
+
+17. Show names for all stadiums except for stadiums having a concert in year 2014.
+P: What are the names of all stadiums that did not have a concert in 2014?
+
+select name
+from stadium
+except
+select T2.name
+from concert as T1 join stadium as T2 on T1.stadium_id = T2.stadium_id
+where T1.year = 2014
+
+18. Show the name and theme for all concerts and the number of singers in each concert.
+P: What are the names, themes, and number of singers for each and every concert?
+
+select T2.concert_name, T2.theme, count(*)
+from singer_in_concert as T1 join concert as T2 on T1.concert_id = T2.concert_id
+group by T2.concert_id
+
+19. List singer names and number of concerts for each singer.
+P: What are the names of the singers and number of concerts for each person?
+
+select T2.name, count(*)
+from singer_in_concert as T1 join singer as T2 on T1.singer_id = T2.singer_id
+group by T2.singer_id
+
+20. List all singer names in concerts in year 2014.
+P: What are the names of the singers who performed in a concert in 2014?
+
+select T2.name
+from singer_in_concert as T1 join singer as T2 on T1.singer_id = T2.singer_id join concert as T3 on T1.concert_id = T3.concert_id
+where T3.year = 2014
+
+21. what is the name and nation of the singer who have a song having 'Hey' in its name?
+P: What is the name and country of origin of every singer who has a song with the word 'Hey' in its title?
+
+select name, country
+from singer
+where song_name like '%Hey%'
+
+22. Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015.
+P: What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015?
+
+select T2.name, T2.location
+from concert as T1 join stadium as T2 on T1.stadium_id = T2.stadium_id
+where T1.Year = 2014
+intersect
+select T2.name, T2.location
+from concert as T1 join stadium as T2 on T1.stadium_id = T2.stadium_id
+where T1.Year = 2015
+
+23. Find the number of concerts happened in the stadium with the highest capacity.
+P: What are the number of concerts that occurred in the stadium with the largest capacity?
+
+select count(*)
+from concert as T1 join stadium as T2 on T1.stadium_id = T2.stadium_id
+order by T2.Capacity desc
+limit 1

@@ -1,0 +1,194 @@
+# Total = 15
+
+1. How many phones are there?
+P: 
+
+SELECT count(*)
+FROM phone
+
+S:
+S:
+S:
+
+
+2. List the names of phones in ascending order of price.
+P: 
+
+SELECT Name
+FROM phone
+order by Price ASC
+
+S:
+S:
+S:
+
+
+3. What are the memories and carriers of phones?
+P: 
+
+SELECT Memory_in_G, Carrier
+FROM phone
+
+S:
+S:
+S:
+
+
+4. List the distinct carriers of phones with memories bigger than 32.
+P: 
+
+SELECT distinct Carrier
+FROM phone
+Where Memory_in_G > 32
+
+S:
+S:
+S:
+
+
+5. Show the names of phones with carrier either "Sprint" or "TMobile".
+P: 
+
+SELECT Name
+FROM phone
+Where Carrier = "Sprint" or Carrier = "TMobile"
+
+S:
+S:
+S:
+
+
+6. What is the carrier of the most expensive phone?
+P: 
+
+SELECT Carrier
+FROM phone
+order by Price DESC limit 1
+
+S:
+S:
+S:
+
+
+7. Show different carriers of phones together with the number of phones with each carrier.
+P: 
+
+SELECT Carrier, COUNT(*)
+FROM phone
+group by Carrier
+
+S:
+S:
+S:
+
+
+8. Show the most frequently used carrier of the phones.
+P: 
+
+SELECT Carrier
+FROM phone
+group by Carrier
+order by COUNT(*) DESC limit 1
+
+S:
+S:
+S:
+
+
+9. Show the carriers that have both phones with memory smaller than 32 and phones with memory bigger than 64.
+P: 
+
+SELECT Carrier
+from phone
+Where Memory_in_G < 32
+Intersect
+SELECT Carrier
+from phone
+Where Memory_in_G > 64
+
+S:
+S:
+S:
+
+
+10. Show the names of phones and the districts of markets they are on.
+P: 
+
+SELECT T3.Name, T2.District
+FROM phone_market as T1 join market as T2
+ON T1.Market_ID = T2.Market_ID join phone as T3
+on T1.Phone_ID = T3.Phone_ID
+
+S:
+S:
+S:
+
+
+11. Show the names of phones and the districts of markets they are on, in ascending order of the ranking of the market.
+P: 
+
+SELECT T3.Name, T2.District
+FROM phone_market as T1 join market as T2
+ON T1.Market_ID = T2.Market_ID join phone as T3
+on T1.Phone_ID = T3.Phone_ID
+order by T2.Ranking
+
+S:
+S:
+S:
+
+
+12. Show the names of phones that are on market with number of shops greater than 50.
+P: 
+
+SELECT T3.Name
+FROM phone_market as T1 join market as T2
+ON T1.Market_ID = T2.Market_ID join phone as T3
+on T1.Phone_ID = T3.Phone_ID
+Where T2.Num_of_shops > 50
+
+S:
+S:
+S:
+
+
+13. For each phone, show its names and total number of stocks.
+P: 
+
+SELECT T2.Name, sum(T1.Num_of_stock)
+FROM phone_market as T1 join phone as T2
+on T1.Phone_ID = T2.Phone_ID
+group by T2.Name
+
+S:
+S:
+S:
+
+
+14. Show the names of phones that have total number of stocks bigger than 2000, in descending order of the total number of stocks.
+P: 
+
+SELECT T2.Name
+FROM phone_market as T1 join phone as T2
+on T1.Phone_ID = T2.Phone_ID
+group by T2.Name
+Having sum(T1.Num_of_stock) >= 2000
+order by sum(T1.Num_of_stock) DESC
+
+S:
+S:
+S:
+
+
+15. List the names of phones that are not on any market.
+P: 
+
+SELECT Name
+from phone
+where Phone_id not in (SELECT Phone_ID FROM phone_market)
+
+S:
+S:
+S:
+
+
