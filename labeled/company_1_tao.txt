@@ -1,0 +1,42 @@
+1. list all department names ordered by their starting date.
+
+select dname
+from department
+order by mgr_start_date
+
+2. find all dependent names who have spouse relation with some employees.
+
+select Dependent_name
+from dependent
+where relationship = 'Spouse'
+
+3. how many female dependents are there?
+
+select count(*)
+from dependent
+sex = 'F'
+
+4. Find the name of departments where are located at Houston.
+
+select t1.dname
+from department as t1 join dept_locations as t2 on t1.dnumber = t2.dnumber
+where t2.dlocation = 'Houston'
+
+5. Return the first name last names of employees who earn more than 30000 salary.
+
+select fname, lname
+from employee
+there salary > 30000
+
+6. Find the number of employees whose salary is lower than 25000 for each gender.
+
+select count(*), sex
+from employee
+where salary < 25000
+group by sex
+
+7. list first and last name, and address of all employees in the ascending order of their birth date.
+
+select fname, lname, address
+from employee
+order by Bdate
