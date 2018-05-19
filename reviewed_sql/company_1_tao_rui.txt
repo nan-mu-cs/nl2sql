@@ -14,25 +14,25 @@ where relationship = 'Spouse'
 
 select count(*)
 from dependent
-sex = 'F'
+where sex = 'F'
 
-4. Find the name of departments where are located at Houston.
+4. Find the name of departments which are located at Houston.
 
 select t1.dname
 from department as t1 join dept_locations as t2 on t1.dnumber = t2.dnumber
 where t2.dlocation = 'Houston'
 
-5. Return the first name last names of employees who earn more than 30000 salary.
+5. Return the first name and last name of employees who earn more than 30000 salary.
 
 select fname, lname
 from employee
-there salary > 30000
+where salary > 30000
 
-6. Find the number of employees whose salary is lower than 25000 for each gender.
+6. Find the number of employees whose salary is lower than 50000 for each gender.
 
 select count(*), sex
 from employee
-where salary < 25000
+where salary < 50000
 group by sex
 
 7. list first and last name, and address of all employees in the ascending order of their birth date.
