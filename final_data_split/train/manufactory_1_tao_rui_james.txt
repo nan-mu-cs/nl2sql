@@ -282,7 +282,6 @@ group by T2.name
 40. Select the code of the product that is cheapest in each product category.
 P: What are the codes and names of the cheapest products in each category?
 
-Select code, name
+Select code, name, min(price)
 from products
 Group by name
-Having price = min(price)
