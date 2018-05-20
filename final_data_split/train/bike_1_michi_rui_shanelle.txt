@@ -659,12 +659,12 @@ S:
 
 
 
-44. Find the id for the trips that lasted at least three times as long as the average duration of trips in zip code 94103.
-P: What are the ids of all trips that had a duration three times as long as the average trip duration in the zip code 94103?
+44. Find the id for the trips that lasted at least as long as the average duration of trips in zip code 94103.
+P: What are the ids of all trips that had a duration as long as the average trip duration in the zip code 94103?
 
 Select id
 From trip
-Where duration >= 3 * (Select avg(duration) From trip Where zip_code = 94103)
+Where duration >= (Select avg(duration) From trip Where zip_code = 94103)
 
 S:
 S:
