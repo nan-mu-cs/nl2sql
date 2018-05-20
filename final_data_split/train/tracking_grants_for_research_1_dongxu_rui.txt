@@ -63,19 +63,6 @@ where role_code = 'leader'
 
 
 
-5. Find the organisation details of the organisations which are involved in the projects
-but are not described as 'Sponsor'.
-P: What are the details of the organization that is involved in the project but are not sponsors?
-
-select T1.organisation_details
-from Organisations as T1 JOIN Projects as T2
-on T1.organisation_id = T2.organisation_id
-EXCEPT 
-select T1.organisation_details
-from Organisations as T1 JOIN organisation_Types as T2
-on T1.organisation_type = T2.organisation_type
-where T2.organisation_type_description = 'Sponsor'
-
 
 6. Find the organisation ids and details of the organisations which are involved in 
 more than total grant amount of 6000.
