@@ -151,7 +151,7 @@ S:
 
  select distinct name
  from Reviewer as T1 JOIN Rating as T2 on T1.rID = T2.rID
- where ratingDate = NULL
+ where ratingDate = "null"
 
 15. What is the average rating stars and title for the oldest movie?
 P: For the oldest movie listed, what is its average rating and title?
@@ -357,7 +357,7 @@ S:
 
 select director
 from Movie
-where director != NULL
+where director != "null"
 group by director
 having count(*) = 1
 
@@ -421,7 +421,7 @@ S:
 
 select T2.title, T1.stars, T2.director, max(T1.stars)
 from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
-where director != NULL
+where director != "null"
 group by director
 
 37. Find the title and star rating of the movie that got the least rating star for each reviewer.
