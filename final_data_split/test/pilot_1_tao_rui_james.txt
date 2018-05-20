@@ -236,19 +236,17 @@ GROUP BY plane_name
 31. Find the name of the oldest pilot for each type of plane, and order the results by plane name.
 P: What are the different plane names, and what are the names of the oldest pilot who has each, ordered by plane name?
 
-SELECT pilot_name, plane_name
+SELECT pilot_name, plane_name, max(age)
 FROM pilotskills
 GROUP BY plane_name
-HAVING age = max(age)
 ORDER BY plane_name
 
 32. What are the names of oldest pilots for each type of plane?
 P: Return the names of the different planes, as well as the names of the oldest pilots who flew each.
 
-SELECT pilot_name, plane_name
+SELECT pilot_name, plane_name, max(age)
 FROM pilotskills
 GROUP BY plane_name
-HAVING age = max(age)
 
 33. Find the max age for each group of pilots with the same name.
 P: What are the different pilot names, and what are the maximum ages of pilots for each?
