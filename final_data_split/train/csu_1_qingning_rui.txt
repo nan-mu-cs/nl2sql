@@ -71,12 +71,12 @@ select count(*)
 from csu_fees
 where campusfee > (select avg(campusfee) from csu_fees)
 
-10. Find the count of universities whose campus fee is greater than two times the average campus fee.
-P: How many universities have a campus fee greater than two times the average? 
+10. Find the count of universities whose campus fee is greater than the average campus fee.
+P: How many universities have a campus fee greater than the average? 
 
 select count(*)
 from csu_fees
-where campusfee > 2 * (select avg(campusfee) from csu_fees)
+where campusfee > (select avg(campusfee) from csu_fees)
 
 11. Which university is in Los Angeles county and opened after 1950?
 P: What campuses are located in Los Angeles county and opened after 1950? 
@@ -101,46 +101,6 @@ select campus
 from degrees
 group by campus
 order by sum(degrees) desc
-limit 1
-
-14. Which discipline has the most enrollments? Show the name.
-P: What is the name of the discipline with the most enrollments?
-
-select T1.name
-from disciplines as T1 join discipline_enrollments as T2
-on T2.discipline = T1.id
-group by T1.id
-order by count(*) desc
-limit 1
-
-15. What is the name and number of full-time students of the campus that has the most "Computer and Info. Sciences" students enrolled in year 2004.
-P: What is the campus name and FTE_AY of full-time students who go to the campus with the most "Computer and Info. Science" students enrolled in 2004? 
-
-select T1.campus, T2.FTE_AY
-from campuses as T1 join enrollments as T2
-on T1.id = T2.campus
-join discipline_enrollments as T3
-on T3.campus = T1.id
-join disciplines as T4
-on T3.discipline = T4.id
-where t3.year = 2004 and T4.name = "Computer and Info. Sciences"
-group by T3.campus
-order by count(*) desc
-limit 1
-
-16. What is the name and number of all enrolled students of the campus that has the most "Agriculture" students enrolled in year 2004.
-P: What is the name and total enrollment numbers of the campus with the most Agriculture students enrolled in 2004? 
-
-select T1.campus, T2.totalenrollment_ay
-from campuses as T1 join enrollments as T2
-on T1.id = T2.campus
-join discipline_enrollments as T3
-on T3.campus = T1.id
-join disciplines as T4
-on T3.discipline = T4.id
-where t3.year = 2004 and T4.name = "Agriculture"
-group by T3.campus
-order by count(*) desc
 limit 1
 
 17. Which campus has the most faculties in year 2003?
@@ -213,14 +173,6 @@ select T1.campus
 from campuses as t1 join enrollments as t2
 on t1.id = t2.campus
 where t2.year = 1956 and totalenrollment_ay > 400 and FTE_AY > 200
-
-24. What is the total number of undergraduate and graduate students with discipline "Computer and Info. Sciences" in 2004?
-P: What is the total number of undergraduate and graduate students in the Computer and Info. Sciences discipline in 2004?
-
-select sum(t1.undergraduate) + sum(t1.graduate)
-from discipline_enrollments as T1 join disciplines as T2
-on t1.discipline = t2.id
-where t1.year = 2004 and t2.name = "Computer and Info. Sciences"
 
 25. How many campuses are there in Los Angeles county?
 P: How many campuses exist are in the county of LA?
@@ -322,22 +274,6 @@ from discipline_enrollments as t1 join campuses as t2
 on t1.campus = t2.id
 where t1.year = 2004 and t2.campus = "San Francisco State University" 
 
-37. How many students studying "Engineering" are enrolled in 2004?
-P: What is the total number of students (graduate and undergraduate) studying Engineering in 2004?
-
-select sum(t2.undergraduate + t2.graduate)
-from disciplines as T1 join discipline_enrollments as T2
-on T1.id = T2.discipline
-where t1.name = "Engineering" and t2.year = 2004
-
-38. How many students studying "Communications" are enrolled in 2004?
-P: What is the total number of graduate and undergraduate students studying Communications in 2004?
-
-select sum(t2.undergraduate + t2.graduate)
-from disciplines as T1 join discipline_enrollments as T2
-on T1.id = T2.discipline
-where t1.name = "Communications" and t2.year = 2004
-
 39. What is the campus fee of "San Francisco State University" in year 2000?
 P: In the year 2000, what is the campus fee for San Francisco State University?
 
@@ -360,8 +296,3 @@ P: What is the total number of campuses?
 select count(*)
 from campuses
 
-42. How many disciplines are there?
-P: What is the total number of disciplines?
-
-select count(*)
-from disciplines
