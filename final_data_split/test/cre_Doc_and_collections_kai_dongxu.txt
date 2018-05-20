@@ -284,7 +284,7 @@ WHERE T1.Collection_Name="Best"
 EXCEPT
 SELECT DISTINCT T3.Document_Object_ID
 FROM Document_Subset_Members as T3 JOIN Document_Subsets as T4 ON T3.Document_Subset_ID= T4.Document_Subset_ID
-WHERE T2.Document_Subset_Name="Best for 2000"
+WHERE T4.Document_Subset_Name="Best for 2000"
 
 
 37.List id of documents that in document subset Best for 2000 or in collection named Best. 
