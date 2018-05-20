@@ -197,7 +197,7 @@ WHERE T2.country="Spain" and T1.year>2017
 P: What are the names of all races held after 2000 in Spain?
 
 SELECT distinct T1.name
-FROM races as T1, circuits as T2 on T1.circuitid=T2.circuitid
+FROM races as T1 join circuits as T2 on T1.circuitid=T2.circuitid
 WHERE T2.country="Spain" and T1.year>2000
 
 
