@@ -62,7 +62,7 @@ order by name DESC
 10. Please show the names and the players of clubs.
 P: What are the names and players of all the clubs?
 
-SELECT T1.name, T2.Player
+SELECT T1.name, T2.Player_id
 FROM club as T1 join player as T2 
 on T1.Club_ID = T2.Club_ID
 

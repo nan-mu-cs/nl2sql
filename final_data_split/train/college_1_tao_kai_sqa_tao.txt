@@ -1148,8 +1148,8 @@ From employee as T1
      Join department as T3 on T2.dept_code = T3.dept_code
 Where T3.dept_name = 'History'
 except
-Select T1.emp_fname
-From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Select T4.emp_fname
+From employee as T4 join class as T5 on T4.emp_num = T5.prof_num
 
 S: What are the first names of all employees who are teaching classes?
 S: Please list the first names of all other professors.
@@ -1163,8 +1163,8 @@ From employee as T1
      join professor as T2 on T1.emp_num = T2.emp_num
      Join department as T3 on T2.dept_code = T3.dept_code
 except
-Select T1.emp_fname
-From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Select T4.emp_fname
+From employee as T4 join class as T5 on T4.emp_num = T5.prof_num
 
 Select T1.emp_fname
 From employee as T1 
@@ -1172,8 +1172,8 @@ From employee as T1
      Join department as T3 on T2.dept_code = T3.dept_code
 Where T3.dept_name = 'History'
 except
-Select T1.emp_fname
-From employee as T1 join class as T2 on T1.emp_num = T2.prof_num
+Select T4.emp_fname
+From employee as T4 join class as T5 on T4.emp_num = T5.prof_num
 
 53. What is the last name and office of the professor from the history department?
 P: What are the last name and office of all history professors?

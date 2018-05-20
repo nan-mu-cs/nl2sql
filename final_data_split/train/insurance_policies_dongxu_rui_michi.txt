@@ -1,22 +1,5 @@
 # count = 25 (only 5 tables, 4 foreign keys)
 
-1. Which settlement has a settlement amount not equal to the average and caused more than one payment? List the settlement id, claim date and date settled.
-P: Find the settlement id, claim date and date settled for the settlement that has a settlement amount not equal to the average and caused more than one payment.
-
-select T1.Settlement_id, T1.Date_claim_made, T1.Date_Claim_Settled
-from Settlements as T1 JOIN Payments as T2
-on T1.Settlement_id = T2.Settlement_id
-where Amount_Settled <> (
-select avg(Amount_Settled)
-from Settlements
-)
-group by T1.Settlement_id
-having count(*) > 1
-
-S:
-S:
-S:
-
 
 2. Which claims caused more than 2 settlements or have the maximum claim value? List the date the claim was made and the claim id.
 P: Find the claims that led to more than two settlements or have the maximum claim value. For each of them, return the date the claim was made and the id of the claim.

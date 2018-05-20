@@ -98,11 +98,6 @@ SELECT Fname,Lname
 FROM Student
 WHERE Age > 18 and Major != 600 and Sex='F';
 
-17. What is restaurant Subway's type?
-SELECT ResTypeName
-FROM Restaurant JOIN Type_Of_Restaurant ON Restaurant.ResID= Type_Of_Restaurant.ResID JOIN Restaurant_Type ON Type_Of_Restaurant.ResTypeID=Restaurant_Type.ResTypeID
-WHERE Restaurant.ResName="Subway";
-
 18. How many restaurant is the Sandwich type restaurant?
 
 SELECT count(*)

@@ -41,10 +41,10 @@ on T1.company_id = T2.company_id
 group by T1.company_id
 having count(*) >= 2
 UNION
-select T1.company_id, T1.company_name
-from Third_Party_Companies as T1 JOIN Maintenance_Contracts as T2
-on T1.company_id = T2.maintenance_contract_company_id
-group by T1.company_id
+select T3.company_id, T3.company_name
+from Third_Party_Companies as T3 JOIN Maintenance_Contracts as T4
+on T3.company_id = T4.maintenance_contract_company_id
+group by T3.company_id
 having count(*) >= 2
 
 
@@ -55,9 +55,9 @@ select T1.staff_name, T1.staff_id
 from Staff as T1 JOIN Fault_Log as T2
 on T1.staff_id = T2.recorded_by_staff_id
 EXCEPT
-select T1.staff_name, T1.staff_id
-from Staff as T1 JOIN Engineer_Visits as T2
-on T1.staff_id = T2.contact_staff_id
+select T3.staff_name, T3.staff_id
+from Staff as T3 JOIN Engineer_Visits as T4
+on T3.staff_id = T4.contact_staff_id
 
 
 6. Which engineer has visited the most times? Show the engineer id, first name and last name.

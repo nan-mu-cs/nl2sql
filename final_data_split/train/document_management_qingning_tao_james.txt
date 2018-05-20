@@ -209,7 +209,7 @@ P: Count the number of users that are logged in.
 
 select count(*)
 from users
-where user_login == 1
+where user_login = 1
 
 S:
 S:

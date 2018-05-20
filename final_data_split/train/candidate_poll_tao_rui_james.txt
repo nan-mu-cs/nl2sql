@@ -129,10 +129,9 @@ S:
 12. Find the name of the candidates whose oppose percentage is the lowest for each sex.
 P: For each sex, what is the name and sex of the candidate with the oppose rate for their sex?
 
-select t1.name, t1.sex
+select t1.name, t1.sex, min(oppose_rate)
 from people as t1 join candidate as t2 on t1.people_id = t2.people_id
 group by t1.sex
-having oppose_rate = min(oppose_rate)
 
 S:
 S:

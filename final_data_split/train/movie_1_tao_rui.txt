@@ -151,7 +151,7 @@ S:
 
  select distinct name
  from Reviewer as T1 JOIN Rating as T2 on T1.rID = T2.rID
- where ratingDate is NULL
+ where ratingDate = NULL
 
 15. What is the average rating stars and title for the oldest movie?
 P: For the oldest movie listed, what is its average rating and title?
@@ -357,7 +357,7 @@ S:
 
 select director
 from Movie
-where director is not NULL
+where director != NULL
 group by director
 having count(*) = 1
 
@@ -419,11 +419,10 @@ S:
 S:
 S:
 
-select T2.title, T1.stars, T2.director
+select T2.title, T1.stars, T2.director, max(T1.stars)
 from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
-where director is not NULL
+where director != NULL
 group by director
-Having T1.stars = max(T1.stars)
 
 37. Find the title and star rating of the movie that got the least rating star for each reviewer.
 P: For each reviewer id, what is the title and rating for the movie with the smallest rating? 
@@ -432,10 +431,9 @@ S:
 S:
 S:
 
- SELECT T2.title, T1.rID, T1.stars
+ SELECT T2.title, T1.rID, T1.stars, min(T1.stars)
  FROM Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
  GROUP BY T1.rID
-Having T1.stars = min(T1.stars)
 
 38. Find the title and score of the movie with the lowest rating among all movies directed by each director.
 P: For each director, what is the title and score of their most poorly rated movie?
@@ -444,10 +442,9 @@ S:
 S:
 S:
 
-select T2.title, T1.stars, T2.director
+select T2.title, T1.stars, T2.director, min(T1.stars)
 from Rating as T1 JOIN Movie as T2 on T1.mID = T2.mID
 group by T2.director
-Having T1.stars = min(T1.stars)
 
 39. What is the name of the movie that is rated by most of times?
 P: What is the name of the movie that has been reviewed the most?

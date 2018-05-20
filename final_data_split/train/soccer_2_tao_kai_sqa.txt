@@ -258,10 +258,9 @@ S: What are the top 3?
 25. What is the name of school that has the smallest enrollment in each state?
 P: What is the name of the school with smallest enrollment size per state?
 
-SELECT cName, state
+SELECT cName, state, min(enr)
 from college
 group by state
-having enr = min(enr)
 
 S: What colleges are located in each state?
 S: Also, list all of the states.
