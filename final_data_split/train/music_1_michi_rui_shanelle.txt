@@ -606,9 +606,7 @@ P: What is the id of every song that has a resolution higher than that of a song
 
 Select f_id
 From song
-where resolution > (select max(resolution)
-                                      from song
-                                       where rating < 8)
+where resolution > (select max(resolution) from song where rating < 8)
 
 
 S:
@@ -617,14 +615,12 @@ S:
 
 
 
-44. What is ids of the songs whose resolution is twice higher than the average resolution of songs in modern genre?
-P: What are the ids of all songs that have twice the resolution of the average resolution in the modern genre?
+44. What is ids of the songs whose resolution is higher than the average resolution of songs in modern genre?
+P: What are the ids of all songs that have higher resolution of the average resolution in the modern genre?
 
 Select f_id
 From song
-where resolution > 2 * (select avg(resolution)
-                                      from song
-                                       where genre_is = "modern")
+where resolution > (select avg(resolution) from song where genre_is = "modern")
 
 
 
