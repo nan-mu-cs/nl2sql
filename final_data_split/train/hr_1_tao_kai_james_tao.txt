@@ -55,7 +55,7 @@ P: What are all the employees without a department number?
 
 SELECT *
 FROM employees
-WHERE department_id IS NULL
+WHERE department_id = NULL
 
 S: Return all the information for all employees.
 S: Of those, which have no department number?
@@ -65,7 +65,7 @@ FROM employees
 
 SELECT *
 FROM employees
-WHERE department_id IS NULL
+WHERE department_id = NULL
 
 5. Display all the information about the department Marketing.
 P: What is all the information about the Marketing department?
@@ -176,7 +176,7 @@ P: Return all information about employees with salaries between 8000 and 12000 f
 SELECT *
 FROM employees
 WHERE salary BETWEEN 8000 AND 12000
-AND commission_pct IS NOT NULL
+AND commission_pct != NULL
 OR  department_id != 40
 
 S: Who are all the employees with salaries between 8000 and 12000?
@@ -189,7 +189,7 @@ WHERE salary BETWEEN 8000 AND 12000
 SELECT *
 FROM employees
 WHERE salary BETWEEN 8000 AND 12000
-AND commission_pct IS NOT NULL
+AND commission_pct != NULL
 OR  department_id != 40
 
 11. What are the full name (first and last name) and salary for all employees who does not have any value for commission?
@@ -197,7 +197,7 @@ P: Return the full names and salaries of employees with null commissions.
 
 SELECT first_name, last_name, salary
 FROM  employees
-WHERE commission_pct IS NULL
+WHERE commission_pct = NULL
 
 S: What are the full names and salaries of all employees?
 S: Of those, which have null comissions?
@@ -207,7 +207,7 @@ FROM  employees
 
 SELECT first_name, last_name, salary
 FROM  employees
-WHERE commission_pct IS NULL
+WHERE commission_pct = NULL
 
 12. Display the first and last name, and salary for those employees whose first name is ending with the letter m.
 P: Return the full names and salaries for employees with first names that end with the letter m.
@@ -267,18 +267,18 @@ P: What are the salaries and manager ids for employees who have managers?
 
 SELECT salary, manager_id
 FROM employees
-WHERE manager_id IS NOT NULL
+WHERE manager_id != NULL
 
 S: Who are the employees who are working under a manager?
 S: What are their salaries and manager numbers?
 
 SELECT *
 FROM employees
-WHERE manager_id IS NOT NULL
+WHERE manager_id != NULL
 
 SELECT salary, manager_id
 FROM employees
-WHERE manager_id IS NOT NULL
+WHERE manager_id != NULL
 
 16. display all the details from Employees table for those employees who was hired before 2002-06-21.
 P: What is all the information about employees hired before June 21, 2002?
@@ -374,7 +374,7 @@ P: What are the emails of employees with null commission, salary between 7000 an
 
 SELECT email
 FROM employees
-WHERE commission_pct IS NULL
+WHERE commission_pct = NULL
 AND salary BETWEEN 7000 AND 12000
 AND department_id=50
 
@@ -384,16 +384,16 @@ S: Of those, which work in the department with id number 50?
 
 SELECT email
 FROM employees
-WHERE commission_pct IS NULL
+WHERE commission_pct = NULL
 
 SELECT email
 FROM employees
-WHERE commission_pct IS NULL
+WHERE commission_pct = NULL
 AND salary BETWEEN 7000 AND 12000
 
 SELECT email
 FROM employees
-WHERE commission_pct IS NULL
+WHERE commission_pct = NULL
 AND salary BETWEEN 7000 AND 12000
 AND department_id=50
 
@@ -465,7 +465,7 @@ P: What is the average salary of employees who have a commission percentage that
 
 SELECT department_id, AVG(salary)
 FROM employees
-WHERE commission_pct IS NOT NULL
+WHERE commission_pct != NULL
 GROUP BY department_id
 
 S: What is the average salary for employees, by department id?
@@ -473,12 +473,12 @@ S: What is this if employees without commission percentages are excluded?
 
 SELECT department_id, AVG(salary)
 FROM employees
-WHERE commission_pct IS NOT NULL
+WHERE commission_pct != NULL
 GROUP BY department_id
 
 SELECT department_id, AVG(salary)
 FROM employees
-WHERE commission_pct IS NOT NULL
+WHERE commission_pct != NULL
 GROUP BY department_id
 
 26. display the country ID and number of cities for each country.
@@ -1220,10 +1220,9 @@ FROM job_history)
 56. display the department ID, full name (first and last name), salary for those employees who is highest salary in every department.
 P: What are the department ids, full names, and salaries for employees who make the most in their departments?
 
-SELECT first_name,  last_name,  salary, department_id
+SELECT first_name,  last_name,  salary, department_id, MAX(salary)
 FROM employees
 GROUP BY department_id
-HAVING salary = MAX(salary)
 
 S: What is the max salary in each department?
 S: What are the first name, last name, salary and department id for employees who make the most in their departments?
@@ -1232,10 +1231,9 @@ SELECT MAX(salary)
 FROM employees
 GROUP BY department_id
 
-SELECT first_name,  last_name,  salary, department_id
+SELECT first_name,  last_name,  salary, department_id, MAX(salary)
 FROM employees
 GROUP BY department_id
-HAVING salary = MAX(salary)
 
 57. display the first and last name, department, city, and state province for each employee.
 P: What are the full names, departments, cities, and state provinces for each employee?
