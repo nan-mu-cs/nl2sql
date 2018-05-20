@@ -202,10 +202,10 @@ FROM student_course_attendance
 WHERE student_id=121
 
 
-24. What are the details of students who registered courses but not attended courses?
-P: What are the details of the students who registered but did not attend any course?
+24. What are all info of students who registered courses but not attended courses?
+P: What are all details of the students who registered but did not attend any course?
 
-SELECT student_details
+SELECT *
 FROM student_course_registrations
 where student_id not in (SELECT student_id FROM student_course_attendance)
 
