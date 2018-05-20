@@ -5,18 +5,18 @@ P: What are the names of movies that do not have any ratings?
 
 Select title
 From movies
-Where rating = NULL
+Where rating = 'null'
 
 S: Which movies do not have any ratings?
 S: What are their names?
 
 Select *
 From movies
-Where rating = NULL
+Where rating = 'null'
 
 Select title
 From movies
-Where rating = NULL
+Where rating = 'null'
 
 2. Find the names of movies whose rating is ‘G’.
 P: What are names of movies that have a 'G' ratings?
@@ -392,7 +392,7 @@ P: How many movies have a rating that is not null?
 
 Select count(*), rating
 From movies
-Where rating != NULL
+Where rating != 'null'
 Group by rating
 
 S: What are the unique ratings for all movies?
@@ -408,7 +408,7 @@ Group by rating
 
 Select count(*), rating
 From movies
-Where rating != NULL
+Where rating != 'null'
 Group by rating
 
 20. Find the name of theaters that has at least one movie playing.
@@ -441,7 +441,7 @@ P: What are the names of all cinemas not showing any movies?
 
 select DISTINCT name
 from MovieTheaters
-where Movie = NULL
+where Movie = 'null'
 
 S: What are the names of every movie theater?
 S: Of those, which are names of theaters that do not have any films showing?
@@ -451,7 +451,7 @@ from MovieTheaters
 
 select DISTINCT name
 from MovieTheaters
-where Movie = NULL
+where Movie = 'null'
 
 
 22. Find the name of the movie theaters that are playing the movies whose rating is ‘G’.
@@ -518,7 +518,7 @@ P: What is all the information about the unrated movies?
 
 select *
 from movies
-where rating = NULL
+where rating = 'null'
 
 S: Show all information about the movies
 S: Of that, which pertain to only unrated movies?
@@ -528,7 +528,7 @@ from movies
 
 select *
 from movies
-where rating = NULL
+where rating = 'null'
 
 27. Show the titles of movies not currently being shown in any theaters.
 P: What are the names of the movies not being shown in any theaters?
@@ -538,7 +538,7 @@ FROM Movies
 WHERE Code NOT IN
 (SELECT Movie
 FROM MovieTheaters
-WHERE Movie != NULL)
+WHERE Movie != 'null')
 
 S: What are all the movies shown in the theaters?
 S: Which movies are not being shown in any theaters?
@@ -547,18 +547,18 @@ S: What are their names
 
 SELECT *
 FROM MovieTheaters
-WHERE Movie != NULL
+WHERE Movie != 'null'
 
 SELECT *
 FROM Movies
 WHERE Code NOT IN
 (SELECT Movie
 FROM MovieTheaters
-WHERE Movie != NULL)
+WHERE Movie != 'null')
 
 SELECT Title
 FROM Movies
 WHERE Code NOT IN
 (SELECT Movie
 FROM MovieTheaters
-WHERE Movie != NULL)
+WHERE Movie != 'null')
