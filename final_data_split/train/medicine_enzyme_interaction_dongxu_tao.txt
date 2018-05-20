@@ -11,7 +11,7 @@ P: What are the names of enzymes in descending order?
 
 SELECT name
 FROM enzyme
-order by enzyme DESC
+order by name DESC
 
 3. List the names and the locations that the enzymes can make an effect.
 P: What are the names and locations of all enzymes listed?
