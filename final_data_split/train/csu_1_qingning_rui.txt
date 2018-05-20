@@ -127,12 +127,13 @@ select avg(campusfee)
 from csu_fees
 where year = 2005
 
-20. For each campus in Los Angeles or Orange counties report the total number of degrees granted between 1998 and 2002.
-P: For each campus located in LA or Orange county, how many degrees were conferred between 1998 and 2002?
+20. report the total number of degrees granted between 1998 and 2002.
+P: how many degrees were conferred between 1998 and 2002?
+
 select T1.campus, sum(T2.degrees)
 from campuses as T1 join degrees as T2
 on T1.id = T2.campus
-where (T1.county = "Los Angeles" or T1.county = "Orange") and T2.year >= 1998 and T2.year <= 2002
+where T2.year >= 1998 and T2.year <= 2002
 group by T1.campus
 
 21. For each Orange county campus, report the number of degrees granted after 2000.
