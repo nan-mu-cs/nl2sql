@@ -102,22 +102,6 @@ on T1.part_id = T2.part_id
 group by T1.part_name
 
 
-11. What are all the part name, fault description, and fault status description of the fault parts in the log?
-
-select T1.part_name, T2.fault_description, T4.fault_status_description
-from Parts as T1 JOIN Part_Faults as T2
-on T1.part_id = T2.part_id
-JOIN Fault_Log_Parts as T3
-on T2.part_fault_id = T3.part_fault_id
-JOIN Ref_Fault_Status as T4
-on T3.fault_status_code = T4.fault_status_code
-
-12. What are all the company names and their type descriptions?
-
-select T1.company_name, T2.company_type_description
-from Third_Party_Companies as T1 JOIN Ref_Company_Types as T2
-on T1.company_type_code = T2.company_type_code
-
 13. What are all the fault descriptions and the fault status of all the faults recoreded in the logs?
 
 select T1.fault_description, T2.fault_status
@@ -210,18 +194,6 @@ from Fault_Log as T1 JOIN Fault_Log_Parts as T2
 on T1.fault_log_entry_id = T2.fault_log_entry_id
 group by T1.fault_log_entry_id
 order by count(*) desc limit 1
-
-
-
-
-26. What are the fault status descriptions and the first names of the responsible maintenance engineers?
-
-select T1.fault_status_description, T3.first_name
-from Ref_Fault_Status as T1 JOIN Engineer_Visits as T2
-on T1.fault_status_code = T2.fault_status_code
-JOIN Maintenance_Engineers as T3
-on T2.engineer_id = T3.engineer_id
-
 
 
 28. Which skill is used in fixing the most number of faults? List the skill id and description.
