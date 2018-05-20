@@ -732,9 +732,9 @@ Select T2.title
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 where T1.artistID = 222
 UNION
-Select T2.title
-From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
-where T1.artistID = 222
+Select T4.title
+From artists as T3 JOIN sculptures as T4 ON T3.artistID = T4.sculptorID
+where T3.artistID = 222
 
 S: Which artist has an id of 222?
 S: What are the titles of all paintings and sculpture works created by him?
@@ -747,9 +747,9 @@ Select T2.title
 From artists as T1 JOIN paintings as T2 ON T1.artistID = T2.painterID
 where T1.artistID = 222
 UNION
-Select T2.title
-From artists as T1 JOIN sculptures as T2 ON T1.artistID = T2.sculptorID
-where T1.artistID = 222
+Select T4.title
+From artists as T3 JOIN sculptures as T4 ON T3.artistID = T4.sculptorID
+where T3.artistID = 222
 
 35. What is the id of the artist who has the highest number of painting works before 1900?
 P: What is the id of the artist with the most paintings before 1900?
