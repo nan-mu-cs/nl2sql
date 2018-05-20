@@ -26,7 +26,7 @@ having count(*) >= 2
 
 select organized_by, name
 from church
-where open_date beween 1830 and 1840
+where open_date between 1830 and 1840
 
 6. Show all opening years and the number of churches that opened in that year.
 
