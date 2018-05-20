@@ -1121,7 +1121,16 @@
       "number"
     ],
     "db_id": "flight_company",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        20,
+        7
+      ],
+      [
+        19,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       7,
@@ -1412,7 +1421,12 @@
       "text"
     ],
     "db_id": "body_builder",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        2,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6
@@ -1560,7 +1574,16 @@
       "number"
     ],
     "db_id": "bike_racing",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        12,
+        1
+      ],
+      [
+        11,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -2463,7 +2486,80 @@
       "number"
     ],
     "db_id": "academic",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        11,
+        8
+      ],
+      [
+        10,
+        1
+      ],
+      [
+        13,
+        8
+      ],
+      [
+        12,
+        5
+      ],
+      [
+        17,
+        8
+      ],
+      [
+        18,
+        15
+      ],
+      [
+        21,
+        8
+      ],
+      [
+        22,
+        20
+      ],
+      [
+        24,
+        5
+      ],
+      [
+        26,
+        15
+      ],
+      [
+        31,
+        8
+      ],
+      [
+        32,
+        27
+      ],
+      [
+        38,
+        20
+      ],
+      [
+        37,
+        27
+      ],
+      [
+        39,
+        1
+      ],
+      [
+        40,
+        27
+      ],
+      [
+        42,
+        27
+      ],
+      [
+        41,
+        27
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -4414,7 +4510,16 @@
       "number"
     ],
     "db_id": "decoration_competition",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        8,
+        1
+      ],
+      [
+        10,
+        5
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -4565,7 +4670,16 @@
       "number"
     ],
     "db_id": "restaurant_bills",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        11,
+        6
+      ],
+      [
+        10,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -4892,235 +5006,247 @@
       ],
       [
         4,
-        "feature_id"
-      ],
-      [
-        4,
-        "feature_name"
-      ],
-      [
-        4,
-        "feature_description"
-      ],
-      [
-        5,
-        "user_id"
-      ],
-      [
-        5,
-        "age_category_code"
-      ],
-      [
-        5,
-        "user_category_code"
-      ],
-      [
-        5,
-        "user_address_id"
-      ],
-      [
-        5,
-        "is_buyer"
-      ],
-      [
-        5,
-        "is_seller"
-      ],
-      [
-        5,
-        "login_name"
-      ],
-      [
-        5,
-        "password"
-      ],
-      [
-        5,
-        "date_registered"
-      ],
-      [
-        5,
-        "first_name"
-      ],
-      [
-        5,
-        "middle_name"
-      ],
-      [
-        5,
-        "last_name"
-      ],
-      [
-        5,
-        "other_user_details"
-      ],
-      [
-        6,
-        "property_id"
-      ],
-      [
-        6,
-        "feature_id"
-      ],
-      [
-        6,
-        "feature_value"
-      ],
-      [
-        6,
-        "property_feature_description"
-      ],
-      [
-        7,
-        "property_id"
-      ],
-      [
-        7,
-        "photo_seq"
-      ],
-      [
-        7,
-        "photo_title"
-      ],
-      [
-        7,
-        "photo_description"
-      ],
-      [
-        7,
-        "photo_filename"
-      ],
-      [
-        8,
-        "property_id"
-      ],
-      [
-        8,
-        "room_number"
-      ],
-      [
-        8,
-        "room_type_code"
-      ],
-      [
-        8,
-        "room_size"
-      ],
-      [
-        8,
-        "other_room_details"
-      ],
-      [
-        9,
-        "user_id"
-      ],
-      [
-        9,
-        "property_id"
-      ],
-      [
-        9,
-        "datestamp"
-      ],
-      [
-        10,
-        "user_id"
-      ],
-      [
-        10,
-        "search_seq"
-      ],
-      [
-        10,
-        "search_datetime"
-      ],
-      [
-        10,
-        "search_string"
-      ],
-      [
-        11,
         "address_id"
       ],
       [
-        11,
+        4,
         "line_1_number_building"
       ],
       [
-        11,
+        4,
         "line_2_number_street"
       ],
       [
-        11,
+        4,
+        "line_3_area_locality"
+      ],
+      [
+        4,
         "town_city"
       ],
       [
-        11,
+        4,
         "zip_postcode"
       ],
       [
-        11,
+        4,
         "county_state_province"
       ],
       [
-        11,
+        4,
         "country"
       ],
       [
-        12,
+        4,
+        "other_address_details"
+      ],
+      [
+        5,
+        "feature_id"
+      ],
+      [
+        5,
+        "feature_name"
+      ],
+      [
+        5,
+        "feature_description"
+      ],
+      [
+        6,
+        "user_id"
+      ],
+      [
+        6,
+        "age_category_code"
+      ],
+      [
+        6,
+        "user_category_code"
+      ],
+      [
+        6,
+        "user_address_id"
+      ],
+      [
+        6,
+        "is_buyer"
+      ],
+      [
+        6,
+        "is_seller"
+      ],
+      [
+        6,
+        "login_name"
+      ],
+      [
+        6,
+        "password"
+      ],
+      [
+        6,
+        "date_registered"
+      ],
+      [
+        6,
+        "first_name"
+      ],
+      [
+        6,
+        "middle_name"
+      ],
+      [
+        6,
+        "last_name"
+      ],
+      [
+        6,
+        "other_user_details"
+      ],
+      [
+        7,
         "property_id"
       ],
       [
-        12,
+        7,
         "property_address_id"
       ],
       [
-        12,
+        7,
         "owner_user_id"
       ],
       [
-        12,
+        7,
         "property_type_code"
       ],
       [
-        12,
+        7,
         "date_on_market"
       ],
       [
-        12,
+        7,
         "date_off_market"
       ],
       [
-        12,
+        7,
         "property_name"
       ],
       [
-        12,
+        7,
         "property_description"
       ],
       [
-        12,
+        7,
         "garage_yn"
       ],
       [
-        12,
+        7,
         "parking_lots"
       ],
       [
-        12,
+        7,
         "room_count"
       ],
       [
-        12,
+        7,
         "vendor_requested_price"
       ],
       [
-        12,
+        7,
         "price_min"
       ],
       [
-        12,
+        7,
         "price_max"
+      ],
+      [
+        7,
+        "other_property_details"
+      ],
+      [
+        8,
+        "property_id"
+      ],
+      [
+        8,
+        "feature_id"
+      ],
+      [
+        8,
+        "feature_value"
+      ],
+      [
+        8,
+        "property_feature_description"
+      ],
+      [
+        9,
+        "property_id"
+      ],
+      [
+        9,
+        "photo_seq"
+      ],
+      [
+        9,
+        "photo_title"
+      ],
+      [
+        9,
+        "photo_description"
+      ],
+      [
+        9,
+        "photo_filename"
+      ],
+      [
+        10,
+        "property_id"
+      ],
+      [
+        10,
+        "room_number"
+      ],
+      [
+        10,
+        "room_type_code"
+      ],
+      [
+        10,
+        "room_size"
+      ],
+      [
+        10,
+        "other_room_details"
+      ],
+      [
+        11,
+        "user_id"
+      ],
+      [
+        11,
+        "property_id"
+      ],
+      [
+        11,
+        "datestamp"
+      ],
+      [
+        12,
+        "user_id"
+      ],
+      [
+        12,
+        "search_seq"
+      ],
+      [
+        12,
+        "search_datetime"
+      ],
+      [
+        12,
+        "search_string"
       ]
     ],
     "column_types": [
@@ -5136,6 +5262,15 @@
       "number",
       "text",
       "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
       "number",
       "text",
       "text",
@@ -5145,34 +5280,6 @@
       "text",
       "text",
       "time",
-      "text",
-      "text",
-      "text",
-      "text",
-      "number",
-      "number",
-      "text",
-      "text",
-      "number",
-      "number",
-      "text",
-      "text",
-      "text",
-      "number",
-      "text",
-      "text",
-      "text",
-      "text",
-      "number",
-      "number",
-      "time",
-      "number",
-      "number",
-      "time",
-      "text",
-      "number",
-      "text",
-      "text",
       "text",
       "text",
       "text",
@@ -5190,53 +5297,75 @@
       "text",
       "number",
       "number",
-      "number"
+      "number",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "time",
+      "number",
+      "number",
+      "time",
+      "text"
     ],
     "db_id": "real_estate_rentals",
     "foreign_keys": [
       [
-        25,
-        53
-      ],
-      [
-        26,
-        9
-      ],
-      [
-        29,
-        53
-      ],
-      [
-        36,
-        5
-      ],
-      [
-        34,
-        53
-      ],
-      [
-        40,
-        53
-      ],
-      [
-        39,
-        12
-      ],
-      [
-        42,
-        12
-      ],
-      [
-        56,
+        37,
         3
       ],
       [
-        54,
-        46
+        35,
+        9
       ],
       [
-        55,
-        12
+        36,
+        21
+      ],
+      [
+        49,
+        34
+      ],
+      [
+        50,
+        18
+      ],
+      [
+        53,
+        34
+      ],
+      [
+        60,
+        5
+      ],
+      [
+        58,
+        34
+      ],
+      [
+        64,
+        34
+      ],
+      [
+        63,
+        21
+      ],
+      [
+        66,
+        21
       ]
     ],
     "primary_keys": [
@@ -5245,9 +5374,9 @@
       5,
       7,
       9,
-      12,
-      46,
-      53
+      18,
+      21,
+      34
     ],
     "table_names": [
       "reference age categories",
@@ -5269,15 +5398,15 @@
       "Ref_Property_Types",
       "Ref_Room_Types",
       "Ref_User_Categories",
+      "Addresses",
       "Features",
       "Users",
+      "Properties",
       "Property_Features",
       "Property_Photos",
       "Rooms",
       "User_Property_History",
-      "User_Searches",
-      "Addresses",
-      "Properties"
+      "User_Searches"
     ]
   },
   {
@@ -5414,7 +5543,16 @@
       "number"
     ],
     "db_id": "phone_market",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        12,
+        2
+      ],
+      [
+        11,
+        6
+      ]
+    ],
     "primary_keys": [
       2,
       6,
@@ -6474,7 +6612,12 @@
       "number"
     ],
     "db_id": "employee_1",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        7,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       4
@@ -8045,7 +8188,16 @@
       "number"
     ],
     "db_id": "company_employee",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        15,
+        1
+      ],
+      [
+        14,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -9629,7 +9781,7 @@
       "text",
       "number",
       "text",
-      "text",
+      "number",
       "number",
       "text"
     ],
@@ -10006,7 +10158,12 @@
       "number"
     ],
     "db_id": "institution_sports",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        12,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       12
@@ -10154,7 +10311,20 @@
       "others"
     ],
     "db_id": "debate",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        12,
+        1
+      ],
+      [
+        11,
+        1
+      ],
+      [
+        10,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -10379,7 +10549,7 @@
       "number",
       "number"
     ],
-    "db_id": "manufacturer_1",
+    "db_id": "manufactory_1",
     "foreign_keys": [
       [
         9,
@@ -11265,7 +11435,16 @@
       "text"
     ],
     "db_id": "entertainment_awards",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        11,
+        1
+      ],
+      [
+        10,
+        7
+      ]
+    ],
     "primary_keys": [
       1,
       7,
@@ -12512,7 +12691,52 @@
       "number"
     ],
     "db_id": "imdb",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        11,
+        8
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        17,
+        8
+      ],
+      [
+        18,
+        14
+      ],
+      [
+        36,
+        22
+      ],
+      [
+        35,
+        8
+      ],
+      [
+        41,
+        28
+      ],
+      [
+        40,
+        8
+      ],
+      [
+        48,
+        8
+      ],
+      [
+        66,
+        57
+      ],
+      [
+        65,
+        8
+      ]
+    ],
     "primary_keys": [
       1,
       7,
@@ -15202,7 +15426,24 @@
       "number"
     ],
     "db_id": "dorm_1",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        16,
+        13
+      ],
+      [
+        15,
+        9
+      ],
+      [
+        18,
+        9
+      ],
+      [
+        17,
+        1
+      ]
+    ],
     "primary_keys": [
       1
     ],
@@ -15232,16 +15473,83 @@
       [
         -1,
         "*"
+      ],
+      [
+        0,
+        "Journal_ID"
+      ],
+      [
+        0,
+        "Date"
+      ],
+      [
+        0,
+        "Theme"
+      ],
+      [
+        0,
+        "Sales"
+      ],
+      [
+        1,
+        "Editor_ID"
+      ],
+      [
+        1,
+        "Name"
+      ],
+      [
+        1,
+        "Age"
+      ],
+      [
+        2,
+        "Editor_ID"
+      ],
+      [
+        2,
+        "Journal_ID"
+      ],
+      [
+        2,
+        "Work_Type"
       ]
     ],
     "column_types": [
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
+      "number",
       "text"
     ],
     "db_id": "journal_committee",
-    "foreign_keys": [],
-    "primary_keys": [],
+    "foreign_keys": [
+      [
+        9,
+        1
+      ],
+      [
+        8,
+        5
+      ]
+    ],
+    "primary_keys": [
+      1,
+      5,
+      8
+    ],
     "table_names": [],
-    "table_names_original": []
+    "table_names_original": [
+      "journal",
+      "editor",
+      "journal_committee"
+    ]
   },
   {
     "column_names": [
@@ -15404,7 +15712,20 @@
       "number"
     ],
     "db_id": "flight_1",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        8,
+        9
+      ],
+      [
+        16,
+        9
+      ],
+      [
+        15,
+        12
+      ]
+    ],
     "primary_keys": [
       1,
       9,
@@ -15567,7 +15888,16 @@
       "text"
     ],
     "db_id": "medicine_enzyme_interaction",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        13,
+        1
+      ],
+      [
+        12,
+        5
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -16635,7 +16965,20 @@
       "number"
     ],
     "db_id": "station_weather",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        13,
+        8
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        14,
+        8
+      ]
+    ],
     "primary_keys": [
       1,
       8,
@@ -18509,7 +18852,20 @@
       "text"
     ],
     "db_id": "railway",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        13,
+        1
+      ],
+      [
+        20,
+        1
+      ],
+      [
+        21,
+        14
+      ]
+    ],
     "primary_keys": [
       1,
       8,
@@ -18843,7 +19199,16 @@
       "number"
     ],
     "db_id": "sing_contest",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        10,
+        4
+      ],
+      [
+        9,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       4,
@@ -19182,7 +19547,7 @@
       ],
       [
         1,
-        "Customer_ID"
+        "ID"
       ],
       [
         1,
@@ -19202,7 +19567,7 @@
       ],
       [
         2,
-        "Customer_ID"
+        "visitor_ID"
       ],
       [
         2,
@@ -19229,7 +19594,16 @@
       "number"
     ],
     "db_id": "museum_visit",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        10,
+        5
+      ],
+      [
+        9,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -19242,7 +19616,7 @@
     ],
     "table_names_original": [
       "museum",
-      "customer",
+      "visitor",
       "visit"
     ]
   },
@@ -19320,10 +19694,6 @@
       ],
       [
         0,
-        "Browser"
-      ],
-      [
-        0,
         "Client"
       ],
       [
@@ -19362,7 +19732,6 @@
       "text",
       "text",
       "text",
-      "text",
       "number",
       "text",
       "number",
@@ -19371,11 +19740,20 @@
       "number"
     ],
     "db_id": "browser_web",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        10,
+        6
+      ],
+      [
+        9,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
-      7,
-      10
+      6,
+      9
     ],
     "table_names": [
       "web client accelerator",
@@ -20410,135 +20788,191 @@
       ],
       [
         1,
-        "player_id"
-      ],
-      [
-        1,
-        "award_id"
-      ],
-      [
-        1,
         "year"
       ],
       [
         1,
-        "league_id"
-      ],
-      [
-        1,
-        "tie"
-      ],
-      [
-        1,
-        "notes"
-      ],
-      [
-        2,
-        "player_id"
-      ],
-      [
-        2,
-        "award_id"
-      ],
-      [
-        2,
-        "year"
-      ],
-      [
-        2,
-        "league_id"
-      ],
-      [
-        2,
-        "tie"
-      ],
-      [
-        2,
-        "notes"
-      ],
-      [
-        3,
-        "player_id"
-      ],
-      [
-        3,
-        "college_id"
-      ],
-      [
-        3,
-        "year"
-      ],
-      [
-        4,
-        "player_id"
-      ],
-      [
-        4,
-        "yearid"
-      ],
-      [
-        4,
-        "votedby"
-      ],
-      [
-        4,
-        "ballots"
-      ],
-      [
-        4,
-        "needed"
-      ],
-      [
-        4,
-        "votes"
-      ],
-      [
-        4,
-        "inducted"
-      ],
-      [
-        4,
-        "category"
-      ],
-      [
-        4,
-        "needed_note"
-      ],
-      [
-        5,
-        "year"
-      ],
-      [
-        5,
-        "league_id"
-      ],
-      [
-        5,
         "team_id"
       ],
       [
-        5,
-        "park_id"
+        1,
+        "league_id"
+      ],
+      [
+        1,
+        "player_id"
+      ],
+      [
+        1,
+        "g_all"
+      ],
+      [
+        1,
+        "gs"
+      ],
+      [
+        1,
+        "g_batting"
+      ],
+      [
+        1,
+        "g_defense"
+      ],
+      [
+        1,
+        "g_p"
+      ],
+      [
+        1,
+        "g_c"
+      ],
+      [
+        1,
+        "g_1b"
+      ],
+      [
+        1,
+        "g_2b"
+      ],
+      [
+        1,
+        "g_3b"
+      ],
+      [
+        1,
+        "g_ss"
+      ],
+      [
+        1,
+        "g_lf"
+      ],
+      [
+        1,
+        "g_cf"
+      ],
+      [
+        1,
+        "g_rf"
+      ],
+      [
+        1,
+        "g_of"
+      ],
+      [
+        1,
+        "g_dh"
+      ],
+      [
+        1,
+        "g_ph"
+      ],
+      [
+        1,
+        "g_pr"
+      ],
+      [
+        2,
+        "player_id"
+      ],
+      [
+        2,
+        "award_id"
+      ],
+      [
+        2,
+        "year"
+      ],
+      [
+        2,
+        "league_id"
+      ],
+      [
+        2,
+        "tie"
+      ],
+      [
+        2,
+        "notes"
+      ],
+      [
+        3,
+        "player_id"
+      ],
+      [
+        3,
+        "award_id"
+      ],
+      [
+        3,
+        "year"
+      ],
+      [
+        3,
+        "league_id"
+      ],
+      [
+        3,
+        "tie"
+      ],
+      [
+        3,
+        "notes"
+      ],
+      [
+        4,
+        "award_id"
+      ],
+      [
+        4,
+        "year"
+      ],
+      [
+        4,
+        "league_id"
+      ],
+      [
+        4,
+        "player_id"
+      ],
+      [
+        4,
+        "points_won"
+      ],
+      [
+        4,
+        "points_max"
+      ],
+      [
+        4,
+        "votes_first"
       ],
       [
         5,
-        "span_first"
+        "award_id"
       ],
       [
         5,
-        "span_last"
+        "year"
       ],
       [
         5,
-        "games"
+        "league_id"
       ],
       [
         5,
-        "openings"
+        "player_id"
       ],
       [
         5,
-        "attendance"
+        "points_won"
+      ],
+      [
+        5,
+        "points_max"
+      ],
+      [
+        5,
+        "votes_first"
       ],
       [
         6,
@@ -20550,15 +20984,15 @@
       ],
       [
         6,
+        "stint"
+      ],
+      [
+        6,
         "team_id"
       ],
       [
         6,
         "league_id"
-      ],
-      [
-        6,
-        "inseason"
       ],
       [
         6,
@@ -20566,19 +21000,75 @@
       ],
       [
         6,
-        "w"
+        "ab"
       ],
       [
         6,
-        "l"
+        "r"
       ],
       [
         6,
-        "rank"
+        "h"
       ],
       [
         6,
-        "plyr_mgr"
+        "double"
+      ],
+      [
+        6,
+        "triple"
+      ],
+      [
+        6,
+        "hr"
+      ],
+      [
+        6,
+        "rbi"
+      ],
+      [
+        6,
+        "sb"
+      ],
+      [
+        6,
+        "cs"
+      ],
+      [
+        6,
+        "bb"
+      ],
+      [
+        6,
+        "so"
+      ],
+      [
+        6,
+        "ibb"
+      ],
+      [
+        6,
+        "hbp"
+      ],
+      [
+        6,
+        "sh"
+      ],
+      [
+        6,
+        "sf"
+      ],
+      [
+        6,
+        "g_idp"
+      ],
+      [
+        7,
+        "year"
+      ],
+      [
+        7,
+        "round"
       ],
       [
         7,
@@ -20586,123 +21076,103 @@
       ],
       [
         7,
-        "birth_year"
+        "team_id"
       ],
       [
         7,
-        "birth_month"
+        "league_id"
       ],
       [
         7,
-        "birth_day"
+        "g"
       ],
       [
         7,
-        "birth_country"
+        "ab"
       ],
       [
         7,
-        "birth_state"
+        "r"
       ],
       [
         7,
-        "birth_city"
+        "h"
       ],
       [
         7,
-        "death_year"
+        "double"
       ],
       [
         7,
-        "death_month"
+        "triple"
       ],
       [
         7,
-        "death_day"
+        "hr"
       ],
       [
         7,
-        "death_country"
+        "rbi"
       ],
       [
         7,
-        "death_state"
+        "sb"
       ],
       [
         7,
-        "death_city"
+        "cs"
       ],
       [
         7,
-        "name_first"
+        "bb"
       ],
       [
         7,
-        "name_last"
+        "so"
       ],
       [
         7,
-        "name_given"
+        "ibb"
       ],
       [
         7,
-        "weight"
+        "hbp"
       ],
       [
         7,
-        "height"
+        "sh"
       ],
       [
         7,
-        "bats"
+        "sf"
       ],
       [
         7,
-        "throws"
-      ],
-      [
-        7,
-        "debut"
-      ],
-      [
-        7,
-        "final_game"
-      ],
-      [
-        7,
-        "retro_id"
-      ],
-      [
-        7,
-        "bbref_id"
+        "g_idp"
       ],
       [
         8,
-        "park_id"
+        "player_id"
       ],
       [
         8,
-        "park_name"
+        "college_id"
       ],
       [
         8,
-        "park_alias"
+        "year"
       ],
       [
-        8,
-        "city"
-      ],
-      [
-        8,
-        "state"
-      ],
-      [
-        8,
-        "country"
+        9,
+        "player_id"
       ],
       [
         9,
         "year"
+      ],
+      [
+        9,
+        "stint"
       ],
       [
         9,
@@ -20714,35 +21184,95 @@
       ],
       [
         9,
-        "player_id"
+        "pos"
       ],
       [
         9,
-        "salary"
+        "g"
+      ],
+      [
+        9,
+        "gs"
+      ],
+      [
+        9,
+        "inn_outs"
+      ],
+      [
+        9,
+        "po"
+      ],
+      [
+        9,
+        "a"
+      ],
+      [
+        9,
+        "e"
+      ],
+      [
+        9,
+        "dp"
+      ],
+      [
+        9,
+        "pb"
+      ],
+      [
+        9,
+        "wp"
+      ],
+      [
+        9,
+        "sb"
+      ],
+      [
+        9,
+        "cs"
+      ],
+      [
+        9,
+        "zr"
       ],
       [
         10,
-        "college_id"
+        "player_id"
       ],
       [
         10,
-        "name_full"
+        "year"
       ],
       [
         10,
-        "city"
+        "stint"
       ],
       [
         10,
-        "state"
+        "glf"
       ],
       [
         10,
-        "country"
+        "gcf"
+      ],
+      [
+        10,
+        "grf"
+      ],
+      [
+        11,
+        "player_id"
       ],
       [
         11,
         "year"
+      ],
+      [
+        11,
+        "team_id"
+      ],
+      [
+        11,
+        "league_id"
       ],
       [
         11,
@@ -20750,239 +21280,887 @@
       ],
       [
         11,
-        "team_id_winner"
+        "pos"
       ],
       [
         11,
-        "league_id_winner"
-      ],
-      [
-        11,
-        "team_id_loser"
-      ],
-      [
-        11,
-        "league_id_loser"
-      ],
-      [
-        11,
-        "wins"
-      ],
-      [
-        11,
-        "losses"
-      ],
-      [
-        11,
-        "ties"
-      ],
-      [
-        12,
-        "year"
-      ],
-      [
-        12,
-        "league_id"
-      ],
-      [
-        12,
-        "team_id"
-      ],
-      [
-        12,
-        "franchise_id"
-      ],
-      [
-        12,
-        "div_id"
-      ],
-      [
-        12,
-        "rank"
-      ],
-      [
-        12,
         "g"
       ],
       [
-        12,
-        "ghome"
+        11,
+        "gs"
       ],
       [
-        12,
-        "w"
+        11,
+        "inn_outs"
       ],
       [
-        12,
-        "l"
+        11,
+        "po"
       ],
       [
-        12,
-        "div_win"
+        11,
+        "a"
       ],
       [
-        12,
-        "wc_win"
+        11,
+        "e"
       ],
       [
-        12,
-        "lg_win"
+        11,
+        "dp"
       ],
       [
-        12,
-        "ws_win"
+        11,
+        "tp"
       ],
       [
-        12,
-        "r"
+        11,
+        "pb"
       ],
       [
-        12,
-        "ab"
-      ],
-      [
-        12,
-        "h"
-      ],
-      [
-        12,
-        "double"
-      ],
-      [
-        12,
-        "triple"
-      ],
-      [
-        12,
-        "hr"
-      ],
-      [
-        12,
-        "bb"
-      ],
-      [
-        12,
-        "so"
-      ],
-      [
-        12,
+        11,
         "sb"
       ],
       [
-        12,
+        11,
         "cs"
       ],
       [
         12,
-        "hbp"
+        "player_id"
       ],
       [
         12,
-        "sf"
+        "yearid"
       ],
       [
         12,
-        "ra"
+        "votedby"
       ],
       [
         12,
-        "er"
+        "ballots"
       ],
       [
         12,
-        "era"
+        "needed"
       ],
       [
         12,
-        "cg"
+        "votes"
       ],
       [
         12,
-        "sho"
+        "inducted"
       ],
       [
         12,
-        "sv"
+        "category"
       ],
       [
         12,
-        "ipouts"
+        "needed_note"
       ],
       [
-        12,
-        "ha"
+        13,
+        "year"
       ],
       [
-        12,
-        "hra"
+        13,
+        "league_id"
       ],
       [
-        12,
-        "bba"
+        13,
+        "team_id"
       ],
       [
-        12,
-        "soa"
+        13,
+        "park_id"
       ],
       [
-        12,
-        "e"
+        13,
+        "span_first"
       ],
       [
-        12,
-        "dp"
+        13,
+        "span_last"
       ],
       [
-        12,
-        "fp"
+        13,
+        "games"
       ],
       [
-        12,
-        "name"
+        13,
+        "openings"
       ],
       [
-        12,
-        "park"
-      ],
-      [
-        12,
+        13,
         "attendance"
       ],
       [
-        12,
-        "bpf"
+        14,
+        "player_id"
       ],
       [
-        12,
-        "ppf"
+        14,
+        "year"
       ],
       [
-        12,
-        "team_id_br"
+        14,
+        "team_id"
       ],
       [
-        12,
-        "team_id_lahman45"
+        14,
+        "league_id"
       ],
       [
-        12,
-        "team_id_retro"
+        14,
+        "inseason"
       ],
       [
-        13,
+        14,
+        "g"
+      ],
+      [
+        14,
+        "w"
+      ],
+      [
+        14,
+        "l"
+      ],
+      [
+        14,
+        "rank"
+      ],
+      [
+        14,
+        "plyr_mgr"
+      ],
+      [
+        15,
+        "player_id"
+      ],
+      [
+        15,
+        "year"
+      ],
+      [
+        15,
+        "team_id"
+      ],
+      [
+        15,
+        "league_id"
+      ],
+      [
+        15,
+        "inseason"
+      ],
+      [
+        15,
+        "half"
+      ],
+      [
+        15,
+        "g"
+      ],
+      [
+        15,
+        "w"
+      ],
+      [
+        15,
+        "l"
+      ],
+      [
+        15,
+        "rank"
+      ],
+      [
+        16,
+        "player_id"
+      ],
+      [
+        16,
+        "birth_year"
+      ],
+      [
+        16,
+        "birth_month"
+      ],
+      [
+        16,
+        "birth_day"
+      ],
+      [
+        16,
+        "birth_country"
+      ],
+      [
+        16,
+        "birth_state"
+      ],
+      [
+        16,
+        "birth_city"
+      ],
+      [
+        16,
+        "death_year"
+      ],
+      [
+        16,
+        "death_month"
+      ],
+      [
+        16,
+        "death_day"
+      ],
+      [
+        16,
+        "death_country"
+      ],
+      [
+        16,
+        "death_state"
+      ],
+      [
+        16,
+        "death_city"
+      ],
+      [
+        16,
+        "name_first"
+      ],
+      [
+        16,
+        "name_last"
+      ],
+      [
+        16,
+        "name_given"
+      ],
+      [
+        16,
+        "weight"
+      ],
+      [
+        16,
+        "height"
+      ],
+      [
+        16,
+        "bats"
+      ],
+      [
+        16,
+        "throws"
+      ],
+      [
+        16,
+        "debut"
+      ],
+      [
+        16,
+        "final_game"
+      ],
+      [
+        16,
+        "retro_id"
+      ],
+      [
+        16,
+        "bbref_id"
+      ],
+      [
+        17,
+        "park_id"
+      ],
+      [
+        17,
+        "park_name"
+      ],
+      [
+        17,
+        "park_alias"
+      ],
+      [
+        17,
+        "city"
+      ],
+      [
+        17,
+        "state"
+      ],
+      [
+        17,
+        "country"
+      ],
+      [
+        18,
+        "player_id"
+      ],
+      [
+        18,
+        "year"
+      ],
+      [
+        18,
+        "stint"
+      ],
+      [
+        18,
+        "team_id"
+      ],
+      [
+        18,
+        "league_id"
+      ],
+      [
+        18,
+        "w"
+      ],
+      [
+        18,
+        "l"
+      ],
+      [
+        18,
+        "g"
+      ],
+      [
+        18,
+        "gs"
+      ],
+      [
+        18,
+        "cg"
+      ],
+      [
+        18,
+        "sho"
+      ],
+      [
+        18,
+        "sv"
+      ],
+      [
+        18,
+        "ipouts"
+      ],
+      [
+        18,
+        "h"
+      ],
+      [
+        18,
+        "er"
+      ],
+      [
+        18,
+        "hr"
+      ],
+      [
+        18,
+        "bb"
+      ],
+      [
+        18,
+        "so"
+      ],
+      [
+        18,
+        "baopp"
+      ],
+      [
+        18,
+        "era"
+      ],
+      [
+        18,
+        "ibb"
+      ],
+      [
+        18,
+        "wp"
+      ],
+      [
+        18,
+        "hbp"
+      ],
+      [
+        18,
+        "bk"
+      ],
+      [
+        18,
+        "bfp"
+      ],
+      [
+        18,
+        "gf"
+      ],
+      [
+        18,
+        "r"
+      ],
+      [
+        18,
+        "sh"
+      ],
+      [
+        18,
+        "sf"
+      ],
+      [
+        18,
+        "g_idp"
+      ],
+      [
+        19,
+        "player_id"
+      ],
+      [
+        19,
+        "year"
+      ],
+      [
+        19,
+        "round"
+      ],
+      [
+        19,
+        "team_id"
+      ],
+      [
+        19,
+        "league_id"
+      ],
+      [
+        19,
+        "w"
+      ],
+      [
+        19,
+        "l"
+      ],
+      [
+        19,
+        "g"
+      ],
+      [
+        19,
+        "gs"
+      ],
+      [
+        19,
+        "cg"
+      ],
+      [
+        19,
+        "sho"
+      ],
+      [
+        19,
+        "sv"
+      ],
+      [
+        19,
+        "ipouts"
+      ],
+      [
+        19,
+        "h"
+      ],
+      [
+        19,
+        "er"
+      ],
+      [
+        19,
+        "hr"
+      ],
+      [
+        19,
+        "bb"
+      ],
+      [
+        19,
+        "so"
+      ],
+      [
+        19,
+        "baopp"
+      ],
+      [
+        19,
+        "era"
+      ],
+      [
+        19,
+        "ibb"
+      ],
+      [
+        19,
+        "wp"
+      ],
+      [
+        19,
+        "hbp"
+      ],
+      [
+        19,
+        "bk"
+      ],
+      [
+        19,
+        "bfp"
+      ],
+      [
+        19,
+        "gf"
+      ],
+      [
+        19,
+        "r"
+      ],
+      [
+        19,
+        "sh"
+      ],
+      [
+        19,
+        "sf"
+      ],
+      [
+        19,
+        "g_idp"
+      ],
+      [
+        20,
+        "year"
+      ],
+      [
+        20,
+        "team_id"
+      ],
+      [
+        20,
+        "league_id"
+      ],
+      [
+        20,
+        "player_id"
+      ],
+      [
+        20,
+        "salary"
+      ],
+      [
+        21,
+        "college_id"
+      ],
+      [
+        21,
+        "name_full"
+      ],
+      [
+        21,
+        "city"
+      ],
+      [
+        21,
+        "state"
+      ],
+      [
+        21,
+        "country"
+      ],
+      [
+        22,
+        "year"
+      ],
+      [
+        22,
+        "round"
+      ],
+      [
+        22,
+        "team_id_winner"
+      ],
+      [
+        22,
+        "league_id_winner"
+      ],
+      [
+        22,
+        "team_id_loser"
+      ],
+      [
+        22,
+        "league_id_loser"
+      ],
+      [
+        22,
+        "wins"
+      ],
+      [
+        22,
+        "losses"
+      ],
+      [
+        22,
+        "ties"
+      ],
+      [
+        23,
+        "year"
+      ],
+      [
+        23,
+        "league_id"
+      ],
+      [
+        23,
+        "team_id"
+      ],
+      [
+        23,
         "franchise_id"
       ],
       [
-        13,
+        23,
+        "div_id"
+      ],
+      [
+        23,
+        "rank"
+      ],
+      [
+        23,
+        "g"
+      ],
+      [
+        23,
+        "ghome"
+      ],
+      [
+        23,
+        "w"
+      ],
+      [
+        23,
+        "l"
+      ],
+      [
+        23,
+        "div_win"
+      ],
+      [
+        23,
+        "wc_win"
+      ],
+      [
+        23,
+        "lg_win"
+      ],
+      [
+        23,
+        "ws_win"
+      ],
+      [
+        23,
+        "r"
+      ],
+      [
+        23,
+        "ab"
+      ],
+      [
+        23,
+        "h"
+      ],
+      [
+        23,
+        "double"
+      ],
+      [
+        23,
+        "triple"
+      ],
+      [
+        23,
+        "hr"
+      ],
+      [
+        23,
+        "bb"
+      ],
+      [
+        23,
+        "so"
+      ],
+      [
+        23,
+        "sb"
+      ],
+      [
+        23,
+        "cs"
+      ],
+      [
+        23,
+        "hbp"
+      ],
+      [
+        23,
+        "sf"
+      ],
+      [
+        23,
+        "ra"
+      ],
+      [
+        23,
+        "er"
+      ],
+      [
+        23,
+        "era"
+      ],
+      [
+        23,
+        "cg"
+      ],
+      [
+        23,
+        "sho"
+      ],
+      [
+        23,
+        "sv"
+      ],
+      [
+        23,
+        "ipouts"
+      ],
+      [
+        23,
+        "ha"
+      ],
+      [
+        23,
+        "hra"
+      ],
+      [
+        23,
+        "bba"
+      ],
+      [
+        23,
+        "soa"
+      ],
+      [
+        23,
+        "e"
+      ],
+      [
+        23,
+        "dp"
+      ],
+      [
+        23,
+        "fp"
+      ],
+      [
+        23,
+        "name"
+      ],
+      [
+        23,
+        "park"
+      ],
+      [
+        23,
+        "attendance"
+      ],
+      [
+        23,
+        "bpf"
+      ],
+      [
+        23,
+        "ppf"
+      ],
+      [
+        23,
+        "team_id_br"
+      ],
+      [
+        23,
+        "team_id_lahman45"
+      ],
+      [
+        23,
+        "team_id_retro"
+      ],
+      [
+        24,
+        "franchise_id"
+      ],
+      [
+        24,
         "franchise_name"
       ],
       [
-        13,
+        24,
         "active"
       ],
       [
-        13,
+        24,
         "na_assoc"
+      ],
+      [
+        25,
+        "year"
+      ],
+      [
+        25,
+        "league_id"
+      ],
+      [
+        25,
+        "team_id"
+      ],
+      [
+        25,
+        "half"
+      ],
+      [
+        25,
+        "div_id"
+      ],
+      [
+        25,
+        "div_win"
+      ],
+      [
+        25,
+        "rank"
+      ],
+      [
+        25,
+        "g"
+      ],
+      [
+        25,
+        "w"
+      ],
+      [
+        25,
+        "l"
       ]
     ],
     "column_types": [
@@ -20995,21 +22173,141 @@
       "text",
       "number",
       "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
+      "number",
       "text",
       "text",
       "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "text",
+      "text",
+      "number",
       "text",
       "number",
+      "number",
+      "text",
+      "text",
       "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "text",
+      "number",
       "number",
+      "number",
+      "number",
+      "number",
       "text",
+      "number",
       "text",
       "text",
       "text",
       "text",
+      "number",
+      "number",
       "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "text",
       "number",
       "text",
@@ -21032,12 +22330,22 @@
       "number",
       "text",
       "text",
+      "number",
       "number",
       "number",
       "number",
       "number",
+      "text",
+      "text",
       "number",
       "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "text",
       "number",
       "number",
@@ -21056,19 +22364,79 @@
       "text",
       "number",
       "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
       "text",
       "text",
       "text",
       "text",
       "text",
       "text",
+      "number",
+      "number",
+      "text",
       "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "text",
+      "number",
       "text",
       "text",
       "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "number",
+      "number",
+      "number",
+      "number",
       "text",
       "text",
       "text",
@@ -21132,51 +22500,101 @@
       "number",
       "number",
       "number",
+      "text",
+      "text",
+      "text",
       "text",
       "text",
       "text",
       "text",
+      "number",
+      "text",
+      "text",
+      "number",
       "text",
       "text",
-      "text"
+      "number",
+      "number",
+      "number",
+      "number"
     ],
     "db_id": "baseball_1",
     "foreign_keys": [
       [
         1,
-        52
+        182
       ],
       [
-        9,
-        52
+        12,
+        182
       ],
       [
-        15,
-        52
+        10,
+        293
       ],
       [
-        22,
-        87
-      ],
-      [
-        21,
-        52
-      ],
-      [
-        24,
-        52
+        30,
+        182
       ],
       [
         36,
-        76
+        182
       ],
       [
-        35,
-        103
+        52,
+        182
       ],
       [
-        44,
-        103
+        56,
+        182
+      ],
+      [
+        81,
+        293
+      ],
+      [
+        80,
+        182
+      ],
+      [
+        101,
+        277
+      ],
+      [
+        100,
+        182
+      ],
+      [
+        103,
+        182
+      ],
+      [
+        121,
+        182
+      ],
+      [
+        127,
+        182
+      ],
+      [
+        144,
+        182
+      ],
+      [
+        156,
+        206
+      ],
+      [
+        155,
+        293
+      ],
+      [
+        164,
+        293
+      ],
+      [
+        174,
+        293
       ]
     ],
     "primary_keys": [],
@@ -21198,19 +22616,31 @@
     ],
     "table_names_original": [
       "all_star",
+      "appearances",
       "manager_award",
       "player_award",
+      "manager_award_vote",
+      "player_award_vote",
+      "batting",
+      "batting_postseason",
       "player_college",
+      "fielding",
+      "fielding_outfield",
+      "fielding_postseason",
       "hall_of_fame",
       "home_game",
       "manager",
+      "manager_half",
       "player",
       "park",
+      "pitching",
+      "pitching_postseason",
       "salary",
       "college",
       "postseason",
       "team",
-      "team_franchise"
+      "team_franchise",
+      "team_half"
     ]
   },
   {
@@ -21383,7 +22813,16 @@
       "text"
     ],
     "db_id": "architecture",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        5,
+        1
+      ],
+      [
+        11,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -21550,49 +22989,53 @@
       ],
       [
         2,
-        "Campus"
-      ],
-      [
-        2,
-        "Discipline"
-      ],
-      [
-        2,
         "Year"
       ],
       [
         2,
-        "Undergraduate"
+        "Campus"
       ],
       [
         2,
-        "Graduate"
-      ],
-      [
-        3,
-        "Campus"
-      ],
-      [
-        3,
-        "Year"
-      ],
-      [
-        3,
-        "Faculty"
-      ],
-      [
-        4,
-        "Year"
-      ],
-      [
-        4,
-        "Campus"
-      ],
-      [
-        4,
         "Degrees"
       ],
       [
+        3,
+        "Campus"
+      ],
+      [
+        3,
+        "Discipline"
+      ],
+      [
+        3,
+        "Year"
+      ],
+      [
+        3,
+        "Undergraduate"
+      ],
+      [
+        3,
+        "Graduate"
+      ],
+      [
+        4,
+        "Campus"
+      ],
+      [
+        4,
+        "Year"
+      ],
+      [
+        4,
+        "TotalEnrollment_AY"
+      ],
+      [
+        4,
+        "FTE_AY"
+      ],
+      [
         5,
         "Campus"
       ],
@@ -21602,23 +23045,7 @@
       ],
       [
         5,
-        "TotalEnrollment_AY"
-      ],
-      [
-        5,
-        "FTE_AY"
-      ],
-      [
-        6,
-        "Id"
-      ],
-      [
-        6,
-        "Name"
-      ],
-      [
-        7,
-        "id"
+        "Faculty"
       ]
     ],
     "column_types": [
@@ -21645,9 +23072,6 @@
       "number",
       "number",
       "number",
-      "number",
-      "number",
-      "text",
       "number"
     ],
     "db_id": "csu_1",
@@ -21658,22 +23082,18 @@
       ],
       [
         10,
-        24
-      ],
-      [
-        9,
         1
       ],
       [
-        14,
+        12,
         1
       ],
       [
-        18,
+        17,
         1
       ],
       [
-        20,
+        21,
         1
       ]
     ],
@@ -21681,10 +23101,8 @@
       1,
       6,
       9,
-      17,
-      20,
-      24,
-      26
+      12,
+      17
     ],
     "table_names": [
       "campuses",
@@ -21698,13 +23116,11 @@
     ],
     "table_names_original": [
       "Campuses",
-      "csu-fees",
-      "discipline-enrollments",
-      "faculty",
+      "csu_fees",
       "degrees",
+      "discipline_enrollments",
       "enrollments",
-      "disciplines",
-      "q"
+      "faculty"
     ]
   },
   {
@@ -23970,7 +25386,16 @@
       "others"
     ],
     "db_id": "school_bus",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        12,
+        1
+      ],
+      [
+        11,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -24103,7 +25528,16 @@
       "text"
     ],
     "db_id": "club_leader",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        10,
+        1
+      ],
+      [
+        9,
+        5
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -26747,8 +28181,30 @@
       "number"
     ],
     "db_id": "advising",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        26,
+        7
+      ],
+      [
+        73,
+        68
+      ],
+      [
+        72,
+        25
+      ],
+      [
+        103,
+        7
+      ],
+      [
+        102,
+        89
+      ]
+    ],
     "primary_keys": [
+      1,
       3,
       7,
       25,
@@ -28885,7 +30341,16 @@
       "text"
     ],
     "db_id": "restaurants",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        7,
+        1
+      ],
+      [
+        12,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       4,
@@ -29342,7 +30807,16 @@
       "text"
     ],
     "db_id": "mountain_photos",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        14,
+        1
+      ],
+      [
+        13,
+        7
+      ]
+    ],
     "primary_keys": [
       1,
       7,
@@ -29538,7 +31012,16 @@
       "number"
     ],
     "db_id": "battle_death",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        7,
+        1
+      ],
+      [
+        14,
+        8
+      ]
+    ],
     "primary_keys": [
       1,
       8,
@@ -30099,51 +31582,55 @@
       ],
       [
         3,
-        "sales_transaction_id"
+        "transaction_id"
       ],
       [
         3,
-        "sales_details"
-      ],
-      [
-        4,
-        "purchase_transaction_id"
-      ],
-      [
-        4,
-        "purchase_details"
-      ],
-      [
-        5,
-        "transaction_id"
-      ],
-      [
-        5,
-        "lot_id"
-      ],
-      [
-        6,
-        "transaction_id"
-      ],
-      [
-        6,
         "investor_id"
       ],
       [
-        6,
+        3,
         "transaction_type_code"
       ],
       [
-        6,
+        3,
         "date_of_transaction"
       ],
       [
-        6,
+        3,
         "amount_of_transaction"
       ],
       [
-        6,
+        3,
         "share_count"
+      ],
+      [
+        3,
+        "other_details"
+      ],
+      [
+        4,
+        "sales_transaction_id"
+      ],
+      [
+        4,
+        "sales_details"
+      ],
+      [
+        5,
+        "purchase_transaction_id"
+      ],
+      [
+        5,
+        "purchase_details"
+      ],
+      [
+        6,
+        "transaction_id"
+      ],
+      [
+        6,
+        "lot_id"
       ]
     ],
     "column_types": [
@@ -30156,17 +31643,18 @@
       "text",
       "text",
       "number",
-      "text",
-      "number",
-      "text",
-      "number",
-      "number",
-      "number",
       "number",
       "text",
       "time",
       "number",
-      "text"
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "number"
     ],
     "db_id": "tracking_share_transactions",
     "foreign_keys": [
@@ -30175,28 +31663,28 @@
         1
       ],
       [
-        8,
-        14
-      ],
-      [
         10,
-        14
-      ],
-      [
-        12,
-        14
-      ],
-      [
-        13,
-        3
-      ],
-      [
-        16,
         6
       ],
       [
-        15,
+        9,
         1
+      ],
+      [
+        15,
+        8
+      ],
+      [
+        17,
+        8
+      ],
+      [
+        19,
+        8
+      ],
+      [
+        20,
+        3
       ]
     ],
     "primary_keys": [
@@ -30204,7 +31692,7 @@
       3,
       6,
       8,
-      14
+      15
     ],
     "table_names": [
       "investors",
@@ -30219,10 +31707,10 @@
       "Investors",
       "Lots",
       "Ref_Transaction_Types",
+      "Transactions",
       "Sales",
       "Purchases",
-      "Transactions_Lots",
-      "Transactions"
+      "Transactions_Lots"
     ]
   },
   {
@@ -31572,7 +33060,12 @@
       "number"
     ],
     "db_id": "ship_mission",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        2,
+        8
+      ]
+    ],
     "primary_keys": [
       1,
       8
@@ -33080,7 +34573,16 @@
       "number"
     ],
     "db_id": "coffee_shop",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        14,
+        1
+      ],
+      [
+        18,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -33274,7 +34776,7 @@
       ],
       [
         2,
-        "Player_name"
+        "Coach_name"
       ],
       [
         2,
@@ -34174,7 +35676,16 @@
       "number"
     ],
     "db_id": "performance_attendance",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        11,
+        5
+      ],
+      [
+        10,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -34673,7 +36184,12 @@
       "number"
     ],
     "db_id": "singer",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        8,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       6
@@ -36171,7 +37687,20 @@
       "number"
     ],
     "db_id": "book_1",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        16,
+        11
+      ],
+      [
+        19,
+        5
+      ],
+      [
+        18,
+        11
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -37999,7 +39528,12 @@
       "number"
     ],
     "db_id": "poker_player",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        2,
+        7
+      ]
+    ],
     "primary_keys": [
       1,
       7
@@ -41221,7 +42755,7 @@
       "text",
       "text"
     ],
-    "db_id": "ship",
+    "db_id": "ship_1",
     "foreign_keys": [
       [
         3,
@@ -42271,463 +43805,11 @@
       ],
       [
         3,
-        "league_id"
-      ],
-      [
-        3,
-        "season"
-      ],
-      [
-        3,
-        "stage"
-      ],
-      [
-        3,
-        "date"
-      ],
-      [
-        3,
-        "match_api_id"
-      ],
-      [
-        3,
-        "home_team_api_id"
-      ],
-      [
-        3,
-        "away_team_api_id"
-      ],
-      [
-        3,
-        "home_team_goal"
-      ],
-      [
-        3,
-        "away_team_goal"
-      ],
-      [
-        3,
-        "home_player_X1"
-      ],
-      [
-        3,
-        "home_player_X2"
-      ],
-      [
-        3,
-        "home_player_X3"
-      ],
-      [
-        3,
-        "home_player_X4"
-      ],
-      [
-        3,
-        "home_player_X5"
-      ],
-      [
-        3,
-        "home_player_X6"
-      ],
-      [
-        3,
-        "home_player_X7"
-      ],
-      [
-        3,
-        "home_player_X8"
-      ],
-      [
-        3,
-        "home_player_X9"
-      ],
-      [
-        3,
-        "home_player_X10"
-      ],
-      [
-        3,
-        "home_player_X11"
-      ],
-      [
-        3,
-        "away_player_X1"
-      ],
-      [
-        3,
-        "away_player_X2"
-      ],
-      [
-        3,
-        "away_player_X3"
-      ],
-      [
-        3,
-        "away_player_X4"
-      ],
-      [
-        3,
-        "away_player_X5"
-      ],
-      [
-        3,
-        "away_player_X6"
-      ],
-      [
-        3,
-        "away_player_X7"
-      ],
-      [
-        3,
-        "away_player_X8"
-      ],
-      [
-        3,
-        "away_player_X9"
-      ],
-      [
-        3,
-        "away_player_X10"
-      ],
-      [
-        3,
-        "away_player_X11"
-      ],
-      [
-        3,
-        "home_player_Y1"
-      ],
-      [
-        3,
-        "home_player_Y2"
-      ],
-      [
-        3,
-        "home_player_Y3"
-      ],
-      [
-        3,
-        "home_player_Y4"
-      ],
-      [
-        3,
-        "home_player_Y5"
-      ],
-      [
-        3,
-        "home_player_Y6"
-      ],
-      [
-        3,
-        "home_player_Y7"
-      ],
-      [
-        3,
-        "home_player_Y8"
-      ],
-      [
-        3,
-        "home_player_Y9"
-      ],
-      [
-        3,
-        "home_player_Y10"
-      ],
-      [
-        3,
-        "home_player_Y11"
-      ],
-      [
-        3,
-        "away_player_Y1"
-      ],
-      [
-        3,
-        "away_player_Y2"
-      ],
-      [
-        3,
-        "away_player_Y3"
-      ],
-      [
-        3,
-        "away_player_Y4"
-      ],
-      [
-        3,
-        "away_player_Y5"
-      ],
-      [
-        3,
-        "away_player_Y6"
-      ],
-      [
-        3,
-        "away_player_Y7"
-      ],
-      [
-        3,
-        "away_player_Y8"
-      ],
-      [
-        3,
-        "away_player_Y9"
-      ],
-      [
-        3,
-        "away_player_Y10"
-      ],
-      [
-        3,
-        "away_player_Y11"
-      ],
-      [
-        3,
-        "home_player_1"
-      ],
-      [
-        3,
-        "home_player_2"
-      ],
-      [
-        3,
-        "home_player_3"
-      ],
-      [
-        3,
-        "home_player_4"
-      ],
-      [
-        3,
-        "home_player_5"
-      ],
-      [
-        3,
-        "home_player_6"
-      ],
-      [
-        3,
-        "home_player_7"
-      ],
-      [
-        3,
-        "home_player_8"
-      ],
-      [
-        3,
-        "home_player_9"
-      ],
-      [
-        3,
-        "home_player_10"
-      ],
-      [
-        3,
-        "home_player_11"
-      ],
-      [
-        3,
-        "away_player_1"
-      ],
-      [
-        3,
-        "away_player_2"
-      ],
-      [
-        3,
-        "away_player_3"
-      ],
-      [
-        3,
-        "away_player_4"
-      ],
-      [
-        3,
-        "away_player_5"
-      ],
-      [
-        3,
-        "away_player_6"
-      ],
-      [
-        3,
-        "away_player_7"
-      ],
-      [
-        3,
-        "away_player_8"
-      ],
-      [
-        3,
-        "away_player_9"
-      ],
-      [
-        3,
-        "away_player_10"
-      ],
-      [
-        3,
-        "away_player_11"
-      ],
-      [
-        3,
-        "goal"
-      ],
-      [
-        3,
-        "shoton"
-      ],
-      [
-        3,
-        "shotoff"
-      ],
-      [
-        3,
-        "foulcommit"
-      ],
-      [
-        3,
-        "card"
-      ],
-      [
-        3,
-        "cross"
-      ],
-      [
-        3,
-        "corner"
-      ],
-      [
-        3,
-        "possession"
-      ],
-      [
-        3,
-        "B365H"
-      ],
-      [
-        3,
-        "B365D"
-      ],
-      [
-        3,
-        "B365A"
-      ],
-      [
-        3,
-        "BWH"
-      ],
-      [
-        3,
-        "BWD"
-      ],
-      [
-        3,
-        "BWA"
-      ],
-      [
-        3,
-        "IWH"
-      ],
-      [
-        3,
-        "IWD"
-      ],
-      [
-        3,
-        "IWA"
-      ],
-      [
-        3,
-        "LBH"
-      ],
-      [
-        3,
-        "LBD"
-      ],
-      [
-        3,
-        "LBA"
-      ],
-      [
-        3,
-        "PSH"
-      ],
-      [
-        3,
-        "PSD"
-      ],
-      [
-        3,
-        "PSA"
-      ],
-      [
-        3,
-        "WHH"
-      ],
-      [
-        3,
-        "WHD"
-      ],
-      [
-        3,
-        "WHA"
-      ],
-      [
-        3,
-        "SJH"
-      ],
-      [
-        3,
-        "SJD"
-      ],
-      [
-        3,
-        "SJA"
-      ],
-      [
-        3,
-        "VCH"
-      ],
-      [
-        3,
-        "VCD"
-      ],
-      [
-        3,
-        "VCA"
-      ],
-      [
-        3,
-        "GBH"
-      ],
-      [
-        3,
-        "GBD"
-      ],
-      [
-        3,
-        "GBA"
-      ],
-      [
-        3,
-        "BSH"
-      ],
-      [
-        3,
-        "BSD"
-      ],
-      [
-        3,
-        "BSA"
+        "name"
       ],
       [
         4,
         "id"
-      ],
-      [
-        4,
-        "country_id"
       ],
       [
         4,
@@ -42739,126 +43821,118 @@
       ],
       [
         5,
-        "name"
-      ],
-      [
-        6,
-        "id"
-      ],
-      [
-        6,
         "team_api_id"
       ],
       [
-        6,
+        5,
         "team_fifa_api_id"
       ],
       [
-        6,
+        5,
         "team_long_name"
       ],
       [
-        6,
+        5,
         "team_short_name"
       ],
       [
-        7,
+        6,
         "id"
       ],
       [
-        7,
+        6,
         "team_fifa_api_id"
       ],
       [
-        7,
+        6,
         "team_api_id"
       ],
       [
-        7,
+        6,
         "date"
       ],
       [
-        7,
+        6,
         "buildUpPlaySpeed"
       ],
       [
-        7,
+        6,
         "buildUpPlaySpeedClass"
       ],
       [
-        7,
+        6,
         "buildUpPlayDribbling"
       ],
       [
-        7,
+        6,
         "buildUpPlayDribblingClass"
       ],
       [
-        7,
+        6,
         "buildUpPlayPassing"
       ],
       [
-        7,
+        6,
         "buildUpPlayPassingClass"
       ],
       [
-        7,
+        6,
         "buildUpPlayPositioningClass"
       ],
       [
-        7,
+        6,
         "chanceCreationPassing"
       ],
       [
-        7,
+        6,
         "chanceCreationPassingClass"
       ],
       [
-        7,
+        6,
         "chanceCreationCrossing"
       ],
       [
-        7,
+        6,
         "chanceCreationCrossingClass"
       ],
       [
-        7,
+        6,
         "chanceCreationShooting"
       ],
       [
-        7,
+        6,
         "chanceCreationShootingClass"
       ],
       [
-        7,
+        6,
         "chanceCreationPositioningClass"
       ],
       [
-        7,
+        6,
         "defencePressure"
       ],
       [
-        7,
+        6,
         "defencePressureClass"
       ],
       [
-        7,
+        6,
         "defenceAggression"
       ],
       [
-        7,
+        6,
         "defenceAggressionClass"
       ],
       [
-        7,
+        6,
         "defenceTeamWidth"
       ],
       [
-        7,
+        6,
         "defenceTeamWidthClass"
       ],
       [
-        7,
+        6,
         "defenceDefenderLineClass"
       ]
     ],
@@ -42917,121 +43991,6 @@
       "number",
       "number",
       "number",
-      "number",
-      "text",
-      "number",
-      "text",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "text",
-      "text",
-      "text",
-      "text",
-      "text",
-      "text",
-      "text",
-      "text",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
       "text",
       "number",
       "text",
@@ -43077,130 +44036,25 @@
         48
       ],
       [
-        128,
-        46
-      ],
-      [
-        127,
-        46
-      ],
-      [
-        126,
-        46
-      ],
-      [
-        125,
-        46
-      ],
-      [
-        124,
-        46
-      ],
-      [
-        123,
-        46
-      ],
-      [
-        122,
-        46
-      ],
-      [
-        121,
-        46
-      ],
-      [
-        120,
-        46
-      ],
-      [
-        119,
-        46
-      ],
-      [
-        118,
-        46
-      ],
-      [
-        117,
-        46
-      ],
-      [
-        116,
-        46
-      ],
-      [
-        115,
-        46
-      ],
-      [
-        114,
-        46
-      ],
-      [
-        113,
-        46
-      ],
-      [
-        112,
-        46
-      ],
-      [
-        111,
-        46
-      ],
-      [
-        110,
-        46
-      ],
-      [
-        109,
-        46
-      ],
-      [
-        108,
-        46
-      ],
-      [
-        107,
-        46
-      ],
-      [
-        60,
-        173
-      ],
-      [
-        59,
-        173
-      ],
-      [
-        54,
-        167
-      ],
-      [
         53,
-        170
+        55
       ],
       [
-        168,
-        170
+        64,
+        58
       ],
       [
-        179,
-        173
-      ],
-      [
-        178,
-        174
+        63,
+        59
       ]
     ],
     "primary_keys": [
       1,
       45,
       52,
-      167,
-      170,
-      172,
-      177
+      55,
+      57,
+      62
     ],
     "table_names": [
       "player attributes",
@@ -43216,7 +44070,6 @@
       "Player_Attributes",
       "sqlite_sequence",
       "Player",
-      "Match",
       "League",
       "Country",
       "Team",
@@ -44507,7 +45360,7 @@
       "time",
       "text",
       "text",
-      "text",
+      "number",
       "number",
       "number",
       "number",
@@ -45112,7 +45965,16 @@
       "number"
     ],
     "db_id": "course_teach",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        9,
+        4
+      ],
+      [
+        8,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       4,
@@ -45272,7 +46134,12 @@
       "text"
     ],
     "db_id": "roller_coaster",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        4,
+        10
+      ]
+    ],
     "primary_keys": [
       1,
       10
@@ -46063,7 +46930,16 @@
       "text"
     ],
     "db_id": "game_injury",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        7,
+        1
+      ],
+      [
+        15,
+        8
+      ]
+    ],
     "primary_keys": [
       1,
       8,
@@ -46629,19 +47505,19 @@
       ],
       [
         0,
-        "authorId"
+        "venueId"
       ],
       [
         0,
+        "venueName"
+      ],
+      [
+        1,
+        "authorId"
+      ],
+      [
+        1,
         "authorName"
-      ],
-      [
-        1,
-        "citingPaperId"
-      ],
-      [
-        1,
-        "citedPaperId"
       ],
       [
         2,
@@ -46697,11 +47573,11 @@
       ],
       [
         6,
-        "paperId"
+        "citingPaperId"
       ],
       [
         6,
-        "datasetId"
+        "citedPaperId"
       ],
       [
         7,
@@ -46709,15 +47585,15 @@
       ],
       [
         7,
+        "datasetId"
+      ],
+      [
+        8,
+        "paperId"
+      ],
+      [
+        8,
         "keyphraseId"
-      ],
-      [
-        8,
-        "venueId"
-      ],
-      [
-        8,
-        "venueName"
       ],
       [
         9,
@@ -46733,8 +47609,6 @@
       "number",
       "text",
       "number",
-      "number",
-      "number",
       "text",
       "number",
       "text",
@@ -46743,28 +47617,67 @@
       "number",
       "text",
       "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
-      "number",
       "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
       "number",
       "number"
     ],
     "db_id": "scholar",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        13,
+        1
+      ],
+      [
+        17,
+        7
+      ],
+      [
+        18,
+        11
+      ],
+      [
+        19,
+        11
+      ],
+      [
+        23,
+        9
+      ],
+      [
+        22,
+        11
+      ],
+      [
+        25,
+        3
+      ],
+      [
+        24,
+        11
+      ]
+    ],
     "primary_keys": [
       1,
       3,
       5,
       7,
       9,
-      11
+      11,
+      18,
+      21,
+      23,
+      24
     ],
     "table_names": [
       "author",
@@ -46779,15 +47692,15 @@
       "writes"
     ],
     "table_names_original": [
+      "venue",
       "author",
-      "cite",
       "dataset",
       "journal",
       "keyphrase",
       "paper",
+      "cite",
       "paperDataset",
       "paperKeyphrase",
-      "venue",
       "writes"
     ]
   },
@@ -47871,7 +48784,7 @@
       "text",
       "number",
       "number",
-      "text",
+      "number",
       "text",
       "text",
       "number",
@@ -48804,7 +49717,36 @@
       "text"
     ],
     "db_id": "yelp",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        13,
+        2
+      ],
+      [
+        19,
+        2
+      ],
+      [
+        23,
+        2
+      ],
+      [
+        27,
+        16
+      ],
+      [
+        26,
+        2
+      ],
+      [
+        35,
+        16
+      ],
+      [
+        33,
+        2
+      ]
+    ],
     "primary_keys": [
       1,
       12,
@@ -49474,7 +50416,16 @@
       "number"
     ],
     "db_id": "manufacturer",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        11,
+        6
+      ],
+      [
+        10,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -49769,19 +50720,19 @@
       ],
       [
         0,
-        "name"
-      ],
-      [
-        0,
-        "seq"
-      ],
-      [
-        1,
         "id"
       ],
       [
+        0,
+        "name"
+      ],
+      [
         1,
         "name"
+      ],
+      [
+        1,
+        "seq"
       ],
       [
         2,
@@ -50034,9 +50985,9 @@
     ],
     "column_types": [
       "text",
-      "text",
-      "text",
       "number",
+      "text",
+      "text",
       "text",
       "number",
       "text",
@@ -50105,7 +51056,7 @@
     "foreign_keys": [
       [
         7,
-        3
+        1
       ],
       [
         12,
@@ -50149,7 +51100,7 @@
       ]
     ],
     "primary_keys": [
-      3,
+      1,
       5,
       8,
       23,
@@ -50176,8 +51127,8 @@
       "playlist tracks"
     ],
     "table_names_original": [
-      "sqlite_sequence",
       "artists",
+      "sqlite_sequence",
       "albums",
       "employees",
       "customers",
@@ -50395,7 +51346,7 @@
       "text",
       "text"
     ],
-    "db_id": "phone",
+    "db_id": "phone_1",
     "foreign_keys": [
       [
         20,
@@ -51340,327 +52291,327 @@
       ],
       [
         0,
-        "raceId"
-      ],
-      [
-        0,
-        "year"
-      ],
-      [
-        0,
-        "round"
-      ],
-      [
-        0,
         "circuitId"
       ],
       [
         0,
-        "name"
-      ],
-      [
-        0,
-        "date"
-      ],
-      [
-        0,
-        "time"
-      ],
-      [
-        0,
-        "url"
-      ],
-      [
-        1,
-        "driverId"
-      ],
-      [
-        1,
-        "driverRef"
-      ],
-      [
-        1,
-        "number"
-      ],
-      [
-        1,
-        "code"
-      ],
-      [
-        1,
-        "forename"
-      ],
-      [
-        1,
-        "surname"
-      ],
-      [
-        1,
-        "dob"
-      ],
-      [
-        1,
-        "nationality"
-      ],
-      [
-        1,
-        "url"
-      ],
-      [
-        2,
-        "statusId"
-      ],
-      [
-        2,
-        "status"
-      ],
-      [
-        3,
-        "year"
-      ],
-      [
-        3,
-        "url"
-      ],
-      [
-        4,
-        "constructorId"
-      ],
-      [
-        4,
-        "constructorRef"
-      ],
-      [
-        4,
-        "name"
-      ],
-      [
-        4,
-        "nationality"
-      ],
-      [
-        4,
-        "url"
-      ],
-      [
-        5,
-        "constructorStandingsId"
-      ],
-      [
-        5,
-        "raceId"
-      ],
-      [
-        5,
-        "constructorId"
-      ],
-      [
-        5,
-        "points"
-      ],
-      [
-        5,
-        "position"
-      ],
-      [
-        5,
-        "positionText"
-      ],
-      [
-        5,
-        "wins"
-      ],
-      [
-        6,
-        "resultId"
-      ],
-      [
-        6,
-        "raceId"
-      ],
-      [
-        6,
-        "driverId"
-      ],
-      [
-        6,
-        "constructorId"
-      ],
-      [
-        6,
-        "number"
-      ],
-      [
-        6,
-        "grid"
-      ],
-      [
-        6,
-        "position"
-      ],
-      [
-        6,
-        "positionText"
-      ],
-      [
-        6,
-        "positionOrder"
-      ],
-      [
-        6,
-        "points"
-      ],
-      [
-        6,
-        "laps"
-      ],
-      [
-        6,
-        "time"
-      ],
-      [
-        6,
-        "milliseconds"
-      ],
-      [
-        6,
-        "fastestLap"
-      ],
-      [
-        6,
-        "rank"
-      ],
-      [
-        6,
-        "fastestLapTime"
-      ],
-      [
-        6,
-        "fastestLapSpeed"
-      ],
-      [
-        6,
-        "statusId"
-      ],
-      [
-        7,
-        "driverStandingsId"
-      ],
-      [
-        7,
-        "raceId"
-      ],
-      [
-        7,
-        "driverId"
-      ],
-      [
-        7,
-        "points"
-      ],
-      [
-        7,
-        "position"
-      ],
-      [
-        7,
-        "positionText"
-      ],
-      [
-        7,
-        "wins"
-      ],
-      [
-        8,
-        "constructorResultsId"
-      ],
-      [
-        8,
-        "raceId"
-      ],
-      [
-        8,
-        "constructorId"
-      ],
-      [
-        8,
-        "points"
-      ],
-      [
-        8,
-        "status"
-      ],
-      [
-        9,
-        "qualifyId"
-      ],
-      [
-        9,
-        "raceId"
-      ],
-      [
-        9,
-        "driverId"
-      ],
-      [
-        9,
-        "constructorId"
-      ],
-      [
-        9,
-        "number"
-      ],
-      [
-        9,
-        "position"
-      ],
-      [
-        9,
-        "q1"
-      ],
-      [
-        9,
-        "q2"
-      ],
-      [
-        9,
-        "q3"
-      ],
-      [
-        10,
-        "circuitId"
-      ],
-      [
-        10,
         "circuitRef"
       ],
       [
-        10,
+        0,
         "name"
       ],
       [
-        10,
+        0,
         "location"
       ],
       [
-        10,
+        0,
         "country"
       ],
       [
-        10,
+        0,
         "lat"
       ],
       [
-        10,
+        0,
         "lng"
       ],
       [
-        10,
+        0,
         "alt"
       ],
       [
-        10,
+        0,
         "url"
+      ],
+      [
+        1,
+        "raceId"
+      ],
+      [
+        1,
+        "year"
+      ],
+      [
+        1,
+        "round"
+      ],
+      [
+        1,
+        "circuitId"
+      ],
+      [
+        1,
+        "name"
+      ],
+      [
+        1,
+        "date"
+      ],
+      [
+        1,
+        "time"
+      ],
+      [
+        1,
+        "url"
+      ],
+      [
+        2,
+        "driverId"
+      ],
+      [
+        2,
+        "driverRef"
+      ],
+      [
+        2,
+        "number"
+      ],
+      [
+        2,
+        "code"
+      ],
+      [
+        2,
+        "forename"
+      ],
+      [
+        2,
+        "surname"
+      ],
+      [
+        2,
+        "dob"
+      ],
+      [
+        2,
+        "nationality"
+      ],
+      [
+        2,
+        "url"
+      ],
+      [
+        3,
+        "statusId"
+      ],
+      [
+        3,
+        "status"
+      ],
+      [
+        4,
+        "year"
+      ],
+      [
+        4,
+        "url"
+      ],
+      [
+        5,
+        "constructorId"
+      ],
+      [
+        5,
+        "constructorRef"
+      ],
+      [
+        5,
+        "name"
+      ],
+      [
+        5,
+        "nationality"
+      ],
+      [
+        5,
+        "url"
+      ],
+      [
+        6,
+        "constructorStandingsId"
+      ],
+      [
+        6,
+        "raceId"
+      ],
+      [
+        6,
+        "constructorId"
+      ],
+      [
+        6,
+        "points"
+      ],
+      [
+        6,
+        "position"
+      ],
+      [
+        6,
+        "positionText"
+      ],
+      [
+        6,
+        "wins"
+      ],
+      [
+        7,
+        "resultId"
+      ],
+      [
+        7,
+        "raceId"
+      ],
+      [
+        7,
+        "driverId"
+      ],
+      [
+        7,
+        "constructorId"
+      ],
+      [
+        7,
+        "number"
+      ],
+      [
+        7,
+        "grid"
+      ],
+      [
+        7,
+        "position"
+      ],
+      [
+        7,
+        "positionText"
+      ],
+      [
+        7,
+        "positionOrder"
+      ],
+      [
+        7,
+        "points"
+      ],
+      [
+        7,
+        "laps"
+      ],
+      [
+        7,
+        "time"
+      ],
+      [
+        7,
+        "milliseconds"
+      ],
+      [
+        7,
+        "fastestLap"
+      ],
+      [
+        7,
+        "rank"
+      ],
+      [
+        7,
+        "fastestLapTime"
+      ],
+      [
+        7,
+        "fastestLapSpeed"
+      ],
+      [
+        7,
+        "statusId"
+      ],
+      [
+        8,
+        "driverStandingsId"
+      ],
+      [
+        8,
+        "raceId"
+      ],
+      [
+        8,
+        "driverId"
+      ],
+      [
+        8,
+        "points"
+      ],
+      [
+        8,
+        "position"
+      ],
+      [
+        8,
+        "positionText"
+      ],
+      [
+        8,
+        "wins"
+      ],
+      [
+        9,
+        "constructorResultsId"
+      ],
+      [
+        9,
+        "raceId"
+      ],
+      [
+        9,
+        "constructorId"
+      ],
+      [
+        9,
+        "points"
+      ],
+      [
+        9,
+        "status"
+      ],
+      [
+        10,
+        "qualifyId"
+      ],
+      [
+        10,
+        "raceId"
+      ],
+      [
+        10,
+        "driverId"
+      ],
+      [
+        10,
+        "constructorId"
+      ],
+      [
+        10,
+        "number"
+      ],
+      [
+        10,
+        "position"
+      ],
+      [
+        10,
+        "q1"
+      ],
+      [
+        10,
+        "q2"
+      ],
+      [
+        10,
+        "q3"
       ],
       [
         11,
@@ -51718,6 +52669,15 @@
     "column_types": [
       "text",
       "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "text",
+      "number",
       "number",
       "number",
       "number",
@@ -51788,15 +52748,6 @@
       "number",
       "text",
       "text",
-      "text",
-      "number",
-      "text",
-      "text",
-      "text",
-      "text",
-      "number",
-      "number",
-      "number",
       "text",
       "number",
       "number",
@@ -51815,85 +52766,85 @@
     "db_id": "formula_1",
     "foreign_keys": [
       [
-        4,
-        73
-      ],
-      [
-        28,
-        1
-      ],
-      [
-        29,
-        22
-      ],
-      [
-        36,
-        9
-      ],
-      [
-        35,
+        13,
         1
       ],
       [
         37,
-        22
+        10
       ],
       [
-        54,
-        9
+        38,
+        31
       ],
       [
-        53,
-        1
+        45,
+        18
       ],
       [
-        60,
-        1
+        44,
+        10
       ],
       [
-        61,
-        22
+        46,
+        31
       ],
       [
-        66,
-        9
+        63,
+        18
       ],
       [
-        65,
-        1
+        62,
+        10
       ],
       [
-        67,
-        22
+        69,
+        10
+      ],
+      [
+        70,
+        31
+      ],
+      [
+        75,
+        18
+      ],
+      [
+        74,
+        10
+      ],
+      [
+        76,
+        31
       ],
       [
         83,
-        9
+        18
       ],
       [
         82,
-        1
+        10
       ],
       [
         90,
-        9
+        18
       ],
       [
         89,
-        1
+        10
       ]
     ],
     "primary_keys": [
       1,
-      9,
+      10,
       18,
-      20,
-      22,
       27,
-      34,
-      52,
-      59,
-      64,
+      29,
+      31,
+      36,
+      43,
+      61,
+      68,
       73,
       82,
       89
@@ -51914,6 +52865,7 @@
       "laptimes"
     ],
     "table_names_original": [
+      "circuits",
       "races",
       "drivers",
       "status",
@@ -51924,7 +52876,6 @@
       "driverStandings",
       "constructorResults",
       "qualifying",
-      "circuits",
       "pitStops",
       "lapTimes"
     ]
@@ -54429,10 +55380,6 @@
         "Make"
       ],
       [
-        4,
-        "Id"
-      ],
-      [
         5,
         "Id"
       ],
@@ -54482,7 +55429,6 @@
       "number",
       "text",
       "text",
-      "text",
       "number",
       "text",
       "number",
@@ -54511,7 +55457,7 @@
         12
       ],
       [
-        17,
+        16,
         13
       ]
     ],
@@ -54521,7 +55467,7 @@
       6,
       10,
       13,
-      17
+      16
     ],
     "table_names": [
       "continents",
@@ -54818,7 +55764,32 @@
       "text"
     ],
     "db_id": "geo",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        10,
+        1
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        11,
+        1
+      ],
+      [
+        13,
+        1
+      ],
+      [
+        25,
+        1
+      ],
+      [
+        29,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       7,
@@ -57348,111 +58319,111 @@
       ],
       [
         2,
-        "name"
+        "matchid"
       ],
       [
         2,
-        "id"
+        "teamid"
+      ],
+      [
+        2,
+        "championid"
+      ],
+      [
+        2,
+        "banturn"
+      ],
+      [
+        3,
+        "name"
       ],
       [
         3,
         "id"
       ],
       [
-        3,
+        4,
+        "id"
+      ],
+      [
+        4,
         "matchid"
       ],
       [
-        3,
+        4,
         "player"
       ],
       [
-        3,
+        4,
         "championid"
       ],
       [
-        3,
+        4,
         "ss1"
       ],
       [
-        3,
+        4,
         "ss2"
       ],
       [
-        3,
+        4,
         "role"
       ],
       [
-        3,
+        4,
         "position"
       ],
       [
-        4,
+        5,
         "matchid"
       ],
       [
-        4,
+        5,
         "teamid"
       ],
       [
-        4,
+        5,
         "firstblood"
       ],
       [
-        4,
+        5,
         "firsttower"
       ],
       [
-        4,
+        5,
         "firstinhib"
       ],
       [
-        4,
+        5,
         "firstbaron"
       ],
       [
-        4,
+        5,
         "firstdragon"
       ],
       [
-        4,
+        5,
         "firstharry"
       ],
       [
-        4,
+        5,
         "towerkills"
       ],
       [
-        4,
+        5,
         "inhibkills"
       ],
       [
-        4,
+        5,
         "baronkills"
       ],
       [
-        4,
+        5,
         "dragonkills"
       ],
       [
-        4,
+        5,
         "harrykills"
-      ],
-      [
-        5,
-        "matchid"
-      ],
-      [
-        5,
-        "teamid"
-      ],
-      [
-        5,
-        "championid"
-      ],
-      [
-        5,
-        "banturn"
       ]
     ],
     "column_types": [
@@ -57521,6 +58492,10 @@
       "number",
       "number",
       "text",
+      "number",
+      "number",
+      "number",
+      "number",
       "text",
       "number",
       "number",
@@ -57531,10 +58506,6 @@
       "number",
       "text",
       "text",
-      "number",
-      "number",
-      "number",
-      "number",
       "number",
       "number",
       "number",
@@ -57552,24 +58523,24 @@
     "db_id": "league_2",
     "foreign_keys": [
       [
-        68,
+        65,
         57
       ],
       [
-        75,
+        72,
         57
       ],
       [
-        88,
+        79,
         57
       ]
     ],
     "primary_keys": [
       1,
       57,
-      67,
-      75,
-      88
+      65,
+      71,
+      79
     ],
     "table_names": [
       "stats1",
@@ -57582,10 +58553,10 @@
     "table_names_original": [
       "stats1",
       "matches",
+      "teambans",
       "champs",
       "participants",
-      "teamstats",
-      "teambans"
+      "teamstats"
     ]
   },
   {
@@ -57874,139 +58845,143 @@
       ],
       [
         6,
-        "Market_ID"
+        "Tourist_Attraction_ID"
       ],
       [
         6,
-        "Market_Details"
-      ],
-      [
-        7,
-        "Shop_ID"
-      ],
-      [
-        7,
-        "Shop_Details"
-      ],
-      [
-        8,
-        "Museum_ID"
-      ],
-      [
-        8,
-        "Museum_Details"
-      ],
-      [
-        9,
-        "Royal_Family_ID"
-      ],
-      [
-        9,
-        "Royal_Family_Details"
-      ],
-      [
-        10,
-        "Theme_Park_ID"
-      ],
-      [
-        10,
-        "Theme_Park_Details"
-      ],
-      [
-        11,
-        "Visit_ID"
-      ],
-      [
-        11,
-        "Tourist_Attraction_ID"
-      ],
-      [
-        11,
-        "Tourist_ID"
-      ],
-      [
-        11,
-        "Visit_Date"
-      ],
-      [
-        11,
-        "Visit_Details"
-      ],
-      [
-        12,
-        "Photo_ID"
-      ],
-      [
-        12,
-        "Tourist_Attraction_ID"
-      ],
-      [
-        12,
-        "Name"
-      ],
-      [
-        12,
-        "Description"
-      ],
-      [
-        12,
-        "Filename"
-      ],
-      [
-        12,
-        "Other_Details"
-      ],
-      [
-        13,
-        "Staff_ID"
-      ],
-      [
-        13,
-        "Tourist_Attraction_ID"
-      ],
-      [
-        13,
-        "Name"
-      ],
-      [
-        13,
-        "Other_Details"
-      ],
-      [
-        14,
-        "Tourist_Attraction_ID"
-      ],
-      [
-        14,
-        "Feature_ID"
-      ],
-      [
-        15,
-        "Tourist_Attraction_ID"
-      ],
-      [
-        15,
         "Attraction_Type_Code"
       ],
       [
-        15,
+        6,
         "Location_ID"
       ],
       [
-        15,
+        6,
         "How_to_Get_There"
       ],
       [
-        15,
+        6,
         "Name"
       ],
       [
-        15,
+        6,
         "Description"
       ],
       [
-        15,
+        6,
         "Opening_Hours"
+      ],
+      [
+        6,
+        "Other_Details"
+      ],
+      [
+        7,
+        "Market_ID"
+      ],
+      [
+        7,
+        "Market_Details"
+      ],
+      [
+        8,
+        "Shop_ID"
+      ],
+      [
+        8,
+        "Shop_Details"
+      ],
+      [
+        9,
+        "Museum_ID"
+      ],
+      [
+        9,
+        "Museum_Details"
+      ],
+      [
+        10,
+        "Royal_Family_ID"
+      ],
+      [
+        10,
+        "Royal_Family_Details"
+      ],
+      [
+        11,
+        "Theme_Park_ID"
+      ],
+      [
+        11,
+        "Theme_Park_Details"
+      ],
+      [
+        12,
+        "Visit_ID"
+      ],
+      [
+        12,
+        "Tourist_Attraction_ID"
+      ],
+      [
+        12,
+        "Tourist_ID"
+      ],
+      [
+        12,
+        "Visit_Date"
+      ],
+      [
+        12,
+        "Visit_Details"
+      ],
+      [
+        13,
+        "Photo_ID"
+      ],
+      [
+        13,
+        "Tourist_Attraction_ID"
+      ],
+      [
+        13,
+        "Name"
+      ],
+      [
+        13,
+        "Description"
+      ],
+      [
+        13,
+        "Filename"
+      ],
+      [
+        13,
+        "Other_Details"
+      ],
+      [
+        14,
+        "Staff_ID"
+      ],
+      [
+        14,
+        "Tourist_Attraction_ID"
+      ],
+      [
+        14,
+        "Name"
+      ],
+      [
+        14,
+        "Other_Details"
+      ],
+      [
+        15,
+        "Tourist_Attraction_ID"
+      ],
+      [
+        15,
+        "Feature_ID"
       ]
     ],
     "column_types": [
@@ -58024,6 +58999,14 @@
       "number",
       "text",
       "number",
+      "text",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
+      "number",
+      "text",
       "text",
       "text",
       "text",
@@ -58054,14 +59037,7 @@
       "text",
       "text",
       "number",
-      "number",
-      "number",
-      "text",
-      "number",
-      "text",
-      "text",
-      "text",
-      "text"
+      "number"
     ],
     "db_id": "cre_Theme_park",
     "foreign_keys": [
@@ -58070,56 +59046,56 @@
         1
       ],
       [
-        18,
-        45
-      ],
-      [
-        20,
-        45
-      ],
-      [
-        22,
-        45
-      ],
-      [
-        24,
-        45
-      ],
-      [
-        26,
-        45
-      ],
-      [
-        30,
-        9
-      ],
-      [
-        29,
-        45
-      ],
-      [
-        34,
-        45
-      ],
-      [
-        40,
-        45
-      ],
-      [
-        44,
-        11
-      ],
-      [
-        43,
-        45
-      ],
-      [
-        46,
+        19,
         7
       ],
       [
-        47,
+        20,
         3
+      ],
+      [
+        26,
+        18
+      ],
+      [
+        28,
+        18
+      ],
+      [
+        30,
+        18
+      ],
+      [
+        32,
+        18
+      ],
+      [
+        34,
+        18
+      ],
+      [
+        38,
+        9
+      ],
+      [
+        37,
+        18
+      ],
+      [
+        42,
+        18
+      ],
+      [
+        48,
+        18
+      ],
+      [
+        52,
+        11
+      ],
+      [
+        51,
+        18
       ]
     ],
     "primary_keys": [
@@ -58130,15 +59106,15 @@
       11,
       13,
       18,
-      20,
-      22,
-      24,
       26,
       28,
-      33,
-      39,
-      43,
-      45
+      30,
+      32,
+      34,
+      36,
+      41,
+      47,
+      51
     ],
     "table_names": [
       "reference hotel star ratings",
@@ -58165,6 +59141,7 @@
       "Visitors",
       "Features",
       "Hotels",
+      "Tourist_Attractions",
       "Street_Markets",
       "Shops",
       "Museums",
@@ -58173,8 +59150,7 @@
       "Visits",
       "Photos",
       "Staff",
-      "Tourist_Attraction_Features",
-      "Tourist_Attractions"
+      "Tourist_Attraction_Features"
     ]
   },
   {
@@ -58448,7 +59424,12 @@
       "text"
     ],
     "db_id": "election_representative",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        2,
+        8
+      ]
+    ],
     "primary_keys": [
       1,
       8
@@ -58817,7 +59798,20 @@
       "number"
     ],
     "db_id": "wedding",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        13,
+        1
+      ],
+      [
+        12,
+        1
+      ],
+      [
+        11,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -58968,7 +59962,16 @@
       "text"
     ],
     "db_id": "news_report",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        12,
+        1
+      ],
+      [
+        11,
+        6
+      ]
+    ],
     "primary_keys": [
       1,
       6,
@@ -59669,8 +60672,17 @@
       "number",
       "number"
     ],
-    "db_id": "gym",
-    "foreign_keys": [],
+    "db_id": "gym_1",
+    "foreign_keys": [
+      [
+        9,
+        3
+      ],
+      [
+        8,
+        4
+      ]
+    ],
     "primary_keys": [
       3,
       4,
@@ -60008,7 +61020,16 @@
       "number"
     ],
     "db_id": "provider_1",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        6,
+        3
+      ],
+      [
+        5,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       3,
@@ -61070,16 +62091,193 @@
       [
         -1,
         "*"
+      ],
+      [
+        0,
+        "staff_id"
+      ],
+      [
+        0,
+        "gender"
+      ],
+      [
+        0,
+        "first_name"
+      ],
+      [
+        0,
+        "last_name"
+      ],
+      [
+        0,
+        "email_address"
+      ],
+      [
+        0,
+        "phone_number"
+      ],
+      [
+        1,
+        "customer_id"
+      ],
+      [
+        1,
+        "customer_type_code"
+      ],
+      [
+        1,
+        "address_line_1"
+      ],
+      [
+        1,
+        "address_line_2"
+      ],
+      [
+        1,
+        "town_city"
+      ],
+      [
+        1,
+        "state"
+      ],
+      [
+        1,
+        "email_address"
+      ],
+      [
+        1,
+        "phone_number"
+      ],
+      [
+        2,
+        "product_id"
+      ],
+      [
+        2,
+        "parent_product_id"
+      ],
+      [
+        2,
+        "product_category_code"
+      ],
+      [
+        2,
+        "date_product_first_available"
+      ],
+      [
+        2,
+        "date_product_discontinued"
+      ],
+      [
+        2,
+        "product_name"
+      ],
+      [
+        2,
+        "product_description"
+      ],
+      [
+        2,
+        "product_price"
+      ],
+      [
+        3,
+        "complaint_id"
+      ],
+      [
+        3,
+        "product_id"
+      ],
+      [
+        3,
+        "customer_id"
+      ],
+      [
+        3,
+        "complaint_outcome_code"
+      ],
+      [
+        3,
+        "complaint_status_code"
+      ],
+      [
+        3,
+        "complaint_type_code"
+      ],
+      [
+        3,
+        "date_complaint_raised"
+      ],
+      [
+        3,
+        "date_complaint_closed"
+      ],
+      [
+        3,
+        "staff_id"
       ]
     ],
     "column_types": [
-      "text"
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "text",
+      "number",
+      "number",
+      "text",
+      "time",
+      "time",
+      "text",
+      "text",
+      "number",
+      "number",
+      "number",
+      "number",
+      "text",
+      "text",
+      "text",
+      "time",
+      "time",
+      "number"
     ],
     "db_id": "customer_complaints",
-    "foreign_keys": [],
-    "primary_keys": [],
+    "foreign_keys": [
+      [
+        25,
+        7
+      ],
+      [
+        24,
+        15
+      ],
+      [
+        31,
+        1
+      ]
+    ],
+    "primary_keys": [
+      1,
+      7,
+      15
+    ],
     "table_names": [],
-    "table_names_original": []
+    "table_names_original": [
+      "Staff",
+      "Customers",
+      "Products",
+      "Complaints"
+    ]
   },
   {
     "column_names": [
@@ -61215,7 +62413,16 @@
       "text"
     ],
     "db_id": "department_management",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        12,
+        7
+      ],
+      [
+        11,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       7,
@@ -62023,7 +63230,16 @@
       "text"
     ],
     "db_id": "workshop_paper",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        10,
+        1
+      ],
+      [
+        9,
+        5
+      ]
+    ],
     "primary_keys": [
       1,
       5,
@@ -62763,7 +63979,16 @@
       "others"
     ],
     "db_id": "party_host",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        11,
+        1
+      ],
+      [
+        12,
+        7
+      ]
+    ],
     "primary_keys": [
       1,
       7,
@@ -62905,7 +64130,12 @@
       "number"
     ],
     "db_id": "book_review",
-    "foreign_keys": [],
+    "foreign_keys": [
+      [
+        9,
+        1
+      ]
+    ],
     "primary_keys": [
       1,
       8
@@ -63205,6 +64435,14 @@
       [
         13,
         9
+      ],
+      [
+        27,
+        9
+      ],
+      [
+        26,
+        12
       ]
     ],
     "primary_keys": [
