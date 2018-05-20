@@ -1264,7 +1264,6 @@ group by CountryCode
 P: Count the number of countries for which Spanish is the predominantly spoken language.
 
 select count(*),  max(Percentage)
-from (SELECT CountryCode
 from countrylanguage
 where Language = "Spanish"
 group by CountryCode
@@ -1284,7 +1283,6 @@ where Language = "Spanish"
 group by CountryCode
 
 select count(*),  max(Percentage)
-from (SELECT CountryCode
 from countrylanguage
 where Language = "Spanish"
 group by CountryCode
