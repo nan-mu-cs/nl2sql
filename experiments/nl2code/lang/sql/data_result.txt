@@ -1,0 +1,2147 @@
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t2.authorid   = t1.authorid    	WHERE t2.year   = t2.price   	ORDER BY t2.year   
+SELECT t1.product_id  , product_type_code   	FROM documents   
+SELECT t1.product_id  , product_type_code   	FROM apartment_bookings   
+SELECT product_name  , products   	FROM nike   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT Mark  , product_price   	FROM products   	ORDER BY money_requested   
+SELECT product_price  , product_price   	FROM products   	WHERE product_price   < product_id   
+select a from b
+select a from b
+SELECT product_price  , product_price   	FROM products   	WHERE product_price   < product_type_code   
+SELECT problem_log  , t1.grant_id   	FROM problem_log   	WHERE daily_hire_cost   < grants   
+select a from b
+select a from b
+SELECT product_color  , product_price   	FROM problem_log   
+SELECT document_id  , investor   	FROM what   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , producer   	FROM writes   	JOIN products   	ON t1.department_id   = t2.manufacturer_id    	WHERE product_price   < products   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.authorid   	FROM writes   	JOIN writes   	ON t3.aid   = t1.authorid    	WHERE t1.authorname   = VLDB   
+select a from b
+SELECT t1.id  , t1.name   	FROM products   	JOIN physician   	ON t1.price   < t2.film_id    	WHERE t1.price   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t4.venueid   	FROM writes   	JOIN browser   	ON t1.department_id   = t1.id    	WHERE t1.dept_name   < Woody Allen   
+select a from b
+SELECT t3.journalid  , t1.price   	FROM writes   	JOIN t1.id   	ON t1.department_id   = t1.id    	WHERE t1.name   < name   
+SELECT t3.aid  , t2.distance   	FROM of   	JOIN medicine_enzyme_interaction   	ON t1.price   < t2.film_id    	WHERE t2.distance   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , physician   	FROM affiliated_with   	JOIN writes   	ON t1.department_id   = t2.department_id    	WHERE t1.employee_id   < t2.manager_id   
+SELECT t3.journalid  , t1.price   	FROM writes   	JOIN t4.authorid   	ON t4.authorid   = t4.name    	WHERE t1.name   = the t3.departmentid   
+select a from b
+select a from b
+select a from b
+SELECT does  , gender   	FROM products   
+SELECT product_type_code  , product_price   	FROM products   	JOIN products   	ON t1.product_id   = t2.product_id    	WHERE product_type_code   < product_price   
+SELECT gender  , gender   	FROM gender   
+select a from b
+SELECT t1.name  , t2.job_title   	FROM affiliated_with   	JOIN writes   	ON t1.id   = t2.camera_lens_id    	WHERE t3.distance   < 'terminal' 
+SELECT <  , <   	FROM roles   	JOIN complaints   	ON t1.grant_id   = t2.title    	WHERE t3.name   = Drama .   
+SELECT t3.festival_name  , t3.festival_name   	FROM pilot_record   	JOIN Regular   	ON t1.festival_id   = t3.festival_name    	WHERE Regular   < 'terminal' 
+SELECT t2.role_name  , result   	FROM medicine   	WHERE destruction_authorised_by_employee_id   < .   
+SELECT t1.employee_id  , Making   	FROM church   
+SELECT t3.aid  , t2.year   	FROM corresponding   	JOIN prescribes   	ON t1.name   = %Led%    	WHERE t1.name   = John Wen   
+SELECT t3.aid  , t1.nationality   	FROM physician   	JOIN prescribes   	ON t1.name   = t2.player_api_id    	WHERE t1.name   = John t2.department   
+select a from b
+select a from b
+SELECT t1.forename  , t1.name   	FROM medicine   	JOIN by   	ON t1.id   = t1.name    	WHERE t1.name   t1.name bought   
+select a from b
+select a from b
+SELECT t4.name  , not invoice   	FROM what   	JOIN not   	ON t1.department_id   = t2.code    	WHERE t2.rank   < the have   
+select a from b
+SELECT t1.id  , t1.name   	FROM physician   	JOIN prescribes   	ON t3.paperid   = t1.id    	WHERE t3.name   = Dan   
+select a from b
+SELECT t3.aid  , t1.price   	FROM affiliated_with   	JOIN writes   	ON t1.price   = t2.medication    	WHERE (t1.authorname   = Peter Mertens  ) or (t2.year   < t2.department  ) 
+select a from b
+SELECT t2.director   	FROM writes   
+select a from b
+SELECT eid  , t1.stars   	FROM employees   	JOIN from   	ON t1.department_id   = t2.department_id    	WHERE t1.price   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.forename  , t4.name   	FROM venue   	JOIN t1.id   	ON t1.id   = t4.name    	WHERE t1.employee_id   < t2.manager_id   
+SELECT t3.journalid  , t1.price   	FROM writes   	JOIN writes   	ON t4.paperid   = t2.medication    	WHERE t2.rank   = t2.film_id   
+SELECT t2.name  , method   	FROM writes   	JOIN customers   	ON t1.department_id   = t2.department_id    	WHERE trade_name   = t2.manager_id   
+SELECT trade_name  , writes   	FROM writes   	JOIN customers   	ON t1.department_id   = t2.department_id    	WHERE trade_name   t2.department_id t2.manager_id   
+select a from b
+select a from b
+select a from b
+SELECT openning_year  , openning_year   	FROM who   
+select a from b
+SELECT t1.account_id  , producer   	FROM writes   	JOIN writes   	ON t1.price   < t2.medication    	WHERE t1.price   t2.name buy   
+SELECT party  , status   	FROM flight   
+SELECT memory_in_g  , t2.crime_rate   	FROM flight   
+select a from b
+SELECT t1.title  , t3.year   	FROM writes   	JOIN tracks   	ON t1.price   = t2.medication    	WHERE t1.name   < Dan   
+SELECT t3.journalid  , t1.nationality   	FROM writes   	JOIN writes   	ON t1.festival_id   = t1.id    	WHERE t1.name   = Woody   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT eid  , t1.price   	FROM affiliated_with   	JOIN customers   	ON eid   = t2.code    	WHERE t1.brand   = t1.price   
+select a from b
+select a from b
+SELECT t1.id  , t1.nationality   	FROM tags   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.name   = Dan   
+SELECT t3.aid  , t1.stars   	FROM tags   	JOIN prescribes   	ON t1.department_id   = t2.film_id    	WHERE t4.name   = Dan   
+SELECT t1.incident_type_code  , t2.invoice_date   	FROM products   	JOIN t1.grant_id   	ON t1.document_type_code   = t2.product_id    	WHERE t3.distance   < 'terminal' 
+select a from b
+SELECT t1.name  , t1.age   	FROM physician   	JOIN paper   	ON t1.name   = %Led%    	WHERE t2.overall_rating   < 'terminal' 
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.venueid    	WHERE t2.bikes_available   t1.document_type_code ACL   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , t1.price   	FROM writes   	JOIN writes   	ON t4.paperid   = t1.id    	WHERE t2.account_name   = do   
+SELECT Drama  , As   	FROM browser   
+select a from b
+select a from b
+select a from b
+SELECT roomid  , directed   	FROM noton   	ORDER BY customer_id   	LIMIT 'terminal' 	
+select a from b
+select a from b
+SELECT t1.name  , user_profiles   	FROM physician   	JOIN made_by   	ON t1.id   = t4.name    	WHERE t1.name   = Mary   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , t3.year   	FROM activitor   	JOIN products   	ON settlement_amount   = t2.film_id    	WHERE t2.account_name   = chervil   
+select a from b
+SELECT employee_id  , t1.grant_id   	FROM problem_log   	WHERE card_type_code   < associated   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN t1.id   	ON t1.id   = t1.id    	WHERE t1.name   = what   
+SELECT the   	FROM user_profiles   	WHERE founder   < t1.white   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t3.year   	FROM paperkeyphrase   	JOIN paperkeyphrase   	ON t1.u_id   = t3.keyphraseid    	WHERE t1.name   = each   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT employee_id  , rating_in_percent   	FROM catalog_structure   	WHERE open_date   < name   
+SELECT t1.id  , t1.trade_name   	FROM medicine   	JOIN t1.id   	ON t1.id   = t1.festival_id    	WHERE t1.name   = names   
+SELECT t3.journalid  , t3.aidt3.year   	FROM writes   	JOIN writes   	ON t4.name   = t2.cid    	WHERE t1.authorname   = been   
+SELECT t1.id  , t2.account_name   	FROM venue   	JOIN t1.id   	ON t2.account_name   = t1.id    	WHERE t1.name   = .   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT user  , Redt3.paperid   	FROM writes   	JOIN writes   	ON t4.paperid   = t4.name    	WHERE t1.authorname   = speed   
+select a from b
+SELECT t3.year   	FROM writes   	JOIN writes   	ON t1.cid   = t2.venueid    	WHERE t1.name   = names   
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t3.year   	FROM writes   	JOIN t1.id   	ON t1.id   = t1.id    	WHERE t1.name   = name   
+SELECT t1.id  , t1.trade_name   	FROM t3.name   	JOIN t1.id   	ON t2.account_name   = t3.keyphraseid    	WHERE t2.account_name   = Yes   
+SELECT not cars  , cars   	FROM products   	ORDER BY cars   	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.driverid  , t2.year   	FROM church   	ORDER BY t2.year   	LIMIT 'terminal' 	
+SELECT destruction_authorised_by_employee_id  , num_of_shops   	FROM writes   	ORDER BY num_of_shops   DESC 	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.attendance  , num_of_shops   	FROM money_requested   	ORDER BY num_of_shops   	LIMIT 'terminal' 	
+select a from b
+SELECT <  , <   	FROM num_of_shops   	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+SELECT roomid  , venue   	FROM please   	ORDER BY image_name   	LIMIT 'terminal' 	
+select a from b
+SELECT t4.name  , t1.price   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.medication    	WHERE t1.name   = names   
+SELECT t4.name  , t1.price   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.code    	WHERE t4.name   = Dan   
+SELECT trade_name   	FROM writes   	ORDER BY the   
+select a from b
+SELECT t1.product_id  , t1.lname   	FROM products   
+select a from b
+SELECT problem_log_id  , t2.invoice_date   	FROM problem_log   	ORDER BY customer_id   	LIMIT 'terminal' 	
+SELECT t1.product_id  , product_type_code   	FROM products   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT nomination  , >=   	FROM nomination   	ORDER BY .   
+select a from b
+select a from b
+select a from b
+SELECT .  , investor   	FROM show   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.title  , trade_name   	FROM writes   	JOIN writes   	ON t1.price   = t2.medication    	WHERE t2.name   = Woody Allen   
+select a from b
+SELECT t1.name  , t1.name   	FROM medicine   	JOIN patient   	ON t1.department_id   = t2.film_id    	WHERE t1.name   t1.name 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t1.nationality   	FROM category   	JOIN clothes   	ON t1.id   < t4.name    	WHERE t2.title   < film_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT the  , names   	FROM user_profiles   	WHERE customer_id   < (email   < product_price  ) 
+select a from b
+select a from b
+SELECT t3.aid  , physician   	FROM physician   	WHERE t1.name   < Boeing   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , producer   	FROM user_profiles   	JOIN writes   	ON t1.department_id   = t4.name    	WHERE t1.name   < codes   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.aid   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.department_id    	WHERE t1.department_id   = eid   
+select a from b
+select a from b
+SELECT t2.name  , use   	FROM writes   	JOIN management   	ON t1.department_id   = t2.department_id    	WHERE trade_name   = t2.manager_id   
+SELECT t3.journalid  , writes   	FROM writes   	JOIN journal   	ON t1.name   = t2.player_api_id    	WHERE t1.name   = Yes   
+select a from b
+SELECT trade_name  , t4.name   	FROM writes   	JOIN writes   	ON t4.name   = t4.name    	WHERE t1.name   t1.name t1.price   
+select a from b
+SELECT t1.name  , T3.NAME(t1.price  )  	FROM affiliated_with   	JOIN tracks   	ON t1.id   = t2.patient    	GROUP BY t1.name   
+SELECT code  , t4.name   	FROM physician   	JOIN management   	ON t1.department_id   = t2.department_id    	WHERE t1.name   t1.name Dan   
+SELECT trade_name  , t4.name   	FROM writes   	JOIN t4.name   	ON t1.id   = t1.id    	WHERE t1.name   = Oil t1.team_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.journalid   	FROM venue   	JOIN paperkeyphrase   	ON t3.paperid   = t2.paperid    	WHERE t1.authorname   t1.document_type_code .   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.title  , monitor   	FROM affiliated_with   	JOIN affiliated_with   	ON t1.name   = t1.price    	WHERE t1.dept_name   = 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT product_name  , product_name   	FROM documents   	WHERE catalog_level_number   < (open_year   < 'terminal') 
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t4.name   	FROM physician   	JOIN browser   	ON t1.id   < t2.storm_id    	WHERE t1.name   < Walter TO browser   
+select a from b
+select a from b
+select a from b
+SELECT venue  , venue   	FROM is   	ORDER BY what   
+SELECT document_id   	FROM ref_document_status   	WHERE document_id   = region   
+select a from b
+select a from b
+SELECT t3.journalid  , t4.venueid   	FROM writes   	JOIN writes   	ON t1.id   = t1.id    	WHERE t3.distance   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.name  , t1.trade_name   	FROM affiliated_with   	JOIN affiliated_with   	ON t1.name   = t2.category_id    	WHERE t1.name   = 'terminal' 
+select a from b
+select a from b
+SELECT t2.year  , open_year   	FROM products   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name   	FROM browser   
+select a from b
+SELECT Walter  , num_of_shops   	FROM products   	ORDER BY num_of_shops   	LIMIT 'terminal' 	
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN author   	ON t2.authorid   = t1.authorid    	WHERE t2.year   = document_id   	ORDER BY t2.year   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , venue   	FROM venue   
+SELECT t3.journalid   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.department_id    	WHERE t1.employee_id   = t2.manager_id   
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t1.nationality   	FROM writes   	JOIN writes   	ON t1.course_id   = t1.id    	WHERE t1.employee_id   = 'terminal' 
+select a from b
+SELECT t1.id  , t1.name   	FROM affiliated_with   	JOIN writes   	ON eid   = t1.id    	WHERE t1.name   = 'terminal' 
+select a from b
+SELECT eid  , writes   	FROM writes   	JOIN customer   	ON t1.department_id   < t2.department_id    	WHERE t1.price   < t2.manager_id   
+select a from b
+SELECT t4.name  , t1.name   	FROM affiliated_with   	JOIN affiliated_with   	ON t1.name   = t2.player_api_id    	WHERE Dan   = t2.manager_id   
+select a from b
+SELECT t1.name  , t1.trade_name   	FROM management   	JOIN countries   	ON t1.driverid   = t2.driverid    	WHERE t1.authorname   = 4   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t1.trade_name   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.medication    	WHERE t1.name   = 'terminal' 
+SELECT t3.journalid  , t1.price   	FROM writes   	JOIN t1.id   	ON t2.medicine_id   = t1.id    	WHERE t1.name   = product_id   
+SELECT destroyed_by_employee_id  , or   	FROM course_authors_and_tutors   
+select a from b
+SELECT product_color  , receipt_date   	FROM products   
+select a from b
+select a from b
+SELECT t1.rid  , t4.name   	FROM affiliated_with   	JOIN writes   	ON t1.department_id   = t2.department_id    	WHERE t1.name   = t2.manager_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t1.nationality   	FROM certificate   	JOIN certificate   	ON t1.department_id   = t2.emp_num    	WHERE t2.role_name   = t2.manager_id   
+SELECT trade_name  , t3.year   	FROM writes   	JOIN writes   	ON t4.paperid   = t4.paperid    	WHERE t2.year   = vehicles   	ORDER BY t1.price   
+SELECT t1.id   	FROM venue   	JOIN writes   	ON t4.paperid   = t2.head_id    	WHERE t1.name   = .   
+SELECT t1.id  , t1.nationality   	FROM user_profiles   	JOIN t4.paperid   	ON t1.u_id   = t2.film_id    	WHERE t1.name   = 4   
+SELECT t3.aid  , t1.nationality   	FROM writes   	JOIN writes   	ON t4.paperid   = t4.paperid    	WHERE trade_name   = Yes   
+select a from b
+select a from b
+SELECT rating_in_percent  , trade_name   	FROM user_profiles   	WHERE category   < .   
+SELECT what  , either   	FROM user_profiles   	WHERE founder   < Walter TO   
+SELECT product_name  , product_type_code   	FROM products   	WHERE baseprice   < (SELECT PRODUCT_TYPE_CODE(product_price  )  	FROM products   ) 
+SELECT t1.festival_id  , t2.attraction_type_code   	FROM church   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.name  , t3.name   	FROM t3.name   	JOIN t4.name   	ON t3.name   = t4.name    	WHERE t3.name   < Making all   
+SELECT t2.title  , t3.release_year   	FROM products   	WHERE t1.price   < 'terminal' 
+SELECT t1.price  , <   	FROM medicine_enzyme_interaction   	JOIN medicine_enzyme_interaction   	ON t1.price   = t2.film_id    	WHERE t2.rank   < cumin   
+SELECT t1.storm_id  , t1.storm_id   	FROM writes   	JOIN medicine_enzyme_interaction   	ON t1.department_id   = t3.keyphraseid    	WHERE t2.distance   < activitor   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT discounts  , discounts   	FROM discounts   	WHERE eid   < 'terminal' 
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.aid   = t4.name    	WHERE t1.name   = the Zettlemoyer   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t1.storm_id   	FROM venue   	JOIN t1.id   	ON t1.id   = t1.id    	WHERE t1.name   = what   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , producer   	FROM affiliated_with   	JOIN writes   	ON t1.price   < t1.id    	WHERE product_price   < Benjamin   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.storm_id  , t1.storm_id   	FROM writes   	JOIN writes   	ON t4.authorid   = venue    	WHERE t2.account_name   = USPS   
+select a from b
+select a from b
+SELECT t1.storm_id  , t1.account_id   	FROM affiliated_with   	JOIN products   	ON t3.product_id   = t4.name    	WHERE t2.rank   t2.account_name achievements   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t1.name   	FROM writes   	JOIN author   	ON t3.paperid   = t1.id    	WHERE t1.name   = monitoring   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , log_entry_description   	FROM t1.team_id   
+SELECT t3.paperid  , t3.year   	FROM writes   	JOIN writes   	ON t2.year   = t2.venueid    	WHERE t1.name   = VLDB   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t1.price   	FROM affiliated_with   	JOIN departments   	ON t1.department_id   = t2.department_id    	WHERE t1.name   = Peter t2.emp_num   
+select a from b
+select a from b
+SELECT t1.id   	FROM writes   	JOIN journal   	ON t1.name   = t1.id    	WHERE t1.name   = Dan   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , writes   	FROM writes   	JOIN writes   	ON t1.department_id   = t3.keyphraseid    	WHERE t1.name   = Dan   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t1.nationality   	FROM writes   	JOIN author   	ON t1.name   = t2.player_api_id    	WHERE t1.name   = Yes   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.department_id    	WHERE ref_shipping_agents.shipping_agent_name   = USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT product_name   	FROM ,   
+SELECT product_name  , investor   	FROM the   UNION SELECT employee_id  , investor   	FROM entrepreneur   	WHERE money_requested   < 'terminal'  
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.cid    	WHERE t1.department_id   = books   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN author   	ON t2.authorid   = t1.authorid    	WHERE t1.authorname   = corresponding   
+select a from b
+SELECT t2.title  , t1.stars   	FROM tags   	JOIN products   	ON t1.mid   = t2.film_id    	WHERE t3.name   = Dan   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.team_id  , openning_year   	FROM how   
+SELECT each  , each   	FROM isbns   	WHERE money_requested   < money_requested   
+SELECT and  , the   	FROM the   
+select a from b
+select a from b
+SELECT t1.storm_id  , t2.distance   	FROM writes   	JOIN products   	ON t1.department_id   = t3.keyphraseid    	WHERE t2.distance   < USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t5.authorid  , producer   	FROM writes   	JOIN writes   	ON t1.department_id   = t3.keyphraseid    	WHERE t1.name   = VLDB   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t5.citingpaperid   = t2.medication    	WHERE t1.authorname   = book   
+select a from b
+select a from b
+select a from b
+SELECT t2.title   	FROM rating   	JOIN what   	ON t1.rid   = t2.i_id    	WHERE t1.mid   < t2.oppose_rate   
+select a from b
+SELECT t3.journalid   	FROM writes   	JOIN writes   	ON t1.employee_id   = t2.medication    
+SELECT t2.job_id  , high_estimate   	FROM employees   
+select a from b
+SELECT complaint_status_code   	FROM difference   
+select a from b
+SELECT card_id  , openning_year   	FROM books   
+SELECT writes  , writes   	FROM course   	ORDER BY book   
+SELECT <  , Making   	FROM 10   
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.venueid    	WHERE t1.authorname   = USPS   
+SELECT t2.year  , t3.year   	FROM browser   
+SELECT <  , Making   	FROM course_authors_and_tutors   
+SELECT <  , Making   	FROM course_authors_and_tutors   
+SELECT t2.journalid  , writes   	FROM medicine   	WHERE ref_shipping_agents.shipping_agent_name   = USPS   
+select a from b
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN writes   	ON t4.authorid   = t2.department_id    	WHERE t1.dept_name   < Woody   
+SELECT artwork  , product_price   	FROM books   
+SELECT t4.authorid  , openning_year   	FROM who   
+SELECT address_line_1  , or   	FROM gas_station   
+select a from b
+SELECT customer_id  , books   	FROM author   
+SELECT t3.venueid  , t3.year   	FROM venue   	JOIN paper   	ON t3.journalid   = t2.venueid    	WHERE t1.authorname   = John Allen   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN prescribes   	ON t1.player_api_id   = t3.keyphraseid    	WHERE t1.authorname   = John A340-300   
+select a from b
+SELECT complaint_status_code  , product_type_code   	FROM products   
+SELECT product_color  , investor   	FROM entrepreneur   
+SELECT destroyed_by_employee_id  , openning_year   	FROM books   
+SELECT t3.journalid  , t1.project_id   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.medication    	WHERE trade_name   = t2.manager_id   
+SELECT t3.journalid  , t3.year   	FROM venue   	JOIN paper   	ON t1.code   = t2.code    	WHERE t1.authorname   = grant_amount Allen   
+SELECT t1.money_requested  , openning_year   	FROM names   
+select a from b
+select a from b
+select a from b
+SELECT document_id  , openning_year   	FROM of   
+SELECT the  , trade_name   	FROM 2   	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+select a from b
+SELECT money_requested  , openning_year   	FROM of   
+select a from b
+select a from b
+select a from b
+SELECT t5.authorid  , t1.book_id   	FROM church   
+select a from b
+select a from b
+select a from b
+SELECT t1.reports_to  , t3.year   	FROM affiliated_with   	WHERE t1.name   = Making books   
+select a from b
+select a from b
+SELECT film_id  , product_price   	FROM products   	WHERE product_name   < Making product_price   
+select a from b
+SELECT t1.last_name  , Clerical   	FROM Dina   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT document_id   	FROM products   	GROUP BY document_id   	ORDER BY COUNT(*)  DESC 	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT customer_id  , product_price   	FROM products   	WHERE customer_id   = product_price   
+select a from b
+select a from b
+SELECT t3.aid  , t1.stars   	FROM affiliated_with   	JOIN affiliated_with   	ON t1.manufacturer   = t1.price    	WHERE t4.name   = Woody Allen   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT eid  , rating_in_percent   	FROM customer   	WHERE eid   < document_id   
+select a from b
+select a from b
+select a from b
+SELECT product_price  , product_price   	FROM products   	WHERE product_name   = product_price   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name   	FROM medicine   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN paperkeyphrase   	ON t3.paperid   = t1.id    	WHERE <   = names   	ORDER BY t2.year   
+select a from b
+select a from b
+select a from b
+SELECT t2.journalid  , t3.aidt3.paperid   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.journalid    	WHERE t3.journalid   = grants   
+SELECT t4.authorid  , t1.project_id   	FROM medicine   	WHERE customer_id   < Peter   
+SELECT t3.journalid  , writes   	FROM writes   	JOIN writes   	ON t4.authorid   = t1.id    	WHERE t2.authorname   = what   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.journalid  , t4.venueid   	FROM by   	JOIN by   	ON t1.department_id   = t2.film_id    	WHERE t1.department_id   = t1.grant_amount   
+select a from b
+select a from b
+SELECT t1.driverid  , t3.aid   	FROM writes   	JOIN writes   	ON t3.paperid   = t4.paperid    	WHERE t2.authorname   < ids   	ORDER BY t2.year   
+select a from b
+SELECT t1.last_name  , t2.year   	FROM affiliated_with   	JOIN writes   	ON t1.department_id   = t2.department_id    	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.paperid   = t1.id    	WHERE <   = names   	ORDER BY t2.year   
+SELECT <  , t3.year   	FROM medicine   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t4.paperid   = t1.id    	WHERE t1.name   = the Zettlemoyer   	ORDER BY t1.price   
+SELECT medicine  , t2.year   	FROM physician   	JOIN medicine_enzyme_interaction   	ON t1.id   = t1.id    	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t1.nationality   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.name   = t1.attendance   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT <  , <   	FROM browser   	ORDER BY    	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.name  , collections   	FROM id   	JOIN it   	ON t1.department_id   = t2.player_api_id    	WHERE t2.year   < 'terminal' 
+SELECT t1.forename  , t1.last_name   	FROM writes   	JOIN artists   	ON t1.department_id   = t2.player_api_id    	WHERE t1.name   = named   
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN author   	ON t1.id   = t1.id    	WHERE t2.authorname   = Mary   
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.venueid    	WHERE t1.name   = best   
+SELECT t1.id  , t1.trade_name   	FROM writes   	JOIN paperkeyphrase   	ON t3.paperid   = t1.id    	WHERE t1.name   = ids   
+SELECT t1.id  , <   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.name   = of t4.paperid   
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN writes   	ON t1.department_id   = t4.name    	WHERE t1.price   < Dan   
+SELECT <  , <   	FROM products   
+select a from b
+SELECT complaint_status_code  , open_year   	FROM products   
+select a from b
+SELECT <  , <   	FROM products   
+select a from b
+SELECT product_id  , investor   	FROM browser   	ORDER BY customer_id   	LIMIT 'terminal' 	
+select a from b
+SELECT t3.journalid  , or   	FROM medicine   	JOIN how   	ON t1.id   = browser    	ORDER BY t2.milliseconds   	LIMIT 'terminal' 	
+select a from b
+SELECT trade_name  , writes   	FROM browser   	ORDER BY As   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.employee_name  , 4560596484842   	FROM course_authors_and_tutors   
+SELECT t1.forename  , t1.last_name   	FROM the   	JOIN departments   	ON t1.department_id   = t2.film_id    	WHERE t1.name   = the Staff   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT document_id   	FROM physician   	JOIN tweets   	ON t1.uid   = t2.uid    	WHERE t1.name   = Walter TO browser   
+select a from b
+select a from b
+SELECT trade_name  , high_estimate   	FROM products   
+select a from b
+select a from b
+SELECT t1.id  , t1.trade_name   	FROM physician   	JOIN browser   	ON t1.id   < t2.aid    	WHERE t1.name   = the Williams   
+SELECT trade_name   	FROM writes   
+SELECT results  , results   	FROM who   
+SELECT t3.aid  , t3.aid   	FROM affiliated_with   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.department_id   = have   
+select a from b
+SELECT t5.authorid   	FROM writes   	JOIN cite   	ON t1.code   = t2.film_id    	WHERE t1.authorname   = USPS   
+select a from b
+select a from b
+select a from b
+SELECT num_of_shops  , codes   	FROM user_profiles   	ORDER BY openning_year   
+select a from b
+SELECT medicine  , t3.year   	FROM what   	JOIN medicine_enzyme_interaction   	ON t1.id   = t2.storm_id    	ORDER BY t3.year   	LIMIT 'terminal' 	
+SELECT Regular  , receipt_date   	FROM and   
+SELECT document_id   	FROM draft_copies   
+select a from b
+select a from b
+select a from b
+SELECT t5.citingpaperid   	FROM writes   	JOIN keyphrase   	ON t2.keyphraseid   = t1.keyphraseid    	WHERE t4.name   = t2.star_rating_code   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT catalog_level_number   	FROM browser   	WHERE document_id   < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT t3.aid   	FROM writes   	JOIN writes   	ON t3.venueid   = t2.venueid    	WHERE t1.name   = the t1.money_requested   
+SELECT category   	FROM products   	WHERE t1.name   < t2.film_id   
+select a from b
+SELECT investor  , t4.venueid   	FROM affiliated_with   	WHERE donator_name   < 'terminal' 
+select a from b
+select a from b
+SELECT channel_code  , t1.order_id   	FROM t1.subject_id   	GROUP BY customer_id   	HAVING COUNT(*)  < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , user   	FROM affiliated_with   	JOIN writes   	ON t4.paperid   = t4.paperid    	WHERE market_share   < 'terminal' 
+select a from b
+select a from b
+SELECT t1.storm_id  , t3.year   	FROM venue   	JOIN venue   	ON t1.u_id   = t2.cid    	WHERE t1.u_id   = documents.document_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.paperid   	FROM writes   	JOIN writes   	ON t4.authorid   = t2.storm_id    	WHERE t1.name   = ids   
+select a from b
+select a from b
+select a from b
+SELECT Making  , product_type_code   	FROM products   
+SELECT product_type_code  , product_type_code   	FROM products   
+SELECT t1.money_requested  , investor   	FROM church   
+SELECT t1.money_requested  , <   	FROM browser   
+SELECT product_price  , t3.release_year   	FROM products   	WHERE product_price   < 'terminal' 
+SELECT product_type_code  , t3.release_year   	FROM products   	WHERE product_type_code   < cities   
+SELECT t3.aid   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.authorname   < city   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN writes   	ON t3.venueid   = t1.authorid    	WHERE t2.year   < 'terminal' 
+select a from b
+select a from b
+SELECT t2.journalid  , t1.project_id   	FROM writes   	JOIN writes   	ON t1.project_id   = t2.journalid    	WHERE t1.project_id   = t2.manager_id   
+SELECT t3.aid  , producer   	FROM affiliated_with   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.name   = Product t2.department   
+SELECT <  , <   	FROM codes   	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+SELECT t2.authorname   	FROM writes   
+SELECT card_id  , investor   	FROM Dina   
+select a from b
+select a from b
+SELECT eid  , name   	FROM physician   	WHERE Dina   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.role_name  , t2.job_title   	FROM project_staff   	WHERE participant_type_code   = 'terminal' 
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t4.authorid   = t1.id    	WHERE t2.authorname   = reserved   
+select a from b
+select a from b
+SELECT customer_id  , card_type_code   	FROM the   	ORDER BY customer_id   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT the  , larger   	FROM with   	WHERE eid   < Peter   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT course_authors_and_tutors  , openning_year   	FROM course_authors_and_tutors   
+select a from b
+SELECT t2.year  , openning_year   	FROM course_authors_and_tutors   
+select a from b
+SELECT t1.employee_id  , openning_year   	FROM course_authors_and_tutors   
+select a from b
+select a from b
+SELECT t2.author  , receipt_date   	FROM what   
+select a from b
+SELECT t3.journalid  , t4.venueid   	FROM medicine_enzyme_interaction   	JOIN affected_region   	ON t1.storm_id   = t2.medication    	WHERE documents.document_id   = USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT document_id  , openning_year   	FROM age   
+select a from b
+SELECT t1.grant_id   	FROM church   	WHERE t2.name   = Michelle   
+SELECT product_color  , venue   	FROM ?   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.festival_id  , openning_year   	FROM age   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , t4.venueid   	FROM writes   	JOIN writes   	ON t1.price   = t2.medication    	WHERE t1.dept_name   = Woody Allen   
+select a from b
+SELECT t2.author  , t3.festival_name   	FROM nomination   	JOIN t1.festival_id   	ON t1.festival_id   = t1.festival_id    
+SELECT Regular  , <   	FROM name   	ORDER BY t3.release_year   	LIMIT 'terminal' 	
+SELECT <  , <   	FROM what   	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+SELECT t1.department_id  , H.   	FROM employee   
+SELECT t3.venueid  , age   	FROM writes   
+SELECT t1.employee_id  , t2.milliseconds   	FROM medicine   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT product_name  , investor_id   	FROM products   
+SELECT what  , the   	FROM the   	ORDER BY the   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id   	FROM writes   	JOIN paperkeyphrase   	ON t3.venueid   = t2.venueid    	WHERE t1.name   = .   
+SELECT t1.account_id   	FROM highest   
+SELECT t1.festival_id  , t1.account_id   	FROM writes   	JOIN medicine_enzyme_interaction   	ON t1.id   = t1.id    	WHERE t2.account_name   = .   
+SELECT destruction_authorised_by_employee_id  , city   	FROM of   	ORDER BY money_requested   	LIMIT 'terminal' 	
+select a from b
+select a from b
+SELECT start_station_name  , directed_by   	FROM products   
+select a from b
+SELECT t1.storm_id  , t1.money_requested   	FROM writes   	JOIN writes   	ON t1.prereq_id   = t1.id    	WHERE t1.money_requested   = Dan   
+SELECT each  , each   	FROM each   	WHERE eid   < 'terminal' 
+SELECT t3.journalid  , writes   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.cid    	WHERE t1.authorname   = Peter Mertens   
+select a from b
+select a from b
+select a from b
+SELECT t1.museum_details  , openning_year   	FROM church   
+SELECT t1.royal_family_details  , Making   	FROM church   
+SELECT .  , .   	FROM .   
+SELECT artwork  , result   	FROM on   
+SELECT t1.name   	FROM category   	JOIN category   	ON t1.name   = t3.name    	WHERE t3.name   < earpads   
+select a from b
+SELECT t3.venueid   	FROM paperkeyphrase   	JOIN paperkeyphrase   	ON t1.code   = t1.keyphraseid    	WHERE t3.name   = never   
+SELECT t3.venueid  , t3.year   	FROM paperkeyphrase   	JOIN keyphrase   	ON t1.keyphraseid   = t2.keyphraseid    	WHERE t3.name   = .   
+SELECT t1.id  , t1.nationality   	FROM writes   	JOIN t1.id   	ON t1.id   = t1.id    	WHERE t1.name   t1.name .   
+SELECT t1.account_id  , t1.account_id   	FROM price   	JOIN what   	ON t1.id   = t1.id    	WHERE t1.festival_id   < t2.manager_id   
+select a from b
+SELECT t1.eid  , t1.nationality   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.employee_id   = t2.manager_id   
+select a from b
+SELECT t1.id  , t1.nationality   	FROM medicine_enzyme_interaction   	JOIN writes   	ON medicine_enzyme_interaction   = t1.code    	WHERE t2.distance   < 'terminal' 
+SELECT t3.journalid  , producer   	FROM writes   	JOIN writes   	ON t4.paperid   = t4.paperid    	WHERE t2.year   = 'terminal' 
+select a from b
+SELECT each   	FROM browser   	WHERE name   < neighborhood   
+select a from b
+select a from b
+SELECT t3.journalid   	FROM physician   	JOIN prescribes   	ON t1.allergy   = t1.id    	WHERE t5.authorname   = John physician   
+select a from b
+select a from b
+SELECT t1.festival_id  , t1.trade_name   	FROM certificate   	JOIN certificate   	ON t1.id   = t1.festival_id    	WHERE t1.name   = eid   
+SELECT t1.festival_id  , city   	FROM church   	WHERE eid   = store   
+SELECT category   	FROM t1.festival_id   	WHERE t1.cname   = t1.white   
+SELECT t1.id   	FROM medicine   	JOIN t1.id   	ON t1.id   = t1.id    	WHERE t1.name   = the largest   
+select a from b
+select a from b
+SELECT t1.id  , t1.trade_name   	FROM headphone   	JOIN medicine_enzyme_interaction   	ON t2.medicine_id   = t2.medicine_id    	GROUP BY t1.storm_id   	HAVING COUNT(*)  >= 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.cid    	WHERE t1.department_id   = Peter Mertens   
+select a from b
+SELECT t3.aid  , t1.surname   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.cid    	WHERE trade_name   = t2.manager_id   
+select a from b
+select a from b
+select a from b
+SELECT open_date  , 2009   	FROM 2009   	WHERE name   = Making 2009   
+SELECT open_year   	FROM of   
+SELECT <  , t1.attendance   	FROM names   	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+SELECT t1.team_id  , t1.attendance   	FROM church   
+SELECT t3.aid  , t3.year   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.authorname   = Anonymous Allen   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.attendance  , receipt_date   	FROM documents   
+select a from b
+select a from b
+select a from b
+SELECT t2.journalid  , t1.project_id   	FROM writes   	JOIN keyword   	ON t1.document_type_code   = t1.kid    	WHERE t2.customer_last_name   = mckeown   
+SELECT t3.journalid  , t2.distance   	FROM writes   	JOIN writes   	ON t1.id   = t1.id    	WHERE t2.authorname   = ids   
+SELECT t2.actor_id  , investor   	FROM t1.project_id   
+SELECT t1.product_id  , openning_year   	FROM church   
+select a from b
+SELECT t1.attendance  , receipt_date   	FROM documents   
+SELECT t1.product_id  , receipt_date   	FROM documents   
+select a from b
+SELECT t1.product_id  , receipt_date   	FROM products   
+SELECT t1.product_id  , receipt_date   	FROM ref_document_status   
+select a from b
+SELECT card_id  , openning_year   	FROM church   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM venue   	JOIN paperkeyphrase   	ON t3.paperid   = t2.medication    	WHERE t1.product_id   = USPS   
+SELECT t5.authorid  , t4.venueid   	FROM venue   	JOIN paperkeyphrase   	ON t1.paperid   = venue    	WHERE t1.last_name   = ACL   
+SELECT t1.product_id  , receipt_date   	FROM documents   
+select a from b
+select a from b
+select a from b
+SELECT document_id  , receipt_date   	FROM where   
+SELECT document_id  , receipt_date   	FROM church   
+SELECT open_year  , openning_year   	FROM where   
+SELECT t1.museum_details  , receipt_date   	FROM church   
+SELECT address_line_1  , investor   	FROM course_authors_and_tutors   
+select a from b
+SELECT t1.product_id  , high_estimate   	FROM 1989-04-24   
+SELECT t2.authorname  , investor   	FROM browser   
+select a from b
+select a from b
+SELECT t1.attendance  , investor   	FROM church   
+select a from b
+select a from b
+select a from b
+SELECT t3.paperid  , t3.year   	FROM paperkeyphrase   	JOIN ref_shipping_agents   	ON t1.account_id   = ref_shipping_agents.shipping_agent_code    	WHERE t1.product_id   = ACL   
+select a from b
+SELECT t1.money_requested   	FROM affected_region   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT address_line_1  , log_entry_description   	FROM problem_log   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT product_color  , investor   	FROM products   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.authorname  , investor   	FROM customers_cards   
+SELECT product_type_code  , product_type_code   	FROM products   	WHERE product_type_code   = Flat   
+select a from b
+SELECT investor   	FROM Dina   
+SELECT t3.paperid  , t4.venueid   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.cid    	WHERE t1.department_id   = Peter Mertens   
+select a from b
+SELECT t3.pid  , t3.year   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.authorid    	WHERE t1.authorname   = Dan   
+select a from b
+SELECT complaint_status_code   	FROM complaints   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT what  , hosted   	FROM hosted   	WHERE donator_name   < hosted   
+SELECT customer_id  , COUNT(customer_id  )  	FROM complaints   	GROUP BY document_id   	ORDER BY COUNT(*)  DESC 	LIMIT 'terminal' 	
+select a from b
+SELECT document_id  , open_year   	FROM draft_copies   
+SELECT t5.datasetname  , document_id   	FROM documents   
+select a from b
+select a from b
+SELECT complaint_status_code   	FROM documents   	GROUP BY complaint_status_code   	HAVING COUNT(*)  < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.card_type_code  , limit   	FROM writes   
+select a from b
+SELECT t1.storm_id  , t1.storm_id   	FROM paperkeyphrase   	JOIN browser   	ON t1.price   = t1.id    	WHERE trade_name   = sponsor   
+SELECT product_type_code  , product_type_code   	FROM products   
+SELECT Walter  , product_type_code   	FROM apartment_bookings   
+SELECT product_color   	FROM products   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid   	FROM customer_orders   	JOIN cite   	ON t1.order_id   = t3.citedpaperid    	WHERE t1.authorname   = USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t4.venueid   = t1.authorid    	WHERE <   = USPS   	ORDER BY t2.year   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.paperid  , t1.last_name   	FROM ref_shipping_agents   	JOIN cite   	ON t1.u_id   = ref_shipping_agents.shipping_agent_code    	WHERE t1.product_id   = USPS   
+select a from b
+SELECT product_color  , t2.document_type_code   	FROM ref_shipping_agents   	JOIN grants   	ON t1.organisation_id   = t2.organisation_id    	WHERE product_color   < (t2.venuename   < 'terminal') 
+select a from b
+SELECT <  , t3.release_year   	FROM products   
+SELECT product_type_code  , product_type_code   	FROM products   	GROUP BY product_type_code   	HAVING COUNT(venue)  < 'terminal' 
+SELECT document_id  , t1.property_id   	FROM church   
+SELECT document_id  , t1.property_id   	FROM t1.project_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.journalid  , t1.date_stored   	FROM problem_log   	JOIN problem_log   	ON t2.journalid   = t2.thing_id    	WHERE t1.project_id   = documents.document_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT <  , <   	FROM spokesman   	JOIN medicine_enzyme_interaction   	ON t1.department_id   = t2.film_id    	WHERE t1.authorname   = grants Allen   
+select a from b
+select a from b
+SELECT t3.journalid   	FROM writes   	JOIN author   	ON t1.id   = t2.journalid    	WHERE t2.authorname   = Luke S Zettlemoyer   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.document_type_code  , receipt_date   	FROM documents   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT entrepreneur  , sculptures   	FROM browser   	WHERE open_date   < 'terminal' 
+SELECT <  , t1.stars   	FROM roles   	JOIN departments   	ON t1.department_id   = t2.department_id    	WHERE t1.name   = Peter Mertens   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.product_id  , receipt_date   	FROM products   
+select a from b
+SELECT <  , product_type_code   	FROM products   	WHERE daily_hire_cost   < 'terminal' 
+SELECT product_type_code  , product_type_code   	FROM products   	WHERE product_type_code   < 'terminal' 
+select a from b
+SELECT film_id  , product_price   	FROM products   	WHERE product_type_code   = product_id   
+SELECT t1.product_id  , settlement_amount   	FROM products   	JOIN products   	ON t1.product_id   = t1.product_id    	ORDER BY Book   	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT products  , at   	FROM products   	WHERE donator_name   = 'terminal' 
+SELECT t1.attendance  , exhibited   	FROM products   	WHERE product_name   = Peter   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT document_id   	FROM grants   	GROUP BY t1.product_id   	ORDER BY COUNT(*)  DESC 	LIMIT 'terminal' 	
+SELECT customer_id  , customer_id   	FROM employee   
+SELECT t2.staff_id  , t1.staff_gender   	FROM t2.staff_id   	JOIN problem_log   	ON t1.staff_id   = t2.staff_id    	WHERE <   < product_id   
+select a from b
+SELECT trade_name  , t3.release_year   	FROM products   	ORDER BY t3.release_year   	LIMIT 'terminal' 	
+select a from b
+SELECT <  , product_type_code   	FROM products   
+SELECT t5.authorid  , t5.authorid   	FROM physician   	JOIN t1.id   	ON t1.uid   = t2.tourist_attraction_id    	WHERE t1.name   = the Card   
+SELECT physician  , t2.total   	FROM browser   	WHERE name   = painting   
+select a from b
+SELECT products   	FROM browser   	WHERE card_type_code   = Peter Mertens   
+select a from b
+SELECT t1.employee_id  , t1.supportrepid   	FROM physician   
+SELECT customer_id  , writes   	FROM browser   	ORDER BY customer_id   	LIMIT 'terminal' 	
+SELECT customer_id  , writes   	FROM browser   	ORDER BY customer_id   	LIMIT 'terminal' 	
+SELECT employee_id  , open_year   	FROM church   	WHERE open_date   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT physician  , displayed   	FROM browser   	WHERE name   < Peter   
+select a from b
+select a from b
+select a from b
+SELECT t1.account_id  , t2.payment_method   	FROM products   	WHERE t1.account_id   < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT ref_shipping_agents.shipping_agent_code  , <   	FROM t1.project_id   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.author  , receipt_date   	FROM ref_document_status   
+SELECT <  , SUM(t1.grant_id  )  	FROM products   	GROUP BY product_type_code   	HAVING COUNT(*)  < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT <  , or   	FROM <   
+SELECT <  , or   	FROM <   
+SELECT t1.product_id  , t2.inventory_id   	FROM cite   	JOIN cite   	ON t1.organisation_id   = t2.organisation_id    	GROUP BY document_id   	HAVING COUNT(t1.paperid  )  < 'terminal' 
+select a from b
+select a from b
+SELECT t1.id  , t1.nationality   	FROM physician   	JOIN certificate   	ON t3.aid   < t2.aid    	WHERE t1.name   = Peter   
+select a from b
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.authorid    	WHERE t1.name   = painting   
+SELECT t1.festival_id  , nomination   	FROM nomination   
+SELECT t3.venueid  , t3.aid   	FROM venue   	JOIN paperkeyphrase   	ON t5.authorname   = t3.keyphraseid    	WHERE t5.authorname   = activitor   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t1.nationality   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.player_api_id    	WHERE t3.name   = painting   
+SELECT open_date  , producer   	FROM products   	WHERE product_name   < Information   
+SELECT employee_id  , open_year   	FROM products   	WHERE product_name   < Information   
+SELECT id  , created   	FROM browser   	WHERE name   < t2.uid   
+SELECT t3.release_year  , t3.release_year   	FROM products   	WHERE product_name   = Information t2.product_id   
+SELECT open_date  , t3.release_year   	FROM products   	WHERE product_name   = painting   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT <  , t1.project_id   	FROM Dina   
+SELECT you  , paintings   	FROM paintings   	WHERE department_id   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.price  , t1.price   	FROM writes   	JOIN writes   	ON t1.price   Dan t4.name    	WHERE t2.title   t2.name .   
+select a from b
+SELECT product_type_code  , product_type_code   	FROM products   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN author   	ON t1.id   = t1.authorid    	WHERE t1.name   = races Allen   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT thelast_name  , t4.venueid   	FROM ofmedicine2   
+SELECT t3.paperid  , t4.venueid   	FROM writes   	JOIN writes   	ON t4.venueid   = t1.authorid    	WHERE t1.authorname   = Peter Mertens   
+select a from b
+SELECT t1.title  , t3.year   	FROM writes   	JOIN writes   	ON t4.authorid   = t1.authorid    	WHERE t1.authorname   = use   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT ref_shipping_agents.shipping_agent_code  , product_type_code   	FROM products   
+SELECT t3.paperid  , t3.year   	FROM writes   	JOIN writes   	ON t4.authorid   = t1.authorid    	WHERE t3.product_name   = chervil   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT chervil  , receipt_date   	FROM products   
+select a from b
+select a from b
+SELECT product_price  , receipt_date   	FROM among   	ORDER BY money_requested   
+select a from b
+SELECT t1.price  , t1.price   	FROM writes   	JOIN products   	ON t1.price   < t2.product_id    	WHERE t2.product_details   = the product_price   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.storm_id  , t3.year   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.journalid    	WHERE card_type_code   = USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , writes   	FROM writes   	JOIN cite   	ON t1.u_id   = t3.keyphraseid    	WHERE trade_name   < t2.manager_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.product_id  , <   	FROM products   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.year  , t3.year   	FROM writes   	JOIN paperkeyphrase   	ON t3.paperid   = t2.paperid    	WHERE t1.keyphrasename   = how   	ORDER BY t3.year   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT eid  , t1.price   	FROM affiliated_with   	JOIN writes   	ON t1.price   = t4.paperid    	WHERE t1.name   = t1.price   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT departments  , t4.venueid   	FROM browser   	WHERE eid   < 'terminal' 
+select a from b
+select a from b
+SELECT t1.id  , trade_name   	FROM paperkeyphrase   	JOIN paperkeyphrase   	ON t3.paperid   = t2.id    	WHERE t1.department_id   = search   
+select a from b
+select a from b
+SELECT results  , trade_name   	FROM medicine   	GROUP BY employee_id   	HAVING COUNT(*)  >= 'terminal' 
+select a from b
+select a from b
+SELECT <  , high_estimate   	FROM search   
+select a from b
+select a from b
+SELECT open_year   	FROM earliest   
+select a from b
+select a from b
+SELECT t1.employee_id  , producer   	FROM user_profiles   	WHERE t2.name   = t2.film_id   
+select a from b
+select a from b
+select a from b
+SELECT t1.reports_to  , t1.job_id   	FROM employees   	JOIN departments   	ON t1.department_id   = t2.department_id    	WHERE t1.name   = middle   
+SELECT eid  , sellers   	FROM affiliated_with   	WHERE job_title   < document_id   
+SELECT t1.paperid  , t1.storm_id   	FROM paperkeyphrase   	JOIN paperkeyphrase   	ON documents.shipping_agent_code   = ref_shipping_agents.shipping_agent_code    	WHERE ref_shipping_agents.shipping_agent_name   = USPS   
+select a from b
+select a from b
+select a from b
+SELECT eid  , t1.price   	FROM affiliated_with   	JOIN departments   	ON t1.department_id   = t2.film_id    	WHERE t2.title   = photos products   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , producer   	FROM writes   	JOIN writes   	ON t1.department_id   = t3.keyphraseid    	WHERE t2.authorname   = .   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT trade_name  , t1.price   	FROM writes   	JOIN products   	ON t1.department_id   = t2.film_id    	WHERE t1.department_id   = search   
+SELECT <  , <   	FROM user_profiles   	JOIN products   	ON settlement_amount   = t2.film_id    	ORDER BY t3.distance   	LIMIT 'terminal' 	
+select a from b
+SELECT bikes  , grams   	FROM products   
+select a from b
+select a from b
+SELECT Quentin  , t1.stars   	FROM director   	JOIN producer   	ON t1.department_id   = t2.did    	WHERE t2.name   t2.name Quentin Allen   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.price  , VENUE(t1.reports_to  )  	FROM affiliated_with   	JOIN browser   	ON t1.id   = t3.product_id    	GROUP BY t1.storm_id   
+SELECT start_station_name  , product_price   	FROM bike   
+select a from b
+select a from b
+SELECT bike  , bike   	FROM products   	WHERE rating_in_percent   < money_requested   
+select a from b
+select a from b
+SELECT what  , rating   	FROM is   
+SELECT investor  , MAX(end_date  )  	FROM employees   	GROUP BY employee_id   
+select a from b
+SELECT what  , sex   	FROM of   	WHERE eid   = Peter Card   
+SELECT eid  , Stonebraker   	FROM affiliated_with   	GROUP BY departmentid   	HAVING COUNT(*)  < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT employee_id  , t2.job_title   	FROM employees   	WHERE customer_id   customer_id in (SELECT employee_id   	FROM employees   	WHERE employee_id   < 'terminal' ) 
+SELECT are  , the   	FROM employee   	WHERE eid   < Peter manager_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT each  , each   	FROM maximum   	WHERE eid   < money_requested   
+select a from b
+SELECT <  , or   	FROM church   
+SELECT t1.id   	FROM writes   	JOIN writes   	ON t1.u_id   = t2.film_id    	WHERE trade_name   = t2.manager_id   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.lat   	FROM physician   
+select a from b
+select a from b
+select a from b
+SELECT title   	FROM course   	WHERE title   = course_authors_and_tutors   
+select a from b
+SELECT t2.cid  , t1.money_requested   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.cid    	WHERE t1.name   = Dan   
+SELECT of  , producer   	FROM of   	JOIN products   	ON t1.manufacturer   = t2.category_id    	WHERE t2.distance   < 'terminal' 
+SELECT t3.aid  , t1.nationality   	FROM writes   	JOIN certificate   	ON t1.department_id   = t2.uid    	WHERE t2.distance   < 'terminal' 
+select a from b
+SELECT Making  , >=   	FROM products   
+select a from b
+select a from b
+SELECT t3.aid  , t1.nationality   	FROM affiliated_with   	JOIN patient   	ON t1.price   < t2.medication    	WHERE t1.price   < 'terminal' 
+SELECT <  , 1989-03-16   	FROM writes   	JOIN products   	ON t1.document_type_code   = t3.keyphraseid    	WHERE t1.brand   = Woody product_price   
+SELECT eid  , physician   	FROM affiliated_with   	JOIN affiliated_with   	ON t1.manufacturer   = t1.price    	WHERE t1.price   < eid   
+SELECT t1.id  , t1.nationality   	FROM affiliated_with   	JOIN products   	ON t1.u_id   = t2.film_id    	WHERE t1.name   = rating_in_percent   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t1.nationality   	FROM writes   	JOIN writes   	ON t1.id   = t2.medication    	WHERE t2.year   = and   
+select a from b
+select a from b
+SELECT product_name  , product_type_code   	FROM of   
+SELECT product_name  , product_type_code   	FROM products   	WHERE product_type_code   < catalog_level_number   
+select a from b
+select a from b
+SELECT Woody  , t3.year   	FROM products   	WHERE t1.dept_name   < Woody   
+select a from b
+select a from b
+SELECT the   	FROM cheapest   
+SELECT t1.name  , COUNT(*)  	FROM employees   	JOIN prescribes   	ON t1.name   = t2.uid    	GROUP BY t1.name   
+select a from b
+SELECT t1.name  , T3.NAME(t1.price  )  	FROM user_profiles   	JOIN artwork   	ON t1.uid   = t2.uid    	GROUP BY t1.name   
+SELECT t1.name  , TITLE(t1.price  )  	FROM of   	JOIN certificate   	ON t1.id   < t2.aid    	GROUP BY t2.job_title   
+select a from b
+select a from b
+SELECT times  , shopped   	FROM employee   
+select a from b
+select a from b
+SELECT t1.name  , t1.age   	FROM writes   	JOIN browser   	ON t1.department_id   = t2.department_id    	ORDER BY t1.price   	LIMIT 'terminal' 	
+SELECT eid   	FROM employee   	WHERE eid   = eid   
+SELECT the  , manager_id   	FROM affiliated_with   	WHERE eid   = Peter Mertens   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.nationality  , t2.year   	FROM flavor   	JOIN flavor   	ON t1.department_id   = t2.film_id    	ORDER BY t2.year   	LIMIT 'terminal' 	
+SELECT t1.driverid  , t2.milliseconds   	FROM film_actor   	JOIN film_actor   	ON t1.actor_id   = t2.actor_id    	ORDER BY t2.year   	LIMIT 'terminal' 	
+select a from b
+select a from b
+SELECT document_id  , tart   	FROM tart   
+SELECT address_line_1  , address_line_1   	FROM course_authors_and_tutors   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT 1989-03-16  , t1.document_type_code   	FROM grants   	JOIN grants   	ON t1.grant_id   < problem_log_id    	WHERE t1.grant_id   = catalog_level_number   
+SELECT Regular  , t1.grant_id   	FROM church   	WHERE Regular   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t3.year   	FROM writes   	JOIN writes   	ON t1.id   = t1.id    	WHERE trade_name   = t2.manager_id   
+select a from b
+select a from b
+SELECT trade_name  , t3.year   	FROM writes   	JOIN paperkeyphrase   	ON t3.paperid   = t2.id    	WHERE trade_name   = team   	ORDER BY followers   
+SELECT t1.storm_id  , t3.year   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.id    	WHERE card_type_code   = 4   
+SELECT t3.journalid  , t1.storm_id   	FROM paperkeyphrase   	JOIN writes   	ON t1.allergy   = t2.author    	WHERE t1.authorname   = t2.order_quantity   
+SELECT t2.title  , t3.year   	FROM writes   	JOIN producer   	ON t1.price   < t2.product_details    	WHERE t4.name   t2.name Dan   
+SELECT money_requested  , product_type_code   	FROM products   
+select a from b
+select a from b
+SELECT customer_id  , t1.storm_id   	FROM writes   	JOIN author   	ON t4.authorid   = t1.authorid    	WHERE t1.product_id   = USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT open_date   	FROM products   	WHERE open_date   < Making   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.aid   	FROM writes   	JOIN browser   	ON t1.u_id   = t3.product_id    	WHERE t3.product_name   = .   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.authorid   	FROM writes   	JOIN venue   	ON t4.name   = t4.name    	WHERE t1.cid   = VLDB   
+select a from b
+SELECT t3.year   	FROM writes   	JOIN writes   	ON eid   = t2.cid    	WHERE t1.last_name   = t2.manager_id   
+SELECT t3.venueid  , t3.year   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.artwork_id    	WHERE t1.authorname   = 4   
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.artwork_id    	WHERE t1.authorname   = .   
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN author   	ON t4.authorid   = t1.authorid    	WHERE t1.authorname   = . Allen   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.paperid  , t3.year   	FROM writes   	JOIN writes   	ON t2.authorid   = t1.authorid    	WHERE t1.authorname   = the Allen   	ORDER BY t2.year   
+SELECT trade_name  , product_price   	FROM browser   	ORDER BY baseprice   DESC 	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT product_type_code  , product_type_code   	FROM products   	GROUP BY product_type_code   	ORDER BY COUNT(*)  T3.CITATION_NUM 	LIMIT 'terminal' 	
+SELECT t1.product_id  , log_entry_description   	FROM problem_log   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id   	FROM writes   	JOIN prescribes   	ON t1.albumid   = t3.keyphraseid    	WHERE t1.name   = Dan   
+SELECT customer_id  , role_code   	FROM problem_logt4.authorid   	ORDER BY baseprice   DESC 	LIMIT 'terminal' 	
+SELECT roomid  , product_type_code   	FROM products   	ORDER BY product_price   < 	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT problem_log_id  , product_price   	FROM products   	ORDER BY product_type_code   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.organisation_id  , product_price   	FROM products   	WHERE t1.product_name   < 'terminal' 
+SELECT document_id   	FROM grants   	GROUP BY document_id   	ORDER BY COUNT(*)  DESC 	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+SELECT t2.authorid  , t3.year   	FROM writes   	JOIN product_characteristics   	ON t1.paperid   = t1.id    	WHERE t1.participant_id   = document_id   
+select a from b
+SELECT document_id  , product_type_code   	FROM draft_copies   	GROUP BY document_id   	ORDER BY COUNT(*)  DESC 	LIMIT 'terminal' 	
+SELECT roomid  , customer_id   	FROM problem_log   	ORDER BY product_price   DESC 	LIMIT 'terminal' 	
+select a from b
+select a from b
+SELECT t3.aid  , venue   	FROM church   	WHERE t2.year   = 'terminal' 
+SELECT investor  , t4.venueid   	FROM writes   
+SELECT stored  , york   	FROM user_profiles   	WHERE eid   = 'terminal' 
+SELECT pname  , city   	FROM user_profiles   	WHERE eid   = 'terminal' 
+SELECT t4.name  , user   	FROM writes   	JOIN writes   	ON t4.paperid   < t2.medication    	WHERE t1.brand   < Dan   
+select a from b
+SELECT <  , director   	FROM employees   	WHERE eid   < code   
+SELECT t3.aid  , what   	FROM physician   	WHERE eid   = entrepreneur   
+select a from b
+select a from b
+SELECT open_date  , investor   	FROM church   
+SELECT Making  , t2.people_id   	FROM products   
+SELECT .  , content   	FROM maximum   	WHERE eid   < eid   
+SELECT t1.employee_id  , t1.name   	FROM course   	WHERE eid   < 'terminal' 
+SELECT t3.aid  , t1.nationality   	FROM writes   	JOIN writes   	ON t1.driverid   = t2.medication    	WHERE t1.employee_id   = t2.manager_id   
+SELECT t3.aid  , t3.aid   	FROM employees   	JOIN writes   	ON eid   = t2.medication    	WHERE t2.year   < 'terminal' 
+SELECT medicine  , t1.nationality   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.player_api_id    	WHERE t1.name   = .   
+SELECT t1.patient   	FROM physician   	WHERE t1.name   = the Young   
+SELECT employee_id  , salary   	FROM employees   	WHERE employee_id   < employee_id   
+select a from b
+select a from b
+SELECT t1.name  , t1.stars   	FROM physician   	JOIN management   	ON t1.id   = t4.name    	WHERE t3.name   = 'terminal' 
+SELECT Mark  , cite   	FROM financial_transactions   
+select a from b
+SELECT stored  , of   	FROM browser   	WHERE eid   < stored   
+SELECT codes  , codes   	FROM church   	WHERE open_year   < 'terminal' 
+SELECT open_year  , name   	FROM church   	WHERE open_year   < 'terminal' 
+select a from b
+SELECT name  , york   	FROM browser   	WHERE open_year   < 'terminal' 
+SELECT t3.aid  , t1.nationality   	FROM user_profiles   	JOIN author   	ON t1.id   = t1.id    	WHERE t3.name   = 'terminal' 
+SELECT at  , at   	FROM browser   	WHERE open_year   < 'terminal' 
+SELECT found  , york   	FROM church   	WHERE open_year   < 'terminal' 
+SELECT t1.id  , t1.last_name   	FROM affiliated_with   	JOIN t1.id   	ON t1.id   = t1.id    	WHERE t1.id   = t2.manager_id   
+select a from b
+SELECT physician  , physician   	FROM physician   	JOIN accelerator_compatible_browser   	ON t1.id   = t2.id    	WHERE t1.brand   = 'terminal' 
+SELECT t3.journalid  , t1.price   	FROM affiliated_with   	JOIN writes   	ON t1.id   = t1.id    	WHERE t1.department_id   = t2.manager_id   
+SELECT t1.staff_name  , t1.staff_gender   	FROM t1.staff_id   
+select a from b
+select a from b
+SELECT t3.aid  , <   	FROM codes   	JOIN prescribes   	ON t1.employeeid   = t2.physician    	WHERE t1.name   = codes   
+select a from b
+SELECT t1.royal_family_details  , t1.staff_gender   	FROM parking_fines   
+select a from b
+SELECT t1.forename  , t2.department   	FROM affiliated_with   	JOIN writes   	ON t1.id   = t2.medication    	WHERE t1.employee_id   < t2.manager_id   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t1.id   = t2.medication    	WHERE t2.year   = 'terminal' 
+SELECT the  , of   	FROM medicine   	WHERE eid   < content   
+select a from b
+select a from b
+select a from b
+SELECT medicine  , stored   	FROM browser   	WHERE rating_in_percent   < entrepreneur   
+SELECT t1.royal_family_details  , <   	FROM tourist_attractions   
+SELECT t3.journalid  , t1.storm_id   	FROM paperkeyphrase   	JOIN prescribes   	ON t2.medicine_id   = t1.id    	WHERE t3.name   = greater   
+select a from b
+SELECT the  , t1.nationality   	FROM affiliated_with   	JOIN writes   	ON t1.department_id   = t2.department_id    	WHERE t1.name   = 'terminal' 
+SELECT employee_id  , t2.document_description   	FROM what   	ORDER BY    	LIMIT 'terminal' 	
+SELECT t1.id  , category   	FROM user_profiles   
+SELECT product_name  , product_type_code   	FROM products_for_hire   
+SELECT product_type_code  , product_price   	FROM products   	WHERE product_type_code   = .   
+SELECT <  , t2.height   	FROM certificate   
+SELECT the  , name   	FROM location   	WHERE open_year   < 'terminal' 
+SELECT what  , location   	FROM course_authors_and_tutors   	WHERE eid   < X   
+SELECT country   	FROM course   	WHERE special_features   < codes   
+SELECT code   	FROM code   
+select a from b
+SELECT job_title  , country   	FROM products   	WHERE eid   < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT pname   	FROM church   
+SELECT investor   	FROM course   	GROUP BY investor   	HAVING COUNT(*)  < 'terminal' 
+SELECT pname  , age   	FROM film   	WHERE rating   = 'terminal' 
+SELECT investor  , customer_id   	FROM employees   	WHERE customer_id   < 'terminal' 
+SELECT t2.role_name  , salary   	FROM employees   	WHERE eid   < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT employee_id  , rating_in_percent   	FROM employees   	WHERE open_year   < location   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT and  , the   	FROM employees   	WHERE rating_in_percent   < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT home   	FROM professor   	WHERE founder   < job_title   
+SELECT eid  , writes   	FROM affiliated_with   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.employee_id   = t2.manager_id   
+select a from b
+SELECT film_id  , products   	FROM products   	WHERE t1.price   < 'terminal' 
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.storm_id  , t3.year   	FROM paperkeyphrase   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.authorname   = USPS   
+SELECT role_code  , product_price   	FROM products   	ORDER BY product_price   DESC 	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT channel_code  , product_type_code   	FROM draft_copies   
+SELECT document_id  , product_type_code   	FROM documents   
+SELECT t2.employee_name  , high_estimate   	FROM affected_region   
+SELECT t1.storm_id   	FROM customer_contact_channels   	WHERE t1.last_name   = USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.storm_id  , t1.storm_id   	FROM t1.storm_id   	JOIN product_characteristics   	ON t1.document_type_code   = t3.keyphraseid    	WHERE t1.document_type_code   = USPS   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t5.authorid  , investor   	FROM browser   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT Mark  , venue   	FROM Dina   
+SELECT open_date  , t4.venueid   	FROM writes   	WHERE destination   = t2.film_id   
+select a from b
+SELECT t4.name  , trade_name   	FROM writes   	JOIN writes   	ON t4.paperid   = t1.id    	WHERE trade_name   = t2.manager_id   	ORDER BY t1.price   
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.medication    	WHERE t1.authorname   = Peter Mertens   	ORDER BY t1.price   
+SELECT t2.journalid  , venue   	FROM church   
+select a from b
+select a from b
+SELECT t3.journalid  , t1.storm_id   	FROM paperkeyphrase   	JOIN medicine_enzyme_interaction   	ON t2.medicine_id   = t1.id    	WHERE t1.manufacturer_id   t1.name t2.organisation_details   
+SELECT Mark  , venue   	FROM of   	ORDER BY t1.money_requested   
+select a from b
+select a from b
+select a from b
+SELECT company  , the   	FROM church   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , writes   	FROM writes   	JOIN writes   	ON t2.medicine_id   = t1.id    	WHERE t1.nationality   = movies   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM paperkeyphrase   	JOIN writes   	ON t2.medicine_id   = t1.id    	WHERE t5.authorname   = movies   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t1.trade_name   	FROM paperkeyphrase   	JOIN t1.id   	ON t2.medicine_id   = t1.id    	WHERE t1.name   = name   
+SELECT <  , high_estimate   	FROM medicine   
+select a from b
+select a from b
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t4.paperid   = t1.id    	WHERE t1.nationality   = Dan   	ORDER BY t1.price   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT destruction_authorised_by_employee_id   	FROM locations   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.cid    	WHERE t1.name   = packages   
+SELECT the  , venue   	FROM what   
+SELECT document_id  , customer_id   	FROM customers_cards   
+SELECT name   	FROM venue   	WHERE dept_name   = eid   
+SELECT t1.address_line_1  , Boeing   	FROM and   
+SELECT investor  , address_line_1   	FROM course_authors_and_tutors   
+select a from b
+SELECT t1.storm_id  , t2.invoice_date   	FROM products   	JOIN products   	ON t1.account_id   = t2.product_id    	WHERE t1.product_id   = chervil   
+SELECT product_type_code  , receipt_date   	FROM is   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.venueid    	WHERE t2.year   = 4   
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.cid    	WHERE trade_name   = t2.manager_id   
+SELECT start_station_name  , directed_by   	FROM products   
+select a from b
+select a from b
+SELECT t1.storm_id  , producer   	FROM writes   	JOIN t1.id   	ON t3.product_id   = t2.medication    	WHERE t1.nationality   = numbers   
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN paper   	ON t3.venueid   = t2.venueid    	WHERE t1.authorname   = t1.attendance   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , producer   	FROM writes   	JOIN writes   	ON t3.journalid   = t2.venueid    	WHERE t1.name   = Dan   
+SELECT t3.venueid  , t3.year   	FROM category   	JOIN cite   	ON t3.venueid   = t2.venueid    	WHERE t1.name   = packages   
+select a from b
+SELECT t3.journalid  , t3.year   	FROM venue   	JOIN t1.id   	ON t2.account_name   = t2.artwork_id    	WHERE t2.account_name   t1.document_type_code Village   
+select a from b
+SELECT t2.authorid  , t3.year   	FROM writes   	JOIN t1.id   	ON t1.artwork_id   = t2.artwork_id    	WHERE t2.account_name   t1.document_type_code Drama   
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t3.venueid   = t1.id    	WHERE t5.authorname   = packages   
+select a from b
+select a from b
+SELECT t3.aid  , writes   	FROM writes   	JOIN writes   	ON t1.id   = t1.id    	WHERE t2.author   = t2.manager_id   
+SELECT t2.authorid  , t3.year   	FROM affiliated_with   	JOIN writes   	ON t1.id   = t1.id    	WHERE t1.project_id   = t2.manager_id   
+select a from b
+select a from b
+SELECT t2.name   	FROM writes   	JOIN writes   	ON t1.price   = t2.film_id    	WHERE t1.name   = Dan   
+SELECT t1.title  , t2.name   	FROM certificate   	JOIN of   	ON t1.id   = t2.id    	WHERE t2.temporary_acting   = 'terminal' 
+select a from b
+select a from b
+SELECT t2.name   	FROM swimmer   	JOIN musical   	ON t1.name   = t2.friend    	WHERE t1.nationality   = ids   
+SELECT t3.aid  , t1.lname   	FROM writes   	JOIN writes   	ON t1.course_id   = t2.course_id    	WHERE t1.nationality   = t2.course_id   
+SELECT t2.lname  , t1.student_capacity   	FROM course_authors_and_tutors   	JOIN student_course_registrations   	ON t1.course_id   = t2.course_id    	WHERE t1.dept_name   = 4560596484842   
+SELECT t3.journalid  , t1.price   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.cid    	WHERE t3.journalid   = t2.course_id   
+SELECT t1.id  , t1.name   	FROM course   	JOIN t1.id   	ON t1.id   = t2.camera_lens_id    	WHERE t1.nationality   = eid   
+SELECT t3.aid  , writes   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.cid    	WHERE t1.authorname   = t2.course_id   
+SELECT t4.authorid   	FROM writes   	JOIN writes   	ON t4.authorid   < t1.authorid    	WHERE t1.authorname   = Works t3.year   
+select a from b
+SELECT t5.authorid   	FROM writes   	JOIN writes   	ON t4.authorid   = t1.id    	WHERE writes   < t2.course_id   
+SELECT t4.authorid   	FROM writes   	JOIN writes   	ON t1.allergy   = t2.cid    	WHERE t1.authorname   = Peter t2.author_id   
+select a from b
+select a from b
+SELECT AVG(overall_rating  ) , MIN(overall_rating  )  	FROM certificate   	WHERE t3.festival_name   t3.festival_name (SELECT destruction_authorised_by_employee_id   	FROM t3.festival_name   ) 
+SELECT what  , the   	FROM what   	WHERE destination   < on   
+SELECT t3.festival_name  , t1.allergytype   	FROM nomination   	JOIN artwork   	ON t1.artwork_id   = t2.artwork_id    	WHERE t3.festival_name   t1.name China   
+SELECT t1.id  , COUNT(t4.prereq_id  )  	FROM swimmer   	JOIN match   	ON t1.id   = t2.i_id    	GROUP BY t2.name   
+select a from b
+SELECT artwork  , t1.price   	FROM physician   
+SELECT how_to_get_there  , MIN(sent  )  	FROM phone   	GROUP BY how_to_get_there   	HAVING COUNT(*)  >= 'terminal' 
+SELECT t1.title  , t1.nationality   	FROM certificate   	JOIN what   	ON t3.aid   = t2.rid    	WHERE t1.name   < on   
+SELECT nominee  , director   	FROM musical   	WHERE (age   < entrepreneur  ) or (hs   < Making  ) 
+SELECT t1.name  , t2.director   	FROM physician   	JOIN what   	ON t1.id   = t2.rid    	WHERE t1.name   = Boeing 737-800   
+SELECT t2.aid  , t1.storm_id   	FROM director   	JOIN producer   	ON t3.aid   < t2.aid    	WHERE t1.name   t2.name China   
+select a from b
+SELECT t1.storm_id  , t1.storm_id   	FROM writes   	JOIN writes   	ON t4.paperid   = t2.id    	WHERE t1.department_id   = product_price   
+SELECT t3.aid  , writes   	FROM writes   	JOIN writes   	ON t1.name   = t2.cid    	WHERE trade_name   < t2.manager_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t1.nationality   	FROM writes   	JOIN writes   	ON eid   = t1.id    	WHERE trade_name   = t2.manager_id   
+SELECT t1.storm_id  , writes   	FROM writes   	JOIN writes   	ON t1.name   = t2.cid    	WHERE t1.name   = Dan   
+select a from b
+select a from b
+SELECT t3.aid  , t3.aid   	FROM medicine   	JOIN management   	ON t1.id   = t1.id    	WHERE t1.name   = Peter t2.emp_num   
+SELECT t3.aid  , t1.nationality   	FROM medicine   	JOIN management   	ON t1.id   = t2.camera_lens_id    	WHERE t1.name   = of affiliated_with   
+SELECT eid  , by   	FROM is   	WHERE name   t2.department_id product_id   
+SELECT by  , by   	FROM manufacturers   	WHERE name   t2.department_id .   
+select a from b
+SELECT problem_log_id  , log_entry_description   	FROM problem_log   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.aid  , t1.nationality   	FROM affiliated_with   	JOIN t1.id   	ON t1.id   = t2.category_id    	WHERE t1.name   = t2.film_id   
+SELECT t1.storm_id  , t3.year   	FROM venue   	ORDER BY t1.project_id   
+SELECT investor  , writes   	FROM products   
+select a from b
+select a from b
+SELECT t1.id  , t1.trade_name   	FROM writes   	JOIN writes   	ON t1.festival_id   = t2.id    	WHERE t1.name   = Yes   
+select a from b
+SELECT money_requested  , money_requested   	FROM names   
+select a from b
+select a from b
+SELECT trade_name  , producer   	FROM producer   	JOIN browser   	ON t4.name   = t1.id    	ORDER BY producer   	LIMIT 'terminal' 	
+SELECT eid  , from   	FROM from   	ORDER BY trade_name   	LIMIT 'terminal' 	
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t4.authorid  , t1.project_id   	FROM writes   	JOIN grants   	ON t1.grant_id   = t2.journalid    	WHERE t1.grant_id   < 'terminal' 
+SELECT product_price  , product_price   	FROM products   	WHERE product_type_code   < 'terminal' 
+select a from b
+select a from b
+SELECT t1.id  , t1.trade_name   	FROM writes   	JOIN t1.id   	ON t1.id   = t1.id    	WHERE t1.manufacturer_id   = documents.document_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , t1.nationality   	FROM tags   	JOIN producer   	ON t1.uid   = t2.film_id    	WHERE t1.nationality   = Dan   
+select a from b
+select a from b
+SELECT log_entry_date  , document_id   	FROM 1989-04-24   	ORDER BY monthly   
+SELECT press  , money_requested   	FROM employee   	WHERE eid   < Peter t2.author_id   
+SELECT product_type_code  , product_type_code   	FROM products   	WHERE product_type_code   < 'terminal' 
+select a from b
+SELECT t1.product_id  , document_id   	FROM products   
+SELECT Woody  , t3.year   	FROM user_profiles   	JOIN artwork   	ON t1.uid   = t2.uid    	ORDER BY t1.money_requested   	LIMIT 'terminal' 	
+SELECT t1.product_id  , receipt_date   	FROM products   
+SELECT product_type_code  , MAX(t1.price  )  	FROM products   	GROUP BY product_type_code   
+select a from b
+SELECT money_requested  , money_requested   	FROM documents   	ORDER BY and   
+select a from b
+SELECT t1.exhibition_id  , openning_year   	FROM books   
+SELECT Regular  , t2.document_description   	FROM documents   
+SELECT Regular  , product_type_code   	FROM products   
+select a from b
+SELECT <  , t1.price   	FROM user_profiles   
+SELECT t5.datasetname  , receipt_date   	FROM station_company   
+SELECT t3.journalid  , t3.year   	FROM writes   	JOIN writes   	ON t4.authorid   = t2.medication    	WHERE t1.employee_id   = t2.manager_id   
+select a from b
+SELECT t1.id  , trade_name   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.film_id    	WHERE t1.department_id   = Question   
+select a from b
+select a from b
+SELECT investor  , t4.venueid   	FROM job_history   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT address_line_1  , address_line_1   	FROM problem_log   
+select a from b
+SELECT t1.storm_id  , t1.project_id   	FROM ref_calendar   
+select a from b
+SELECT film_id  , open_year   	FROM products   	WHERE product_name   < documents   
+select a from b
+select a from b
+select a from b
+SELECT t1.team_id  , Making   	FROM t1.team_id   
+SELECT t3.journalid  , t4.venueid   	FROM has_allergy   	JOIN has_allergy   	ON t1.allergy   = t1.id    	WHERE t1.subject_id   = t2.manager_id   
+select a from b
+select a from b
+select a from b
+SELECT t1.name  , open_year   	FROM browser   
+SELECT t1.team_id  , t1.team_id   	FROM names   	JOIN descriptions   	ON t1.team_id   = t1.team_id    	ORDER BY t3.release_year   	LIMIT 'terminal' 	
+select a from b
+SELECT t1.id  , Making   	FROM church   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT codes  , codes   	FROM codes   	ORDER BY codes   	LIMIT 'terminal' 	
+SELECT t3.journalid   	FROM paperkeyphrase   	JOIN paperkeyphrase   	ON t1.name   = t2.player_api_id    	WHERE t1.authorname   = the Zettlemoyer   
+select a from b
+SELECT open_year  , codes   	FROM codes   	ORDER BY codes   	LIMIT 'terminal' 	
+SELECT trade_name   	FROM code   
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN departments   	ON t1.department_id   = t2.cid    	WHERE t1.price   = t2.manager_id   
+SELECT t1.team_id  , Making   	FROM documents   
+select a from b
+SELECT t2.account_name   	FROM paperkeyphrase   	JOIN venue   	ON t3.paperid   = t2.paperid    	WHERE t1.name   = of t2.product_category_code   
+SELECT t4.name  , t1.team_id   	FROM category   	JOIN codes   	ON t1.team_id   = t1.team_id    	ORDER BY t3.release_year   	LIMIT 'terminal' 	
+SELECT t3.paperid  , t3.paperid   	FROM paperkeyphrase   	JOIN t4.paperid   	ON t4.paperid   = t2.i_id    	WHERE t4.paperid   = t2.storm_id   
+SELECT t2.journalid  , trade_name   	FROM venue   	JOIN prescribes   	ON t1.department_id   = t2.journalid    	WHERE t1.medication   = activitor   
+SELECT t1.id  , t1.trade_name   	FROM writes   	JOIN writes   	ON t3.paperid   = t2.paperid    	WHERE trade_name   = t2.manager_id   
+SELECT t2.name  , t1.team_id   	FROM writes   	JOIN prescribes   	ON t1.id   = t2.id    	WHERE t1.name   = t2.manager_id   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT paperkeyphrase  , high_estimate   	FROM medicine_enzyme_interaction   
+SELECT t1.id  , t1.name   	FROM agency   	JOIN problem_log   	ON t1.tourist_attraction_id   = t2.tourist_attraction_id    
+select a from b
+select a from b
+SELECT t1.name  , t1.stars   	FROM user_profiles   	JOIN category   	ON t1.id   = t1.name    	GROUP BY t1.name   	HAVING MAX(t1.stars  )  < 'terminal' 
+SELECT t1.id  , t1.name   	FROM and   	JOIN problem_log   	ON t1.albumid   = t2.film_id    
+SELECT t1.storm_id  , t1.storm_id   	FROM paperkeyphrase   	JOIN paperkeyphrase   	ON documents.shipping_agent_code   = t3.keyphraseid    	WHERE documents.document_id   = .   
+SELECT t1.id  , trade_name   	FROM affiliated_with   	JOIN medicine_enzyme_interaction   	ON t1.id   = t1.id    	WHERE trade_name   = t2.manager_id   
+SELECT t3.aid  , t4.venueid   	FROM writes   	JOIN author   	ON t1.name   = t2.player_api_id    	WHERE t1.name   = of t3.departmentid   
+SELECT t1.id  , t1.trade_name   	FROM writes   	JOIN t1.id   	ON t1.id   = t2.id    	WHERE t1.name   = of t3.departmentid   
+SELECT roomid  , product_price   	FROM product_price   	WHERE document_id   < product_name   
+SELECT roomid  , t2.invoice_date   	FROM t2.invoice_date   	JOIN products   	ON documents.document_id   = ref_shipping_agents.shipping_agent_code    	WHERE baseprice   < 'terminal' 
+select a from b
+SELECT t3.journalid  , physician   	FROM affiliated_with   	JOIN affiliated_with   	ON t1.name   = t2.pcp    	WHERE t1.name   = mac   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.title  , t1.price   	FROM tags   	JOIN writes   	ON t3.name   = t2.film_id    	WHERE t1.name   = ids   
+select a from b
+SELECT t1.product_id  , receipt_date   	FROM documents   
+SELECT t1.storm_id  , t1.storm_id   	FROM agency   	JOIN medicine_enzyme_interaction   	ON t1.id   = t2.id    	WHERE documents.document_id   = documents.document_id   
+SELECT t1.region_id   	FROM medicine_enzyme_interaction   	JOIN paperkeyphrase   	ON documents.shipping_agent_code   = ref_shipping_agents.shipping_agent_code    	WHERE documents.document_id   = catalog_level_number   
+select a from b
+select a from b
+SELECT t2.paperid  , t3.year   	FROM writes   	JOIN writes   	ON t1.paperid   = t2.paperid    	WHERE t1.authorname   = of Allen   	ORDER BY t3.release_year   
+SELECT codes  , codes   	FROM user_profiles   	WHERE destination   < 'terminal' 
+SELECT t3.aid  , t3.release_year   	FROM writes   	JOIN writes   	ON t2.did   = t2.instid    	WHERE t2.year   < 'terminal' 
+select a from b
+select a from b
+SELECT t3.aid  , writes   	FROM writes   	GROUP BY trade_name   	HAVING COUNT(t1.price  )  < 'terminal' 
+select a from b
+select a from b
+SELECT Allen   	FROM writes   	JOIN writes   	ON t1.grant_id   = t1.authorid    	WHERE t3.distance   < 'terminal' 
+select a from b
+select a from b
+select a from b
+SELECT t1.paperid   	FROM writes   	JOIN product_characteristics   	ON t1.product_id   = t2.product_id    	WHERE t3.release_year   < USPS   
+select a from b
+SELECT t1.id  , <   	FROM tags   	JOIN medicine_enzyme_interaction   	ON t1.employeeid   = t2.physician    	WHERE interaction_type   = ids   
+SELECT t1.name  , codes   	FROM paperkeyphrase   	JOIN review   	ON t1.u_id   = t2.film_id    
+select a from b
+SELECT channel_code  , typical_buying_price   	FROM employees   	WHERE product_name   = cumin   
+SELECT Pen  , high_estimate   	FROM meeting   
+SELECT t1.forename  , t3.release_year   	FROM ids   	JOIN writes   	ON t1.id   = t2.product_id    	WHERE t3.distance   < t2.manager_id   
+select a from b
+select a from b
+SELECT <  , 1989-03-16   	FROM writes   	JOIN writes   	ON t1.grant_id   = t2.product_id    	WHERE t3.distance   < 'terminal' 
+SELECT t2.paperid  , t4.name   	FROM writes   	JOIN professor   	ON t1.price   = t2.film_id    	WHERE t4.name   = Woody Allen   
+select a from b
+SELECT <  , MIN(product_price  )  	FROM products   	GROUP BY product_type_code   	ORDER BY JOB_ID(product_price  )  DESC 	LIMIT 'terminal' 	
+SELECT product_name  , t2.job_title   	FROM products_for_hire   	WHERE product_name   < product_name   
+select a from b
+SELECT <  , t1.grant_id   	FROM venue   	JOIN cite   	ON documents.shipping_agent_code   = t3.keyphraseid    	WHERE t3.release_year   < 'terminal' 
+select a from b
+SELECT for  , ?   	FROM writes   	JOIN are   	ON t1.department_id   < t2.department_id    	WHERE eid   < ?   
+SELECT t2.title  , trade_name   	FROM writes   	JOIN patient   	ON t1.price   = t1.id    	WHERE t1.brand   < .   
+SELECT t3.aid  , t3.release_year   	FROM writes   	JOIN writes   	ON t1.ssn   = t2.patient    	WHERE t2.year   < 'terminal' 
+SELECT t3.aid  , t3.aid   	FROM writes   	JOIN departments   	ON t1.department_id   = t2.cid    	WHERE t1.price   = t2.manager_id   
+select a from b
+select a from b
+SELECT t1.storm_id  , t1.storm_id   	FROM paperkeyphrase   	JOIN paperkeyphrase   	ON t1.festival_id   = t1.id    	WHERE documents.document_id   = documents.document_id   
+SELECT t3.aid  , writes   	FROM affiliated_with   	JOIN writes   	ON t3.paperid   = t2.medication    	WHERE t1.authorname   < most   
+SELECT t3.journalid  , t3.aid   	FROM writes   	JOIN writes   	ON t1.department_id   = t2.player_api_id    	WHERE trade_name   < t2.manager_id   
+select a from b
+SELECT product_color  , product_price   	FROM products   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t2.authorid  , t1.nationality   	FROM writes   	JOIN journal   	ON t2.jid   = t2.journalid    	WHERE t1.name   = .   
+select a from b
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t3.paperid   	FROM writes   	JOIN writes   	ON t4.paperid   = t2.storm_id    	WHERE t1.name   = Mark Zettlemoyer   
+select a from b
+SELECT product_type_code  , meeting   	FROM meeting   
+SELECT Mark   	FROM venue   	JOIN writes   	ON t3.paperid   = t2.id    	WHERE trade_name   = activitor   
+select a from b
+select a from b
+select a from b
+select a from b
+SELECT t1.id  , <   	FROM writes   	JOIN products   	ON t1.manufacturer   = t2.player_api_id    	WHERE t1.brand   = Dan   
+SELECT t2.title  , t1.price   	FROM medicine_enzyme_interaction   	JOIN products   	ON t1.price   < t2.film_id    	WHERE t1.price   < codes   
+select a from b
+SELECT t3.aid  , t1.nationality   	FROM writes   	JOIN writes   	ON t3.paperid   = t1.id    	WHERE t1.name   = meeting   
