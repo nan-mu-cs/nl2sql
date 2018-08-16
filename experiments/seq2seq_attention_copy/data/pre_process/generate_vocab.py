@@ -206,7 +206,6 @@ def get_decode_vocab_no_weight(outfile):
 
 def get_encode_vocab_no_weight(outfile):
     cnt = collections.Counter()
-    # cnt, _, _ = get_schema_vocab("schema")
     cnt.update(get_encode_Query(None, 'train', False))
     cnt.update(get_encode_Query(None, 'dev', False))   
     cnt.update(get_schema_vocab("schema")[0])
@@ -218,7 +217,6 @@ def decode_encode_copy(outfile):
 
     cnt.update(get_encode_Query(None, 'train', False))
     cnt.update(get_encode_Query(None, 'dev', False))   
-    # cnt.update(get_decode_SQL(None, "train", False))
     cnt.update(get_schema_vocab("schema")[0])
     cnt.update(sql_key_words())
 
@@ -231,31 +229,30 @@ if __name__ == "__main__":
     
     count_databases()
     
-    # if not os.path.exists(os.path.join(prefix,'dev')):
-    #     os.makedirs(os.path.join(prefix,'dev'))
-    # if not os.path.exists(os.path.join(prefix,'train')):
-    #     os.makedirs(os.path.join(prefix,'train'))
+    if not os.path.exists(os.path.join(prefix,'dev')):
+        os.makedirs(os.path.join(prefix,'dev'))
+    if not os.path.exists(os.path.join(prefix,'train')):
+        os.makedirs(os.path.join(prefix,'train'))
     if not os.path.exists(os.path.join(prefix,'test')):
         os.makedirs(os.path.join(prefix,'test'))
         
-    # get_decode_SQL(os.path.join(prefix,'dev', "dev_decode.txt"), "dev", True)        
+    get_decode_SQL(os.path.join(prefix,'dev', "dev_decode.txt"), "dev", True)        
     get_decode_SQL(os.path.join(prefix,'test', "test_decode.txt"), "test", True)
-    # get_decode_SQL(os.path.join(prefix,'train', "train_decode.txt"), "train", True)
+    get_decode_SQL(os.path.join(prefix,'train', "train_decode.txt"), "train", True)
 
     get_encode_Query(os.path.join(prefix,'test', "test_encode.txt"), "test", True)
-    # get_encode_Query(os.path.join(prefix,'dev', "dev_encode.txt"), "dev", True)
-    # get_encode_Query(os.path.join(prefix,'train', "train_encode.txt"), "train", True)
+    get_encode_Query(os.path.join(prefix,'dev', "dev_encode.txt"), "dev", True)
+    get_encode_Query(os.path.join(prefix,'train', "train_encode.txt"), "train", True)
     
-#     get_encode_vocab_no_weight(os.path.join(prefix, "encode_vocab.txt"))
+    get_encode_vocab_no_weight(os.path.join(prefix, "encode_vocab.txt"))
     
-#     get_decode_vocab_no_weight(os.path.join(prefix, "decode_vocab.txt"))
-#     get_decode_vocab_no_weight(os.path.join(prefix, "decode_copy_encode_vocab.txt"))
+    get_decode_vocab_no_weight(os.path.join(prefix, "decode_vocab.txt"))
+    get_decode_vocab_no_weight(os.path.join(prefix, "decode_copy_encode_vocab.txt"))
     
-    # todo: where to generate dev_copy_decode?
-    # where to generate schema locations?
+
     get_mask(os.path.join(prefix, "test", "test_decoder_mask.txt"), "test",os.path.join(prefix, "decode_vocab.txt"), True)
-    # get_mask(os.path.join(prefix, "dev", "dev_decoder_mask.txt"), "dev",os.path.join(prefix, "decode_vocab.txt"), True)
-    # get_mask(os.path.join(prefix, "train", "train_decoder_mask.txt"), "train", os.path.join(prefix, "decode_vocab.txt"),True)
+    get_mask(os.path.join(prefix, "dev", "dev_decoder_mask.txt"), "dev",os.path.join(prefix, "decode_vocab.txt"), True)
+    get_mask(os.path.join(prefix, "train", "train_decoder_mask.txt"), "train", os.path.join(prefix, "decode_vocab.txt"),True)
     
     
     

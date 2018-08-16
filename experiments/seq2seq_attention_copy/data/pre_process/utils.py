@@ -44,7 +44,7 @@ prefix = '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_processe
 # prefix = '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_radn_split_processed'
 
 
-VALUE_NUM_SYMBOL = "{VALUE}"
+VALUE_NUM_SYMBOL = "{value}"
 
 # todo: how to lower? how to delete number?
 
@@ -67,19 +67,24 @@ def strip_nl(nl):
     nl = nl.replace(";"," ; ").replace(",", " , ").replace("?", " ? ").replace("\t"," ")
     nl = nl.replace("(", " ( ").replace(")", " ) ")
     
+    str_1 = re.findall("\"[^\"]*\"", nl)
+    str_2 = re.findall("\'[^\']*\'", nl)
+    float_nums = re.findall("[-+]?\d*\.\d+", query)
+    
+    values = str_1 + str_2 + float_nums
+    for val in values:
+        nl = nl.replace(val.strip(), VALUE_NUM_SYMBOL)
+    
+    
     raw_keywords = nl.strip().split()
     for tok in raw_keywords:
         if "." in tok:
-            number = re.findall("[-+]?\d*\.\d+", tok)
-            if len(number)>0 and number[0] == tok:
-                nl_keywords.append(tok.lower())
-            else:
-                to = tok.replace(".", " . ").split()
-                to = [t.lower() for t in to if len(t)>0]
-                nl_keywords.extend(to)
+            to = tok.replace(".", " . ").split()
+            to = [t.lower() for t in to if len(t)>0]
+            nl_keywords.extend(to)
         elif "'" in tok and tok[0]!="'" and tok[-1]!="'":
             to = word_tokenize(tok)
-            to = to = [t.lower() for t in to if len(t)>0]
+            to = [t.lower() for t in to if len(t)>0]
             nl_keywords.extend(to)      
         elif len(tok) > 0:
             nl_keywords.append(tok.lower())
@@ -128,11 +133,9 @@ def strip_query(query):
             query_keywords.append(tok.lower())
     query_keywords = [w for w in query_keywords if len(w)>0]
     query_sentence = " ".join(query_keywords)
-    #if '>' in query_sentence or '=' in query_sentence:
-    #    print query_sentence
     query_sentence = query_sentence.replace("> =", ">=").replace("! =", "!=").replace("< =", "<=")
-    #if '>' in query_sentence or '=' in query_sentence:
-    #    print query_sentence
+    if '>' in query_sentence or '=' in query_sentence:
+       print query_sentence
     return query_sentence.split()
 
 
