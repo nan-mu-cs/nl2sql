@@ -1,2 +1,3 @@
 *.pyc
 *.DS_Store
+experiments/seq2seq_attention_copy/data/datasets/*
