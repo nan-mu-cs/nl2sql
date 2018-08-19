@@ -12,21 +12,14 @@ import json
 import os.path
 from nltk import word_tokenize
 np.random.seed(12345)
-infiles = { 'train':      # 'vocab_encode_nl', 'vocab_decode_sql' 
-           '/home/lily/dw633/seq2seq/seq2sql/data/mix_data/raw_data/train.json',   
-            'dev':        # 'vocab_decode_nl':
-           '/home/lily/dw633/seq2seq/seq2sql/data/mix_data/raw_data/dev.json',
-           'schema':
-           '/home/lily/dw633/seq2seq/seq2sql/data/mix_data/raw_data/tables.json'
-}
+
 VALUE_NUM_SYMBOL = "{value}"
 
 
 def get_schema_vocab_mapping():
     column_map = {}
     table_map = {}
-    # todo: there is no interpretation for wikisql
-    with open( '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data/tables.json') as f:
+    with open( '../../data/datasets/tables.json') as f:
         ex_list = json.load(f)
         for table_dict in ex_list:
             db_id = table_dict["db_id"]
@@ -64,10 +57,7 @@ def get_average(words, model):
                 print "%s not recognized; using id instead." % word
             else:
                 if word in separate_word_dict:
-                    vector += separate_word_dict[word]
-#                 elif word[0] == "'" or word[0] == '"' or word[-1] == "'" or word[-1] == '"':
-#                     vector += separate_word_dict["{value}"]
-#                     print "%s not recognized; using {value} instead." % word     
+                    vector += separate_word_dict[word]   
                 else:
                     tmp_vec = np.random.uniform(-0.25, 0.25, size=len(model['the']))
                     vector += tmp_vec
@@ -140,7 +130,6 @@ def read_embeddings(embeddings_path, vocab_path, embed_dim, mode="source"):
     if os.path.isfile(filename):
         return read_embed_from_file(filename, vocab_)
     else:
-        # add already randomed into it
         separate_word_dict = {}
         gensim_model = KeyedVectors.load_word2vec_format(embeddings_path, binary=False)
         # todo: how to deal with value
@@ -151,13 +140,6 @@ def read_embeddings(embeddings_path, vocab_path, embed_dim, mode="source"):
     
     return embedding_mat
 
-# def read_embeddings_target(embeddings_path, vocab_path):
-#   gensim_model = KeyedVectors.load_word2vec_format(embeddings_path, binary=False)
-#   vocab_, _, _ = vocab.read_vocab(vocab_path)
-#   vecs = [get_word_vector(w, gensim_model) for w in vocab_]
-#   embedding_mat = np.asarray(vecs, dtype=np.float32)
-
-#   return embedding_mat
 
 if __name__ == "__main__":
     column_map, table_map = get_schema_vocab_mapping()
