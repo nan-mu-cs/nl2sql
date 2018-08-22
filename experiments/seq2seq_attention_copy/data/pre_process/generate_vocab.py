@@ -78,7 +78,7 @@ def get_mask(infile_group, outfile, infile, vocabfile, output=True):
     
     
     
-    _, used_databases, db_dict_rev = get_schema_vocab("schema")
+    _, used_databases, db_dict_rev = get_schema_vocab(infile_group, "schema")
     key_words = sql_key_words()
     infile_name = infile_group[infile]
     if output:
