@@ -418,7 +418,7 @@ def write_specs(spec):
     with open(infer_test_file_path, 'w') as f:
         yaml.dump(infer_test_spec, f, default_flow_style=False)
 
-def write_bash_scripts(spec):
+def write_bash_scripts(path, spec):
     model_dir = spec["model_dir"]
     dev_questions = " ".join(spec["required_files"]["dev/dev_encode.txt"])
     test_questions = " ".join(spec["required_files"]["test/test_encode.txt"])
@@ -438,16 +438,11 @@ def write_bash_scripts(spec):
     test_gold = " ".join(spec["required_files"][test_decode])
     train_gold = " ".join(spec["required_files"][train_decode])
 
-    if "restarting" in model_dir:
-        top = "restarting"
-    else:
-        top = "seq2seq"
-
     script = """
     #!/bin/bash
 
     cwd=$(pwd)
-    cd ~/%s/seq2sql_copy_mask_replicate/
+    cd ~/%s/
     export MODEL_DIR=%s
     export CONFIG_DIR=$MODEL_DIR/config
     DEV_QUESTIONS="%s"
@@ -458,17 +453,9 @@ def write_bash_scripts(spec):
     echo $MODEL_DIR >> $MODEL_DIR/experiment_log.txt
     echo "Starting train: $(date)" >> $MODEL_DIR/experiment_log.txt
     python -m bin.train --config_paths="$CONFIG_DIR/train.yml"
-    #echo "Starting infer: $(date)" >> $MODEL_DIR/experiment_log.txt
-    #python -m bin.infer --config_path="$CONFIG_DIR/infer.yml" > $MODEL_DIR/output.txt
-    #echo "Starting infer on train: $(date)" >> $MODEL_DIR/experiment_log.txt
-    #python -m bin.infer --config_path="$CONFIG_DIR/infer_train.yml" > $MODEL_DIR/output_train.txt
-    #echo "Starting evaluation: $(date)" >> $MODEL_DIR/experiment_log.txt
-    #python quick_eval.py -q $DEV_QUESTIONS -g $DEV_GOLD -s $MODEL_DIR/output.txt > $MODEL_DIR/quick_eval.txt
-    #echo "Starting evaluation on train: $(date)" >> $MODEL_DIR/experiment_log.txt
-    #python quick_eval.py -q $TRAIN_QUESTIONS -g $TRAIN_GOLD -s $MODEL_DIR/output_train.txt > $MODEL_DIR/quick_eval_train.txt
     echo "$(date) $MODEL_DIR" >> experiments_to_review.txt
     cd $cwd
-    """ % (top, model_dir, dev_questions, dev_gold, train_questions, train_gold)
+    """ % (path, model_dir, dev_questions, dev_gold, train_questions, train_gold)
 
     script_fname = os.path.join(model_dir, "experiment.sh")
     with open(script_fname, 'w') as f:
@@ -480,7 +467,7 @@ def write_bash_scripts(spec):
     #!/bin/bash
 
     cwd=$(pwd)
-    cd ~/%s/seq2sql_copy_mask_replicate/
+    cd ~/%s/
     export MODEL_DIR=%s
     export CONFIG_DIR=$MODEL_DIR/config
     DEV_QUESTIONS="%s"
@@ -489,8 +476,6 @@ def write_bash_scripts(spec):
     TRAIN_GOLD="%s"
 
     echo $MODEL_DIR >> $MODEL_DIR/experiment_log.txt
-    #echo "Starting train: $(date)" >> $MODEL_DIR/experiment_log.txt
-    #python -m bin.train --config_paths="$CONFIG_DIR/train.yml"
     echo "Starting infer: $(date)" >> $MODEL_DIR/experiment_log.txt
     python -m bin.infer --config_path="$CONFIG_DIR/infer.yml" > $MODEL_DIR/output.txt
     echo "Starting infer on test: $(date)" >> $MODEL_DIR/experiment_log.txt
@@ -498,12 +483,9 @@ def write_bash_scripts(spec):
     echo "Starting infer on train: $(date)" >> $MODEL_DIR/experiment_log.txt
     python -m bin.infer --config_path="$CONFIG_DIR/infer_train.yml" > $MODEL_DIR/output_train.txt
     echo "Starting evaluation: $(date)" >> $MODEL_DIR/experiment_log.txt
-    python quick_eval.py -q $DEV_QUESTIONS -g $DEV_GOLD -s $MODEL_DIR/output.txt > $MODEL_DIR/quick_eval.txt
-    echo "Starting evaluation on train: $(date)" >> $MODEL_DIR/experiment_log.txt
-    python quick_eval.py -q $TRAIN_QUESTIONS -g $TRAIN_GOLD -s $MODEL_DIR/output_train.txt > $MODEL_DIR/quick_eval_train.txt
     echo "$(date) $MODEL_DIR" >> experiments_to_review.txt
     cd $cwd
-    """ % (top, model_dir, dev_questions, dev_gold, train_questions, train_gold)
+    """ % (path, model_dir, dev_questions, dev_gold, train_questions, train_gold)
 
     script_fname = os.path.join(model_dir, "experiment_infer.sh")
     with open(script_fname, 'w') as f:
@@ -516,64 +498,63 @@ def write_bash_scripts(spec):
     #!/bin/bash
 
     cwd=$(pwd)
-    cd ~/%s/seq2sql_copy_mask_replicate/
+    cd ~/%s/
     export MODEL_DIR=%s
     export CONFIG_DIR=$MODEL_DIR/config
     TEST_QUESTIONS="%s"
     TEST_GOLD="%s"
 
     echo $MODEL_DIR >> $MODEL_DIR/experiment_log.txt
-    echo "Training on train + dev: $(date)" >> $MODEL_DIR/experiment_log.txt
-    python -m bin.train --config_paths="$CONFIG_DIR/train_with_dev.yml"
     echo "Starting infer on test: $(date)" >> $MODEL_DIR/experiment_log.txt
     python -m bin.infer --config_path="$CONFIG_DIR/infer_test.yml" > $MODEL_DIR/test_output.txt
     echo "Starting evaluation of test: $(date)" >> $MODEL_DIR/experiment_log.txt
     python quick_eval.py -q $TEST_QUESTIONS -g $TEST_GOLD -s $MODEL_DIR/test_output.txt > $MODEL_DIR/quick_eval_test.txt
     echo "$(date) TEST $MODEL_DIR" >> experiments_to_review.txt
     cd $cwd
-    """ % (top, model_dir, test_questions, test_gold)
+    """ % (path, model_dir, test_questions, test_gold)
 
     script_fname = os.path.join(model_dir, "run_test.sh")
     with open(script_fname, 'w') as f:
         f.write(test_script)
     os.chmod(script_fname, 0775)
 
-    curves_script = """#!/bin/bash
-export MODEL_DIR=%s
-export CONFIG_DIR=$MODEL_DIR/config
-export PRED_DIR=$MODEL_DIR/predictions
-mkdir -p $PRED_DIR
-DEV_GOLD="%s"
-TRAIN_GOLD="%s"
+    curves_script = """
+    #!/bin/bash
+    export MODEL_DIR=%s
+    export CONFIG_DIR=$MODEL_DIR/config
+    export PRED_DIR=$MODEL_DIR/predictions
+    mkdir -p $PRED_DIR
+    DEV_GOLD="%s"
+    TRAIN_GOLD="%s"
 
-cwd=$(pwd)
-cd ~/%s/seq2sql_copy_mask_replicate/
-for fname in $MODEL_DIR/model.ckpt-*.index
-do
-    echo $fname
-    tmp=${fname#*ckpt-}
-    num=${%s}
-    if [ -s ${PRED_DIR}/predictions-$num.txt ]
-    then
-        echo "Already evaluated."
-    else
-        python -m bin.infer \\
-          --config_path="$CONFIG_DIR/infer.yml"\\
-          --checkpoint_path ${MODEL_DIR}/model.ckpt-$num \\
-          >  ${PRED_DIR}/predictions-$num.txt
+    cwd=$(pwd)
+    cd ~/%s/%s/
+    for fname in $MODEL_DIR/model.ckpt-*.index
+    do
+        echo $fname
+        tmp=${fname#*ckpt-}
+        num=${%s}
+        if [ -s ${PRED_DIR}/predictions-$num.txt ]
+        then
+            echo "Already evaluated."
+        else
+            python -m bin.infer \\
+              --config_path="$CONFIG_DIR/infer.yml"\\
+              --checkpoint_path ${MODEL_DIR}/model.ckpt-$num \\
+              >  ${PRED_DIR}/predictions-$num.txt
 
-        echo "==================TRAIN================" \\
-          >> ${PRED_DIR}/predictions-$num.txt
+            echo "==================TRAIN================" \\
+              >> ${PRED_DIR}/predictions-$num.txt
 
-        python -m bin.infer \\
-          --config_path="$CONFIG_DIR/infer_train.yml"\\
-          --checkpoint_path ${MODEL_DIR}/model.ckpt-$num \\
-          >>  ${PRED_DIR}/predictions-$num.txt
-    fi
-done
-python plot_training_curves.py $PRED_DIR -t $TRAIN_GOLD -d $DEV_GOLD
-cd $cwd
-    """  %(model_dir, dev_gold, train_gold, top, "tmp%.*")
+            python -m bin.infer \\
+              --config_path="$CONFIG_DIR/infer_train.yml"\\
+              --checkpoint_path ${MODEL_DIR}/model.ckpt-$num \\
+              >>  ${PRED_DIR}/predictions-$num.txt
+        fi
+    done
+    python plot_training_curves.py $PRED_DIR -t $TRAIN_GOLD -d $DEV_GOLD
+    cd $cwd
+    """  %(model_dir, dev_gold, train_gold, path, "tmp%.*")
     script_fname = os.path.join(model_dir, "plot_training_curves.sh")
     with open(script_fname, 'w') as f:
         f.write(curves_script)
@@ -585,10 +566,10 @@ def main():
     parser.add_argument("spec_file", help="Specification file path")
     args = parser.parse_args()
     simple_spec = parse_yaml(args.spec_file)
-    # print simple_spec
     expanded_spec = expand_spec(simple_spec)
     write_specs(expanded_spec)
-    write_bash_scripts(expanded_spec)
+    path = os.getcwd()
+    write_bash_scripts(path, expanded_spec)
 
 if __name__=="__main__":
     main()

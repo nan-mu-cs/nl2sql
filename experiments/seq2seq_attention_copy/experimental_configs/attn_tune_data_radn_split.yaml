@@ -1,8 +1,8 @@
 model: AttentionSeq2Seq
 model_dir: AttentionSeq2Seq_tune_model_data_radn_split
-data_directories: /home/lily/dw633/seq2seq/seq2sql_copy_mask_replicate/data/datasets/data_radn_split_processed/
+data_directories: ../../data/datasets/data_radn_split_processed/
 model_params:
-  embedding.file: /home/lily/dw633/seq2seq/seq2sql_copy_mask_replicate/data/glove/glove.6B.100d.txt
+  embedding.file: ../../data/glove/glove.6B.100d.txt
   embedding.tune: True
   attention.class: seq2seq.decoders.attention.AttentionLayerDot
   attention.params:

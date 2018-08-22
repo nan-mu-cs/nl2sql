@@ -28,8 +28,7 @@ import json
 import os
 from nltk.tokenize import word_tokenize
 import re
-from utils import output_vocab_to_txt, infiles, count_databases, strip_query, strip_nl, prefix
-# sys.setdefaultencoding("utf-8")
+from utils import output_vocab_to_txt, infiles, count_databases, strip_query, strip_nl
 
 parser = argparse.ArgumentParser(
     description="Generate vocabulary for a tokenized text file.")
@@ -48,10 +47,10 @@ parser.add_argument(
 args = parser.parse_args()
     
 
-def get_encode_Query(outfile, infile, output=False):
+def get_encode_Query(infile_group, outfile, infile, output=False):
     max_nl = 0
     cnt = collections.Counter()
-    infile = infiles[infile]
+    infile = infile_group[infile]
     if output:
         outfile = open(outfile, 'w')
     
@@ -75,15 +74,13 @@ def get_encode_Query(outfile, infile, output=False):
     return cnt
 
 
-def get_mask(outfile, infile, vocabfile, output=True):
+def get_mask(infile_group, outfile, infile, vocabfile, output=True):
     
     
     
     _, used_databases, db_dict_rev = get_schema_vocab("schema")
-    # print db_dict_rev
     key_words = sql_key_words()
-    # print db_dict_rev
-    infile_name = infiles[infile]
+    infile_name = infile_group[infile]
     if output:
         outfile = open(outfile, 'w')
     vocab_ls = []
@@ -120,11 +117,11 @@ def get_mask(outfile, infile, vocabfile, output=True):
         
     
         
-def get_decode_SQL(outfile, infile, output=False):
+def get_decode_SQL(infile_group, outfile, infile, output=False):
     max_sql = 0
     
     cnt = collections.Counter()
-    infile = infiles[infile]
+    infile = infile_group[infile]
     if output:
         outfile = open(outfile, 'w')
     
@@ -145,11 +142,11 @@ def get_decode_SQL(outfile, infile, output=False):
     print "max sql length of", infile, "is", max_sql
     return cnt
 
-def get_schema_vocab(infile):
+def get_schema_vocab(infile_group, infile):
     used_databases = set()
     cnt = collections.Counter()
     db_dict_rev = {}
-    with open(infiles[infile]) as f:
+    with open(infile_group[infile]) as f:
         ex_list = json.load(f)
         for table_dict in ex_list:
             db_id = table_dict["db_id"]
@@ -193,31 +190,28 @@ def sql_key_words():
     return cnt
 
 
-def get_decode_vocab_no_weight(outfile):
+def get_decode_vocab_no_weight(infile_group, outfile):
 
-
-    # update the sql of train & nl of dev
-    # cnt.update(get_decode_SQL(None, "train", False))
-    cnt, _, db_dict_rev = get_schema_vocab("schema_small")
+    cnt, _, db_dict_rev = get_schema_vocab(infile_group, "schema_small")
     cnt.update(sql_key_words())
     output_vocab_to_txt(outfile, cnt)
 
 
 
-def get_encode_vocab_no_weight(outfile):
+def get_encode_vocab_no_weight(infile_group, outfile):
     cnt = collections.Counter()
-    cnt.update(get_encode_Query(None, 'train', False))
-    cnt.update(get_encode_Query(None, 'dev', False))   
-    cnt.update(get_schema_vocab("schema")[0])
+    cnt.update(get_encode_Query(infile_group, None, 'train', False))
+    cnt.update(get_encode_Query(infile_group, None, 'dev', False))   
+    cnt.update(get_schema_vocab(infile_group, "schema")[0])
     output_vocab_to_txt(outfile, cnt)
 
     
-def decode_encode_copy(outfile):
+def decode_encode_copy(infile_group, outfile):
     cnt = collections.Counter()
 
-    cnt.update(get_encode_Query(None, 'train', False))
-    cnt.update(get_encode_Query(None, 'dev', False))   
-    cnt.update(get_schema_vocab("schema")[0])
+    cnt.update(get_encode_Query(infile_group, None, 'train', False))
+    cnt.update(get_encode_Query(infile_group, None, 'dev', False))   
+    cnt.update(get_schema_vocab(infile_group, "schema")[0])
     cnt.update(sql_key_words())
 
     output_vocab_to_txt(outfile, cnt)
@@ -227,32 +221,34 @@ def decode_encode_copy(outfile):
     
 if __name__ == "__main__":
     
-    count_databases()
-    
-    if not os.path.exists(os.path.join(prefix,'dev')):
-        os.makedirs(os.path.join(prefix,'dev'))
-    if not os.path.exists(os.path.join(prefix,'train')):
-        os.makedirs(os.path.join(prefix,'train'))
-    if not os.path.exists(os.path.join(prefix,'test')):
-        os.makedirs(os.path.join(prefix,'test'))
-        
-    get_decode_SQL(os.path.join(prefix,'dev', "dev_decode.txt"), "dev", True)        
-    get_decode_SQL(os.path.join(prefix,'test', "test_decode.txt"), "test", True)
-    get_decode_SQL(os.path.join(prefix,'train', "train_decode.txt"), "train", True)
 
-    get_encode_Query(os.path.join(prefix,'test', "test_encode.txt"), "test", True)
-    get_encode_Query(os.path.join(prefix,'dev', "dev_encode.txt"), "dev", True)
-    get_encode_Query(os.path.join(prefix,'train', "train_encode.txt"), "train", True)
-    
-    get_encode_vocab_no_weight(os.path.join(prefix, "encode_vocab.txt"))
-    
-    get_decode_vocab_no_weight(os.path.join(prefix, "decode_vocab.txt"))
-    get_decode_vocab_no_weight(os.path.join(prefix, "decode_copy_encode_vocab.txt"))
-    
+    for key in infiles.keys():
+        infile_group, prefix = infiles[key]
+        count_databases(infile_group)
+        if not os.path.exists(os.path.join(prefix,'dev')):
+            os.makedirs(os.path.join(prefix,'dev'))
+        if not os.path.exists(os.path.join(prefix,'train')):
+            os.makedirs(os.path.join(prefix,'train'))
+        if not os.path.exists(os.path.join(prefix,'test')):
+            os.makedirs(os.path.join(prefix,'test'))
 
-    get_mask(os.path.join(prefix, "test", "test_decoder_mask.txt"), "test",os.path.join(prefix, "decode_vocab.txt"), True)
-    get_mask(os.path.join(prefix, "dev", "dev_decoder_mask.txt"), "dev",os.path.join(prefix, "decode_vocab.txt"), True)
-    get_mask(os.path.join(prefix, "train", "train_decoder_mask.txt"), "train", os.path.join(prefix, "decode_vocab.txt"),True)
-    
-    
+        get_decode_SQL(infile_group, os.path.join(prefix,'dev', "dev_decode.txt"), "dev", True)        
+        get_decode_SQL(infile_group, os.path.join(prefix,'test', "test_decode.txt"), "test", True)
+        get_decode_SQL(infile_group, os.path.join(prefix,'train', "train_decode.txt"), "train", True)
+
+        get_encode_Query(infile_group, os.path.join(prefix,'test', "test_encode.txt"), "test", True)
+        get_encode_Query(infile_group, os.path.join(prefix,'dev', "dev_encode.txt"), "dev", True)
+        get_encode_Query(infile_group, os.path.join(prefix,'train', "train_encode.txt"), "train", True)
+
+        get_encode_vocab_no_weight(infile_group, os.path.join(prefix, "encode_vocab.txt"))
+
+        get_decode_vocab_no_weight(infile_group, os.path.join(prefix, "decode_vocab.txt"))
+        get_decode_vocab_no_weight(infile_group, os.path.join(prefix, "decode_copy_encode_vocab.txt"))
+
+
+        get_mask(infile_group, os.path.join(prefix, "test", "test_decoder_mask.txt"), "test",os.path.join(prefix, "decode_vocab.txt"), True)
+        get_mask(infile_group, os.path.join(prefix, "dev", "dev_decoder_mask.txt"), "dev",os.path.join(prefix, "decode_vocab.txt"), True)
+        get_mask(infile_group, os.path.join(prefix, "train", "train_decoder_mask.txt"), "train", os.path.join(prefix, "decode_vocab.txt"),True)
+
+
     

@@ -3,50 +3,27 @@ import json
 import re
 import logging
 
-infiles_data = { 'train':   
-           '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data/train.json',   
-            'dev':       
-           '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data/dev.json',
-           'schema':
-           '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data/tables.json',
-            'test':
-            '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data/test.json'
-}
-# infiles_data_add_wikisql = { "schema_small":
-#                             '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data/tables.json',
-#     'train':     
-#            '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_add_wikisql/train_wikisql.json',   
-#             'dev':
-#            '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_add_wikisql/dev.json',
-#            'schema':
-#            '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_add_wikisql/all_tables.json',
-#             'test':
-#             '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_add_wikisql/dev.json'
-# }
-
-
-infiles_data_radn_split = { 'train': 
-                         '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_radn_split/train_radn.json',   
-            'dev': '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_radn_split/dev_radn.json',
-           'schema':
-                           '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data/tables.json',
-         'test':
-                           '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_radn_split/test_radn.json'
+infiles_data_final = {'train': '../datasets/data_final/train.json',   
+                'dev':'../datasets/data_final/dev.json',
+                'schema': '../datasets/tables.json',
+                'test': '../datasets/data_final/test.json'
 }
 
-# infiles = infiles_data_add_wikisql
-# prefix = '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_add_wikisql_processed'
+infiles_data_radn_split = {'train': '../datasets/data_radn_split/train_radn.json',   
+                           'dev': '../datasets/data_radn_split/dev_radn.json',
+                           'schema': '../datasets/tables.json',
+                           'test': '../datasets/data_radn_split/test_radn.json'
+}
 
-infiles = infiles_data
-prefix = '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_processed'
-
-# infiles = infiles_data_radn_split
-# prefix = '/home/lily/dw633/seq2seq/seq2sql_copy_mask/data/datasets/data_radn_split_processed'
+prefix_data_final = '../datasets/finaldata_processed'
+prefix_data_radn_split = '../datasets/data_radn_split_processed'
+infiles = {
+    "data_final": [infiles_data_final, prefix_data_final] 
+    "data_radn_split": [infiles_data_radn_split, prefix_data_radn_split]
+}
 
 
 VALUE_NUM_SYMBOL = "{value}"
-
-# todo: how to lower? how to delete number?
 
 def strip_table(table):
     column_types = table['column_types']
@@ -142,23 +119,23 @@ def strip_query(query):
 
 
 
-def count_databases():
+def count_databases(infile_group):
     content = set()
-    with open(infiles['dev']) as f:
+    with open(infile_group['dev']) as f:
         ex_list = json.load(f)
         for table_dict in ex_list:
             content.add(table_dict["db_id"])
     dev_count = len(content)
     print "the number of dev tables are", dev_count
     
-    with open(infiles['train']) as f:
+    with open(infile_group['train']) as f:
         ex_list = json.load(f)
         for table_dict in ex_list:
             content.add(table_dict["db_id"])
     train_count = len(content) - dev_count
     print "the number of train tables are",train_count
     
-    with open(infiles['test']) as f: 
+    with open(infile_group['test']) as f: 
         ex_list = json.load(f)
         for table_dict in ex_list:
             db_id = table_dict["db_id"]
