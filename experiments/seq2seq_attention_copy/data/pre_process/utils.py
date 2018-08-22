@@ -110,8 +110,8 @@ def strip_query(query):
     query_keywords = [w for w in query_keywords if len(w)>0]
     query_sentence = " ".join(query_keywords)
     query_sentence = query_sentence.replace("> =", ">=").replace("! =", "!=").replace("< =", "<=")
-    if '>' in query_sentence or '=' in query_sentence:
-       print query_sentence
+#     if '>' in query_sentence or '=' in query_sentence:
+#        print query_sentence
     return query_sentence.split()
 
 

@@ -93,7 +93,7 @@ def get_mask(infile_group, outfile, infile, vocabfile, output=True):
         ex_list = json.load(f)
         for nl_sql_dict in ex_list:
             if infile != 'train':
-                db_id = nl_sql_dict["db_id"]#.decode().encode("utf-8")
+                db_id = nl_sql_dict["db_id"]
 
                 binary = []
                 for item in vocab_ls:
@@ -107,7 +107,6 @@ def get_mask(infile_group, outfile, infile, vocabfile, output=True):
                 binary.extend(["1"] * 5)
                 if output:
                     outfile.write("{}\n".format(" ".join(binary)))
-                # print (sum([int(b) for b in binary]))
             elif output:
                 outfile.write("{}\n".format("1"))
                 
@@ -192,7 +191,7 @@ def sql_key_words():
 
 def get_decode_vocab_no_weight(infile_group, outfile):
 
-    cnt, _, db_dict_rev = get_schema_vocab(infile_group, "schema_small")
+    cnt, _, db_dict_rev = get_schema_vocab(infile_group, "schema")
     cnt.update(sql_key_words())
     output_vocab_to_txt(outfile, cnt)
 
