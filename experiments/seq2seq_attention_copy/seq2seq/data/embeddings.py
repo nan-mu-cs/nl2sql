@@ -41,7 +41,7 @@ def get_schema_vocab_mapping():
 
 
 
-def get_average(words, model):
+def get_average(words, model, separate_word_dict):
     
     vector = np.zeros(len(model['the']))
     
@@ -82,15 +82,15 @@ def get_word_vector(input_string, model, column_map, table_map, separate_word_di
     
     if input_string in table_map:
         words = [w.lower() for w in table_map[input_string].split() if len(w) > 0]
-        vector = get_average(words, model)
+        vector = get_average(words, model, separate_word_dict)
     elif input_string in column_map:
         table_name, column_name = column_map[input_string].split("^^^")
         table_words = [w.lower() for w in table_name.split() if len(w) > 0]
         column_words = [w.lower() for w in column_name.split() if len(w) > 0]
-        vector = get_average(table_words, model) + get_average(column_words, model)
+        vector = get_average(table_words, model, separate_word_dict) + get_average(column_words, model, separate_word_dict)
     else:
         words = [w.lower() for w in input_string.split() if len(w) > 0]
-        vector = get_average(words, model)
+        vector = get_average(words, model, separate_word_dict)
     v_norm = np.linalg.norm(vector)    
     if v_norm == 0:
         return vector
