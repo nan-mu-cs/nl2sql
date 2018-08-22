@@ -1,8 +1,8 @@
 model: InputAttentionCopyingSeq2Seq
 model_dir: InputAttentionCopyingSeq2Seq_tune_model_data
-data_directories: ../../data/datasets/data_processed/
+data_directories: data/datasets/data_final_processed/
 model_params:
-  embedding.file: ../../data/glove/glove.6B.100d.txt
+  embedding.file: data/glove/glove.6B.100d.txt
   embedding.tune: True
   attention.class: seq2seq.decoders.attention.AttentionLayerDot
   attention.params:
@@ -31,6 +31,6 @@ model_params:
   optimizer.params:
     epsilon: 0.0000008
   optimizer.learning_rate: 0.0005
-  source.max_seq_len: 50
+  source.max_seq_len: 45
   source.reverse: false
-  target.max_seq_len: 150
+  target.max_seq_len: 125
