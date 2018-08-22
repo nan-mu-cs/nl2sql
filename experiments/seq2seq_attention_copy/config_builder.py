@@ -442,7 +442,7 @@ def write_bash_scripts(path, spec):
     #!/bin/bash
 
     cwd=$(pwd)
-    cd ~/%s/
+    cd %s/
     export MODEL_DIR=%s
     export CONFIG_DIR=$MODEL_DIR/config
     DEV_QUESTIONS="%s"
@@ -467,7 +467,7 @@ def write_bash_scripts(path, spec):
     #!/bin/bash
 
     cwd=$(pwd)
-    cd ~/%s/
+    cd %s/
     export MODEL_DIR=%s
     export CONFIG_DIR=$MODEL_DIR/config
     DEV_QUESTIONS="%s"
@@ -498,7 +498,7 @@ def write_bash_scripts(path, spec):
     #!/bin/bash
 
     cwd=$(pwd)
-    cd ~/%s/
+    cd %s/
     export MODEL_DIR=%s
     export CONFIG_DIR=$MODEL_DIR/config
     TEST_QUESTIONS="%s"
@@ -528,7 +528,7 @@ def write_bash_scripts(path, spec):
     TRAIN_GOLD="%s"
 
     cwd=$(pwd)
-    cd ~/%s/%s/
+    cd %s/%s/
     for fname in $MODEL_DIR/model.ckpt-*.index
     do
         echo $fname
@@ -554,7 +554,7 @@ def write_bash_scripts(path, spec):
     done
     python plot_training_curves.py $PRED_DIR -t $TRAIN_GOLD -d $DEV_GOLD
     cd $cwd
-    """  %(model_dir, dev_gold, train_gold, path, "tmp%.*")
+    """  %(model_dir, dev_gold, train_gold, path, model_dir, "tmp%.*")
     script_fname = os.path.join(model_dir, "plot_training_curves.sh")
     with open(script_fname, 'w') as f:
         f.write(curves_script)
