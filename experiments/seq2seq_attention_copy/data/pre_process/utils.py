@@ -15,7 +15,7 @@ infiles_data_radn_split = {'train': '../datasets/data_radn_split/train_radn.json
                            'test': '../datasets/data_radn_split/test_radn.json'
 }
 
-prefix_data_final = '../datasets/finaldata_processed'
+prefix_data_final = '../datasets/data_final_processed'
 prefix_data_radn_split = '../datasets/data_radn_split_processed'
 infiles = {}
 infiles["data_final"] = [infiles_data_final, prefix_data_final]  
