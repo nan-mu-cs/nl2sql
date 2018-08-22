@@ -17,10 +17,9 @@ infiles_data_radn_split = {'train': '../datasets/data_radn_split/train_radn.json
 
 prefix_data_final = '../datasets/finaldata_processed'
 prefix_data_radn_split = '../datasets/data_radn_split_processed'
-infiles = {
-    "data_final": [infiles_data_final, prefix_data_final] 
-    "data_radn_split": [infiles_data_radn_split, prefix_data_radn_split]
-}
+infiles = {}
+infiles["data_final"] = [infiles_data_final, prefix_data_final]  
+infiles["data_radn_split"] = [infiles_data_radn_split, prefix_data_radn_split]
 
 
 VALUE_NUM_SYMBOL = "{value}"
@@ -46,7 +45,7 @@ def strip_nl(nl):
     
     str_1 = re.findall("\"[^\"]*\"", nl)
     str_2 = re.findall("\'[^\']*\'", nl)
-    float_nums = re.findall("[-+]?\d*\.\d+", query)
+    float_nums = re.findall("[-+]?\d*\.\d+", nl)
     
     values = str_1 + str_2 + float_nums
     for val in values:
