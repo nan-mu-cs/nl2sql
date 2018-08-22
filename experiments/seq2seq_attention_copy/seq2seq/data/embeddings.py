@@ -19,7 +19,7 @@ VALUE_NUM_SYMBOL = "{value}"
 def get_schema_vocab_mapping():
     column_map = {}
     table_map = {}
-    with open( '../../data/datasets/tables.json') as f:
+    with open( 'data/datasets/tables.json') as f:
         ex_list = json.load(f)
         for table_dict in ex_list:
             db_id = table_dict["db_id"]
