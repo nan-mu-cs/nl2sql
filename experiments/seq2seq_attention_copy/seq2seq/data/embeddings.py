@@ -36,7 +36,7 @@ def get_schema_vocab_mapping():
             for i in range(len(table_names)):
                 item_original = table_names_original[i]
                 item = table_names[i]
-                table_map[item_original[1]] = item[1].replace(" ", "_")
+                table_map[item_original] = item.replace(" ", "_")
     return column_map, table_map
 
 
@@ -147,9 +147,10 @@ if __name__ == "__main__":
     model = KeyedVectors.load_word2vec_format("data/glove/glove.6B.100d.txt", binary=False)
     
     for k in column_map.keys():
-        print (k, column_map[k])
-        get_word_vector(column_map[k], model, column_map, table_map, separate_word_dict)
+       print (k, column_map[k])
+       get_word_vector(k, model, column_map, table_map, separate_word_dict)
         
     for k in table_map.keys():
         print (k, table_map[k])
-        get_word_vector(table_map[k], model, column_map, table_map, separate_word_dict)
+#         get_word_vector(k, model, column_map, table_map, separate_word_dict)
+

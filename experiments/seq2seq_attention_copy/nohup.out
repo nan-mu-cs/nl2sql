@@ -1,0 +1,193 @@
+INFO:tensorflow:Loading config from /data/lily/dw633/seq2seq/nl2sql/experiments/seq2seq_attention_copy/AttentionSeq2Seq_tune_model_data/config/train.yml
+INFO:tensorflow:Final Config:
+batch_size: 16
+buckets: 25,50,100,200
+input_pipeline_dev:
+  class: ParallelTextAndMaskInputPipeline
+  params:
+    decoder_mask_files: [data/datasets/data_final_processed/dev/dev_decoder_mask.txt]
+    source_files: [data/datasets/data_final_processed/dev/dev_encode.txt]
+    target_files: [data/datasets/data_final_processed/dev/dev_decode.txt]
+input_pipeline_train:
+  class: ParallelTextAndMaskInputPipeline
+  params:
+    decoder_mask_files: [data/datasets/data_final_processed/train/train_decoder_mask.txt]
+    source_files: [data/datasets/data_final_processed/train/train_encode.txt]
+    target_files: [data/datasets/data_final_processed/train/train_decode.txt]
+keep_checkpoint_max: 0
+model: AttentionSeq2Seq
+model_params:
+  attention.class: seq2seq.decoders.attention.AttentionLayerDot
+  attention.params: {num_units: 150}
+  bridge.class: seq2seq.models.bridges.ZeroBridge
+  decoder.class: seq2seq.decoders.AttentionDecoder
+  decoder.params:
+    rnn_cell:
+      cell_class: LSTMCell
+      cell_params: {num_units: 150}
+      dropout_input_keep_prob: 0.5
+      dropout_output_keep_prob: 0.5
+      num_layers: 1
+  embedding.dim: 100
+  embedding.file: data/glove/glove.6B.100d.txt
+  embedding.tune: true
+  encoder.class: seq2seq.encoders.BidirectionalRNNEncoder
+  encoder.params:
+    rnn_cell:
+      cell_class: LSTMCell
+      cell_params: {num_units: 150}
+      dropout_input_keep_prob: 0.5
+      dropout_output_keep_prob: 0.5
+      num_layers: 1
+  optimizer.learning_rate: 0.0005
+  optimizer.name: Adam
+  optimizer.params: {epsilon: 8.0e-07}
+  source.max_seq_len: 45
+  source.reverse: false
+  target.max_seq_len: 125
+  vocab_source: data/datasets/data_final_processed/encode_vocab.txt
+  vocab_target: data/datasets/data_final_processed/decode_vocab.txt
+output_dir: AttentionSeq2Seq_tune_model_data
+save_checkpoints_steps: 1000
+train_steps: 40000
+
+INFO:tensorflow:Creating ParallelTextAndMaskInputPipeline in mode=train
+INFO:tensorflow:
+ParallelTextAndMaskInputPipeline:
+  !!python/unicode 'build_schema_map_table': false
+  !!python/unicode 'build_schema_text_table': false
+  !!python/unicode 'decoder_mask_files': [data/datasets/data_final_processed/train/train_decoder_mask.txt]
+  !!python/unicode 'num_epochs': null
+  !!python/unicode 'shuffle': true
+  !!python/unicode 'source_delimiter': !!python/unicode ' '
+  !!python/unicode 'source_files': [data/datasets/data_final_processed/train/train_encode.txt]
+  !!python/unicode 'target_delimiter': !!python/unicode ' '
+  !!python/unicode 'target_files': [data/datasets/data_final_processed/train/train_decode.txt]
+
+INFO:tensorflow:Creating ParallelTextAndMaskInputPipeline in mode=eval
+INFO:tensorflow:
+ParallelTextAndMaskInputPipeline:
+  !!python/unicode 'build_schema_map_table': false
+  !!python/unicode 'build_schema_text_table': false
+  !!python/unicode 'decoder_mask_files': [data/datasets/data_final_processed/dev/dev_decoder_mask.txt]
+  !!python/unicode 'num_epochs': 1
+  !!python/unicode 'shuffle': false
+  !!python/unicode 'source_delimiter': !!python/unicode ' '
+  !!python/unicode 'source_files': [data/datasets/data_final_processed/dev/dev_encode.txt]
+  !!python/unicode 'target_delimiter': !!python/unicode ' '
+  !!python/unicode 'target_files': [data/datasets/data_final_processed/dev/dev_decode.txt]
+
+INFO:tensorflow:Using config: {'_save_checkpoints_secs': None, '_num_ps_replicas': 0, '_keep_checkpoint_max': 0, '_task_type': None, '_is_chief': True, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x7fefee47d310>, '_model_dir': 'AttentionSeq2Seq_tune_model_data', '_save_checkpoints_steps': 1000, '_keep_checkpoint_every_n_hours': 4, '_session_config': None, '_tf_random_seed': None, '_save_summary_steps': 100, '_environment': 'local', '_num_worker_replicas': 0, '_task_id': 0, '_log_step_count_steps': 100, '_tf_config': gpu_options {
+  per_process_gpu_memory_fraction: 1.0
+}
+, '_evaluation_master': '', '_master': ''}
+INFO:tensorflow:Training model for 1000 steps
+2018-08-22 02:15:37.099279: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2018-08-22 02:15:37.370481: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1105] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:05:00.0
+totalMemory: 11.17GiB freeMemory: 11.10GiB
+2018-08-22 02:15:37.370538: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1195] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0, compute capability: 3.7)
+INFO:tensorflow:Creating AttentionSeq2Seq in mode=train
+INFO:tensorflow:
+AttentionSeq2Seq:
+  !!python/unicode 'attention.class': !!python/unicode 'seq2seq.decoders.attention.AttentionLayerDot'
+  !!python/unicode 'attention.params': {!!python/unicode 'num_units': 150}
+  !!python/unicode 'bridge.class': !!python/unicode 'seq2seq.models.bridges.ZeroBridge'
+  !!python/unicode 'bridge.params': {}
+  !!python/unicode 'decoder.class': !!python/unicode 'seq2seq.decoders.AttentionDecoder'
+  !!python/unicode 'decoder.params':
+    !!python/unicode 'max_decode_length': 250
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'embedding.dim': 100
+  !!python/unicode 'embedding.file': data/glove/glove.6B.100d.txt
+  !!python/unicode 'embedding.init_scale': 0.04
+  !!python/unicode 'embedding.share': false
+  !!python/unicode 'embedding.tune': true
+  !!python/unicode 'encoder.class': !!python/unicode 'seq2seq.encoders.BidirectionalRNNEncoder'
+  !!python/unicode 'encoder.params':
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'inference.beam_search.beam_width': 0
+  !!python/unicode 'inference.beam_search.choose_successors_fn': !!python/unicode 'choose_top_k'
+  !!python/unicode 'inference.beam_search.length_penalty_weight': 0.0
+  !!python/unicode 'optimizer.clip_embed_gradients': 0.1
+  !!python/unicode 'optimizer.clip_gradients': 5.0
+  !!python/unicode 'optimizer.learning_rate': 0.0005
+  !!python/unicode 'optimizer.lr_decay_rate': 0.99
+  !!python/unicode 'optimizer.lr_decay_steps': 100
+  !!python/unicode 'optimizer.lr_decay_type': !!python/unicode ''
+  !!python/unicode 'optimizer.lr_min_learning_rate': 1.0e-12
+  !!python/unicode 'optimizer.lr_staircase': false
+  !!python/unicode 'optimizer.lr_start_decay_at': 0
+  !!python/unicode 'optimizer.lr_stop_decay_at': 2147483647
+  !!python/unicode 'optimizer.name': !!python/unicode 'Adam'
+  !!python/unicode 'optimizer.params': {!!python/unicode 'epsilon': 8.0e-07}
+  !!python/unicode 'optimizer.sync_replicas': 0
+  !!python/unicode 'optimizer.sync_replicas_to_aggregate': 0
+  !!python/unicode 'source.max_seq_len': 45
+  !!python/unicode 'source.reverse': false
+  !!python/unicode 'target.max_seq_len': 125
+  !!python/unicode 'vocab_source': !!python/unicode 'data/datasets/data_final_processed/encode_vocab.txt'
+  !!python/unicode 'vocab_target': !!python/unicode 'data/datasets/data_final_processed/decode_vocab.txt'
+
+make mask data provider args: ['data/datasets/data_final_processed/train/train_encode.txt'] ['data/datasets/data_final_processed/train/train_decode.txt'] ['data/datasets/data_final_processed/train/train_decoder_mask.txt'] True None    
+source_files ['data/datasets/data_final_processed/train/train_encode.txt']
+<seq2seq.data.split_tokens_decoder.SplitTokensDecoder object at 0x7fefee47d610>
+schema data source ['data/datasets/data_final_processed/train/train_decoder_mask.txt']
+schemas.data_sources ['data/datasets/data_final_processed/train/train_decoder_mask.txt']
+items2 [u'target_tokens', u'target_len']
+data_target Tensor("train_input_fn/random_shuffle_queue_Dequeue:1", dtype=string)
+items_schema [u'decoder_mask']
+tensor_schema [<tf.Tensor 'train_input_fn/StringToNumber:0' shape=(?,) dtype=float32>]
+Traceback (most recent call last):
+  File "/home/lily/dw633/anaconda2/lib/python2.7/runpy.py", line 174, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "/data/lily/dw633/seq2seq/nl2sql/experiments/seq2seq_attention_copy/bin/train.py", line 279, in <module>
+    tf.app.run()
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/python/platform/app.py", line 124, in run
+    _sys.exit(main(argv))
+  File "/data/lily/dw633/seq2seq/nl2sql/experiments/seq2seq_attention_copy/bin/train.py", line 274, in main
+    schedule=FLAGS.schedule)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/contrib/learn/python/learn/learn_runner.py", line 218, in run
+    return _execute_schedule(experiment, schedule)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/contrib/learn/python/learn/learn_runner.py", line 46, in _execute_schedule
+    return task()
+  File "seq2seq/contrib/experiment.py", line 104, in continuous_train_and_eval
+    monitors=self._train_monitors)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/python/util/deprecation.py", line 316, in new_func
+    return func(*args, **kwargs)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/contrib/learn/python/learn/estimators/estimator.py", line 480, in fit
+    loss = self._train_model(input_fn=input_fn, hooks=hooks)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/contrib/learn/python/learn/estimators/estimator.py", line 985, in _train_model
+    model_fn_ops = self._get_train_ops(features, labels)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/contrib/learn/python/learn/estimators/estimator.py", line 1201, in _get_train_ops
+    return self._call_model_fn(features, labels, model_fn_lib.ModeKeys.TRAIN)
+  File "/home/lily/dw633/anaconda2/lib/python2.7/site-packages/tensorflow/contrib/learn/python/learn/estimators/estimator.py", line 1165, in _call_model_fn
+    model_fn_results = self._model_fn(features, labels, **kwargs)
+  File "/data/lily/dw633/seq2seq/nl2sql/experiments/seq2seq_attention_copy/bin/train.py", line 182, in model_fn
+    }, models, mode=mode)
+  File "seq2seq/configurable.py", line 53, in _create_from_dict
+    instance = class_(params, *args, **kwargs)
+  File "seq2seq/models/attention_seq2seq.py", line 43, in __init__
+    super(AttentionSeq2Seq, self).__init__(params, mode, name)
+  File "seq2seq/models/basic_seq2seq.py", line 46, in __init__
+    super(BasicSeq2Seq, self).__init__(params, mode, name)
+  File "seq2seq/models/seq2seq_model.py", line 56, in __init__
+    self.embedding_mat_source = read_embeddings(self.params['embedding.file'], self.source_vocab_info.path, self.params["embedding.dim"], "source")
+  File "seq2seq/data/embeddings.py", line 127, in read_embeddings
+    column_map, table_map = get_schema_vocab_mapping()
+  File "seq2seq/data/embeddings.py", line 22, in get_schema_vocab_mapping
+    with open( '../../data/datasets/tables.json') as f:
+IOError: [Errno 2] No such file or directory: '../../data/datasets/tables.json'

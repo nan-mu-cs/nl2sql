@@ -1,0 +1,361 @@
+nohup: ignoring input
+INFO:tensorflow:Creating ParallelTextAndMaskInputPipeline in mode=infer
+INFO:tensorflow:
+ParallelTextAndMaskInputPipeline:
+  !!python/unicode 'build_schema_map_table': false
+  !!python/unicode 'build_schema_text_table': false
+  !!python/unicode 'decoder_mask_files': [data/datasets/data_final_processed/dev/dev_decoder_mask.txt]
+  !!python/unicode 'num_epochs': 1
+  !!python/unicode 'shuffle': false
+  !!python/unicode 'source_delimiter': !!python/unicode ' '
+  !!python/unicode 'source_files': [data/datasets/data_final_processed/dev/dev_encode.txt]
+  !!python/unicode 'target_delimiter': !!python/unicode ' '
+  !!python/unicode 'target_files': []
+
+INFO:tensorflow:Creating AttentionSeq2Seq in mode=infer
+INFO:tensorflow:
+AttentionSeq2Seq:
+  !!python/unicode 'attention.class': !!python/unicode 'seq2seq.decoders.attention.AttentionLayerDot'
+  !!python/unicode 'attention.params': {!!python/unicode 'num_units': 150}
+  !!python/unicode 'bridge.class': !!python/unicode 'seq2seq.models.bridges.ZeroBridge'
+  !!python/unicode 'bridge.params': {}
+  !!python/unicode 'decoder.class': !!python/unicode 'seq2seq.decoders.AttentionDecoder'
+  !!python/unicode 'decoder.params':
+    !!python/unicode 'max_decode_length': 250
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'embedding.dim': 100
+  !!python/unicode 'embedding.file': !!python/unicode 'data/glove/glove.6B.100d.txt'
+  !!python/unicode 'embedding.init_scale': 0.04
+  !!python/unicode 'embedding.share': false
+  !!python/unicode 'embedding.tune': true
+  !!python/unicode 'encoder.class': !!python/unicode 'seq2seq.encoders.BidirectionalRNNEncoder'
+  !!python/unicode 'encoder.params':
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'inference.beam_search.beam_width': 0
+  !!python/unicode 'inference.beam_search.choose_successors_fn': !!python/unicode 'choose_top_k'
+  !!python/unicode 'inference.beam_search.length_penalty_weight': 0.0
+  !!python/unicode 'optimizer.clip_embed_gradients': 0.1
+  !!python/unicode 'optimizer.clip_gradients': 5.0
+  !!python/unicode 'optimizer.learning_rate': 0.0005
+  !!python/unicode 'optimizer.lr_decay_rate': 0.99
+  !!python/unicode 'optimizer.lr_decay_steps': 100
+  !!python/unicode 'optimizer.lr_decay_type': !!python/unicode ''
+  !!python/unicode 'optimizer.lr_min_learning_rate': 1.0e-12
+  !!python/unicode 'optimizer.lr_staircase': false
+  !!python/unicode 'optimizer.lr_start_decay_at': 0
+  !!python/unicode 'optimizer.lr_stop_decay_at': 2147483647
+  !!python/unicode 'optimizer.name': !!python/unicode 'Adam'
+  !!python/unicode 'optimizer.params': {!!python/unicode 'epsilon': 8.0e-07}
+  !!python/unicode 'optimizer.sync_replicas': 0
+  !!python/unicode 'optimizer.sync_replicas_to_aggregate': 0
+  !!python/unicode 'source.max_seq_len': 45
+  !!python/unicode 'source.reverse': false
+  !!python/unicode 'target.max_seq_len': 125
+  !!python/unicode 'vocab_source': !!python/unicode 'data/datasets/data_final_processed/encode_vocab.txt'
+  !!python/unicode 'vocab_target': !!python/unicode 'data/datasets/data_final_processed/decode_vocab.txt'
+
+INFO:tensorflow:Reading vocabulary from data/datasets/data_final_processed/encode_vocab.txt
+INFO:tensorflow:Reading vocabulary from data/datasets/data_final_processed/decode_vocab.txt
+INFO:tensorflow:Creating DecodeText in mode=infer
+INFO:tensorflow:
+DecodeText: {!!python/unicode 'delimiter': !!python/unicode ' ', !!python/unicode 'postproc_fn': !!python/unicode '',
+  !!python/unicode 'print_source': false, !!python/unicode 'unk_mapping': null, !!python/unicode 'unk_replace': false}
+
+2018-08-22 23:12:28.182888: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2018-08-22 23:12:28.425965: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1105] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:05:00.0
+totalMemory: 11.17GiB freeMemory: 11.10GiB
+2018-08-22 23:12:28.426035: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1195] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0, compute capability: 3.7)
+INFO:tensorflow:Creating vocabulary lookup table of size 5884
+INFO:tensorflow:Creating vocabulary lookup table of size 3419
+INFO:tensorflow:Creating BidirectionalRNNEncoder in mode=infer
+INFO:tensorflow:
+BidirectionalRNNEncoder:
+  init_scale: 0.04
+  rnn_cell:
+    cell_class: LSTMCell
+    cell_params: {num_units: 150}
+    dropout_input_keep_prob: 0.5
+    dropout_output_keep_prob: 0.5
+    num_layers: 1
+    residual_combiner: add
+    residual_connections: false
+    residual_dense: false
+
+INFO:tensorflow:Creating AttentionLayerDot in mode=infer
+INFO:tensorflow:
+AttentionLayerDot: {!!python/unicode 'num_units': 150}
+
+INFO:tensorflow:Creating AttentionDecoder in mode=infer
+INFO:tensorflow:
+AttentionDecoder:
+  !!python/unicode 'init_scale': 0.04
+  !!python/unicode 'max_decode_length': 250
+  !!python/unicode 'rnn_cell':
+    cell_class: LSTMCell
+    cell_params: {num_units: 150}
+    dropout_input_keep_prob: 0.5
+    dropout_output_keep_prob: 0.5
+    num_layers: 1
+    residual_combiner: add
+    residual_connections: false
+    residual_dense: false
+
+INFO:tensorflow:Creating ZeroBridge in mode=infer
+INFO:tensorflow:
+ZeroBridge: {}
+
+2018-08-22 23:12:29.999234: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1195] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0, compute capability: 3.7)
+INFO:tensorflow:Restoring parameters from AttentionSeq2Seq_tune_model_data/model.ckpt-40000
+INFO:tensorflow:Restored model from AttentionSeq2Seq_tune_model_data/model.ckpt-40000
+INFO:tensorflow:Creating ParallelTextAndMaskInputPipeline in mode=infer
+INFO:tensorflow:
+ParallelTextAndMaskInputPipeline:
+  !!python/unicode 'build_schema_map_table': false
+  !!python/unicode 'build_schema_text_table': false
+  !!python/unicode 'decoder_mask_files': [data/datasets/data_final_processed/test/test_decoder_mask.txt]
+  !!python/unicode 'num_epochs': 1
+  !!python/unicode 'shuffle': false
+  !!python/unicode 'source_delimiter': !!python/unicode ' '
+  !!python/unicode 'source_files': [data/datasets/data_final_processed/test/test_encode.txt]
+  !!python/unicode 'target_delimiter': !!python/unicode ' '
+  !!python/unicode 'target_files': []
+
+INFO:tensorflow:Creating AttentionSeq2Seq in mode=infer
+INFO:tensorflow:
+AttentionSeq2Seq:
+  !!python/unicode 'attention.class': !!python/unicode 'seq2seq.decoders.attention.AttentionLayerDot'
+  !!python/unicode 'attention.params': {!!python/unicode 'num_units': 150}
+  !!python/unicode 'bridge.class': !!python/unicode 'seq2seq.models.bridges.ZeroBridge'
+  !!python/unicode 'bridge.params': {}
+  !!python/unicode 'decoder.class': !!python/unicode 'seq2seq.decoders.AttentionDecoder'
+  !!python/unicode 'decoder.params':
+    !!python/unicode 'max_decode_length': 250
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'embedding.dim': 100
+  !!python/unicode 'embedding.file': !!python/unicode 'data/glove/glove.6B.100d.txt'
+  !!python/unicode 'embedding.init_scale': 0.04
+  !!python/unicode 'embedding.share': false
+  !!python/unicode 'embedding.tune': true
+  !!python/unicode 'encoder.class': !!python/unicode 'seq2seq.encoders.BidirectionalRNNEncoder'
+  !!python/unicode 'encoder.params':
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'inference.beam_search.beam_width': 0
+  !!python/unicode 'inference.beam_search.choose_successors_fn': !!python/unicode 'choose_top_k'
+  !!python/unicode 'inference.beam_search.length_penalty_weight': 0.0
+  !!python/unicode 'optimizer.clip_embed_gradients': 0.1
+  !!python/unicode 'optimizer.clip_gradients': 5.0
+  !!python/unicode 'optimizer.learning_rate': 0.0005
+  !!python/unicode 'optimizer.lr_decay_rate': 0.99
+  !!python/unicode 'optimizer.lr_decay_steps': 100
+  !!python/unicode 'optimizer.lr_decay_type': !!python/unicode ''
+  !!python/unicode 'optimizer.lr_min_learning_rate': 1.0e-12
+  !!python/unicode 'optimizer.lr_staircase': false
+  !!python/unicode 'optimizer.lr_start_decay_at': 0
+  !!python/unicode 'optimizer.lr_stop_decay_at': 2147483647
+  !!python/unicode 'optimizer.name': !!python/unicode 'Adam'
+  !!python/unicode 'optimizer.params': {!!python/unicode 'epsilon': 8.0e-07}
+  !!python/unicode 'optimizer.sync_replicas': 0
+  !!python/unicode 'optimizer.sync_replicas_to_aggregate': 0
+  !!python/unicode 'source.max_seq_len': 45
+  !!python/unicode 'source.reverse': false
+  !!python/unicode 'target.max_seq_len': 125
+  !!python/unicode 'vocab_source': !!python/unicode 'data/datasets/data_final_processed/encode_vocab.txt'
+  !!python/unicode 'vocab_target': !!python/unicode 'data/datasets/data_final_processed/decode_vocab.txt'
+
+INFO:tensorflow:Reading vocabulary from data/datasets/data_final_processed/encode_vocab.txt
+INFO:tensorflow:Reading vocabulary from data/datasets/data_final_processed/decode_vocab.txt
+INFO:tensorflow:Creating DecodeText in mode=infer
+INFO:tensorflow:
+DecodeText: {!!python/unicode 'delimiter': !!python/unicode ' ', !!python/unicode 'postproc_fn': !!python/unicode '',
+  !!python/unicode 'print_source': false, !!python/unicode 'unk_mapping': null, !!python/unicode 'unk_replace': false}
+
+2018-08-22 23:12:57.882615: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2018-08-22 23:12:58.133523: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1105] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:05:00.0
+totalMemory: 11.17GiB freeMemory: 11.10GiB
+2018-08-22 23:12:58.133578: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1195] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0, compute capability: 3.7)
+INFO:tensorflow:Creating vocabulary lookup table of size 5884
+INFO:tensorflow:Creating vocabulary lookup table of size 3419
+INFO:tensorflow:Creating BidirectionalRNNEncoder in mode=infer
+INFO:tensorflow:
+BidirectionalRNNEncoder:
+  init_scale: 0.04
+  rnn_cell:
+    cell_class: LSTMCell
+    cell_params: {num_units: 150}
+    dropout_input_keep_prob: 0.5
+    dropout_output_keep_prob: 0.5
+    num_layers: 1
+    residual_combiner: add
+    residual_connections: false
+    residual_dense: false
+
+INFO:tensorflow:Creating AttentionLayerDot in mode=infer
+INFO:tensorflow:
+AttentionLayerDot: {!!python/unicode 'num_units': 150}
+
+INFO:tensorflow:Creating AttentionDecoder in mode=infer
+INFO:tensorflow:
+AttentionDecoder:
+  !!python/unicode 'init_scale': 0.04
+  !!python/unicode 'max_decode_length': 250
+  !!python/unicode 'rnn_cell':
+    cell_class: LSTMCell
+    cell_params: {num_units: 150}
+    dropout_input_keep_prob: 0.5
+    dropout_output_keep_prob: 0.5
+    num_layers: 1
+    residual_combiner: add
+    residual_connections: false
+    residual_dense: false
+
+INFO:tensorflow:Creating ZeroBridge in mode=infer
+INFO:tensorflow:
+ZeroBridge: {}
+
+2018-08-22 23:12:59.572115: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1195] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0, compute capability: 3.7)
+INFO:tensorflow:Restoring parameters from AttentionSeq2Seq_tune_model_data/model.ckpt-40000
+INFO:tensorflow:Restored model from AttentionSeq2Seq_tune_model_data/model.ckpt-40000
+INFO:tensorflow:Creating ParallelTextAndMaskInputPipeline in mode=infer
+INFO:tensorflow:
+ParallelTextAndMaskInputPipeline:
+  !!python/unicode 'build_schema_map_table': false
+  !!python/unicode 'build_schema_text_table': false
+  !!python/unicode 'decoder_mask_files': [data/datasets/data_final_processed/train/train_decoder_mask.txt]
+  !!python/unicode 'num_epochs': 1
+  !!python/unicode 'shuffle': false
+  !!python/unicode 'source_delimiter': !!python/unicode ' '
+  !!python/unicode 'source_files': [data/datasets/data_final_processed/train/train_encode.txt]
+  !!python/unicode 'target_delimiter': !!python/unicode ' '
+  !!python/unicode 'target_files': []
+
+INFO:tensorflow:Creating AttentionSeq2Seq in mode=infer
+INFO:tensorflow:
+AttentionSeq2Seq:
+  !!python/unicode 'attention.class': !!python/unicode 'seq2seq.decoders.attention.AttentionLayerDot'
+  !!python/unicode 'attention.params': {!!python/unicode 'num_units': 150}
+  !!python/unicode 'bridge.class': !!python/unicode 'seq2seq.models.bridges.ZeroBridge'
+  !!python/unicode 'bridge.params': {}
+  !!python/unicode 'decoder.class': !!python/unicode 'seq2seq.decoders.AttentionDecoder'
+  !!python/unicode 'decoder.params':
+    !!python/unicode 'max_decode_length': 250
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'embedding.dim': 100
+  !!python/unicode 'embedding.file': !!python/unicode 'data/glove/glove.6B.100d.txt'
+  !!python/unicode 'embedding.init_scale': 0.04
+  !!python/unicode 'embedding.share': false
+  !!python/unicode 'embedding.tune': true
+  !!python/unicode 'encoder.class': !!python/unicode 'seq2seq.encoders.BidirectionalRNNEncoder'
+  !!python/unicode 'encoder.params':
+    !!python/unicode 'rnn_cell':
+      !!python/unicode 'cell_class': !!python/unicode 'LSTMCell'
+      !!python/unicode 'cell_params': {!!python/unicode 'num_units': 150}
+      !!python/unicode 'dropout_input_keep_prob': 0.5
+      !!python/unicode 'dropout_output_keep_prob': 0.5
+      !!python/unicode 'num_layers': 1
+  !!python/unicode 'inference.beam_search.beam_width': 0
+  !!python/unicode 'inference.beam_search.choose_successors_fn': !!python/unicode 'choose_top_k'
+  !!python/unicode 'inference.beam_search.length_penalty_weight': 0.0
+  !!python/unicode 'optimizer.clip_embed_gradients': 0.1
+  !!python/unicode 'optimizer.clip_gradients': 5.0
+  !!python/unicode 'optimizer.learning_rate': 0.0005
+  !!python/unicode 'optimizer.lr_decay_rate': 0.99
+  !!python/unicode 'optimizer.lr_decay_steps': 100
+  !!python/unicode 'optimizer.lr_decay_type': !!python/unicode ''
+  !!python/unicode 'optimizer.lr_min_learning_rate': 1.0e-12
+  !!python/unicode 'optimizer.lr_staircase': false
+  !!python/unicode 'optimizer.lr_start_decay_at': 0
+  !!python/unicode 'optimizer.lr_stop_decay_at': 2147483647
+  !!python/unicode 'optimizer.name': !!python/unicode 'Adam'
+  !!python/unicode 'optimizer.params': {!!python/unicode 'epsilon': 8.0e-07}
+  !!python/unicode 'optimizer.sync_replicas': 0
+  !!python/unicode 'optimizer.sync_replicas_to_aggregate': 0
+  !!python/unicode 'source.max_seq_len': 45
+  !!python/unicode 'source.reverse': false
+  !!python/unicode 'target.max_seq_len': 125
+  !!python/unicode 'vocab_source': !!python/unicode 'data/datasets/data_final_processed/encode_vocab.txt'
+  !!python/unicode 'vocab_target': !!python/unicode 'data/datasets/data_final_processed/decode_vocab.txt'
+
+INFO:tensorflow:Reading vocabulary from data/datasets/data_final_processed/encode_vocab.txt
+INFO:tensorflow:Reading vocabulary from data/datasets/data_final_processed/decode_vocab.txt
+INFO:tensorflow:Creating DecodeText in mode=infer
+INFO:tensorflow:
+DecodeText: {!!python/unicode 'delimiter': !!python/unicode ' ', !!python/unicode 'postproc_fn': !!python/unicode '',
+  !!python/unicode 'print_source': false, !!python/unicode 'unk_mapping': null, !!python/unicode 'unk_replace': false}
+
+2018-08-22 23:13:37.765228: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2018-08-22 23:13:37.990895: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1105] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:05:00.0
+totalMemory: 11.17GiB freeMemory: 11.10GiB
+2018-08-22 23:13:37.990965: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1195] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0, compute capability: 3.7)
+INFO:tensorflow:Creating vocabulary lookup table of size 5884
+INFO:tensorflow:Creating vocabulary lookup table of size 3419
+INFO:tensorflow:Creating BidirectionalRNNEncoder in mode=infer
+INFO:tensorflow:
+BidirectionalRNNEncoder:
+  init_scale: 0.04
+  rnn_cell:
+    cell_class: LSTMCell
+    cell_params: {num_units: 150}
+    dropout_input_keep_prob: 0.5
+    dropout_output_keep_prob: 0.5
+    num_layers: 1
+    residual_combiner: add
+    residual_connections: false
+    residual_dense: false
+
+INFO:tensorflow:Creating AttentionLayerDot in mode=infer
+INFO:tensorflow:
+AttentionLayerDot: {!!python/unicode 'num_units': 150}
+
+INFO:tensorflow:Creating AttentionDecoder in mode=infer
+INFO:tensorflow:
+AttentionDecoder:
+  !!python/unicode 'init_scale': 0.04
+  !!python/unicode 'max_decode_length': 250
+  !!python/unicode 'rnn_cell':
+    cell_class: LSTMCell
+    cell_params: {num_units: 150}
+    dropout_input_keep_prob: 0.5
+    dropout_output_keep_prob: 0.5
+    num_layers: 1
+    residual_combiner: add
+    residual_connections: false
+    residual_dense: false
+
+INFO:tensorflow:Creating ZeroBridge in mode=infer
+INFO:tensorflow:
+ZeroBridge: {}
+
+2018-08-22 23:13:39.492130: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1195] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K80, pci bus id: 0000:05:00.0, compute capability: 3.7)
+INFO:tensorflow:Restoring parameters from AttentionSeq2Seq_tune_model_data/model.ckpt-40000
+INFO:tensorflow:Restored model from AttentionSeq2Seq_tune_model_data/model.ckpt-40000
