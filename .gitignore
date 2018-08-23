@@ -1,3 +1,5 @@
 *.pyc
 *.DS_Store
 experiments/seq2seq_attention_copy/data/datasets/*
+experiments/seq2seq_attention_copy/data/glove/*
+experiments/seq2seq_attention_copy/AttentionSeq2Seq_tune_model_data/
