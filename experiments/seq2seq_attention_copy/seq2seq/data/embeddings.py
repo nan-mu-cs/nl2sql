@@ -31,12 +31,12 @@ def get_schema_vocab_mapping():
             for i in range(len(column_names)):
                 item_original = column_names_original[i]
                 item = column_names[i]
-                column_map[item_original[1]] = table_names[int(item[0])] + "^^^" +item[1]
+                column_map[item_original[1]] = table_names[int(item[0])].replace(" ", "_") + "^^^" +item[1].replace(" ", "_")
                 
             for i in range(len(table_names)):
                 item_original = table_names_original[i]
                 item = table_names[i]
-                table_map[item_original[1]] = item[1]
+                table_map[item_original[1]] = item[1].replace(" ", "_")
     return column_map, table_map
 
 
@@ -85,11 +85,11 @@ def get_word_vector(input_string, model, column_map, table_map, separate_word_di
         vector = get_average(words, model, separate_word_dict)
     elif input_string in column_map:
         table_name, column_name = column_map[input_string].split("^^^")
-        table_words = [w.lower() for w in table_name.split() if len(w) > 0]
-        column_words = [w.lower() for w in column_name.split() if len(w) > 0]
+        table_words = [w.lower() for w in table_name.split("_") if len(w) > 0]
+        column_words = [w.lower() for w in column_name.split("_") if len(w) > 0]
         vector = get_average(table_words, model, separate_word_dict) + get_average(column_words, model, separate_word_dict)
     else:
-        words = [w.lower() for w in input_string.split() if len(w) > 0]
+        words = [w.lower() for w in input_string.split("_") if len(w) > 0]
         vector = get_average(words, model, separate_word_dict)
     v_norm = np.linalg.norm(vector)    
     if v_norm == 0:
@@ -145,6 +145,10 @@ if __name__ == "__main__":
     column_map, table_map = get_schema_vocab_mapping()
     for k in column_map.keys():
         print (k, column_map[k])
+        get_average(k)
+        get_average(column_map[k])
         
     for k in table_map.keys():
         print (k, table_map[k])
+        get_average(k)
+        get_average(table_map[k])
