@@ -81,7 +81,7 @@ def get_word_vector(input_string, model, column_map, table_map, separate_word_di
     # change to input string
     
     if input_string in table_map:
-        words = [w.lower() for w in table_map[input_string].split() if len(w) > 0]
+        words = [w.lower() for w in table_map[input_string].split("_") if len(w) > 0]
         vector = get_average(words, model, separate_word_dict)
     elif input_string in column_map:
         table_name, column_name = column_map[input_string].split("^^^")
