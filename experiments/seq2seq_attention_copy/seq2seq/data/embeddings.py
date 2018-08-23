@@ -143,12 +143,13 @@ def read_embeddings(embeddings_path, vocab_path, embed_dim, mode="source"):
 
 if __name__ == "__main__":
     column_map, table_map = get_schema_vocab_mapping()
+    separate_word_dict = {}
+    model = KeyedVectors.load_word2vec_format("data/glove/glove.6B.100d.txt", binary=False)
+    
     for k in column_map.keys():
         print (k, column_map[k])
-        get_average(k)
-        get_average(column_map[k])
+        get_word_vector(column_map[k], model, column_map, table_map, separate_word_dict)
         
     for k in table_map.keys():
         print (k, table_map[k])
-        get_average(k)
-        get_average(table_map[k])
+        get_word_vector(table_map[k], model, column_map, table_map, separate_word_dict)
