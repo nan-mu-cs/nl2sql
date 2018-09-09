@@ -60,7 +60,7 @@ npm run sqlgenerate
 ```bash
 node ./lang/sql/sqlgenerate-babel.js
 ```
-Warning: when run the above script, it may throw. This means the input sql file contains incorrect sql that could not be parsed. It has to be corrected according to the error message.
+Warning: when run the above script, it may throw exceptions. This means the input sql file contains incorrect sql that could not be parsed. It has to be corrected according to the error message.
 
 In input file one line is one sql statement ended with a semicolon. Output file is a json file contains ast structure for every input sql.
 
