@@ -12,13 +12,12 @@
 
 ### SQL Hardness criteria
 
-For all different evaluation metrices, we would get the scores on all SQL-question pairs. Also, we would like to know the scores
-on SQL with different hardness levels.
+To better understand the model performance on different queries, we divide SQL queries into 4 levels: easy, medium, hard, extra hard. We define the difficulty as the following:
 
-We define:
+First, we define:
 - SQL components 1: WHERE, GROUP BY, ORDER BY, LIMIT, JOIN, OR, LIKE，HAVING
 - SQL components 2: EXCEPT, UNION, INTERSECT, NESTED
-- Others: # of agg > 1, # of select columns > 1, # of where conditions > 1, # of group by clauses > 1, # of group by clauses > 1 (no consider col1-col2 math equations etc.)
+- Others: number of agg $>$ 1, number of select columns $>$ 1, number of where conditions $>$ 1, number of group by clauses $>$ 1, number of group by clauses $>$ 1 (no consider col1-col2 math equations etc.)
 
 1. easy: 
    - if SQL key words have ZERO or exact ONE from [SQL components 1] and SQL do not satisfy any conditions in [Others] above. AND no word from [SQL components 2].
